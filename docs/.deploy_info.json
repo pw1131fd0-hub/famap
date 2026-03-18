@@ -1,8 +1,9 @@
 {
-  "deployed_at": "2026-03-18T21:53:13Z",
-  "method": "npm",
-  "ports": [3003, 3004],
-  "urls": ["http://localhost:3003", "http://localhost:3004"],
-  "pid_or_container": "Server PID: 2781474, Client PID: 2781459",
-  "status": "running"
+  "deployed_at": "2026-03-18T22:13:00Z",
+  "method": "npm with screen",
+  "ports": [3006, 3007],
+  "urls": ["http://localhost:3006", "http://localhost:3007"],
+  "pid_or_container": "Server Screen PID: 2783856, Client Screen PID: 2783859",
+  "status": "running",
+  "error": null
 }
