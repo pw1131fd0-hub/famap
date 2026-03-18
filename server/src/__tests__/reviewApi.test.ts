@@ -31,11 +31,11 @@ describe('Review API', () => {
       const newReview = {
         rating: 5,
         comment: 'Great place!',
-        userName: 'Test User'
       };
 
       const res = await request(app)
         .post('/api/locations/1/reviews')
+        .set('Authorization', 'Bearer mock-token-u1')
         .send(newReview);
       
       expect(res.status).toBe(201);
@@ -43,15 +43,22 @@ describe('Review API', () => {
       expect(res.body.comment).toBe('Great place!');
     });
 
+    it('should return 401 for unauthorized access', async () => {
+      const res = await request(app)
+        .post('/api/locations/1/reviews')
+        .send({ rating: 5, comment: 'test' });
+      expect(res.status).toBe(401);
+    });
+
     it('should return 404 for non-existent location', async () => {
       const newReview = {
         rating: 5,
         comment: 'Great place!',
-        userName: 'Test User'
       };
 
       const res = await request(app)
         .post('/api/locations/999/reviews')
+        .set('Authorization', 'Bearer mock-token-u1')
         .send(newReview);
       
       expect(res.status).toBe(404);
@@ -60,6 +67,7 @@ describe('Review API', () => {
     it('should return 400 for missing fields', async () => {
       const res = await request(app)
         .post('/api/locations/1/reviews')
+        .set('Authorization', 'Bearer mock-token-u1')
         .send({ rating: 5 });
       
       expect(res.status).toBe(400);

@@ -57,6 +57,7 @@ describe('Location API', () => {
 
       const res = await request(app)
         .post('/api/locations')
+        .set('Authorization', 'Bearer mock-token-u1')
         .send(newLoc);
       
       expect(res.status).toBe(201);
@@ -66,8 +67,16 @@ describe('Location API', () => {
     it('should return 400 for invalid location data', async () => {
       const res = await request(app)
         .post('/api/locations')
+        .set('Authorization', 'Bearer mock-token-u1')
         .send({ name: 'invalid' });
       expect(res.status).toBe(400);
+    });
+
+    it('should return 401 for unauthorized access', async () => {
+      const res = await request(app)
+        .post('/api/locations')
+        .send({});
+      expect(res.status).toBe(401);
     });
   });
 
@@ -79,6 +88,7 @@ describe('Location API', () => {
 
       const res = await request(app)
         .patch('/api/locations/1')
+        .set('Authorization', 'Bearer mock-token-u1')
         .send(updateData);
       
       expect(res.status).toBe(200);
@@ -88,6 +98,7 @@ describe('Location API', () => {
     it('should return 400 for invalid update data', async () => {
       const res = await request(app)
         .patch('/api/locations/1')
+        .set('Authorization', 'Bearer mock-token-u1')
         .send({ category: 'invalid' });
       expect(res.status).toBe(400);
     });
@@ -95,8 +106,16 @@ describe('Location API', () => {
     it('should return 404 for non-existent id', async () => {
       const res = await request(app)
         .patch('/api/locations/999')
+        .set('Authorization', 'Bearer mock-token-u1')
         .send({ name: { zh: 'New', en: 'New' } });
       expect(res.status).toBe(404);
+    });
+
+    it('should return 401 for unauthorized access', async () => {
+      const res = await request(app)
+        .patch('/api/locations/1')
+        .send({});
+      expect(res.status).toBe(401);
     });
   });
 });

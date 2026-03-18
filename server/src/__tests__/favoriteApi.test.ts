@@ -9,17 +9,20 @@ describe('Favorite API', () => {
   });
 
   describe('GET /api/favorites', () => {
-    it('should return 400 if userId is missing', async () => {
-      const res = await request(app).get('/api/favorites');
-      expect(res.status).toBe(400);
-    });
-
     it('should return favorites for a user', async () => {
       mockFavorites.push({ id: 'f1', userId: 'u1', locationId: '1', createdAt: new Date().toISOString() });
-      const res = await request(app).get('/api/favorites').query({ userId: 'u1' });
+      const res = await request(app)
+        .get('/api/favorites')
+        .set('Authorization', 'Bearer mock-token-u1');
+      
       expect(res.status).toBe(200);
       expect(Array.isArray(res.body)).toBe(true);
       expect(res.body.length).toBe(1);
+    });
+
+    it('should return 401 if unauthorized', async () => {
+      const res = await request(app).get('/api/favorites');
+      expect(res.status).toBe(401);
     });
   });
 
@@ -27,7 +30,8 @@ describe('Favorite API', () => {
     it('should add a favorite', async () => {
       const res = await request(app)
         .post('/api/favorites')
-        .send({ userId: 'u1', locationId: '2' });
+        .set('Authorization', 'Bearer mock-token-u1')
+        .send({ locationId: '2' });
       
       expect(res.status).toBe(201);
       expect(res.body.userId).toBe('u1');
@@ -35,7 +39,10 @@ describe('Favorite API', () => {
     });
 
     it('should return 400 for missing fields', async () => {
-      const res = await request(app).post('/api/favorites').send({ userId: 'u1' });
+      const res = await request(app)
+        .post('/api/favorites')
+        .set('Authorization', 'Bearer mock-token-u1')
+        .send({});
       expect(res.status).toBe(400);
     });
   });
@@ -45,7 +52,8 @@ describe('Favorite API', () => {
       mockFavorites.push({ id: 'f1', userId: 'u1', locationId: '1', createdAt: new Date().toISOString() });
       const res = await request(app)
         .delete('/api/favorites')
-        .send({ userId: 'u1', locationId: '1' });
+        .set('Authorization', 'Bearer mock-token-u1')
+        .send({ locationId: '1' });
       
       expect(res.status).toBe(204);
       expect(mockFavorites.length).toBe(0);
@@ -55,13 +63,21 @@ describe('Favorite API', () => {
   describe('GET /api/favorites/check', () => {
     it('should return isFavorited: true if favorited', async () => {
       mockFavorites.push({ id: 'f1', userId: 'u1', locationId: '1', createdAt: new Date().toISOString() });
-      const res = await request(app).get('/api/favorites/check').query({ userId: 'u1', locationId: '1' });
+      const res = await request(app)
+        .get('/api/favorites/check')
+        .set('Authorization', 'Bearer mock-token-u1')
+        .query({ locationId: '1' });
+      
       expect(res.status).toBe(200);
       expect(res.body.isFavorited).toBe(true);
     });
 
     it('should return isFavorited: false if not favorited', async () => {
-      const res = await request(app).get('/api/favorites/check').query({ userId: 'u1', locationId: '1' });
+      const res = await request(app)
+        .get('/api/favorites/check')
+        .set('Authorization', 'Bearer mock-token-u1')
+        .query({ locationId: '1' });
+      
       expect(res.status).toBe(200);
       expect(res.body.isFavorited).toBe(false);
     });

@@ -13,5 +13,6 @@ export interface ReviewCreateDTO {
   rating: number;
   comment: string;
   photos?: string[];
-  userName?: string; // For now without full auth
+  userName?: string;
+  userId?: string;
 }

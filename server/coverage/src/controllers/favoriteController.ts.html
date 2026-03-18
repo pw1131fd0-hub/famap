@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">75.75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>24/32</span>
+                <span class='fraction'>25/33</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.77% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>14/18</span>
+                <span class='fraction'>6/10</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">75.75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>24/32</span>
+                <span class='fraction'>25/33</span>
             </div>
         
             
@@ -126,17 +126,13 @@
 <a name='L61'></a><a href='#L61'>61</a>
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -145,6 +141,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -165,6 +162,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -182,13 +180,13 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { Request, Response } from 'express';
@@ -197,10 +195,7 @@ import { FavoriteService } from '../services/favoriteService.ts';
 export class FavoriteController {
   static async getFavorites(req: Request, res: Response) {
     try {
-      const userId = req.query.userId as string;
-      if (!userId) {
-        return res.status(400).json({ error: 'userId is required' });
-      }
+      const userId = (req as any).user.id;
       const favorites = await FavoriteService.getFavorites(userId);
       res.json(favorites);
     } catch (error) {
@@ -210,9 +205,10 @@ export class FavoriteController {
 &nbsp;
   static async addFavorite(req: Request, res: Response) {
     try {
-      const { userId, locationId } = req.body;
-      if (!userId || !locationId) {
-        return res.status(400).json({ error: 'userId and locationId are required' });
+      const userId = (req as any).user.id;
+      const { locationId } = req.body;
+      if (!locationId) {
+        return res.status(400).json({ error: 'locationId is required' });
       }
 &nbsp;
       const favorite = await FavoriteService.addFavorite({ userId, locationId });
@@ -227,9 +223,10 @@ export class FavoriteController {
 &nbsp;
   static async removeFavorite(req: Request, res: Response) {
     try {
-      const { userId, locationId } = req.body;
-      <span class="missing-if-branch" title="if path not taken" >I</span>if (!userId || !locationId) {
-<span class="cstat-no" title="statement not covered" >        return res.status(400).json({ error: 'userId and locationId are required' });</span>
+      const userId = (req as any).user.id;
+      const { locationId } = req.body;
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (!locationId) {
+<span class="cstat-no" title="statement not covered" >        return res.status(400).json({ error: 'locationId is required' });</span>
       }
 &nbsp;
       const success = await FavoriteService.removeFavorite(userId, locationId);
@@ -242,27 +239,27 @@ export class FavoriteController {
     }
   }
 &nbsp;
-  static async checkFavorite(req: Request, res: Response) {
+  static async isFavorited(req: Request, res: Response) {
     try {
-      const { userId, locationId } = req.query;
-      <span class="missing-if-branch" title="if path not taken" >I</span>if (!userId || !locationId) {
-<span class="cstat-no" title="statement not covered" >        return res.status(400).json({ error: 'userId and locationId are required' });</span>
+      const userId = (req as any).user.id;
+      const { locationId } = req.query;
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (!locationId) {
+<span class="cstat-no" title="statement not covered" >        return res.status(400).json({ error: 'locationId is required' });</span>
       }
-      const isFavorited = await FavoriteService.isFavorited(userId as string, locationId as string);
+      const isFavorited = await FavoriteService.isFavorited(userId, locationId as string);
       res.json({ isFavorited });
     } catch (error) {
 <span class="cstat-no" title="statement not covered" >      res.status(500).json({ error: 'Internal server error' });</span>
     }
   }
-}
-&nbsp;</pre></td></tr></table></pre>
+}</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-03-18T20:51:11.922Z
+                at 2026-03-18T21:39:35.690Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

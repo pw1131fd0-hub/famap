@@ -1,6 +1,17 @@
 import type { Location } from '../types/location.ts';
 import type { Review } from '../types/review.ts';
 import type { Favorite } from '../types/favorite.ts';
+import type { User } from '../types/user.ts';
+
+export let mockUsers: User[] = [
+  {
+    id: 'u1',
+    email: 'mom@example.com',
+    passwordHash: 'hashed_password_1', // In a real app, use bcrypt
+    displayName: '小明媽',
+    createdAt: '2026-01-01T00:00:00Z',
+  },
+];
 
 export let mockLocations: Location[] = [
   {
@@ -45,7 +56,7 @@ export let mockLocations: Location[] = [
   },
 ];
 
-export const mockReviews: Review[] = [
+export let mockReviews: Review[] = [
   {
     id: '101',
     locationId: '1',

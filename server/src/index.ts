@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 import locationRoutes from './routes/locationRoutes.ts';
 import favoriteRoutes from './routes/favoriteRoutes.ts';
+import authRoutes from './routes/authRoutes.ts';
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(express.json());
 // Routes
 app.use('/api/locations', locationRoutes);
 app.use('/api/favorites', favoriteRoutes);
+app.use('/api/auth', authRoutes);
 
 app.get('/health', (req: Request, res: Response) => {
   res.json({ status: 'ok', message: 'FamMap API is running' });

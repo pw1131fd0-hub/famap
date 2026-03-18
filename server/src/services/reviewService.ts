@@ -2,10 +2,8 @@ import { mockReviews } from '../data/seed-data.ts';
 import type { Review, ReviewCreateDTO } from '../types/review.ts';
 
 export class ReviewService {
-  private static reviews: Review[] = [...mockReviews];
-
   static async findByLocationId(locationId: string): Promise<Review[]> {
-    return this.reviews.filter((r) => r.locationId === locationId)
+    return mockReviews.filter((r) => r.locationId === locationId)
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
 
@@ -13,7 +11,7 @@ export class ReviewService {
     const newReview: Review = {
       id: Math.random().toString(36).substring(2, 11),
       locationId,
-      userId: 'u-' + Math.random().toString(36).substring(2, 5),
+      userId: dto.userId || 'u-' + Math.random().toString(36).substring(2, 5),
       userName: dto.userName || 'Anonymous',
       rating: dto.rating,
       comment: dto.comment,
@@ -24,7 +22,7 @@ export class ReviewService {
       newReview.photos = dto.photos;
     }
 
-    this.reviews.push(newReview);
+    mockReviews.push(newReview);
     return newReview;
   }
 }

@@ -20,7 +20,8 @@ export class ReviewController {
   static async createReview(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const { rating, comment, userName } = req.body;
+      const { rating, comment } = req.body;
+      const user = (req as any).user;
 
       if (!id) {
         return res.status(400).json({ error: 'Location ID is required' });
@@ -35,7 +36,12 @@ export class ReviewController {
         return res.status(404).json({ error: 'Location not found' });
       }
 
-      const review = await ReviewService.create(id as string, { rating, comment, userName });
+      const review = await ReviewService.create(id as string, { 
+        rating, 
+        comment, 
+        userName: user?.displayName || 'Anonymous',
+        userId: user?.id || 'u-unknown'
+      });
       res.status(201).json(review);
     } catch (error) {
       console.error('Error creating review:', error);

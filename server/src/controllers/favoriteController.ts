@@ -4,10 +4,7 @@ import { FavoriteService } from '../services/favoriteService.ts';
 export class FavoriteController {
   static async getFavorites(req: Request, res: Response) {
     try {
-      const userId = req.query.userId as string;
-      if (!userId) {
-        return res.status(400).json({ error: 'userId is required' });
-      }
+      const userId = (req as any).user.id;
       const favorites = await FavoriteService.getFavorites(userId);
       res.json(favorites);
     } catch (error) {
@@ -17,9 +14,10 @@ export class FavoriteController {
 
   static async addFavorite(req: Request, res: Response) {
     try {
-      const { userId, locationId } = req.body;
-      if (!userId || !locationId) {
-        return res.status(400).json({ error: 'userId and locationId are required' });
+      const userId = (req as any).user.id;
+      const { locationId } = req.body;
+      if (!locationId) {
+        return res.status(400).json({ error: 'locationId is required' });
       }
 
       const favorite = await FavoriteService.addFavorite({ userId, locationId });
@@ -34,9 +32,10 @@ export class FavoriteController {
 
   static async removeFavorite(req: Request, res: Response) {
     try {
-      const { userId, locationId } = req.body;
-      if (!userId || !locationId) {
-        return res.status(400).json({ error: 'userId and locationId are required' });
+      const userId = (req as any).user.id;
+      const { locationId } = req.body;
+      if (!locationId) {
+        return res.status(400).json({ error: 'locationId is required' });
       }
 
       const success = await FavoriteService.removeFavorite(userId, locationId);
@@ -49,13 +48,14 @@ export class FavoriteController {
     }
   }
 
-  static async checkFavorite(req: Request, res: Response) {
+  static async isFavorited(req: Request, res: Response) {
     try {
-      const { userId, locationId } = req.query;
-      if (!userId || !locationId) {
-        return res.status(400).json({ error: 'userId and locationId are required' });
+      const userId = (req as any).user.id;
+      const { locationId } = req.query;
+      if (!locationId) {
+        return res.status(400).json({ error: 'locationId is required' });
       }
-      const isFavorited = await FavoriteService.isFavorited(userId as string, locationId as string);
+      const isFavorited = await FavoriteService.isFavorited(userId, locationId as string);
       res.json({ isFavorited });
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
