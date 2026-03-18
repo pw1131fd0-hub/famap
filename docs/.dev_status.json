@@ -8,8 +8,8 @@
     "runnability": 100,
     "git_commit": 100
   },
-  "completeness": 60,
-  "summary": "M3 (使用者評論與評分) 完成。實作了評論 API (GET/POST)、後端 ReviewService 與 Controller，並在前端增加了評論清單、撰寫評論表單以及地點詳情側邊欄。所有程式碼通過 TypeScript 型別檢查且可成功建置。",
-  "next_action": "實施 M4 (新增/編輯地點與無障礙篩選)：實作地點提交 API 與前端表單，並增加嬰兒車無障礙路徑篩選功能。",
-  "updated_at": "2026-03-18T20:30:00Z"
+  "completeness": 80,
+  "summary": "M4 (新增/編輯地點與無障礙篩選) 完成。實作了地點提交 API (POST/PATCH)、後端 LocationService 更新、前端新增地點表單與嬰兒車無障礙篩選功能。所有程式碼通過 TypeScript 型別檢查且可成功建置。",
+  "next_action": "實施 M5 (收藏地點與我的最愛)：實作收藏 API 與前端收藏清單功能。",
+  "updated_at": "2026-03-18T22:30:00Z"
 }

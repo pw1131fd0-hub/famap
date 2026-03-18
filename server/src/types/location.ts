@@ -29,4 +29,5 @@ export interface SearchParams {
   lng: number;
   radius: number; // in meters
   category?: Category | undefined;
+  stroller_accessible?: boolean | undefined;
 }

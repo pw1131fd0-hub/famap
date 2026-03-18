@@ -1,7 +1,7 @@
 import type { Location } from '../types/location.js';
 import type { Review } from '../types/review.js';
 
-export const mockLocations: Location[] = [
+export let mockLocations: Location[] = [
   {
     id: '1',
     name: { zh: '大安森林公園', en: 'Daan Forest Park' },

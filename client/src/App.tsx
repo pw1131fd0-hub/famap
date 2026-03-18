@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X } from 'lucide-react';
+import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Filter } from 'lucide-react';
 import { locationApi, reviewApi } from './services/api';
-import type { Location, Category, Review, ReviewCreateDTO } from './types';
+import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO } from './types';
 import { useTranslation } from './i18n/LanguageContext';
 import { ReviewList } from './components/ReviewList';
 import { ReviewForm } from './components/ReviewForm';
+import { LocationForm } from './components/LocationForm';
 
 // Fix for default marker icons in Leaflet with React
 // @ts-expect-error - Leaflet icon hack
@@ -32,8 +33,10 @@ function App() {
   const [position, setPosition] = useState<[number, number]>([25.0330, 121.5654]); // Taipei
   const [locations, setLocations] = useState<Location[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<Category | undefined>(undefined);
+  const [strollerOnly, setStrollerOnly] = useState(false);
   const [loading, setLoading] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
+  const [showAddLocation, setShowAddLocation] = useState(false);
   const [reviews, setReviews] = useState<Review[]>([]);
 
   useEffect(() => {
@@ -45,6 +48,7 @@ function App() {
           lng: position[1],
           radius: 10000, // 10km for demo
           category: selectedCategory,
+          stroller_accessible: strollerOnly || undefined,
         });
         setLocations(data);
       } catch (error) {
@@ -55,7 +59,7 @@ function App() {
     };
 
     fetchLocations();
-  }, [position, selectedCategory]);
+  }, [position, selectedCategory, strollerOnly]);
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -99,6 +103,18 @@ function App() {
     }
   };
 
+  const handleCreateLocation = async (locationDto: LocationCreateDTO) => {
+    try {
+      const newLocation = await locationApi.create(locationDto);
+      setLocations([newLocation, ...locations]);
+      setShowAddLocation(false);
+      setSelectedLocation(newLocation);
+    } catch (error) {
+      console.error('Failed to create location:', error);
+      throw error;
+    }
+  };
+
   const categories: { key: Category | undefined; icon: any; label: string }[] = [
     { key: undefined, icon: MapPin, label: t.common.all },
     { key: 'park', icon: Park, label: t.categories.park },
@@ -130,7 +146,24 @@ function App() {
 
       <div className="main-content">
         <aside className="sidebar">
-          {selectedLocation ? (
+          {showAddLocation ? (
+            <div className="location-form-container">
+              <header className="detail-header">
+                <h2>{t.common.addLocation}</h2>
+                <button 
+                  onClick={() => setShowAddLocation(false)} 
+                  className="close-detail-button"
+                >
+                  <X size={20} />
+                </button>
+              </header>
+              <LocationForm 
+                onSubmit={handleCreateLocation} 
+                onCancel={() => setShowAddLocation(false)} 
+                initialCoordinates={{ lat: position[0], lng: position[1] }}
+              />
+            </div>
+          ) : selectedLocation ? (
             <div className="location-detail-overlay">
               <header className="detail-header">
                 <div>
@@ -163,6 +196,24 @@ function App() {
             </div>
           ) : (
             <>
+              <div className="sidebar-tools">
+                <button 
+                  className={`tool-button ${strollerOnly ? 'active' : ''}`}
+                  onClick={() => setStrollerOnly(!strollerOnly)}
+                  title={t.common.filterStroller}
+                >
+                  <Filter size={18} />
+                  <span>{t.common.filterStroller}</span>
+                </button>
+                <button 
+                  className="tool-button primary"
+                  onClick={() => setShowAddLocation(true)}
+                  title={t.common.addLocation}
+                >
+                  <Plus size={18} />
+                  <span>{t.common.addLocation}</span>
+                </button>
+              </div>
               <nav className="category-list">
                 {categories.map((cat) => (
                   <button

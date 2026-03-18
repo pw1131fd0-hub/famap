@@ -6,7 +6,9 @@ const router = Router();
 
 // /api/locations
 router.get('/', LocationController.getNearby);
+router.post('/', LocationController.create);
 router.get('/:id', LocationController.getById);
+router.patch('/:id', LocationController.update);
 
 // Reviews
 router.get('/:id/reviews', ReviewController.getReviews);

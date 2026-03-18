@@ -45,6 +45,16 @@ export interface SearchParams {
   lng: number;
   radius: number;
   category?: Category;
+  stroller_accessible?: boolean;
+}
+
+export interface LocationCreateDTO {
+  name: { zh: string; en: string };
+  description: { zh: string; en: string };
+  category: Category;
+  coordinates: { lat: number; lng: number };
+  address: { zh: string; en: string };
+  facilities: string[];
 }
 
 export type Language = 'zh' | 'en';

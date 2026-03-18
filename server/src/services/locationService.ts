@@ -18,7 +18,7 @@ export class LocationService {
   }
 
   static async findNearby(params: SearchParams): Promise<Location[]> {
-    const { lat, lng, radius, category } = params;
+    const { lat, lng, radius, category, stroller_accessible } = params;
 
     return mockLocations.filter((location: Location) => {
       const distance = this.calculateDistance(
@@ -30,12 +30,43 @@ export class LocationService {
 
       const withinRadius = distance <= radius;
       const matchCategory = !category || location.category === category;
+      const matchStroller = !stroller_accessible || location.facilities.includes('stroller_accessible');
 
-      return withinRadius && matchCategory;
+      return withinRadius && matchCategory && matchStroller;
     });
   }
 
   static async findById(id: string): Promise<Location | null> {
     return mockLocations.find((l: Location) => l.id === id) || null;
+  }
+
+  static async create(locationData: Omit<Location, 'id' | 'averageRating'>): Promise<Location> {
+    const newLocation: Location = {
+      ...locationData,
+      id: (mockLocations.length + 1).toString(),
+      averageRating: 0,
+    };
+    mockLocations.push(newLocation);
+    return newLocation;
+  }
+
+  static async update(id: string, locationData: Partial<Omit<Location, 'id' | 'averageRating'>>): Promise<Location | null> {
+    const index = mockLocations.findIndex((l: Location) => l.id === id);
+    if (index === -1) return null;
+
+    const existing = mockLocations[index];
+    if (!existing) return null;
+
+    const updated: Location = {
+      ...existing,
+      ...locationData,
+      name: locationData.name ? { ...existing.name, ...locationData.name } : existing.name,
+      description: locationData.description ? { ...existing.description, ...locationData.description } : existing.description,
+      address: locationData.address ? { ...existing.address, ...locationData.address } : existing.address,
+      coordinates: locationData.coordinates ? { ...existing.coordinates, ...locationData.coordinates } : existing.coordinates,
+    };
+
+    mockLocations[index] = updated;
+    return updated;
   }
 }
