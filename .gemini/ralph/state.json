@@ -1,8 +1,0 @@
-{
-  "active": true,
-  "current_iteration": 1,
-  "max_iterations": 10,
-  "completion_promise": "",
-  "original_prompt": "Read and follow .gemini_instructions.tmp precisely. When done, delete it.",
-  "started_at": "2026-03-18T17:38:44Z"
-}
