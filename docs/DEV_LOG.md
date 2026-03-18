@@ -43,3 +43,16 @@ I will now examine the `server/src/routes/locationRoutes.ts`, `server/src/contro
 I've confirm
 
 ---
+
+## [2026-03-19 04:04:12] [dev] 90%
+
+M5 (收藏地點與我的最愛) 完成。實作了收藏 API (GET/POST/DELETE)、後端 FavoriteService 與 Controller，並在前端增加了收藏清單切換、收藏按鈕以及整合 API。修復了 Leaflet 圖示顯示問題並通過 TypeScript 建置檢查。
+
+> I will read the instructions in `.gemini_instructions.tmp`.
+I will start by exploring the codebase to understand the current implementation and prepare for M5 (Favorites/Saved Places).
+I will check if there are any existing favorite-related files or placeholders in the codebase.
+I'll start by checking the `server/src/index.ts` to see how routes are registered.
+I'll check `server/src/routes/locationRoutes.ts` to see what's there.
+I'll check `server/src/types/location.ts` to see the `Location` typ
+
+---
