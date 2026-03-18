@@ -99,7 +99,7 @@
 
 ## 3. Error Handling Strategy
 - **Client Errors (4xx):**
-  - `400 Bad Request`: Validation failure (Zod error details returned).
+  - `400 Bad Request`: Validation failure (Pydantic error details returned).
   - `401 Unauthorized`: Not logged in.
   - `404 Not Found`: Resource doesn't exist.
 - **Server Errors (5xx):**

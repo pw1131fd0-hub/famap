@@ -47,10 +47,10 @@
 ## 5. Technical Stack & Deployment
 - **Frontend:** React (TypeScript) with Vite.
 - **Styling:** Vanilla CSS (as per Gemini CLI preference).
-- **Map Engine:** Leaflet (OpenStreetMap) or Google Maps API (depending on budget/accuracy). *Recommendation: Leaflet for MVP.*
-- **Backend:** Node.js (Express) or FastAPI.
+- **Map Engine:** Leaflet (OpenStreetMap).
+- **Backend:** FastAPI (Python).
 - **Database:** PostgreSQL (PostGIS for spatial queries).
-- **Deployment:** Vercel (Frontend), Railway/Render (Backend).
+- **Deployment:** PWA (Mobile First), Vercel (Frontend), Railway/Render (Backend).
 
 ## 6. Competitive Analysis
 - **Google Maps:** Great for general locations, but lacks specialized "parent-child" filters and verified facility details.
@@ -69,7 +69,7 @@
   - Background (Cream/White): `#FFFDD0` / `#FFFFFF`
   - Text (Dark Gray): `#333333`
   - Accent (Coral): `#FF6F61`
-- **Typography:** Rounded sans-serif fonts (e.g., 'Quicksand' or 'Nunito') for a friendly feel.
+- **Typography:** 'Noto Sans TC' (Google Fonts) for a clear and friendly feel.
 - **Component Style:** Large touch targets, rounded corners (8px+), subtle shadows.
 - **RWD Breakpoints:** 600px (Mobile), 1024px (Tablet), 1440px (Desktop).
 - **Modes:** Support for Light Mode (default) and Dark Mode (softer grays/blues).

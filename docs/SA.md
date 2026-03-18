@@ -1,11 +1,11 @@
 # FamMap (親子地圖) - System Architecture (SA)
 
 ## 1. System Architecture Overview
-FamMap follows a modern Client-Server architecture, utilizing a Single Page Application (SPA) for the frontend and a RESTful API for the backend.
+FamMap follows a modern Client-Server architecture, utilizing a Single Page Application (SPA) for the frontend and a RESTful API for the backend. The application is built as a Progressive Web App (PWA) to ensure a mobile-first experience.
 
 ```mermaid
 graph TD
-    Client[Web/Mobile Browser] -->|HTTPS/JSON| API[API Server Node.js]
+    Client[Web/Mobile Browser - PWA] -->|HTTPS/JSON| API[API Server - FastAPI]
     API -->|SQL| DB[(PostgreSQL + PostGIS)]
     API -->|External| Maps[Map Provider API]
     API -->|Media| Storage[Cloud Storage - Images]
@@ -19,14 +19,15 @@ graph TD
 - **Location Module:** Show details of a specific location, display photos and reviews.
 - **User Module:** Handle profile, favorites, and submissions (add/edit).
 - **Localization Module:** Manage i18n for Traditional Chinese and English.
+- **PWA Module:** Service Worker for offline support and installation.
 
-### 2.2 Backend (Node.js + Express)
-- **API Router:** Route requests to appropriate controllers.
+### 2.2 Backend (FastAPI + Python)
+- **API Router:** Route requests to appropriate controllers/endpoints.
 - **Location Controller:** Handle spatial queries (nearest locations), search, and CRUD for locations.
-- `Review Controller`: Manage user ratings and comments.
-- `Auth Controller`: Handle user sessions, registrations, and permissions.
-- `Favorite Controller`: Manage user's saved locations.
-- `Spatial Service`: Interface with PostGIS for radius-based queries.
+- **Review Controller:** Manage user ratings and comments.
+- **Auth Controller:** Handle user sessions, registrations, and permissions.
+- **Favorite Controller:** Manage user's saved locations.
+- **Spatial Service:** Interface with PostGIS for radius-based queries.
 
 
 ### 2.3 Database (PostgreSQL + PostGIS)
@@ -44,10 +45,11 @@ graph TD
 - **Backend Hosting:** Railway/Render (Managed container hosting).
 - **Database:** Supabase or Managed PostgreSQL (with PostGIS extension).
 - **CDN:** For static assets and map tiles (OpenStreetMap).
+- **Distribution:** Progressive Web App (PWA) for mobile-first delivery.
 
 ## 5. Third-party Dependencies
 - **Maps:** Leaflet.js (Map rendering), OpenStreetMap (Tile provider).
 - **Styling:** CSS Modules or Vanilla CSS.
 - **Icons:** Lucide-react (General UI icons).
 - **State Management:** React Context or Zustand.
-- **Backend Libraries:** Express, Prisma or Kysely (ORM/Query Builder), Zod (Validation).
+- **Backend Libraries:** FastAPI, Pydantic (Validation), SQLAlchemy or Tortoise ORM, Psycopg2.
