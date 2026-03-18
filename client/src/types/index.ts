@@ -24,6 +24,22 @@ export interface Location {
   photoUrl?: string;
 }
 
+export interface Review {
+  id: string;
+  locationId: string;
+  userId: string;
+  userName: string;
+  rating: number;
+  comment: string;
+  createdAt: string;
+}
+
+export interface ReviewCreateDTO {
+  rating: number;
+  comment: string;
+  userName?: string;
+}
+
 export interface SearchParams {
   lat: number;
   lng: number;

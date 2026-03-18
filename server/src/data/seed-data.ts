@@ -1,4 +1,5 @@
 import type { Location } from '../types/location.js';
+import type { Review } from '../types/review.js';
 
 export const mockLocations: Location[] = [
   {
@@ -40,5 +41,35 @@ export const mockLocations: Location[] = [
     address: { zh: '台北市信義區', en: 'Xinyi Dist., Taipei' },
     facilities: ['high_chair', 'nursing_room'],
     averageRating: 4.2,
+  },
+];
+
+export const mockReviews: Review[] = [
+  {
+    id: '101',
+    locationId: '1',
+    userId: 'u1',
+    userName: '小明媽',
+    rating: 5,
+    comment: '空間很大，非常適合小孩跑跳！',
+    createdAt: '2026-03-01T10:00:00Z',
+  },
+  {
+    id: '102',
+    locationId: '1',
+    userId: 'u2',
+    userName: 'Mike',
+    rating: 4,
+    comment: 'Nice place but can be crowded on weekends.',
+    createdAt: '2026-03-05T14:30:00Z',
+  },
+  {
+    id: '103',
+    locationId: '2',
+    userId: 'u3',
+    userName: '小美爸',
+    rating: 5,
+    comment: '設施很多，小朋友玩得很開心。',
+    createdAt: '2026-03-10T09:15:00Z',
   },
 ];

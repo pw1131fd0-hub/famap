@@ -13,14 +13,13 @@ I'll read the `.gemini_instructions.tmp` file to get the specific instructions f
 I'll list the files in the current directory to understand the existing project structure.
 ---
 
-## [2026-03-19 02:34:55] [dev] 40%
+## [2026-03-19 03:30:00] [dev] 60%
 
-M2 (地點資料庫與 API) 完成。實作了基於地理座標的週邊搜尋 API，並在前端整合了地圖標記與類別篩選功能。同時完成了全介面中英文雙語支持與 PRD 要求的視覺風格設計。
+M3 (使用者評論與評分) 完成。實作了評論 API (GET/POST)、後端 ReviewService 與 Controller，並在前端增加了評論清單、撰寫評論表單以及地點詳情側邊欄。所有程式碼通過 TypeScript 型別檢查且可成功建置。
 
-> I will read the `.gemini_instructions.tmp` file to understand the task requirements.
-I will list the files in the `server` and `client` directories to understand the current progress of the project.
-I will read the content of the `server/src/index.ts`, `client/src/App.tsx`, `docs/.dev_status.json`, and `docs/DEV_LOG.md` files to understand the current implementation and status.
-I will check the environment for the availability of PostgreSQL and Docker.
-I will check if the PostgreSQL service is r
-
+> I have completed the implementation of M3.
+I've added the Review type, ReviewService, ReviewController, and review routes on the backend.
+I've updated the frontend with ReviewList and ReviewForm components, and a location detail view in the sidebar.
+I've also updated the i18n and CSS.
+Everything is passing type checks and building successfully.
 ---

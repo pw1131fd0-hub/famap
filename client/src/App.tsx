@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital } from 'lucide-react';
-import { locationApi } from './services/api';
-import type { Location, Category } from './types';
+import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X } from 'lucide-react';
+import { locationApi, reviewApi } from './services/api';
+import type { Location, Category, Review, ReviewCreateDTO } from './types';
 import { useTranslation } from './i18n/LanguageContext';
+import { ReviewList } from './components/ReviewList';
+import { ReviewForm } from './components/ReviewForm';
 
 // Fix for default marker icons in Leaflet with React
 // @ts-expect-error - Leaflet icon hack
@@ -31,6 +33,8 @@ function App() {
   const [locations, setLocations] = useState<Location[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<Category | undefined>(undefined);
   const [loading, setLoading] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
+  const [reviews, setReviews] = useState<Review[]>([]);
 
   useEffect(() => {
     const fetchLocations = async () => {
@@ -53,6 +57,23 @@ function App() {
     fetchLocations();
   }, [position, selectedCategory]);
 
+  useEffect(() => {
+    const fetchReviews = async () => {
+      if (selectedLocation) {
+        try {
+          const data = await reviewApi.getByLocationId(selectedLocation.id);
+          setReviews(data);
+        } catch (error) {
+          console.error('Failed to fetch reviews:', error);
+        }
+      } else {
+        setReviews([]);
+      }
+    };
+
+    fetchReviews();
+  }, [selectedLocation]);
+
   const handleFindMe = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -64,6 +85,17 @@ function App() {
           alert('Could not get your location. Defaulting to Taipei.');
         }
       );
+    }
+  };
+
+  const handlePostReview = async (reviewDto: ReviewCreateDTO) => {
+    if (!selectedLocation) return;
+    try {
+      const newReview = await reviewApi.create(selectedLocation.id, reviewDto);
+      setReviews([newReview, ...reviews]);
+    } catch (error) {
+      console.error('Failed to post review:', error);
+      throw error;
     }
   };
 
@@ -98,33 +130,71 @@ function App() {
 
       <div className="main-content">
         <aside className="sidebar">
-          <nav className="category-list">
-            {categories.map((cat) => (
-              <button
-                key={cat.key || 'all'}
-                className={`category-item ${selectedCategory === cat.key ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(cat.key)}
-              >
-                <cat.icon size={20} />
-                <span>{cat.label}</span>
-              </button>
-            ))}
-          </nav>
-          {loading && <div className="loading-overlay">{t.common.loading}</div>}
-          <div className="locations-list">
-            {locations.map((loc) => (
-              <div 
-                key={loc.id} 
-                className="location-card"
-                onClick={() => setPosition([loc.coordinates.lat, loc.coordinates.lng])}
-              >
-                <h3>{loc.name[language]}</h3>
-                <p className="category-label">{t.categories[loc.category]}</p>
-                <p className="address-text">{loc.address[language]}</p>
-                <div className="rating">⭐ {loc.averageRating}</div>
+          {selectedLocation ? (
+            <div className="location-detail-overlay">
+              <header className="detail-header">
+                <div>
+                  <h2>{selectedLocation.name[language]}</h2>
+                  <p className="category-label">{t.categories[selectedLocation.category]}</p>
+                </div>
+                <button 
+                  onClick={() => setSelectedLocation(null)} 
+                  className="close-detail-button"
+                >
+                  <X size={20} />
+                </button>
+              </header>
+              <div className="detail-content">
+                <div className="detail-section">
+                  <h4>{t.locationDetail.address}</h4>
+                  <p>{selectedLocation.address[language]}</p>
+                </div>
+                <div className="detail-section">
+                  <h4>{t.locationDetail.facilities}</h4>
+                  <div className="facility-chips">
+                    {selectedLocation.facilities.map(f => (
+                      <span key={f} className="chip">{t.facilities[f as keyof typeof t.facilities] || f}</span>
+                    ))}
+                  </div>
+                </div>
+                <ReviewList reviews={reviews} />
+                <ReviewForm onSubmit={handlePostReview} />
               </div>
-            ))}
-          </div>
+            </div>
+          ) : (
+            <>
+              <nav className="category-list">
+                {categories.map((cat) => (
+                  <button
+                    key={cat.key || 'all'}
+                    className={`category-item ${selectedCategory === cat.key ? 'active' : ''}`}
+                    onClick={() => setSelectedCategory(cat.key)}
+                  >
+                    <cat.icon size={20} />
+                    <span>{cat.label}</span>
+                  </button>
+                ))}
+              </nav>
+              {loading && <div className="loading-overlay">{t.common.loading}</div>}
+              <div className="locations-list">
+                {locations.map((loc) => (
+                  <div 
+                    key={loc.id} 
+                    className="location-card"
+                    onClick={() => {
+                      setPosition([loc.coordinates.lat, loc.coordinates.lng]);
+                      setSelectedLocation(loc);
+                    }}
+                  >
+                    <h3>{loc.name[language]}</h3>
+                    <p className="category-label">{t.categories[loc.category]}</p>
+                    <p className="address-text">{loc.address[language]}</p>
+                    <div className="rating">⭐ {loc.averageRating}</div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </aside>
 
         <main className="map-view">
@@ -135,7 +205,13 @@ function App() {
             />
             <MapUpdater center={position} />
             {locations.map((loc) => (
-              <Marker key={loc.id} position={[loc.coordinates.lat, loc.coordinates.lng]}>
+              <Marker 
+                key={loc.id} 
+                position={[loc.coordinates.lat, loc.coordinates.lng]}
+                eventHandlers={{
+                  click: () => setSelectedLocation(loc),
+                }}
+              >
                 <Popup>
                   <div className="popup-content">
                     <strong>{loc.name[language]}</strong>

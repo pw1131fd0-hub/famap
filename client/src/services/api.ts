@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { Location, SearchParams } from '../types';
+import type { Location, SearchParams, Review, ReviewCreateDTO } from '../types';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 
@@ -14,6 +14,17 @@ export const locationApi = {
   },
   getById: async (id: string): Promise<Location> => {
     const response = await api.get<Location>(`/locations/${id}`);
+    return response.data;
+  },
+};
+
+export const reviewApi = {
+  getByLocationId: async (locationId: string): Promise<Review[]> => {
+    const response = await api.get<Review[]>(`/locations/${locationId}/reviews`);
+    return response.data;
+  },
+  create: async (locationId: string, review: ReviewCreateDTO): Promise<Review> => {
+    const response = await api.post<Review>(`/locations/${locationId}/reviews`, review);
     return response.data;
   },
 };

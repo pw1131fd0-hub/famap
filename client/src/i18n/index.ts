@@ -5,6 +5,8 @@ export const translations = {
       findMe: '我的位置',
       loading: '載入中...',
       all: '全部',
+      close: '關閉',
+      submit: '提交',
     },
     categories: {
       park: '公園',
@@ -22,6 +24,14 @@ export const translations = {
       address: '地址',
       rating: '評分',
       facilities: '設施',
+    },
+    reviews: {
+      title: '評論',
+      write: '撰寫評論',
+      rating: '評分',
+      comment: '評論內容',
+      userName: '您的名稱',
+      empty: '暫無評論',
     }
   },
   en: {
@@ -30,6 +40,8 @@ export const translations = {
       findMe: 'Find Me',
       loading: 'Loading...',
       all: 'All',
+      close: 'Close',
+      submit: 'Submit',
     },
     categories: {
       park: 'Park',
@@ -47,6 +59,14 @@ export const translations = {
       address: 'Address',
       rating: 'Rating',
       facilities: 'Facilities',
+    },
+    reviews: {
+      title: 'Reviews',
+      write: 'Write a Review',
+      rating: 'Rating',
+      comment: 'Comment',
+      userName: 'Your Name',
+      empty: 'No reviews yet',
     }
   }
 };
