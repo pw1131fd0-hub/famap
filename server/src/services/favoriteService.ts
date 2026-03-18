@@ -1,6 +1,6 @@
-import { mockFavorites, mockLocations } from '../data/seed-data.js';
-import type { Favorite, FavoriteCreateDTO } from '../types/favorite.js';
-import type { Location } from '../types/location.js';
+import { mockFavorites, mockLocations } from '../data/seed-data.ts';
+import type { Favorite, FavoriteCreateDTO } from '../types/favorite.ts';
+import type { Location } from '../types/location.ts';
 
 export class FavoriteService {
   static async getFavorites(userId: string): Promise<Location[]> {

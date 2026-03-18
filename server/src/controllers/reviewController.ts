@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
-import { ReviewService } from '../services/reviewService.js';
-import { LocationService } from '../services/locationService.js';
+import { ReviewService } from '../services/reviewService.ts';
+import { LocationService } from '../services/locationService.ts';
 
 export class ReviewController {
   static async getReviews(req: Request, res: Response) {

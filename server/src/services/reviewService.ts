@@ -1,5 +1,5 @@
-import { mockReviews } from '../data/seed-data.js';
-import type { Review, ReviewCreateDTO } from '../types/review.js';
+import { mockReviews } from '../data/seed-data.ts';
+import type { Review, ReviewCreateDTO } from '../types/review.ts';
 
 export class ReviewService {
   private static reviews: Review[] = [...mockReviews];

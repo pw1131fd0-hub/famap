@@ -1,6 +1,6 @@
-import type { Location } from '../types/location.js';
-import type { Review } from '../types/review.js';
-import type { Favorite } from '../types/favorite.js';
+import type { Location } from '../types/location.ts';
+import type { Review } from '../types/review.ts';
+import type { Favorite } from '../types/favorite.ts';
 
 export let mockLocations: Location[] = [
   {

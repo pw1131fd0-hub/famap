@@ -34,31 +34,37 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit }) => {
     <form className="review-form" onSubmit={handleSubmit}>
       <h3>{t.reviews.write}</h3>
       <div className="form-group">
-        <label>{t.reviews.userName}</label>
-        <input 
-          type="text" 
-          value={userName} 
-          onChange={(e) => setUserName(e.target.value)} 
-          required 
-          placeholder={t.reviews.userName}
-        />
+        <label>
+          {t.reviews.userName}
+          <input 
+            type="text" 
+            value={userName} 
+            onChange={(e) => setUserName(e.target.value)} 
+            required 
+            placeholder={t.reviews.userName}
+          />
+        </label>
       </div>
       <div className="form-group">
-        <label>{t.reviews.rating}</label>
-        <select value={rating} onChange={(e) => setRating(Number(e.target.value))}>
-          {[5, 4, 3, 2, 1].map(num => (
-            <option key={num} value={num}>{num} ⭐</option>
-          ))}
-        </select>
+        <label>
+          {t.reviews.rating}
+          <select value={rating} onChange={(e) => setRating(Number(e.target.value))}>
+            {[5, 4, 3, 2, 1].map(num => (
+              <option key={num} value={num}>{num} ⭐</option>
+            ))}
+          </select>
+        </label>
       </div>
       <div className="form-group">
-        <label>{t.reviews.comment}</label>
-        <textarea 
-          value={comment} 
-          onChange={(e) => setComment(e.target.value)} 
-          required 
-          placeholder={t.reviews.comment}
-        />
+        <label>
+          {t.reviews.comment}
+          <textarea 
+            value={comment} 
+            onChange={(e) => setComment(e.target.value)} 
+            required 
+            placeholder={t.reviews.comment}
+          />
+        </label>
       </div>
       <button type="submit" disabled={submitting} className="submit-button">
         {submitting ? t.common.loading : t.common.submit}

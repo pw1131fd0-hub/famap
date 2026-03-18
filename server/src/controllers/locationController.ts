@@ -1,6 +1,6 @@
 import { type Request, type Response } from 'express';
 import { z } from 'zod';
-import { LocationService } from '../services/locationService.js';
+import { LocationService } from '../services/locationService.ts';
 
 const searchSchema = z.object({
   lat: z.coerce.number().min(-90).max(90),
@@ -21,11 +21,25 @@ const locationCreateSchema = z.object({
 
 export class LocationController {
   static async getNearby(req: Request, res: Response) {
-    // ... (existing code)
+    const parseResult = searchSchema.safeParse(req.query);
+    if (!parseResult.success) {
+      return res.status(400).json({ error: 'Invalid search parameters', details: parseResult.error.format() });
+    }
+
+    const locations = await LocationService.findNearby(parseResult.data);
+    res.json(locations);
   }
 
   static async getById(req: Request, res: Response) {
-    // ... (existing code)
+    const { id } = req.params;
+    if (!id) return res.status(400).json({ error: 'ID is required' });
+
+    const location = await LocationService.findById(id);
+    if (!location) {
+      return res.status(404).json({ error: 'Location not found' });
+    }
+
+    res.json(location);
   }
 
   static async create(req: Request, res: Response) {

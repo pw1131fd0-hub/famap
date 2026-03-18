@@ -209,6 +209,7 @@ function App() {
                     <button 
                       className={`favorite-button ${favorites.some(f => f.id === selectedLocation.id) ? 'active' : ''}`}
                       onClick={(e) => toggleFavorite(e, selectedLocation.id)}
+                      aria-label={favorites.some(f => f.id === selectedLocation.id) ? t.common.removeFromFavorites : t.common.addToFavorites}
                     >
                       <Heart size={24} fill={favorites.some(f => f.id === selectedLocation.id) ? "currentColor" : "none"} />
                     </button>
@@ -315,6 +316,7 @@ function App() {
                         <button 
                           className={`favorite-icon-button ${favorites.some(f => f.id === loc.id) ? 'active' : ''}`}
                           onClick={(e) => toggleFavorite(e, loc.id)}
+                          aria-label={favorites.some(f => f.id === loc.id) ? t.common.removeFromFavorites : t.common.addToFavorites}
                         >
                           <Heart size={18} fill={favorites.some(f => f.id === loc.id) ? "currentColor" : "none"} />
                         </button>

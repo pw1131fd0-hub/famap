@@ -42,75 +42,89 @@ export const LocationForm: React.FC<LocationFormProps> = ({ onSubmit, onCancel, 
   };
 
   const categories: Category[] = ['park', 'nursing_room', 'restaurant', 'medical'];
-  const commonFacilities = ['stroller_accessible', 'nursing_room', 'high_chair', 'public_toilet'];
+  const commonFacilities = ['stroller_accessible', 'changing_table', 'high_chair', 'public_toilet'];
 
   return (
     <div className="location-form">
       <h3>{t.common.addLocation}</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>{t.locationForm.nameZh}</label>
-          <input
-            type="text"
-            value={formData.name.zh}
-            onChange={e => setFormData({ ...formData, name: { ...formData.name, zh: e.target.value } })}
-            required
-          />
+          <label>
+            {t.locationForm.nameZh}
+            <input
+              type="text"
+              value={formData.name.zh}
+              onChange={e => setFormData({ ...formData, name: { ...formData.name, zh: e.target.value } })}
+              required
+            />
+          </label>
         </div>
         <div className="form-group">
-          <label>{t.locationForm.nameEn}</label>
-          <input
-            type="text"
-            value={formData.name.en}
-            onChange={e => setFormData({ ...formData, name: { ...formData.name, en: e.target.value } })}
-            required
-          />
+          <label>
+            {t.locationForm.nameEn}
+            <input
+              type="text"
+              value={formData.name.en}
+              onChange={e => setFormData({ ...formData, name: { ...formData.name, en: e.target.value } })}
+              required
+            />
+          </label>
         </div>
         <div className="form-group">
-          <label>{t.locationForm.category}</label>
-          <select
-            value={formData.category}
-            onChange={e => setFormData({ ...formData, category: e.target.value as Category })}
-          >
-            {categories.map(c => (
-              <option key={c} value={c}>{t.categories[c]}</option>
-            ))}
-          </select>
+          <label>
+            {t.locationForm.category}
+            <select
+              value={formData.category}
+              onChange={e => setFormData({ ...formData, category: e.target.value as Category })}
+            >
+              {categories.map(c => (
+                <option key={c} value={c}>{t.categories[c]}</option>
+              ))}
+            </select>
+          </label>
         </div>
         <div className="form-group">
-          <label>{t.locationForm.addressZh}</label>
-          <input
-            type="text"
-            value={formData.address.zh}
-            onChange={e => setFormData({ ...formData, address: { ...formData.address, zh: e.target.value } })}
-            required
-          />
+          <label>
+            {t.locationForm.addressZh}
+            <input
+              type="text"
+              value={formData.address.zh}
+              onChange={e => setFormData({ ...formData, address: { ...formData.address, zh: e.target.value } })}
+              required
+            />
+          </label>
         </div>
         <div className="form-group">
-          <label>{t.locationForm.addressEn}</label>
-          <input
-            type="text"
-            value={formData.address.en}
-            onChange={e => setFormData({ ...formData, address: { ...formData.address, en: e.target.value } })}
-            required
-          />
+          <label>
+            {t.locationForm.addressEn}
+            <input
+              type="text"
+              value={formData.address.en}
+              onChange={e => setFormData({ ...formData, address: { ...formData.address, en: e.target.value } })}
+              required
+            />
+          </label>
         </div>
         <div className="form-group">
-          <label>{t.locationForm.descriptionZh}</label>
-          <textarea
-            value={formData.description.zh}
-            onChange={e => setFormData({ ...formData, description: { ...formData.description, zh: e.target.value } })}
-          />
+          <label>
+            {t.locationForm.descriptionZh}
+            <textarea
+              value={formData.description.zh}
+              onChange={e => setFormData({ ...formData, description: { ...formData.description, zh: e.target.value } })}
+            />
+          </label>
         </div>
         <div className="form-group">
-          <label>{t.locationForm.descriptionEn}</label>
-          <textarea
-            value={formData.description.en}
-            onChange={e => setFormData({ ...formData, description: { ...formData.description, en: e.target.value } })}
-          />
+          <label>
+            {t.locationForm.descriptionEn}
+            <textarea
+              value={formData.description.en}
+              onChange={e => setFormData({ ...formData, description: { ...formData.description, en: e.target.value } })}
+            />
+          </label>
         </div>
         <div className="form-group">
-          <label>{t.locationForm.facilities}</label>
+          <span>{t.locationForm.facilities}</span>
           <div className="facility-checkboxes">
             {commonFacilities.map(f => (
               <label key={f} className="checkbox-label">
