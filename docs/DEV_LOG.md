@@ -30,3 +30,16 @@ M4 (新增/編輯地點與無障礙篩選) 完成。
 - Added a new LocationForm component and integrated it with the sidebar.
 - Fixed TS errors related to optional properties and nested objects.
 ---
+## [2026-03-19 03:34:56] [dev] 80%
+
+M4 (新增/編輯地點與無障礙篩選) 完成。實作了地點提交 API (POST/PATCH)、後端 LocationService 更新、前端新增地點表單與嬰兒車無障礙篩選功能。所有程式碼通過 TypeScript 型別檢查且可成功建置。
+
+> I will start by reading the contents of the `.gemini_instructions.tmp` file to understand the tasks I need to perform.
+
+I will check the current environment variables and read the `docs/.dev_status.json` file to determine the current state and next steps for the project.
+
+I will now examine the `server/src/routes/locationRoutes.ts`, `server/src/controllers/locationController.ts`, and the frontend components to understand the current implementation and identify what's needed for M4.
+
+I've confirm
+
+---
