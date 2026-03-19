@@ -1532,5 +1532,838 @@
       "stroller_accessible"
     ],
     "averageRating": 4.0
+  },
+  {
+    "id": "2eb8fad1-b4cb-4e17-8a2e-5f669e241c11",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.139716,
+      "lng": 121.6173837
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "37f2849b-7924-4eda-8bc3-c9dfb23d9d2d",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.1396732,
+      "lng": 121.6173865
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "9c00b357-54da-4d09-bf0b-750582220e3f",
+    "name": {
+      "zh": "內雙溪森林藥用植物園",
+      "en": "Neishuangxi Medicinal Plant Garden"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1152558,
+      "lng": 121.576656
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "9dea09e9-5481-4d02-8188-365e1e203681",
+    "name": {
+      "zh": "崁腳國小",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.1606301,
+      "lng": 121.6497164
+    },
+    "address": {
+      "zh": "新北市萬里區崁脚里011鄰崁脚59號",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "939a26d1-f1de-4c6b-8042-22f0aa5897ac",
+    "name": {
+      "zh": "大坪國小",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.167594,
+      "lng": 121.6384753
+    },
+    "address": {
+      "zh": "新北市萬里區雙興里大坪路19號",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "cfc47eba-0286-45f9-80e3-3b1c10c8427b",
+    "name": {
+      "zh": "七星公園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1641404,
+      "lng": 121.5572491
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "d7483416-a85e-4886-830f-8adfaae051aa",
+    "name": {
+      "zh": "開放空間",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0993905,
+      "lng": 121.5498728
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "8aca2cdb-1ab3-4f8a-83c9-17c0215ea7df",
+    "name": {
+      "zh": "外雙溪公園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1012875,
+      "lng": 121.552523
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "6b6faf4d-fe28-4980-bb8b-f5db73fa5ce5",
+    "name": {
+      "zh": "帕米爾齧雪精神堡",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1224853,
+      "lng": 121.5938693
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "343ba0ac-473f-4e46-96e7-355656a24517",
+    "name": {
+      "zh": "天溪園生態教育中心",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1319656,
+      "lng": 121.5953245
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "a911208e-df77-42fb-a72a-dc431f5a9c11",
+    "name": {
+      "zh": "內雙溪森林自然中心",
+      "en": "Nei Shuang Xi Nature Park"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1157294,
+      "lng": 121.5787766
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "c950ffa1-bf38-428b-90bf-f936500bb0b5",
+    "name": {
+      "zh": "平等國小",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.1288547,
+      "lng": 121.5765948
+    },
+    "address": {
+      "zh": "臺北市士林區平等里平菁街101號",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "6e824dd9-7e47-44f0-947c-6bbaf52aaaf2",
+    "name": {
+      "zh": "高年級遊戲場",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1073142,
+      "lng": 121.565418
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "high_chair"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "d2690325-96b1-40db-8ccd-2ef6295a5470",
+    "name": {
+      "zh": "城堡區",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1069076,
+      "lng": 121.5648087
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "high_chair"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "df1a4b84-f837-4d31-a73f-5164a911dceb",
+    "name": {
+      "zh": "幼稚園遊戲區",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1064861,
+      "lng": 121.564593
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "high_chair"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "4406b22e-8183-4daa-9b03-706e708e79ee",
+    "name": {
+      "zh": "衛理兒童遊戲場",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1022828,
+      "lng": 121.5533946
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "b0632723-bab9-4575-abd0-73a420f95ead",
+    "name": {
+      "zh": "櫻花公園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1807788,
+      "lng": 121.5695455
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "7b80eae2-9c59-4474-94a4-5700c3d33f2b",
+    "name": {
+      "zh": "不在道院",
+      "en": "Bu Zai Dao Yuan"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - other",
+      "en": "Automatically collected data from OSM - other"
+    },
+    "category": "other",
+    "coordinates": {
+      "lat": 25.1347175,
+      "lng": 121.5826981
+    },
+    "address": {
+      "zh": "111016臺北市士林區平菁街95巷56號",
+      "en": "Unknown Address"
+    },
+    "facilities": [],
+    "averageRating": 4.0
+  },
+  {
+    "id": "3f635b83-0c5d-4af7-9844-750422c949d5",
+    "name": {
+      "zh": "帕米爾公園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.12288,
+      "lng": 121.593608
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "08396431-bce8-4335-bc19-f9474229e26a",
+    "name": {
+      "zh": "翠山公園",
+      "en": "Cuishan Park"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1079682,
+      "lng": 121.5694116
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "4fb5e4fa-fc0d-445c-a6cf-b40afc805d0c",
+    "name": {
+      "zh": "住六(公一)公園",
+      "en": "Zhuliu(Gongyi)Park"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1368918,
+      "lng": 121.5590829
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "b13700fe-ae7f-4122-81f1-f5c30bc08656",
+    "name": {
+      "zh": "住六(公二)公園",
+      "en": "Zhuliu(Gong'er)Park"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1376675,
+      "lng": 121.5573871
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "68cfeac2-b608-4af5-9e06-32a5d6bf214e",
+    "name": {
+      "zh": "41號公園",
+      "en": "Park No.41"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1072321,
+      "lng": 121.5643164
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "a5550674-7836-4c62-95d8-2c1707d557ab",
+    "name": {
+      "zh": "陽明山國家公園",
+      "en": "Yangmingshan National Park"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1808246,
+      "lng": 121.5589179
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "c2a516a0-c46b-43ab-bc5f-fcb83e7937ac",
+    "name": {
+      "zh": "大油坑與金包里大路史蹟保存區",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1700186,
+      "lng": 121.5800798
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "493cdc11-d604-4f48-85fd-1157846028c3",
+    "name": {
+      "zh": "瑪鋉溪上游水源涵養特別景觀區",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.139757,
+      "lng": 121.6173946
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "a2d1a5c4-08cb-443e-914e-627bb22b39ab",
+    "name": {
+      "zh": "內雙溪中上游水源涵養特別景觀區",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1319796,
+      "lng": 121.5962193
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "9a6653cf-8de4-4d2b-a01b-68c501f39274",
+    "name": {
+      "zh": "七星山自然文化景觀特別景觀區",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1606679,
+      "lng": 121.5714252
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "7c9f3070-a190-4c10-958e-9bd0fd385c51",
+    "name": {
+      "zh": "磺嘴山大尖後山外圍特別景觀區",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1638419,
+      "lng": 121.6019338
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "71e03373-f669-4f69-ac1d-5e86f4cb2614",
+    "name": {
+      "zh": "竹子山鹿角坑溪外圍特別景觀區",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.2108937,
+      "lng": 121.556931
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "29811c71-1e53-4175-a9d5-6934a043b37f",
+    "name": {
+      "zh": "磺嘴山生態保護區",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.173395,
+      "lng": 121.5991047
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "70986c6a-698a-4f70-90fa-7de99bcfe5fb",
+    "name": {
+      "zh": "夢幻湖生態保護區",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1669143,
+      "lng": 121.5601326
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "193c791d-1ba3-4df3-97f8-ad38773fe82e",
+    "name": {
+      "zh": "鹿角坑生態保護區",
+      "en": "Lujiaokeng Ecological Conservation Zone"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.2101242,
+      "lng": 121.5576942
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "64bdd4e3-f49c-4a71-9d53-5502cc73d699",
+    "name": {
+      "zh": "原住民文化主題公園",
+      "en": "Indigenous People's Park"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1018877,
+      "lng": 121.551048
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
   }
 ]

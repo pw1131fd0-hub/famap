@@ -16,19 +16,20 @@ def fetch_osm_data(lat=None, lng=None, radius=None):
     overpass_query = f"""
     [out:json][timeout:25];
     (
-      node["leisure"="park"]{bbox};
-      node["leisure"="playground"]{bbox};
-      node["leisure"="nature_reserve"]{bbox};
-      node["amenity"="nursing_room"]{bbox};
+      node["leisure"~"park|playground|nature_reserve|recreation_ground"]{bbox};
+      way["leisure"~"park|playground|nature_reserve|recreation_ground"]{bbox};
+      relation["leisure"~"park|playground|nature_reserve|recreation_ground"]{bbox};
+      
+      node["amenity"~"nursing_room|kindergarten|school|childcare"]{bbox};
+      way["amenity"~"nursing_room|kindergarten|school|childcare"]{bbox};
+      
+      node["amenity"~"restaurant|cafe"]["high_chair"="yes"]{bbox};
+      way["amenity"~"restaurant|cafe"]["high_chair"="yes"]{bbox};
+      
       node["amenity"="toilets"]["changing_table"="yes"]{bbox};
-      node["amenity"="kindergarten"]{bbox};
-      node["amenity"="school"]{bbox};
-      node["amenity"="restaurant"]["high_chair"="yes"]{bbox};
-      node["amenity"="cafe"]["high_chair"="yes"]{bbox};
+      way["amenity"="toilets"]["changing_table"="yes"]{bbox};
     );
-    out body;
-    >;
-    out skel qt;
+    out center;
     """
     
     print(f"Fetching data from OSM Overpass API for bbox {bbox}...")
@@ -41,51 +42,63 @@ def fetch_osm_data(lat=None, lng=None, radius=None):
         
         locations = []
         for element in result.get('elements', []):
-            if element['type'] == 'node':
-                tags = element.get('tags', {})
-                name_zh = tags.get('name:zh', tags.get('name', '未命名地點'))
-                name_en = tags.get('name:en', 'Unnamed Location')
-                
-                # Determine category
-                if tags.get('leisure') in ['park', 'playground', 'nature_reserve']:
-                    category = 'park'
-                    facilities = ['stroller_accessible']
-                    if tags.get('leisure') == 'park': facilities.append('public_toilet')
-                    if tags.get('leisure') == 'playground': facilities.append('high_chair')
-                elif tags.get('amenity') in ['nursing_room', 'toilets'] or tags.get('changing_table') == 'yes':
-                    category = 'nursing_room'
-                    facilities = ['nursing_room', 'changing_table']
-                    if name_zh == '未命名地點':
-                        name_zh = '哺乳室 / 尿布台'
-                        name_en = 'Nursing Room / Changing Table'
-                elif tags.get('amenity') in ['restaurant', 'cafe']:
-                    category = 'restaurant'
-                    facilities = ['high_chair', 'stroller_accessible']
-                elif tags.get('amenity') in ['school', 'kindergarten']:
-                    category = 'medical' # Using medical as a placeholder for 'care/educational' for now
-                    facilities = ['stroller_accessible']
-                else:
-                    category = 'other'
-                    facilities = []
-                
-                # Exclude if no meaningful name and not a nursing room
-                if name_zh == '未命名地點' and category != 'nursing_room':
-                    continue
-                
-                loc = {
-                    "id": str(uuid.uuid4()),
-                    "name": {"zh": name_zh, "en": name_en},
-                    "description": {
-                        "zh": f"來自 OSM 的自動收集資料 - {category}",
-                        "en": f"Automatically collected data from OSM - {category}"
-                    },
-                    "category": category,
-                    "coordinates": {"lat": element['lat'], "lng": element['lon']},
-                    "address": {"zh": "未知地址", "en": "Unknown Address"},
-                    "facilities": facilities,
-                    "averageRating": 4.0
-                }
-                locations.append(loc)
+            tags = element.get('tags', {})
+            # Get coordinates from either 'lat'/'lon' or 'center'
+            if 'lat' in element and 'lon' in element:
+                lat_val = element['lat']
+                lng_val = element['lon']
+            elif 'center' in element:
+                lat_val = element['center']['lat']
+                lng_val = element['center']['lon']
+            else:
+                continue
+
+            name_zh = tags.get('name:zh', tags.get('name', '未命名地點'))
+            name_en = tags.get('name:en', 'Unnamed Location')
+            
+            # Determine category
+            leisure = tags.get('leisure')
+            amenity = tags.get('amenity')
+            
+            if leisure in ['park', 'playground', 'nature_reserve', 'recreation_ground']:
+                category = 'park'
+                facilities = ['stroller_accessible']
+                if leisure == 'park': facilities.append('public_toilet')
+                if leisure == 'playground': facilities.append('high_chair')
+            elif amenity in ['nursing_room', 'toilets', 'childcare'] or tags.get('changing_table') == 'yes':
+                category = 'nursing_room'
+                facilities = ['nursing_room', 'changing_table']
+                if name_zh == '未命名地點':
+                    name_zh = '哺乳室 / 尿布台'
+                    name_en = 'Nursing Room / Changing Table'
+            elif amenity in ['restaurant', 'cafe']:
+                category = 'restaurant'
+                facilities = ['high_chair', 'stroller_accessible']
+            elif amenity in ['school', 'kindergarten']:
+                category = 'medical' # Using medical as a placeholder for 'care/educational' for now
+                facilities = ['stroller_accessible']
+            else:
+                category = 'other'
+                facilities = []
+            
+            # Exclude if no meaningful name and not a nursing room
+            if name_zh == '未命名地點' and category != 'nursing_room':
+                continue
+            
+            loc = {
+                "id": str(uuid.uuid4()),
+                "name": {"zh": name_zh, "en": name_en},
+                "description": {
+                    "zh": f"來自 OSM 的自動收集資料 - {category}",
+                    "en": f"Automatically collected data from OSM - {category}"
+                },
+                "category": category,
+                "coordinates": {"lat": lat_val, "lng": lng_val},
+                "address": {"zh": tags.get('addr:full', "未知地址"), "en": tags.get('addr:full:en', "Unknown Address")},
+                "facilities": facilities,
+                "averageRating": 4.0
+            }
+            locations.append(loc)
         
         print(f"Collected {len(locations)} locations from OSM.")
         if len(locations) == 0:
