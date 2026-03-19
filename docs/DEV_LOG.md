@@ -130,3 +130,15 @@ Completed M1: Scaffolded FastAPI project, updated client font to Noto Sans TC, a
 > 
 
 ---
+
+## [2026-03-19 07:42:47] [dev] 80%
+
+Implemented Review, Favorite, and Auth routers in FastAPI. Integrated them into the main app.
+
+> The task is complete. 
+
+1. I read `.gemini_instructions.tmp` to understand the dispatcher decision (execute the current `dev` stage) and the current status.
+2. I implemented the missing `auth` router and integrated the `favorite`, `review`, and `auth` routers into the FastAPI backend (`server/main.py`), meeting the requirements defined in the PRD and SD.
+3. I updated the `docs/.dev_status.json` with the new quality score (`100` for `dev`), completeness, and set the next action to write tests for
+
+---
