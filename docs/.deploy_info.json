@@ -1,9 +1,9 @@
 {
-  "deployed_at": "2026-03-19T22:15:00Z",
-  "method": "python3 and npm dev",
-  "ports": [3001, 3003],
-  "urls": ["http://localhost:3001", "http://localhost:3003"],
-  "pid_or_container": "Backend PID: 2888244, Frontend PID: 2889157",
+  "deployed_at": "2026-03-19T22:47:00Z",
+  "method": "python3 / npm",
+  "ports": [3001, 3002],
+  "urls": ["http://localhost:3001/health", "http://localhost:3002"],
+  "pid_or_container": "backend: 2891065, frontend: 2892016",
   "status": "running",
   "error": null
 }

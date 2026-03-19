@@ -301,3 +301,14 @@ Fixed major miscategorization issue where museums and other attractions were inc
 3. Batch-fixing 67 miscategorized attractions in `osm_locations.json`.
 4. Updating the frontend Chinese translation for 'attraction' for better clarity.
 ---
+
+## [2026-03-20 06:33:34] [done] 100%
+
+Fixed major miscategorization issue where museums and other attractions were incorrectly labeled as 'medical'. Corrected 'National Taiwan Museum' in both Python and Node.js backends. Optimized auto_collect.py mapping logic to prioritize 'attraction' and expanded OSM query. Batch-fixed 67 existing locations in osm_locations.json. Updated frontend translation for 'attraction' to match the boss's feedback.
+
+> I will read the contents of the `.gemini_instructions.tmp` file to understand the tasks I need to perform.
+I will list all files in the current directory, including hidden and ignored ones, to confirm the existence of `.gemini_instructions.tmp`.
+I will use `cat` to read the contents of `.gemini_instructions.tmp` because `read_file` was blocked by ignore patterns.
+I will explore the `server/data` directory to understand the current implementation of automated location collection and identify miss
+
+---
