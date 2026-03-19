@@ -1,4 +1,6 @@
 from typing import List, Dict, Any
+import json
+import os
 
 mock_users: List[Dict[str, Any]] = [
     {
@@ -105,3 +107,14 @@ mock_reviews: List[Dict[str, Any]] = [
 ]
 
 mock_favorites: List[Dict[str, Any]] = []
+
+# Load automatically collected OSM data if available
+osm_data_path = os.path.join(os.path.dirname(__file__), 'osm_locations.json')
+if os.path.exists(osm_data_path):
+    try:
+        with open(osm_data_path, 'r', encoding='utf-8') as f:
+            osm_locations = json.load(f)
+            mock_locations.extend(osm_locations)
+    except Exception as e:
+        print(f"Failed to load osm_locations.json: {e}")
+

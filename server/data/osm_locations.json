@@ -1,0 +1,1152 @@
+[
+  {
+    "id": "65798b2f-83e0-464f-aad7-3b99edf85c28",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.1370226,
+      "lng": 121.5031612
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "6c66747f-2ca8-40e9-abee-755a3412d406",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.1370226,
+      "lng": 121.503129
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "4a1508ac-926b-4b40-bc91-55d878526265",
+    "name": {
+      "zh": "津渡橋(公園)",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0072357,
+      "lng": 121.4517425
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "b77ed04d-00de-469d-828a-4476ebddc55a",
+    "name": {
+      "zh": "中正親子館",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0390952,
+      "lng": 121.5223309
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "high_chair"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "2bbd4363-856a-49e5-9808-154e244e37b5",
+    "name": {
+      "zh": "單槓",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0714399,
+      "lng": 121.6120203
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "high_chair"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "81ea10ee-6574-44c2-9e48-7a7ea56ca3ed",
+    "name": {
+      "zh": "盪鞦韆",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0713402,
+      "lng": 121.6120203
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "high_chair"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "166ce468-10f6-4ffa-8337-42932af48279",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.0483192,
+      "lng": 121.51
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "192be0be-dd26-419a-8ab4-8aeb0c4ab86a",
+    "name": {
+      "zh": "芭樂樹公園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0014532,
+      "lng": 121.5199015
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "d2fde50e-2c75-4b0a-9c3f-a203e5d09ce9",
+    "name": {
+      "zh": "兒童溜滑梯",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 24.9813395,
+      "lng": 121.5669013
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "high_chair"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "1f7ef1fe-f1b6-4485-9beb-d74a7c5350cf",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.0425029,
+      "lng": 121.5320223
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "0004bde9-7c51-41f7-bf5f-5dfa9cf9a924",
+    "name": {
+      "zh": "文湖捷運文德站二樓",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.0783092,
+      "lng": 121.5847558
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "ac6a9737-bc1c-43e5-b0dc-35dec50c9619",
+    "name": {
+      "zh": "遊樂、健身設施",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0695877,
+      "lng": 121.4939216
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "high_chair"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "eda80f4b-72b2-4e34-8c6b-d79816527052",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 24.9920828,
+      "lng": 121.5888316
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "af8ace7e-f2e9-47e6-a702-2c21b39d4236",
+    "name": {
+      "zh": "江翠礫間水岸公園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0318073,
+      "lng": 121.4825877
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "963da957-6be2-44ef-a017-c132e16ab5d2",
+    "name": {
+      "zh": "Childrens' Playarea",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0782181,
+      "lng": 121.5620009
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "high_chair"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "039c503c-c929-4aeb-a6a9-c74fdc86b826",
+    "name": {
+      "zh": "兒童遊憩區",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 24.995365,
+      "lng": 121.5237482
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "high_chair"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "f2848bf1-5519-4634-8e02-58a2d6451d4a",
+    "name": {
+      "zh": "景新公園 三介廟 兒童遊樂場",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 24.9882288,
+      "lng": 121.5164332
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "high_chair"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "f5290b3b-f8e5-4597-bd3a-0bac1bcb2c75",
+    "name": {
+      "zh": "員山公園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0021761,
+      "lng": 121.4780291
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "245f889d-421e-4b70-8252-68cd30f0b883",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.045129,
+      "lng": 121.531321
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "1364c965-19f0-4295-94c5-62abeb8a20f1",
+    "name": {
+      "zh": "鄧公開心農場",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1699319,
+      "lng": 121.4502771
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "c8978491-e08c-4eab-b247-3893eb247c4e",
+    "name": {
+      "zh": "樂幼屋親子派對歡樂園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0323572,
+      "lng": 121.5669762
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "high_chair"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "d116c785-c96c-477a-a8b2-4c518acc33bb",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.0194214,
+      "lng": 121.5043186
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "1276797e-0eba-4ef9-b689-82437a598afe",
+    "name": {
+      "zh": "防空洞",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0668934,
+      "lng": 121.6114292
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "high_chair"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "88e6e45b-dda4-4fee-ac4b-0433663efaf2",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.0227995,
+      "lng": 121.5147658
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "2f602893-4a4f-4959-9fc8-9baac02139e8",
+    "name": {
+      "zh": "臺大醫院附設幼兒園遊樂場",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0442969,
+      "lng": 121.5171512
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "high_chair"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "14f676c9-7026-46d3-8bf8-cef898bb020b",
+    "name": {
+      "zh": "籃球場",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0101535,
+      "lng": 121.4672943
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "439a5673-be10-47d6-87b0-becf48fb28c5",
+    "name": {
+      "zh": "籃球場",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0099463,
+      "lng": 121.4674182
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "c82faf33-dba5-4f17-9b53-cf12d19f28e8",
+    "name": {
+      "zh": "籃球場",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0098869,
+      "lng": 121.4674634
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "c030b89f-9bad-427d-bfd5-087887072336",
+    "name": {
+      "zh": "籃球場",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0098179,
+      "lng": 121.4675023
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "709d2ed7-39e4-4809-aa7d-372a7ce9b282",
+    "name": {
+      "zh": "籃球場",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0097341,
+      "lng": 121.4675573
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "01cc5c82-4688-485c-887f-156aa2dcadf1",
+    "name": {
+      "zh": "籃球場",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0100405,
+      "lng": 121.4673699
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "2fbc185d-7a76-4caa-be53-6038112370f1",
+    "name": {
+      "zh": "中山樓入口櫻花林",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.1513544,
+      "lng": 121.5499549
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "a65a0e05-1f9b-44bb-a29a-378f1534850f",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.0501354,
+      "lng": 121.5200499
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "20c1d79f-80db-4cbc-8bdd-931dc4d39db5",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.0519234,
+      "lng": 121.5203154
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "5914f2b7-0fa7-4578-b76c-2248c9084980",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.056875,
+      "lng": 121.5206203
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "799b2d3c-bb20-41d7-a5bb-88f36cd4990c",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.0443609,
+      "lng": 121.5295722
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "902fe5e2-2425-4174-abf4-74f01e9f4e50",
+    "name": {
+      "zh": "萬華親子館",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0239805,
+      "lng": 121.5070202
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "high_chair"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "27c8ecae-0175-4a97-83d5-9c37e98c199b",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 24.9964977,
+      "lng": 121.5828764
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "f71a374d-2eca-48b7-af41-fb82f192d0fa",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 24.9953224,
+      "lng": 121.5876882
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "2ca30bb2-248b-4c75-bd16-c3d2498a7e4b",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.08352,
+      "lng": 121.5573587
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "4e82a727-0125-4115-ab30-a5581dfe3a22",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.1114564,
+      "lng": 121.5314275
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "f630653a-e775-46e3-8f11-4eb5760600d3",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.1551517,
+      "lng": 121.5465378
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "8b43d65c-c4f7-4774-ad97-5bae85ee4946",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.0021108,
+      "lng": 121.4964422
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "b9d03fe6-5d7a-449a-bf54-d781f34bff10",
+    "name": {
+      "zh": "住家",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 25.0821403,
+      "lng": 121.4980507
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "public_toilet"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "3b5d5679-5d96-44fa-8fbc-5e08e4a86a4c",
+    "name": {
+      "zh": "錦和運動公園兒童遊戲場",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - park",
+      "en": "Automatically collected data from OSM - park"
+    },
+    "category": "park",
+    "coordinates": {
+      "lat": 24.9933144,
+      "lng": 121.4888932
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "stroller_accessible",
+      "high_chair"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "58ce167a-f50d-42ed-8de2-50ef57339873",
+    "name": {
+      "zh": "哺乳室 / 尿布台",
+      "en": "Nursing Room / Changing Table"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - nursing_room",
+      "en": "Automatically collected data from OSM - nursing_room"
+    },
+    "category": "nursing_room",
+    "coordinates": {
+      "lat": 25.0154357,
+      "lng": 121.5106589
+    },
+    "address": {
+      "zh": "台北市",
+      "en": "Taipei City"
+    },
+    "facilities": [
+      "nursing_room",
+      "changing_table"
+    ],
+    "averageRating": 4.0
+  }
+]
