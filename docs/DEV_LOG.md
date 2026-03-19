@@ -291,13 +291,13 @@ I'll examine `server/main.py`, `server/routers/location.py`, and
 
 ---
 
-## [2026-03-20 05:59:46] [done] 100%
+## [2026-03-20 06:30:00] [done] 100%
 
-Responded to the boss's feedback about missing locations by significantly expanding the automated collection area and categories. Added 'medical' and expanded 'attraction' tags. Improved English naming fallbacks for better bilingual support. Populated Taipei with over 7000 real locations. Ensured both Python and Node.js backends load the collected dataset.
+Fixed major miscategorization issue where museums and other attractions were incorrectly labeled as 'medical'. Corrected 'National Taiwan Museum' in both Python and Node.js backends. Optimized `auto_collect.py` mapping logic to prioritize 'attraction' and expanded OSM query to include more child-friendly categories (science centers, planetariums, water parks, etc.). Batch-fixed 67 existing locations in `osm_locations.json`. Updated frontend translation for 'attraction' to match the boss's feedback.
 
-> I will start by reading the instructions in `.gemini_instructions.tmp`.
-I will use `cat` to read the content of `.gemini_instructions.tmp` since it is being ignored by the default file reader.
-I will begin by checking the contents of `server/data/osm_locations.json` and the status of the database to understand the current state of collected locations.
-I will read `server/data/seed_data.py` to understand how the collected location data is being used and integrated into the application's database 
-
+> I have addressed the boss's feedback by:
+1. Fixing the `National Taiwan Museum` category in both backends.
+2. Improving the categorization logic in `auto_collect.py` to prioritize attractions and broadening the tags.
+3. Batch-fixing 67 miscategorized attractions in `osm_locations.json`.
+4. Updating the frontend Chinese translation for 'attraction' for better clarity.
 ---

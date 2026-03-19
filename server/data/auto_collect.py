@@ -41,9 +41,11 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
       // Attractions
       node["tourism"~"theme_park|zoo|aquarium|museum|attraction|viewpoint|gallery"]{bbox};
       way["tourism"~"theme_park|zoo|aquarium|museum|attraction|viewpoint|gallery"]{bbox};
-      node["leisure"="theme_park"]{bbox};
-      way["leisure"="theme_park"]{bbox};
+      node["leisure"~"theme_park|water_park|amusement_ride|ice_rink|bowling_alley|miniature_golf"]{bbox};
+      way["leisure"~"theme_park|water_park|amusement_ride|ice_rink|bowling_alley|miniature_golf"]{bbox};
       node["historic"~"memorial|monument|castle"]{bbox};
+      node["amenity"~"planetarium|science_centre|arts_centre"]{bbox};
+      way["amenity"~"planetarium|science_centre|arts_centre"]{bbox};
       
       // Medical
       node["amenity"~"hospital|clinic|pharmacy|doctors"]{bbox};
@@ -95,47 +97,20 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
             shop = tags.get('shop')
             historic = tags.get('historic')
             
-            if leisure in ['park', 'playground', 'nature_reserve', 'recreation_ground', 'garden', 'pitch']:
-                category = 'park'
-                facilities = ['stroller_accessible']
-                if leisure == 'park': facilities.append('public_toilet')
-                if leisure == 'playground': facilities.append('high_chair')
-                if not name_zh:
-                    name_zh = '公園/遊樂場' if leisure in ['park', 'playground'] else '綠地'
-                if not name_en:
-                    name_en = 'Park/Playground' if leisure in ['park', 'playground'] else 'Green Space'
-            
-            elif amenity in ['nursing_room', 'baby_hatch', 'childcare'] or tags.get('changing_table') == 'yes':
-                category = 'nursing_room'
-                facilities = ['nursing_room', 'changing_table']
-                if not name_zh: name_zh = '哺乳室 / 尿布台'
-                if not name_en: name_en = 'Nursing Room / Changing Table'
-            
-            elif amenity in ['restaurant', 'cafe', 'fast_food', 'food_court']:
-                category = 'restaurant'
-                facilities = ['stroller_accessible']
-                if tags.get('high_chair') == 'yes':
-                    facilities.append('high_chair')
-                if not name_zh: name_zh = '親子友善餐廳'
-                if not name_en: name_en = 'Kid Friendly Restaurant'
-            
-            elif amenity in ['hospital', 'clinic', 'pharmacy', 'doctors']:
-                category = 'medical'
-                facilities = ['stroller_accessible']
-                if not name_zh:
-                    if amenity == 'pharmacy': name_zh = '藥局'
-                    else: name_zh = '醫療診所'
-                if not name_en:
-                    if amenity == 'pharmacy': name_en = 'Pharmacy'
-                    else: name_en = 'Medical Clinic'
-
-            elif tourism in ['theme_park', 'zoo', 'aquarium', 'museum', 'gallery', 'viewpoint', 'attraction'] or \
-                 leisure == 'theme_park' or \
+            # Category assignment - prioritized
+            if tourism in ['theme_park', 'zoo', 'aquarium', 'museum', 'gallery', 'viewpoint', 'attraction'] or \
+                 leisure in ['theme_park', 'water_park', 'amusement_ride', 'ice_rink', 'bowling_alley', 'miniature_golf', 'amusement_arcade'] or \
                  historic in ['memorial', 'monument', 'castle'] or \
-                 amenity in ['school', 'kindergarten', 'library', 'community_centre'] or \
+                 amenity in ['school', 'kindergarten', 'library', 'community_centre', 'planetarium', 'science_centre', 'arts_centre'] or \
                  shop in ['toys', 'baby_goods', 'books']:
                 category = 'attraction'
-                facilities = ['stroller_accessible', 'nursing_room']
+                facilities = ['stroller_accessible']
+                # Check for additional facilities
+                if tags.get('nursing_room') == 'yes' or tags.get('amenity') == 'nursing_room':
+                    facilities.append('nursing_room')
+                if tags.get('changing_table') == 'yes':
+                    facilities.append('changing_table')
+                
                 if not name_zh:
                     if tourism == 'museum': name_zh = '博物館'
                     elif tourism == 'zoo': name_zh = '動物園'
@@ -148,6 +123,41 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
                     elif shop == 'toys': name_en = 'Toy Store'
                     elif amenity == 'library': name_en = 'Library'
                     else: name_en = 'Kid-friendly Attraction'
+
+            elif leisure in ['park', 'playground', 'nature_reserve', 'recreation_ground', 'garden', 'pitch']:
+                category = 'park'
+                facilities = ['stroller_accessible']
+                if leisure == 'park': facilities.append('public_toilet')
+                if leisure == 'playground': facilities.append('high_chair')
+                if not name_zh:
+                    name_zh = '公園/遊樂場' if leisure in ['park', 'playground'] else '綠地'
+                if not name_en:
+                    name_en = 'Park/Playground' if leisure in ['park', 'playground'] else 'Green Space'
+            
+            elif amenity in ['restaurant', 'cafe', 'fast_food', 'food_court']:
+                category = 'restaurant'
+                facilities = ['stroller_accessible']
+                if tags.get('high_chair') == 'yes':
+                    facilities.append('high_chair')
+                if not name_zh: name_zh = '親子友善餐廳'
+                if not name_en: name_en = 'Kid Friendly Restaurant'
+
+            elif amenity in ['hospital', 'clinic', 'pharmacy', 'doctors']:
+                category = 'medical'
+                facilities = ['stroller_accessible']
+                if not name_zh:
+                    if amenity == 'pharmacy': name_zh = '藥局'
+                    else: name_zh = '醫療診所'
+                if not name_en:
+                    if amenity == 'pharmacy': name_en = 'Pharmacy'
+                    else: name_en = 'Medical Clinic'
+            
+            elif amenity in ['nursing_room', 'baby_hatch', 'childcare'] or tags.get('changing_table') == 'yes':
+                category = 'nursing_room'
+                facilities = ['nursing_room', 'changing_table']
+                if not name_zh: name_zh = '哺乳室 / 尿布台'
+                if not name_en: name_en = 'Nursing Room / Changing Table'
+            
             else:
                 category = 'other'
                 facilities = []

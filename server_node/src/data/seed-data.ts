@@ -38,7 +38,7 @@ export let mockLocations: Location[] = [
     id: '3',
     name: { zh: '國立臺灣博物館', en: 'National Taiwan Museum' },
     description: { zh: '日治時期建築，有適合兒童的自然生態展示區。', en: 'Japanese colonial era building with natural ecology exhibits for children.' },
-    category: 'medical', // Categorized here for museum/educational
+    category: 'attraction',
     coordinates: { lat: 25.0428, lng: 121.5148 },
     address: { zh: '台北市中正區襄陽路2號', en: 'No. 2, Xiangyang Rd., Zhongzheng Dist., Taipei' },
     facilities: ['stroller_accessible', 'nursing_room'],

@@ -52,7 +52,7 @@ mock_locations: List[Dict[str, Any]] = [
             "zh": "日治時期建築，有適合兒童的自然生態展示區。",
             "en": "Japanese colonial era building with natural ecology exhibits for children.",
         },
-        "category": "medical",
+        "category": "attraction",
         "coordinates": {"lat": 25.0428, "lng": 121.5148},
         "address": {
             "zh": "台北市中正區襄陽路2號",
