@@ -1,8 +1,11 @@
 {
-  "deployed_at": "2026-03-18T22:38:00Z",
-  "method": "binary (node/tsx via screen)",
-  "ports": [3004, 3005],
-  "urls": ["http://localhost:3004", "http://localhost:3005"],
-  "pid_or_container": "screen sessions: famap-server-3004, famap-client-3005",
+  "deployed_at": "2026-03-19T17:09:00Z",
+  "method": "binary / npm via screen",
+  "ports": [3003, 3004],
+  "urls": [
+    "http://localhost:3003",
+    "http://localhost:3004"
+  ],
+  "pid_or_container": "screen sessions: famap-server, famap-client",
   "status": "running"
 }

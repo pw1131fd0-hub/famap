@@ -176,3 +176,14 @@ Verified all works are completed. Marked as done.
 
 
 ---
+
+## [2026-03-20 01:04:53] [done] 100%
+
+Implemented automated location collection from OSM Overpass API to seed database with real kid-friendly POIs.
+
+> I have completed the task. The automated data collection script (`server/data/auto_collect.py`) has been implemented and queries the OSM Overpass API for kid-friendly locations. The backend now seamlessly integrates these fetched locations upon startup. The files have been pushed to the remote repository, the status in `docs/.dev_status.json` has been updated, and `.gemini_instructions.tmp` has been deleted as requested.
+
+/ralph:cancel
+
+
+---
