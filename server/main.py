@@ -31,5 +31,5 @@ app.include_router(review.router, prefix="/api/reviews", tags=["reviews"])
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", 3000))
+    port = int(os.getenv("PORT", 3001))
     uvicorn.run("server.main:app", host="0.0.0.0", port=port, reload=True)

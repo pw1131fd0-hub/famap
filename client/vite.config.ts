@@ -29,10 +29,20 @@ export default defineConfig({
   ],
   server: {
     host: '0.0.0.0',
-    port: 3004,
+    port: 3003,
     proxy: {
       '/api': {
-        target: 'http://localhost:3003',
+        target: 'http://localhost:3001',
+        changeOrigin: true
+      }
+    }
+  },
+  preview: {
+    host: '0.0.0.0',
+    port: 3003,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
         changeOrigin: true
       }
     }

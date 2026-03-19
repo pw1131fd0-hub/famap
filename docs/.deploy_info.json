@@ -1,8 +1,8 @@
 {
-  "deployed_at": "2026-03-19T18:38:44Z",
-  "method": "python3 + node",
-  "ports": [3003, 3001],
-  "urls": ["http://localhost:3003/health", "http://localhost:3001/"],
-  "pid_or_container": "backend: 2869402, frontend: 2869755",
+  "deployed_at": "2026-03-19T19:13:30Z",
+  "method": "python3 (FastAPI) + python3 (http.server for React build)",
+  "ports": [3001, 3003],
+  "urls": ["http://localhost:3001/health", "http://localhost:3003/"],
+  "pid_or_container": "backend: 2872506, frontend: 2873289",
   "status": "running"
 }
