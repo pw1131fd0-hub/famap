@@ -10,7 +10,8 @@ load_dotenv()
 app = FastAPI(title="FamMap API")
 
 # CORS middleware
-origins = os.getenv("ALLOWED_ORIGINS", "*").split(",")
+origins_env = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173,http://localhost:3000")
+origins = [origin.strip() for origin in origins_env.split(",") if origin.strip()]
 
 app.add_middleware(
     CORSMiddleware,

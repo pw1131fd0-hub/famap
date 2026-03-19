@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends
 from typing import List
-from datetime import datetime
+from datetime import datetime, timezone
 import uuid
 from ..schemas import Favorite, FavoriteBase
 from ..data.seed_data import mock_favorites
@@ -23,7 +23,7 @@ async def add_favorite(fav: FavoriteBase):
         "id": str(uuid.uuid4()),
         "locationId": fav.locationId,
         "userId": "u1",
-        "createdAt": datetime.utcnow().isoformat() + "Z"
+        "createdAt": datetime.now(timezone.utc).isoformat()
     }
     mock_favorites.append(new_fav)
     return new_fav

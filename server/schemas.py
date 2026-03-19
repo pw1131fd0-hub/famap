@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import List, Optional
 from enum import Enum
 
@@ -32,8 +32,7 @@ class Location(LocationBase):
     averageRating: float
     photoUrl: Optional[str] = None
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class SearchParams(BaseModel):
     lat: float

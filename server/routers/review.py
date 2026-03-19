@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Query
 from typing import List
-from datetime import datetime
+from datetime import datetime, timezone
 import uuid
 from ..schemas import Review, ReviewCreate
 from ..data.seed_data import mock_reviews, mock_locations
@@ -18,7 +18,7 @@ async def create_review(review: ReviewCreate):
     new_review["id"] = str(uuid.uuid4())
     new_review["userId"] = "u1"
     new_review["userName"] = "Anonymous"
-    new_review["createdAt"] = datetime.utcnow().isoformat() + "Z"
+    new_review["createdAt"] = datetime.now(timezone.utc).isoformat()
     
     mock_reviews.append(new_review)
     return new_review
