@@ -18,8 +18,13 @@ def fetch_osm_data(lat=None, lng=None, radius=None):
     (
       node["leisure"="park"]{bbox};
       node["leisure"="playground"]{bbox};
+      node["leisure"="nature_reserve"]{bbox};
       node["amenity"="nursing_room"]{bbox};
       node["amenity"="toilets"]["changing_table"="yes"]{bbox};
+      node["amenity"="kindergarten"]{bbox};
+      node["amenity"="school"]{bbox};
+      node["amenity"="restaurant"]["high_chair"="yes"]{bbox};
+      node["amenity"="cafe"]["high_chair"="yes"]{bbox};
     );
     out body;
     >;
@@ -42,18 +47,23 @@ def fetch_osm_data(lat=None, lng=None, radius=None):
                 name_en = tags.get('name:en', 'Unnamed Location')
                 
                 # Determine category
-                if tags.get('leisure') == 'park':
+                if tags.get('leisure') in ['park', 'playground', 'nature_reserve']:
                     category = 'park'
-                    facilities = ['stroller_accessible', 'public_toilet']
-                elif tags.get('leisure') == 'playground':
-                    category = 'park'
-                    facilities = ['stroller_accessible', 'high_chair']
-                elif tags.get('amenity') == 'nursing_room' or tags.get('changing_table') == 'yes':
+                    facilities = ['stroller_accessible']
+                    if tags.get('leisure') == 'park': facilities.append('public_toilet')
+                    if tags.get('leisure') == 'playground': facilities.append('high_chair')
+                elif tags.get('amenity') in ['nursing_room', 'toilets'] or tags.get('changing_table') == 'yes':
                     category = 'nursing_room'
                     facilities = ['nursing_room', 'changing_table']
                     if name_zh == '未命名地點':
                         name_zh = '哺乳室 / 尿布台'
                         name_en = 'Nursing Room / Changing Table'
+                elif tags.get('amenity') in ['restaurant', 'cafe']:
+                    category = 'restaurant'
+                    facilities = ['high_chair', 'stroller_accessible']
+                elif tags.get('amenity') in ['school', 'kindergarten']:
+                    category = 'medical' # Using medical as a placeholder for 'care/educational' for now
+                    facilities = ['stroller_accessible']
                 else:
                     category = 'other'
                     facilities = []
@@ -79,7 +89,9 @@ def fetch_osm_data(lat=None, lng=None, radius=None):
         
         print(f"Collected {len(locations)} locations from OSM.")
         if len(locations) == 0:
-            raise Exception("Empty result from OSM")
+            # If no results from OSM, we don't necessarily want to raise an exception here
+            # as the caller might want to handle it.
+            pass
         return locations
     except Exception as e:
         print(f"Error fetching data from OSM: {e}")
@@ -112,9 +124,45 @@ def fetch_osm_data(lat=None, lng=None, radius=None):
                 fallback_locations.append(loc)
         return fallback_locations
 
+def save_locations(locations):
+    if not locations:
+        return
+    
+    file_path = os.path.join(os.path.dirname(__file__), 'osm_locations.json')
+    existing_locations = []
+    if os.path.exists(file_path):
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                existing_locations = json.load(f)
+        except Exception as e:
+            print(f"Error reading existing locations: {e}")
+    
+    # Simple de-duplication based on coordinates (rounded)
+    def get_coord_key(loc):
+        return (round(loc['coordinates']['lat'], 5), round(loc['coordinates']['lng'], 5))
+    
+    existing_keys = {get_coord_key(loc) for loc in existing_locations}
+    
+    new_count = 0
+    for loc in locations:
+        if '模擬' in loc['name']['zh']: # Don't save simulated data
+            continue
+        key = get_coord_key(loc)
+        if key not in existing_keys:
+            existing_locations.append(loc)
+            existing_keys.add(key)
+            new_count += 1
+    
+    if new_count > 0:
+        try:
+            with open(file_path, 'w', encoding='utf-8') as f:
+                json.dump(existing_locations, f, ensure_ascii=False, indent=2)
+            print(f"Saved {new_count} new locations to {file_path}")
+        except Exception as e:
+            print(f"Error saving locations: {e}")
+
+import os
 if __name__ == "__main__":
     locations = fetch_osm_data()
     if locations:
-        with open('server/data/osm_locations.json', 'w', encoding='utf-8') as f:
-            json.dump(locations, f, ensure_ascii=False, indent=2)
-        print("Saved to server/data/osm_locations.json")
+        save_locations(locations)

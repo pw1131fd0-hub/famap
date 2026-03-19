@@ -9,15 +9,15 @@ const api = axios.create({
 
 export const locationApi = {
   getNearby: async (params: SearchParams): Promise<Location[]> => {
-    const response = await api.get<Location[]>('/locations', { params });
+    const response = await api.get<Location[]>('/locations/', { params });
     return response.data;
   },
   getById: async (id: string): Promise<Location> => {
-    const response = await api.get<Location>(`/locations/${id}`);
+    const response = await api.get<Location>(`/locations/${id}/`);
     return response.data;
   },
   create: async (location: LocationCreateDTO): Promise<Location> => {
-    const response = await api.post<Location>('/locations', location);
+    const response = await api.post<Location>('/locations/', location);
     return response.data;
   },
 };

@@ -23,10 +23,31 @@ L.Icon.Default.mergeOptions({
 const MOCK_USER_ID = 'u1';
 
 // Component to handle map view updates
+function MapEvents({ onPositionChange }: { onPositionChange: (pos: [number, number]) => void }) {
+  const map = useMap();
+  
+  useEffect(() => {
+    map.on('moveend', () => {
+      const center = map.getCenter();
+      onPositionChange([center.lat, center.lng]);
+    });
+  }, [map, onPositionChange]);
+
+  return null;
+}
+
 function MapUpdater({ center }: { center: [number, number] }) {
   const map = useMap();
   useEffect(() => {
-    map.setView(center, map.getZoom());
+    const currentCenter = map.getCenter();
+    const distance = Math.sqrt(
+      Math.pow(currentCenter.lat - center[0], 2) +
+      Math.pow(currentCenter.lng - center[1], 2)
+    );
+    // Only set view if the change is significant (e.g., more than 0.0001 degrees)
+    if (distance > 0.0001) {
+      map.setView(center, map.getZoom());
+    }
   }, [center, map]);
   return null;
 }
@@ -339,6 +360,7 @@ function App() {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <MapUpdater center={position} />
+            <MapEvents onPositionChange={setPosition} />
             {locations.map((loc) => (
               <Marker 
                 key={loc.id} 

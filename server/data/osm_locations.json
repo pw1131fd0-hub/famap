@@ -1148,5 +1148,389 @@
       "changing_table"
     ],
     "averageRating": 4.0
+  },
+  {
+    "id": "17d6c66e-0e89-43f5-bf03-7253d175d68d",
+    "name": {
+      "zh": "星辰幼稚園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.1032823,
+      "lng": 121.4502359
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "9c676771-2703-449c-8f65-75bbd76b5517",
+    "name": {
+      "zh": "吉利幼兒園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.119315,
+      "lng": 121.508505
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "a5fa2490-0674-4201-ac6d-af66a32ff3e0",
+    "name": {
+      "zh": "好來幼兒園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.1276127,
+      "lng": 121.5332016
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "55ba8f86-c409-4d02-bad2-1de2aac8815b",
+    "name": {
+      "zh": "道爾敦幼兒園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.127063,
+      "lng": 121.5332075
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "b9097016-b925-4641-867d-1e262194df94",
+    "name": {
+      "zh": "華民幼兒園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.1233623,
+      "lng": 121.5254891
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "3b37d864-becf-4b03-bb1b-ff9c540f193f",
+    "name": {
+      "zh": "北投幼兒園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.113251,
+      "lng": 121.5226008
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "60f21646-f881-4020-89ab-d9b77111a2a3",
+    "name": {
+      "zh": "台北市翰諾幼兒園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.1073634,
+      "lng": 121.5271184
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "c65cd691-9022-4109-bd53-2b47e2848ce6",
+    "name": {
+      "zh": "何嘉仁士林幼兒園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.0962348,
+      "lng": 121.5291111
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "9424cbf4-f8ba-4c0b-bb58-c78da30013df",
+    "name": {
+      "zh": "天道幼兒園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.0956986,
+      "lng": 121.5242539
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "730dec7a-2f02-40cb-807e-2718089d7b54",
+    "name": {
+      "zh": "泰安幼兒園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.1017499,
+      "lng": 121.5253352
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "966aaaa8-d113-4fdc-af49-7ea8cebbff69",
+    "name": {
+      "zh": "達義幼兒園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.1121424,
+      "lng": 121.5146899
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "67070b24-083b-438f-a08a-3bc4c381d487",
+    "name": {
+      "zh": "十大幼稚園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.1179656,
+      "lng": 121.5361207
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "2494f83a-d7b8-401d-97bb-b58abf63b7f1",
+    "name": {
+      "zh": "聖德幼兒園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.1094305,
+      "lng": 121.4996605
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "500c2873-981a-40ba-820a-63b44f541534",
+    "name": {
+      "zh": "天鵝堡",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.1009686,
+      "lng": 121.5518743
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "d174911d-4fa8-4dea-8af1-ccc6491c245d",
+    "name": {
+      "zh": "光復幼兒園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.0399133,
+      "lng": 121.5557824
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
+  },
+  {
+    "id": "6bfd329d-ce41-4551-88c9-26e210a4a56f",
+    "name": {
+      "zh": "三德幼兒園",
+      "en": "Unnamed Location"
+    },
+    "description": {
+      "zh": "來自 OSM 的自動收集資料 - medical",
+      "en": "Automatically collected data from OSM - medical"
+    },
+    "category": "medical",
+    "coordinates": {
+      "lat": 25.0247618,
+      "lng": 121.5678315
+    },
+    "address": {
+      "zh": "未知地址",
+      "en": "Unknown Address"
+    },
+    "facilities": [
+      "stroller_accessible"
+    ],
+    "averageRating": 4.0
   }
 ]

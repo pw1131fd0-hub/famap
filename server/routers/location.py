@@ -5,9 +5,13 @@ import sys
 sys.path.append('..')
 from schemas import Location, SearchParams, Category, LocationCreate
 from data.seed_data import mock_locations
-from data.auto_collect import fetch_osm_data
+from data.auto_collect import fetch_osm_data, save_locations
 
 router = APIRouter()
+
+# Keep track of areas that have already been fetched from OSM in this session
+# to avoid redundant calls within a short time.
+fetched_areas = []
 
 def calculate_distance(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     R = 6371e3  # Earth radius in meters
@@ -41,17 +45,36 @@ async def get_locations(
         if within_radius and match_category and match_stroller:
             results.append(loc)
             
-    if not results:
+    # If we have very few results (e.g., < 5), or if we haven't fetched this area from OSM yet,
+    # try to fetch more from OSM.
+    already_fetched = any(calculate_distance(lat, lng, f_lat, f_lng) < radius/2 for f_lat, f_lng in fetched_areas)
+    
+    if len(results) < 10 and not already_fetched:
         new_locations = fetch_osm_data(lat, lng, radius)
         if new_locations:
+            # Add to mock_locations in memory
+            # De-duplicate before adding
+            existing_ids = {loc["id"] for loc in mock_locations}
             for loc in new_locations:
-                mock_locations.append(loc)
-                dist = calculate_distance(lat, lng, loc["coordinates"]["lat"], loc["coordinates"]["lng"])
-                within_radius = dist <= radius
-                match_category = category is None or loc["category"] == category
-                match_stroller = stroller_accessible is None or not stroller_accessible or "stroller_accessible" in loc["facilities"]
-                if within_radius and match_category and match_stroller:
-                    results.append(loc)
+                if loc["id"] not in existing_ids:
+                    mock_locations.append(loc)
+                    existing_ids.add(loc["id"])
+                    
+                    # Also check if it matches current filters to add to results
+                    dist = calculate_distance(lat, lng, loc["coordinates"]["lat"], loc["coordinates"]["lng"])
+                    within_radius = dist <= radius
+                    match_category = category is None or loc["category"] == category
+                    match_stroller = stroller_accessible is None or not stroller_accessible or "stroller_accessible" in loc["facilities"]
+                    if within_radius and match_category and match_stroller:
+                        # Avoid duplicates in results
+                        if all(r["id"] != loc["id"] for r in results):
+                            results.append(loc)
+            
+            # Save to JSON file for persistence (only real OSM data, handled inside save_locations)
+            save_locations(new_locations)
+            
+            # Record that we fetched this area
+            fetched_areas.append((lat, lng))
 
     return results
 
