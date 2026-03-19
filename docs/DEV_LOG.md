@@ -211,3 +211,15 @@ I will test the automated collection script directly to see if it successfully f
 I will check which backend (Fas
 
 ---
+
+## [2026-03-20 02:34:43] [done] 100%
+
+Completed the boss's request for automated location collection. Improved backend with dynamic OSM data fetching, persistence, and pro-active coverage check. Updated frontend to refresh locations upon map panning and fixed infinite loop in map view. Verified with real-time data collection and saving.
+
+> I will read the contents of the `.gemini_instructions.tmp` file to understand the tasks I need to perform.
+I will read the `server/data/osm_locations.json` file to check if any location data has been collected.
+I will read the `server/data/seed_data.py` file to understand how the collected location data is used to seed the database.
+I will read the `server/main.py` file to see how it uses the `mock_locations` and if it correctly serves them to the frontend.
+I will read the `server/routers/locati
+
+---
