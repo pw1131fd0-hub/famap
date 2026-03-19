@@ -187,3 +187,15 @@ Implemented automated location collection from OSM Overpass API to seed database
 
 
 ---
+
+## [2026-03-20 01:35:20] [done] 100%
+
+Fixed frontend API port mismatch and implemented dynamic location auto-collection on-the-fly using Overpass API when no locations are found in a viewed area.
+
+> I am reading the instructions to understand the required task.
+I will check the existing automated collection script to ensure it fulfills the boss's requirement of automatically collecting locations.
+I will read `server/data/seed_data.py` and `server/main.py` to understand how the collected data is seeded into the database.
+I will read `server/data/osm_locations.json` to see if the automated collection script was actually run and generated the data.
+I will read `server/database.py` and `server/
+
+---

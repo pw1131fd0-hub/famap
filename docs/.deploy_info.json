@@ -1,11 +1,12 @@
 {
-  "deployed_at": "2026-03-19T17:09:00Z",
-  "method": "binary / npm via screen",
+  "deployed_at": "2026-03-19T17:45:46+00:00",
+  "method": "python3 start_server.py & screen npx vite",
   "ports": [3003, 3004],
   "urls": [
-    "http://localhost:3003",
+    "http://localhost:3003/health",
     "http://localhost:3004"
   ],
-  "pid_or_container": "screen sessions: famap-server, famap-client",
-  "status": "running"
+  "pid_or_container": "backend: nohup / frontend: screen famap-client",
+  "status": "running",
+  "error": ""
 }
