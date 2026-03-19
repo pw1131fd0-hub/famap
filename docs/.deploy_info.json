@@ -1,1 +1,1 @@
-{"deployed_at": "2026-03-19T19:43:01Z", "method": "binary", "ports": [3001, 3003], "urls": ["http://localhost:3001", "http://localhost:3003"], "pid_or_container": "backend:2874985, frontend:2876151", "status": "running"}
+{"deployed_at": "2026-03-19T20:29:00Z", "method": "python3 / npm (vite)", "ports": [3001, 3003], "urls": ["http://localhost:3001", "http://localhost:3003"], "pid_or_container": "2879533,2879990", "status": "running"}
