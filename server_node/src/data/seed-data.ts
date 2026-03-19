@@ -87,3 +87,23 @@ export let mockReviews: Review[] = [
 ];
 
 export let mockFavorites: Favorite[] = [];
+
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load automatically collected OSM data if available
+const osmDataPath = path.join(__dirname, '../../../server/data/osm_locations.json');
+if (fs.existsSync(osmDataPath)) {
+  try {
+    const fileContent = fs.readFileSync(osmDataPath, 'utf-8');
+    const osmLocations = JSON.parse(fileContent);
+    mockLocations.push(...osmLocations);
+    console.log(`Loaded ${osmLocations.length} locations from OSM data.`);
+  } catch (error) {
+    console.error('Failed to load osm_locations.json:', error);
+  }
+}

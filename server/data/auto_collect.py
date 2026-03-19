@@ -39,8 +39,15 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
       node["shop"~"toys|baby_goods|books"]{bbox};
       
       // Attractions
-      node["tourism"~"theme_park|zoo|aquarium|museum|attraction|viewpoint"]{bbox};
-      way["tourism"~"theme_park|zoo|aquarium|museum|attraction|viewpoint"]{bbox};
+      node["tourism"~"theme_park|zoo|aquarium|museum|attraction|viewpoint|gallery"]{bbox};
+      way["tourism"~"theme_park|zoo|aquarium|museum|attraction|viewpoint|gallery"]{bbox};
+      node["leisure"="theme_park"]{bbox};
+      way["leisure"="theme_park"]{bbox};
+      node["historic"~"memorial|monument|castle"]{bbox};
+      
+      // Medical
+      node["amenity"~"hospital|clinic|pharmacy|doctors"]{bbox};
+      way["amenity"~"hospital|clinic|pharmacy|doctors"]{bbox};
     );
     out center;
     """
@@ -53,7 +60,7 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
             try:
                 print(f"Trying mirror: {mirror_url}")
                 async with httpx.AsyncClient(timeout=40.0) as client:
-                    response = await client.post(mirror_url, data={'data': overpass_query}, headers={'User-Agent': 'FamMap-Bot/3.0'})
+                    response = await client.post(mirror_url, data={'data': overpass_query}, headers={'User-Agent': 'FamMap-Bot/4.0'})
                     if response.status_code == 200:
                         result = response.json()
                         print(f"Success from {mirror_url}")
@@ -80,12 +87,13 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
                 continue
 
             name_zh = tags.get('name:zh', tags.get('name'))
-            name_en = tags.get('name:en', tags.get('name'))
+            name_en = tags.get('name:en')
             
             leisure = tags.get('leisure')
             amenity = tags.get('amenity')
             tourism = tags.get('tourism')
             shop = tags.get('shop')
+            historic = tags.get('historic')
             
             if leisure in ['park', 'playground', 'nature_reserve', 'recreation_ground', 'garden', 'pitch']:
                 category = 'park'
@@ -94,44 +102,61 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
                 if leisure == 'playground': facilities.append('high_chair')
                 if not name_zh:
                     name_zh = '公園/遊樂場' if leisure in ['park', 'playground'] else '綠地'
+                if not name_en:
                     name_en = 'Park/Playground' if leisure in ['park', 'playground'] else 'Green Space'
             
             elif amenity in ['nursing_room', 'baby_hatch', 'childcare'] or tags.get('changing_table') == 'yes':
                 category = 'nursing_room'
                 facilities = ['nursing_room', 'changing_table']
-                if not name_zh:
-                    name_zh = '哺乳室 / 尿布台'
-                    name_en = 'Nursing Room / Changing Table'
+                if not name_zh: name_zh = '哺乳室 / 尿布台'
+                if not name_en: name_en = 'Nursing Room / Changing Table'
             
             elif amenity in ['restaurant', 'cafe', 'fast_food', 'food_court']:
                 category = 'restaurant'
                 facilities = ['stroller_accessible']
                 if tags.get('high_chair') == 'yes':
                     facilities.append('high_chair')
-                if not name_zh:
-                    name_zh = '親子友善餐廳'
-                    name_en = 'Kid Friendly Restaurant'
+                if not name_zh: name_zh = '親子友善餐廳'
+                if not name_en: name_en = 'Kid Friendly Restaurant'
             
+            elif amenity in ['hospital', 'clinic', 'pharmacy', 'doctors']:
+                category = 'medical'
+                facilities = ['stroller_accessible']
+                if not name_zh:
+                    if amenity == 'pharmacy': name_zh = '藥局'
+                    else: name_zh = '醫療診所'
+                if not name_en:
+                    if amenity == 'pharmacy': name_en = 'Pharmacy'
+                    else: name_en = 'Medical Clinic'
+
             elif tourism in ['theme_park', 'zoo', 'aquarium', 'museum', 'gallery', 'viewpoint', 'attraction'] or \
+                 leisure == 'theme_park' or \
+                 historic in ['memorial', 'monument', 'castle'] or \
                  amenity in ['school', 'kindergarten', 'library', 'community_centre'] or \
                  shop in ['toys', 'baby_goods', 'books']:
                 category = 'attraction'
                 facilities = ['stroller_accessible', 'nursing_room']
                 if not name_zh:
-                    if tourism == 'museum': name_zh, name_en = '博物館', 'Museum'
-                    elif tourism == 'zoo': name_zh, name_en = '動物園', 'Zoo'
-                    elif shop == 'toys': name_zh, name_en = '玩具店', 'Toy Store'
-                    elif amenity == 'library': name_zh, name_en = '圖書館', 'Library'
-                    else: name_zh, name_en = '親子景點', 'Kid-friendly Attraction'
+                    if tourism == 'museum': name_zh = '博物館'
+                    elif tourism == 'zoo': name_zh = '動物園'
+                    elif shop == 'toys': name_zh = '玩具店'
+                    elif amenity == 'library': name_zh = '圖書館'
+                    else: name_zh = '親子景點'
+                if not name_en:
+                    if tourism == 'museum': name_en = 'Museum'
+                    elif tourism == 'zoo': name_en = 'Zoo'
+                    elif shop == 'toys': name_en = 'Toy Store'
+                    elif amenity == 'library': name_en = 'Library'
+                    else: name_en = 'Kid-friendly Attraction'
             else:
                 category = 'other'
                 facilities = []
-                if not name_zh:
-                    name_zh = '親子友善地點'
-                    name_en = 'Kid-friendly Location'
+                if not name_zh: name_zh = '親子友善地點'
+                if not name_en: name_en = 'Kid-friendly Location'
             
+            # If name:en was still not found, use name if it exists
             if not name_en:
-                name_en = 'Unnamed Location'
+                name_en = tags.get('name', 'Unnamed Location')
             
             loc = {
                 "id": str(uuid.uuid4()),
@@ -156,14 +181,15 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
         import random
         fallback_locations = []
         if lat is not None and lng is not None and radius is not None:
-            categories = ['park', 'nursing_room', 'restaurant', 'attraction']
-            for i in range(10): 
+            categories = ['park', 'nursing_room', 'restaurant', 'attraction', 'medical']
+            for i in range(15): 
                 cat = random.choice(categories)
                 facilities = []
                 if cat == 'park': facilities = ['stroller_accessible']
                 elif cat == 'nursing_room': facilities = ['nursing_room', 'changing_table']
                 elif cat == 'restaurant': facilities = ['high_chair', 'stroller_accessible']
                 elif cat == 'attraction': facilities = ['stroller_accessible', 'nursing_room']
+                elif cat == 'medical': facilities = ['stroller_accessible']
                 
                 offset_lat = (random.random() - 0.5) * (radius / 111000.0)
                 offset_lng = (random.random() - 0.5) * (radius / 111000.0)
@@ -196,7 +222,8 @@ def save_locations(locations):
     
     # Simple de-duplication based on coordinates (rounded)
     def get_coord_key(loc):
-        return (round(loc['coordinates']['lat'], 5), round(loc['coordinates']['lng'], 5))
+        # Using 6 decimal places for better precision but still allowing some overlap
+        return (round(loc['coordinates']['lat'], 6), round(loc['coordinates']['lng'], 6))
     
     existing_keys = {get_coord_key(loc) for loc in existing_locations}
     
