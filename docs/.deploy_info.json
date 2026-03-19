@@ -1,1 +1,9 @@
-{"deployed_at": "2026-03-19T20:29:00Z", "method": "python3 / npm (vite)", "ports": [3001, 3003], "urls": ["http://localhost:3001", "http://localhost:3003"], "pid_or_container": "2879533,2879990", "status": "running"}
+{
+  "deployed_at": "2026-03-19T20:47:00Z",
+  "method": "python + npm",
+  "ports": [3001, 3002],
+  "urls": ["http://localhost:3001/health", "http://localhost:3002"],
+  "pid_or_container": "backend: 2881612, frontend: 2881868",
+  "status": "running",
+  "error": null
+}
