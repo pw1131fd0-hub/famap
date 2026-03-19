@@ -61,38 +61,72 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
             else:
                 continue
 
-            name_zh = tags.get('name:zh', tags.get('name', '未命名地點'))
-            name_en = tags.get('name:en', 'Unnamed Location')
+            name_zh = tags.get('name:zh', tags.get('name'))
+            name_en = tags.get('name:en', tags.get('name'))
             
             # Determine category
             leisure = tags.get('leisure')
             amenity = tags.get('amenity')
             tourism = tags.get('tourism')
+            shop = tags.get('shop')
             
-            if leisure in ['park', 'playground', 'nature_reserve', 'recreation_ground']:
+            # Improved mapping
+            if leisure in ['park', 'playground', 'nature_reserve', 'recreation_ground', 'garden', 'pitch']:
                 category = 'park'
                 facilities = ['stroller_accessible']
                 if leisure == 'park': facilities.append('public_toilet')
                 if leisure == 'playground': facilities.append('high_chair')
-            elif amenity in ['nursing_room', 'childcare'] or tags.get('changing_table') == 'yes':
+                
+                if not name_zh:
+                    if leisure == 'playground': 
+                        name_zh = '遊樂場'
+                        name_en = 'Playground'
+                    elif leisure == 'park': 
+                        name_zh = '公園'
+                        name_en = 'Park'
+                    else:
+                        name_zh = '休憩綠地'
+                        name_en = 'Recreation Area'
+            
+            elif amenity in ['nursing_room', 'baby_hatch', 'childcare'] or tags.get('changing_table') == 'yes':
                 category = 'nursing_room'
                 facilities = ['nursing_room', 'changing_table']
-                if name_zh == '未命名地點':
+                if not name_zh:
                     name_zh = '哺乳室 / 尿布台'
                     name_en = 'Nursing Room / Changing Table'
-            elif amenity in ['restaurant', 'cafe']:
+            
+            elif amenity in ['restaurant', 'cafe', 'fast_food', 'food_court']:
+                # Even if no high_chair tag, many are kid friendly if they have space
                 category = 'restaurant'
-                facilities = ['high_chair', 'stroller_accessible']
-            elif tourism in ['theme_park', 'zoo', 'aquarium', 'museum'] or amenity in ['school', 'kindergarten']:
-                category = 'medical' # Placeholder for educational/attraction category
+                facilities = ['stroller_accessible']
+                if tags.get('high_chair') == 'yes':
+                    facilities.append('high_chair')
+                
+                if not name_zh:
+                    name_zh = '親子友善餐廳'
+                    name_en = 'Kid Friendly Restaurant'
+            
+            elif tourism in ['theme_park', 'zoo', 'aquarium', 'museum', 'gallery', 'viewpoint', 'attraction'] or \
+                 amenity in ['school', 'kindergarten', 'library', 'community_centre'] or \
+                 shop in ['toys', 'baby_goods', 'books']:
+                category = 'medical' # Still using medical as placeholder for 'attraction/edu' as per schema
                 facilities = ['stroller_accessible', 'nursing_room']
+                
+                if not name_zh:
+                    if tourism == 'museum': name_zh, name_en = '博物館', 'Museum'
+                    elif tourism == 'zoo': name_zh, name_en = '動物園', 'Zoo'
+                    elif shop == 'toys': name_zh, name_en = '玩具店', 'Toy Store'
+                    elif amenity == 'library': name_zh, name_en = '圖書館', 'Library'
+                    else: name_zh, name_en = '親子景點', 'Kid-friendly Spot'
             else:
                 category = 'other'
                 facilities = []
+                if not name_zh:
+                    name_zh = '親子友善地點'
+                    name_en = 'Kid-friendly Location'
             
-            # Exclude if no meaningful name and not a nursing room
-            if name_zh == '未命名地點' and category != 'nursing_room':
-                continue
+            if not name_en:
+                name_en = 'Unnamed Location'
             
             loc = {
                 "id": str(uuid.uuid4()),

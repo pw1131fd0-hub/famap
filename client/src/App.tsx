@@ -65,25 +65,25 @@ function App() {
   const [showAddLocation, setShowAddLocation] = useState(false);
   const [reviews, setReviews] = useState<Review[]>([]);
 
-  useEffect(() => {
-    const fetchLocations = async () => {
-      setLoading(true);
-      try {
-        const data = await locationApi.getNearby({
-          lat: position[0],
-          lng: position[1],
-          radius: 10000, // 10km for demo
-          category: selectedCategory,
-          stroller_accessible: strollerOnly || undefined,
-        });
-        setLocations(data);
-      } catch (error) {
-        console.error('Failed to fetch locations:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchLocations = async () => {
+    setLoading(true);
+    try {
+      const data = await locationApi.getNearby({
+        lat: position[0],
+        lng: position[1],
+        radius: 10000, // 10km for demo
+        category: selectedCategory,
+        stroller_accessible: strollerOnly || undefined,
+      });
+      setLocations(data);
+    } catch (error) {
+      console.error('Failed to fetch locations:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchLocations();
   }, [position, selectedCategory, strollerOnly]);
 
@@ -321,7 +321,11 @@ function App() {
               <div className="locations-list">
                 {(showFavorites ? favorites : locations).length === 0 ? (
                   <div className="empty-state">
-                    <p>{showFavorites ? t.common.noFavorites : t.common.loading}</p>
+                    {loading ? (
+                      <p>{t.common.loading}</p>
+                    ) : (
+                      <p>{showFavorites ? t.common.noFavorites : t.common.noLocations}</p>
+                    )}
                   </div>
                 ) : (
                   (showFavorites ? favorites : locations).map((loc) => (
@@ -384,6 +388,20 @@ function App() {
               </Marker>
             ))}
           </MapContainer>
+          <div className="map-controls">
+            {!loading && (
+              <button className="search-here-button" onClick={fetchLocations}>
+                <Filter size={16} />
+                <span>{t.common.searchArea}</span>
+              </button>
+            )}
+            {loading && (
+              <div className="map-loading-indicator">
+                <span className="spinner"></span>
+                <span>{t.common.loading}</span>
+              </div>
+            )}
+          </div>
         </main>
       </div>
     </div>

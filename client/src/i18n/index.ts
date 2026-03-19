@@ -14,6 +14,8 @@ export const translations = {
       addToFavorites: '加入收藏',
       removeFromFavorites: '移除收藏',
       noFavorites: '目前沒有收藏',
+      noLocations: '找不到景點，請試著移動地圖。',
+      searchArea: '搜尋此區域',
     },
     locationForm: {
       nameZh: '中文名稱',
@@ -68,6 +70,8 @@ export const translations = {
       addToFavorites: 'Add to Favorites',
       removeFromFavorites: 'Remove from Favorites',
       noFavorites: 'No favorites yet',
+      noLocations: 'No spots found, try moving the map.',
+      searchArea: 'Search this area',
     },
     locationForm: {
       nameZh: 'Name (Chinese)',

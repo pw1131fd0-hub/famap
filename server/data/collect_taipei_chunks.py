@@ -4,33 +4,38 @@ import time
 import asyncio
 
 # Add the server directory to Python path
-sys.path.insert(0, '/home/crawd_user/project/famap/server')
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from data.auto_collect import fetch_osm_data, save_locations
 
 async def collect_all():
-    # Split Taipei into 4 quadrants
+    print("Starting chunked Taipei data collection...")
     # (24.96,121.45,25.20,121.65)
-    lat_mid = (24.96 + 25.20) / 2
-    lng_mid = (121.45 + 121.65) / 2
+    lat_start, lat_end = 24.96, 25.21
+    lng_start, lng_end = 121.45, 121.66
     
-    quadrants = [
-        (24.96, 121.45, lat_mid, lng_mid),      # SW
-        (lat_mid, 121.45, 25.20, lng_mid),      # NW
-        (24.96, lng_mid, lat_mid, 121.65),      # SE
-        (lat_mid, lng_mid, 25.20, 121.65),      # NE
-    ]
+    step = 0.03 # Roughly 3km x 3km chunks
     
-    for bbox in quadrants:
-        print(f"Collecting quadrant: {bbox}")
-        center_lat = (bbox[0] + bbox[2]) / 2
-        center_lng = (bbox[1] + bbox[3]) / 2
-        radius = 5000 
-        
-        locations = await fetch_osm_data(center_lat, center_lng, radius)
-        if locations:
-            save_locations(locations)
-        await asyncio.sleep(2) 
+    lat = lat_start
+    while lat < lat_end:
+        lng = lng_start
+        while lng < lng_end:
+            center_lat = lat + step / 2
+            center_lng = lng + step / 2
+            radius = 3000 # 3km radius covers the chunk
+            
+            print(f"Collecting chunk near {center_lat:.4f}, {center_lng:.4f}...")
+            locations = await fetch_osm_data(center_lat, center_lng, radius)
+            if locations:
+                # Filter out simulated data if any
+                real_locations = [loc for loc in locations if '模擬' not in loc['name']['zh']]
+                if real_locations:
+                    save_locations(real_locations)
+                    print(f"Added {len(real_locations)} real locations.")
+            
+            lng += step
+            await asyncio.sleep(1) # Be nice to Overpass
+        lat += step
 
 if __name__ == "__main__":
     asyncio.run(collect_all())

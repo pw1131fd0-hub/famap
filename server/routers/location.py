@@ -49,16 +49,22 @@ async def get_locations(
     # try to fetch more from OSM.
     already_fetched = any(calculate_distance(lat, lng, f_lat, f_lng) < radius/2 for f_lat, f_lng in fetched_areas)
     
-    if len(results) < 10 and not already_fetched:
+    if len(results) < 5 and not already_fetched:
+        print(f"Low results ({len(results)}) for {lat}, {lng}. Fetching from OSM...")
         new_locations = await fetch_osm_data(lat, lng, radius)
+        
         if new_locations:
-            # Add to mock_locations in memory
+            # Check if these are real or fallback
+            is_fallback = any('模擬' in loc['name']['zh'] for loc in new_locations)
+            
             # De-duplicate before adding
             existing_ids = {loc["id"] for loc in mock_locations}
+            added_count = 0
             for loc in new_locations:
                 if loc["id"] not in existing_ids:
                     mock_locations.append(loc)
                     existing_ids.add(loc["id"])
+                    added_count += 1
                     
                     # Also check if it matches current filters to add to results
                     dist = calculate_distance(lat, lng, loc["coordinates"]["lat"], loc["coordinates"]["lng"])
@@ -66,15 +72,19 @@ async def get_locations(
                     match_category = category is None or loc["category"] == category
                     match_stroller = stroller_accessible is None or not stroller_accessible or "stroller_accessible" in loc["facilities"]
                     if within_radius and match_category and match_stroller:
-                        # Avoid duplicates in results
                         if all(r["id"] != loc["id"] for r in results):
                             results.append(loc)
             
-            # Save to JSON file for persistence (only real OSM data, handled inside save_locations)
-            save_locations(new_locations)
-            
-            # Record that we fetched this area
-            fetched_areas.append((lat, lng))
+            if not is_fallback:
+                # Save real OSM data to JSON file for persistence
+                save_locations([loc for loc in new_locations if '模擬' not in loc['name']['zh']])
+                # Record that we successfully fetched this area to avoid spamming OSM
+                fetched_areas.append((lat, lng))
+                print(f"Fetched and saved {added_count} real locations from OSM.")
+            else:
+                print(f"OSM fetch failed, using {len(new_locations)} fallback locations.")
+
+    return results
 
     return results
 
