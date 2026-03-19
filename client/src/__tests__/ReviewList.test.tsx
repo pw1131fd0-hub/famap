@@ -6,8 +6,8 @@ import { LanguageProvider } from '../i18n/LanguageContext';
 describe('ReviewList', () => {
   it('renders reviews', () => {
     const mockReviews = [
-      { id: '1', userName: 'User 1', rating: 5, comment: 'Great!', createdAt: new Date().toISOString() },
-      { id: '2', userName: 'User 2', rating: 4, comment: 'Good.', createdAt: new Date().toISOString() },
+      { id: '1', locationId: '1', userId: 'u1', userName: 'User 1', rating: 5, comment: 'Great!', createdAt: new Date().toISOString() },
+      { id: '2', locationId: '1', userId: 'u2', userName: 'User 2', rating: 4, comment: 'Good.', createdAt: new Date().toISOString() },
     ];
     render(
       <LanguageProvider>

@@ -11,3 +11,7 @@ python-jose[cryptography]
 passlib[bcrypt]
 python-multipart
 cors
+pytest
+pytest-cov
+httpx
+pytest-asyncio

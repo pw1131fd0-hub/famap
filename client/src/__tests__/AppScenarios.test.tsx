@@ -23,7 +23,7 @@ vi.mock('../services/api', () => ({
 }));
 
 describe('App Complex Scenarios', () => {
-  const mockLocation = {
+  const mockLocation: any = {
     id: '1',
     name: { zh: '公園', en: 'Park' },
     description: { zh: '描述', en: 'Desc' },
@@ -180,7 +180,6 @@ describe('App Complex Scenarios', () => {
     fireEvent.click(screen.getByTitle(/新增地點/i));
     expect(screen.getAllByText(/新增地點/i).length).toBeGreaterThan(1);
 
-    const closeBtn = screen.getByRole('button', { name: '' }); // The X button doesn't have a label but class close-detail-button
     // Find the one in aside
     const aside = document.querySelector('aside');
     const xBtn = aside?.querySelector('.close-detail-button');

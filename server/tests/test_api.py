@@ -1,0 +1,124 @@
+from fastapi.testclient import TestClient
+import pytest
+from server.main import app
+from server.data.seed_data import mock_locations, mock_users, mock_favorites, mock_reviews
+
+client = TestClient(app)
+
+def test_health_check():
+    response = client.get("/health")
+    assert response.status_code == 200
+    assert response.json() == {"status": "ok", "message": "FamMap API (FastAPI) is running"}
+
+def test_get_locations():
+    # Provide coordinates in Taipei
+    response = client.get("/api/locations/?lat=25.0330&lng=121.5654&radius=10000")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+    if len(mock_locations) > 0:
+        assert len(data) > 0
+
+def test_get_location():
+    if not mock_locations:
+        return
+    loc_id = mock_locations[0]["id"]
+    response = client.get(f"/api/locations/{loc_id}")
+    assert response.status_code == 200
+    assert response.json()["id"] == loc_id
+
+def test_get_location_not_found():
+    response = client.get("/api/locations/invalid_id_999")
+    assert response.status_code == 404
+
+def test_create_location():
+    new_loc = {
+        "name": {"zh": "測試公園", "en": "Test Park"},
+        "description": {"zh": "測試用", "en": "For testing"},
+        "category": "park",
+        "coordinates": {"lat": 25.0, "lng": 121.0},
+        "address": {"zh": "測試地址", "en": "Test Addr"},
+        "facilities": ["playground"]
+    }
+    response = client.post("/api/locations/", json=new_loc)
+    assert response.status_code == 200
+    assert response.json()["name"]["en"] == "Test Park"
+
+def test_update_location():
+    if not mock_locations:
+        return
+    loc_id = mock_locations[0]["id"]
+    update_data = {"photoUrl": "http://test.com/photo.jpg"}
+    response = client.patch(f"/api/locations/{loc_id}", json=update_data)
+    assert response.status_code == 200
+    assert response.json()["photoUrl"] == "http://test.com/photo.jpg"
+
+def test_update_location_not_found():
+    response = client.patch("/api/locations/invalid_id_999", json={"photoUrl": "test"})
+    assert response.status_code == 404
+
+def test_get_favorites():
+    response = client.get("/api/favorites/")
+    assert response.status_code == 200
+    assert isinstance(response.json(), list)
+
+def test_add_favorite():
+    fav = {"locationId": "test_loc_1"}
+    response = client.post("/api/favorites/", json=fav)
+    assert response.status_code == 200
+    assert response.json()["locationId"] == "test_loc_1"
+
+def test_remove_favorite():
+    # add a favorite first
+    fav = {"locationId": "test_loc_to_remove"}
+    client.post("/api/favorites/", json=fav)
+    # now remove it
+    response = client.delete("/api/favorites/test_loc_to_remove")
+    assert response.status_code == 200
+    assert response.json() == {"status": "success"}
+
+def test_get_reviews():
+    response = client.get("/api/reviews/test_loc_1")
+    assert response.status_code == 200
+    assert isinstance(response.json(), list)
+
+def test_create_review():
+    review = {
+        "locationId": "test_loc_1",
+        "rating": 5,
+        "comment": "Great place!"
+    }
+    response = client.post("/api/reviews/", json=review)
+    assert response.status_code == 200
+    assert response.json()["comment"] == "Great place!"
+
+def test_register_and_login():
+    # Register
+    user_data = {
+        "email": "newuser@test.com",
+        "displayName": "New User",
+        "password": "secretpassword"
+    }
+    response = client.post("/api/auth/register", json=user_data)
+    assert response.status_code == 200
+    assert response.json()["email"] == "newuser@test.com"
+
+    # Register duplicate
+    response_dup = client.post("/api/auth/register", json=user_data)
+    assert response_dup.status_code == 400
+
+    # Login
+    login_data = {"email": "newuser@test.com", "password": "secretpassword"}
+    response = client.post("/api/auth/login", json=login_data)
+    assert response.status_code == 200
+    assert "access_token" in response.json()
+
+    # Login invalid
+    login_invalid = {"email": "newuser@test.com", "password": "wrongpassword"}
+    response = client.post("/api/auth/login", json=login_invalid)
+    assert response.status_code == 401
+
+def test_get_me():
+    response = client.get("/api/auth/me")
+    assert response.status_code == 200
+    assert "email" in response.json()
