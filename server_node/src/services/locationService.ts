@@ -19,8 +19,11 @@ export class LocationService {
 
   static async findNearby(params: SearchParams): Promise<Location[]> {
     const { lat, lng, radius, category, stroller_accessible } = params;
+    
+    console.log('Search params:', { lat, lng, radius, category, stroller_accessible });
+    console.log('Total locations:', mockLocations.length);
 
-    return mockLocations.filter((location: Location) => {
+    const results = mockLocations.filter((location: Location) => {
       const distance = this.calculateDistance(
         lat,
         lng,
@@ -31,9 +34,14 @@ export class LocationService {
       const withinRadius = distance <= radius;
       const matchCategory = !category || location.category === category;
       const matchStroller = !stroller_accessible || location.facilities.includes('stroller_accessible');
+      
+      console.log(`Location ${location.name.en}: distance=${distance}, withinRadius=${withinRadius}, matchCategory=${matchCategory}, matchStroller=${matchStroller}`);
 
       return withinRadius && matchCategory && matchStroller;
     });
+    
+    console.log('Filtered results:', results.length);
+    return results;
   }
 
   static async findById(id: string): Promise<Location | null> {
