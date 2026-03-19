@@ -1,5 +1,5 @@
-import { mockReviews } from '../data/seed-data.ts';
-import type { Review, ReviewCreateDTO } from '../types/review.ts';
+import { mockReviews } from '../data/seed-data.js';
+import type { Review, ReviewCreateDTO } from '../types/review.js';
 
 export class ReviewService {
   static async findByLocationId(locationId: string): Promise<Review[]> {

@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import request from 'supertest';
-import app from '../index.ts';
-import { mockFavorites } from '../data/seed-data.ts';
+import app from '../index.js';
+import { mockFavorites } from '../data/seed-data.js';
 
 describe('Favorite API', () => {
   beforeEach(() => {

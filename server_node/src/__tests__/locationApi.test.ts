@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import request from 'supertest';
-import app from '../index.ts';
-import { mockLocations } from '../data/seed-data.ts';
+import app from '../index.js';
+import { mockLocations } from '../data/seed-data.js';
 
 describe('Location API', () => {
   const originalLocations = [...mockLocations];

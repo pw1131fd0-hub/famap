@@ -1,5 +1,5 @@
-import { mockUsers } from '../data/seed-data.ts';
-import type { User, RegisterDTO, LoginDTO, AuthResponse } from '../types/user.ts';
+import { mockUsers } from '../data/seed-data.js';
+import type { User, RegisterDTO, LoginDTO, AuthResponse } from '../types/user.js';
 
 export class AuthService {
   static async register(dto: RegisterDTO): Promise<AuthResponse> {

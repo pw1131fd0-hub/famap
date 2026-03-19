@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { FavoriteService } from '../services/favoriteService.ts';
-import { mockFavorites, mockLocations } from '../data/seed-data.ts';
+import { FavoriteService } from '../services/favoriteService.js';
+import { mockFavorites, mockLocations } from '../data/seed-data.js';
 
 describe('FavoriteService', () => {
   beforeEach(() => {

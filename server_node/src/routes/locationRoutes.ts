@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { LocationController } from '../controllers/locationController.ts';
-import { ReviewController } from '../controllers/reviewController.ts';
-import { authMiddleware } from '../middleware/auth.ts';
+import { LocationController } from '../controllers/locationController.js';
+import { ReviewController } from '../controllers/reviewController.js';
+import { authMiddleware } from '../middleware/auth.js';
 
 const router = Router();
 

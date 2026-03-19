@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { AuthService } from '../services/authService.ts';
+import { AuthService } from '../services/authService.js';
 
 export class AuthController {
   static async register(req: Request, res: Response) {

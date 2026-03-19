@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { FavoriteController } from '../controllers/favoriteController.ts';
-import { authMiddleware } from '../middleware/auth.ts';
+import { FavoriteController } from '../controllers/favoriteController.js';
+import { authMiddleware } from '../middleware/auth.js';
 
 const router = Router();
 

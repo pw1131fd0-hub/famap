@@ -1,17 +1,17 @@
 import { describe, it, expect, vi } from 'vitest';
 import request from 'supertest';
-import app from '../index.ts';
-import { ReviewService } from '../services/reviewService.ts';
-import { AuthService } from '../services/authService.ts';
+import app from '../index.js';
+import { ReviewService } from '../services/reviewService.js';
+import { AuthService } from '../services/authService.js';
 
-vi.mock('../services/reviewService.ts', () => ({
+vi.mock('../services/reviewService.js', () => ({
   ReviewService: {
     findByLocationId: vi.fn(),
     create: vi.fn(),
   }
 }));
 
-vi.mock('../services/authService.ts', () => ({
+vi.mock('../services/authService.js', () => ({
   AuthService: {
     getMe: vi.fn().mockResolvedValue({ id: 'u1', displayName: 'Test User' }),
   }

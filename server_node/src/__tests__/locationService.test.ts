@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { LocationService } from '../services/locationService.ts';
-import { mockLocations } from '../data/seed-data.ts';
+import { LocationService } from '../services/locationService.js';
+import { mockLocations } from '../data/seed-data.js';
 
 describe('LocationService', () => {
   const originalLocations = [...mockLocations];

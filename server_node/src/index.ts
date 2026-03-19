@@ -2,9 +2,9 @@ import express, { type Request, type Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
-import locationRoutes from './routes/locationRoutes.ts';
-import favoriteRoutes from './routes/favoriteRoutes.ts';
-import authRoutes from './routes/authRoutes.ts';
+import locationRoutes from './routes/locationRoutes.js';
+import favoriteRoutes from './routes/favoriteRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 
 dotenv.config();
 

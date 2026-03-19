@@ -1,7 +1,7 @@
-import type { Location } from '../types/location.ts';
-import type { Review } from '../types/review.ts';
-import type { Favorite } from '../types/favorite.ts';
-import type { User } from '../types/user.ts';
+import type { Location } from '../types/location.js';
+import type { Review } from '../types/review.js';
+import type { Favorite } from '../types/favorite.js';
+import type { User } from '../types/user.js';
 
 export let mockUsers: User[] = [
   {

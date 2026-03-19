@@ -1,6 +1,6 @@
 import { type Request, type Response } from 'express';
 import { z } from 'zod';
-import { LocationService } from '../services/locationService.ts';
+import { LocationService } from '../services/locationService.js';
 
 const searchSchema = z.object({
   lat: z.coerce.number().min(-90).max(90),
@@ -31,8 +31,8 @@ export class LocationController {
   }
 
   static async getById(req: Request, res: Response) {
-    const { id } = req.params;
-    if (!id) return res.status(400).json({ error: 'ID is required' });
+    const id = req.params.id;
+    if (!id || typeof id !== 'string') return res.status(400).json({ error: 'ID is required' });
 
     const location = await LocationService.findById(id);
     if (!location) {

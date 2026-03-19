@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { FavoriteService } from '../services/favoriteService.ts';
+import { FavoriteService } from '../services/favoriteService.js';
 
 export class FavoriteController {
   static async getFavorites(req: Request, res: Response) {

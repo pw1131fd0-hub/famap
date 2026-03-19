@@ -1,5 +1,5 @@
-import { mockLocations } from '../data/seed-data.ts';
-import type { Location, SearchParams } from '../types/location.ts';
+import { mockLocations } from '../data/seed-data.js';
+import type { Location, SearchParams } from '../types/location.js';
 
 export class LocationService {
   private static calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
