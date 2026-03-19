@@ -8,7 +8,9 @@ import hmac
 import base64
 import json
 import os
-from ..schemas import User, UserCreate, Token
+import sys
+sys.path.append('..')
+from schemas import User, UserCreate, Token
 
 router = APIRouter()
 

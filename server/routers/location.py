@@ -1,8 +1,10 @@
 from fastapi import APIRouter, HTTPException, Query
 from typing import List, Optional
 import math
-from ..schemas import Location, SearchParams, Category, LocationCreate
-from ..data.seed_data import mock_locations
+import sys
+sys.path.append('..')
+from schemas import Location, SearchParams, Category, LocationCreate
+from data.seed_data import mock_locations
 
 router = APIRouter()
 

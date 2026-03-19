@@ -2,8 +2,10 @@ from fastapi import APIRouter, HTTPException, Query
 from typing import List
 from datetime import datetime, timezone
 import uuid
-from ..schemas import Review, ReviewCreate
-from ..data.seed_data import mock_reviews, mock_locations
+import sys
+sys.path.append('..')
+from schemas import Review, ReviewCreate
+from data.seed_data import mock_reviews, mock_locations
 
 router = APIRouter()
 

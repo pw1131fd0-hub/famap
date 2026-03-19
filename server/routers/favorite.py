@@ -2,8 +2,10 @@ from fastapi import APIRouter, HTTPException, Depends
 from typing import List
 from datetime import datetime, timezone
 import uuid
-from ..schemas import Favorite, FavoriteBase
-from ..data.seed_data import mock_favorites
+import sys
+sys.path.append('..')
+from schemas import Favorite, FavoriteBase
+from data.seed_data import mock_favorites
 
 router = APIRouter()
 
