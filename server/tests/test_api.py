@@ -1,7 +1,18 @@
 from fastapi.testclient import TestClient
 import pytest
-from server.main import app
-from server.data.seed_data import mock_locations, mock_users, mock_favorites, mock_reviews
+import sys
+import os
+
+# Add parent directory to path to allow importing from 'server' if needed, 
+# but here we prefer direct imports if running from 'server' dir.
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+try:
+    from main import app
+    from data.seed_data import mock_locations, mock_users, mock_favorites, mock_reviews
+except ImportError:
+    from server.main import app
+    from server.data.seed_data import mock_locations, mock_users, mock_favorites, mock_reviews
 
 client = TestClient(app)
 

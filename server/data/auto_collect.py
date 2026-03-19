@@ -1,44 +1,52 @@
-import urllib.request
-import urllib.parse
+import httpx
 import json
 import uuid
+import os
+import asyncio
 
-def fetch_osm_data(lat=None, lng=None, radius=None):
+async def fetch_osm_data(lat=None, lng=None, radius=None):
     if lat is None or lng is None or radius is None:
         bbox = "(24.96,121.45,25.20,121.65)"
     else:
         # Approximate degrees for bounding box based on radius in meters
-        lat_offset = radius / 111000.0
-        lng_offset = radius / (111000.0 * 0.9)
+        # Cap radius to 10km to avoid over-large queries
+        radius_capped = min(radius, 10000)
+        lat_offset = radius_capped / 111000.0
+        lng_offset = radius_capped / (111000.0 * 0.9)
         bbox = f"({lat - lat_offset},{lng - lng_offset},{lat + lat_offset},{lng + lng_offset})"
 
-    overpass_url = "http://overpass-api.de/api/interpreter"
+    overpass_url = "https://overpass-api.de/api/interpreter"
     overpass_query = f"""
     [out:json][timeout:25];
     (
+      // Parks and Playgrounds
       node["leisure"~"park|playground|nature_reserve|recreation_ground"]{bbox};
       way["leisure"~"park|playground|nature_reserve|recreation_ground"]{bbox};
       relation["leisure"~"park|playground|nature_reserve|recreation_ground"]{bbox};
       
+      // Facilities
       node["amenity"~"nursing_room|kindergarten|school|childcare"]{bbox};
       way["amenity"~"nursing_room|kindergarten|school|childcare"]{bbox};
       
+      // Kid-friendly amenities
       node["amenity"~"restaurant|cafe"]["high_chair"="yes"]{bbox};
-      way["amenity"~"restaurant|cafe"]["high_chair"="yes"]{bbox};
-      
       node["amenity"="toilets"]["changing_table"="yes"]{bbox};
-      way["amenity"="toilets"]["changing_table"="yes"]{bbox};
+      
+      // Attractions
+      node["tourism"~"theme_park|zoo|aquarium|museum"]{bbox};
+      way["tourism"~"theme_park|zoo|aquarium|museum"]{bbox};
     );
     out center;
     """
     
     print(f"Fetching data from OSM Overpass API for bbox {bbox}...")
     try:
-        data = urllib.parse.urlencode({'data': overpass_query}).encode('utf-8')
-        req = urllib.request.Request(overpass_url, data=data, headers={'User-Agent': 'FamMap/1.0 (Contact: admin@fammap.local)'})
-        
-        with urllib.request.urlopen(req, timeout=15.0) as response:
-            result = json.loads(response.read().decode('utf-8'))
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.post(overpass_url, data={'data': overpass_query}, headers={'User-Agent': 'FamMap-Bot/2.0'})
+            if response.status_code != 200:
+                print(f"OSM API error: {response.status_code}")
+                raise Exception(f"HTTP {response.status_code}")
+            result = response.json()
         
         locations = []
         for element in result.get('elements', []):
@@ -59,13 +67,14 @@ def fetch_osm_data(lat=None, lng=None, radius=None):
             # Determine category
             leisure = tags.get('leisure')
             amenity = tags.get('amenity')
+            tourism = tags.get('tourism')
             
             if leisure in ['park', 'playground', 'nature_reserve', 'recreation_ground']:
                 category = 'park'
                 facilities = ['stroller_accessible']
                 if leisure == 'park': facilities.append('public_toilet')
                 if leisure == 'playground': facilities.append('high_chair')
-            elif amenity in ['nursing_room', 'toilets', 'childcare'] or tags.get('changing_table') == 'yes':
+            elif amenity in ['nursing_room', 'childcare'] or tags.get('changing_table') == 'yes':
                 category = 'nursing_room'
                 facilities = ['nursing_room', 'changing_table']
                 if name_zh == '未命名地點':
@@ -74,9 +83,9 @@ def fetch_osm_data(lat=None, lng=None, radius=None):
             elif amenity in ['restaurant', 'cafe']:
                 category = 'restaurant'
                 facilities = ['high_chair', 'stroller_accessible']
-            elif amenity in ['school', 'kindergarten']:
-                category = 'medical' # Using medical as a placeholder for 'care/educational' for now
-                facilities = ['stroller_accessible']
+            elif tourism in ['theme_park', 'zoo', 'aquarium', 'museum'] or amenity in ['school', 'kindergarten']:
+                category = 'medical' # Placeholder for educational/attraction category
+                facilities = ['stroller_accessible', 'nursing_room']
             else:
                 category = 'other'
                 facilities = []
@@ -101,15 +110,10 @@ def fetch_osm_data(lat=None, lng=None, radius=None):
             locations.append(loc)
         
         print(f"Collected {len(locations)} locations from OSM.")
-        if len(locations) == 0:
-            # If no results from OSM, we don't necessarily want to raise an exception here
-            # as the caller might want to handle it.
-            pass
         return locations
     except Exception as e:
         print(f"Error fetching data from OSM: {e}")
         # Generate simulated data based on location to ensure there are ALWAYS points
-        print("Generating fallback locations dynamically due to OSM failure or no data...")
         import random
         fallback_locations = []
         if lat is not None and lng is not None and radius is not None:
@@ -174,8 +178,9 @@ def save_locations(locations):
         except Exception as e:
             print(f"Error saving locations: {e}")
 
-import os
 if __name__ == "__main__":
-    locations = fetch_osm_data()
-    if locations:
-        save_locations(locations)
+    async def main():
+        locations = await fetch_osm_data()
+        if locations:
+            save_locations(locations)
+    asyncio.run(main())

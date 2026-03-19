@@ -31,6 +31,7 @@ export const translations = {
       nursing_room: '哺乳室',
       restaurant: '餐廳',
       medical: '醫療設施',
+      other: '其他',
     },
     facilities: {
       changing_table: '尿布台',
@@ -84,6 +85,7 @@ export const translations = {
       nursing_room: 'Nursing Room',
       restaurant: 'Restaurant',
       medical: 'Medical Facility',
+      other: 'Other',
     },
     facilities: {
       changing_table: 'Changing Table',

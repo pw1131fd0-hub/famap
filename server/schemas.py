@@ -7,6 +7,7 @@ class Category(str, Enum):
     NURSING_ROOM = "nursing_room"
     RESTAURANT = "restaurant"
     MEDICAL = "medical"
+    OTHER = "other"
 
 class LocalizedString(BaseModel):
     zh: str

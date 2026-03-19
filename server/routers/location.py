@@ -50,7 +50,7 @@ async def get_locations(
     already_fetched = any(calculate_distance(lat, lng, f_lat, f_lng) < radius/2 for f_lat, f_lng in fetched_areas)
     
     if len(results) < 10 and not already_fetched:
-        new_locations = fetch_osm_data(lat, lng, radius)
+        new_locations = await fetch_osm_data(lat, lng, radius)
         if new_locations:
             # Add to mock_locations in memory
             # De-duplicate before adding

@@ -179,6 +179,7 @@ function App() {
     { key: 'nursing_room', icon: Baby, label: t.categories.nursing_room },
     { key: 'restaurant', icon: Utensils, label: t.categories.restaurant },
     { key: 'medical', icon: Hospital, label: t.categories.medical },
+    { key: 'other', icon: MapPin, label: t.categories.other },
   ];
 
   return (

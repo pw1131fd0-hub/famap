@@ -1,4 +1,4 @@
-export type Category = 'park' | 'nursing_room' | 'restaurant' | 'medical';
+export type Category = 'park' | 'nursing_room' | 'restaurant' | 'medical' | 'other';
 
 export interface Location {
   id: string;
