@@ -3,22 +3,30 @@ import urllib.parse
 import json
 import uuid
 
-def fetch_osm_data():
+def fetch_osm_data(lat=None, lng=None, radius=None):
+    if lat is None or lng is None or radius is None:
+        bbox = "(24.96,121.45,25.20,121.65)"
+    else:
+        # Approximate degrees for bounding box based on radius in meters
+        lat_offset = radius / 111000.0
+        lng_offset = radius / (111000.0 * 0.9)
+        bbox = f"({lat - lat_offset},{lng - lng_offset},{lat + lat_offset},{lng + lng_offset})"
+
     overpass_url = "http://overpass-api.de/api/interpreter"
-    overpass_query = """
+    overpass_query = f"""
     [out:json][timeout:25];
     (
-      node["leisure"="park"](24.96,121.45,25.20,121.65);
-      node["leisure"="playground"](24.96,121.45,25.20,121.65);
-      node["amenity"="nursing_room"](24.96,121.45,25.20,121.65);
-      node["amenity"="toilets"]["changing_table"="yes"](24.96,121.45,25.20,121.65);
+      node["leisure"="park"]{bbox};
+      node["leisure"="playground"]{bbox};
+      node["amenity"="nursing_room"]{bbox};
+      node["amenity"="toilets"]["changing_table"="yes"]{bbox};
     );
     out body;
     >;
     out skel qt;
     """
     
-    print("Fetching data from OSM Overpass API...")
+    print(f"Fetching data from OSM Overpass API for bbox {bbox}...")
     try:
         data = urllib.parse.urlencode({'data': overpass_query}).encode('utf-8')
         req = urllib.request.Request(overpass_url, data=data)
@@ -63,7 +71,7 @@ def fetch_osm_data():
                     },
                     "category": category,
                     "coordinates": {"lat": element['lat'], "lng": element['lon']},
-                    "address": {"zh": "台北市", "en": "Taipei City"},
+                    "address": {"zh": "未知地址", "en": "Unknown Address"},
                     "facilities": facilities,
                     "averageRating": 4.0
                 }

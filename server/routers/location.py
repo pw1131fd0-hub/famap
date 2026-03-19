@@ -5,6 +5,7 @@ import sys
 sys.path.append('..')
 from schemas import Location, SearchParams, Category, LocationCreate
 from data.seed_data import mock_locations
+from data.auto_collect import fetch_osm_data
 
 router = APIRouter()
 
@@ -40,6 +41,18 @@ async def get_locations(
         if within_radius and match_category and match_stroller:
             results.append(loc)
             
+    if not results:
+        new_locations = fetch_osm_data(lat, lng, radius)
+        if new_locations:
+            for loc in new_locations:
+                mock_locations.append(loc)
+                dist = calculate_distance(lat, lng, loc["coordinates"]["lat"], loc["coordinates"]["lng"])
+                within_radius = dist <= radius
+                match_category = category is None or loc["category"] == category
+                match_stroller = stroller_accessible is None or not stroller_accessible or "stroller_accessible" in loc["facilities"]
+                if within_radius and match_category and match_stroller:
+                    results.append(loc)
+
     return results
 
 @router.get("/{location_id}", response_model=Location)
