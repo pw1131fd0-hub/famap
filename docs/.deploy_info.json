@@ -1,9 +1,8 @@
 {
-  "deployed_at": "2026-03-19T20:47:00Z",
-  "method": "python + npm",
+  "deployed_at": "2026-03-19T21:16:00Z",
+  "method": "python (backend) / vite (frontend)",
   "ports": [3001, 3002],
-  "urls": ["http://localhost:3001/health", "http://localhost:3002"],
-  "pid_or_container": "backend: 2881612, frontend: 2881868",
-  "status": "running",
-  "error": null
+  "urls": ["http://localhost:3001", "http://localhost:3002"],
+  "pid_or_container": "backend.pid, frontend.pid",
+  "status": "running"
 }

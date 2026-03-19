@@ -8,7 +8,7 @@ sys.path.insert(0, '/home/crawd_user/project/famap/server')
 
 # Set environment variables
 os.environ['PYTHONPATH'] = '/home/crawd_user/project/famap/server'
-os.environ['ALLOWED_ORIGINS'] = 'http://localhost:3003,http://localhost:3004,http://localhost:3001,http://localhost:5173,http://localhost:3000'
+os.environ['ALLOWED_ORIGINS'] = 'http://localhost:3003,http://localhost:3004,http://localhost:3001,http://localhost:5173,http://localhost:3000,http://localhost:3002'
 
 # Now import and run the app
 import uvicorn
