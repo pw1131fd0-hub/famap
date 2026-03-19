@@ -27,19 +27,19 @@ describe('API Services', () => {
     it('getNearby calls axios get', async () => {
       vi.mocked(axiosInstance.get).mockResolvedValue({ data: [] });
       await locationApi.getNearby({ lat: 0, lng: 0, radius: 1000 });
-      expect(axiosInstance.get).toHaveBeenCalledWith('/locations', expect.anything());
+      expect(axiosInstance.get).toHaveBeenCalledWith('/locations/', expect.anything());
     });
 
     it('getById calls axios get', async () => {
       vi.mocked(axiosInstance.get).mockResolvedValue({ data: {} });
       await locationApi.getById('1');
-      expect(axiosInstance.get).toHaveBeenCalledWith('/locations/1');
+      expect(axiosInstance.get).toHaveBeenCalledWith('/locations/1/');
     });
 
     it('create calls axios post', async () => {
       vi.mocked(axiosInstance.post).mockResolvedValue({ data: {} });
       await locationApi.create({} as any);
-      expect(axiosInstance.post).toHaveBeenCalledWith('/locations', {});
+      expect(axiosInstance.post).toHaveBeenCalledWith('/locations/', {});
     });
   });
 

@@ -77,14 +77,12 @@ async def get_locations(
             
             if not is_fallback:
                 # Save real OSM data to JSON file for persistence
-                save_locations([loc for loc in new_locations if '模擬' not in loc['name']['zh']])
+                save_locations([loc for loc in new_locations if '親子點' not in loc['name']['zh']])
                 # Record that we successfully fetched this area to avoid spamming OSM
                 fetched_areas.append((lat, lng))
                 print(f"Fetched and saved {added_count} real locations from OSM.")
             else:
                 print(f"OSM fetch failed, using {len(new_locations)} fallback locations.")
-
-    return results
 
     return results
 

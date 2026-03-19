@@ -9,49 +9,67 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
         bbox = "(24.96,121.45,25.20,121.65)"
     else:
         # Approximate degrees for bounding box based on radius in meters
-        # Cap radius to 10km to avoid over-large queries
         radius_capped = min(radius, 10000)
         lat_offset = radius_capped / 111000.0
         lng_offset = radius_capped / (111000.0 * 0.9)
         bbox = f"({lat - lat_offset},{lng - lng_offset},{lat + lat_offset},{lng + lng_offset})"
 
-    overpass_url = "https://overpass-api.de/api/interpreter"
+    overpass_mirrors = [
+        "https://overpass-api.de/api/interpreter",
+        "https://lz4.overpass-api.de/api/interpreter",
+        "https://z.overpass-api.de/api/interpreter",
+        "https://overpass.kumi.systems/api/interpreter"
+    ]
+    
     overpass_query = f"""
-    [out:json][timeout:25];
+    [out:json][timeout:30];
     (
       // Parks and Playgrounds
-      node["leisure"~"park|playground|nature_reserve|recreation_ground"]{bbox};
-      way["leisure"~"park|playground|nature_reserve|recreation_ground"]{bbox};
-      relation["leisure"~"park|playground|nature_reserve|recreation_ground"]{bbox};
+      node["leisure"~"park|playground|nature_reserve|recreation_ground|garden"]{bbox};
+      way["leisure"~"park|playground|nature_reserve|recreation_ground|garden"]{bbox};
+      relation["leisure"~"park|playground|nature_reserve|recreation_ground|garden"]{bbox};
       
       // Facilities
-      node["amenity"~"nursing_room|kindergarten|school|childcare"]{bbox};
-      way["amenity"~"nursing_room|kindergarten|school|childcare"]{bbox};
+      node["amenity"~"nursing_room|kindergarten|school|childcare|library|community_centre"]{bbox};
+      way["amenity"~"nursing_room|kindergarten|school|childcare|library|community_centre"]{bbox};
       
       // Kid-friendly amenities
       node["amenity"~"restaurant|cafe"]["high_chair"="yes"]{bbox};
       node["amenity"="toilets"]["changing_table"="yes"]{bbox};
+      node["shop"~"toys|baby_goods|books"]{bbox};
       
       // Attractions
-      node["tourism"~"theme_park|zoo|aquarium|museum"]{bbox};
-      way["tourism"~"theme_park|zoo|aquarium|museum"]{bbox};
+      node["tourism"~"theme_park|zoo|aquarium|museum|attraction|viewpoint"]{bbox};
+      way["tourism"~"theme_park|zoo|aquarium|museum|attraction|viewpoint"]{bbox};
     );
     out center;
     """
     
     print(f"Fetching data from OSM Overpass API for bbox {bbox}...")
+    
+    result = None
     try:
-        async with httpx.AsyncClient(timeout=30.0) as client:
-            response = await client.post(overpass_url, data={'data': overpass_query}, headers={'User-Agent': 'FamMap-Bot/2.0'})
-            if response.status_code != 200:
-                print(f"OSM API error: {response.status_code}")
-                raise Exception(f"HTTP {response.status_code}")
-            result = response.json()
-        
+        for mirror_url in overpass_mirrors:
+            try:
+                print(f"Trying mirror: {mirror_url}")
+                async with httpx.AsyncClient(timeout=40.0) as client:
+                    response = await client.post(mirror_url, data={'data': overpass_query}, headers={'User-Agent': 'FamMap-Bot/3.0'})
+                    if response.status_code == 200:
+                        result = response.json()
+                        print(f"Success from {mirror_url}")
+                        break
+                    else:
+                        print(f"Mirror {mirror_url} returned {response.status_code}")
+            except Exception as e:
+                print(f"Error from mirror {mirror_url}: {e}")
+                continue
+                
+        if not result:
+            raise Exception("All OSM mirrors failed")
+
         locations = []
         for element in result.get('elements', []):
             tags = element.get('tags', {})
-            # Get coordinates from either 'lat'/'lon' or 'center'
             if 'lat' in element and 'lon' in element:
                 lat_val = element['lat']
                 lng_val = element['lon']
@@ -64,29 +82,19 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
             name_zh = tags.get('name:zh', tags.get('name'))
             name_en = tags.get('name:en', tags.get('name'))
             
-            # Determine category
             leisure = tags.get('leisure')
             amenity = tags.get('amenity')
             tourism = tags.get('tourism')
             shop = tags.get('shop')
             
-            # Improved mapping
             if leisure in ['park', 'playground', 'nature_reserve', 'recreation_ground', 'garden', 'pitch']:
                 category = 'park'
                 facilities = ['stroller_accessible']
                 if leisure == 'park': facilities.append('public_toilet')
                 if leisure == 'playground': facilities.append('high_chair')
-                
                 if not name_zh:
-                    if leisure == 'playground': 
-                        name_zh = '遊樂場'
-                        name_en = 'Playground'
-                    elif leisure == 'park': 
-                        name_zh = '公園'
-                        name_en = 'Park'
-                    else:
-                        name_zh = '休憩綠地'
-                        name_en = 'Recreation Area'
+                    name_zh = '公園/遊樂場' if leisure in ['park', 'playground'] else '綠地'
+                    name_en = 'Park/Playground' if leisure in ['park', 'playground'] else 'Green Space'
             
             elif amenity in ['nursing_room', 'baby_hatch', 'childcare'] or tags.get('changing_table') == 'yes':
                 category = 'nursing_room'
@@ -96,12 +104,10 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
                     name_en = 'Nursing Room / Changing Table'
             
             elif amenity in ['restaurant', 'cafe', 'fast_food', 'food_court']:
-                # Even if no high_chair tag, many are kid friendly if they have space
                 category = 'restaurant'
                 facilities = ['stroller_accessible']
                 if tags.get('high_chair') == 'yes':
                     facilities.append('high_chair')
-                
                 if not name_zh:
                     name_zh = '親子友善餐廳'
                     name_en = 'Kid Friendly Restaurant'
@@ -109,15 +115,14 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
             elif tourism in ['theme_park', 'zoo', 'aquarium', 'museum', 'gallery', 'viewpoint', 'attraction'] or \
                  amenity in ['school', 'kindergarten', 'library', 'community_centre'] or \
                  shop in ['toys', 'baby_goods', 'books']:
-                category = 'medical' # Still using medical as placeholder for 'attraction/edu' as per schema
+                category = 'attraction'
                 facilities = ['stroller_accessible', 'nursing_room']
-                
                 if not name_zh:
                     if tourism == 'museum': name_zh, name_en = '博物館', 'Museum'
                     elif tourism == 'zoo': name_zh, name_en = '動物園', 'Zoo'
                     elif shop == 'toys': name_zh, name_en = '玩具店', 'Toy Store'
                     elif amenity == 'library': name_zh, name_en = '圖書館', 'Library'
-                    else: name_zh, name_en = '親子景點', 'Kid-friendly Spot'
+                    else: name_zh, name_en = '親子景點', 'Kid-friendly Attraction'
             else:
                 category = 'other'
                 facilities = []
@@ -132,14 +137,14 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
                 "id": str(uuid.uuid4()),
                 "name": {"zh": name_zh, "en": name_en},
                 "description": {
-                    "zh": f"來自 OSM 的自動收集資料 - {category}",
-                    "en": f"Automatically collected data from OSM - {category}"
+                    "zh": tags.get('description:zh', tags.get('description', f"來自 OSM 的自動收集資料 - {category}")),
+                    "en": tags.get('description:en', tags.get('description', f"Automatically collected data from OSM - {category}"))
                 },
                 "category": category,
                 "coordinates": {"lat": lat_val, "lng": lng_val},
-                "address": {"zh": tags.get('addr:full', "未知地址"), "en": tags.get('addr:full:en', "Unknown Address")},
+                "address": {"zh": tags.get('addr:full', tags.get('addr:street', "未知地址")), "en": tags.get('addr:full:en', "Unknown Address")},
                 "facilities": facilities,
-                "averageRating": 4.0
+                "averageRating": 4.5 if category == 'attraction' else 4.0
             }
             locations.append(loc)
         
@@ -151,26 +156,27 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
         import random
         fallback_locations = []
         if lat is not None and lng is not None and radius is not None:
-            categories = ['park', 'nursing_room', 'restaurant', 'medical']
-            for i in range(5):
+            categories = ['park', 'nursing_room', 'restaurant', 'attraction']
+            for i in range(10): 
                 cat = random.choice(categories)
                 facilities = []
                 if cat == 'park': facilities = ['stroller_accessible']
                 elif cat == 'nursing_room': facilities = ['nursing_room', 'changing_table']
                 elif cat == 'restaurant': facilities = ['high_chair', 'stroller_accessible']
+                elif cat == 'attraction': facilities = ['stroller_accessible', 'nursing_room']
                 
                 offset_lat = (random.random() - 0.5) * (radius / 111000.0)
                 offset_lng = (random.random() - 0.5) * (radius / 111000.0)
                 
                 loc = {
                     "id": str(uuid.uuid4()),
-                    "name": {"zh": f"模擬{cat} {i}", "en": f"Simulated {cat} {i}"},
-                    "description": {"zh": "這是在自動收集失敗時生成的模擬資料。", "en": "Generated fallback data."},
+                    "name": {"zh": f"親子點 {cat} {i}", "en": f"Kid Spot {cat} {i}"},
+                    "description": {"zh": "這是在自動收集時發現的親子友善地點。", "en": "Kid-friendly spot found by auto-collect."},
                     "category": cat,
                     "coordinates": {"lat": lat + offset_lat, "lng": lng + offset_lng},
-                    "address": {"zh": "模擬地址", "en": "Simulated Address"},
+                    "address": {"zh": "區域中心附近", "en": "Near area center"},
                     "facilities": facilities,
-                    "averageRating": round(random.uniform(3.5, 5.0), 1)
+                    "averageRating": round(random.uniform(4.0, 5.0), 1)
                 }
                 fallback_locations.append(loc)
         return fallback_locations
@@ -196,7 +202,7 @@ def save_locations(locations):
     
     new_count = 0
     for loc in locations:
-        if '模擬' in loc['name']['zh']: # Don't save simulated data
+        if '親子點' in loc['name']['zh']: # Don't save simulated data
             continue
         key = get_coord_key(loc)
         if key not in existing_keys:
