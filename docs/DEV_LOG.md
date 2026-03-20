@@ -353,3 +353,16 @@ Fixed critical bugs: Node.js backend was missing 'attraction' category in Zod va
 2. **No result limit → 22K+ response crash** — Both backends were returning all matching locations (up to 22K+) in a single response. With 10km radius in central Taipei, Leaflet wo
 
 ---
+
+## [2026-03-20 22:37:59] [done] 99%
+
+Added marker clustering (react-leaflet-cluster) to frontend for smooth UX with 500 markers. Improved server_node test coverage from 77.77% → 80.34% branch coverage by adding missing error-path tests for favoriteController (400 missing locationId, 404 not found). Total tests: 100 passing (37 client + 14 Python + 49 server_node). npm audit: 0 vulnerabilities. All P0 and P1 PRD features complete and tested.
+
+> Done. Here's what was accomplished this iteration:
+
+**Changes made:**
+- **Marker clustering** — Integrated `react-leaflet-cluster` into the map. 500 markers are now grouped into clusters, making the map performant and usable at all zoom levels.
+- **Test coverage improved** — Added 3 missing test cases for `favoriteController` error paths (DELETE without locationId → 400, DELETE non-existent favorite → 404, CHECK without locationId → 400). Server_node branch coverage: 77.77% → 80.34%.
+- **Test mo
+
+---
