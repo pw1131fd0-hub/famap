@@ -59,3 +59,7 @@ vi.mock('react-leaflet', () => ({
     off: vi.fn(),
   }),
 }));
+
+vi.mock('react-leaflet-cluster', () => ({
+  default: ({ children }: any) => <div>{children}</div>,
+}));

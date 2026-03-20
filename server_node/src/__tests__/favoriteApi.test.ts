@@ -54,9 +54,25 @@ describe('Favorite API', () => {
         .delete('/api/favorites')
         .set('Authorization', 'Bearer mock-token-u1')
         .send({ locationId: '1' });
-      
+
       expect(res.status).toBe(204);
       expect(mockFavorites.length).toBe(0);
+    });
+
+    it('should return 400 if locationId is missing', async () => {
+      const res = await request(app)
+        .delete('/api/favorites')
+        .set('Authorization', 'Bearer mock-token-u1')
+        .send({});
+      expect(res.status).toBe(400);
+    });
+
+    it('should return 404 if favorite does not exist', async () => {
+      const res = await request(app)
+        .delete('/api/favorites')
+        .set('Authorization', 'Bearer mock-token-u1')
+        .send({ locationId: 'non-existent-id' });
+      expect(res.status).toBe(404);
     });
   });
 
@@ -77,9 +93,16 @@ describe('Favorite API', () => {
         .get('/api/favorites/check')
         .set('Authorization', 'Bearer mock-token-u1')
         .query({ locationId: '1' });
-      
+
       expect(res.status).toBe(200);
       expect(res.body.isFavorited).toBe(false);
+    });
+
+    it('should return 400 if locationId is missing', async () => {
+      const res = await request(app)
+        .get('/api/favorites/check')
+        .set('Authorization', 'Bearer mock-token-u1');
+      expect(res.status).toBe(400);
     });
   });
 });

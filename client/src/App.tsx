@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import MarkerClusterGroup from 'react-leaflet-cluster';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Filter, Heart, List } from 'lucide-react';
@@ -368,27 +369,29 @@ function App() {
             />
             <MapUpdater center={position} />
             <MapEvents onPositionChange={setPosition} />
-            {locations.map((loc) => (
-              <Marker 
-                key={loc.id} 
-                position={[loc.coordinates.lat, loc.coordinates.lng]}
-                eventHandlers={{
-                  click: () => setSelectedLocation(loc),
-                }}
-              >
-                <Popup>
-                  <div className="popup-content">
-                    <strong>{loc.name[language]}</strong>
-                    <p>{loc.description[language]}</p>
-                    <div className="facility-chips">
-                      {loc.facilities.map(f => (
-                        <span key={f} className="chip">{t.facilities[f as keyof typeof t.facilities] || f}</span>
-                      ))}
+            <MarkerClusterGroup chunkedLoading>
+              {locations.map((loc) => (
+                <Marker
+                  key={loc.id}
+                  position={[loc.coordinates.lat, loc.coordinates.lng]}
+                  eventHandlers={{
+                    click: () => setSelectedLocation(loc),
+                  }}
+                >
+                  <Popup>
+                    <div className="popup-content">
+                      <strong>{loc.name[language]}</strong>
+                      <p>{loc.description[language]}</p>
+                      <div className="facility-chips">
+                        {loc.facilities.map(f => (
+                          <span key={f} className="chip">{t.facilities[f as keyof typeof t.facilities] || f}</span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                </Popup>
-              </Marker>
-            ))}
+                  </Popup>
+                </Marker>
+              ))}
+            </MarkerClusterGroup>
           </MapContainer>
           <div className="map-controls">
             {!loading && (
