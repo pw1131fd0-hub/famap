@@ -439,3 +439,25 @@ copilot completed
 
 
 ---
+
+## [2026-03-21 02:08:07] [done] 100%
+
+Fixed two boss-reported issues: (1) Mobile UX - sidebar now hidden by default on mobile (<768px), slides in as overlay when toggled via hamburger menu in header, has X close button and 'View Map' sticky button, backdrop overlay dismisses it; (2) Attraction filter - confirmed API returns 1253 attractions correctly, root cause was mobile layout covering the map entirely so users couldn't see results. All 37 client tests pass, build clean.
+
+> 兩個問題都修好了：
+
+**問題 1：手機選單無法關掉**
+- Header 新增漢堡選單按鈕（僅手機顯示）
+- Sidebar 在手機上預設隱藏，點按鈕後從左側滑入覆蓋地圖
+- 點選 backdrop（暗色遮罩）或 `X` 按鈕可關閉
+- 側邊欄底部加了「查看地圖」sticky 按鈕
+- 點擊地點卡片後自動關閉 sidebar，顯示地圖
+
+**問題 2：怎麼選都沒有景點**
+- 確認 FastAPI 後端針對台北中心 10km 範圍可回傳 **1253 筆景點**資料
+- 根本原因是：手機上 sidebar 固定 320px 寬度但沒有 RWD breakpoint，把地圖完全擠掉，使用者看不到地圖上的 marker，誤以為沒有資料
+
+所有 37 個 client tests 通過，build 無錯誤，已 push 到 origin/master。
+
+
+---
