@@ -393,3 +393,26 @@ Added marker clustering (react-leaflet-cluster) to frontend for smooth UX with 5
 - Node.js 後端 Zod 驗證也已加入 `attraction` 類別（曾有 b
 
 ---
+
+## [2026-03-20 23:39:47] [done] 100%
+
+Final quality pass: improved server_node branch coverage from 80.34% → 88.88% by adding 9 new targeted tests. Fixes: reviewController now forwards photos field per SD spec. New tests: auth field validation (register/login missing fields, getMe no header), auth middleware catch block (invalid bearer token), review with photos, reviewService userId/userName fallback branches, locationService update with all fields and with partial fields. Total tests: 109 passing (58 server_node + 37 client + 14 Python). All P0 and P1 PRD features complete, tested, and quality-verified.
+
+> 完成。本輪執行摘要：
+
+**品質提升：99/100 → 100/100**
+
+| 指標 | 變化 |
+|------|------|
+| Branch Coverage | 80.34% → **88.88%** |
+| Statements | 92.68% → **94.71%** |
+| Services Branch | 83.33% → **97.91%** |
+| Total Tests | 100 → **109 通過** |
+
+**新增/修正的項目：**
+
+1. **reviewController 修正** — 補上 `photos` 欄位的傳遞（原本 controller 有拆 body 但未傳給 service，與 SD.md API 規格不符）
+2. **authApi.test.ts** — 新增缺漏的欄位驗證測試（register/login 缺少必填欄位 → 400、getMe 無 header → 401）
+3. **reviewApi.test.ts** — 新增含 photos 的評論建立測試、無效 Bearer token 觸發 middlewar
+
+---
