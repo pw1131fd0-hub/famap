@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Filter, Heart, List } from 'lucide-react';
+import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Filter, Heart, List, Menu } from 'lucide-react';
 import { locationApi, reviewApi, favoriteApi } from './services/api';
 import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO } from './types';
 import { useTranslation } from './i18n/LanguageContext';
@@ -59,6 +59,7 @@ function App() {
   const [locations, setLocations] = useState<Location[]>([]);
   const [favorites, setFavorites] = useState<Location[]>([]);
   const [showFavorites, setShowFavorites] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<Category | undefined>(undefined);
   const [strollerOnly, setStrollerOnly] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -189,14 +190,17 @@ function App() {
     <div className="app-layout">
       <header className="app-header">
         <div className="logo-section">
+          <button className="icon-button sidebar-toggle-btn" onClick={() => setSidebarOpen(!sidebarOpen)} title="Menu">
+            <Menu size={20} />
+          </button>
           <h1>FamMap</h1>
         </div>
         <div className="header-actions">
           <button onClick={handleFindMe} className="icon-button" title={t.common.findMe}>
             <Navigation size={20} />
           </button>
-          <button 
-            onClick={() => setLanguage(language === 'zh' ? 'en' : 'zh')} 
+          <button
+            onClick={() => setLanguage(language === 'zh' ? 'en' : 'zh')}
             className="icon-button"
             title="Switch Language"
           >
@@ -207,7 +211,8 @@ function App() {
       </header>
 
       <div className="main-content">
-        <aside className="sidebar">
+        {sidebarOpen && <div className="sidebar-backdrop" onClick={() => setSidebarOpen(false)} />}
+        <aside className={`sidebar${sidebarOpen ? ' sidebar-open' : ''}`}>
           {showAddLocation ? (
             <div className="location-form-container">
               <header className="detail-header">
@@ -268,19 +273,26 @@ function App() {
           ) : (
             <>
               <div className="sidebar-tabs">
-                <button 
+                <button
                   className={`tab-button ${!showFavorites ? 'active' : ''}`}
                   onClick={() => setShowFavorites(false)}
                 >
                   <List size={18} />
                   <span>{t.common.all}</span>
                 </button>
-                <button 
+                <button
                   className={`tab-button ${showFavorites ? 'active' : ''}`}
                   onClick={() => setShowFavorites(true)}
                 >
                   <Heart size={18} />
                   <span>{t.common.favorites}</span>
+                </button>
+                <button
+                  className="tab-button sidebar-close-btn"
+                  onClick={() => setSidebarOpen(false)}
+                  aria-label="Close"
+                >
+                  <X size={18} />
                 </button>
               </div>
 
@@ -320,7 +332,7 @@ function App() {
               ) : null}
 
               {loading && <div className="loading-overlay">{t.common.loading}</div>}
-              
+
               <div className="locations-list">
                 {(showFavorites ? favorites : locations).length === 0 ? (
                   <div className="empty-state">
@@ -338,6 +350,7 @@ function App() {
                       onClick={() => {
                         setPosition([loc.coordinates.lat, loc.coordinates.lng]);
                         setSelectedLocation(loc);
+                        setSidebarOpen(false);
                       }}
                     >
                       <div className="card-header">
@@ -357,6 +370,10 @@ function App() {
                   ))
                 )}
               </div>
+              <button className="view-map-btn" onClick={() => setSidebarOpen(false)}>
+                <MapPin size={18} />
+                <span>{t.common.viewMap}</span>
+              </button>
             </>
           )}
         </aside>

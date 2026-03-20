@@ -16,6 +16,7 @@ export const translations = {
       noFavorites: '目前沒有收藏',
       noLocations: '找不到景點，請試著移動地圖。',
       searchArea: '搜尋此區域',
+      viewMap: '查看地圖',
     },
     locationForm: {
       nameZh: '中文名稱',
@@ -73,6 +74,7 @@ export const translations = {
       noFavorites: 'No favorites yet',
       noLocations: 'No spots found, try moving the map.',
       searchArea: 'Search this area',
+      viewMap: 'View Map',
     },
     locationForm: {
       nameZh: 'Name (Chinese)',
