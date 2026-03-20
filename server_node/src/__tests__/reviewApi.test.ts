@@ -69,8 +69,26 @@ describe('Review API', () => {
         .post('/api/locations/1/reviews')
         .set('Authorization', 'Bearer mock-token-u1')
         .send({ rating: 5 });
-      
+
       expect(res.status).toBe(400);
+    });
+
+    it('should create a review with photos', async () => {
+      const res = await request(app)
+        .post('/api/locations/1/reviews')
+        .set('Authorization', 'Bearer mock-token-u1')
+        .send({ rating: 4, comment: 'Nice spot!', photos: ['https://example.com/photo.jpg'] });
+
+      expect(res.status).toBe(201);
+      expect(res.body.photos).toEqual(['https://example.com/photo.jpg']);
+    });
+
+    it('should return 401 with invalid bearer token on protected route', async () => {
+      const res = await request(app)
+        .post('/api/locations/1/reviews')
+        .set('Authorization', 'Bearer bad-token-xyz')
+        .send({ rating: 5, comment: 'ok' });
+      expect(res.status).toBe(401);
     });
   });
 });

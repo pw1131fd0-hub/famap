@@ -108,5 +108,29 @@ describe('LocationService', () => {
       });
       expect(updated).toBeNull();
     });
+
+    it('should update all fields when all are provided', async () => {
+      const updated = await LocationService.update('1', {
+        name: { zh: '完整更新', en: 'Full Update' },
+        description: { zh: '新描述', en: 'New desc' },
+        address: { zh: '新地址', en: 'New addr' },
+        coordinates: { lat: 25.05, lng: 121.55 },
+      });
+      expect(updated?.name.zh).toBe('完整更新');
+      expect(updated?.description.zh).toBe('新描述');
+      expect(updated?.address.zh).toBe('新地址');
+      expect(updated?.coordinates.lat).toBe(25.05);
+    });
+
+    it('should preserve existing fields when not included in update', async () => {
+      const original = mockLocations.find(l => l.id === '1')!;
+      const updated = await LocationService.update('1', { facilities: ['high_chair'] });
+      expect(updated).not.toBeNull();
+      expect(updated?.name).toEqual(original.name);
+      expect(updated?.description).toEqual(original.description);
+      expect(updated?.address).toEqual(original.address);
+      expect(updated?.coordinates).toEqual(original.coordinates);
+      expect(updated?.facilities).toEqual(['high_chair']);
+    });
   });
 });

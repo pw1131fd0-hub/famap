@@ -31,6 +31,13 @@ describe('Auth API', () => {
       expect(res.body.token).toBeDefined();
     });
 
+    it('should return 400 if missing required fields', async () => {
+      const res = await request(app)
+        .post('/api/auth/register')
+        .send({ email: 'test@example.com' });
+      expect(res.status).toBe(400);
+    });
+
     it('should return 400 if user already exists', async () => {
       const res = await request(app)
         .post('/api/auth/register')
@@ -57,6 +64,13 @@ describe('Auth API', () => {
       expect(res.status).toBe(200);
       expect(res.body.user.email).toBe('mom@example.com');
       expect(res.body.token).toBe('mock-token-u1');
+    });
+
+    it('should return 400 if missing required fields', async () => {
+      const res = await request(app)
+        .post('/api/auth/login')
+        .send({ email: 'mom@example.com' });
+      expect(res.status).toBe(400);
     });
 
     it('should return 401 for invalid credentials', async () => {
@@ -86,6 +100,11 @@ describe('Auth API', () => {
         .get('/api/auth/me')
         .set('Authorization', 'Bearer invalid-token');
 
+      expect(res.status).toBe(401);
+    });
+
+    it('should return 401 if no authorization header', async () => {
+      const res = await request(app).get('/api/auth/me');
       expect(res.status).toBe(401);
     });
   });

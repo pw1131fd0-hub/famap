@@ -20,7 +20,7 @@ export class ReviewController {
   static async createReview(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const { rating, comment } = req.body;
+      const { rating, comment, photos } = req.body;
       const user = (req as any).user;
 
       if (!id) {
@@ -36,9 +36,10 @@ export class ReviewController {
         return res.status(404).json({ error: 'Location not found' });
       }
 
-      const review = await ReviewService.create(id as string, { 
-        rating, 
-        comment, 
+      const review = await ReviewService.create(id as string, {
+        rating,
+        comment,
+        photos,
         userName: user?.displayName || 'Anonymous',
         userId: user?.id || 'u-unknown'
       });
