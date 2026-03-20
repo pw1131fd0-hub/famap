@@ -339,3 +339,17 @@ Boss feedback resolved: attractions (2143) and restaurants (17559) now fully col
 
 
 ---
+
+## [2026-03-20 22:06:11] [done] 98%
+
+Fixed critical bugs: Node.js backend was missing 'attraction' category in Zod validation schema and TypeScript types (causing attraction filter to fail with 400 errors). Added result limit (default 500) to both Python and Node.js backends to prevent 22K+ location responses crashing the browser. Removed verbose per-location console.log. Frontend now passes limit=500. All category filters including attraction now work correctly.
+
+> Done. Here's what was fixed in this round:
+
+**Critical bugs resolved:**
+
+1. **Attraction category broken in Node.js backend** — `'attraction'` and `'other'` were missing from the Zod validation schema and TypeScript `Category` type. Any request with `category=attraction` was returning a 400 validation error silently.
+
+2. **No result limit → 22K+ response crash** — Both backends were returning all matching locations (up to 22K+) in a single response. With 10km radius in central Taipei, Leaflet wo
+
+---
