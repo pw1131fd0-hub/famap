@@ -33,8 +33,9 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
       node["amenity"~"nursing_room|kindergarten|school|childcare|library|community_centre"]{bbox};
       way["amenity"~"nursing_room|kindergarten|school|childcare|library|community_centre"]{bbox};
       
-      // Kid-friendly amenities
-      node["amenity"~"restaurant|cafe"]["high_chair"="yes"]{bbox};
+      // Kid-friendly amenities - restaurants (family-friendly)
+      node["amenity"~"restaurant|cafe|fast_food|food_court"]{bbox};
+      way["amenity"~"restaurant|cafe|fast_food|food_court"]{bbox};
       node["amenity"="toilets"]["changing_table"="yes"]{bbox};
       node["shop"~"toys|baby_goods|books"]{bbox};
       
