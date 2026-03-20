@@ -33,6 +33,26 @@ describe('LocationService', () => {
       expect(results.every(l => l.category === 'park')).toBe(true);
     });
 
+    it('should filter by attraction category', async () => {
+      const results = await LocationService.findNearby({
+        lat: 25.03,
+        lng: 121.53,
+        radius: 10000,
+        category: 'attraction'
+      });
+      expect(results.every(l => l.category === 'attraction')).toBe(true);
+    });
+
+    it('should respect limit parameter', async () => {
+      const results = await LocationService.findNearby({
+        lat: 25.03,
+        lng: 121.53,
+        radius: 50000,
+        limit: 2
+      });
+      expect(results.length).toBeLessThanOrEqual(2);
+    });
+
     it('should filter by stroller accessibility', async () => {
       const results = await LocationService.findNearby({
         lat: 25.03,

@@ -5,15 +5,16 @@ import { LocationService } from '../services/locationService.js';
 const searchSchema = z.object({
   lat: z.coerce.number().min(-90).max(90),
   lng: z.coerce.number().min(-180).max(180),
-  radius: z.coerce.number().positive().default(5000), // Default 5km
-  category: z.enum(['park', 'nursing_room', 'restaurant', 'medical']).optional(),
+  radius: z.coerce.number().positive().default(5000),
+  category: z.enum(['park', 'nursing_room', 'restaurant', 'medical', 'attraction', 'other']).optional(),
   stroller_accessible: z.coerce.boolean().optional(),
+  limit: z.coerce.number().int().positive().max(2000).default(500),
 });
 
 const locationCreateSchema = z.object({
   name: z.object({ zh: z.string(), en: z.string() }),
   description: z.object({ zh: z.string(), en: z.string() }),
-  category: z.enum(['park', 'nursing_room', 'restaurant', 'medical']),
+  category: z.enum(['park', 'nursing_room', 'restaurant', 'medical', 'attraction', 'other']),
   coordinates: z.object({ lat: z.number(), lng: z.number() }),
   address: z.object({ zh: z.string(), en: z.string() }),
   facilities: z.array(z.string()),

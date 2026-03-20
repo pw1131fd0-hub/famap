@@ -46,6 +46,7 @@ export interface SearchParams {
   radius: number;
   category?: Category;
   stroller_accessible?: boolean;
+  limit?: number;
 }
 
 export interface LocationCreateDTO {

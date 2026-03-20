@@ -32,7 +32,8 @@ async def get_locations(
     lng: float = Query(...),
     radius: float = Query(...),
     category: Optional[Category] = Query(None),
-    stroller_accessible: Optional[bool] = Query(None)
+    stroller_accessible: Optional[bool] = Query(None),
+    limit: int = Query(default=500, ge=1, le=2000)
 ):
     results = []
     for loc in mock_locations:
@@ -84,7 +85,7 @@ async def get_locations(
             else:
                 print(f"OSM fetch failed, using {len(new_locations)} fallback locations.")
 
-    return results
+    return results[:limit]
 
 @router.get("/{location_id}", response_model=Location)
 async def get_location(location_id: str):

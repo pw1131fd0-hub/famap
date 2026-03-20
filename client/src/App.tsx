@@ -71,9 +71,10 @@ function App() {
       const data = await locationApi.getNearby({
         lat: position[0],
         lng: position[1],
-        radius: 10000, // 10km for demo
+        radius: 10000,
         category: selectedCategory,
         stroller_accessible: strollerOnly || undefined,
+        limit: 500,
       });
       setLocations(data);
     } catch (error) {
