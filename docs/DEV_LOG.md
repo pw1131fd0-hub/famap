@@ -366,3 +366,30 @@ Added marker clustering (react-leaflet-cluster) to frontend for smooth UX with 5
 - **Test mo
 
 ---
+
+## [2026-03-20 23:03:08] [done] 99%
+
+Added marker clustering (react-leaflet-cluster) to frontend for smooth UX with 500 markers. Improved server_node test coverage from 77.77% → 80.34% branch coverage by adding missing error-path tests for favoriteController (400 missing locationId, 404 not found). Total tests: 100 passing (37 client + 14 Python + 49 server_node). npm audit: 0 vulnerabilities. All P0 and P1 PRD features complete and tested.
+
+> **現況確認：專案已完成，品質達標。**
+
+---
+
+**本輪巡檢結果：**
+
+| 項目 | 狀態 |
+|------|------|
+| 階段 | `done` |
+| 品質分 | **99/100** |
+| 測試 | **100/100 通過** (49 server_node + 37 client + 14 Python) |
+| Git | 乾淨，已與 origin/master 同步 |
+
+**老闆反饋「都沒有景點」已在前幾輪完整解決：**
+
+- `server/data/auto_collect.py` — 自動從 Overpass API（4 個 mirror fallback）收集 OSM 景點
+- `osm_locations.json` — 目前包含 **2,143 筆景點**（共 27,109 筆資料）
+- 兩個後端（Python + Node.js）均支援 `category=attraction` 篩選
+- 前端 i18n 已加入 `attraction: '景點'`
+- Node.js 後端 Zod 驗證也已加入 `attraction` 類別（曾有 b
+
+---
