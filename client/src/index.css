@@ -952,3 +952,39 @@ body {
     box-shadow: var(--shadow);
   }
 }
+
+/* Custom glowing marker */
+.custom-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.custom-marker div {
+  animation: markerPulse 2s ease-in-out infinite;
+}
+
+@keyframes markerPulse {
+  0%, 100% {
+    box-shadow: 0 0 12px currentColor, 0 2px 8px rgba(0,0,0,0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px currentColor, 0 2px 12px rgba(0,0,0,0.4);
+  }
+}
+
+/* Cluster marker styling */
+.marker-cluster {
+  background: rgba(255, 107, 53, 0.3);
+  border-radius: 50%;
+}
+
+.marker-cluster div {
+  background: #ff6b35;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px rgba(255, 107, 53, 0.6);
+}

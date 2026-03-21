@@ -51,6 +51,35 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
+// Custom glowing marker icon
+const createGlowingIcon = (category: string) => {
+  const colors: Record<string, string> = {
+    park: '#22c55e',
+    nursing_room: '#ec4899',
+    restaurant: '#f97316',
+    medical: '#ef4444',
+    attraction: '#8b5cf6',
+    other: '#6b7280',
+  };
+  const color = colors[category] || colors.other;
+  
+  return L.divIcon({
+    className: 'custom-marker',
+    html: `<div style="
+      background: ${color};
+      width: 24px;
+      height: 24px;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      border: 3px solid white;
+      box-shadow: 0 0 12px ${color}, 0 2px 8px rgba(0,0,0,0.3);
+    "></div>`,
+    iconSize: [24, 24],
+    iconAnchor: [12, 24],
+    popupAnchor: [0, -24],
+  });
+};
+
 // Hardcoded user ID for demonstration (MVP)
 const MOCK_USER_ID = 'u1';
 
@@ -456,6 +485,7 @@ function App() {
                 <Marker
                   key={loc.id}
                   position={[loc.coordinates.lat, loc.coordinates.lng]}
+                  icon={createGlowingIcon(loc.category)}
                   eventHandlers={{
                     click: () => setSelectedLocation(loc),
                   }}
