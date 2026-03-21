@@ -1,5 +1,15 @@
 export const translations = {
   zh: {
+    cities: {
+      taipei: '台北市',
+      new_taipei: '新北市',
+      taoyuan: '桃園市',
+    },
+    cityDescriptions: {
+      taipei: '首都核心，親子設施最密集',
+      new_taipei: '大台北生活圈，山水景點多',
+      taoyuan: '機場所在地，親子樂園豐富',
+    },
     common: {
       searchPlaceholder: '搜尋地點...',
       findMe: '我的位置',
@@ -58,6 +68,16 @@ export const translations = {
     }
   },
   en: {
+    cities: {
+      taipei: 'Taipei',
+      new_taipei: 'New Taipei',
+      taoyuan: 'Taoyuan',
+    },
+    cityDescriptions: {
+      taipei: 'Capital city with most family facilities',
+      new_taipei: 'Greater Taipei area with mountains and beaches',
+      taoyuan: 'Airport location with family attractions',
+    },
     common: {
       searchPlaceholder: 'Search locations...',
       findMe: 'Find Me',

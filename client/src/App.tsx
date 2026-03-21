@@ -3,13 +3,44 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Filter, Heart, List, Menu } from 'lucide-react';
+import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Filter, Heart, List, Menu, ChevronDown } from 'lucide-react';
 import { locationApi, reviewApi, favoriteApi } from './services/api';
 import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO } from './types';
 import { useTranslation } from './i18n/LanguageContext';
 import { ReviewList } from './components/ReviewList';
 import { ReviewForm } from './components/ReviewForm';
 import { LocationForm } from './components/LocationForm';
+
+// City data with coordinates and descriptions
+type CityKey = 'taipei' | 'new_taipei' | 'taoyuan';
+
+interface City {
+  key: CityKey;
+  name: string;
+  description: string;
+  center: [number, number];
+}
+
+const CITIES: City[] = [
+  { 
+    key: 'taipei', 
+    name: '台北市', 
+    description: '首都核心，親子設施最密集',
+    center: [25.0330, 121.5654] 
+  },
+  { 
+    key: 'new_taipei', 
+    name: '新北市', 
+    description: '大台北生活圈，山水景點多',
+    center: [25.0169, 121.4628] 
+  },
+  { 
+    key: 'taoyuan', 
+    name: '桃園市', 
+    description: '機場所在地，親子樂園豐富',
+    center: [24.9937, 121.3000] 
+  },
+];
 
 // Fix for default marker icons in Leaflet with React
 // @ts-expect-error - Leaflet icon hack
@@ -55,7 +86,9 @@ function MapUpdater({ center }: { center: [number, number] }) {
 
 function App() {
   const { language, setLanguage, t } = useTranslation();
-  const [position, setPosition] = useState<[number, number]>([25.0330, 121.5654]); // Taipei
+  const [selectedCity, setSelectedCity] = useState<CityKey>('taipei');
+  const [cityDropdownOpen, setCityDropdownOpen] = useState(false);
+  const [position, setPosition] = useState<[number, number]>(CITIES[0].center); // Taipei
   const [locations, setLocations] = useState<Location[]>([]);
   const [favorites, setFavorites] = useState<Location[]>([]);
   const [showFavorites, setShowFavorites] = useState(false);
@@ -134,6 +167,15 @@ function App() {
     }
   };
 
+  const handleCityChange = (cityKey: CityKey) => {
+    const city = CITIES.find(c => c.key === cityKey);
+    if (city) {
+      setSelectedCity(cityKey);
+      setPosition(city.center);
+      setCityDropdownOpen(false);
+    }
+  };
+
   const handlePostReview = async (reviewDto: ReviewCreateDTO) => {
     if (!selectedLocation) return;
     try {
@@ -194,6 +236,29 @@ function App() {
             <Menu size={20} />
           </button>
           <h1>FamMap</h1>
+        </div>
+        <div className="city-selector">
+          <button 
+            className="city-selector-button"
+            onClick={() => setCityDropdownOpen(!cityDropdownOpen)}
+          >
+            <span className="city-name">{CITIES.find(c => c.key === selectedCity)?.name}</span>
+            <ChevronDown size={16} className={cityDropdownOpen ? 'rotate' : ''} />
+          </button>
+          {cityDropdownOpen && (
+            <div className="city-dropdown">
+              {CITIES.map((city) => (
+                <button
+                  key={city.key}
+                  className={`city-option ${selectedCity === city.key ? 'active' : ''}`}
+                  onClick={() => handleCityChange(city.key)}
+                >
+                  <span className="city-option-name">{city.name}</span>
+                  <span className="city-option-desc">{city.description}</span>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
         <div className="header-actions">
           <button onClick={handleFindMe} className="icon-button" title={t.common.findMe}>
