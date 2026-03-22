@@ -11,6 +11,27 @@ import { ReviewList } from './components/ReviewList';
 import { ReviewForm } from './components/ReviewForm';
 import { LocationForm } from './components/LocationForm';
 
+// Utility function to calculate distance between two coordinates (Haversine formula)
+const calculateDistance = (lat1: number, lng1: number, lat2: number, lng2: number): number => {
+  const R = 6371; // Earth's radius in kilometers
+  const dLat = (lat2 - lat1) * (Math.PI / 180);
+  const dLng = (lng2 - lng1) * (Math.PI / 180);
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+};
+
+// Format distance for display
+const formatDistance = (distanceKm: number): string => {
+  if (distanceKm < 1) {
+    return `${(distanceKm * 1000).toFixed(0)}m`;
+  }
+  return `${distanceKm.toFixed(1)}km`;
+};
+
 // City data with coordinates and descriptions
 type CityKey = 'taipei' | 'new_taipei' | 'taoyuan';
 
@@ -449,7 +470,7 @@ function App() {
                     >
                       <div className="card-header">
                         <h3>{loc.name[language]}</h3>
-                        <button 
+                        <button
                           className={`favorite-icon-button ${favorites.some(f => f.id === loc.id) ? 'active' : ''}`}
                           onClick={(e) => toggleFavorite(e, loc.id)}
                           aria-label={favorites.some(f => f.id === loc.id) ? t.common.removeFromFavorites : t.common.addToFavorites}
@@ -457,7 +478,10 @@ function App() {
                           <Heart size={18} fill={favorites.some(f => f.id === loc.id) ? "currentColor" : "none"} />
                         </button>
                       </div>
-                      <p className="category-label">{t.categories[loc.category]}</p>
+                      <div className="card-meta">
+                        <p className="category-label">{t.categories[loc.category]}</p>
+                        <p className="distance-text">📍 {formatDistance(calculateDistance(position[0], position[1], loc.coordinates.lat, loc.coordinates.lng))}</p>
+                      </div>
                       <p className="address-text">{loc.address[language]}</p>
                       <div className="rating">⭐ {loc.averageRating}</div>
                     </div>

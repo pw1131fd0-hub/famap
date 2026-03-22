@@ -4,8 +4,12 @@
   --secondary: #FDFD96;
   --bg-cream: #FFFDD0;
   --bg-white: #FFFFFF;
+  --bg-gray: #F3F4F6;
   --text-dark: #333333;
+  --text-h: #1F2937;
+  --text-muted: #6B7280;
   --accent: #FF6F61;
+  --accent-bg: #FEE2E2;
   --border: #E5E4E7;
   --shadow: rgba(0, 0, 0, 0.1) 0 4px 6px -1px, rgba(0, 0, 0, 0.06) 0 2px 4px -1px;
 
@@ -292,11 +296,25 @@ body {
   color: var(--primary);
 }
 
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
 .category-label {
   font-size: 12px;
   color: #888;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin: 0;
+}
+
+.distance-text {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0;
+  white-space: nowrap;
 }
 
 .address-text {
