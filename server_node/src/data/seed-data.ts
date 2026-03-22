@@ -269,6 +269,32 @@ export let mockLocations: Location[] = [
       isParentSupervisionVisiblity: true,
       hasPrivacyScreen: true,
       changingFacilitiesNotes: '主廁所與家庭廁所各設2個尿布台，保持清潔，備有濕紙巾和尿布丟棄桶。'
+    },
+    equipmentRental: {
+      hasEquipmentRental: true,
+      bikeRental: true,
+      scooterRental: false,
+      helmetRental: true,
+      sunProtectionGearRental: true,
+      rainGearRental: false,
+      wheelchairRental: false,
+      rentalPriceRange: 'NT$100-300',
+      rentalAvailabilityNotes: '自行車租賃在公園入口提供，供應充足',
+      equipmentRentalNotes: '可租賃腳踏車和安全帽，夏季備有防曬帽出租'
+    },
+    membership: {
+      hasMembership: false,
+      annualPassAvailable: false,
+      membershipNotes: '公園免費開放，無需年卡或會員卡'
+    },
+    onSiteDining: {
+      hasFoodCourt: false,
+      hasCafe: false,
+      hasRestaurant: false,
+      hasSnackBar: true,
+      foodPriceRange: 'NT$30-80',
+      diningOptionsDescription: '有小食亭販售飲料和簡餐',
+      diningNotes: '公園內僅有小食亭，建議自帶便當和飲水'
     }
   },
   {
@@ -575,6 +601,47 @@ export let mockLocations: Location[] = [
       isParentSupervisionVisiblity: true,
       hasPrivacyScreen: true,
       changingFacilitiesNotes: '樂園各主要區域設置尿布台，共6個。備有一次性尿布、濕紙巾和尿布丟棄桶。維持衛生高標準。'
+    },
+    equipmentRental: {
+      hasEquipmentRental: true,
+      bikeRental: false,
+      scooterRental: false,
+      helmetRental: false,
+      sunProtectionGearRental: true,
+      rainGearRental: true,
+      wheelchairRental: true,
+      rentalPriceRange: 'NT$50-200',
+      rentalAvailabilityNotes: '防曬帽、雨傘和輪椅在入口和遊樂區各點租賃',
+      equipmentRentalNotes: '樂園提供防曬帽(NT$100)、雨傘(NT$80)、輪椅(NT$150)等租賃服務，夏季炎熱建議租賃防曬帽'
+    },
+    membership: {
+      hasMembership: true,
+      annualPassAvailable: true,
+      seasonalPassAvailable: true,
+      discountCardAvailable: true,
+      membershipCost: 'NT$3,000/年',
+      seasonalPassCost: 'NT$1,800/季',
+      membershipBenefits: ['無限次入園', '20%購物優惠', '優先預約表演票'],
+      visitsIncludedInPass: '無限制入園',
+      groupMembershipAvailable: true,
+      paymentMethods: ['cash', 'credit card', 'LINE Pay'],
+      membershipNotes: '年卡超值，平均每月造訪2次即可回本。季卡適合短期訪客。'
+    },
+    onSiteDining: {
+      hasFoodCourt: true,
+      hasCafe: true,
+      hasRestaurant: true,
+      hasSnackBar: true,
+      foodQualityRating: 4.1,
+      foodPriceRange: 'NT$150-500',
+      vegetarianOptionsAvailable: true,
+      halalFoodAvailable: false,
+      hasHighchair: true,
+      hasWarmingFacilities: true,
+      diningOptionsDescription: '美食廣場提供亞洲和西方食物選項，有素食便當和兒童套餐',
+      diningSeatingDescription: '室內餐飲區可容納200人，提供高椅供嬰幼兒使用',
+      diningHours: '09:00 - 20:00',
+      diningNotes: '美食廣場價格中等，停留時間長建議於園內購餐。有溫奶器供訪客使用。'
     }
   },
   {
@@ -856,6 +923,33 @@ export let mockLocations: Location[] = [
       isParentSupervisionVisiblity: true,
       hasPrivacyScreen: true,
       changingFacilitiesNotes: '博物館設有親子廁所，備有尿布台、濕紙巾和尿布垃圾桶。定期清潔維護。'
+    },
+    equipmentRental: {
+      hasEquipmentRental: false,
+      equipmentRentalNotes: '博物館無提供設備租賃服務'
+    },
+    membership: {
+      hasMembership: true,
+      annualPassAvailable: true,
+      discountCardAvailable: false,
+      membershipCost: 'NT$500/年',
+      membershipBenefits: ['無限參觀', '特展優先入場', '國家博物館聯誼會折扣'],
+      visitsIncludedInPass: '無限制入館',
+      paymentMethods: ['cash', 'credit card'],
+      membershipNotes: '國立博物館年卡划算，參訪2次即可回本'
+    },
+    onSiteDining: {
+      hasFoodCourt: false,
+      hasCafe: true,
+      hasRestaurant: false,
+      hasSnackBar: false,
+      foodQualityRating: 3.8,
+      foodPriceRange: 'NT$100-250',
+      vegetarianOptionsAvailable: true,
+      diningOptionsDescription: '咖啡廳提供飲料、咖啡和輕食',
+      diningSeatingDescription: '咖啡廳座位約30個，適合簡單用餐或歇息',
+      diningHours: '09:00 - 17:00 (時間與博物館開放時間一致)',
+      diningNotes: '咖啡廳飲食選擇有限，不建議作為主要用餐地點。建議自帶便食或到附近用餐。'
     }
   },
   {
@@ -1147,6 +1241,37 @@ export let mockLocations: Location[] = [
       isParentSupervisionVisiblity: true,
       hasPrivacyScreen: true,
       changingFacilitiesNotes: '餐廳多個廁所和親子廁所設有尿布台。全新設施，清潔度極高。備有免費尿布、濕紙巾和垃圾桶。'
+    },
+    equipmentRental: {
+      hasEquipmentRental: false,
+      equipmentRentalNotes: '親子餐廳無提供設備租賃'
+    },
+    membership: {
+      hasMembership: true,
+      annualPassAvailable: false,
+      discountCardAvailable: true,
+      discountCardCost: '免費，集點卡',
+      membershipBenefits: ['消費集點', '集滿10點享用餐折扣50元'],
+      visitsIncludedInPass: '消費集點折抵',
+      paymentMethods: ['cash', 'credit card', 'LINE Pay'],
+      membershipNotes: '集點卡免費申請，常客可累積點數享受折扣'
+    },
+    onSiteDining: {
+      hasFoodCourt: false,
+      hasCafe: false,
+      hasRestaurant: true,
+      hasSnackBar: false,
+      foodQualityRating: 4.5,
+      foodPriceRange: 'NT$200-500',
+      vegetarianOptionsAvailable: true,
+      veganOptionsAvailable: false,
+      glutenFreeOptionsAvailable: true,
+      hasHighchair: true,
+      hasWarmingFacilities: true,
+      diningOptionsDescription: '專業兒童菜單、素食餐點、無麩質餐點選項豐富',
+      diningSeatingDescription: '寬敞用餐區可容納100人，高椅多張，適合家庭用餐',
+      diningHours: '11:00 - 22:00',
+      diningNotes: '餐點品質優良，特別適合家庭用餐。提供溫奶器和食物溫加服務。'
     }
   },
   {
@@ -1424,6 +1549,42 @@ export let mockLocations: Location[] = [
       isParentSupervisionVisiblity: true,
       hasPrivacyScreen: true,
       changingFacilitiesNotes: '運動中心設有多個尿布台，分布於各廁所。備有清潔用品和垃圾桶。運動後可直接使用。'
+    },
+    equipmentRental: {
+      hasEquipmentRental: true,
+      bikeRental: false,
+      floatationDeviceRental: true,
+      lifejacketRental: true,
+      helmetRental: false,
+      rentalPriceRange: 'NT$100-200',
+      rentalAvailabilityNotes: '浮力衣和救生衣在池邊租賃，兒童優先配備',
+      equipmentRentalNotes: '游泳課程提供免費浮力衣。想額外租賃救生衣可在服務台申請。'
+    },
+    membership: {
+      hasMembership: true,
+      annualPassAvailable: true,
+      seasonalPassAvailable: true,
+      discountCardAvailable: false,
+      membershipCost: 'NT$4,500/年',
+      seasonalPassCost: 'NT$1,200/季',
+      membershipBenefits: ['無限入場', '游泳課程9折', '停車免費'],
+      visitsIncludedInPass: '無限制入場',
+      groupMembershipAvailable: true,
+      paymentMethods: ['cash', 'credit card', 'EasyCard'],
+      membershipNotes: '年卡超划算，尤其適合需要游泳課程的家庭'
+    },
+    onSiteDining: {
+      hasFoodCourt: false,
+      hasCafe: true,
+      hasRestaurant: false,
+      hasSnackBar: true,
+      foodQualityRating: 3.5,
+      foodPriceRange: 'NT$80-200',
+      vegetarianOptionsAvailable: true,
+      diningOptionsDescription: '咖啡廳和小食亭提供飲料、便當和簡食',
+      diningSeatingDescription: '咖啡廳座位區可容納50人，提供冷暖飲區',
+      diningHours: '07:00 - 21:00',
+      diningNotes: '設施簡單，建議自帶便當。課程結束後運動飲品選擇豐富。'
     }
   },
   {
@@ -1696,6 +1857,39 @@ export let mockLocations: Location[] = [
       isParentSupervisionVisiblity: true,
       hasPrivacyScreen: true,
       changingFacilitiesNotes: '游泳中心多個廁所設有尿布台。潔淨度良好，備有清潔用品和垃圾桶。游泳前後可使用。'
+    },
+    equipmentRental: {
+      hasEquipmentRental: true,
+      floatationDeviceRental: true,
+      lifejacketRental: true,
+      rentalPriceRange: 'NT$80-150',
+      rentalAvailabilityNotes: '浮力衣、救生衣和泳鏡在售票處租賃',
+      equipmentRentalNotes: '游泳課程免費提供浮力衣。欲加購其他防護設備可租賃。'
+    },
+    membership: {
+      hasMembership: true,
+      annualPassAvailable: true,
+      seasonalPassAvailable: false,
+      discountCardAvailable: true,
+      membershipCost: 'NT$3,600/年',
+      discountCardCost: '集點卡，消費集點',
+      membershipBenefits: ['無限入場', '課程優惠', '免費停車'],
+      visitsIncludedInPass: '無限制',
+      paymentMethods: ['cash', 'credit card', 'EasyCard'],
+      membershipNotes: '年卡划算，適合暑期兒童游泳課程家庭'
+    },
+    onSiteDining: {
+      hasFoodCourt: false,
+      hasCafe: false,
+      hasRestaurant: false,
+      hasSnackBar: true,
+      foodQualityRating: 3.2,
+      foodPriceRange: 'NT$60-150',
+      vegetarianOptionsAvailable: true,
+      diningOptionsDescription: '小食亭提供飲料和簡食',
+      diningSeatingDescription: '簡單戶外座位區',
+      diningHours: '06:00 - 21:00',
+      diningNotes: '食物選擇有限。強烈建議自帶便當或到附近便利商店購買。'
     }
   },
   {
@@ -1992,6 +2186,42 @@ export let mockLocations: Location[] = [
       isParentSupervisionVisiblity: true,
       hasPrivacyScreen: true,
       changingFacilitiesNotes: '水上樂園各區設置尿布台，共6個。備有免費尿布、濕紙巾和垃圾桶。因為是水上樂園，維持中等清潔度。'
+    },
+    equipmentRental: {
+      hasEquipmentRental: true,
+      floatationDeviceRental: true,
+      lifejacketRental: true,
+      sunProtectionGearRental: true,
+      rainGearRental: false,
+      rentalPriceRange: 'NT$100-250',
+      rentalAvailabilityNotes: '浮圈、救生衣、防曬帽在各區租賃點提供',
+      equipmentRentalNotes: '水上樂園必備浮力裝備。防曬帽強烈建議租賃，暑期台灣紫外線指數高。'
+    },
+    membership: {
+      hasMembership: true,
+      annualPassAvailable: true,
+      seasonalPassAvailable: false,
+      discountCardAvailable: false,
+      membershipCost: 'NT$2,500/季',
+      membershipBenefits: ['無限入場', '20%餐飲折扣', '設施優先使用權'],
+      visitsIncludedInPass: '無限制入園（6月-9月營運期間）',
+      groupMembershipAvailable: true,
+      paymentMethods: ['cash', 'credit card', 'LINE Pay'],
+      membershipNotes: '季卡划算，暑期常訪家庭首選。平均每月3次即可回本。'
+    },
+    onSiteDining: {
+      hasFoodCourt: true,
+      hasCafe: true,
+      hasRestaurant: true,
+      hasSnackBar: true,
+      foodQualityRating: 3.8,
+      foodPriceRange: 'NT$80-400',
+      vegetarianOptionsAvailable: true,
+      halalFoodAvailable: false,
+      diningOptionsDescription: '美食廣場、咖啡廳、餐廳和小食亭提供多樣選擇',
+      diningSeatingDescription: '戶外用餐區遮陰良好，可容納500人',
+      diningHours: '09:00 - 18:00 (跟隨樂園營運時間)',
+      diningNotes: '水上樂園餐飲選擇豐富但價格偏高。建議自帶便當和飲水，另外購買冷飲補充電解質。'
     }
   },
 ];

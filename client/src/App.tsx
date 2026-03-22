@@ -1546,6 +1546,123 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.equipmentRental && (
+                  <div className="location-detail-section">
+                    <h4>🛴 {language === 'zh' ? '設備租賃' : 'Equipment Rental'}</h4>
+                    {selectedLocation.equipmentRental.hasEquipmentRental === false ? (
+                      <p><strong>{language === 'zh' ? '設施' : 'Services'}</strong>: {language === 'zh' ? '無提供設備租賃' : 'No equipment rental available'}</p>
+                    ) : (
+                      <>
+                        {selectedLocation.equipmentRental.bikeRental && (
+                          <p>✓ {language === 'zh' ? '腳踏車出租' : 'Bike Rental'}</p>
+                        )}
+                        {selectedLocation.equipmentRental.scooterRental && (
+                          <p>✓ {language === 'zh' ? '滑板車出租' : 'Scooter Rental'}</p>
+                        )}
+                        {selectedLocation.equipmentRental.helmetRental && (
+                          <p>✓ {language === 'zh' ? '安全帽出租' : 'Helmet Rental'}</p>
+                        )}
+                        {selectedLocation.equipmentRental.sunProtectionGearRental && (
+                          <p>✓ {language === 'zh' ? '防曬帽/衣出租' : 'Sun Protection Gear Rental'}</p>
+                        )}
+                        {selectedLocation.equipmentRental.rainGearRental && (
+                          <p>✓ {language === 'zh' ? '雨具出租' : 'Rain Gear Rental'}</p>
+                        )}
+                        {selectedLocation.equipmentRental.wheelchairRental && (
+                          <p>✓ {language === 'zh' ? '輪椅出租' : 'Wheelchair Rental'}</p>
+                        )}
+                        {selectedLocation.equipmentRental.floatationDeviceRental && (
+                          <p>✓ {language === 'zh' ? '浮力衣出租' : 'Flotation Device Rental'}</p>
+                        )}
+                        {selectedLocation.equipmentRental.lifejacketRental && (
+                          <p>✓ {language === 'zh' ? '救生衣出租' : 'Lifejacket Rental'}</p>
+                        )}
+                        {selectedLocation.equipmentRental.coolerBoxRental && (
+                          <p>✓ {language === 'zh' ? '保冷箱出租' : 'Cooler Box Rental'}</p>
+                        )}
+                        {selectedLocation.equipmentRental.rentalPriceRange && (
+                          <p><strong>{language === 'zh' ? '租賃價格' : 'Rental Price'}</strong>: {selectedLocation.equipmentRental.rentalPriceRange}</p>
+                        )}
+                        {selectedLocation.equipmentRental.equipmentRentalNotes && (
+                          <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.equipmentRental.equipmentRentalNotes}</p>
+                        )}
+                      </>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.membership && (
+                  <div className="location-detail-section">
+                    <h4>💳 {language === 'zh' ? '會員與年卡' : 'Membership & Passes'}</h4>
+                    {selectedLocation.membership.hasMembership === false ? (
+                      <p>{language === 'zh' ? '無會員或年卡方案' : 'No membership programs available'}</p>
+                    ) : (
+                      <>
+                        {selectedLocation.membership.annualPassAvailable && (
+                          <p>✓ {language === 'zh' ? '年卡' : 'Annual Pass'} {selectedLocation.membership.membershipCost && `: ${selectedLocation.membership.membershipCost}`}</p>
+                        )}
+                        {selectedLocation.membership.seasonalPassAvailable && (
+                          <p>✓ {language === 'zh' ? '季卡' : 'Seasonal Pass'} {selectedLocation.membership.seasonalPassCost && `: ${selectedLocation.membership.seasonalPassCost}`}</p>
+                        )}
+                        {selectedLocation.membership.discountCardAvailable && (
+                          <p>✓ {language === 'zh' ? '折扣卡' : 'Discount Card'} {selectedLocation.membership.discountCardCost && `: ${selectedLocation.membership.discountCardCost}`}</p>
+                        )}
+                        {selectedLocation.membership.membershipBenefits && selectedLocation.membership.membershipBenefits.length > 0 && (
+                          <p><strong>{language === 'zh' ? '會員優惠' : 'Benefits'}</strong>: {selectedLocation.membership.membershipBenefits.join(', ')}</p>
+                        )}
+                        {selectedLocation.membership.visitsIncludedInPass && (
+                          <p><strong>{language === 'zh' ? '訪問限制' : 'Visits'}</strong>: {selectedLocation.membership.visitsIncludedInPass}</p>
+                        )}
+                        {selectedLocation.membership.membershipNotes && (
+                          <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.membership.membershipNotes}</p>
+                        )}
+                      </>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.onSiteDining && (
+                  <div className="location-detail-section">
+                    <h4>🍽️ {language === 'zh' ? '現場用餐' : 'On-Site Dining'}</h4>
+                    {!selectedLocation.onSiteDining.hasFoodCourt && !selectedLocation.onSiteDining.hasRestaurant && !selectedLocation.onSiteDining.hasCafe ? (
+                      <p>{language === 'zh' ? '無現場用餐設施' : 'No on-site dining available'}</p>
+                    ) : (
+                      <>
+                        {selectedLocation.onSiteDining.hasFoodCourt && (
+                          <p>✓ {language === 'zh' ? '美食廣場' : 'Food Court'}</p>
+                        )}
+                        {selectedLocation.onSiteDining.hasRestaurant && (
+                          <p>✓ {language === 'zh' ? '餐廳' : 'Restaurant'}</p>
+                        )}
+                        {selectedLocation.onSiteDining.hasCafe && (
+                          <p>✓ {language === 'zh' ? '咖啡廳' : 'Cafe'}</p>
+                        )}
+                        {selectedLocation.onSiteDining.hasSnackBar && (
+                          <p>✓ {language === 'zh' ? '小食亭' : 'Snack Bar'}</p>
+                        )}
+                        {selectedLocation.onSiteDining.vegetarianOptionsAvailable && (
+                          <p>✓ {language === 'zh' ? '素食選項' : 'Vegetarian Options'}</p>
+                        )}
+                        {selectedLocation.onSiteDining.veganOptionsAvailable && (
+                          <p>✓ {language === 'zh' ? '純素選項' : 'Vegan Options'}</p>
+                        )}
+                        {selectedLocation.onSiteDining.glutenFreeOptionsAvailable && (
+                          <p>✓ {language === 'zh' ? '無麩質選項' : 'Gluten-Free Options'}</p>
+                        )}
+                        {selectedLocation.onSiteDining.halalFoodAvailable && (
+                          <p>✓ {language === 'zh' ? '清真食物' : 'Halal Food'}</p>
+                        )}
+                        {selectedLocation.onSiteDining.foodQualityRating && (
+                          <p><strong>{language === 'zh' ? '食品質量' : 'Quality'}</strong>: {selectedLocation.onSiteDining.foodQualityRating}/5</p>
+                        )}
+                        {selectedLocation.onSiteDining.foodPriceRange && (
+                          <p><strong>{language === 'zh' ? '價格範圍' : 'Price Range'}</strong>: {selectedLocation.onSiteDining.foodPriceRange}</p>
+                        )}
+                        {selectedLocation.onSiteDining.diningNotes && (
+                          <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.onSiteDining.diningNotes}</p>
+                        )}
+                      </>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>

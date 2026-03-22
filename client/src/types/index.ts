@@ -416,6 +416,58 @@ export interface DiaperChangingFacilitiesInfo {
   changingFacilitiesNotes?: string;
 }
 
+export interface EquipmentRentalInfo {
+  hasEquipmentRental?: boolean; // Does venue offer any equipment rentals?
+  bikeRental?: boolean; // 腳踏車出租
+  scooterRental?: boolean; // 滑板車/踏板車出租
+  helmetRental?: boolean; // 安全帽出租
+  sunProtectionGearRental?: boolean; // 防曬帽、防曬衣出租
+  rainGearRental?: boolean; // 雨具出租
+  wheelchairRental?: boolean; // 輪椅出租 (for accessibility)
+  strollerRental?: boolean; // Already covered in StrollerInfo, but for reference
+  floatationDeviceRental?: boolean; // 浮力衣、浮圈出租 (for water venues)
+  coolerBoxRental?: boolean; // 冰箱/保冷箱出租
+  lifejacketRental?: boolean; // 救生衣出租 (for water venues)
+  rentalAvailabilityNotes?: string; // e.g., "All rentals available at entrance, advance booking recommended for weekends"
+  rentalPriceRange?: string; // e.g., "NT$50-200 per item"
+  rentalQualityNotes?: string; // e.g., "Equipment well-maintained, cleaned daily"
+  equipmentRentalNotes?: string; // Complete equipment rental information
+}
+
+export interface MembershipPassInfo {
+  hasMembership?: boolean; // Does venue offer membership programs?
+  annualPassAvailable?: boolean; // 年卡
+  seasonalPassAvailable?: boolean; // 季卡
+  discountCardAvailable?: boolean; // 折扣卡/會員卡
+  membershipCost?: string; // e.g., "NT$2,000 per year"
+  seasonalPassCost?: string; // e.g., "NT$1,500 for 3 months"
+  discountCardCost?: string; // e.g., "Free with 10-visit card"
+  membershipBenefits?: string[]; // e.g., ["20% discount on entry", "Free parking", "Priority booking"]
+  visitsIncludedInPass?: string; // e.g., "Unlimited visits"
+  groupMembershipAvailable?: boolean; // Family memberships
+  paymentMethods?: string[]; // How to purchase membership
+  membershipNotes?: string; // Complete membership information
+}
+
+export interface OnSiteDiningInfo {
+  hasFoodCourt?: boolean; // 美食廣場
+  hasCafe?: boolean; // 咖啡館
+  hasRestaurant?: boolean; // 餐廳
+  hasSnackBar?: boolean; // 小食亭
+  foodQualityRating?: number; // 1-5 stars
+  foodPriceRange?: string; // e.g., "NT$50-300"
+  vegetarianOptionsAvailable?: boolean; // 素食選項
+  veganOptionsAvailable?: boolean; // 純素選項
+  glutenFreeOptionsAvailable?: boolean; // 無麩質選項
+  halalFoodAvailable?: boolean; // 清真食物
+  hasHighchair?: boolean; // If dining area has high chairs (already in HighChairInfo but mentioning here)
+  hasWarmingFacilities?: boolean; // 溫奶器 (for baby food/formula)
+  diningOptionsDescription?: string; // e.g., "Multiple food stalls with Asian and Western options"
+  diningSeatingDescription?: string; // e.g., "Indoor seating area with 50 seats, family-friendly"
+  diningHours?: string; // Operating hours if different from venue hours
+  diningNotes?: string; // Complete dining information
+}
+
 export interface Location {
   id: string;
   name: {
@@ -481,6 +533,9 @@ export interface Location {
   heightBasedPricing?: HeightBasedPricingInfo;
   drinkingWater?: DrinkingWaterInfo;
   diaperChanging?: DiaperChangingFacilitiesInfo;
+  equipmentRental?: EquipmentRentalInfo;
+  membership?: MembershipPassInfo;
+  onSiteDining?: OnSiteDiningInfo;
 }
 
 export interface Review {
@@ -555,6 +610,12 @@ export interface LocationCreateDTO {
   photoVideo?: PhotoVideoPolicy;
   visitDuration?: VisitDurationRecommendation;
   schoolHolidays?: TaiwanSchoolHolidayInfo;
+  heightBasedPricing?: HeightBasedPricingInfo;
+  drinkingWater?: DrinkingWaterInfo;
+  diaperChanging?: DiaperChangingFacilitiesInfo;
+  equipmentRental?: EquipmentRentalInfo;
+  membership?: MembershipPassInfo;
+  onSiteDining?: OnSiteDiningInfo;
 }
 
 export interface Favorite {
