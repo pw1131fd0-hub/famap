@@ -148,6 +148,28 @@ export let mockLocations: Location[] = [
       multilingualSignage: false,
       staffTrainingLevel: 'basic',
       languageSupportNotes: '公園為開放式設施，主要由志工協助。英文說明請洽詢服務中心。'
+    },
+    waterSafety: {
+      hasWaterActivities: false,
+      waterSafetyNotes: '公園內無水上活動，無游泳池或戲水區。'
+    },
+    highChair: {
+      hasHighChairs: false,
+      highChairNotes: '戶外公園，無高腳椅提供。'
+    },
+    ageSpecificBathroom: {
+      hasToddlerToilets: true,
+      hasStepStools: true,
+      hasChildHeightHandWashing: true,
+      bathroomCleanlinessRating: 4.0,
+      bathroomNotes: '標準公園廁所，備有階梯便凳，日常清潔維護良好。'
+    },
+    lostChildProtocol: {
+      hasLostChildProtocol: true,
+      staffIdentificationSystem: true,
+      meetingPointDesignated: true,
+      staffTrainingLevel: 'basic',
+      lostChildProtocolNotes: '公園有遺失兒童處理程序，主要入口處設有明確集合點。工作人員具備基本訓練。'
     }
   },
   {
@@ -297,6 +319,41 @@ export let mockLocations: Location[] = [
       multilingualSignage: true,
       staffTrainingLevel: 'trained',
       languageSupportNotes: '售票處及主要設施區備有英文說明人員。入口QR碼提供多語言翻譯（英文、日文、越南文）。'
+    },
+    waterSafety: {
+      hasWaterActivities: true,
+      lifeguardAvailable: true,
+      lifeguardRatio: '5名救生員值班',
+      hasShallowAreas: true,
+      poolTemperature: '26-28°C',
+      waterSafetyRulesEnforced: true,
+      waterSafetyNotes: '園區有水上遊樂設施，5名專業救生員全時值班。設有幼兒淺水區，溫度控制在26-28°C。'
+    },
+    highChair: {
+      hasHighChairs: true,
+      highChairQuantity: 15,
+      minimumAgeMonths: 6,
+      maximumAgeMonths: 36,
+      cleanlinessRating: 4.8,
+      hasBottleWarmingFacilities: true,
+      highChairNotes: '15張高腳椅可供使用，適合6個月至3歲幼兒，每次使用後清潔消毒。'
+    },
+    ageSpecificBathroom: {
+      hasToddlerToilets: true,
+      hasStepStools: true,
+      hasChildHeightHandWashing: true,
+      hasPrivacyFamilyBathroom: true,
+      bathroomCleanlinessRating: 4.8,
+      bathroomNotes: '兒童專用廁所，設有階梯便凳和兒童高度洗手設施。整園廁所清潔度優異。'
+    },
+    lostChildProtocol: {
+      hasLostChildProtocol: true,
+      staffIdentificationSystem: true,
+      hasEmergencyPaging: true,
+      hasIDWristbandSystem: true,
+      meetingPointDesignated: true,
+      staffTrainingLevel: 'comprehensive',
+      lostChildProtocolNotes: '完善的遺失兒童處理程序，提供身份手環識別系統，廣播尋人系統，多個集合點。工作人員經過全面訓練。'
     }
   },
   {
@@ -440,6 +497,33 @@ export let mockLocations: Location[] = [
       multilingualSignage: true,
       staffTrainingLevel: 'certified',
       languageSupportNotes: '導覽員具多語言認證。館內展示牌有中英文，導覽預約可提供英文、日文或法文解說。'
+    },
+    waterSafety: {
+      hasWaterActivities: false,
+      waterSafetyNotes: '博物館內無水上活動或游泳池設施。'
+    },
+    highChair: {
+      hasHighChairs: true,
+      highChairQuantity: 8,
+      minimumAgeMonths: 6,
+      maximumAgeMonths: 36,
+      cleanlinessRating: 4.9,
+      highChairNotes: '提供8張高腳椅，清潔度優異，適合6個月至3歲幼兒。'
+    },
+    ageSpecificBathroom: {
+      hasToddlerToilets: true,
+      hasStepStools: true,
+      hasChildHeightHandWashing: true,
+      hasPrivacyFamilyBathroom: true,
+      bathroomCleanlinessRating: 4.9,
+      bathroomNotes: '現代化設施，配備全面幼兒友善設施，包括家庭廁所。清潔度達到博物館最高標準。'
+    },
+    lostChildProtocol: {
+      hasLostChildProtocol: true,
+      staffIdentificationSystem: true,
+      meetingPointDesignated: true,
+      staffTrainingLevel: 'standard',
+      lostChildProtocolNotes: '博物館備有遺失兒童處理程序，設有多個明確集合點。工作人員經過標準訓練。'
     }
   },
   {
@@ -585,6 +669,33 @@ export let mockLocations: Location[] = [
       multilingualSignage: true,
       staffTrainingLevel: 'trained',
       languageSupportNotes: '新住民社區常客，工作人員會基本英文和越南文溝通。提供簡單的多語言菜單。'
+    },
+    waterSafety: {
+      hasWaterActivities: false,
+      waterSafetyNotes: '餐廳內無水上活動或游泳池。'
+    },
+    highChair: {
+      hasHighChairs: true,
+      highChairQuantity: 10,
+      minimumAgeMonths: 6,
+      maximumAgeMonths: 36,
+      cleanlinessRating: 4.9,
+      hasBottleWarmingFacilities: true,
+      highChairNotes: '10張高腳椅可供使用，適合6個月至3歲幼兒。清潔標準優異，每次使用後徹底消毒。'
+    },
+    ageSpecificBathroom: {
+      hasToddlerToilets: true,
+      hasStepStools: true,
+      hasChildHeightHandWashing: true,
+      hasPrivacyFamilyBathroom: true,
+      bathroomCleanlinessRating: 4.8,
+      bathroomNotes: '設有家庭廁所，兒童高度洗手設施齊全。廁所環境舒適乾淨。'
+    },
+    lostChildProtocol: {
+      hasLostChildProtocol: true,
+      staffIdentificationSystem: true,
+      staffTrainingLevel: 'basic',
+      lostChildProtocolNotes: '餐廳備有基本遺失兒童處理程序。工作人員具備基礎安全訓練。'
     }
   },
   {
@@ -728,6 +839,37 @@ export let mockLocations: Location[] = [
       multilingualSignage: false,
       staffTrainingLevel: 'basic',
       languageSupportNotes: '運動中心工作人員主要為中文。英文課程可洽詢客服。'
+    },
+    waterSafety: {
+      hasWaterActivities: true,
+      lifeguardAvailable: true,
+      lifeguardRatio: '6名救生員值班',
+      poolTemperature: '26-28°C',
+      waterSafetyRulesEnforced: true,
+      waterSafetyNotes: '親子中心設有溫水游泳池，26-28°C恆溫。6名專業救生員全時值班，嚴格執行水安全規則。'
+    },
+    highChair: {
+      hasHighChairs: true,
+      highChairQuantity: 6,
+      minimumAgeMonths: 6,
+      maximumAgeMonths: 36,
+      hasBottleWarmingFacilities: true,
+      highChairNotes: '6張高腳椅可供使用，備有奶瓶溫熱設施。適合6個月至3歲幼兒。'
+    },
+    ageSpecificBathroom: {
+      hasToddlerToilets: true,
+      hasStepStools: true,
+      hasChildHeightHandWashing: true,
+      hasPrivacyFamilyBathroom: true,
+      bathroomCleanlinessRating: 4.7,
+      bathroomNotes: '親子友善設施優異，備有幼兒馬桶和階梯便凳。廁所清潔度佳。'
+    },
+    lostChildProtocol: {
+      hasLostChildProtocol: true,
+      staffIdentificationSystem: true,
+      meetingPointDesignated: true,
+      staffTrainingLevel: 'comprehensive',
+      lostChildProtocolNotes: '親子中心備有完善遺失兒童處理程序，設有多個明確集合點。工作人員經過全面訓練。'
     }
   },
   {
@@ -868,6 +1010,36 @@ export let mockLocations: Location[] = [
       multilingualSignage: false,
       staffTrainingLevel: 'basic',
       languageSupportNotes: '運動中心工作人員主要為中文溝通。英文手冊可在服務台索取。'
+    },
+    waterSafety: {
+      hasWaterActivities: true,
+      lifeguardAvailable: true,
+      lifeguardRatio: '奧運標準游泳池救生員值班',
+      hasShallowAreas: true,
+      poolTemperature: '26-28°C',
+      waterSafetyRulesEnforced: true,
+      waterSafetyNotes: '運動中心設有奧運標準游泳池，專業救生員全時值班。設有兒童淺水區，溫度26-28°C。'
+    },
+    highChair: {
+      hasHighChairs: true,
+      highChairQuantity: 2,
+      minimumAgeMonths: 6,
+      maximumAgeMonths: 36,
+      highChairNotes: '運動中心作為運動設施，僅提供2張高腳椅供基本使用。'
+    },
+    ageSpecificBathroom: {
+      hasToddlerToilets: true,
+      hasStepStools: true,
+      hasPrivacyFamilyBathroom: true,
+      bathroomCleanlinessRating: 4.5,
+      bathroomNotes: '標準設施，備有獨立更衣室區域，方便家長協助幼兒更衣。'
+    },
+    lostChildProtocol: {
+      hasLostChildProtocol: true,
+      staffIdentificationSystem: true,
+      meetingPointDesignated: true,
+      staffTrainingLevel: 'standard',
+      lostChildProtocolNotes: '運動中心備有標準遺失兒童處理程序。工作人員經過訓練，備有緊急程序。'
     }
   },
   {
@@ -1005,6 +1177,42 @@ export let mockLocations: Location[] = [
       multilingualSignage: false,
       staffTrainingLevel: 'basic',
       languageSupportNotes: '水上樂園工作人員主要為中文溝通。遊園指南可在售票處索取。'
+    },
+    waterSafety: {
+      hasWaterActivities: true,
+      lifeguardAvailable: true,
+      lifeguardRatio: '10名以上救生員值班',
+      waterQualityTesting: '每日水質檢測',
+      hasShallowAreas: true,
+      poolTemperature: '25-30°C',
+      hasLifeJacketRental: true,
+      waterSafetyRulesEnforced: true,
+      waterSafetyNotes: '水上樂園設有多個游泳池和滑水道。10名以上專業救生員全時值班。水質每日檢測。備有救生衣租賃服務。'
+    },
+    highChair: {
+      hasHighChairs: true,
+      highChairQuantity: 12,
+      minimumAgeMonths: 6,
+      maximumAgeMonths: 36,
+      cleanlinessRating: 4.6,
+      highChairNotes: '食堂區域提供12張高腳椅，定期清潔，適合6個月至3歲幼兒。'
+    },
+    ageSpecificBathroom: {
+      hasToddlerToilets: true,
+      hasStepStools: true,
+      hasChildHeightHandWashing: true,
+      hasPrivacyFamilyBathroom: true,
+      bathroomCleanlinessRating: 4.7,
+      bathroomNotes: '家庭更衣區域完善，幼兒友善設施齊全。更衣室乾淨舒適。'
+    },
+    lostChildProtocol: {
+      hasLostChildProtocol: true,
+      staffIdentificationSystem: true,
+      hasEmergencyPaging: true,
+      hasIDWristbandSystem: true,
+      meetingPointDesignated: true,
+      staffTrainingLevel: 'comprehensive',
+      lostChildProtocolNotes: '水上樂園備有完善遺失兒童處理程序。提供身份手環系統，多個集合點，廣播系統。工作人員經過全面訓練。'
     }
   },
 ];

@@ -1144,6 +1144,146 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.waterSafety && (
+                  <div className="detail-section">
+                    <h4>🌊 {language === 'zh' ? '水上安全與活動' : 'Water Safety & Activities'}</h4>
+                    {selectedLocation.waterSafety.hasWaterActivities && (
+                      <p>✅ {language === 'zh' ? '水上活動' : 'Water Activities Available'}</p>
+                    )}
+                    {selectedLocation.waterSafety.lifeguardAvailable && (
+                      <p>✅ {language === 'zh' ? '救生員在場' : 'Lifeguard Available'}</p>
+                    )}
+                    {selectedLocation.waterSafety.lifeguardRatio && (
+                      <p><strong>{language === 'zh' ? '救生員比例' : 'Lifeguard Ratio'}</strong>: {selectedLocation.waterSafety.lifeguardRatio}</p>
+                    )}
+                    {selectedLocation.waterSafety.waterQualityTesting && (
+                      <p><strong>{language === 'zh' ? '水質測試' : 'Water Quality Testing'}</strong>: {selectedLocation.waterSafety.waterQualityTesting}</p>
+                    )}
+                    {selectedLocation.waterSafety.maxWaterDepth !== undefined && (
+                      <p><strong>{language === 'zh' ? '最大深度' : 'Max Water Depth'}</strong>: {selectedLocation.waterSafety.maxWaterDepth}m</p>
+                    )}
+                    {selectedLocation.waterSafety.hasShallowAreas && (
+                      <p>✅ {language === 'zh' ? '淺水區' : 'Shallow Areas'}</p>
+                    )}
+                    {selectedLocation.waterSafety.poolTemperature && (
+                      <p><strong>{language === 'zh' ? '池溫度' : 'Pool Temperature'}</strong>: {selectedLocation.waterSafety.poolTemperature}</p>
+                    )}
+                    {selectedLocation.waterSafety.hasLifeJacketRental && (
+                      <p>✅ {language === 'zh' ? '救生衣租賃' : 'Life Jacket Rental'}</p>
+                    )}
+                    {selectedLocation.waterSafety.swimLessonAvailable && (
+                      <p>✅ {language === 'zh' ? '游泳課程' : 'Swim Lessons Available'}</p>
+                    )}
+                    {selectedLocation.waterSafety.waterSafetyRulesEnforced && (
+                      <p>✅ {language === 'zh' ? '水上安全規則執行' : 'Water Safety Rules Enforced'}</p>
+                    )}
+                    {selectedLocation.waterSafety.waterSafetyNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.waterSafety.waterSafetyNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.highChair && (
+                  <div className="detail-section">
+                    <h4>👶 {language === 'zh' ? '嬰兒餐椅與嬰兒用品' : 'High-Chairs & Baby Gear'}</h4>
+                    {selectedLocation.highChair.hasHighChairs && (
+                      <p>✅ {language === 'zh' ? '嬰兒餐椅' : 'High Chairs Available'}</p>
+                    )}
+                    {selectedLocation.highChair.highChairQuantity !== undefined && (
+                      <p><strong>{language === 'zh' ? '餐椅數量' : 'Quantity'}</strong>: {selectedLocation.highChair.highChairQuantity}</p>
+                    )}
+                    {selectedLocation.highChair.minimumAgeMonths !== undefined && (
+                      <p><strong>{language === 'zh' ? '最小年齡' : 'Minimum Age'}</strong>: {selectedLocation.highChair.minimumAgeMonths} {language === 'zh' ? '個月' : 'months'}</p>
+                    )}
+                    {selectedLocation.highChair.maximumAgeMonths !== undefined && (
+                      <p><strong>{language === 'zh' ? '最大年齡' : 'Maximum Age'}</strong>: {selectedLocation.highChair.maximumAgeMonths} {language === 'zh' ? '個月' : 'months'}</p>
+                    )}
+                    {selectedLocation.highChair.cleanlinessRating !== undefined && (
+                      <p><strong>{language === 'zh' ? '清潔度' : 'Cleanliness'}</strong>: {selectedLocation.highChair.cleanlinessRating === 5 ? '⭐⭐⭐⭐⭐ 優秀' : selectedLocation.highChair.cleanlinessRating === 4 ? '⭐⭐⭐⭐ 良好' : selectedLocation.highChair.cleanlinessRating === 3 ? '⭐⭐⭐ 一般' : '⭐⭐ 需改進'}</p>
+                    )}
+                    {selectedLocation.highChair.hasBoosterSeats && (
+                      <p>✅ {language === 'zh' ? '加高座椅' : 'Booster Seats'}</p>
+                    )}
+                    {selectedLocation.highChair.hasChangingStations && (
+                      <p>✅ {language === 'zh' ? '尿布台' : 'Changing Stations'}</p>
+                    )}
+                    {selectedLocation.highChair.hasBottleWarmingFacilities && (
+                      <p>✅ {language === 'zh' ? '奶瓶溫暖設施' : 'Bottle Warming Facilities'}</p>
+                    )}
+                    {selectedLocation.highChair.babyGearRentalAvailable && (
+                      <p>✅ {language === 'zh' ? '嬰兒用品租賃' : 'Baby Gear Rental Available'}</p>
+                    )}
+                    {selectedLocation.highChair.highChairNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.highChair.highChairNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.ageSpecificBathroom && (
+                  <div className="detail-section">
+                    <h4>🚽 {language === 'zh' ? '幼兒浴室' : 'Bathrooms for Toddlers'}</h4>
+                    {selectedLocation.ageSpecificBathroom.hasToddlerToilets && (
+                      <p>✅ {language === 'zh' ? '幼兒馬桶' : 'Toddler Toilets'}</p>
+                    )}
+                    {selectedLocation.ageSpecificBathroom.hasStepStools && (
+                      <p>✅ {language === 'zh' ? '踏腳凳' : 'Step Stools'}</p>
+                    )}
+                    {selectedLocation.ageSpecificBathroom.hasToiletTrainingFacilities && (
+                      <p>✅ {language === 'zh' ? '如廁訓練設施' : 'Toilet Training Facilities'}</p>
+                    )}
+                    {selectedLocation.ageSpecificBathroom.hasChildHeightHandWashing && (
+                      <p>✅ {language === 'zh' ? '兒童洗手設施' : 'Child-Height Hand Washing'}</p>
+                    )}
+                    {selectedLocation.ageSpecificBathroom.hasPrivacyFamilyBathroom && (
+                      <p>✅ {language === 'zh' ? '親子浴室' : 'Private Family Bathroom'}</p>
+                    )}
+                    {selectedLocation.ageSpecificBathroom.hasHandDryersChildSafe && (
+                      <p>✅ {language === 'zh' ? '兒童安全烘手機' : 'Child-Safe Hand Dryers'}</p>
+                    )}
+                    {selectedLocation.ageSpecificBathroom.parentSupervisionVisiblity && (
+                      <p>✅ {language === 'zh' ? '家長監督可見性' : 'Parent Supervision Visibility'}</p>
+                    )}
+                    {selectedLocation.ageSpecificBathroom.genderSpecificFacilityEducation && (
+                      <p>✅ {language === 'zh' ? '性別教育設施' : 'Gender Facility Education'}</p>
+                    )}
+                    {selectedLocation.ageSpecificBathroom.bathroomCleanlinessRating !== undefined && (
+                      <p><strong>{language === 'zh' ? '清潔度' : 'Cleanliness'}</strong>: {selectedLocation.ageSpecificBathroom.bathroomCleanlinessRating === 5 ? '⭐⭐⭐⭐⭐ 優秀' : selectedLocation.ageSpecificBathroom.bathroomCleanlinessRating === 4 ? '⭐⭐⭐⭐ 良好' : selectedLocation.ageSpecificBathroom.bathroomCleanlinessRating === 3 ? '⭐⭐⭐ 一般' : '⭐⭐ 需改進'}</p>
+                    )}
+                    {selectedLocation.ageSpecificBathroom.bathroomNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.ageSpecificBathroom.bathroomNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.lostChildProtocol && (
+                  <div className="detail-section">
+                    <h4>🆘 {language === 'zh' ? '失蹤兒童協議' : 'Lost Child Protocol'}</h4>
+                    {selectedLocation.lostChildProtocol.hasLostChildProtocol && (
+                      <p>✅ {language === 'zh' ? '已建立失蹤兒童協議' : 'Lost Child Protocol Established'}</p>
+                    )}
+                    {selectedLocation.lostChildProtocol.staffIdentificationSystem && (
+                      <p>✅ {language === 'zh' ? '員工識別系統' : 'Staff Identification System'}</p>
+                    )}
+                    {selectedLocation.lostChildProtocol.hasEmergencyPaging && (
+                      <p>✅ {language === 'zh' ? '緊急尋人廣播' : 'Emergency Paging System'}</p>
+                    )}
+                    {selectedLocation.lostChildProtocol.hasIDWristbandSystem && (
+                      <p>✅ {language === 'zh' ? 'ID手環系統' : 'ID Wristband System'}</p>
+                    )}
+                    {selectedLocation.lostChildProtocol.meetingPointDesignated && (
+                      <p>✅ {language === 'zh' ? '指定集合點' : 'Designated Meeting Point'}</p>
+                    )}
+                    {selectedLocation.lostChildProtocol.hasEmergencyPhoneNumbers && (
+                      <p>✅ {language === 'zh' ? '緊急電話號碼' : 'Emergency Phone Numbers'}</p>
+                    )}
+                    {selectedLocation.lostChildProtocol.staffTrainingLevel && (
+                      <p><strong>{language === 'zh' ? '員工培訓級別' : 'Staff Training Level'}</strong>: {selectedLocation.lostChildProtocol.staffTrainingLevel === 'comprehensive' ? '全面' : selectedLocation.lostChildProtocol.staffTrainingLevel === 'standard' ? '標準' : selectedLocation.lostChildProtocol.staffTrainingLevel === 'basic' ? '基礎' : '最小'}</p>
+                    )}
+                    {selectedLocation.lostChildProtocol.incidentDocumentation && (
+                      <p>✅ {language === 'zh' ? '事件文件記錄' : 'Incident Documentation'}</p>
+                    )}
+                    {selectedLocation.lostChildProtocol.lostChildProtocolNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.lostChildProtocol.lostChildProtocolNotes}</p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>

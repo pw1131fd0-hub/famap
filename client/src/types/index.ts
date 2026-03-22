@@ -221,6 +221,58 @@ export interface StaffLanguageInfo {
   languageSupportNotes?: string; // Detailed language support info
 }
 
+export interface WaterSafetyInfo {
+  hasWaterActivities?: boolean;
+  lifeguardAvailable?: boolean;
+  lifeguardRatio?: string;
+  waterQualityTesting?: string;
+  maxWaterDepth?: number;
+  hasShallowAreas?: boolean;
+  poolTemperature?: string;
+  hasLifeJacketRental?: boolean;
+  swimLessonAvailable?: boolean;
+  waterSafetyRulesEnforced?: boolean;
+  waterSafetyNotes?: string;
+}
+
+export interface HighChairInfo {
+  hasHighChairs?: boolean;
+  highChairQuantity?: number;
+  minimumAgeMonths?: number;
+  maximumAgeMonths?: number;
+  cleanlinessRating?: number;
+  hasBoosterSeats?: boolean;
+  hasChangingStations?: boolean;
+  hasBottleWarmingFacilities?: boolean;
+  babyGearRentalAvailable?: boolean;
+  highChairNotes?: string;
+}
+
+export interface AgeSpecificBathroomInfo {
+  hasToddlerToilets?: boolean;
+  hasStepStools?: boolean;
+  hasToiletTrainingFacilities?: boolean;
+  hasChildHeightHandWashing?: boolean;
+  hasPrivacyFamilyBathroom?: boolean;
+  hasHandDryersChildSafe?: boolean;
+  parentSupervisionVisiblity?: boolean;
+  genderSpecificFacilityEducation?: boolean;
+  bathroomCleanlinessRating?: number;
+  bathroomNotes?: string;
+}
+
+export interface LostChildProtocolInfo {
+  hasLostChildProtocol?: boolean;
+  staffIdentificationSystem?: boolean;
+  hasEmergencyPaging?: boolean;
+  hasIDWristbandSystem?: boolean;
+  meetingPointDesignated?: boolean;
+  hasEmergencyPhoneNumbers?: boolean;
+  staffTrainingLevel?: 'comprehensive' | 'standard' | 'basic' | 'minimal';
+  incidentDocumentation?: boolean;
+  lostChildProtocolNotes?: string;
+}
+
 export interface Location {
   id: string;
   name: {
@@ -271,6 +323,10 @@ export interface Location {
   climateComfort?: ClimateComfortInfo;
   sanitationProtocols?: SanitationProtocolsInfo;
   staffLanguage?: StaffLanguageInfo;
+  waterSafety?: WaterSafetyInfo;
+  highChair?: HighChairInfo;
+  ageSpecificBathroom?: AgeSpecificBathroomInfo;
+  lostChildProtocol?: LostChildProtocolInfo;
 }
 
 export interface Review {
@@ -330,6 +386,10 @@ export interface LocationCreateDTO {
   reservedTimes?: ReservedTimesInfo;
   nursingRoom?: NursingRoomDetails;
   petPolicy?: PetPolicy;
+  waterSafety?: WaterSafetyInfo;
+  highChair?: HighChairInfo;
+  ageSpecificBathroom?: AgeSpecificBathroomInfo;
+  lostChildProtocol?: LostChildProtocolInfo;
 }
 
 export interface Favorite {

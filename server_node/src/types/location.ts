@@ -221,6 +221,58 @@ export interface StaffLanguageInfo {
   languageSupportNotes?: string; // e.g., "English-speaking staff available daily 10am-6pm, WeChat translation available 24/7"
 }
 
+export interface WaterSafetyInfo {
+  hasWaterActivities?: boolean; // Pools, water park, beach, etc.
+  lifeguardAvailable?: boolean; // Lifeguard supervision
+  lifeguardRatio?: string; // e.g., "1 lifeguard per 100 swimmers"
+  waterQualityTesting?: string; // e.g., "Daily water quality testing, meets Taiwan Water Department standards"
+  maxWaterDepth?: number; // Maximum depth in meters
+  hasShallowAreas?: boolean; // Dedicated shallow/toddler areas
+  poolTemperature?: string; // e.g., "Heated pool 28-30°C"
+  hasLifeJacketRental?: boolean; // Floatation device availability
+  swimLessonAvailable?: boolean; // Swimming lessons for children
+  waterSafetyRulesEnforced?: boolean; // Safety rules compliance
+  waterSafetyNotes?: string; // e.g., "Shallow pool 0.5m for toddlers, certified lifeguards on duty, life jackets available for rent"
+}
+
+export interface HighChairInfo {
+  hasHighChairs?: boolean; // High-chair availability
+  highChairQuantity?: number; // Number of high-chairs
+  minimumAgeMonths?: number; // Minimum age recommendation
+  maximumAgeMonths?: number; // Maximum age recommendation
+  cleanlinessRating?: number; // 1-5 stars for cleanliness
+  hasBoosterSeats?: boolean; // Booster seats for toddlers
+  hasChangingStations?: boolean; // Dedicated changing stations (beyond standard toilets)
+  hasBottleWarmingFacilities?: boolean; // Bottle warming capability
+  babyGearRentalAvailable?: boolean; // Can rent car seats, play pens, etc.
+  highChairNotes?: string; // e.g., "8 high-chairs available, cleaned between uses, seats for 6mo-3yo"
+}
+
+export interface AgeSpecificBathroomInfo {
+  hasToddlerToilets?: boolean; // Child-sized toilet seats
+  hasStepStools?: boolean; // Step stools for toilet access
+  hasToiletTrainingFacilities?: boolean; // Support for toilet-training children
+  hasChildHeightHandWashing?: boolean; // Hand-washing stations at child height
+  hasPrivacyFamilyBathroom?: boolean; // Family bathrooms for privacy
+  hasHandDryersChildSafe?: boolean; // Non-startling hand dryers for children
+  parentSupervisionVisiblity?: boolean; // Can parent see child washing hands
+  genderSpecificFacilityEducation?: boolean; // Staff support for privacy education
+  bathroomCleanlinessRating?: number; // 1-5 stars
+  bathroomNotes?: string; // e.g., "Child-sized toilets in all bathrooms, step stools provided, family restrooms available"
+}
+
+export interface LostChildProtocolInfo {
+  hasLostChildProtocol?: boolean; // Documented lost child procedures
+  staffIdentificationSystem?: boolean; // Easy-to-spot staff (uniforms, badges)
+  hasEmergencyPaging?: boolean; // PA system for announcements
+  hasIDWristbandSystem?: boolean; // Wristband identification program
+  meetingPointDesignated?: boolean; // Pre-established meeting points
+  hasEmergencyPhoneNumbers?: boolean; // Posted emergency contact numbers
+  staffTrainingLevel?: 'comprehensive' | 'standard' | 'basic' | 'minimal'; // Staff training in lost child procedures
+  incidentDocumentation?: boolean; // Formal incident recording capability
+  lostChildProtocolNotes?: string; // e.g., "Clear lost child protocol, staff trained, ID wristbands available, emergency PA system, meeting point near entrance"
+}
+
 export interface Location {
   id: string;
   name: {
@@ -271,6 +323,10 @@ export interface Location {
   climateComfort?: ClimateComfortInfo;
   sanitationProtocols?: SanitationProtocolsInfo;
   staffLanguage?: StaffLanguageInfo;
+  waterSafety?: WaterSafetyInfo;
+  highChair?: HighChairInfo;
+  ageSpecificBathroom?: AgeSpecificBathroomInfo;
+  lostChildProtocol?: LostChildProtocolInfo;
 }
 
 export interface SearchParams {
