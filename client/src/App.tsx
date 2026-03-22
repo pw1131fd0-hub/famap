@@ -243,10 +243,10 @@ function App() {
       const data = await locationApi.getNearby({
         lat: position[0],
         lng: position[1],
-        radius: 10000,
+        radius: 5000,
         category: selectedCategory,
         stroller_accessible: strollerOnly || undefined,
-        limit: 500,
+        limit: 150,
       });
       setLocations(data);
     } catch (error) {
@@ -2630,12 +2630,7 @@ function App() {
                   <Popup>
                     <div className="popup-content">
                       <strong>{loc.name[language]}</strong>
-                      <p>{loc.description[language]}</p>
-                      <div className="facility-chips">
-                        {loc.facilities.map(f => (
-                          <span key={f} className="chip">{t.facilities[f as keyof typeof t.facilities] || f}</span>
-                        ))}
-                      </div>
+                      <p style={{fontSize: '0.9em', maxHeight: '60px', overflow: 'hidden', textOverflow: 'ellipsis'}}>{loc.description[language]}</p>
                     </div>
                   </Popup>
                 </Marker>
