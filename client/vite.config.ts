@@ -27,6 +27,26 @@ export default defineConfig({
       }
     })
   ],
+  build: {
+    chunkSizeWarningLimit: 600,
+    rollupOptions: {
+      output: {
+        manualChunks(id: string) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react')) {
+              return 'vendor-react';
+            }
+            if (id.includes('leaflet')) {
+              return 'vendor-leaflet';
+            }
+            if (id.includes('lucide-react')) {
+              return 'vendor-lucide';
+            }
+          }
+        }
+      }
+    }
+  },
   server: {
     host: '0.0.0.0',
     port: 3002,
