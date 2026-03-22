@@ -188,6 +188,39 @@ export interface PetPolicy {
   petPolicyNotes?: string; // e.g., "Pet-friendly park, water bowls available, no aggressive breeds"
 }
 
+export interface ClimateComfortInfo {
+  hasAirConditioning?: boolean; // Indoor air conditioning (冷氣)
+  hasHeating?: boolean; // Winter heating
+  hasShadedAreas?: boolean; // Outdoor shade structures or trees
+  indoorAreaPercentage?: number; // 0-100% of venue that is indoors
+  summerHeatMitigation?: string; // e.g., "Water misting stations, frequent water breaks, shaded play zones"
+  winterColdProtection?: string; // e.g., "Heated indoor areas, shelter from wind"
+  hasWaterStations?: boolean; // Drinking water available
+  hasRestAreas?: boolean; // Cool rest areas for tired families
+  climateNotes?: string; // e.g., "Outdoor playground surfaces: natural grass and shade trees, ground stays cool; indoor area fully AC'd"
+}
+
+export interface SanitationProtocolsInfo {
+  cleaningFrequency?: string; // e.g., "Hourly high-touch surface disinfection, daily deep clean"
+  disinfectionMethods?: string[]; // e.g., ["electrostatic spray", "EPA-approved disinfectant", "HEPA air filtration"]
+  airQualityRating?: 'excellent' | 'good' | 'fair' | 'needs_improvement'; // Ventilation & air quality assessment
+  hasAirFilters?: boolean; // HEPA or similar air filtration system
+  hasFrequentHandWashingStations?: boolean; // Accessible hand-washing for kids
+  toySanitizationFrequency?: string; // e.g., "Toys sanitized after each use, daily deep clean"
+  highTouchSurfaceDisinfection?: boolean; // Doorknobs, railings, etc.
+  lastInspectionDate?: string; // ISO date of last health/sanitation inspection
+  sanitationNotes?: string; // e.g., "Meet Taiwan CDC hygiene standards, HEPA filters changed quarterly"
+}
+
+export interface StaffLanguageInfo {
+  englishStaffAvailable?: boolean; // At least one English-speaking staff member
+  languagesSpoken?: string[]; // e.g., ["Mandarin", "English", "Vietnamese"]
+  hasTranslationServices?: boolean; // Translation app or services available
+  multilingualSignage?: boolean; // Signs in multiple languages
+  staffTrainingLevel?: 'certified' | 'trained' | 'basic' | 'minimal'; // Language proficiency certification
+  languageSupportNotes?: string; // e.g., "English-speaking staff available daily 10am-6pm, WeChat translation available 24/7"
+}
+
 export interface Location {
   id: string;
   name: {
@@ -235,6 +268,9 @@ export interface Location {
   reservedTimes?: ReservedTimesInfo;
   nursingRoom?: NursingRoomDetails;
   petPolicy?: PetPolicy;
+  climateComfort?: ClimateComfortInfo;
+  sanitationProtocols?: SanitationProtocolsInfo;
+  staffLanguage?: StaffLanguageInfo;
 }
 
 export interface SearchParams {

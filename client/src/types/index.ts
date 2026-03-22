@@ -188,6 +188,39 @@ export interface PetPolicy {
   petPolicyNotes?: string; // e.g., "Pet-friendly park, water bowls available, no aggressive breeds"
 }
 
+export interface ClimateComfortInfo {
+  hasAirConditioning?: boolean; // Indoor air conditioning
+  hasHeating?: boolean; // Winter heating
+  hasShadedAreas?: boolean; // Outdoor shade structures
+  indoorAreaPercentage?: number; // 0-100%
+  summerHeatMitigation?: string; // Heat protection measures
+  winterColdProtection?: string; // Cold protection measures
+  hasWaterStations?: boolean; // Drinking water available
+  hasRestAreas?: boolean; // Cool rest areas
+  climateNotes?: string; // Detailed climate information
+}
+
+export interface SanitationProtocolsInfo {
+  cleaningFrequency?: string; // e.g., "Hourly high-touch surface disinfection"
+  disinfectionMethods?: string[]; // e.g., ["electrostatic spray", "HEPA filtration"]
+  airQualityRating?: 'excellent' | 'good' | 'fair' | 'needs_improvement';
+  hasAirFilters?: boolean; // HEPA air filtration
+  hasFrequentHandWashingStations?: boolean; // For kids
+  toySanitizationFrequency?: string; // e.g., "Hourly"
+  highTouchSurfaceDisinfection?: boolean; // Doorknobs, railings, etc.
+  lastInspectionDate?: string; // ISO date
+  sanitationNotes?: string; // Detailed sanitation information
+}
+
+export interface StaffLanguageInfo {
+  englishStaffAvailable?: boolean; // At least one English-speaking staff
+  languagesSpoken?: string[]; // e.g., ["Mandarin", "English", "Vietnamese"]
+  hasTranslationServices?: boolean; // Translation app or services
+  multilingualSignage?: boolean; // Signs in multiple languages
+  staffTrainingLevel?: 'certified' | 'trained' | 'basic' | 'minimal';
+  languageSupportNotes?: string; // Detailed language support info
+}
+
 export interface Location {
   id: string;
   name: {
@@ -235,6 +268,9 @@ export interface Location {
   reservedTimes?: ReservedTimesInfo;
   nursingRoom?: NursingRoomDetails;
   petPolicy?: PetPolicy;
+  climateComfort?: ClimateComfortInfo;
+  sanitationProtocols?: SanitationProtocolsInfo;
+  staffLanguage?: StaffLanguageInfo;
 }
 
 export interface Review {

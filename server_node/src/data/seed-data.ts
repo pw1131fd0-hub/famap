@@ -118,6 +118,36 @@ export let mockLocations: Location[] = [
       hasLeashRequirement: true,
       hasDesignatedPetAreas: false,
       petPolicyNotes: '寵物須繫牽繩，不得進入兒童遊戲場。歡迎在公園散步區遛狗'
+    },
+    climateComfort: {
+      hasAirConditioning: false,
+      hasHeating: false,
+      hasShadedAreas: true,
+      indoorAreaPercentage: 15,
+      summerHeatMitigation: '園內樹蔭充足，多個休息涼亭，隨處可見飲水台',
+      winterColdProtection: '戶外公園，冬季風較大，建議穿著保暖',
+      hasWaterStations: true,
+      hasRestAreas: true,
+      climateNotes: '大型森林公園，天然樹蔭覆蓋率高，遊戲場地多為草皮，夏季不會過燙。戶外活動為主，風吹適度舒適。'
+    },
+    sanitationProtocols: {
+      cleaningFrequency: '每日清晨及傍晚各清潔一次，遊樂設施每週深層消毒',
+      disinfectionMethods: ['每日定時消毒遊樂設施', '環保無毒清潔劑', '高接觸表面每日擦拭'],
+      airQualityRating: 'excellent',
+      hasAirFilters: false,
+      hasFrequentHandWashingStations: true,
+      toySanitizationFrequency: '開放式公園，玩具由訪客自備，無共用玩具',
+      highTouchSurfaceDisinfection: true,
+      lastInspectionDate: '2026-03-20T00:00:00Z',
+      sanitationNotes: '符合台北市環保署衛生標準，戶外環境通風良好，空氣品質佳。廁所每2小時清潔消毒一次。'
+    },
+    staffLanguage: {
+      englishStaffAvailable: false,
+      languagesSpoken: ['中文'],
+      hasTranslationServices: false,
+      multilingualSignage: false,
+      staffTrainingLevel: 'basic',
+      languageSupportNotes: '公園為開放式設施，主要由志工協助。英文說明請洽詢服務中心。'
     }
   },
   {
@@ -237,6 +267,36 @@ export let mockLocations: Location[] = [
     petPolicy: {
       petsAllowed: false,
       petPolicyNotes: '遊樂園內禁止寵物進入（導盲犬除外）'
+    },
+    climateComfort: {
+      hasAirConditioning: true,
+      hasHeating: true,
+      hasShadedAreas: true,
+      indoorAreaPercentage: 45,
+      summerHeatMitigation: '多數遊樂設施有遮蔽，水上遊戲區、室內遊戲館全面空調。定時噴霧降溫。',
+      winterColdProtection: '室內設施完整溫暖，戶外遊樂設施有風擋。',
+      hasWaterStations: true,
+      hasRestAreas: true,
+      climateNotes: '混合室內外設施。夏季高溫時提供冷氣休息區和水上活動。園區設施維護良好，地面多為安全材質，溫度控制得宜。'
+    },
+    sanitationProtocols: {
+      cleaningFrequency: '每小時高接觸表面消毒，每日深層清潔，營業前後各消毒一次',
+      disinfectionMethods: ['靜電消毒噴霧', '醫療級消毒液', 'HEPA空氣淨化', '每30分鐘一次高接觸表面擦拭'],
+      airQualityRating: 'excellent',
+      hasAirFilters: true,
+      hasFrequentHandWashingStations: true,
+      toySanitizationFrequency: '所有共用玩具每日消毒3次，使用者触摸後立即清潔',
+      highTouchSurfaceDisinfection: true,
+      lastInspectionDate: '2026-03-18T00:00:00Z',
+      sanitationNotes: '符合台灣CDC後疫情時代衛生標準。HEPA濾網每季更換。所有設施定期安全檢驗與消毒。'
+    },
+    staffLanguage: {
+      englishStaffAvailable: true,
+      languagesSpoken: ['中文', '英文', '日文'],
+      hasTranslationServices: true,
+      multilingualSignage: true,
+      staffTrainingLevel: 'trained',
+      languageSupportNotes: '售票處及主要設施區備有英文說明人員。入口QR碼提供多語言翻譯（英文、日文、越南文）。'
     }
   },
   {
@@ -350,6 +410,36 @@ export let mockLocations: Location[] = [
       petsAllowed: false,
       serviceAnimalsAllowed: true,
       petPolicyNotes: '導盲犬等服務犬允許進入，其他寵物禁止'
+    },
+    climateComfort: {
+      hasAirConditioning: true,
+      hasHeating: true,
+      hasShadedAreas: false,
+      indoorAreaPercentage: 100,
+      summerHeatMitigation: '完全室內設施，空調調控舒適，全年溫度恆定22-24°C',
+      winterColdProtection: '室內全面供暖，冬季舒適溫暖',
+      hasWaterStations: true,
+      hasRestAreas: true,
+      climateNotes: '歷史建築完全室內展示。夏天去博物館是逃避炎熱的理想去處，冬天也溫暖舒適。全館均勻冷暖氣控制。'
+    },
+    sanitationProtocols: {
+      cleaningFrequency: '每日開館前全館消毒，遊客參觀期間每小時清潔一次',
+      disinfectionMethods: ['EPA認證消毒液', '紫外線消毒展示區', '高效空氣淨化系統'],
+      airQualityRating: 'excellent',
+      hasAirFilters: true,
+      hasFrequentHandWashingStations: true,
+      toySanitizationFrequency: '互動展示區每30分鐘消毒一次',
+      highTouchSurfaceDisinfection: true,
+      lastInspectionDate: '2026-03-19T00:00:00Z',
+      sanitationNotes: '符合台灣文化部博物館衛生標準。工作人員定期訓練，消毒用品符合國際安全規範。'
+    },
+    staffLanguage: {
+      englishStaffAvailable: true,
+      languagesSpoken: ['中文', '英文', '日文', '法文'],
+      hasTranslationServices: true,
+      multilingualSignage: true,
+      staffTrainingLevel: 'certified',
+      languageSupportNotes: '導覽員具多語言認證。館內展示牌有中英文，導覽預約可提供英文、日文或法文解說。'
     }
   },
   {
@@ -465,6 +555,36 @@ export let mockLocations: Location[] = [
     petPolicy: {
       petsAllowed: false,
       petPolicyNotes: '餐廳內不允許寵物進入'
+    },
+    climateComfort: {
+      hasAirConditioning: true,
+      hasHeating: true,
+      hasShadedAreas: false,
+      indoorAreaPercentage: 100,
+      summerHeatMitigation: '完全室內冷氣餐廳，溫度舒適涼爽，全年22-24°C恆溫',
+      winterColdProtection: '室內全面供暖，冬季舒適溫暖',
+      hasWaterStations: true,
+      hasRestAreas: true,
+      climateNotes: '全室內親子餐廳，夏天完全冷氣，是炎熱天氣逃難所。冬季也溫暖舒適。遊戲區和用餐區溫度均一致舒適。'
+    },
+    sanitationProtocols: {
+      cleaningFrequency: '每小時全區清潔，高接觸物體每30分鐘消毒一次',
+      disinfectionMethods: ['食品級消毒劑', 'HEPA濾網空氣淨化系統', '紫外線消毒玩具區'],
+      airQualityRating: 'excellent',
+      hasAirFilters: true,
+      hasFrequentHandWashingStations: true,
+      toySanitizationFrequency: '玩具區每使用完一班就消毒一次，每日深層消毒',
+      highTouchSurfaceDisinfection: true,
+      lastInspectionDate: '2026-03-17T00:00:00Z',
+      sanitationNotes: '符合食品衛生法規，對嬰幼兒友善的無毒清潔方式。每月第一個禮拜進行專業深層消毒。'
+    },
+    staffLanguage: {
+      englishStaffAvailable: true,
+      languagesSpoken: ['中文', '英文', '越南文'],
+      hasTranslationServices: true,
+      multilingualSignage: true,
+      staffTrainingLevel: 'trained',
+      languageSupportNotes: '新住民社區常客，工作人員會基本英文和越南文溝通。提供簡單的多語言菜單。'
     }
   },
   {
@@ -578,6 +698,36 @@ export let mockLocations: Location[] = [
     petPolicy: {
       petsAllowed: false,
       petPolicyNotes: '運動中心禁止寵物進入'
+    },
+    climateComfort: {
+      hasAirConditioning: true,
+      hasHeating: true,
+      hasShadedAreas: false,
+      indoorAreaPercentage: 100,
+      summerHeatMitigation: '完全室內設施，暖水池全年溫度控制，遊泳是夏季完美解暑活動',
+      winterColdProtection: '暖水池全年溫暖，淋浴間和換衣室溫度舒適',
+      hasWaterStations: true,
+      hasRestAreas: true,
+      climateNotes: '現代親子中心設施，全年四季恆溫22-25°C。游泳池水溫全年保持26-28°C，冬夏皆宜。'
+    },
+    sanitationProtocols: {
+      cleaningFrequency: '每2小時全面清潔，游泳池每日檢測水質3次並消毒',
+      disinfectionMethods: ['氯消毒', '紫外線池水處理', '高效空氣過濾系統'],
+      airQualityRating: 'excellent',
+      hasAirFilters: true,
+      hasFrequentHandWashingStations: true,
+      toySanitizationFrequency: '開放式親子設施，共用玩具每日消毒',
+      highTouchSurfaceDisinfection: true,
+      lastInspectionDate: '2026-03-16T00:00:00Z',
+      sanitationNotes: '符合台北市體育局游泳池衛生管理標準。全新設施，消毒標準高。'
+    },
+    staffLanguage: {
+      englishStaffAvailable: false,
+      languagesSpoken: ['中文'],
+      hasTranslationServices: false,
+      multilingualSignage: false,
+      staffTrainingLevel: 'basic',
+      languageSupportNotes: '運動中心工作人員主要為中文。英文課程可洽詢客服。'
     }
   },
   {
@@ -688,6 +838,36 @@ export let mockLocations: Location[] = [
     petPolicy: {
       petsAllowed: false,
       petPolicyNotes: '運動中心禁止寵物進入'
+    },
+    climateComfort: {
+      hasAirConditioning: true,
+      hasHeating: true,
+      hasShadedAreas: true,
+      indoorAreaPercentage: 30,
+      summerHeatMitigation: '室內游泳館冷氣舒適，戶外池有遮陽棚，暖水池全年溫度控制',
+      winterColdProtection: '暖水池冬季溫暖舒適，室內淋浴區和休息區溫度充足',
+      hasWaterStations: true,
+      hasRestAreas: true,
+      climateNotes: '混合室內外設施。游泳是夏季解暑首選，冬季暖水池依然開放。遮蔽區和涼亭眾多。'
+    },
+    sanitationProtocols: {
+      cleaningFrequency: '每小時清潔一次，游泳池每日水質檢測2次並消毒',
+      disinfectionMethods: ['氯消毒系統', '高效濾水系統', '每日高溫消毒設施'],
+      airQualityRating: 'good',
+      hasAirFilters: true,
+      hasFrequentHandWashingStations: true,
+      toySanitizationFrequency: '共用玩具每日消毒一次，每週深層清潔',
+      highTouchSurfaceDisinfection: true,
+      lastInspectionDate: '2026-03-15T00:00:00Z',
+      sanitationNotes: '符合台北市和新北市游泳設施衛生標準。運動中心級別的清潔管理。'
+    },
+    staffLanguage: {
+      englishStaffAvailable: false,
+      languagesSpoken: ['中文'],
+      hasTranslationServices: false,
+      multilingualSignage: false,
+      staffTrainingLevel: 'basic',
+      languageSupportNotes: '運動中心工作人員主要為中文溝通。英文手冊可在服務台索取。'
     }
   },
   {
@@ -795,6 +975,36 @@ export let mockLocations: Location[] = [
     petPolicy: {
       petsAllowed: false,
       petPolicyNotes: '水上樂園禁止寵物進入'
+    },
+    climateComfort: {
+      hasAirConditioning: false,
+      hasHeating: false,
+      hasShadedAreas: true,
+      indoorAreaPercentage: 5,
+      summerHeatMitigation: '園區有多個遮蔽涼亭，水上活動是消暑首選。定時出現人工波浪，水溫適中',
+      winterColdProtection: '水上樂園冬季關閉。',
+      hasWaterStations: true,
+      hasRestAreas: true,
+      climateNotes: '夏季限定開放（6-9月）。完全戶外設施，但有遮蔭區和涼亭。水上遊戲讓小孩在炎熱天氣中玩耍時保持涼爽。'
+    },
+    sanitationProtocols: {
+      cleaningFrequency: '每日開園前全面清潔，營業中每小時清潔一次',
+      disinfectionMethods: ['氯系統消毒', '定時池水檢測', '高效過濾系統'],
+      airQualityRating: 'good',
+      hasAirFilters: false,
+      hasFrequentHandWashingStations: true,
+      toySanitizationFrequency: '玩具區每日消毒一次',
+      highTouchSurfaceDisinfection: true,
+      lastInspectionDate: '2026-06-01T00:00:00Z',
+      sanitationNotes: '符合新北市環保署水上設施衛生標準。各池水質定期檢測。'
+    },
+    staffLanguage: {
+      englishStaffAvailable: false,
+      languagesSpoken: ['中文'],
+      hasTranslationServices: false,
+      multilingualSignage: false,
+      staffTrainingLevel: 'basic',
+      languageSupportNotes: '水上樂園工作人員主要為中文溝通。遊園指南可在售票處索取。'
     }
   },
 ];

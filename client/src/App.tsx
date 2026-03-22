@@ -1060,6 +1060,90 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.climateComfort && (
+                  <div className="detail-section">
+                    <h4>🌡️ {language === 'zh' ? '氣候舒適度' : 'Climate Comfort'}</h4>
+                    {selectedLocation.climateComfort.hasAirConditioning && (
+                      <p>✅ {language === 'zh' ? '冷氣' : 'Air Conditioning'}</p>
+                    )}
+                    {selectedLocation.climateComfort.hasHeating && (
+                      <p>✅ {language === 'zh' ? '暖氣' : 'Heating'}</p>
+                    )}
+                    {selectedLocation.climateComfort.hasShadedAreas && (
+                      <p>✅ {language === 'zh' ? '遮蔭區' : 'Shaded Areas'}</p>
+                    )}
+                    {selectedLocation.climateComfort.indoorAreaPercentage !== undefined && (
+                      <p><strong>{language === 'zh' ? '室內比例' : 'Indoor Area'}</strong>: {selectedLocation.climateComfort.indoorAreaPercentage}%</p>
+                    )}
+                    {selectedLocation.climateComfort.hasWaterStations && (
+                      <p>✅ {language === 'zh' ? '飲水台' : 'Water Stations'}</p>
+                    )}
+                    {selectedLocation.climateComfort.hasRestAreas && (
+                      <p>✅ {language === 'zh' ? '休息區' : 'Rest Areas'}</p>
+                    )}
+                    {selectedLocation.climateComfort.summerHeatMitigation && (
+                      <p><strong>{language === 'zh' ? '夏季防熱' : 'Summer Heat'}</strong>: {selectedLocation.climateComfort.summerHeatMitigation}</p>
+                    )}
+                    {selectedLocation.climateComfort.winterColdProtection && (
+                      <p><strong>{language === 'zh' ? '冬季防寒' : 'Winter Cold'}</strong>: {selectedLocation.climateComfort.winterColdProtection}</p>
+                    )}
+                    {selectedLocation.climateComfort.climateNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.climateComfort.climateNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.sanitationProtocols && (
+                  <div className="detail-section">
+                    <h4>🧼 {language === 'zh' ? '清潔衛生' : 'Sanitation Protocols'}</h4>
+                    {selectedLocation.sanitationProtocols.cleaningFrequency && (
+                      <p><strong>{language === 'zh' ? '清潔頻率' : 'Cleaning Frequency'}</strong>: {selectedLocation.sanitationProtocols.cleaningFrequency}</p>
+                    )}
+                    {selectedLocation.sanitationProtocols.airQualityRating && (
+                      <p><strong>{language === 'zh' ? '空氣品質' : 'Air Quality'}</strong>: {selectedLocation.sanitationProtocols.airQualityRating === 'excellent' ? '⭐⭐⭐⭐⭐ 優秀' : selectedLocation.sanitationProtocols.airQualityRating === 'good' ? '⭐⭐⭐⭐ 良好' : selectedLocation.sanitationProtocols.airQualityRating === 'fair' ? '⭐⭐⭐ 一般' : '⭐⭐ 需改進'}</p>
+                    )}
+                    {selectedLocation.sanitationProtocols.hasAirFilters && (
+                      <p>✅ {language === 'zh' ? 'HEPA空氣過濾系統' : 'HEPA Air Filters'}</p>
+                    )}
+                    {selectedLocation.sanitationProtocols.hasFrequentHandWashingStations && (
+                      <p>✅ {language === 'zh' ? '兒童洗手區' : 'Kids Hand Washing Stations'}</p>
+                    )}
+                    {selectedLocation.sanitationProtocols.highTouchSurfaceDisinfection && (
+                      <p>✅ {language === 'zh' ? '高接觸表面消毒' : 'High-Touch Surface Disinfection'}</p>
+                    )}
+                    {selectedLocation.sanitationProtocols.toySanitizationFrequency && (
+                      <p><strong>{language === 'zh' ? '玩具消毒頻率' : 'Toy Sanitization'}</strong>: {selectedLocation.sanitationProtocols.toySanitizationFrequency}</p>
+                    )}
+                    {selectedLocation.sanitationProtocols.disinfectionMethods && selectedLocation.sanitationProtocols.disinfectionMethods.length > 0 && (
+                      <p><strong>{language === 'zh' ? '消毒方法' : 'Disinfection Methods'}</strong>: {selectedLocation.sanitationProtocols.disinfectionMethods.join(', ')}</p>
+                    )}
+                    {selectedLocation.sanitationProtocols.sanitationNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.sanitationProtocols.sanitationNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.staffLanguage && (
+                  <div className="detail-section">
+                    <h4>🗣️ {language === 'zh' ? '語言支援' : 'Language Support'}</h4>
+                    {selectedLocation.staffLanguage.englishStaffAvailable && (
+                      <p>✅ {language === 'zh' ? '英文工作人員' : 'English-speaking Staff'}</p>
+                    )}
+                    {selectedLocation.staffLanguage.languagesSpoken && selectedLocation.staffLanguage.languagesSpoken.length > 0 && (
+                      <p><strong>{language === 'zh' ? '支援語言' : 'Languages'}</strong>: {selectedLocation.staffLanguage.languagesSpoken.join(', ')}</p>
+                    )}
+                    {selectedLocation.staffLanguage.hasTranslationServices && (
+                      <p>✅ {language === 'zh' ? '翻譯服務' : 'Translation Services'}</p>
+                    )}
+                    {selectedLocation.staffLanguage.multilingualSignage && (
+                      <p>✅ {language === 'zh' ? '多語言標誌' : 'Multilingual Signage'}</p>
+                    )}
+                    {selectedLocation.staffLanguage.staffTrainingLevel && (
+                      <p><strong>{language === 'zh' ? '工作人員訓練' : 'Staff Training'}</strong>: {selectedLocation.staffLanguage.staffTrainingLevel === 'certified' ? '認證' : selectedLocation.staffLanguage.staffTrainingLevel === 'trained' ? '已訓練' : selectedLocation.staffLanguage.staffTrainingLevel === 'basic' ? '基礎' : '最少'}</p>
+                    )}
+                    {selectedLocation.staffLanguage.languageSupportNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.staffLanguage.languageSupportNotes}</p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>
