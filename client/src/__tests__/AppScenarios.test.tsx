@@ -3,6 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import App from '../App.tsx';
 import { LanguageProvider } from '../i18n/LanguageContext.tsx';
 import { locationApi, favoriteApi, reviewApi } from '../services/api';
+import type { Location } from '../types';
 
 vi.mock('../services/api', () => ({
   locationApi: {
@@ -23,7 +24,7 @@ vi.mock('../services/api', () => ({
 }));
 
 describe('App Complex Scenarios', () => {
-  const mockLocation: any = {
+  const mockLocation: Location = {
     id: '1',
     name: { zh: '公園', en: 'Park' },
     description: { zh: '描述', en: 'Desc' },

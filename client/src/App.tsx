@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import 'leaflet/dist/leaflet.css';
@@ -6,7 +6,7 @@ import L from 'leaflet';
 import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Filter, Heart, List, Menu, ChevronDown } from 'lucide-react';
 import { locationApi, reviewApi, favoriteApi } from './services/api';
 import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO } from './types';
-import { useTranslation } from './i18n/LanguageContext';
+import { useTranslation } from './i18n/useTranslation';
 import { ReviewList } from './components/ReviewList';
 import { ReviewForm } from './components/ReviewForm';
 import { LocationForm } from './components/LocationForm';
@@ -129,7 +129,7 @@ function App() {
   const [showAddLocation, setShowAddLocation] = useState(false);
   const [reviews, setReviews] = useState<Review[]>([]);
 
-  const fetchLocations = async () => {
+  const fetchLocations = useCallback(async () => {
     setLoading(true);
     try {
       const data = await locationApi.getNearby({
@@ -146,11 +146,11 @@ function App() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [position, selectedCategory, strollerOnly]);
 
   useEffect(() => {
     fetchLocations();
-  }, [position, selectedCategory, strollerOnly]);
+  }, [fetchLocations]);
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -247,7 +247,7 @@ function App() {
     }
   };
 
-  const categories: { key: Category | undefined; icon: any; label: string }[] = [
+  const categories: Array<{ key: Category | undefined; icon: React.ElementType; label: string }> = [
     { key: undefined, icon: MapPin, label: t.common.all },
     { key: 'park', icon: Park, label: t.categories.park },
     { key: 'nursing_room', icon: Baby, label: t.categories.nursing_room },

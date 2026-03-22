@@ -20,6 +20,7 @@ vi.mock('axios', () => {
 vi.mock('leaflet', () => ({
   default: {
     icon: vi.fn(() => ({})),
+    divIcon: vi.fn(() => ({})),
     map: vi.fn(() => ({
       setView: vi.fn(),
       remove: vi.fn(),
@@ -46,11 +47,15 @@ vi.mock('leaflet', () => ({
   },
 }));
 
+interface MockComponentProps {
+  children?: React.ReactNode;
+}
+
 vi.mock('react-leaflet', () => ({
-  MapContainer: ({ children }: any) => <div>{children}</div>,
+  MapContainer: ({ children }: MockComponentProps) => <div>{children}</div>,
   TileLayer: () => <div>TileLayer</div>,
-  Marker: ({ children }: any) => <div>{children}</div>,
-  Popup: ({ children }: any) => <div>{children}</div>,
+  Marker: ({ children }: MockComponentProps) => <div>{children}</div>,
+  Popup: ({ children }: MockComponentProps) => <div>{children}</div>,
   useMap: () => ({
     setView: vi.fn(),
     getZoom: vi.fn(() => 13),
@@ -61,5 +66,5 @@ vi.mock('react-leaflet', () => ({
 }));
 
 vi.mock('react-leaflet-cluster', () => ({
-  default: ({ children }: any) => <div>{children}</div>,
+  default: ({ children }: MockComponentProps) => <div>{children}</div>,
 }));

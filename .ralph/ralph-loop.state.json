@@ -1,0 +1,13 @@
+{
+  "active": true,
+  "iteration": 1,
+  "minIterations": 1,
+  "maxIterations": 10,
+  "completionPromise": "COMPLETE",
+  "tasksMode": false,
+  "taskPromise": "READY_FOR_NEXT_TASK",
+  "prompt": "run 閱讀本專案 理解  improve this project 不要相信 已經好 好了就再加功能 ",
+  "startedAt": "2026-03-22T15:53:05.745Z",
+  "model": "",
+  "agent": "claude-code"
+}

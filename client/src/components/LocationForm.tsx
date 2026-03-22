@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { type LocationCreateDTO, type Category } from '../types';
-import { useTranslation } from '../i18n/LanguageContext';
+import { useTranslation } from '../i18n/useTranslation';
 
 interface LocationFormProps {
   onSubmit: (location: LocationCreateDTO) => Promise<void>;

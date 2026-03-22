@@ -10,7 +10,7 @@ import asyncio
 
 load_dotenv()
 
-app = FastAPI(title="FamMap API")
+app = FastAPI(title="FamMap API", redirect_slashes=False)
 
 @app.on_event("startup")
 async def startup_event():

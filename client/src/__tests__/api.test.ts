@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { locationApi, reviewApi, favoriteApi } from '../services/api';
 import axios from 'axios';
+import type { LocationCreateDTO, ReviewCreateDTO } from '../types';
 
 vi.mock('axios', () => {
   const mockAxiosInstance = {
@@ -38,8 +39,16 @@ describe('API Services', () => {
 
     it('create calls axios post', async () => {
       vi.mocked(axiosInstance.post).mockResolvedValue({ data: {} });
-      await locationApi.create({} as any);
-      expect(axiosInstance.post).toHaveBeenCalledWith('/locations/', {});
+      const location: LocationCreateDTO = {
+        name: { zh: 'Test', en: 'Test' },
+        description: { zh: 'Test', en: 'Test' },
+        category: 'park',
+        coordinates: { lat: 0, lng: 0 },
+        address: { zh: 'Test', en: 'Test' },
+        facilities: [],
+      };
+      await locationApi.create(location);
+      expect(axiosInstance.post).toHaveBeenCalledWith('/locations/', location);
     });
   });
 
@@ -52,8 +61,13 @@ describe('API Services', () => {
 
     it('create calls axios post', async () => {
       vi.mocked(axiosInstance.post).mockResolvedValue({ data: {} });
-      await reviewApi.create('1', {} as any);
-      expect(axiosInstance.post).toHaveBeenCalledWith('/locations/1/reviews', {});
+      const review: ReviewCreateDTO = {
+        rating: 5,
+        comment: 'Test',
+        userName: 'Test User',
+      };
+      await reviewApi.create('1', review);
+      expect(axiosInstance.post).toHaveBeenCalledWith('/locations/1/reviews', review);
     });
   });
 

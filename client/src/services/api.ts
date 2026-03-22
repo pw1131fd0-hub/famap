@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { Location, SearchParams, Review, ReviewCreateDTO, LocationCreateDTO } from '../types';
+import type { Location, SearchParams, Review, ReviewCreateDTO, LocationCreateDTO, Favorite } from '../types';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
@@ -38,8 +38,8 @@ export const favoriteApi = {
     const response = await api.get<Location[]>('/favorites', { params: { userId } });
     return response.data;
   },
-  add: async (userId: string, locationId: string): Promise<any> => {
-    const response = await api.post('/favorites', { userId, locationId });
+  add: async (userId: string, locationId: string): Promise<Favorite> => {
+    const response = await api.post<Favorite>('/favorites', { userId, locationId });
     return response.data;
   },
   remove: async (userId: string, locationId: string): Promise<void> => {

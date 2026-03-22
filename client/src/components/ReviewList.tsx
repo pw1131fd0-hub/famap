@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Review } from '../types';
-import { useTranslation } from '../i18n/LanguageContext';
+import { useTranslation } from '../i18n/useTranslation';
 
 interface ReviewListProps {
   reviews: Review[];

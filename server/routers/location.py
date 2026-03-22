@@ -33,7 +33,7 @@ async def get_locations(
     radius: float = Query(...),
     category: Optional[Category] = Query(None),
     stroller_accessible: Optional[bool] = Query(None),
-    limit: int = Query(default=500, ge=1, le=2000)
+    limit: int = Query(default=50, ge=1, le=2000)
 ):
     results = []
     for loc in mock_locations:

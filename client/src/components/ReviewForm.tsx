@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { ReviewCreateDTO } from '../types';
-import { useTranslation } from '../i18n/LanguageContext';
+import { useTranslation } from '../i18n/useTranslation';
 
 interface ReviewFormProps {
   onSubmit: (review: ReviewCreateDTO) => Promise<void>;
