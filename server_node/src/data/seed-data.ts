@@ -454,6 +454,62 @@ export let mockLocations: Location[] = [
         hasUSBServices: false
       },
       photographyNotes: '大安森林公園四季景色各異，春天櫻花、夏天綠蔭、秋天楓葉、冬天也有其特色。遊客眾多，建議早晨或傍晚拍照。尊重他人，不影響遊樂設施的正常使用。'
+    },
+    kidsClassesAndWorkshops: {
+      hasClasses: true,
+      musicClasses: {
+        available: false
+      },
+      artClasses: {
+        available: true,
+        types: ['自然寫生', '戶外素描', '環保手工藝'],
+        ageGroup: '5-12歲',
+        schedule: '週末上午10-11點半',
+        duration: '90分鐘',
+        pricing: '免費（公園志工教學）',
+        materialsIncluded: false
+      },
+      sportClasses: {
+        available: true,
+        types: ['戶外瑜伽', '親子健走', '兒童自行車騎乘基礎'],
+        ageGroup: '3-12歲',
+        schedule: '週六早上7-8點（晨間運動課程）',
+        duration: '60分鐘',
+        pricing: '免費',
+        instructorQualifications: '公園志工及社區運動教練'
+      },
+      academicClasses: {
+        available: false
+      },
+      languageClasses: {
+        available: false
+      },
+      parentChildClasses: {
+        available: true,
+        types: ['親子野餐教室', '家庭植物觀察課程'],
+        ageGroup: '2-5歲搭配家長',
+        schedule: '週日下午2-3點',
+        duration: '60分鐘',
+        pricing: '免費'
+      },
+      summitCamps: {
+        available: false
+      },
+      workshopsAndEvents: {
+        available: true,
+        types: ['季節性戶外觀察工作坊', '節日特別活動'],
+        schedule: '定期舉辦',
+        ageGroup: '4-10歲',
+        duration: '90-120分鐘',
+        pricing: '免費至NT$200',
+        advanceBookingRequired: false
+      },
+      specialNeedsClasses: {
+        available: false
+      },
+      bookingMethod: '部分課程無須預約，特殊課程可洽詢公園服務中心',
+      classesPhoneNumber: '02-2700-8600',
+      classesNotes: '大安森林公園定期舉辦免費戶外課程，適合親子家庭參與。課程內容隨季節變化，包括自然觀察、藝術創作和健身課程。志工教學為主，課程品質佳。建議早點到達以確保位置。'
     }
   },
   {
@@ -982,6 +1038,74 @@ export let mockLocations: Location[] = [
         hasUSBServices: false
       },
       photographyNotes: '樂園內各設施都是很好的拍照背景。建議穿著色彩鮮豔的衣服以與背景形成對比。高峰期人潮眾多，早晨或黃昏人較少，更適合拍照。園區禁止使用自拍棒和無人機。'
+    },
+    kidsClassesAndWorkshops: {
+      hasClasses: true,
+      musicClasses: {
+        available: true,
+        types: ['兒童音樂會', '樂器介紹課程'],
+        ageGroup: '4-10歲',
+        schedule: '週末下午3-3:45pm',
+        duration: '45分鐘',
+        pricing: '免費（含入園票）',
+        instructorQualifications: '專業音樂教師'
+      },
+      artClasses: {
+        available: true,
+        types: ['自然標本藝術創作', '生態主題繪畫班'],
+        ageGroup: '5-12歲',
+        schedule: '週六上午11am-12pm',
+        duration: '60分鐘',
+        pricing: 'NT$300-500/課程',
+        materialsIncluded: true
+      },
+      sportClasses: {
+        available: false
+      },
+      academicClasses: {
+        available: true,
+        types: ['自然科學探索課', '生態知識講座'],
+        ageGroup: '6-12歲',
+        schedule: '週日上午10-11am',
+        duration: '60分鐘',
+        pricing: '免費（含入園票）'
+      },
+      languageClasses: {
+        available: false
+      },
+      parentChildClasses: {
+        available: true,
+        types: ['親子自然探險', '家庭生態導覽課'],
+        ageGroup: '2-5歲搭配家長',
+        schedule: '週六下午2-3pm',
+        duration: '60分鐘',
+        pricing: '免費（含入園票）'
+      },
+      summitCamps: {
+        available: true,
+        types: ['暑期自然科學營', '冬令生態探索營'],
+        ageGroup: '6-12歲',
+        seasonalAvailability: '暑假7月-8月、寒假1月-2月',
+        duration: '全天 9am-4pm',
+        pricing: 'NT$1500-2500/天',
+        mealIncluded: false
+      },
+      workshopsAndEvents: {
+        available: true,
+        types: ['標本製作工作坊', '自然攝影課', '環保手工藝'],
+        schedule: '定期舉辦，假日為主',
+        ageGroup: '5-14歲',
+        duration: '90-120分鐘',
+        pricing: 'NT$200-800',
+        advanceBookingRequired: true
+      },
+      specialNeedsClasses: {
+        available: false
+      },
+      bookingMethod: '線上預約或電話洽詢，部分課程需提前報名',
+      classesWebsite: 'www.ntm.gov.tw',
+      classesPhoneNumber: '02-2382-2566',
+      classesNotes: '博物館提供豐富的教育課程，適合對自然和科學有興趣的家庭。課程融合展示內容，讓孩童深入學習。暑假和寒假有多天營隊課程。部分課程需收費，但許多基礎課程免費。建議提前查看官網課程表。'
     }
   },
   {
@@ -1452,6 +1576,72 @@ export let mockLocations: Location[] = [
         hasUSBServices: false
       },
       photographyNotes: '博物館內部光線較暗，建議使用高感光度相機或手機夜拍功能。展示區內許多玻璃櫃可能反光，需調整角度。館內禁止使用閃光燈以保護文物。鄰近的二二八公園也是很好的戶外拍照地點。'
+    },
+    kidsClassesAndWorkshops: {
+      hasClasses: true,
+      musicClasses: {
+        available: false
+      },
+      artClasses: {
+        available: true,
+        types: ['古物欣賞與繪畫', '文化遺產手工藝'],
+        ageGroup: '5-12歲',
+        schedule: '週六上午10-11am',
+        duration: '60分鐘',
+        pricing: '免費-NT$300',
+        materialsIncluded: true
+      },
+      sportClasses: {
+        available: false
+      },
+      academicClasses: {
+        available: true,
+        types: ['台灣歷史講座', '考古學入門', '古生物探索'],
+        ageGroup: '7-14歲',
+        schedule: '週日下午2-3pm',
+        duration: '60分鐘',
+        pricing: '免費（含入園票）'
+      },
+      languageClasses: {
+        available: false
+      },
+      parentChildClasses: {
+        available: true,
+        types: ['親子文物探險', '家庭導覽課程'],
+        ageGroup: '3-6歲搭配家長',
+        schedule: '週六下午3-3:45pm',
+        duration: '45分鐘',
+        pricing: '免費'
+      },
+      summitCamps: {
+        available: true,
+        types: ['暑期文化探險營', '冬令古物研究營'],
+        ageGroup: '8-13歲',
+        seasonalAvailability: '暑假7月-8月、寒假1月-2月',
+        duration: '全天 9:30am-4pm',
+        pricing: 'NT$2000-3000/天',
+        mealIncluded: false
+      },
+      workshopsAndEvents: {
+        available: true,
+        types: ['陶藝工作坊', '書法體驗', '傳統工藝課'],
+        schedule: '定期週末舉辦',
+        ageGroup: '6-15歲',
+        duration: '120分鐘',
+        pricing: 'NT$300-800',
+        advanceBookingRequired: true
+      },
+      specialNeedsClasses: {
+        available: true,
+        types: ['無障礙導覽課程', '感官友善工作坊'],
+        ageGroup: '4-12歲',
+        schedule: '需事先預約',
+        supportLevel: '配合特殊需求調整課程內容'
+      },
+      bookingMethod: '官網預約或電話洽詢館教室',
+      classesWebsite: 'www.ntm.gov.tw/education',
+      classesPhoneNumber: '02-2382-2566 分機3301',
+      classesNotes: '國立臺灣博物館提供多元教育課程，強調文化學習和動手實踐。課程設計融合展示內容，讓孩童認識台灣文化和自然遺產。提供暑假和寒假營隊。許多基礎課程免費，特殊工作坊需收費。建議提前預約以確保位置。'
     }
   },
   {
@@ -1933,6 +2123,57 @@ export let mockLocations: Location[] = [
         hasUSBServices: false
       },
       photographyNotes: '親子餐廳內部環境整潔舒適，光線充足。拍照時請注意不影響其他用餐顧客。餐廳經常有人潮，建議在非用餐尖峰時段拍照。室內遊樂設施是很好的兒童活動背景。'
+    },
+    kidsClassesAndWorkshops: {
+      hasClasses: true,
+      musicClasses: {
+        available: false
+      },
+      artClasses: {
+        available: true,
+        types: ['美食繪畫課', '創意料理藝術'],
+        ageGroup: '4-10歲',
+        schedule: '每週六下午2-3pm',
+        duration: '60分鐘',
+        pricing: 'NT$500-800',
+        materialsIncluded: true
+      },
+      sportClasses: {
+        available: false
+      },
+      academicClasses: {
+        available: false
+      },
+      languageClasses: {
+        available: false
+      },
+      parentChildClasses: {
+        available: true,
+        types: ['親子烹飪課', '家庭美食製作工坊'],
+        ageGroup: '2-6歲搭配家長',
+        schedule: '每週日上午11-12pm',
+        duration: '60分鐘',
+        pricing: 'NT$600-1000（含材料和午餐）',
+        mealIncluded: true
+      },
+      summitCamps: {
+        available: false
+      },
+      workshopsAndEvents: {
+        available: true,
+        types: ['兒童烘焙工作坊', '美食探險隊'],
+        schedule: '週末和假期',
+        ageGroup: '5-12歲',
+        duration: '90-120分鐘',
+        pricing: 'NT$700-1200',
+        advanceBookingRequired: true
+      },
+      specialNeedsClasses: {
+        available: false
+      },
+      bookingMethod: '電話預約或至餐廳櫃台報名',
+      classesPhoneNumber: '02-2181-6666',
+      classesNotes: '親子餐廳提供多樣化的烹飪和藝術課程，強調親子互動和動手體驗。課程融合餐廳環境，讓孩童在趣味中學習。所有課程包含材料費和部分含餐飲。建議提前預約，假日課程常額滿。'
     }
   },
   {
@@ -2413,6 +2654,72 @@ export let mockLocations: Location[] = [
         hasUSBServices: false
       },
       photographyNotes: '親子中心環境新穎整潔，採光充足。室內設施現代化，適合拍攝兒童活動。園區周邊也有不少戶外拍照點。建議預約參訪時間以獲得最佳拍照環境。'
+    },
+    kidsClassesAndWorkshops: {
+      hasClasses: true,
+      musicClasses: {
+        available: false
+      },
+      artClasses: {
+        available: true,
+        types: ['室內美術課', '創意手工藝'],
+        ageGroup: '4-10歲',
+        schedule: '每週三和週五下午3-4pm',
+        duration: '60分鐘',
+        pricing: 'NT$400/堂',
+        materialsIncluded: true
+      },
+      sportClasses: {
+        available: false
+      },
+      academicClasses: {
+        available: true,
+        types: ['STEM課程', '科技創新工坊'],
+        ageGroup: '6-12歲',
+        schedule: '週末上午10-11:30am',
+        duration: '90分鐘',
+        pricing: 'NT$600-800'
+      },
+      languageClasses: {
+        available: false
+      },
+      parentChildClasses: {
+        available: true,
+        types: ['親子美術活動', '寶寶感官課程'],
+        ageGroup: '0-4歲搭配家長',
+        schedule: '週二上午10-11am',
+        duration: '60分鐘',
+        pricing: '免費-NT$300'
+      },
+      summitCamps: {
+        available: true,
+        types: ['暑期創意營隊', '冬令兒童工坊'],
+        ageGroup: '5-12歲',
+        seasonalAvailability: '暑假7月-8月、寒假1月-2月',
+        duration: '上午 or 全天課程',
+        pricing: 'NT$1200-2500',
+        mealIncluded: false
+      },
+      workshopsAndEvents: {
+        available: true,
+        types: ['月度親子活動', '主題工作坊'],
+        schedule: '每月定期舉辦',
+        ageGroup: '3-12歲',
+        duration: '90-120分鐘',
+        pricing: 'NT$300-600',
+        advanceBookingRequired: false
+      },
+      specialNeedsClasses: {
+        available: true,
+        types: ['適應體能課程', '感官友善活動'],
+        ageGroup: '4-10歲',
+        schedule: '可協商時間',
+        supportLevel: '小班教學，一對一協助'
+      },
+      bookingMethod: '線上系統或電話預約，部分課程現場報名',
+      classesWebsite: 'www.nangang-familycenter.taipei.gov.tw',
+      classesPhoneNumber: '02-2655-0988',
+      classesNotes: '南港軟體園區親子中心提供多元化課程，強調創意和互動學習。設施新穎，教師專業認證。提供暑假和寒假營隊。許多課程適合不同能力的兒童。建議提前預約課程，假日班級常滿。'
     }
   },
   {
@@ -2880,6 +3187,66 @@ export let mockLocations: Location[] = [
         hasUSBServices: false
       },
       photographyNotes: '運動中心環境整潔，但室內光線可能較暗。游泳池畔拍照時需注意安全。建議帶防水相機或手機殼保護設備。戶外拍照點主要為建築外觀，景觀簡潔。'
+    },
+    kidsClassesAndWorkshops: {
+      hasClasses: true,
+      musicClasses: {
+        available: false
+      },
+      artClasses: {
+        available: false
+      },
+      sportClasses: {
+        available: true,
+        types: ['兒童游泳課程', '水上安全課', '浮潛基礎班'],
+        ageGroup: '3-12歲',
+        schedule: '平日下午4-5pm，週末上午10-11am 和下午2-3pm',
+        duration: '45-60分鐘',
+        pricing: 'NT$400-600/堂，10堂卡 NT$4000-5000',
+        instructorQualifications: '認證游泳教練，CPR和急救訓練'
+      },
+      academicClasses: {
+        available: false
+      },
+      languageClasses: {
+        available: false
+      },
+      parentChildClasses: {
+        available: true,
+        types: ['親子水上遊戲課', '嬰幼兒水適應課'],
+        ageGroup: '1-4歲搭配家長',
+        schedule: '每週六上午11am-12pm',
+        duration: '30-45分鐘',
+        pricing: 'NT$300-400'
+      },
+      summitCamps: {
+        available: true,
+        types: ['暑期游泳集訓營', '水上救援營'],
+        ageGroup: '6-14歲',
+        seasonalAvailability: '暑假7月-8月（夏季營隊為主）',
+        duration: '全天 8:30am-4pm',
+        pricing: 'NT$2000-3500/周',
+        mealIncluded: true
+      },
+      workshopsAndEvents: {
+        available: true,
+        types: ['水上安全工作坊', '親子運動日'],
+        schedule: '定期週末舉辦',
+        ageGroup: '4-12歲',
+        duration: '60-120分鐘',
+        pricing: 'NT$200-500',
+        advanceBookingRequired: false
+      },
+      specialNeedsClasses: {
+        available: true,
+        types: ['適應水上課程', '物理治療水療班'],
+        ageGroup: '3-12歲',
+        schedule: '可協商時間',
+        supportLevel: '一對一教練，根據特殊需求客製化課程'
+      },
+      bookingMethod: '現場報名或電話預約，熱門課程需提前登記',
+      classesPhoneNumber: '02-2918-3533',
+      classesNotes: '內湖運動中心提供專業的游泳和水上運動課程，教練資格完整。課程涵蓋初學到進階，並有特殊需求適應課程。暑假集訓營非常受歡迎，常需提前預約。成人陪同課程讓小朋友安全適應水環境。'
     }
   },
   {
@@ -3383,6 +3750,66 @@ export let mockLocations: Location[] = [
         hasUSBServices: false
       },
       photographyNotes: '水上樂園夏季是最佳拍照季節，但人潮眾多。建議早晨開園時段拍照。水上拍照必須使用防水設備。園區周邊河岸景觀優美，可拍風景照。禁止使用無人機。'
+    },
+    kidsClassesAndWorkshops: {
+      hasClasses: true,
+      musicClasses: {
+        available: false
+      },
+      artClasses: {
+        available: false
+      },
+      sportClasses: {
+        available: true,
+        types: ['兒童游泳課程', '水上安全訓練', '浮潛初級班'],
+        ageGroup: '3-12歲',
+        schedule: '夏季（暑假）密集課程，平日下午3-4pm，週末上午9-10am',
+        duration: '45-60分鐘',
+        pricing: 'NT$350-500/堂，套票優惠',
+        instructorQualifications: '認證游泳教練'
+      },
+      academicClasses: {
+        available: false
+      },
+      languageClasses: {
+        available: false
+      },
+      parentChildClasses: {
+        available: true,
+        types: ['親子水上嬉遊課', '寶寶水適應班'],
+        ageGroup: '1-3歲搭配家長',
+        schedule: '週末上午11am-12pm',
+        duration: '30-45分鐘',
+        pricing: 'NT$250-350'
+      },
+      summitCamps: {
+        available: true,
+        types: ['暑期游泳集訓', '水上救援訓練營', '水上運動夏令營'],
+        ageGroup: '5-14歲',
+        seasonalAvailability: '暑假7月-8月為主要季節',
+        duration: '全天 8:30am-4pm',
+        pricing: 'NT$1500-3000/周',
+        mealIncluded: true
+      },
+      workshopsAndEvents: {
+        available: true,
+        types: ['水上安全知識講座', '親子水上運動日'],
+        schedule: '假期週末定期舉辦',
+        ageGroup: '4-14歲',
+        duration: '90-120分鐘',
+        pricing: '免費-NT$300',
+        advanceBookingRequired: false
+      },
+      specialNeedsClasses: {
+        available: true,
+        types: ['適應水環境課程', '特殊需求水療課'],
+        ageGroup: '3-12歲',
+        schedule: '需事先協商',
+        supportLevel: '專業教練和助手一對一協助'
+      },
+      bookingMethod: '線上或現場報名，暑期課程需提前預約',
+      classesPhoneNumber: '02-2911-6789',
+      classesNotes: '新店陽光園區夏季提供多樣化水上課程，教練均具安全認證。暑假是課程高峰期，集訓營和營隊課程非常受歡迎，需提早報名。所有課程強調安全和玩樂兼具。完善的特殊需求課程協助有特殊需求的兒童。'
     }
   },
 ];

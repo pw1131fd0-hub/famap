@@ -653,6 +653,90 @@ export interface PhotographySpotsAndServicesInfo {
   photographyNotes?: string;
 }
 
+export interface KidsClassesAndWorkshopsInfo {
+  hasClasses?: boolean;
+  musicClasses?: {
+    available: boolean;
+    types?: string[];
+    ageGroup?: string;
+    schedule?: string;
+    duration?: string;
+    pricing?: string;
+    instructorQualifications?: string;
+  };
+  artClasses?: {
+    available: boolean;
+    types?: string[];
+    ageGroup?: string;
+    schedule?: string;
+    duration?: string;
+    pricing?: string;
+    materialsIncluded?: boolean;
+  };
+  sportClasses?: {
+    available: boolean;
+    types?: string[];
+    ageGroup?: string;
+    schedule?: string;
+    duration?: string;
+    pricing?: string;
+    instructorQualifications?: string;
+  };
+  academicClasses?: {
+    available: boolean;
+    types?: string[];
+    ageGroup?: string;
+    schedule?: string;
+    duration?: string;
+    pricing?: string;
+  };
+  languageClasses?: {
+    available: boolean;
+    languages?: string[];
+    ageGroup?: string;
+    schedule?: string;
+    duration?: string;
+    pricing?: string;
+  };
+  parentChildClasses?: {
+    available: boolean;
+    types?: string[];
+    ageGroup?: string;
+    schedule?: string;
+    duration?: string;
+    pricing?: string;
+  };
+  summitCamps?: {
+    available: boolean;
+    types?: string[];
+    ageGroup?: string;
+    seasonalAvailability?: string;
+    duration?: string;
+    pricing?: string;
+    mealIncluded?: boolean;
+  };
+  workshopsAndEvents?: {
+    available: boolean;
+    types?: string[];
+    schedule?: string;
+    ageGroup?: string;
+    duration?: string;
+    pricing?: string;
+    advanceBookingRequired?: boolean;
+  };
+  specialNeedsClasses?: {
+    available: boolean;
+    types?: string[];
+    ageGroup?: string;
+    schedule?: string;
+    supportLevel?: string;
+  };
+  bookingMethod?: string;
+  classesWebsite?: string;
+  classesPhoneNumber?: string;
+  classesNotes?: string;
+}
+
 export interface Location {
   id: string;
   name: {
@@ -730,6 +814,7 @@ export interface Location {
   playgroundAndActivity?: PlaygroundEquipmentAndActivityInfo;
   navigationFromTransit?: NavigationFromTransitInfo;
   photographySpotsAndServices?: PhotographySpotsAndServicesInfo;
+  kidsClassesAndWorkshops?: KidsClassesAndWorkshopsInfo;
 }
 
 export interface Review {
@@ -819,6 +904,7 @@ export interface LocationCreateDTO {
   playgroundAndActivity?: PlaygroundEquipmentAndActivityInfo;
   navigationFromTransit?: NavigationFromTransitInfo;
   photographySpotsAndServices?: PhotographySpotsAndServicesInfo;
+  kidsClassesAndWorkshops?: KidsClassesAndWorkshopsInfo;
 }
 
 export interface Favorite {

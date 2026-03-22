@@ -654,6 +654,90 @@ export interface PhotographySpotsAndServicesInfo {
   photographyNotes?: string; // General photography tips and guidelines
 }
 
+export interface KidsClassesAndWorkshopsInfo {
+  hasClasses?: boolean; // Are there classes/workshops offered?
+  musicClasses?: {
+    available: boolean;
+    types?: string[]; // e.g., ["piano", "guitar", "singing", "music appreciation"]
+    ageGroup?: string; // e.g., "3-8 years"
+    schedule?: string; // e.g., "Weekends 10-11am, 2-3pm"
+    duration?: string; // Class duration e.g., "30 minutes per session"
+    pricing?: string; // Cost per class
+    instructorQualifications?: string; // e.g., "certified music teachers"
+  };
+  artClasses?: {
+    available: boolean;
+    types?: string[]; // e.g., ["painting", "clay", "crafts", "drawing"]
+    ageGroup?: string; // e.g., "2-10 years"
+    schedule?: string; // When classes are offered
+    duration?: string; // Class duration
+    pricing?: string; // Cost per class
+    materialsIncluded?: boolean; // Are art materials provided?
+  };
+  sportClasses?: {
+    available: boolean;
+    types?: string[]; // e.g., ["swimming", "martial arts", "dance", "yoga", "gymnastics"]
+    ageGroup?: string; // e.g., "4-12 years"
+    schedule?: string; // When classes are offered
+    duration?: string; // Class duration
+    pricing?: string; // Cost per class
+    instructorQualifications?: string; // Safety certifications
+  };
+  academicClasses?: {
+    available: boolean;
+    types?: string[]; // e.g., ["English lessons", "math tutoring", "science workshops", "coding"]
+    ageGroup?: string; // e.g., "5-12 years"
+    schedule?: string; // When offered
+    duration?: string; // Class duration
+    pricing?: string; // Cost per class
+  };
+  languageClasses?: {
+    available: boolean;
+    languages?: string[]; // e.g., ["English", "Japanese", "French"]
+    ageGroup?: string; // Age range
+    schedule?: string; // When offered
+    duration?: string; // Class duration
+    pricing?: string; // Cost
+  };
+  parentChildClasses?: {
+    available: boolean; // Parent-child bonding classes
+    types?: string[]; // e.g., ["mommy and me", "parent-child yoga", "parent-child cooking"]
+    ageGroup?: string; // e.g., "0-3 years with parent"
+    schedule?: string; // When offered
+    duration?: string; // Class duration
+    pricing?: string; // Cost
+  };
+  summitCamps?: {
+    available: boolean; // Holiday/summer camps
+    types?: string[]; // e.g., ["art camp", "sports camp", "adventure camp", "STEM camp"]
+    ageGroup?: string; // Age range
+    seasonalAvailability?: string; // e.g., "Summer Jul-Aug, Winter Jan-Feb"
+    duration?: string; // e.g., "Full day 9am-5pm"
+    pricing?: string; // Cost for camp
+    mealIncluded?: boolean; // Are meals provided?
+  };
+  workshopsAndEvents?: {
+    available: boolean; // One-time workshops or special events
+    types?: string[]; // e.g., ["science demonstration", "cooking workshop", "DIY craft session"]
+    schedule?: string; // Regular schedule or special dates
+    ageGroup?: string; // Who it's suitable for
+    duration?: string; // How long each workshop lasts
+    pricing?: string; // Cost per workshop
+    advanceBookingRequired?: boolean; // Do you need to book ahead?
+  };
+  specialNeedsClasses?: {
+    available: boolean; // Classes for children with special needs
+    types?: string[]; // e.g., ["autism-friendly classes", "sensory-friendly arts", "adaptive sports"]
+    ageGroup?: string; // Age range
+    schedule?: string; // When offered
+    supportLevel?: string; // e.g., "1-on-1 assistant available"
+  };
+  bookingMethod?: string; // e.g., "Online registration at website, phone booking, walk-in first-come-first-served"
+  classesWebsite?: string; // URL to class information
+  classesPhoneNumber?: string; // Phone to inquire about classes
+  classesNotes?: string; // e.g., "Diverse class offerings suitable for ages 2-12. Registration open 2 weeks in advance. Sibling discounts available. Equipment provided for most classes except sports (bring comfortable clothing)."
+}
+
 export interface Location {
   id: string;
   name: {
@@ -731,6 +815,7 @@ export interface Location {
   playgroundAndActivity?: PlaygroundEquipmentAndActivityInfo;
   navigationFromTransit?: NavigationFromTransitInfo;
   photographySpotsAndServices?: PhotographySpotsAndServicesInfo;
+  kidsClassesAndWorkshops?: KidsClassesAndWorkshopsInfo;
 }
 
 export interface SearchParams {

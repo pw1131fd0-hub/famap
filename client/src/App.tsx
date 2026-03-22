@@ -1987,6 +1987,105 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.kidsClassesAndWorkshops && selectedLocation.kidsClassesAndWorkshops.hasClasses && (
+                  <div className="detail-section">
+                    <h4>🎨 {language === 'zh' ? '兒童課程與工作坊' : 'Kids Classes & Workshops'}</h4>
+                    {selectedLocation.kidsClassesAndWorkshops.musicClasses && selectedLocation.kidsClassesAndWorkshops.musicClasses.available && (
+                      <div style={{ marginBottom: '15px', paddingLeft: '10px', borderLeft: '3px solid #9333ea' }}>
+                        <p><strong>🎵 {language === 'zh' ? '音樂課程' : 'Music Classes'}</strong></p>
+                        {selectedLocation.kidsClassesAndWorkshops.musicClasses.types && selectedLocation.kidsClassesAndWorkshops.musicClasses.types.length > 0 && (
+                          <p>{language === 'zh' ? '課程類型' : 'Types'}: {selectedLocation.kidsClassesAndWorkshops.musicClasses.types.join(', ')}</p>
+                        )}
+                        {selectedLocation.kidsClassesAndWorkshops.musicClasses.ageGroup && (
+                          <p>{language === 'zh' ? '適合年齡' : 'Age Group'}: {selectedLocation.kidsClassesAndWorkshops.musicClasses.ageGroup}</p>
+                        )}
+                        {selectedLocation.kidsClassesAndWorkshops.musicClasses.schedule && (
+                          <p>{language === 'zh' ? '課程時間' : 'Schedule'}: {selectedLocation.kidsClassesAndWorkshops.musicClasses.schedule}</p>
+                        )}
+                        {selectedLocation.kidsClassesAndWorkshops.musicClasses.pricing && (
+                          <p>{language === 'zh' ? '費用' : 'Pricing'}: {selectedLocation.kidsClassesAndWorkshops.musicClasses.pricing}</p>
+                        )}
+                      </div>
+                    )}
+                    {selectedLocation.kidsClassesAndWorkshops.artClasses && selectedLocation.kidsClassesAndWorkshops.artClasses.available && (
+                      <div style={{ marginBottom: '15px', paddingLeft: '10px', borderLeft: '3px solid #ec4899' }}>
+                        <p><strong>🎨 {language === 'zh' ? '美術課程' : 'Art Classes'}</strong></p>
+                        {selectedLocation.kidsClassesAndWorkshops.artClasses.types && selectedLocation.kidsClassesAndWorkshops.artClasses.types.length > 0 && (
+                          <p>{language === 'zh' ? '課程類型' : 'Types'}: {selectedLocation.kidsClassesAndWorkshops.artClasses.types.join(', ')}</p>
+                        )}
+                        {selectedLocation.kidsClassesAndWorkshops.artClasses.ageGroup && (
+                          <p>{language === 'zh' ? '適合年齡' : 'Age Group'}: {selectedLocation.kidsClassesAndWorkshops.artClasses.ageGroup}</p>
+                        )}
+                        {selectedLocation.kidsClassesAndWorkshops.artClasses.schedule && (
+                          <p>{language === 'zh' ? '課程時間' : 'Schedule'}: {selectedLocation.kidsClassesAndWorkshops.artClasses.schedule}</p>
+                        )}
+                        {selectedLocation.kidsClassesAndWorkshops.artClasses.pricing && (
+                          <p>{language === 'zh' ? '費用' : 'Pricing'}: {selectedLocation.kidsClassesAndWorkshops.artClasses.pricing}</p>
+                        )}
+                        {selectedLocation.kidsClassesAndWorkshops.artClasses.materialsIncluded && (
+                          <p>✓ {language === 'zh' ? '教材已含' : 'Materials Included'}</p>
+                        )}
+                      </div>
+                    )}
+                    {selectedLocation.kidsClassesAndWorkshops.sportClasses && selectedLocation.kidsClassesAndWorkshops.sportClasses.available && (
+                      <div style={{ marginBottom: '15px', paddingLeft: '10px', borderLeft: '3px solid #f97316' }}>
+                        <p><strong>⚽ {language === 'zh' ? '運動課程' : 'Sports Classes'}</strong></p>
+                        {selectedLocation.kidsClassesAndWorkshops.sportClasses.types && selectedLocation.kidsClassesAndWorkshops.sportClasses.types.length > 0 && (
+                          <p>{language === 'zh' ? '課程類型' : 'Types'}: {selectedLocation.kidsClassesAndWorkshops.sportClasses.types.join(', ')}</p>
+                        )}
+                        {selectedLocation.kidsClassesAndWorkshops.sportClasses.ageGroup && (
+                          <p>{language === 'zh' ? '適合年齡' : 'Age Group'}: {selectedLocation.kidsClassesAndWorkshops.sportClasses.ageGroup}</p>
+                        )}
+                        {selectedLocation.kidsClassesAndWorkshops.sportClasses.schedule && (
+                          <p>{language === 'zh' ? '課程時間' : 'Schedule'}: {selectedLocation.kidsClassesAndWorkshops.sportClasses.schedule}</p>
+                        )}
+                        {selectedLocation.kidsClassesAndWorkshops.sportClasses.pricing && (
+                          <p>{language === 'zh' ? '費用' : 'Pricing'}: {selectedLocation.kidsClassesAndWorkshops.sportClasses.pricing}</p>
+                        )}
+                      </div>
+                    )}
+                    {selectedLocation.kidsClassesAndWorkshops.parentChildClasses && selectedLocation.kidsClassesAndWorkshops.parentChildClasses.available && (
+                      <div style={{ marginBottom: '15px', paddingLeft: '10px', borderLeft: '3px solid #22c55e' }}>
+                        <p><strong>👪 {language === 'zh' ? '親子課程' : 'Parent-Child Classes'}</strong></p>
+                        {selectedLocation.kidsClassesAndWorkshops.parentChildClasses.types && selectedLocation.kidsClassesAndWorkshops.parentChildClasses.types.length > 0 && (
+                          <p>{language === 'zh' ? '課程類型' : 'Types'}: {selectedLocation.kidsClassesAndWorkshops.parentChildClasses.types.join(', ')}</p>
+                        )}
+                        {selectedLocation.kidsClassesAndWorkshops.parentChildClasses.ageGroup && (
+                          <p>{language === 'zh' ? '適合年齡' : 'Age Group'}: {selectedLocation.kidsClassesAndWorkshops.parentChildClasses.ageGroup}</p>
+                        )}
+                        {selectedLocation.kidsClassesAndWorkshops.parentChildClasses.schedule && (
+                          <p>{language === 'zh' ? '課程時間' : 'Schedule'}: {selectedLocation.kidsClassesAndWorkshops.parentChildClasses.schedule}</p>
+                        )}
+                        {selectedLocation.kidsClassesAndWorkshops.parentChildClasses.pricing && (
+                          <p>{language === 'zh' ? '費用' : 'Pricing'}: {selectedLocation.kidsClassesAndWorkshops.parentChildClasses.pricing}</p>
+                        )}
+                      </div>
+                    )}
+                    {selectedLocation.kidsClassesAndWorkshops.summitCamps && selectedLocation.kidsClassesAndWorkshops.summitCamps.available && (
+                      <div style={{ marginBottom: '15px', paddingLeft: '10px', borderLeft: '3px solid #06b6d4' }}>
+                        <p><strong>🏕️ {language === 'zh' ? '暑期/冬令營隊' : 'Summer/Winter Camps'}</strong></p>
+                        {selectedLocation.kidsClassesAndWorkshops.summitCamps.types && selectedLocation.kidsClassesAndWorkshops.summitCamps.types.length > 0 && (
+                          <p>{language === 'zh' ? '課程類型' : 'Types'}: {selectedLocation.kidsClassesAndWorkshops.summitCamps.types.join(', ')}</p>
+                        )}
+                        {selectedLocation.kidsClassesAndWorkshops.summitCamps.seasonalAvailability && (
+                          <p>{language === 'zh' ? '開放季節' : 'Seasonal Availability'}: {selectedLocation.kidsClassesAndWorkshops.summitCamps.seasonalAvailability}</p>
+                        )}
+                        {selectedLocation.kidsClassesAndWorkshops.summitCamps.pricing && (
+                          <p>{language === 'zh' ? '費用' : 'Pricing'}: {selectedLocation.kidsClassesAndWorkshops.summitCamps.pricing}</p>
+                        )}
+                      </div>
+                    )}
+                    {selectedLocation.kidsClassesAndWorkshops.classesNotes && (
+                      <p><strong>{language === 'zh' ? '課程說明' : 'Classes Notes'}</strong>: {selectedLocation.kidsClassesAndWorkshops.classesNotes}</p>
+                    )}
+                    {selectedLocation.kidsClassesAndWorkshops.bookingMethod && (
+                      <p><strong>{language === 'zh' ? '預約方式' : 'Booking Method'}</strong>: {selectedLocation.kidsClassesAndWorkshops.bookingMethod}</p>
+                    )}
+                    {selectedLocation.kidsClassesAndWorkshops.classesPhoneNumber && (
+                      <p><strong>{language === 'zh' ? '課程電話' : 'Classes Phone'}</strong>: {selectedLocation.kidsClassesAndWorkshops.classesPhoneNumber}</p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>
