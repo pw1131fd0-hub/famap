@@ -355,6 +355,24 @@ export let mockLocations: Location[] = [
       enforcementLevel: 'none',
       documentationNotes: '戶外開放式公園，無任何健康證明要求',
       healthRequirementNotes: '公園為戶外設施，無疫苗或健康文件要求。全家可放心遊玩。'
+    },
+    playgroundAndActivity: {
+      hasPlayground: true,
+      playgroundTypes: ['traditional playground', 'sandbox play area', 'nature trail'],
+      playgroundEquipment: ['slides', 'swings', 'climbing structures', 'sandbox', 'spring riders', 'balance beams'],
+      toddlerPlaygroundAvailable: true,
+      preschoolPlayEquipment: ['swings', 'sandbox', 'climbing wall', 'spring riders'],
+      schoolAgePlayEquipment: ['slides', 'climbing structures', 'rope bridges', 'balance beams'],
+      teenActivityOptions: ['nature trails', 'climbing rocks', 'badminton courts'],
+      activitiesByAgeGroup: '1-3歲：沙坑、搖搖馬、小滑梯；4-8歲：攀爬網、標準滑梯、秋千；9-12歲：挑戰型攀爬、繩橋、登山步道',
+      seasonalActivityAvailability: '全年開放，夏季多水上活動機會，冬季適合登山',
+      playgroundSafetyRating: 4.8,
+      equipmentMaintenanceFrequency: '每日檢查，每週深層清潔，季度安全檢驗',
+      equipmentAgeAndCondition: '設施於2024年全面更新，符合台灣安全標準，木製設施定期防腐處理',
+      costForActivities: '全部免費',
+      suggestedDurationPerActivityType: '沙坑：45分鐘、秋千：30分鐘、滑梯：20分鐘、登山：60-120分鐘',
+      outdoorVsIndoorActivities: '95%戶外，5%涼亭和廁所室內',
+      playgroundAndActivityNotes: '台北最大親子公園，遊樂設施齊全，適合各年齡層。沙坑特別受歡迎，建議上午9-11點或下午4點後到訪避免人潮。'
     }
   },
   {
@@ -777,6 +795,24 @@ export let mockLocations: Location[] = [
       enforcementLevel: 'none',
       documentationNotes: '樂園遵守台灣防疫指引，但不強制要求疫苗證明',
       healthRequirementNotes: '目前無特定疫苗或健康文件要求。建議在患病期間避免訪園。'
+    },
+    playgroundAndActivity: {
+      hasPlayground: true,
+      playgroundTypes: ['amusement park', 'water play area', 'arcade games', 'interactive exhibits'],
+      playgroundEquipment: ['roller coaster', 'log flume', 'carousel', 'spinning rides', 'arcade games', 'water splash zone'],
+      toddlerPlaygroundAvailable: true,
+      preschoolPlayEquipment: ['carousel', 'water spray area', 'soft play rides', 'mini roller coaster'],
+      schoolAgePlayEquipment: ['water rides', 'spinning rides', 'roller coaster', 'arcade games', 'challenge courses'],
+      teenActivityOptions: ['extreme rides', 'shooting games', 'VR experiences', 'arcade competitions'],
+      activitiesByAgeGroup: '2-4歲：旋轉木馬、水上樂園、軟墊遊樂設施；5-8歲：摩天輪、小型雲霄飛車、水上遊樂設施；9-12歲：大型遊樂設施、遊戲機、挑戰課程；13+：極限遊樂設施、VR體驗',
+      seasonalActivityAvailability: '全年開放，冬季水上設施部分關閉，夏季水上樂園全開放',
+      playgroundSafetyRating: 4.9,
+      equipmentMaintenanceFrequency: '每日營業前檢查，每週深層維護，每月第三周進行重點檢修',
+      equipmentAgeAndCondition: '設施於2023年起逐年更新，全符合國際安全標準ISO17842，定期檢驗證書公開於入口處',
+      costForActivities: '遊樂設施包含在入園票內，遊戲機額外付費（NT$20-50/次），水上樂園全包',
+      suggestedDurationPerActivityType: '旋轉木馬：5分鐘、大遊樂設施：3-5分鐘排隊加遊玩、水上區：60分鐘、遊戲機區：30-45分鐘',
+      outdoorVsIndoorActivities: '60%戶外（遊樂設施、水上區），40%室內（遊戲機館、表演廳、餐飲區）',
+      playgroundAndActivityNotes: '兒童樂園有30+項遊樂設施，適合各年齡層。高峰時段（周末下午2-6pm）排隊時間可達30-60分鐘。建議平日上午或親子時段造訪以避免人潮。水上遊樂設施夏季非常受歡迎。'
     }
   },
   {
@@ -1149,6 +1185,24 @@ export let mockLocations: Location[] = [
       enforcementLevel: 'none',
       documentationNotes: '室內文化場所，遵守基本防疫措施但無強制疫苗要求',
       healthRequirementNotes: '無特定疫苗或健康文件要求。提供手部消毒設施。'
+    },
+    playgroundAndActivity: {
+      hasPlayground: false,
+      playgroundTypes: ['indoor exhibits', 'interactive learning stations'],
+      playgroundEquipment: ['interactive display screens', 'hands-on fossil models', 'virtual reality stations', 'touch screens', 'microscopes'],
+      toddlerPlaygroundAvailable: false,
+      preschoolPlayEquipment: ['large illustrated panels', 'touch-sensitive exhibits'],
+      schoolAgePlayEquipment: ['fossil exploration station', 'geology interactive display', 'VR paleontology experience', 'microscope station'],
+      teenActivityOptions: ['advanced paleontology exhibits', 'geological research station', 'cultural heritage digital archives'],
+      activitiesByAgeGroup: '3-5歲：彩色插圖展板、大型模型觀賞；6-8歲：化石互動展示、觸控螢幕學習、望遠鏡體驗；9-12歲：地質學習區、VR古生物體驗、實驗室模擬；13+：進階古生物研究、文物保護教育',
+      seasonalActivityAvailability: '全年開放，特定月份有特展',
+      playgroundSafetyRating: 4.7,
+      equipmentMaintenanceFrequency: '每日清潔消毒，互動設備每周檢修',
+      equipmentAgeAndCondition: '設備於2024年全面升級為最新互動式展示，遵守文物保護標準',
+      costForActivities: '全部包含在入場票內，無額外付費',
+      suggestedDurationPerActivityType: '化石區：30-40分鐘、VR體驗：15-20分鐘（需排隊）、地質展區：20-30分鐘',
+      outdoorVsIndoorActivities: '100%室內，完全空調控制',
+      playgroundAndActivityNotes: '博物館為教育性室內景點，無傳統遊樂場。適合對古生物和地質有興趣的兒童。互動展示很受歡迎，高峰時段（假日下午）互動設備需排隊20-30分鐘。2-3歲幼兒可能難以享受，建議3歲以上兒童。'
     }
   },
   {
@@ -1535,6 +1589,24 @@ export let mockLocations: Location[] = [
       enforcementLevel: 'none',
       documentationNotes: '室內親子設施維持基本防疫，無強制疫苗要求',
       healthRequirementNotes: '無特定疫苗或健康文件要求。提供手部消毒設施和玩具清潔。'
+    },
+    playgroundAndActivity: {
+      hasPlayground: true,
+      playgroundTypes: ['indoor soft play', 'activity play zone', 'sensory play area'],
+      playgroundEquipment: ['soft climbing structures', 'ball pit', 'slides', 'tunnels', 'sensory toys', 'play kitchen', 'blocks'],
+      toddlerPlaygroundAvailable: true,
+      preschoolPlayEquipment: ['soft slides', 'ball pit', 'climbing blocks', 'sensory play', 'play kitchen', 'ride-on toys'],
+      schoolAgePlayEquipment: ['challenging climbing', 'obstacle course', 'interactive games', 'age-appropriate puzzles'],
+      teenActivityOptions: ['limited - designed for younger children'],
+      activitiesByAgeGroup: '1-2歲：軟墊安全區、感官玩具、學步訓練；3-5歲：軟墊攀爬、球池、幻想遊戲區、廚房扮家家；6-8歲：挑戰性攀爬、解謎遊戲、運動活動',
+      seasonalActivityAvailability: '全年開放，室內恆溫冷氣',
+      playgroundSafetyRating: 4.9,
+      equipmentMaintenanceFrequency: '營業前日常檢查，每週深層清潔消毒，月度安全檢驗',
+      equipmentAgeAndCondition: '設施全新（2024年開業），符合國際安全標準，所有材料無毒環保',
+      costForActivities: '全部包含入場費，無額外付費',
+      suggestedDurationPerActivityType: '軟墊區：20-30分鐘、球池：15-20分鐘、扮家家：20-30分鐘、整體遊玩：1.5-2小時',
+      outdoorVsIndoorActivities: '100%室內，完全空調',
+      playgroundAndActivityNotes: '專為1-6歲設計的安全室內遊樂設施。冬季和雨天的完美選擇，空調舒適。設施清潔衛生，玩具定期消毒。特別適合幼齡兒童和新生兒。高峰時段（周末下午）人滿為患，建議平日或上午到訪。'
     }
   },
   {
@@ -1917,6 +1989,24 @@ export let mockLocations: Location[] = [
       enforcementLevel: 'none',
       documentationNotes: '公設運動中心，遵守防疫但無強制疫苗要求',
       healthRequirementNotes: '無特定疫苗或健康文件要求。建議患有眼睛或皮膚問題的兒童帶備防護用品。'
+    },
+    playgroundAndActivity: {
+      hasPlayground: true,
+      playgroundTypes: ['swimming pools', 'water play area', 'aquatic training', 'recreational pool', 'children splash pool'],
+      playgroundEquipment: ['heated infant pool', 'shallow children pool', 'main Olympic pool', 'diving area', 'water slides', 'splash pad'],
+      toddlerPlaygroundAvailable: true,
+      preschoolPlayEquipment: ['shallow splash pool (0.6m)', 'water toys', 'beginner swim lanes'],
+      schoolAgePlayEquipment: ['children training pool (1m)', 'intermediate swim lanes', 'water polo areas', 'diving board (shallow)'],
+      teenActivityOptions: ['Olympic diving board', 'competitive swim lanes', 'water polo', 'synchronized swimming classes'],
+      activitiesByAgeGroup: '3-12個月：嬰兒溫水池26-30°C、親子水上遊戲；1-3歲：淺水池(0.6m)、水上安全課、水上遊戲；4-8歲：兒童訓練池(1m)、游泳課程、跳水課；9-12歲：標準游泳課、進階水上技能、水上運動；13+：競技游泳、跳水訓練',
+      seasonalActivityAvailability: '全年開放，冬季室內加溫，夏季戶外泳池全開',
+      playgroundSafetyRating: 4.8,
+      equipmentMaintenanceFrequency: '每日水質檢測及設施檢查，周度深層清潔，月度技術檢修',
+      equipmentAgeAndCondition: '設施完善，多個泳池設備定期維護，2024年進行現代化升級',
+      costForActivities: '游泳票包含池費，游泳課程額外付費（NT$200-500/堂）',
+      suggestedDurationPerActivityType: '嬰兒池：20-30分鐘、兒童淺水池：45-60分鐘、游泳課：60分鐘、整體遊玩：1.5-2小時',
+      outdoorVsIndoorActivities: '70%室內（加溫池），30%戶外（夏季開放）',
+      playgroundAndActivityNotes: '南港軟體園區親子中心特別適合1-8歲的水上活動和游泳學習。嬰兒溫水池很溫暖安全，兒童淺水池人氣旺盛。周末假日人多排隊，建議平日上午到訪。專業游泳教練提供各年齡段課程。高峰時段淺水池可能擁擠。'
     }
   },
   {
@@ -2293,6 +2383,24 @@ export let mockLocations: Location[] = [
       enforcementLevel: 'none',
       documentationNotes: '公設運動中心，遵守防疫標準但無強制疫苗要求',
       healthRequirementNotes: '無特定疫苗或健康文件要求。水上活動建議檢查天氣和水質狀況。'
+    },
+    playgroundAndActivity: {
+      hasPlayground: true,
+      playgroundTypes: ['swimming pools', 'water training facilities', 'recreational pool', 'children splash pool', 'competitive swimming area'],
+      playgroundEquipment: ['heated children pool', 'shallow training pool', 'Olympic main pool', 'diving board', 'water slide (summer)', 'hydro-jet facilities'],
+      toddlerPlaygroundAvailable: false,
+      preschoolPlayEquipment: ['shallow pool (0.8m)', 'water toys', 'beginner swim lane'],
+      schoolAgePlayEquipment: ['children training pool (1.2m)', 'intermediate swim lanes', 'diving platforms'],
+      teenActivityOptions: ['Olympic diving board', 'competitive swimming', 'water polo training', 'diving certifications'],
+      activitiesByAgeGroup: '4-7歲：淺水訓練池(0.8m)、游泳課程、水上遊戲；8-12歲：標準訓練池(1.2m)、進階游泳課、跳水課；13+：競技游泳、跳水訓練、水上運動',
+      seasonalActivityAvailability: '全年室內池開放，夏季（6-9月）戶外設施全開，水滑梯開放',
+      playgroundSafetyRating: 4.7,
+      equipmentMaintenanceFrequency: '每日水質檢測，营業前後設施檢查，周度清潔，月度安全檢修',
+      equipmentAgeAndCondition: '設施完善，2023年進行維修升級，所有設備符合國際標準',
+      costForActivities: '入池票包含所有池設施，游泳課程額外付費（NT$100-400/堂）',
+      suggestedDurationPerActivityType: '淺水池：30-45分鐘、遊泳課程：60分鐘、自由遊玩：1-2小時',
+      outdoorVsIndoorActivities: '冬季100%室內，夏季70%室內+30%戶外',
+      playgroundAndActivityNotes: '內湖運動中心為公設游泳設施，主要用於競技和訓練，不若兒童新樂園般有娛樂設施。適合4歲以上想學習游泳的兒童。淺水池適合初學者，但高峰時段（周末下午和晚間）常排隊。夏季水滑梯超人氣，等待時間長。建議預約游泳課程以保證時間。'
     }
   },
   {
@@ -2698,6 +2806,24 @@ export let mockLocations: Location[] = [
       enforcementLevel: 'none',
       documentationNotes: '水上樂園遵守標準防疫，無強制疫苗要求',
       healthRequirementNotes: '無特定疫苗或健康文件要求。建議檢查天氣預報。皮膚敏感兒童帶備防曬和防刺激產品。'
+    },
+    playgroundAndActivity: {
+      hasPlayground: true,
+      playgroundTypes: ['water park', 'water slides', 'wave pool', 'water play zone', 'lazy river'],
+      playgroundEquipment: ['water slides (family/extreme)', 'wave pool (adjustable)', 'shallow children splash area', 'lazy river floats', 'water spray playground', 'interactive water features'],
+      toddlerPlaygroundAvailable: false,
+      preschoolPlayEquipment: [],
+      schoolAgePlayEquipment: ['children water slides', 'shallow splash area', 'wave pool (shallow section)', 'water spray toys'],
+      teenActivityOptions: ['extreme water slides', 'wave pool surfing', 'deep diving area', 'water sports activities'],
+      activitiesByAgeGroup: '4-7歲：兒童水滑梯、淺水戲水區、水上噴泉；8-12歲：中級水滑梯、波浪池、懶人漂流河、水上遊戲；13+：極限水滑梯、深水區、衝浪板體驗',
+      seasonalActivityAvailability: '季節性開放，5月中至9月中開放（夏季營運期），冬季關閉',
+      playgroundSafetyRating: 4.6,
+      equipmentMaintenanceFrequency: '營業期間每日檢查，周度深層維護，营業前後安全檢驗',
+      equipmentAgeAndCondition: '設施定期維護，2024年進行部分設備更新，所有滑道符合安全標準',
+      costForActivities: '所有水上設施包含在入園票內',
+      suggestedDurationPerActivityType: '水滑梯排隊+遊玩：15-30分鐘、波浪池：30-45分鐘、懶人漂流河：20分鐘、整體遊玩時間：4-6小時',
+      outdoorVsIndoorActivities: '100%戶外，無室內設施',
+      playgroundAndActivityNotes: '新店水上樂園是台北地區最大的水上樂園，適合4歲以上學齡兒童和青少年。擁有30多項水上設施和遊樂。高峰期（周末和暑假）人非常多，排隊時間長達30-60分鐘。建議早上8-10點到達或參加夜間活動。4歲以下兒童不建議，因無特別設施。務必做好防曬和補充水分。'
     }
   },
 ];

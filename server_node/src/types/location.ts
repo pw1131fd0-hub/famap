@@ -560,6 +560,26 @@ export interface HealthDocumentationRequirementsInfo {
   healthRequirementNotes?: string; // Complete health requirement information
 }
 
+export interface PlaygroundEquipmentAndActivityInfo {
+  hasPlayground?: boolean; // Is there a playground available?
+  playgroundTypes?: string[]; // e.g., ["traditional playground", "water playground", "adventure park", "sensory playground"]
+  playgroundEquipment?: string[]; // e.g., ["slides", "swings", "monkey bars", "climbing wall", "sandbox", "seesaw", "spring riders", "balance beams", "rope bridges"]
+  toddlerPlaygroundAvailable?: boolean; // Dedicated toddler play areas
+  preschoolPlayEquipment?: string[]; // Equipment suitable for 3-5 years
+  schoolAgePlayEquipment?: string[]; // Equipment suitable for 6-12 years
+  teenActivityOptions?: string[]; // Equipment/activities for 13+ years
+  activitiesByAgeGroup?: string; // e.g., "Ages 1-3: sandbox, swings, soft play; Ages 4-8: slides, climbing, monkey bars; Ages 9-12: challenge courses, zip lines"
+  seasonalActivityAvailability?: string; // e.g., "Water playground open May-September only"
+  activityDurationRecommendations?: string; // e.g., "Typical playground visit 1-3 hours depending on age and interest"
+  playgroundSafetyRating?: number; // 1-5 stars based on equipment condition
+  equipmentMaintenanceFrequency?: string; // e.g., "Daily inspection and weekly deep clean"
+  equipmentAgeAndCondition?: string; // e.g., "Equipment renewed 2025, all structures certified safe"
+  costForActivities?: string; // e.g., "Playground free; water play NT$50 extra; adventure courses NT$100-300"
+  suggestedDurationPerActivityType?: string; // e.g., "Slide: 10-15 mins, sandbox: 30-60 mins, swings: 15-30 mins"
+  outdoorVsIndoorActivities?: string; // e.g., "50% outdoor, 50% indoor; indoor areas heated/AC'd"
+  playgroundAndActivityNotes?: string; // Complete playground and activity information
+}
+
 export interface Location {
   id: string;
   name: {
@@ -634,6 +654,7 @@ export interface Location {
   childAgeCompatibility?: ChildAgeCombinationSuitabilityInfo;
   visitCost?: ComprehensiveVisitCostInfo;
   healthDocumentation?: HealthDocumentationRequirementsInfo;
+  playgroundAndActivity?: PlaygroundEquipmentAndActivityInfo;
 }
 
 export interface SearchParams {

@@ -1837,6 +1837,41 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.playgroundAndActivity && (
+                  <div className="location-detail-section">
+                    <h4>🎪 {language === 'zh' ? '遊樂設施與活動' : 'Playground & Activities'}</h4>
+                    {selectedLocation.playgroundAndActivity.hasPlayground !== undefined && (
+                      <p><strong>{language === 'zh' ? '有遊樂設施' : 'Has Playground'}</strong>: {selectedLocation.playgroundAndActivity.hasPlayground ? (language === 'zh' ? '是' : 'Yes') : (language === 'zh' ? '否' : 'No')}</p>
+                    )}
+                    {selectedLocation.playgroundAndActivity.playgroundTypes && selectedLocation.playgroundAndActivity.playgroundTypes.length > 0 && (
+                      <p><strong>{language === 'zh' ? '遊樂場類型' : 'Playground Types'}</strong>: {selectedLocation.playgroundAndActivity.playgroundTypes.join(', ')}</p>
+                    )}
+                    {selectedLocation.playgroundAndActivity.playgroundEquipment && selectedLocation.playgroundAndActivity.playgroundEquipment.length > 0 && (
+                      <p><strong>{language === 'zh' ? '遊樂設備' : 'Equipment'}</strong>: {selectedLocation.playgroundAndActivity.playgroundEquipment.join(', ')}</p>
+                    )}
+                    {selectedLocation.playgroundAndActivity.activitiesByAgeGroup && (
+                      <p><strong>{language === 'zh' ? '不同年齡活動' : 'Activities by Age'}</strong>: {selectedLocation.playgroundAndActivity.activitiesByAgeGroup}</p>
+                    )}
+                    {selectedLocation.playgroundAndActivity.costForActivities && (
+                      <p><strong>{language === 'zh' ? '活動費用' : 'Activity Cost'}</strong>: {selectedLocation.playgroundAndActivity.costForActivities}</p>
+                    )}
+                    {selectedLocation.playgroundAndActivity.playgroundSafetyRating && (
+                      <p><strong>{language === 'zh' ? '設施安全評分' : 'Safety Rating'}</strong>: {selectedLocation.playgroundAndActivity.playgroundSafetyRating}/5 ⭐</p>
+                    )}
+                    {selectedLocation.playgroundAndActivity.equipmentMaintenanceFrequency && (
+                      <p><strong>{language === 'zh' ? '維護頻率' : 'Maintenance'}</strong>: {selectedLocation.playgroundAndActivity.equipmentMaintenanceFrequency}</p>
+                    )}
+                    {selectedLocation.playgroundAndActivity.suggestedDurationPerActivityType && (
+                      <p><strong>{language === 'zh' ? '建議時間' : 'Suggested Duration'}</strong>: {selectedLocation.playgroundAndActivity.suggestedDurationPerActivityType}</p>
+                    )}
+                    {selectedLocation.playgroundAndActivity.outdoorVsIndoorActivities && (
+                      <p><strong>{language === 'zh' ? '室內/戶外' : 'Indoor/Outdoor'}</strong>: {selectedLocation.playgroundAndActivity.outdoorVsIndoorActivities}</p>
+                    )}
+                    {selectedLocation.playgroundAndActivity.playgroundAndActivityNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.playgroundAndActivity.playgroundAndActivityNotes}</p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>

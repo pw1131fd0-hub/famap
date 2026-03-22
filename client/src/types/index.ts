@@ -560,6 +560,25 @@ export interface HealthDocumentationRequirementsInfo {
   healthRequirementNotes?: string;
 }
 
+export interface PlaygroundEquipmentAndActivityInfo {
+  hasPlayground?: boolean;
+  playgroundTypes?: string[];
+  playgroundEquipment?: string[];
+  toddlerPlaygroundAvailable?: boolean;
+  preschoolPlayEquipment?: string[];
+  schoolAgePlayEquipment?: string[];
+  teenActivityOptions?: string[];
+  activitiesByAgeGroup?: string;
+  seasonalActivityAvailability?: string;
+  playgroundSafetyRating?: number;
+  equipmentMaintenanceFrequency?: string;
+  equipmentAgeAndCondition?: string;
+  costForActivities?: string;
+  suggestedDurationPerActivityType?: string;
+  outdoorVsIndoorActivities?: string;
+  playgroundAndActivityNotes?: string;
+}
+
 export interface Location {
   id: string;
   name: {
@@ -634,6 +653,7 @@ export interface Location {
   childAgeCompatibility?: ChildAgeCombinationSuitabilityInfo;
   visitCost?: ComprehensiveVisitCostInfo;
   healthDocumentation?: HealthDocumentationRequirementsInfo;
+  playgroundAndActivity?: PlaygroundEquipmentAndActivityInfo;
 }
 
 export interface Review {
