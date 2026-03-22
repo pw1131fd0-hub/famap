@@ -780,6 +780,27 @@ export interface WalkingDistanceAndDifficultyInfo {
   walkingDifficultyNotes?: string; // e.g., "Mostly flat paths with good stroller access. Main attractions within 200m of entrance. Plenty of benches for rest. Well-suited for families with toddlers. Estimated 1-2 hours walking for full experience."
 }
 
+export interface NoiseAndSensoryEnvironmentInfo {
+  overallNoiseLevel?: 'very_quiet' | 'quiet' | 'moderate' | 'loud' | 'very_loud'; // General noise assessment
+  noiseSourcesDescription?: string; // e.g., "Primarily outdoor venue noise from other visitors and playground equipment; echoing sounds in indoor play areas"
+  peakNoiseHours?: string; // e.g., "Weekends 11am-4pm during peak attendance; highest noise Saturdays-Sundays"
+  quietestHours?: string; // e.g., "Weekday mornings 9-11am and late afternoons 4-6pm; very quiet before 9am"
+  soundMitigation?: string[]; // e.g., ["soundproofing in main hall", "noise-reducing playground surface", "designated quiet zones"]
+  hasSoundproofing?: boolean; // Are any areas soundproofed?
+  quietZonesAvailable?: boolean; // Dedicated quiet areas?
+  quietZoneDescription?: string; // e.g., "Quiet reading area, sensory room with soft lighting and low music"
+  sensoryFriendlyHours?: string; // e.g., "Autism-friendly sensory-reduced hours: Tuesday mornings 9-11am, reduced lighting, lower volume entertainment"
+  sensoryAccommodations?: string[]; // e.g., ["adjustable lighting", "low-volume audio options", "scent-free policies"]
+  vibrationalActivities?: string; // e.g., "Rides and performances have vibration; separate quiet entertainment options available"
+  lightingSituation?: 'very_bright' | 'bright' | 'moderate' | 'dim' | 'mixed'; // Lighting assessment
+  hasAdjustableLighting?: boolean; // Can lighting be adjusted?
+  scents?: string; // e.g., "Food court aromas; playground rubber mulch; no strong chemical odors"
+  hasScent_freePolicies?: boolean; // Fragrance-free areas?
+  echoProblems?: boolean; // Do certain areas have echo/reverb issues?
+  staffSensoryAwareness?: 'comprehensive' | 'trained' | 'basic' | 'minimal'; // Staff training level on sensory needs
+  sensoryEnvironmentNotes?: string; // e.g., "Best for sensory-sensitive families during quiet hours (weekday mornings). Main playground is loud; quieter activities available indoors. Autism-friendly hours available with reduced stimulation."
+}
+
 export interface Location {
   id: string;
   name: {
@@ -860,6 +881,7 @@ export interface Location {
   kidsClassesAndWorkshops?: KidsClassesAndWorkshopsInfo;
   weatherAndSunSafety?: WeatherAndSunSafetyInfo;
   walkingDistanceAndDifficulty?: WalkingDistanceAndDifficultyInfo;
+  noiseAndSensoryEnvironment?: NoiseAndSensoryEnvironmentInfo;
 }
 
 export interface SearchParams {

@@ -2217,6 +2217,82 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.noiseAndSensoryEnvironment && (
+                  <div className="location-section" style={{ borderTop: '2px solid #a78bfa', paddingTop: '12px', marginTop: '12px' }}>
+                    <h3>🔊 {language === 'zh' ? '音量與感官環境' : 'Noise & Sensory Environment'}</h3>
+                    {selectedLocation.noiseAndSensoryEnvironment.overallNoiseLevel && (
+                      <p><strong>{language === 'zh' ? '整體噪音水平' : 'Overall Noise Level'}</strong>: {
+                        selectedLocation.noiseAndSensoryEnvironment.overallNoiseLevel === 'very_quiet' ? '🟢 ' + (language === 'zh' ? '非常安靜' : 'Very Quiet') :
+                        selectedLocation.noiseAndSensoryEnvironment.overallNoiseLevel === 'quiet' ? '🟢 ' + (language === 'zh' ? '安靜' : 'Quiet') :
+                        selectedLocation.noiseAndSensoryEnvironment.overallNoiseLevel === 'moderate' ? '🟡 ' + (language === 'zh' ? '中等' : 'Moderate') :
+                        selectedLocation.noiseAndSensoryEnvironment.overallNoiseLevel === 'loud' ? '🟠 ' + (language === 'zh' ? '吵雜' : 'Loud') :
+                        '🔴 ' + (language === 'zh' ? '非常吵雜' : 'Very Loud')
+                      }</p>
+                    )}
+                    {selectedLocation.noiseAndSensoryEnvironment.noiseSourcesDescription && (
+                      <p><strong>{language === 'zh' ? '噪音來源' : 'Noise Sources'}</strong>: {selectedLocation.noiseAndSensoryEnvironment.noiseSourcesDescription}</p>
+                    )}
+                    {selectedLocation.noiseAndSensoryEnvironment.peakNoiseHours && (
+                      <p><strong>{language === 'zh' ? '尖峰噪音時段' : 'Peak Noise Hours'}</strong>: {selectedLocation.noiseAndSensoryEnvironment.peakNoiseHours}</p>
+                    )}
+                    {selectedLocation.noiseAndSensoryEnvironment.quietestHours && (
+                      <p><strong>{language === 'zh' ? '最安靜時段' : 'Quietest Hours'}</strong>: {selectedLocation.noiseAndSensoryEnvironment.quietestHours}</p>
+                    )}
+                    {selectedLocation.noiseAndSensoryEnvironment.soundMitigation && selectedLocation.noiseAndSensoryEnvironment.soundMitigation.length > 0 && (
+                      <p><strong>{language === 'zh' ? '降噪措施' : 'Sound Mitigation'}</strong>: {selectedLocation.noiseAndSensoryEnvironment.soundMitigation.join(', ')}</p>
+                    )}
+                    {selectedLocation.noiseAndSensoryEnvironment.hasSoundproofing !== undefined && (
+                      <p><strong>{language === 'zh' ? '隔音措施' : 'Soundproofing'}</strong>: {selectedLocation.noiseAndSensoryEnvironment.hasSoundproofing ? '✅' : '❌'}</p>
+                    )}
+                    {selectedLocation.noiseAndSensoryEnvironment.quietZonesAvailable !== undefined && (
+                      <p><strong>{language === 'zh' ? '安靜區域' : 'Quiet Zones'}</strong>: {selectedLocation.noiseAndSensoryEnvironment.quietZonesAvailable ? '✅ ' + (language === 'zh' ? '有' : 'Available') : '❌ ' + (language === 'zh' ? '無' : 'Not Available')}</p>
+                    )}
+                    {selectedLocation.noiseAndSensoryEnvironment.quietZoneDescription && (
+                      <p><strong>{language === 'zh' ? '安靜區域說明' : 'Quiet Zone Details'}</strong>: {selectedLocation.noiseAndSensoryEnvironment.quietZoneDescription}</p>
+                    )}
+                    {selectedLocation.noiseAndSensoryEnvironment.sensoryFriendlyHours && (
+                      <p><strong>{language === 'zh' ? '感官友善時段' : 'Sensory-Friendly Hours'}</strong>: {selectedLocation.noiseAndSensoryEnvironment.sensoryFriendlyHours}</p>
+                    )}
+                    {selectedLocation.noiseAndSensoryEnvironment.sensoryAccommodations && selectedLocation.noiseAndSensoryEnvironment.sensoryAccommodations.length > 0 && (
+                      <p><strong>{language === 'zh' ? '感官便利設施' : 'Sensory Accommodations'}</strong>: {selectedLocation.noiseAndSensoryEnvironment.sensoryAccommodations.join(', ')}</p>
+                    )}
+                    {selectedLocation.noiseAndSensoryEnvironment.vibrationalActivities && (
+                      <p><strong>{language === 'zh' ? '振動活動' : 'Vibrational Activities'}</strong>: {selectedLocation.noiseAndSensoryEnvironment.vibrationalActivities}</p>
+                    )}
+                    {selectedLocation.noiseAndSensoryEnvironment.lightingSituation && (
+                      <p><strong>{language === 'zh' ? '照明環境' : 'Lighting Situation'}</strong>: {
+                        selectedLocation.noiseAndSensoryEnvironment.lightingSituation === 'very_bright' ? '🔆 ' + (language === 'zh' ? '非常明亮' : 'Very Bright') :
+                        selectedLocation.noiseAndSensoryEnvironment.lightingSituation === 'bright' ? '☀️ ' + (language === 'zh' ? '明亮' : 'Bright') :
+                        selectedLocation.noiseAndSensoryEnvironment.lightingSituation === 'moderate' ? '◐ ' + (language === 'zh' ? '中等' : 'Moderate') :
+                        selectedLocation.noiseAndSensoryEnvironment.lightingSituation === 'dim' ? '🌙 ' + (language === 'zh' ? '昏暗' : 'Dim') :
+                        '◔ ' + (language === 'zh' ? '混合' : 'Mixed')
+                      }</p>
+                    )}
+                    {selectedLocation.noiseAndSensoryEnvironment.hasAdjustableLighting !== undefined && (
+                      <p><strong>{language === 'zh' ? '可調照明' : 'Adjustable Lighting'}</strong>: {selectedLocation.noiseAndSensoryEnvironment.hasAdjustableLighting ? '✅' : '❌'}</p>
+                    )}
+                    {selectedLocation.noiseAndSensoryEnvironment.scents && (
+                      <p><strong>{language === 'zh' ? '氣味環境' : 'Scents'}</strong>: {selectedLocation.noiseAndSensoryEnvironment.scents}</p>
+                    )}
+                    {selectedLocation.noiseAndSensoryEnvironment.hasScent_freePolicies !== undefined && (
+                      <p><strong>{language === 'zh' ? '無香料政策' : 'Scent-Free Policies'}</strong>: {selectedLocation.noiseAndSensoryEnvironment.hasScent_freePolicies ? '✅' : '❌'}</p>
+                    )}
+                    {selectedLocation.noiseAndSensoryEnvironment.echoProblems !== undefined && (
+                      <p><strong>{language === 'zh' ? '迴音問題' : 'Echo Problems'}</strong>: {selectedLocation.noiseAndSensoryEnvironment.echoProblems ? '⚠️ ' + (language === 'zh' ? '有' : 'Yes') : '✅ ' + (language === 'zh' ? '無' : 'No')}</p>
+                    )}
+                    {selectedLocation.noiseAndSensoryEnvironment.staffSensoryAwareness && (
+                      <p><strong>{language === 'zh' ? '員工感官意識' : 'Staff Sensory Awareness'}</strong>: {
+                        selectedLocation.noiseAndSensoryEnvironment.staffSensoryAwareness === 'comprehensive' ? '⭐⭐⭐ ' + (language === 'zh' ? '全面' : 'Comprehensive') :
+                        selectedLocation.noiseAndSensoryEnvironment.staffSensoryAwareness === 'trained' ? '⭐⭐ ' + (language === 'zh' ? '已訓練' : 'Trained') :
+                        selectedLocation.noiseAndSensoryEnvironment.staffSensoryAwareness === 'basic' ? '⭐ ' + (language === 'zh' ? '基礎' : 'Basic') :
+                        '◯ ' + (language === 'zh' ? '最少' : 'Minimal')
+                      }</p>
+                    )}
+                    {selectedLocation.noiseAndSensoryEnvironment.sensoryEnvironmentNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.noiseAndSensoryEnvironment.sensoryEnvironmentNotes}</p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>

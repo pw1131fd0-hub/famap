@@ -779,6 +779,27 @@ export interface WalkingDistanceAndDifficultyInfo {
   walkingDifficultyNotes?: string;
 }
 
+export interface NoiseAndSensoryEnvironmentInfo {
+  overallNoiseLevel?: 'very_quiet' | 'quiet' | 'moderate' | 'loud' | 'very_loud';
+  noiseSourcesDescription?: string;
+  peakNoiseHours?: string;
+  quietestHours?: string;
+  soundMitigation?: string[];
+  hasSoundproofing?: boolean;
+  quietZonesAvailable?: boolean;
+  quietZoneDescription?: string;
+  sensoryFriendlyHours?: string;
+  sensoryAccommodations?: string[];
+  vibrationalActivities?: string;
+  lightingSituation?: 'very_bright' | 'bright' | 'moderate' | 'dim' | 'mixed';
+  hasAdjustableLighting?: boolean;
+  scents?: string;
+  hasScent_freePolicies?: boolean;
+  echoProblems?: boolean;
+  staffSensoryAwareness?: 'comprehensive' | 'trained' | 'basic' | 'minimal';
+  sensoryEnvironmentNotes?: string;
+}
+
 export interface Location {
   id: string;
   name: {
@@ -859,6 +880,7 @@ export interface Location {
   kidsClassesAndWorkshops?: KidsClassesAndWorkshopsInfo;
   weatherAndSunSafety?: WeatherAndSunSafetyInfo;
   walkingDistanceAndDifficulty?: WalkingDistanceAndDifficultyInfo;
+  noiseAndSensoryEnvironment?: NoiseAndSensoryEnvironmentInfo;
 }
 
 export interface Review {

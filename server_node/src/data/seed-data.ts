@@ -550,6 +550,26 @@ export let mockLocations: Location[] = [
       timeToMainAttraction: 5,
       roundTripWalkingTime: 120,
       walkingDifficultyNotes: '平坦寬敞的主路徑非常適合推嬰兒車。遊樂場全部集中在南邊入口附近，無需走遠路。林區步道較為蜿蜒，沙坑設施距離入口僅200米，非常便利。家有小幼兒的家庭可在1小時內完成主要景點遊覽，有充足休息區域。'
+    },
+    noiseAndSensoryEnvironment: {
+      overallNoiseLevel: 'moderate',
+      noiseSourcesDescription: '主要是遊樂場兒童聲音和戶外鳥鳴聲。週末人多時較吵雜，特別是遊樂區。林區相對安靜。',
+      peakNoiseHours: '週末上午10時至下午4時；暑假期間全天人聲鼎沸',
+      quietestHours: '平日上午9-10時、下午4-6時；清晨5-7時非常安靜',
+      soundMitigation: ['林區自然隔音', '沙坑設施下方有軟質材料減少噪音'],
+      hasSoundproofing: false,
+      quietZonesAvailable: true,
+      quietZoneDescription: '北方林區相對安靜，遠離遊樂設施；早晨散步路線寧靜舒適',
+      sensoryFriendlyHours: '平日上午8-10時特別寧靜，適合感官敏感的家庭',
+      sensoryAccommodations: ['茂密樹蔭提供自然光線調節', '花園區域無強刺激聲音', '遠離遊樂區可獲得寧靜環境'],
+      vibrationalActivities: '僅遊樂設施有輕微振動；其他區域無振動',
+      lightingSituation: 'bright',
+      hasAdjustableLighting: false,
+      scents: '自然草木香氣；可能有泥土和沙塵味道',
+      hasScent_freePolicies: false,
+      echoProblems: false,
+      staffSensoryAwareness: 'basic',
+      sensoryEnvironmentNotes: '戶外公園對感官敏感兒童而言，應選擇平日上午造訪。林區區域非常寧靜，適合需要感官調節的家庭。週末應避免。清晨散步是感官敏感家庭的理想選擇。'
     }
   },
   {
@@ -1186,6 +1206,26 @@ export let mockLocations: Location[] = [
       timeToMainAttraction: 5,
       roundTripWalkingTime: 90,
       walkingDifficultyNotes: '樂園規劃良好，主路線平坦寬敞，很適合推嬰兒車。遊樂設施距離不遠，最多走15分鐘可到任何設施。有充足休息座位。家有嬰幼兒的家庭可輕鬆遊玩，不會過度勞累。'
+    },
+    noiseAndSensoryEnvironment: {
+      overallNoiseLevel: 'very_loud',
+      noiseSourcesDescription: '遊樂園充滿兒童尖叫聲、遊樂設施運作聲、音樂音效。過山車和遊樂設施運作時非常嘈雜。',
+      peakNoiseHours: '每日上午10時至下午6時；週末全天持續很吵',
+      quietestHours: '開園初期9-10時相對較靜；閉園前傍晚5時後逐漸安靜',
+      soundMitigation: [],
+      hasSoundproofing: false,
+      quietZonesAvailable: false,
+      quietZoneDescription: '沒有專門的安靜區域；整個園區都充滿遊樂設施噪音',
+      sensoryFriendlyHours: '開園最初1小時（9-10點）噪音稍低；週一至週五上午相對較靜',
+      sensoryAccommodations: ['戶外開放空間讓兒童適應聲音', '某些室內遊樂區提供相對較靜的環境'],
+      vibrationalActivities: '過山車和遊樂設施產生顯著振動',
+      lightingSituation: 'bright',
+      hasAdjustableLighting: false,
+      scents: '爆米花、食物香氣、機器油味',
+      hasScent_freePolicies: false,
+      echoProblems: true,
+      staffSensoryAwareness: 'basic',
+      sensoryEnvironmentNotes: '兒童樂園整體非常嘈雜，不適合感官敏感或自閉症兒童。週一至週五上午相對較靜，但仍有可觀噪音。家有感官敏感兒童應考慮其他場所。加強音樂或閃烁燈光的遊樂設施應讓敏感兒童避開。'
     }
   },
   {
@@ -1762,6 +1802,26 @@ export let mockLocations: Location[] = [
       timeToMainAttraction: 3,
       roundTripWalkingTime: 60,
       walkingDifficultyNotes: '博物館為多層樓設施，但配有完整電梯系統，推嬰兒車無困難。走道寬敞，座椅多。主要展示區集中在一二樓，無需過度步行。適合家有嬰幼兒的家庭，走路距離短，休息區充足。'
+    },
+    noiseAndSensoryEnvironment: {
+      overallNoiseLevel: 'quiet',
+      noiseSourcesDescription: '室內博物館相對安靜。來自遊客低聲交談和輕微腳步聲。展示區寧靜，教育性環境提倡安靜參觀。',
+      peakNoiseHours: '週末上午11時至下午3時較多遊客；導覽團進行時短暫提高音量',
+      quietestHours: '平日上午9-10時、下午3-4時非常安靜；開館初期人少',
+      soundMitigation: ['厚實牆壁和木質地板提供自然音響隔離', '展示區設計有吸音效果'],
+      hasSoundproofing: true,
+      quietZonesAvailable: true,
+      quietZoneDescription: '一樓主要展區和三樓書閣區域特別寧靜，適合需要安靜環境的家庭',
+      sensoryFriendlyHours: '平日全天適合感官敏感兒童；週一至週五上午特別理想',
+      sensoryAccommodations: ['柔和的展示照明', '寧靜的音樂背景', '少於刺激的視覺設計', '提供休息座位'],
+      vibrationalActivities: '無振動活動',
+      lightingSituation: 'moderate',
+      hasAdjustableLighting: true,
+      scents: '博物館內部無強烈氣味；可能有輕微的文物和木材味道',
+      hasScent_freePolicies: true,
+      echoProblems: false,
+      staffSensoryAwareness: 'trained',
+      sensoryEnvironmentNotes: '國立臺灣博物館是感官敏感和自閉症兒童的優選場所。安靜的文化教育環境、柔和照明、有限刺激。平日上午造訪最佳，避免週末和導覽時段。完全室內、恆溫、寧靜、低刺激——對感官敏感家庭極為友善。'
     }
   },
   {
@@ -2334,6 +2394,26 @@ export let mockLocations: Location[] = [
       timeToMainAttraction: 0,
       roundTripWalkingTime: 0,
       walkingDifficultyNotes: '親子餐廳為完全室內設施，空間相對集中。無需走遠路，所有遊樂和用餐區都在店內。完全無障礙，非常適合推嬰兒車或抱小孩的家長。家長可邊用餐邊監督小孩遊玩。'
+    },
+    noiseAndSensoryEnvironment: {
+      overallNoiseLevel: 'moderate',
+      noiseSourcesDescription: '室內餐廳環境，包含兒童遊樂聲、餐廳背景音樂、廚房聲音。遊樂區有兒童嬉戲聲，但整體控制良好。',
+      peakNoiseHours: '午餐時段（12-1時）和傍晚（5-6時）；週末全天較吵',
+      quietestHours: '開店初期9-10時、下午2-3時較靜',
+      soundMitigation: ['柔和的背景音樂設置', '軟質家具和地毯降低噪音'],
+      hasSoundproofing: false,
+      quietZonesAvailable: true,
+      quietZoneDescription: '用餐區相對安靜；遊樂區較為活躍',
+      sensoryFriendlyHours: '平日下午2-3時或週一上午較靜；適合感官敏感兒童',
+      sensoryAccommodations: ['可調暗的餐廳區域', '多樣的活動選擇讓兒童自由選擇強度', '相對溫和的背景音樂'],
+      vibrationalActivities: '無明顯振動活動',
+      lightingSituation: 'bright',
+      hasAdjustableLighting: true,
+      scents: '食物香氣（烹飪、咖啡）；清潔劑味道',
+      hasScent_freePolicies: false,
+      echoProblems: false,
+      staffSensoryAwareness: 'trained',
+      sensoryEnvironmentNotes: '親子餐廳噪音適中，特別是用餐區。對大多數兒童來說舒適。感官敏感兒童應選擇非用餐時段和用餐區。下午茶時間是最寧靜時段。整體環境友善，但遊樂區會有典型兒童活動的聲音。'
     }
   },
   {
@@ -2920,6 +3000,26 @@ export let mockLocations: Location[] = [
       timeToMainAttraction: 1,
       roundTripWalkingTime: 15,
       walkingDifficultyNotes: '現代親子中心設計開放，空間寬敞無障礙。無需走遠路即可到達各活動區。完全適合推嬰兒車。設有多個家長休息區，可舒適地監督孩童遊玩。'
+    },
+    noiseAndSensoryEnvironment: {
+      overallNoiseLevel: 'quiet',
+      noiseSourcesDescription: '現代化親子中心設計安靜。主要是兒童活動的輕鬆聲音、低音量背景音樂、輕微腳步聲。整體聲學設計優良。',
+      peakNoiseHours: '週末上午10-12時、下午2-4時人較多，噪音略增',
+      quietestHours: '平日上午9-10時、下午4-5時最安靜；週二至週四全天相對安靜',
+      soundMitigation: ['現代隔音設計', '軟質地板和牆壁材料', '空調運作聲掩蓋背景噪音'],
+      hasSoundproofing: true,
+      quietZonesAvailable: true,
+      quietZoneDescription: '嬰幼兒區、家長休息區特別寧靜；讀書角和冥想區提供低刺激環境',
+      sensoryFriendlyHours: '平日全天友善；週一至週四上午最理想',
+      sensoryAccommodations: ['可調亮度照明系統', '低刺激感官設計', '安靜區域明確劃分', '柔和的背景音樂', '安全感官游戲選項'],
+      vibrationalActivities: '蹦床區有輕微振動；可避開',
+      lightingSituation: 'moderate',
+      hasAdjustableLighting: true,
+      scents: '乾淨現代環境，無強烈氣味',
+      hasScent_freePolicies: true,
+      echoProblems: false,
+      staffSensoryAwareness: 'comprehensive',
+      sensoryEnvironmentNotes: '南港軟體園區親子中心是感官敏感和自閉症兒童的優選場所。現代化設計、隔音良好、寧靜、低刺激、清潔無味。平日造訪尤佳，特別是週一至週四上午。工作人員具備感官意識。整體環境完全適合各種感官敏感度的家庭。'
     }
   },
   {
@@ -3487,6 +3587,26 @@ export let mockLocations: Location[] = [
       timeToMainAttraction: 8,
       roundTripWalkingTime: 45,
       walkingDifficultyNotes: '運動中心為現代化設施，主路線平坦寬敞。室外泳池區有一些高低差但坡度溫和。推嬰兒車可行，但部分草地區可能困難。主要設施距離適中，無過度走路問題。有充足座椅供家長休息。'
+    },
+    noiseAndSensoryEnvironment: {
+      overallNoiseLevel: 'moderate',
+      noiseSourcesDescription: '運動中心包含多種活動：游泳課堂聲、水聲、兒童嬉戲聲、運動訓練聲。室內泳池區聲音迴響；室外區相對開放。',
+      peakNoiseHours: '下午3-6時（課堂時間）；週末全天人多',
+      quietestHours: '平日上午9-11時、中午12-1時相對安靜；開館初期最靜',
+      soundMitigation: ['室內泳池的回聲控制設計', '室外區域空間開放減少聲音集中'],
+      hasSoundproofing: false,
+      quietZonesAvailable: true,
+      quietZoneDescription: '家長休息區相對安靜；早上時段較靜',
+      sensoryFriendlyHours: '平日上午9-11時最適合；週一至週三避開課程時間',
+      sensoryAccommodations: ['提供耳塞選項', '安靜休息區', '課程時間表公開可避開'],
+      vibrationalActivities: '潛水和跳水活動有振動；遠離可避開',
+      lightingSituation: 'bright',
+      hasAdjustableLighting: false,
+      scents: '氯氣氣味明顯（游泳池化學物質）',
+      hasScent_freePolicies: false,
+      echoProblems: true,
+      staffSensoryAwareness: 'basic',
+      sensoryEnvironmentNotes: '運動中心主要面向活躍兒童，噪音適度。感官敏感兒童應在平日上午造訪，避開課程時間。室內泳池迴響較多；室外區相對好。氯氣味道可能對敏感兒童帶來不適。建議感官敏感家庭提前查看課程表以避開尖峰時段。'
     }
   },
   {
@@ -4090,6 +4210,26 @@ export let mockLocations: Location[] = [
       timeToMainAttraction: 15,
       roundTripWalkingTime: 120,
       walkingDifficultyNotes: '水上樂園為戶外園區，地形多為自然草地和泥土，不適合推嬰兒車。家有嬰幼兒家庭建議帶嬰兒背帶。園區地勢起伏，有多個樓梯和水池邊坡。需走較長距離才能到達各遊樂區。休息座位有限，建議自帶帳篷遮陽。體力要求較高，適合學齡兒童以上。'
+    },
+    noiseAndSensoryEnvironment: {
+      overallNoiseLevel: 'loud',
+      noiseSourcesDescription: '戶外水樂園充滿兒童尖叫聲、水濺聲、音樂、廣播、其他遊客聲音。開放式園區聲音四處迴響。',
+      peakNoiseHours: '每日上午10時至下午5時；週末和假日最吵',
+      quietestHours: '開園初期8-9時；傍晚5時後逐漸安靜；雨天人少較靜',
+      soundMitigation: [],
+      hasSoundproofing: false,
+      quietZonesAvailable: false,
+      quietZoneDescription: '沒有專門的安靜區域；整個園區都充滿水樂園活動的聲音',
+      sensoryFriendlyHours: '開園初期8-9時噪音最低；週一至週五上午相對較靜（如無課程）',
+      sensoryAccommodations: ['提供耳塞', '偏遠角落可避開人群'],
+      vibrationalActivities: '水滑梯、跳水台、遊樂設施有振動',
+      lightingSituation: 'very_bright',
+      hasAdjustableLighting: false,
+      scents: '氯氣、陽光、草地、自然環境氣味',
+      hasScent_freePolicies: false,
+      echoProblems: false,
+      staffSensoryAwareness: 'minimal',
+      sensoryEnvironmentNotes: '水上樂園是充滿感官刺激的環境，不適合感官敏感或自閉症兒童。開放式戶外園區、高噪音、尖叫聲、強烈日光、多感官刺激。感官敏感家庭應嚴重考慮此地點。若必須造訪，建議：早起來園、帶耳塞、計畫短時間停留。感官友善場所（博物館、親子中心）是更好選擇。'
     }
   },
 ];
