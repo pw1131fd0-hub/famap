@@ -139,6 +139,30 @@ const isLocationOpen = (operatingHours?: Record<string, string>): { isOpen: bool
   return { isOpen: true, message: '營業中' };
 };
 
+// Calculate family-friendliness score
+const getLocationFamilyScore = (location: Location): number => {
+  let score = 0;
+  const keyFacilities = [
+    'nursing_room',
+    'public_toilet',
+    'stroller_accessible',
+    'changing_table',
+    'high_chair',
+    'kids_menu',
+    'air_conditioned',
+    'parking',
+    'drinking_water',
+  ];
+
+  keyFacilities.forEach(facility => {
+    if (location.facilities.includes(facility)) {
+      score += 1;
+    }
+  });
+
+  return score;
+};
+
 // Component to handle map view updates
 function MapEvents({ onPositionChange }: { onPositionChange: (pos: [number, number]) => void }) {
   const map = useMap();
@@ -795,6 +819,17 @@ function App() {
                         <p className="address-text">{loc.address[language]}</p>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px', gap: '8px', flexWrap: 'wrap' }}>
                           <div className="rating">⭐ {loc.averageRating}</div>
+                          {(() => {
+                            const familyScore = getLocationFamilyScore(loc);
+                            if (familyScore >= 6) {
+                              return (
+                                <div style={{ fontSize: '0.75em', background: '#c3e6cb', color: '#155724', padding: '2px 6px', borderRadius: '3px', fontWeight: '600' }}>
+                                  👨‍👩‍👧‍👦 {language === 'zh' ? '親子友善' : 'Family-Friendly'}
+                                </div>
+                              );
+                            }
+                            return null;
+                          })()}
                           {loc.pricing?.isFree && (
                             <div style={{ fontSize: '0.75em', background: '#d4edda', color: '#155724', padding: '2px 6px', borderRadius: '3px', fontWeight: '600' }}>
                               💚 {language === 'zh' ? '免費' : 'FREE'}
