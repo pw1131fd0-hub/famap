@@ -512,6 +512,54 @@ export interface StorageLockerInfo {
   lockerAccessibility?: boolean; // Accessible locker sizes available?
 }
 
+export interface ChildAgeCombinationSuitabilityInfo {
+  hasActivitiesForMultipleAges?: boolean;
+  bestAgeCombination?: string;
+  toddlerActivitiesAvailable?: boolean;
+  preschoolActivitiesAvailable?: boolean;
+  schoolAgeActivitiesAvailable?: boolean;
+  teenActivitiesAvailable?: boolean;
+  simultaneousActivityOptions?: boolean;
+  ageGroupSeparationNeeded?: string;
+  siblingFriendlinessRating?: 'excellent' | 'good' | 'fair' | 'challenging';
+  recommendedGroupSizes?: string;
+  ageCompatibilityNotes?: string;
+}
+
+export interface ComprehensiveVisitCostInfo {
+  entryFeePerAdult?: string;
+  entryFeePerChild?: string;
+  entryFeePerToddler?: string;
+  familyPackagePrice?: string;
+  familyPackageIncludes?: string;
+  estimatedFoodCostPerFamily?: string;
+  parkingCostForDay?: string;
+  rentalsCostEstimate?: string;
+  extraActivitiesCostEstimate?: string;
+  totalEstimatedCostPerFamily?: string;
+  discountedPackages?: string[];
+  paymentFlexibility?: string;
+  costSavingTips?: string;
+  budgetWarning?: string;
+  visitCostNotes?: string;
+}
+
+export interface HealthDocumentationRequirementsInfo {
+  requiresCOVIDVaccination?: boolean;
+  vaccineProofRequired?: string;
+  vaccineBoosterRequired?: boolean;
+  requiresCovidTestOnArrival?: boolean;
+  requiresHealthCertificate?: boolean;
+  otherHealthCertificatesRequired?: string[];
+  requiresTemperatureCheck?: string;
+  healthInsuranceRequired?: boolean;
+  childrenSpecificRequirements?: string;
+  exemptionCategories?: string;
+  enforcementLevel?: 'strict' | 'moderate' | 'flexible' | 'none';
+  documentationNotes?: string;
+  healthRequirementNotes?: string;
+}
+
 export interface Location {
   id: string;
   name: {
@@ -583,6 +631,9 @@ export interface Location {
   queueWaitTime?: QueueWaitTimeInfo;
   infantSpecific?: InfantSpecificInfo;
   storageLocker?: StorageLockerInfo;
+  childAgeCompatibility?: ChildAgeCombinationSuitabilityInfo;
+  visitCost?: ComprehensiveVisitCostInfo;
+  healthDocumentation?: HealthDocumentationRequirementsInfo;
 }
 
 export interface Review {

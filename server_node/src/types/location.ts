@@ -512,6 +512,54 @@ export interface StorageLockerInfo {
   lockerAccessibility?: boolean; // Accessible locker sizes available?
 }
 
+export interface ChildAgeCombinationSuitabilityInfo {
+  hasActivitiesForMultipleAges?: boolean; // Are there activities suitable for children of different ages simultaneously?
+  bestAgeCombination?: string; // e.g., "Works well for siblings ages 2-12 together"
+  toddlerActivitiesAvailable?: boolean; // Activities for young kids (1-3 years)
+  preschoolActivitiesAvailable?: boolean; // Activities for preschool (3-5 years)
+  schoolAgeActivitiesAvailable?: boolean; // Activities for school-age (6-12 years)
+  teenActivitiesAvailable?: boolean; // Activities for teens (13+ years)
+  simultaneousActivityOptions?: boolean; // Can older and younger kids do activities at same time/place?
+  ageGroupSeparationNeeded?: string; // e.g., "Sometimes required for toddler safety"
+  siblingFriendlinessRating?: 'excellent' | 'good' | 'fair' | 'challenging'; // How well families with multiple ages are accommodated
+  recommendedGroupSizes?: string; // e.g., "Works best for 2-4 children with parent supervision"
+  ageCompatibilityNotes?: string; // e.g., "Great mix of activities for ages 2-10; playground for older kids, sensory play for toddlers in same area"
+}
+
+export interface ComprehensiveVisitCostInfo {
+  entryFeePerAdult?: string; // e.g., "NT$500"
+  entryFeePerChild?: string; // e.g., "NT$250" (usually lower than adult)
+  entryFeePerToddler?: string; // e.g., "Free under 3 years"
+  familyPackagePrice?: string; // e.g., "NT$1200 for family of 4"
+  familyPackageIncludes?: string; // e.g., "2 adults + 2 children + 2 beverage vouchers"
+  estimatedFoodCostPerFamily?: string; // e.g., "NT$200-400 per person for lunch"
+  parkingCostForDay?: string; // e.g., "Free" or "NT$50"
+  rentalsCostEstimate?: string; // e.g., "NT$100-200 for stroller rental"
+  extraActivitiesCostEstimate?: string; // e.g., "Rides NT$100-300 each, photo packages NT$200"
+  totalEstimatedCostPerFamily?: string; // e.g., "NT$2000-3000 for family of 4 with lunch and rentals"
+  discountedPackages?: string[]; // e.g., ["2-visit pass NT$800", "10-visit membership NT$3000"]
+  paymentFlexibility?: string; // e.g., "Can pay separately per person or as bundled family package"
+  costSavingTips?: string; // e.g., "Visit on weekdays for no entry fee, free parking"
+  budgetWarning?: string; // e.g., "Rides and rental costs add up significantly; budget NT$3000+ for full family experience"
+  visitCostNotes?: string; // Complete cost breakdown information
+}
+
+export interface HealthDocumentationRequirementsInfo {
+  requiresCOVIDVaccination?: boolean; // COVID vaccination needed
+  vaccineProofRequired?: string; // e.g., "Full vaccination" or "Booster within 3 months"
+  vaccineBoosterRequired?: boolean; // Booster shot required
+  requiresCovidTestOnArrival?: boolean; // Rapid test or PCR test required
+  requiresHealthCertificate?: boolean; // General health certificate
+  otherHealthCertificatesRequired?: string[]; // e.g., ["tuberculosis screening", "physical examination"]
+  requiresTemperatureCheck?: string; // e.g., "At entrance, must be below 37.5°C"
+  healthInsuranceRequired?: boolean; // Travel or local health insurance
+  childrenSpecificRequirements?: string; // e.g., "Children under 12 must be vaccinated"
+  exemptionCategories?: string; // e.g., "Infants under 6 months, immunocompromised with waiver"
+  enforcementLevel?: 'strict' | 'moderate' | 'flexible' | 'none'; // How strictly enforced
+  documentationNotes?: string; // e.g., "Proof accepted: digital cert, physical card, official letter from doctor"
+  healthRequirementNotes?: string; // Complete health requirement information
+}
+
 export interface Location {
   id: string;
   name: {
@@ -583,6 +631,9 @@ export interface Location {
   queueWaitTime?: QueueWaitTimeInfo;
   infantSpecific?: InfantSpecificInfo;
   storageLocker?: StorageLockerInfo;
+  childAgeCompatibility?: ChildAgeCombinationSuitabilityInfo;
+  visitCost?: ComprehensiveVisitCostInfo;
+  healthDocumentation?: HealthDocumentationRequirementsInfo;
 }
 
 export interface SearchParams {

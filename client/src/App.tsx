@@ -1753,6 +1753,90 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.childAgeCompatibility && (
+                  <div className="location-detail-section">
+                    <h4>👨‍👩‍👧‍👦 {language === 'zh' ? '年齡段相容性' : 'Age Compatibility'}</h4>
+                    {selectedLocation.childAgeCompatibility.bestAgeCombination && (
+                      <p><strong>{language === 'zh' ? '最佳年齡組合' : 'Best Age Mix'}</strong>: {selectedLocation.childAgeCompatibility.bestAgeCombination}</p>
+                    )}
+                    {selectedLocation.childAgeCompatibility.toddlerActivitiesAvailable && (
+                      <p>✓ {language === 'zh' ? '幼兒活動可用' : 'Toddler Activities'}</p>
+                    )}
+                    {selectedLocation.childAgeCompatibility.preschoolActivitiesAvailable && (
+                      <p>✓ {language === 'zh' ? '學前兒童活動可用' : 'Preschool Activities'}</p>
+                    )}
+                    {selectedLocation.childAgeCompatibility.schoolAgeActivitiesAvailable && (
+                      <p>✓ {language === 'zh' ? '學齡兒童活動可用' : 'School-Age Activities'}</p>
+                    )}
+                    {selectedLocation.childAgeCompatibility.teenActivitiesAvailable && (
+                      <p>✓ {language === 'zh' ? '青少年活動可用' : 'Teen Activities'}</p>
+                    )}
+                    {selectedLocation.childAgeCompatibility.siblingFriendlinessRating && (
+                      <p><strong>{language === 'zh' ? '兄弟姐妹友善度' : 'Sibling-Friendly'}</strong>: {selectedLocation.childAgeCompatibility.siblingFriendlinessRating}</p>
+                    )}
+                    {selectedLocation.childAgeCompatibility.recommendedGroupSizes && (
+                      <p><strong>{language === 'zh' ? '推薦團體大小' : 'Recommended Group Size'}</strong>: {selectedLocation.childAgeCompatibility.recommendedGroupSizes}</p>
+                    )}
+                    {selectedLocation.childAgeCompatibility.ageCompatibilityNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.childAgeCompatibility.ageCompatibilityNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.visitCost && (
+                  <div className="location-detail-section">
+                    <h4>💰 {language === 'zh' ? '完整造訪成本' : 'Visit Cost Breakdown'}</h4>
+                    {selectedLocation.visitCost.entryFeePerAdult && (
+                      <p><strong>{language === 'zh' ? '成人票' : 'Adult Entry'}</strong>: {selectedLocation.visitCost.entryFeePerAdult}</p>
+                    )}
+                    {selectedLocation.visitCost.entryFeePerChild && (
+                      <p><strong>{language === 'zh' ? '兒童票' : 'Child Entry'}</strong>: {selectedLocation.visitCost.entryFeePerChild}</p>
+                    )}
+                    {selectedLocation.visitCost.entryFeePerToddler && (
+                      <p><strong>{language === 'zh' ? '幼兒票' : 'Toddler Entry'}</strong>: {selectedLocation.visitCost.entryFeePerToddler}</p>
+                    )}
+                    {selectedLocation.visitCost.familyPackagePrice && (
+                      <p><strong>{language === 'zh' ? '家庭套票' : 'Family Package'}</strong>: {selectedLocation.visitCost.familyPackagePrice}</p>
+                    )}
+                    {selectedLocation.visitCost.estimatedFoodCostPerFamily && (
+                      <p><strong>{language === 'zh' ? '用餐預估' : 'Estimated Food'}</strong>: {selectedLocation.visitCost.estimatedFoodCostPerFamily}</p>
+                    )}
+                    {selectedLocation.visitCost.parkingCostForDay && (
+                      <p><strong>{language === 'zh' ? '停車費用' : 'Parking'}</strong>: {selectedLocation.visitCost.parkingCostForDay}</p>
+                    )}
+                    {selectedLocation.visitCost.totalEstimatedCostPerFamily && (
+                      <p><strong>{language === 'zh' ? '全家預估總成本' : 'Total Estimated Cost'}</strong>: {selectedLocation.visitCost.totalEstimatedCostPerFamily}</p>
+                    )}
+                    {selectedLocation.visitCost.costSavingTips && (
+                      <p><strong>{language === 'zh' ? '省錢建議' : 'Money-Saving Tips'}</strong>: {selectedLocation.visitCost.costSavingTips}</p>
+                    )}
+                    {selectedLocation.visitCost.visitCostNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.visitCost.visitCostNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.healthDocumentation && (
+                  <div className="location-detail-section">
+                    <h4>🏥 {language === 'zh' ? '健康與疫苗要求' : 'Health & Vaccination'}</h4>
+                    {selectedLocation.healthDocumentation.requiresCOVIDVaccination !== undefined && (
+                      <p><strong>{language === 'zh' ? 'COVID 疫苗要求' : 'COVID Vaccination'}</strong>: {selectedLocation.healthDocumentation.requiresCOVIDVaccination ? (language === 'zh' ? '是' : 'Required') : (language === 'zh' ? '否' : 'Not Required')}</p>
+                    )}
+                    {selectedLocation.healthDocumentation.requiresCovidTestOnArrival !== undefined && (
+                      <p><strong>{language === 'zh' ? '到達時需要檢測' : 'COVID Test on Arrival'}</strong>: {selectedLocation.healthDocumentation.requiresCovidTestOnArrival ? (language === 'zh' ? '是' : 'Required') : (language === 'zh' ? '否' : 'Not Required')}</p>
+                    )}
+                    {selectedLocation.healthDocumentation.requiresHealthCertificate !== undefined && (
+                      <p><strong>{language === 'zh' ? '健康證明' : 'Health Certificate'}</strong>: {selectedLocation.healthDocumentation.requiresHealthCertificate ? (language === 'zh' ? '是' : 'Required') : (language === 'zh' ? '否' : 'Not Required')}</p>
+                    )}
+                    {selectedLocation.healthDocumentation.enforcementLevel && (
+                      <p><strong>{language === 'zh' ? '實施等級' : 'Enforcement Level'}</strong>: {selectedLocation.healthDocumentation.enforcementLevel}</p>
+                    )}
+                    {selectedLocation.healthDocumentation.documentationNotes && (
+                      <p><strong>{language === 'zh' ? '文件說明' : 'Documentation Info'}</strong>: {selectedLocation.healthDocumentation.documentationNotes}</p>
+                    )}
+                    {selectedLocation.healthDocumentation.healthRequirementNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.healthDocumentation.healthRequirementNotes}</p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>

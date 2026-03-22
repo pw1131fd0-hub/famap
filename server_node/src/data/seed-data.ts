@@ -320,6 +320,41 @@ export let mockLocations: Location[] = [
       hasLockers: false,
       hasLargeStorage: false,
       storageNotes: '公園無置物櫃，建議自行攜帶或使用推車存放'
+    },
+    childAgeCompatibility: {
+      hasActivitiesForMultipleAges: true,
+      bestAgeCombination: '1-12 歲兒童一起遊玩非常適合',
+      toddlerActivitiesAvailable: true,
+      preschoolActivitiesAvailable: true,
+      schoolAgeActivitiesAvailable: true,
+      teenActivitiesAvailable: false,
+      simultaneousActivityOptions: true,
+      ageGroupSeparationNeeded: '無特殊年齡限制',
+      siblingFriendlinessRating: 'excellent',
+      recommendedGroupSizes: '2-4 個小孩加家長最佳，可同時進行多種活動',
+      ageCompatibilityNotes: '大型遊戲場適合各年齡段，沙坑適合 2-5 歲，登山步道適合 6 歲以上。兄弟姐妹可在同一地點進行不同活動。'
+    },
+    visitCost: {
+      entryFeePerAdult: '免費',
+      entryFeePerChild: '免費',
+      familyPackagePrice: '免費',
+      estimatedFoodCostPerFamily: 'NT$0-200 自帶食物',
+      parkingCostForDay: '免費',
+      rentalsCostEstimate: 'NT$100-300 自行車租賃',
+      extraActivitiesCostEstimate: '無額外費用',
+      totalEstimatedCostPerFamily: 'NT$0-500 取決於是否租自行車',
+      costSavingTips: '完全免費入園，自帶食物和飲料，可省錢。自行車租賃費用可略過。',
+      budgetWarning: '無隱藏費用，全家可免費遊玩整天',
+      visitCostNotes: '最經濟實惠的台北親子景點，完全免費開放，僅自行車租賃需付費。'
+    },
+    healthDocumentation: {
+      requiresCOVIDVaccination: false,
+      vaccineProofRequired: '不需要',
+      requiresCovidTestOnArrival: false,
+      requiresHealthCertificate: false,
+      enforcementLevel: 'none',
+      documentationNotes: '戶外開放式公園，無任何健康證明要求',
+      healthRequirementNotes: '公園為戶外設施，無疫苗或健康文件要求。全家可放心遊玩。'
     }
   },
   {
@@ -703,6 +738,45 @@ export let mockLocations: Location[] = [
       storageAttendantAvailable: true,
       storageSecurity: 'excellent',
       storageNotes: '園區各處有投幣置物櫃（NT$20-50），大型行李可至服務台寄放，有專人看管'
+    },
+    childAgeCompatibility: {
+      hasActivitiesForMultipleAges: true,
+      bestAgeCombination: '2-15 歲兒童可同遊，各年齡層都有適合的設施',
+      toddlerActivitiesAvailable: true,
+      preschoolActivitiesAvailable: true,
+      schoolAgeActivitiesAvailable: true,
+      teenActivitiesAvailable: true,
+      simultaneousActivityOptions: true,
+      ageGroupSeparationNeeded: '某些刺激設施可能需要年長兒童單獨遊玩',
+      siblingFriendlinessRating: 'excellent',
+      recommendedGroupSizes: '2-6 個兒童加家長，可分組遊玩或一起遊歷',
+      ageCompatibilityNotes: '樂園設施分年齡設計，幼稚園、小學、國中生都有專屬區域。兄弟姐妹可在樂園尋找各自喜愛的遊樂設施。'
+    },
+    visitCost: {
+      entryFeePerAdult: 'NT$400-500',
+      entryFeePerChild: 'NT$200-350',
+      entryFeePerToddler: '免費 (身高 80cm 以下)',
+      familyPackagePrice: 'NT$1,200-1,500',
+      familyPackageIncludes: '2 成人 + 2 兒童一日票',
+      estimatedFoodCostPerFamily: 'NT$400-800 園內餐飲',
+      parkingCostForDay: 'NT$100',
+      rentalsCostEstimate: 'NT$100-200 防曬帽或雨傘',
+      extraActivitiesCostEstimate: 'NT$200-1,000 額外遊樂設施、演出票',
+      totalEstimatedCostPerFamily: 'NT$2,500-4,500 含午餐和小額外費',
+      discountedPackages: ['年卡 NT$3,000/無限入園', '季卡 NT$1,800/3月', '10 次票 NT$3,000'],
+      paymentFlexibility: '可單人購票或購買家庭套票，在線購票有優惠',
+      costSavingTips: '平日票價較低，提前線上購買可省 10-20%。年卡適合頻繁訪客。',
+      budgetWarning: '園內飲食和租賃費用較高，建議預算足夠應對兒童臨時需求',
+      visitCostNotes: '票價適中，但園內消費較高。建議自帶零食和飲水省錢。'
+    },
+    healthDocumentation: {
+      requiresCOVIDVaccination: false,
+      vaccineProofRequired: '不需要',
+      requiresCovidTestOnArrival: false,
+      requiresHealthCertificate: false,
+      enforcementLevel: 'none',
+      documentationNotes: '樂園遵守台灣防疫指引，但不強制要求疫苗證明',
+      healthRequirementNotes: '目前無特定疫苗或健康文件要求。建議在患病期間避免訪園。'
     }
   },
   {
@@ -1038,6 +1112,43 @@ export let mockLocations: Location[] = [
       storageAttendantAvailable: true,
       storageSecurity: 'excellent',
       storageNotes: '大型行李和推車可於入口寄放，有專人管理，免費'
+    },
+    childAgeCompatibility: {
+      hasActivitiesForMultipleAges: true,
+      bestAgeCombination: '3-14 歲兒童都能學到新知識',
+      toddlerActivitiesAvailable: false,
+      preschoolActivitiesAvailable: true,
+      schoolAgeActivitiesAvailable: true,
+      teenActivitiesAvailable: true,
+      simultaneousActivityOptions: false,
+      ageGroupSeparationNeeded: '不同展區難度不同，較小兒童需協助理解',
+      siblingFriendlinessRating: 'good',
+      recommendedGroupSizes: '2-4 個兒童加家長，過多兒童易失控',
+      ageCompatibilityNotes: '博物館展示適合 3 歲以上，但年紀差距大的兒童可能對同一展區的興趣不同。建議家長分開照顧或輪流講解。'
+    },
+    visitCost: {
+      entryFeePerAdult: 'NT$100',
+      entryFeePerChild: 'NT$50',
+      entryFeePerToddler: '免費 (3 歲以下)',
+      familyPackagePrice: 'NT$300',
+      familyPackageIncludes: '2 成人 + 2 兒童票',
+      estimatedFoodCostPerFamily: 'NT$200-400 咖啡廳',
+      parkingCostForDay: 'NT$80/小時',
+      rentalsCostEstimate: '無租賃服務',
+      extraActivitiesCostEstimate: 'NT$0 展覽已含入場費',
+      totalEstimatedCostPerFamily: 'NT$500-1,200 含停車和咖啡',
+      costSavingTips: '購買家庭票可省 50 元。停車時間短建議在附近停車。',
+      budgetWarning: '停車費用較高，考慮搭乘 MRT。咖啡廳價格中等。',
+      visitCostNotes: '票價低廉，家庭票更划算。停車費是主要開支。'
+    },
+    healthDocumentation: {
+      requiresCOVIDVaccination: false,
+      vaccineProofRequired: '不需要',
+      requiresCovidTestOnArrival: false,
+      requiresHealthCertificate: false,
+      enforcementLevel: 'none',
+      documentationNotes: '室內文化場所，遵守基本防疫措施但無強制疫苗要求',
+      healthRequirementNotes: '無特定疫苗或健康文件要求。提供手部消毒設施。'
     }
   },
   {
@@ -1387,6 +1498,43 @@ export let mockLocations: Location[] = [
       hasLockers: false,
       hasLargeStorage: false,
       storageNotes: '餐廳內無置物櫃，推車可靠牆放置'
+    },
+    childAgeCompatibility: {
+      hasActivitiesForMultipleAges: true,
+      bestAgeCombination: '1-6 歲幼兒最佳，較大兒童可能不夠滿足',
+      toddlerActivitiesAvailable: true,
+      preschoolActivitiesAvailable: true,
+      schoolAgeActivitiesAvailable: false,
+      teenActivitiesAvailable: false,
+      simultaneousActivityOptions: false,
+      ageGroupSeparationNeeded: '設施針對幼兒設計，大兒童可能不感興趣',
+      siblingFriendlinessRating: 'fair',
+      recommendedGroupSizes: '1-2 個幼兒加家長或照顧者',
+      ageCompatibilityNotes: '主要針對幼兒 1-6 歲設計。年長的哥哥姐姐可能覺得無聊。建議純幼兒家庭或有多名幼兒的家庭。'
+    },
+    visitCost: {
+      entryFeePerAdult: 'NT$150-200',
+      entryFeePerChild: 'NT$100-150',
+      entryFeePerToddler: '免費 (1 歲以下)',
+      familyPackagePrice: 'NT$400-500',
+      familyPackageIncludes: '2 成人 + 2 兒童',
+      estimatedFoodCostPerFamily: 'NT$200-300 簡單餐點',
+      parkingCostForDay: '免費停車',
+      rentalsCostEstimate: '無租賃服務',
+      extraActivitiesCostEstimate: 'NT$100-200 額外課程或活動',
+      totalEstimatedCostPerFamily: 'NT$700-1,200 含停車',
+      costSavingTips: '平日折扣優惠。自帶便當可省飲食費。',
+      budgetWarning: '提供簡餐但非餐廳，費用經濟實惠',
+      visitCostNotes: '票價合理，停車免費是優點。小型親子中心，消費親民。'
+    },
+    healthDocumentation: {
+      requiresCOVIDVaccination: false,
+      vaccineProofRequired: '不需要',
+      requiresCovidTestOnArrival: false,
+      requiresHealthCertificate: false,
+      enforcementLevel: 'none',
+      documentationNotes: '室內親子設施維持基本防疫，無強制疫苗要求',
+      healthRequirementNotes: '無特定疫苗或健康文件要求。提供手部消毒設施和玩具清潔。'
     }
   },
   {
@@ -1730,6 +1878,45 @@ export let mockLocations: Location[] = [
       storageAttendantAvailable: false,
       storageSecurity: 'good',
       storageNotes: '免費置物櫃和行李寄放區'
+    },
+    childAgeCompatibility: {
+      hasActivitiesForMultipleAges: true,
+      bestAgeCombination: '0-8 歲幼兒和學齡兒童都有適合活動',
+      toddlerActivitiesAvailable: true,
+      preschoolActivitiesAvailable: true,
+      schoolAgeActivitiesAvailable: true,
+      teenActivitiesAvailable: false,
+      simultaneousActivityOptions: true,
+      ageGroupSeparationNeeded: '不同年齡有不同游泳課程區域',
+      siblingFriendlinessRating: 'excellent',
+      recommendedGroupSizes: '1-4 個幼兒加家長',
+      ageCompatibilityNotes: '中心為家庭設計，提供嬰幼兒溫水池和兒童游泳課程。兄弟姐妹可各自參加適齡課程，家長可輪流照顧。'
+    },
+    visitCost: {
+      entryFeePerAdult: 'NT$100-150',
+      entryFeePerChild: 'NT$80-120',
+      entryFeePerToddler: '免費 (3 歲以下)',
+      familyPackagePrice: 'NT$400-500',
+      familyPackageIncludes: '2 成人 + 2 兒童',
+      estimatedFoodCostPerFamily: 'NT$150-300 簡易食堂',
+      parkingCostForDay: '免費停車',
+      rentalsCostEstimate: 'NT$100-200 浮力衣和救生衣',
+      extraActivitiesCostEstimate: 'NT$200-500 游泳課程 (若報名)',
+      totalEstimatedCostPerFamily: 'NT$750-1,700 含停車和基本租賃',
+      discountedPackages: ['10 次票 NT$1,200', '季卡 NT$1,200/3月', '年卡 NT$4,500'],
+      paymentFlexibility: '單次票或購買時間票，年卡超值',
+      costSavingTips: '年卡適合常客。游泳課程可包含在季卡內。停車免費省成本。',
+      budgetWarning: '游泳課程額外費用。租賃浮力衣需付費。',
+      visitCostNotes: '票價經濟，年卡最划算。游泳課程可提升技能，值得投資。'
+    },
+    healthDocumentation: {
+      requiresCOVIDVaccination: false,
+      vaccineProofRequired: '不需要',
+      requiresCovidTestOnArrival: false,
+      requiresHealthCertificate: false,
+      enforcementLevel: 'none',
+      documentationNotes: '公設運動中心，遵守防疫但無強制疫苗要求',
+      healthRequirementNotes: '無特定疫苗或健康文件要求。建議患有眼睛或皮膚問題的兒童帶備防護用品。'
     }
   },
   {
@@ -2067,6 +2254,45 @@ export let mockLocations: Location[] = [
       storageAttendantAvailable: true,
       storageSecurity: 'excellent',
       storageNotes: '投幣置物櫃NT$20，大型行李可於服務台寄放'
+    },
+    childAgeCompatibility: {
+      hasActivitiesForMultipleAges: true,
+      bestAgeCombination: '4-12 歲兒童最適合，較小幼兒有嬰幼兒池',
+      toddlerActivitiesAvailable: true,
+      preschoolActivitiesAvailable: true,
+      schoolAgeActivitiesAvailable: true,
+      teenActivitiesAvailable: true,
+      simultaneousActivityOptions: true,
+      ageGroupSeparationNeeded: '深水區和淺水區分開，確保安全',
+      siblingFriendlinessRating: 'excellent',
+      recommendedGroupSizes: '2-6 個兒童加家長，可分組使用不同池區',
+      ageCompatibilityNotes: '運動中心有嬰幼兒池、兒童池、成人池，各年齡段都有適合區域。兄弟姐妹可各自享受游泳樂趣。'
+    },
+    visitCost: {
+      entryFeePerAdult: 'NT$150',
+      entryFeePerChild: 'NT$100',
+      entryFeePerToddler: '免費 (3 歲以下)',
+      familyPackagePrice: 'NT$500-600',
+      familyPackageIncludes: '2 成人 + 2 兒童',
+      estimatedFoodCostPerFamily: 'NT$200-400 簡易食堂',
+      parkingCostForDay: '免費停車',
+      rentalsCostEstimate: 'NT$100-200 浮力衣和毛巾租賃',
+      extraActivitiesCostEstimate: 'NT$100-300 水上設施或課程',
+      totalEstimatedCostPerFamily: 'NT$1,050-1,700 含停車和基本租賃',
+      discountedPackages: ['10 次票 NT$1,300', '季卡 NT$1,500/3月'],
+      paymentFlexibility: '單次票或購買時間票',
+      costSavingTips: '季卡適合夏季常客。停車免費。自帶零食省錢。',
+      budgetWarning: '停留時間長會增加食堂消費。租賃毛巾有額外費用。',
+      visitCostNotes: '票價合理，夏季遊玩最划算。季卡超值。'
+    },
+    healthDocumentation: {
+      requiresCOVIDVaccination: false,
+      vaccineProofRequired: '不需要',
+      requiresCovidTestOnArrival: false,
+      requiresHealthCertificate: false,
+      enforcementLevel: 'none',
+      documentationNotes: '公設運動中心，遵守防疫標準但無強制疫苗要求',
+      healthRequirementNotes: '無特定疫苗或健康文件要求。水上活動建議檢查天氣和水質狀況。'
     }
   },
   {
@@ -2433,6 +2659,45 @@ export let mockLocations: Location[] = [
       storageAttendantAvailable: false,
       storageSecurity: 'good',
       storageNotes: '投幣置物櫃分佈在各區，容量有限，尖峰時段可能不夠'
+    },
+    childAgeCompatibility: {
+      hasActivitiesForMultipleAges: true,
+      bestAgeCombination: '4-15 歲兒童最適合，學齡兒童和青少年都有樂趣',
+      toddlerActivitiesAvailable: false,
+      preschoolActivitiesAvailable: false,
+      schoolAgeActivitiesAvailable: true,
+      teenActivitiesAvailable: true,
+      simultaneousActivityOptions: true,
+      ageGroupSeparationNeeded: '兒童區和成人區分開，不同身高限制',
+      siblingFriendlinessRating: 'good',
+      recommendedGroupSizes: '2-4 個學齡兒童加家長',
+      ageCompatibilityNotes: '水樂園適合年長兒童和青少年。年幼兒童（4 歲以下）不建議。兄弟姐妹若年齡相近可同樂，否則家長需分開照顧。'
+    },
+    visitCost: {
+      entryFeePerAdult: 'NT$600',
+      entryFeePerChild: 'NT$400',
+      entryFeePerToddler: '免費 (未滿 110cm)',
+      familyPackagePrice: 'NT$2,000-2,500',
+      familyPackageIncludes: '2 成人 + 2 兒童',
+      estimatedFoodCostPerFamily: 'NT$400-800 園內餐飲 (較貴)',
+      parkingCostForDay: 'NT$100',
+      rentalsCostEstimate: 'NT$200-400 浮力衣、毛巾、防曬用品',
+      extraActivitiesCostEstimate: 'NT$100-300 額外水上設施',
+      totalEstimatedCostPerFamily: 'NT$3,200-5,200 含停車和租賃',
+      discountedPackages: ['季卡 NT$1,800/3月', '平日票 NT$400-500 (折扣)'],
+      paymentFlexibility: '可購買單次票或季卡，提前購票有優惠',
+      costSavingTips: '季卡適合暑假常客，平均每次 NT$200。自帶便當省錢（禁止玻璃容器）。',
+      budgetWarning: '票價最高，停車費和租賃費用加起來顯著。園內飲食價格偏高。',
+      visitCostNotes: '最昂貴景點，須預算充足。季卡和平日優惠可降低成本。暑期遊樂首選。'
+    },
+    healthDocumentation: {
+      requiresCOVIDVaccination: false,
+      vaccineProofRequired: '不需要',
+      requiresCovidTestOnArrival: false,
+      requiresHealthCertificate: false,
+      enforcementLevel: 'none',
+      documentationNotes: '水上樂園遵守標準防疫，無強制疫苗要求',
+      healthRequirementNotes: '無特定疫苗或健康文件要求。建議檢查天氣預報。皮膚敏感兒童帶備防曬和防刺激產品。'
     }
   },
 ];
