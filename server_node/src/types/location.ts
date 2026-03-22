@@ -822,6 +822,32 @@ export interface InsectAndAllergenEnvironmentInfo {
   insectAllergenNotes?: string; // e.g., "High mosquito activity May-October, especially at dusk. Indoor areas and main pavilion have screens. Insect repellent recommended. Alternative: visit early morning or dry season months."
 }
 
+export interface RainyDayAlternativesAndIndoorActivitiesInfo {
+  isFullyIndoor?: boolean; // Venue entirely indoors
+  hasIndoorAlternatives?: boolean; // Alternative indoor activities when outdoor is unavailable
+  indoorActivitiesDescription?: string; // What indoor activities are available
+  indoorActivityTypes?: string[]; // e.g., ["arcade games", "play equipment", "cinema", "dining"]
+  ageAppropriateIndoorActivities?: {
+    toddlers?: string[];
+    preschool?: string[];
+    schoolAge?: string[];
+    teens?: string[];
+  };
+  rainyCoveragePercentage?: number; // 0-100% of venue covered
+  weatherProtectionDetails?: string; // e.g., "Mostly covered except main play area, indoor backup available"
+  typhoonSeasonClosurePolicy?: string; // Closure during typhoons (July-September risk)
+  typhoonClosure?: boolean; // Venue closes during typhoon warnings
+  typhoonSafetyPlan?: string; // What happens during typhoons
+  indoorClimateControl?: boolean; // AC/heating for comfort
+  hasMultipleLevels?: boolean; // Multi-level indoor space
+  rainyDayActivitiesNotLimited?: boolean; // Full activities available on rainy days
+  wouldNotRecommendRainyDay?: boolean; // Venue not suitable for rainy days
+  rainyDayAlternativeVenuesNearby?: string[]; // Similar venues nearby for rainy days
+  bestWeatherConditions?: string; // e.g., "Best on sunny days, indoor areas good for rain"
+  seasonalWeatherImpact?: string; // How seasons affect visitability
+  rainySeasonNotes?: string; // Taiwan rainy season (May-September) specific notes
+  rainyDayNotes?: string; // Complete rainy day/weather alternatives information
+}
 
 export interface Location {
   id: string;
@@ -905,6 +931,7 @@ export interface Location {
   walkingDistanceAndDifficulty?: WalkingDistanceAndDifficultyInfo;
   noiseAndSensoryEnvironment?: NoiseAndSensoryEnvironmentInfo;
   insectAndAllergenEnvironment?: InsectAndAllergenEnvironmentInfo;
+  rainyDayAlternatives?: RainyDayAlternativesAndIndoorActivitiesInfo;
 }
 
 export interface SearchParams {

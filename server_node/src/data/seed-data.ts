@@ -590,6 +590,31 @@ export let mockLocations: Location[] = [
       staffAlertnessToInsects: true,
       bestTimeToAvoidInsects: '平日上午9時至下午2時蚊蟲最少，或選擇冬季11月至4月訪問',
       insectAllergenNotes: '大安森林公園5月至10月蚊蟲活動頻繁，黃昏特別嚴重。建議穿著長袖褲和使用防蚊液。早晨訪問時蚊蟲最少。冬季蚊蟲幾乎沒有。林區比遊樂場蚊蟲少。過敏體質兒童注意春秋季節樟樹花粉。'
+    },
+    rainyDayAlternatives: {
+      isFullyIndoor: false,
+      hasIndoorAlternatives: false,
+      indoorActivitiesDescription: '大安森林公園主要為戶外設施，雨天時沒有室內替代活動。',
+      ageAppropriateIndoorActivities: {
+        toddlers: [],
+        preschool: [],
+        schoolAge: [],
+        teens: []
+      },
+      rainyCoveragePercentage: 15,
+      weatherProtectionDetails: '大部分區域為開放式，除了少數涼亭和走廊提供遮蔽。',
+      typhoonSeasonClosurePolicy: '颱風警報發佈時園區可能關閉或部分設施關閉。',
+      typhoonClosure: true,
+      typhoonSafetyPlan: '颱風日期間建議避免訪問。遊樂場設施在強風時會關閉。',
+      indoorClimateControl: false,
+      hasMultipleLevels: false,
+      rainyDayActivitiesNotLimited: false,
+      wouldNotRecommendRainyDay: true,
+      rainyDayAlternativeVenuesNearby: ['台北市兒童新樂園', '國立臺灣博物館'],
+      bestWeatherConditions: '晴朗的日子最適合。',
+      seasonalWeatherImpact: '5月至9月為台灣雨季和颱風季，不利於訪問。',
+      rainySeasonNotes: '台灣5月至9月為雨季和颱風高風險期。建議選擇乾季（10月至4月）訪問大安森林公園。',
+      rainyDayNotes: '大安森林公園不適合雨天訪問。戶外林地路面易滑，遊樂場設施在雨天不安全。颱風季尤其應避免。家庭應選擇天氣良好的日子，或考慮室內替代地點如博物館。'
     }
   },
   {
@@ -1266,6 +1291,32 @@ export let mockLocations: Location[] = [
       staffAlertnessToInsects: true,
       bestTimeToAvoidInsects: '冬季11月至4月幾乎沒有蚊蟲；夏季應早上9-11時或傍晚6時後訪問',
       insectAllergenNotes: '兒童新樂園6月至10月蚊蟲非常嚴重，特別是黃昏。強烈建議自備防蚊液。室外遊樂園區風險很高，室內設施可避免蚊蟲。冬季為理想避蚊季節。'
+    },
+    rainyDayAlternatives: {
+      isFullyIndoor: false,
+      hasIndoorAlternatives: true,
+      indoorActivitiesDescription: '園區有部分室內遊樂設施（如室內迷宮、室內遊戲區），但大部分為戶外遊樂園區。',
+      indoorActivityTypes: ['室內遊樂園', '室內遊戲區', '食堂'],
+      ageAppropriateIndoorActivities: {
+        toddlers: ['室內柔軟遊樂區'],
+        preschool: ['室內遊戲區', '迷宮'],
+        schoolAge: ['室內遊戲區', '迷宮', '室內遊樂園'],
+        teens: ['室內遊樂園', '遊戲中心']
+      },
+      rainyCoveragePercentage: 25,
+      weatherProtectionDetails: '部分遊樂設施有頂篷或室內設施，但大多數刺激性遊樂園（過山車、水上遊樂設施）在雨天關閉。',
+      typhoonSeasonClosurePolicy: '颱風警報發佈時園區關閉，所有戶外設施停止營運。',
+      typhoonClosure: true,
+      typhoonSafetyPlan: '颱風日期間園區完全關閉。建議避免颱風季（7-9月）訪問。',
+      indoorClimateControl: true,
+      hasMultipleLevels: true,
+      rainyDayActivitiesNotLimited: false,
+      wouldNotRecommendRainyDay: true,
+      rainyDayAlternativeVenuesNearby: ['國立臺灣博物館', '南港軟體園區親子中心'],
+      bestWeatherConditions: '晴朗無風的日子最適合體驗所有遊樂設施。',
+      seasonalWeatherImpact: '雨天時戶外遊樂設施關閉；颱風季（7-9月）園區可能關閉。',
+      rainySeasonNotes: '台灣5月至9月為雨季。兒童新樂園在雨天會關閉許多戶外遊樂設施。颱風季尤其不適合訪問。建議選擇乾季訪問以享受完整的園區體驗。',
+      rainyDayNotes: '兒童新樂園不適合雨天訪問。大多數遊樂設施為戶外式，雨天會關閉。有少量室內替代活動，但體驗受限。颱風警報日期間園區完全關閉。建議：選擇晴朗日子訪問，避免5月至9月雨季和颱風季，考慮完全室內替代地點如博物館或親子中心。'
     }
   },
   {
@@ -1882,6 +1933,32 @@ export let mockLocations: Location[] = [
       staffAlertnessToInsects: false,
       bestTimeToAvoidInsects: '全年任何時間都可安心訪問',
       insectAllergenNotes: '國立臺灣博物館完全室內，無蚊蟲問題。花粉和過敏原風險極低，適合過敏和蟲敏感兒童。全年任何季節都是理想選擇。'
+    },
+    rainyDayAlternatives: {
+      isFullyIndoor: true,
+      hasIndoorAlternatives: true,
+      indoorActivitiesDescription: '博物館為完全室內設施，提供各樓層自然生態展示、恐龍展示、互動式展覽，以及兒童遊戲區。',
+      indoorActivityTypes: ['展覽觀賞', '互動式展示', '教育活動', '兒童遊戲區'],
+      ageAppropriateIndoorActivities: {
+        toddlers: ['兒童遊戲區', '簡單展示觀賞'],
+        preschool: ['互動展示', '教育活動', '兒童遊戲區'],
+        schoolAge: ['展覽觀賞', '互動展示', '教育講座'],
+        teens: ['展覽觀賞', '教育講座', '自然科學展示']
+      },
+      rainyCoveragePercentage: 100,
+      weatherProtectionDetails: '完全室內，所有展示區、走道、休息區均在室內。完全防水和遮風。',
+      typhoonSeasonClosurePolicy: '颱風警報期間博物館可能提前關閉，具體安排需確認官方公告。',
+      typhoonClosure: false,
+      typhoonSafetyPlan: '博物館為完全室內設施，颱風期間相對安全。但可能提前關閉，建議先確認營業時間。',
+      indoorClimateControl: true,
+      hasMultipleLevels: true,
+      rainyDayActivitiesNotLimited: true,
+      wouldNotRecommendRainyDay: false,
+      rainyDayAlternativeVenuesNearby: [],
+      bestWeatherConditions: '全年任何天氣都適合訪問，雨天是完美選擇。',
+      seasonalWeatherImpact: '天氣對博物館訪問沒有負面影響，雨天反而是訪問的好時機。',
+      rainySeasonNotes: '台灣5月至9月為雨季。國立臺灣博物館是雨季訪問的理想選擇！完全室內設施，無天氣影響。',
+      rainyDayNotes: '國立臺灣博物館是雨天訪問的完美地點！完全室內設施，所有展示和活動不受天氣影響。無停車場困擾、無推嬰兒車困難。多樓層設計適合各年齡兒童。強烈推薦雨天、颱風季和夏季炎熱時訪問。全年任何季節都是優秀選擇。'
     }
   },
   {
@@ -2494,6 +2571,32 @@ export let mockLocations: Location[] = [
       staffAlertnessToInsects: true,
       bestTimeToAvoidInsects: '冬季11月至4月無蚊蟲；夏季中午訪問蚊蟲最少',
       insectAllergenNotes: '親子餐廳主要室內，蚊蟲風險低。遊樂區靠近窗戶夏季可能偶見蚊蟲，但不嚴重。空調區域完全無蚊蟲。過敏兒童應避免春季高花粉期間。'
+    },
+    rainyDayAlternatives: {
+      isFullyIndoor: true,
+      hasIndoorAlternatives: true,
+      indoorActivitiesDescription: '親子餐廳設有完全室內的兒童遊樂區、用餐區，以及各種遊戲設施和互動區域。',
+      indoorActivityTypes: ['遊戲室', '遊樂區', '用餐', '互動遊戲'],
+      ageAppropriateIndoorActivities: {
+        toddlers: ['軟墊遊戲區', '爬行區', '用餐'],
+        preschool: ['滑梯', '球池', '繪畫區', '用餐'],
+        schoolAge: ['遊樂園', '遊戲室', '電玩', '用餐'],
+        teens: ['遊戲室', '電玩', '用餐']
+      },
+      rainyCoveragePercentage: 100,
+      weatherProtectionDetails: '完全室內設施，遊樂區、用餐區、廁所均在室內。',
+      typhoonSeasonClosurePolicy: '餐廳在颱風警報期間可能縮短營業時間，但通常不會關閉。',
+      typhoonClosure: false,
+      typhoonSafetyPlan: '室內設施，颱風期間相對安全。建議提前確認營業時間。',
+      indoorClimateControl: true,
+      hasMultipleLevels: false,
+      rainyDayActivitiesNotLimited: true,
+      wouldNotRecommendRainyDay: false,
+      rainyDayAlternativeVenuesNearby: [],
+      bestWeatherConditions: '全年任何天氣都適合，雨天是完美選擇。',
+      seasonalWeatherImpact: '天氣對餐廳訪問沒有影響，可全年訪問。',
+      rainySeasonNotes: '台灣5月至9月為雨季。親子餐廳是雨季訪問的好選擇，可吃飯又能遊玩。',
+      rainyDayNotes: '親子餐廳適合雨天訪問！完全室內設施，遊樂和用餐都不受天氣影響。特別適合：需要用餐的家庭、尋找室內遊樂場所、避雨同時放鬆。可結合用餐時間，讓小孩邊玩邊吃，是雨天親子活動的絕佳選擇。'
     }
   },
   {
@@ -3120,6 +3223,32 @@ export let mockLocations: Location[] = [
       staffAlertnessToInsects: false,
       bestTimeToAvoidInsects: '全年任何時間都完全安心',
       insectAllergenNotes: '南港軟體園區親子中心為現代密閉設施，完全無蚊蟲和花粉風險。高效空氣濾淨系統提供最潔淨環境。過敏和蟲敏感兒童的理想選擇。全年任何季節訪問都是安心的。'
+    },
+    rainyDayAlternatives: {
+      isFullyIndoor: true,
+      hasIndoorAlternatives: true,
+      indoorActivitiesDescription: '南港軟體園區親子中心為現代超級室內設施，提供完整的兒童遊樂區、活動中心、互動遊戲、教室等。',
+      indoorActivityTypes: ['室內遊樂園', '活動課程', '互動遊戲', '閱讀區', '手工藝區'],
+      ageAppropriateIndoorActivities: {
+        toddlers: ['軟遊樂區', '感統遊戲', '兒童活動'],
+        preschool: ['遊樂園', '互動課程', '手工藝', '感統活動'],
+        schoolAge: ['遊樂園', '課程活動', '互動展示', '閱讀區'],
+        teens: ['互動遊戲', '課程', '閱讀區']
+      },
+      rainyCoveragePercentage: 100,
+      weatherProtectionDetails: '超現代密閉設施，所有區域均為室內，配備優質空調和照明。',
+      typhoonSeasonClosurePolicy: '完全室內設施，颱風不影響營運。',
+      typhoonClosure: false,
+      typhoonSafetyPlan: '超現代建築，颱風期間完全安全。通常正常營業。',
+      indoorClimateControl: true,
+      hasMultipleLevels: true,
+      rainyDayActivitiesNotLimited: true,
+      wouldNotRecommendRainyDay: false,
+      rainyDayAlternativeVenuesNearby: [],
+      bestWeatherConditions: '全年任何天氣都完美，雨天是首選。',
+      seasonalWeatherImpact: '無季節或天氣影響，全年恆溫舒適。',
+      rainySeasonNotes: '台灣5月至9月為雨季。南港軟體園區親子中心是雨季的最佳選擇！現代設施、恆溫舒適、無天氣影響。',
+      rainyDayNotes: '南港軟體園區親子中心是雨天訪問的終極選擇！超現代密閉設施，完全不受天氣影響。特別適合：尋求完全室內環保境、避免雨季困擾、感官敏感家庭。設施完善、員工訓練充分、環境清潔舒適。強烈推薦雨天、颱風季、極端天氣時訪問。全年任何時間都是優秀選擇。'
     }
   },
   {
@@ -3727,6 +3856,32 @@ export let mockLocations: Location[] = [
       staffAlertnessToInsects: true,
       bestTimeToAvoidInsects: '冬季11月至4月蚊蟲最少；夏季上午10時至下午3時蚊蟲較少',
       insectAllergenNotes: '內湖運動中心戶外泳池區6月至10月蚊蟲風險中等，尤其黃昏。建議自備防蚊液。室外區域蚊蟲較多；室內設施無蚊蟲。冬季為最佳季節。'
+    },
+    rainyDayAlternatives: {
+      isFullyIndoor: false,
+      hasIndoorAlternatives: true,
+      indoorActivitiesDescription: '運動中心有室內遊泳池、室內健身房、室內運動設施、更衣室等。',
+      indoorActivityTypes: ['室內遊泳池', '室內運動課程', '更衣休息區'],
+      ageAppropriateIndoorActivities: {
+        toddlers: ['室內遊泳池淺水區'],
+        preschool: ['室內遊泳池', '淺水區遊玩'],
+        schoolAge: ['室內遊泳池', '游泳課程'],
+        teens: ['室內遊泳池', '運動課程']
+      },
+      rainyCoveragePercentage: 40,
+      weatherProtectionDetails: '室外泳池無頂篷，室內泳池完全遮蔽。運動中心建築提供部分遮蔽。',
+      typhoonSeasonClosurePolicy: '颱風警報期間戶外區域關閉，室內設施繼續營業。',
+      typhoonClosure: true,
+      typhoonSafetyPlan: '颱風警報時戶外區域關閉，室內設施安全。建議訪問室內區域。',
+      indoorClimateControl: true,
+      hasMultipleLevels: true,
+      rainyDayActivitiesNotLimited: false,
+      wouldNotRecommendRainyDay: false,
+      rainyDayAlternativeVenuesNearby: ['台北市兒童新樂園'],
+      bestWeatherConditions: '晴朗日子適合室外泳池；雨天可選室內設施。',
+      seasonalWeatherImpact: '雨天時室外設施受影響，但室內遊泳池和運動設施不受影響。',
+      rainySeasonNotes: '台灣5月至9月為雨季。內湖運動中心雨天可以游泳！室內泳池完全不受天氣影響。',
+      rainyDayNotes: '內湖運動中心雨天仍可訪問。室外泳池在雨天可能不適合，但室內泳池設施完全正常。特別適合：需要游泳運動、雨天運動、冬季活動。建議：雨天重點選擇室內設施，避免室外區域。夏季可訪問室外泳池，冬季則專注室內。'
     }
   },
   {
@@ -4370,6 +4525,32 @@ export let mockLocations: Location[] = [
       staffAlertnessToInsects: true,
       bestTimeToAvoidInsects: '冬季11月至4月蚊蟲最少；夏季上午8-11時蚊蟲最少',
       insectAllergenNotes: '新店陽光園區為完全戶外水樂園，6月至10月蚊蟲風險非常高，特別是傍晚。強烈建議自備防蚊液並頻繁補擦。靠近草地區域蚊蟲更多。被蚊子叮咬敏感的兒童應避免夏季黃昏訪問。冬季為理想季節。'
+    },
+    rainyDayAlternatives: {
+      isFullyIndoor: false,
+      hasIndoorAlternatives: false,
+      indoorActivitiesDescription: '新店陽光園區完全為戶外水樂園，無室內替代活動。',
+      indoorActivityTypes: [],
+      ageAppropriateIndoorActivities: {
+        toddlers: [],
+        preschool: [],
+        schoolAge: [],
+        teens: []
+      },
+      rainyCoveragePercentage: 0,
+      weatherProtectionDetails: '完全開放戶外園區，無任何頂篷或室內設施。',
+      typhoonSeasonClosurePolicy: '颱風警報期間園區關閉。夏季豪雨時可能關閉或限制進入。',
+      typhoonClosure: true,
+      typhoonSafetyPlan: '颱風警報發佈時立即關閉。豪雨期間不安全。建議避免雨季和颱風季訪問。',
+      indoorClimateControl: false,
+      hasMultipleLevels: false,
+      rainyDayActivitiesNotLimited: false,
+      wouldNotRecommendRainyDay: true,
+      rainyDayAlternativeVenuesNearby: ['國立臺灣博物館', '親子餐廳範例', '南港軟體園區親子中心'],
+      bestWeatherConditions: '晴朗炎熱日子最適合水樂園。',
+      seasonalWeatherImpact: '雨天園區關閉或限制；颱風季無法營運。',
+      rainySeasonNotes: '台灣5月至9月為雨季和颱風高風險期。新店陽光園區在此期間不建議訪問，園區可能因豪雨或颱風警報關閉。',
+      rainyDayNotes: '新店陽光園區不適合雨天訪問。完全戶外水樂園，無任何室內替代活動。雨天園區安全風險高，可能關閉。特別警告：避免5月至9月雨季和颱風季訪問。建議選擇天氣晴朗的日子（10月至4月乾季）。必須訪問時選擇完全晴朗無雨的日期。'
     }
   },
 ];
