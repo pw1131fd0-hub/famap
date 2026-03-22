@@ -878,6 +878,32 @@ export interface RideAgeHeightRestrictionInfo {
   rideRestrictionNotes?: string; // Complete age/height restrictions information for families
 }
 
+export interface AirQualityAndPollutionInfo {
+  affectsOutdoorActivities?: boolean; // Does air quality significantly impact outdoor visits?
+  aqiMonitoringAvailable?: boolean; // Is real-time AQI data available at venue?
+  typicalAQIRange?: string; // e.g., "20-50 (Good)" or "50-100 (Moderate)"
+  poorAQIWarningThreshold?: number; // AQI level when outdoor activities not recommended
+  seasonalAQIPatterns?: string; // e.g., "Winter (Nov-Mar) PM2.5 pollution from China, summer relatively clean"
+  peakPollutionMonths?: string[]; // e.g., ["November", "December", "January", "February", "March"]
+  peakPollutionTimeOfDay?: string; // e.g., "Morning 6-9am and evening 5-9pm typically highest"
+  indoorOutdoorAQIDifference?: string; // e.g., "Indoor areas have air filtering; outdoor 40% more polluted in winter"
+  airPurificationSystem?: boolean; // Indoor areas have air purification/filtration?
+  indoorAirQualityRating?: 'excellent' | 'good' | 'fair' | 'poor'; // Indoor air quality assessment
+  respiratorySensitivityWarning?: boolean; // Warning for children with asthma/respiratory issues?
+  recommendedVisitTiming?: string; // e.g., "Visit summer/early fall for best air quality; avoid peak pollution hours in winter"
+  outdoorActivityRecommendations?: string; // e.g., "Outdoor play limited in winter; recommend indoor alternatives on bad air days"
+  childrenWithAsthmaConsiderations?: string; // e.g., "Bring inhalers, avoid peak pollution months, monitor AQI before visiting"
+  maskRecommendationMonths?: string[]; // Months when masks recommended for outdoor activities
+  aqiDataSource?: string; // e.g., "Taiwan EPA AQI Real-time Data" or "Indoor monitors"
+  pollutantInformation?: {
+    pm25Risk?: 'none' | 'low' | 'moderate' | 'high' | 'very_high'; // PM2.5 (fine particulate matter)
+    o3Risk?: 'none' | 'low' | 'moderate' | 'high'; // Ozone risk
+    noRisk?: 'none' | 'low' | 'moderate' | 'high'; // Nitrogen oxide
+  };
+  airQualityAccessibility?: string; // e.g., "AQI display at entrance, published daily online, text alerts available"
+  airQualityNotes?: string; // Complete air quality and pollution information for Taiwan families
+}
+
 export interface Location {
   id: string;
   name: {
@@ -962,6 +988,7 @@ export interface Location {
   insectAndAllergenEnvironment?: InsectAndAllergenEnvironmentInfo;
   rainyDayAlternatives?: RainyDayAlternativesAndIndoorActivitiesInfo;
   rideRestrictions?: RideAgeHeightRestrictionInfo;
+  airQuality?: AirQualityAndPollutionInfo;
 }
 
 export interface Review {
@@ -1052,6 +1079,13 @@ export interface LocationCreateDTO {
   navigationFromTransit?: NavigationFromTransitInfo;
   photographySpotsAndServices?: PhotographySpotsAndServicesInfo;
   kidsClassesAndWorkshops?: KidsClassesAndWorkshopsInfo;
+  weatherAndSunSafety?: WeatherAndSunSafetyInfo;
+  walkingDistanceAndDifficulty?: WalkingDistanceAndDifficultyInfo;
+  noiseAndSensoryEnvironment?: NoiseAndSensoryEnvironmentInfo;
+  insectAndAllergenEnvironment?: InsectAndAllergenEnvironmentInfo;
+  rainyDayAlternatives?: RainyDayAlternativesAndIndoorActivitiesInfo;
+  rideRestrictions?: RideAgeHeightRestrictionInfo;
+  airQuality?: AirQualityAndPollutionInfo;
 }
 
 export interface Favorite {
