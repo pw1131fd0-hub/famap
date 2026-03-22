@@ -737,6 +737,48 @@ export interface KidsClassesAndWorkshopsInfo {
   classesNotes?: string;
 }
 
+export interface WeatherAndSunSafetyInfo {
+  hasOutdoorExposure?: boolean;
+  uvRiskLevel?: 'extreme' | 'very high' | 'high' | 'moderate' | 'low';
+  peakUVMonth?: string[];
+  recommendedSunProtection?: string[];
+  sunExposureRisk?: string;
+  shadeAvailability?: 'abundant' | 'moderate' | 'limited' | 'minimal';
+  umbrellaAllowed?: boolean;
+  sunriseToSunsetTiming?: string;
+  bestSafeTimeToVisit?: string;
+  heatStressRisk?: string;
+  mosquitoSeasonInfo?: string;
+  sunburnWarning?: boolean;
+  photosensitivityRisk?: boolean;
+  recommendedClothing?: string[];
+  sunscreenRecommendation?: string;
+  indoorAlternativesAvailable?: boolean;
+  weatherProtectionNotes?: string;
+}
+
+export interface WalkingDistanceAndDifficultyInfo {
+  totalWalkingDistance?: number;
+  mainAttractionsAccessibility?: string;
+  strollerWalking?: {
+    isStrollerFriendly?: boolean;
+    difficultSections?: string;
+    flatPathPercentage?: number;
+    maxSlopePercentage?: number;
+  };
+  carryingSmallChildrenDifficulty?: 'easy' | 'moderate' | 'challenging';
+  ageGroupPhysicalDemands?: {
+    toddlers?: string;
+    preschool?: string;
+    schoolAge?: string;
+  };
+  restAreaFrequency?: string;
+  benchesToAmenitiesRatio?: string;
+  timeToMainAttraction?: number;
+  roundTripWalkingTime?: number;
+  walkingDifficultyNotes?: string;
+}
+
 export interface Location {
   id: string;
   name: {
@@ -815,6 +857,8 @@ export interface Location {
   navigationFromTransit?: NavigationFromTransitInfo;
   photographySpotsAndServices?: PhotographySpotsAndServicesInfo;
   kidsClassesAndWorkshops?: KidsClassesAndWorkshopsInfo;
+  weatherAndSunSafety?: WeatherAndSunSafetyInfo;
+  walkingDistanceAndDifficulty?: WalkingDistanceAndDifficultyInfo;
 }
 
 export interface Review {

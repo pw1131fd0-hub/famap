@@ -738,6 +738,48 @@ export interface KidsClassesAndWorkshopsInfo {
   classesNotes?: string; // e.g., "Diverse class offerings suitable for ages 2-12. Registration open 2 weeks in advance. Sibling discounts available. Equipment provided for most classes except sports (bring comfortable clothing)."
 }
 
+export interface WeatherAndSunSafetyInfo {
+  hasOutdoorExposure?: boolean; // Does the venue have significant outdoor areas?
+  uvRiskLevel?: 'extreme' | 'very high' | 'high' | 'moderate' | 'low'; // Year-round UV risk rating
+  peakUVMonth?: string[]; // e.g., ["May", "June", "July", "August", "September"]
+  recommendedSunProtection?: string[]; // e.g., ["SPF50+ sunscreen", "UV-blocking clothing", "hat/cap", "sunglasses"]
+  sunExposureRisk?: string; // e.g., "High during summer 10am-4pm; outdoor playground directly exposed; limited shade available"
+  shadeAvailability?: 'abundant' | 'moderate' | 'limited' | 'minimal'; // How much shade is available
+  umbrellaAllowed?: boolean; // Can families bring umbrellas for sun protection?
+  sunriseToSunsetTiming?: string; // e.g., "Sunrise ~5:30am, Sunset ~6:30pm in summer"
+  bestSafeTimeToVisit?: string; // e.g., "Early morning before 10am or after 4pm for minimal sun exposure"
+  heatStressRisk?: string; // e.g., "Very high July-August (30-35°C); brings water frequently, watch for heat exhaustion"
+  mosquitoSeasonInfo?: string; // e.g., "High mosquito activity May-October, especially dusk; recommend repellent and protective clothing"
+  sunburnWarning?: boolean; // Is sunburn a significant risk?
+  photosensitivityRisk?: boolean; // High glare/reflection areas (water, sand, concrete)?
+  recommendedClothing?: string[]; // e.g., ["light-colored long sleeves", "moisture-wicking fabrics", "UV-blocking hat"]
+  sunscreenRecommendation?: string; // e.g., "SPF50+ reapplied every 2 hours, especially after water activities"
+  indoorAlternativesAvailable?: boolean; // Are there indoor activities if sun is too intense?
+  weatherProtectionNotes?: string; // e.g., "Outdoor park has limited shade; recommend early morning visits in summer. Bring sunscreen SPF50+, hat, and extra water. Indoor museum section available as alternative on extremely hot days."
+}
+
+export interface WalkingDistanceAndDifficultyInfo {
+  totalWalkingDistance?: number; // Total walking distance in meters for full tour/experience
+  mainAttractionsAccessibility?: string; // e.g., "Main attractions within 500m of entrance"
+  strollerWalking?: {
+    isStrollerFriendly?: boolean; // Are paths suitable for strollers?
+    difficultSections?: string; // e.g., "Stairs on west path, gravel surface near playground"
+    flatPathPercentage?: number; // 0-100% of paths are flat/smooth
+    maxSlopePercentage?: number; // Steepest slope grade
+  };
+  carryingSmallChildrenDifficulty?: 'easy' | 'moderate' | 'challenging'; // Difficulty of carrying toddlers
+  ageGroupPhysicalDemands?: {
+    toddlers?: string; // e.g., "Minimal walking, short visits 1-2 hours recommended"
+    preschool?: string; // e.g., "Moderate walking, can do 2-3km, needs rest breaks"
+    schoolAge?: string; // e.g., "Can handle 5km+ with interest, minimal rest needs"
+  };
+  restAreaFrequency?: string; // e.g., "Rest areas every 200-300m"
+  benchesToAmenitiesRatio?: string; // e.g., "Plenty of seating throughout"
+  timeToMainAttraction?: number; // Minutes from entrance to main area
+  roundTripWalkingTime?: number; // Total walking time for full experience (minutes)
+  walkingDifficultyNotes?: string; // e.g., "Mostly flat paths with good stroller access. Main attractions within 200m of entrance. Plenty of benches for rest. Well-suited for families with toddlers. Estimated 1-2 hours walking for full experience."
+}
+
 export interface Location {
   id: string;
   name: {
@@ -816,6 +858,8 @@ export interface Location {
   navigationFromTransit?: NavigationFromTransitInfo;
   photographySpotsAndServices?: PhotographySpotsAndServicesInfo;
   kidsClassesAndWorkshops?: KidsClassesAndWorkshopsInfo;
+  weatherAndSunSafety?: WeatherAndSunSafetyInfo;
+  walkingDistanceAndDifficulty?: WalkingDistanceAndDifficultyInfo;
 }
 
 export interface SearchParams {

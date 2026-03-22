@@ -510,6 +510,46 @@ export let mockLocations: Location[] = [
       bookingMethod: '部分課程無須預約，特殊課程可洽詢公園服務中心',
       classesPhoneNumber: '02-2700-8600',
       classesNotes: '大安森林公園定期舉辦免費戶外課程，適合親子家庭參與。課程內容隨季節變化，包括自然觀察、藝術創作和健身課程。志工教學為主，課程品質佳。建議早點到達以確保位置。'
+    },
+    weatherAndSunSafety: {
+      hasOutdoorExposure: true,
+      uvRiskLevel: 'high',
+      peakUVMonth: ['May', 'June', 'July', 'August', 'September'],
+      recommendedSunProtection: ['SPF50+ 防曬乳', '防曬衣著', '帽子和墨鏡', '陽傘或遮陽帳篷'],
+      sunExposureRisk: '夏季戶外遊樂場陽光直射，上午10點至下午4點紫外線最強。雖有樹蔭但遊戲場空曠處易曬傷',
+      shadeAvailability: 'moderate',
+      umbrellaAllowed: true,
+      sunriseToSunsetTiming: '冬季約6點日出、5點日落；夏季約5:30日出、6:30日落',
+      bestSafeTimeToVisit: '早上7-10點或下午4-6點紫外線較弱，避免中午直曬',
+      heatStressRisk: '7-8月可達33-36°C高溫，需頻繁補充水分，注意兒童熱衰竭風險',
+      mosquitoSeasonInfo: '5-10月蚊蟲活動頻繁，黃昏時段特別多，建議穿著長袖褲並使用防蚊液',
+      sunburnWarning: true,
+      photosensitivityRisk: false,
+      recommendedClothing: ['淺色透氣長袖', '寬鬆速乾褲', '防曬帽', 'UV防曬衣'],
+      sunscreenRecommendation: 'SPF50+防曬乳每2小時補擦一次，流汗或下水後立即補擦。兒童建議物理性防曬優於化學防曬',
+      indoorAlternativesAvailable: false,
+      weatherProtectionNotes: '大安森林公園為開放式戶外設施，夏季紫外線強烈。建議早上9-11點或傍晚4-6點造訪。自備SPF50+防曬乳、帽子、陽傘。多個飲水台可補充水分，建議帶足量飲用水以預防熱衰竭。春秋季節最舒適，無需特殊防曬。'
+    },
+    walkingDistanceAndDifficulty: {
+      totalWalkingDistance: 2500,
+      mainAttractionsAccessibility: '主要遊樂區在公園南邊入口附近，距離入口200-500公尺',
+      strollerWalking: {
+        isStrollerFriendly: true,
+        difficultSections: '林區小徑路面不平，部分階梯無法推嬰兒車',
+        flatPathPercentage: 75,
+        maxSlopePercentage: 8
+      },
+      carryingSmallChildrenDifficulty: 'easy',
+      ageGroupPhysicalDemands: {
+        toddlers: '最少走路，大型遊樂場和沙坑在入口附近，建議1.5-2小時訪問',
+        preschool: '適度步行，可遊覽3-5公里路線，需安排休息時段',
+        schoolAge: '可應對5公里以上步行，體力充足時可全天遊玩'
+      },
+      restAreaFrequency: '每200-300公尺有涼亭或座椅',
+      benchesToAmenitiesRatio: '遊樂區周邊多有長椅和涼亭，適合親子休息',
+      timeToMainAttraction: 5,
+      roundTripWalkingTime: 120,
+      walkingDifficultyNotes: '平坦寬敞的主路徑非常適合推嬰兒車。遊樂場全部集中在南邊入口附近，無需走遠路。林區步道較為蜿蜒，沙坑設施距離入口僅200米，非常便利。家有小幼兒的家庭可在1小時內完成主要景點遊覽，有充足休息區域。'
     }
   },
   {
@@ -1106,6 +1146,46 @@ export let mockLocations: Location[] = [
       classesWebsite: 'www.ntm.gov.tw',
       classesPhoneNumber: '02-2382-2566',
       classesNotes: '博物館提供豐富的教育課程，適合對自然和科學有興趣的家庭。課程融合展示內容，讓孩童深入學習。暑假和寒假有多天營隊課程。部分課程需收費，但許多基礎課程免費。建議提前查看官網課程表。'
+    },
+    weatherAndSunSafety: {
+      hasOutdoorExposure: true,
+      uvRiskLevel: 'very high',
+      peakUVMonth: ['May', 'June', 'July', 'August', 'September'],
+      recommendedSunProtection: ['SPF50+ 防曬乳', '防曬衣著', '帽子和墨鏡', '遮陽傘'],
+      sunExposureRisk: '樂園為戶外設施，大部分遊樂設施露天，夏季上午10點至下午4點紫外線極強。摩天輪、旋轉木馬等多為無遮蔽設施',
+      shadeAvailability: 'limited',
+      umbrellaAllowed: true,
+      sunriseToSunsetTiming: '冬季約6點日出、5點日落；夏季約5:30日出、6:30日落',
+      bestSafeTimeToVisit: '早上8-10點或下午4:30-6點為最佳時段，避免正午烈日',
+      heatStressRisk: '7-8月高溫32-36°C，樂園內因密集人潮溫度更高。需定期補充水分，小童易發生熱中風',
+      mosquitoSeasonInfo: '5-10月蚊蟲活跡，黃昏尤其多。樂園近山區，建議穿防蚊衣著並帶防蚊液',
+      sunburnWarning: true,
+      photosensitivityRisk: true,
+      recommendedClothing: ['淺色透氣衣物', '長袖長褲', '寬鬆帽子', '防曬外套'],
+      sunscreenRecommendation: 'SPF50+ PA++++防曬乳每小時補擦。進行水上遊乐設施後立即補擦。建議備用防曬乳多支',
+      indoorAlternativesAvailable: false,
+      weatherProtectionNotes: '兒童新樂園大部分遊樂設施為露天，夏季豔陽炎炎。強烈建議早上9-11點或傍晚4-6點造訪。自備SPF50+ PA++++防曬乳（多支）、防曬帽、遮陽傘。園區備有多個飲水台，建議自帶足量礦泉水。考慮購買防曬衣著以加強保護。'
+    },
+    walkingDistanceAndDifficulty: {
+      totalWalkingDistance: 1500,
+      mainAttractionsAccessibility: '主要遊樂設施集中在園區中心，距離入口200-400公尺',
+      strollerWalking: {
+        isStrollerFriendly: true,
+        difficultSections: '部分遊樂區周邊地形不平，階梯區需繞路',
+        flatPathPercentage: 80,
+        maxSlopePercentage: 5
+      },
+      carryingSmallChildrenDifficulty: 'easy',
+      ageGroupPhysicalDemands: {
+        toddlers: '最少走路，主要設施在園區中心。建議2-3小時訪問',
+        preschool: '中等步行量，可走遍整個園區，需數次休息',
+        schoolAge: '可應對全園遊玩，體力充足，1日以上遊玩無問題'
+      },
+      restAreaFrequency: '每處遊樂設施周邊都有座椅或涼亭',
+      benchesToAmenitiesRatio: '座椅充足，多個休息區域分佈園區',
+      timeToMainAttraction: 5,
+      roundTripWalkingTime: 90,
+      walkingDifficultyNotes: '樂園規劃良好，主路線平坦寬敞，很適合推嬰兒車。遊樂設施距離不遠，最多走15分鐘可到任何設施。有充足休息座位。家有嬰幼兒的家庭可輕鬆遊玩，不會過度勞累。'
     }
   },
   {
@@ -1642,6 +1722,46 @@ export let mockLocations: Location[] = [
       classesWebsite: 'www.ntm.gov.tw/education',
       classesPhoneNumber: '02-2382-2566 分機3301',
       classesNotes: '國立臺灣博物館提供多元教育課程，強調文化學習和動手實踐。課程設計融合展示內容，讓孩童認識台灣文化和自然遺產。提供暑假和寒假營隊。許多基礎課程免費，特殊工作坊需收費。建議提前預約以確保位置。'
+    },
+    weatherAndSunSafety: {
+      hasOutdoorExposure: false,
+      uvRiskLevel: 'low',
+      peakUVMonth: [],
+      recommendedSunProtection: [],
+      sunExposureRisk: '室內博物館，無戶外陽光暴露風險',
+      shadeAvailability: 'na',
+      umbrellaAllowed: true,
+      sunriseToSunsetTiming: 'N/A',
+      bestSafeTimeToVisit: '任何時段皆可，不受陽光影響',
+      heatStressRisk: '全年恆溫室內環境（約20-25°C），無熱衰竭風險',
+      mosquitoSeasonInfo: '室內環境，無蚊蟲問題',
+      sunburnWarning: false,
+      photosensitivityRisk: false,
+      recommendedClothing: ['正常穿著', '長褲（展示區溫度較涼）'],
+      sunscreenRecommendation: '無需防曬乳',
+      indoorAlternativesAvailable: true,
+      weatherProtectionNotes: '國立臺灣博物館為完全室內設施，全年提供恆溫舒適環境。無陽光暴露或天氣相關顧慮。任何季節、時段均可舒適參觀。室內溫度約20-25°C，建議穿著長褲以保暖。下雨天尤其適合參訪此館，完全不受天氣影響。'
+    },
+    walkingDistanceAndDifficulty: {
+      totalWalkingDistance: 800,
+      mainAttractionsAccessibility: '主要展示區在一二樓，距離入口不遠',
+      strollerWalking: {
+        isStrollerFriendly: true,
+        difficultSections: '部分樓梯區，但有電梯可用',
+        flatPathPercentage: 90,
+        maxSlopePercentage: 2
+      },
+      carryingSmallChildrenDifficulty: 'easy',
+      ageGroupPhysicalDemands: {
+        toddlers: '最少走路，可在一樓主要展區停留。建議1-2小時訪問',
+        preschool: '適度步行，可上下樓層。建議2-3小時',
+        schoolAge: '可自由走動探索。建議3-4小時遊覽'
+      },
+      restAreaFrequency: '多個休息座椅在展示區周邊',
+      benchesToAmenitiesRatio: '展示區內座椅充足',
+      timeToMainAttraction: 3,
+      roundTripWalkingTime: 60,
+      walkingDifficultyNotes: '博物館為多層樓設施，但配有完整電梯系統，推嬰兒車無困難。走道寬敞，座椅多。主要展示區集中在一二樓，無需過度步行。適合家有嬰幼兒的家庭，走路距離短，休息區充足。'
     }
   },
   {
@@ -2174,6 +2294,46 @@ export let mockLocations: Location[] = [
       bookingMethod: '電話預約或至餐廳櫃台報名',
       classesPhoneNumber: '02-2181-6666',
       classesNotes: '親子餐廳提供多樣化的烹飪和藝術課程，強調親子互動和動手體驗。課程融合餐廳環境，讓孩童在趣味中學習。所有課程包含材料費和部分含餐飲。建議提前預約，假日課程常額滿。'
+    },
+    weatherAndSunSafety: {
+      hasOutdoorExposure: false,
+      uvRiskLevel: 'low',
+      peakUVMonth: [],
+      recommendedSunProtection: [],
+      sunExposureRisk: '室內餐廳，無戶外陽光暴露風險',
+      shadeAvailability: 'na',
+      umbrellaAllowed: true,
+      sunriseToSunsetTiming: 'N/A',
+      bestSafeTimeToVisit: '任何時段皆可',
+      heatStressRisk: '全年恆溫室內（約22-26°C），無熱衰竭風險',
+      mosquitoSeasonInfo: '室內環境，無蚊蟲問題',
+      sunburnWarning: false,
+      photosensitivityRisk: false,
+      recommendedClothing: ['正常穿著'],
+      sunscreenRecommendation: '無需防曬乳',
+      indoorAlternativesAvailable: true,
+      weatherProtectionNotes: '親子餐廳為現代室內設施，提供全年恆溫舒適環境。無陽光或天氣相關顧慮。任何季節、時段均可舒適用餐和上課。雨天尤其適合，完全不受天氣影響。'
+    },
+    walkingDistanceAndDifficulty: {
+      totalWalkingDistance: 400,
+      mainAttractionsAccessibility: '室內設施，主要遊樂區在店內',
+      strollerWalking: {
+        isStrollerFriendly: true,
+        difficultSections: '無',
+        flatPathPercentage: 100,
+        maxSlopePercentage: 0
+      },
+      carryingSmallChildrenDifficulty: 'easy',
+      ageGroupPhysicalDemands: {
+        toddlers: '無需走路，可在店內遊玩。建議2-3小時',
+        preschool: '最少走路，可自由探索店內空間。建議2-4小時',
+        schoolAge: '可自由活動，與同齡兒童互動遊玩'
+      },
+      restAreaFrequency: '座位區遍佈，家長可在餐飲區監視',
+      benchesToAmenitiesRatio: '餐飲座位充足',
+      timeToMainAttraction: 0,
+      roundTripWalkingTime: 0,
+      walkingDifficultyNotes: '親子餐廳為完全室內設施，空間相對集中。無需走遠路，所有遊樂和用餐區都在店內。完全無障礙，非常適合推嬰兒車或抱小孩的家長。家長可邊用餐邊監督小孩遊玩。'
     }
   },
   {
@@ -2720,6 +2880,46 @@ export let mockLocations: Location[] = [
       classesWebsite: 'www.nangang-familycenter.taipei.gov.tw',
       classesPhoneNumber: '02-2655-0988',
       classesNotes: '南港軟體園區親子中心提供多元化課程，強調創意和互動學習。設施新穎，教師專業認證。提供暑假和寒假營隊。許多課程適合不同能力的兒童。建議提前預約課程，假日班級常滿。'
+    },
+    weatherAndSunSafety: {
+      hasOutdoorExposure: false,
+      uvRiskLevel: 'low',
+      peakUVMonth: [],
+      recommendedSunProtection: [],
+      sunExposureRisk: '室內親子中心，無戶外陽光暴露',
+      shadeAvailability: 'na',
+      umbrellaAllowed: true,
+      sunriseToSunsetTiming: 'N/A',
+      bestSafeTimeToVisit: '任何時段皆可',
+      heatStressRisk: '現代商業設施，全年恆溫（22-26°C），無熱衰竭風險',
+      mosquitoSeasonInfo: '室內環境，無蚊蟲問題',
+      sunburnWarning: false,
+      photosensitivityRisk: false,
+      recommendedClothing: ['正常穿著'],
+      sunscreenRecommendation: '無需防曬乳',
+      indoorAlternativesAvailable: true,
+      weatherProtectionNotes: '南港軟體園區親子中心為全新現代化室內設施，全年恆溫舒適。無陽光或天氣相關顧慮。任何季節都是舒適的造訪時間。雨天尤其適合，完全不受天氣影響。'
+    },
+    walkingDistanceAndDifficulty: {
+      totalWalkingDistance: 500,
+      mainAttractionsAccessibility: '室內設施，主要活動區在中心內',
+      strollerWalking: {
+        isStrollerFriendly: true,
+        difficultSections: '無',
+        flatPathPercentage: 100,
+        maxSlopePercentage: 0
+      },
+      carryingSmallChildrenDifficulty: 'easy',
+      ageGroupPhysicalDemands: {
+        toddlers: '無需走路，可在安全設施區活動。建議2-3小時',
+        preschool: '最少走路，全設施無障礙開放。建議2-4小時',
+        schoolAge: '可自由探索，各年齡區域分開設置'
+      },
+      restAreaFrequency: '多個家長休息區分佈中心各處',
+      benchesToAmenitiesRatio: '座椅和飲用水充足',
+      timeToMainAttraction: 1,
+      roundTripWalkingTime: 15,
+      walkingDifficultyNotes: '現代親子中心設計開放，空間寬敞無障礙。無需走遠路即可到達各活動區。完全適合推嬰兒車。設有多個家長休息區，可舒適地監督孩童遊玩。'
     }
   },
   {
@@ -3247,6 +3447,46 @@ export let mockLocations: Location[] = [
       bookingMethod: '現場報名或電話預約，熱門課程需提前登記',
       classesPhoneNumber: '02-2918-3533',
       classesNotes: '內湖運動中心提供專業的游泳和水上運動課程，教練資格完整。課程涵蓋初學到進階，並有特殊需求適應課程。暑假集訓營非常受歡迎，常需提前預約。成人陪同課程讓小朋友安全適應水環境。'
+    },
+    weatherAndSunSafety: {
+      hasOutdoorExposure: true,
+      uvRiskLevel: 'very high',
+      peakUVMonth: ['May', 'June', 'July', 'August', 'September'],
+      recommendedSunProtection: ['SPF50+ PA++++ 防曬乳', '防曬衣和泳衣', '防曬帽', 'UV防曬鏡'],
+      sunExposureRisk: '運動中心有室內室外設施。室外泳池直接暴露於陽光，夏季上午10點至下午4點紫外線極強。水面反光加強曬傷風險',
+      shadeAvailability: 'moderate',
+      umbrellaAllowed: true,
+      sunriseToSunsetTiming: '冬季約6點日出、5點日落；夏季約5:30日出、6:30日落',
+      bestSafeTimeToVisit: '早上7-9點或下午4-6點紫外線較弱',
+      heatStressRisk: '7-8月高溫32-36°C，加上水邊反光會加劇熱感。需頻繁補充水分',
+      mosquitoSeasonInfo: '5-10月蚊蟲活躍，近山區尤其多。黃昏時刻特別明顯',
+      sunburnWarning: true,
+      photosensitivityRisk: true,
+      recommendedClothing: ['防曬泳衣', '防曬長褲/褲裙', '防曬帽', 'UV涼感衣物'],
+      sunscreenRecommendation: '游泳前擦SPF50+ PA++++防曬乳，每30分鐘補擦（特別是下水後），水邊反光強，需特別加強防曬',
+      indoorAlternativesAvailable: true,
+      weatherProtectionNotes: '內湖運動中心擁有室內室外泳池。室外泳池夏季紫外線強烈，建議早上8-10點或下午4-6點游泳。自備SPF50+ PA++++防曬乳（多支）、防曬泳衣或防曬衣。可選擇使用室內恆溫泳池以避免過度曝曬。雨天或烈日時，室內泳池是舒適選擇。'
+    },
+    walkingDistanceAndDifficulty: {
+      totalWalkingDistance: 800,
+      mainAttractionsAccessibility: '主要泳池區在中心廣場，距離入口300-500公尺',
+      strollerWalking: {
+        isStrollerFriendly: true,
+        difficultSections: '部分室外區路面有高低差',
+        flatPathPercentage: 85,
+        maxSlopePercentage: 3
+      },
+      carryingSmallChildrenDifficulty: 'easy',
+      ageGroupPhysicalDemands: {
+        toddlers: '最少走路，主要活動區靠近入口。建議2-3小時',
+        preschool: '中等步行，可到達各泳池區。建議3-4小時',
+        schoolAge: '可自由探索運動中心。建議4-6小時'
+      },
+      restAreaFrequency: '座椅分佈在各泳池周邊',
+      benchesToAmenitiesRatio: '座位充足，有多個家長監督區',
+      timeToMainAttraction: 8,
+      roundTripWalkingTime: 45,
+      walkingDifficultyNotes: '運動中心為現代化設施，主路線平坦寬敞。室外泳池區有一些高低差但坡度溫和。推嬰兒車可行，但部分草地區可能困難。主要設施距離適中，無過度走路問題。有充足座椅供家長休息。'
     }
   },
   {
@@ -3810,6 +4050,46 @@ export let mockLocations: Location[] = [
       bookingMethod: '線上或現場報名，暑期課程需提前預約',
       classesPhoneNumber: '02-2911-6789',
       classesNotes: '新店陽光園區夏季提供多樣化水上課程，教練均具安全認證。暑假是課程高峰期，集訓營和營隊課程非常受歡迎，需提早報名。所有課程強調安全和玩樂兼具。完善的特殊需求課程協助有特殊需求的兒童。'
+    },
+    weatherAndSunSafety: {
+      hasOutdoorExposure: true,
+      uvRiskLevel: 'extreme',
+      peakUVMonth: ['May', 'June', 'July', 'August', 'September'],
+      recommendedSunProtection: ['SPF50+ PA++++ 防曬乳', '防曬衣/泳衣', '防曬帽', 'UV墨鏡', '遮陽傘'],
+      sunExposureRisk: '水上樂園為完全戶外設施，紫外線風險最高。大部分活動在日光下進行，夏季上午10點至下午4點紫外線最強。水面反光和混凝土地面加強曬傷風險',
+      shadeAvailability: 'minimal',
+      umbrellaAllowed: true,
+      sunriseToSunsetTiming: '冬季約6點日出、5點日落；夏季約5:30日出、6:30日落',
+      bestSafeTimeToVisit: '早上7:30-9:30或下午4:30-6:30為最安全時段',
+      heatStressRisk: '7-8月高溫達33-38°C，戶外水樂園溫度更高。小童易發生熱中風，需極頻繁補充水分',
+      mosquitoSeasonInfo: '5-10月蚊蟲活躍，雨後特別多。建議傍晚或夜間活動時配備防蚊用品',
+      sunburnWarning: true,
+      photosensitivityRisk: true,
+      recommendedClothing: ['長時間防曬泳衣', '防曬褲', '防曬帽（可防水）', '水上活動防曬衣'],
+      sunscreenRecommendation: '使用SPF50+ PA++++物理性防曬乳，進入游樂池或下雨後立即補擦。建議備多支防曬乳並放置樂園內各處。嬰幼兒優先使用物理防曬衣物而非防曬乳',
+      indoorAlternativesAvailable: false,
+      weatherProtectionNotes: '新店陽光休閒園區為完全戶外水上樂園，紫外線曝曬最強。夏日造訪時強烈建議早上8-10點或下午4-6點。自備SPF50+ PA++++防曬乳（多支）、防曬長泳衣、防曬帽、遮陽傘。定時補充清水以預防熱衰竭。雨天造訪可減少紫外線曝曬。冬季造訪可大幅降低防曬需求。'
+    },
+    walkingDistanceAndDifficulty: {
+      totalWalkingDistance: 2000,
+      mainAttractionsAccessibility: '主要遊樂區分散園區，需較多步行',
+      strollerWalking: {
+        isStrollerFriendly: false,
+        difficultSections: '水樂園地形起伏，多為泥土或草地，嬰兒車難行。部分區域有階梯',
+        flatPathPercentage: 50,
+        maxSlopePercentage: 12
+      },
+      carryingSmallChildrenDifficulty: 'moderate',
+      ageGroupPhysicalDemands: {
+        toddlers: '需較多行走，地形不平坦。不建議1-2歲幼童來此',
+        preschool: '中等步行量，可遊玩各區但需家長協助。建議3-5小時',
+        schoolAge: '可應對園區內較多步行和地形起伏。建議4-6小時全日遊玩'
+      },
+      restAreaFrequency: '休息區相對較少，建議帶帳篷或遮陽設施',
+      benchesToAmenitiesRatio: '座椅不多，多為露天草地',
+      timeToMainAttraction: 15,
+      roundTripWalkingTime: 120,
+      walkingDifficultyNotes: '水上樂園為戶外園區，地形多為自然草地和泥土，不適合推嬰兒車。家有嬰幼兒家庭建議帶嬰兒背帶。園區地勢起伏，有多個樓梯和水池邊坡。需走較長距離才能到達各遊樂區。休息座位有限，建議自帶帳篷遮陽。體力要求較高，適合學齡兒童以上。'
     }
   },
 ];
