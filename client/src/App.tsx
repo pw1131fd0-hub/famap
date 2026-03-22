@@ -165,6 +165,7 @@ function App() {
     const saved = localStorage.getItem('childAge');
     return saved ? parseInt(saved, 10) : undefined;
   });
+  const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance');
 
   const fetchLocations = useCallback(async () => {
     setLoading(true);
@@ -322,7 +323,24 @@ function App() {
       filtered = filtered.filter(isAgeAppropriate);
     }
 
-    return filtered;
+    // Sort based on selected option
+    const sorted = [...filtered].sort((a, b) => {
+      switch (sortBy) {
+        case 'distance': {
+          const distA = calculateDistance(position[0], position[1], a.coordinates.lat, a.coordinates.lng);
+          const distB = calculateDistance(position[0], position[1], b.coordinates.lat, b.coordinates.lng);
+          return distA - distB;
+        }
+        case 'rating':
+          return b.averageRating - a.averageRating;
+        case 'name':
+          return a.name[language].localeCompare(b.name[language], language === 'zh' ? 'zh-Hans' : 'en');
+        default:
+          return 0;
+      }
+    });
+
+    return sorted;
   };
 
   const categories: Array<{ key: Category | undefined; icon: React.ElementType; label: string }> = [
@@ -571,6 +589,58 @@ function App() {
                       )}
                     </div>
                   </div>
+                  <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid #eee' }}>
+                    <label style={{ fontSize: '0.9em', fontWeight: '500', display: 'block', marginBottom: '8px' }}>
+                      🔀 {language === 'zh' ? '排序' : 'Sort by'}
+                    </label>
+                    <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                      <button
+                        onClick={() => setSortBy('distance')}
+                        style={{
+                          padding: '6px 10px',
+                          background: sortBy === 'distance' ? '#3b82f6' : '#f0f0f0',
+                          color: sortBy === 'distance' ? 'white' : '#333',
+                          border: 'none',
+                          borderRadius: '4px',
+                          cursor: 'pointer',
+                          fontSize: '0.85em',
+                          fontWeight: sortBy === 'distance' ? '600' : '400',
+                        }}
+                      >
+                        📍 {language === 'zh' ? '距離' : 'Distance'}
+                      </button>
+                      <button
+                        onClick={() => setSortBy('rating')}
+                        style={{
+                          padding: '6px 10px',
+                          background: sortBy === 'rating' ? '#3b82f6' : '#f0f0f0',
+                          color: sortBy === 'rating' ? 'white' : '#333',
+                          border: 'none',
+                          borderRadius: '4px',
+                          cursor: 'pointer',
+                          fontSize: '0.85em',
+                          fontWeight: sortBy === 'rating' ? '600' : '400',
+                        }}
+                      >
+                        ⭐ {language === 'zh' ? '評分' : 'Rating'}
+                      </button>
+                      <button
+                        onClick={() => setSortBy('name')}
+                        style={{
+                          padding: '6px 10px',
+                          background: sortBy === 'name' ? '#3b82f6' : '#f0f0f0',
+                          color: sortBy === 'name' ? 'white' : '#333',
+                          border: 'none',
+                          borderRadius: '4px',
+                          cursor: 'pointer',
+                          fontSize: '0.85em',
+                          fontWeight: sortBy === 'name' ? '600' : '400',
+                        }}
+                      >
+                        A-Z {language === 'zh' ? '名稱' : 'Name'}
+                      </button>
+                    </div>
+                  </div>
                   <div className="quick-facility-filters">
                     <button
                       className={`quick-facility-btn ${facilitiesFilter.includes('public_toilet') ? 'active' : ''}`}
@@ -649,34 +719,50 @@ function App() {
                     )}
                   </div>
                 ) : (
-                  getFilteredLocations(showFavorites ? favorites : locations).map((loc) => (
-                    <div 
-                      key={loc.id} 
-                      className="location-card"
-                      onClick={() => {
-                        setPosition([loc.coordinates.lat, loc.coordinates.lng]);
-                        setSelectedLocation(loc);
-                        setSidebarOpen(false);
-                      }}
-                    >
-                      <div className="card-header">
-                        <h3>{loc.name[language]}</h3>
-                        <button
-                          className={`favorite-icon-button ${favorites.some(f => f.id === loc.id) ? 'active' : ''}`}
-                          onClick={(e) => toggleFavorite(e, loc.id)}
-                          aria-label={favorites.some(f => f.id === loc.id) ? t.common.removeFromFavorites : t.common.addToFavorites}
-                        >
-                          <Heart size={18} fill={favorites.some(f => f.id === loc.id) ? "currentColor" : "none"} />
-                        </button>
+                  getFilteredLocations(showFavorites ? favorites : locations).map((loc) => {
+                    const criticalFacilities = loc.facilities.filter(f =>
+                      ['public_toilet', 'nursing_room', 'medical'].includes(f) ||
+                      (loc.category === 'medical')
+                    );
+                    const hasCriticalFacility = criticalFacilities.length > 0 || loc.category === 'medical';
+
+                    return (
+                      <div
+                        key={loc.id}
+                        className="location-card"
+                        onClick={() => {
+                          setPosition([loc.coordinates.lat, loc.coordinates.lng]);
+                          setSelectedLocation(loc);
+                          setSidebarOpen(false);
+                        }}
+                        style={hasCriticalFacility ? { borderLeft: '3px solid #ff6b6b' } : {}}
+                      >
+                        <div className="card-header">
+                          <h3>{loc.name[language]}</h3>
+                          <button
+                            className={`favorite-icon-button ${favorites.some(f => f.id === loc.id) ? 'active' : ''}`}
+                            onClick={(e) => toggleFavorite(e, loc.id)}
+                            aria-label={favorites.some(f => f.id === loc.id) ? t.common.removeFromFavorites : t.common.addToFavorites}
+                          >
+                            <Heart size={18} fill={favorites.some(f => f.id === loc.id) ? "currentColor" : "none"} />
+                          </button>
+                        </div>
+                        <div className="card-meta">
+                          <p className="category-label">{t.categories[loc.category]}</p>
+                          <p className="distance-text">📍 {formatDistance(calculateDistance(position[0], position[1], loc.coordinates.lat, loc.coordinates.lng))}</p>
+                        </div>
+                        <p className="address-text">{loc.address[language]}</p>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px' }}>
+                          <div className="rating">⭐ {loc.averageRating}</div>
+                          {hasCriticalFacility && (
+                            <div style={{ fontSize: '0.8em', color: '#ff6b6b', fontWeight: '600' }}>
+                              ⚠️ {language === 'zh' ? '有必要設施' : 'Key Facilities'}
+                            </div>
+                          )}
+                        </div>
                       </div>
-                      <div className="card-meta">
-                        <p className="category-label">{t.categories[loc.category]}</p>
-                        <p className="distance-text">📍 {formatDistance(calculateDistance(position[0], position[1], loc.coordinates.lat, loc.coordinates.lng))}</p>
-                      </div>
-                      <p className="address-text">{loc.address[language]}</p>
-                      <div className="rating">⭐ {loc.averageRating}</div>
-                    </div>
-                  ))
+                    );
+                  })
                 )}
               </div>
               <button className="view-map-btn" onClick={() => setSidebarOpen(false)}>
