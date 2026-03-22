@@ -159,6 +159,35 @@ export interface ReservedTimesInfo {
   reservedTimesNotes?: string; // e.g., "Wednesday 10-12am parent-child hours, reserve online"
 }
 
+export interface NursingRoomDetails {
+  hasDedicatedNursingRoom?: boolean; // Is there a dedicated nursing/lactation room? (哺乳室)
+  isPrivate?: boolean; // Private room vs shared area
+  hasSeating?: boolean; // Comfortable seating
+  hasChangingTable?: boolean; // For diaper changes
+  hasAirConditioning?: boolean; // Climate control
+  hasWifi?: boolean; // For nursing parents
+  hasLockableStall?: boolean; // Privacy for nursing
+  hasRefrigerator?: boolean; // For breast milk storage
+  hasPowerOutlet?: boolean; // For breast pump/bottle warmer
+  hasHandWashing?: boolean; // For hygiene
+  cleanlinessRating?: number; // 1-5 stars
+  roomCount?: number; // Number of nursing rooms available
+  nursingRoomNotes?: string; // e.g., "Private rooms with comfortable seating, refrigerator available, very clean. Reserve ahead"
+}
+
+export interface PetPolicy {
+  petsAllowed?: boolean; // General pet permission
+  dogsAllowed?: boolean; // Specifically for dogs
+  catsAllowed?: boolean; // Specifically for cats
+  serviceAnimalsAllowed?: boolean; // Service animals (always true but explicit)
+  smallPetsAllowed?: boolean; // Rabbits, hamsters, etc.
+  hasLeashRequirement?: boolean; // Must be on leash
+  hasDesignatedPetAreas?: boolean; // Specific areas for pets
+  hasOnSiteVeterinary?: boolean; // Veterinary clinic available
+  petRestrictionsDetails?: string; // e.g., "Dogs only in designated area, must be on leash, max 2 dogs per person"
+  petPolicyNotes?: string; // e.g., "Pet-friendly park, water bowls available, no aggressive breeds"
+}
+
 export interface Location {
   id: string;
   name: {
@@ -204,6 +233,8 @@ export interface Location {
   outsideFood?: OutsideFoodPolicy;
   stroller?: StrollerInfo;
   reservedTimes?: ReservedTimesInfo;
+  nursingRoom?: NursingRoomDetails;
+  petPolicy?: PetPolicy;
 }
 
 export interface SearchParams {

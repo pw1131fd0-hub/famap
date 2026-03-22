@@ -99,3 +99,30 @@ class User(UserBase):
 class Token(BaseModel):
     access_token: str
     token_type: str
+
+class NursingRoomDetails(BaseModel):
+    hasDedicatedNursingRoom: Optional[bool] = None
+    isPrivate: Optional[bool] = None
+    hasSeating: Optional[bool] = None
+    hasChangingTable: Optional[bool] = None
+    hasAirConditioning: Optional[bool] = None
+    hasWifi: Optional[bool] = None
+    hasLockableStall: Optional[bool] = None
+    hasRefrigerator: Optional[bool] = None
+    hasPowerOutlet: Optional[bool] = None
+    hasHandWashing: Optional[bool] = None
+    cleanlinessRating: Optional[int] = None
+    roomCount: Optional[int] = None
+    nursingRoomNotes: Optional[str] = None
+
+class PetPolicy(BaseModel):
+    petsAllowed: Optional[bool] = None
+    dogsAllowed: Optional[bool] = None
+    catsAllowed: Optional[bool] = None
+    serviceAnimalsAllowed: Optional[bool] = None
+    smallPetsAllowed: Optional[bool] = None
+    hasLeashRequirement: Optional[bool] = None
+    hasDesignatedPetAreas: Optional[bool] = None
+    hasOnSiteVeterinary: Optional[bool] = None
+    petRestrictionsDetails: Optional[str] = None
+    petPolicyNotes: Optional[str] = None

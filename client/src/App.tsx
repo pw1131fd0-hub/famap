@@ -990,6 +990,76 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.nursingRoom && (
+                  <div className="detail-section">
+                    <h4>👩‍🍼 {language === 'zh' ? '哺乳室' : 'Nursing Room'}</h4>
+                    {selectedLocation.nursingRoom.hasDedicatedNursingRoom && (
+                      <p><strong>{language === 'zh' ? '專門哺乳室' : 'Dedicated Room'}</strong>: ✅</p>
+                    )}
+                    {selectedLocation.nursingRoom.isPrivate && (
+                      <p><strong>{language === 'zh' ? '隱私' : 'Privacy'}</strong>: {selectedLocation.nursingRoom.isPrivate ? `✅ ${language === 'zh' ? '獨立' : 'Private'}` : `❌ ${language === 'zh' ? '開放' : 'Shared'}`}</p>
+                    )}
+                    {selectedLocation.nursingRoom.hasSeating && (
+                      <p>✅ {language === 'zh' ? '舒適座位' : 'Comfortable Seating'}</p>
+                    )}
+                    {selectedLocation.nursingRoom.hasChangingTable && (
+                      <p>✅ {language === 'zh' ? '尿布台' : 'Changing Table'}</p>
+                    )}
+                    {selectedLocation.nursingRoom.hasAirConditioning && (
+                      <p>✅ {language === 'zh' ? '空調' : 'Air Conditioning'}</p>
+                    )}
+                    {selectedLocation.nursingRoom.hasWifi && (
+                      <p>✅ WiFi</p>
+                    )}
+                    {selectedLocation.nursingRoom.hasRefrigerator && (
+                      <p>✅ {language === 'zh' ? '冰箱' : 'Refrigerator'}</p>
+                    )}
+                    {selectedLocation.nursingRoom.hasPowerOutlet && (
+                      <p>✅ {language === 'zh' ? '插座' : 'Power Outlet'}</p>
+                    )}
+                    {selectedLocation.nursingRoom.cleanlinessRating && (
+                      <p><strong>{language === 'zh' ? '清潔度' : 'Cleanliness'}</strong>: ⭐ {selectedLocation.nursingRoom.cleanlinessRating}/5</p>
+                    )}
+                    {selectedLocation.nursingRoom.roomCount && (
+                      <p><strong>{language === 'zh' ? '房間數' : 'Number of Rooms'}</strong>: {selectedLocation.nursingRoom.roomCount}</p>
+                    )}
+                    {selectedLocation.nursingRoom.nursingRoomNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.nursingRoom.nursingRoomNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.petPolicy && (
+                  <div className="detail-section">
+                    <h4>🐕 {language === 'zh' ? '寵物政策' : 'Pet Policy'}</h4>
+                    {selectedLocation.petPolicy.petsAllowed !== undefined && (
+                      <p><strong>{language === 'zh' ? '寵物允許' : 'Pets Allowed'}</strong>: {selectedLocation.petPolicy.petsAllowed ? '✅' : '❌'}</p>
+                    )}
+                    {selectedLocation.petPolicy.dogsAllowed !== undefined && (
+                      <p><strong>{language === 'zh' ? '狗狗允許' : 'Dogs Allowed'}</strong>: {selectedLocation.petPolicy.dogsAllowed ? '✅' : '❌'}</p>
+                    )}
+                    {selectedLocation.petPolicy.catsAllowed !== undefined && (
+                      <p><strong>{language === 'zh' ? '貓咪允許' : 'Cats Allowed'}</strong>: {selectedLocation.petPolicy.catsAllowed ? '✅' : '❌'}</p>
+                    )}
+                    {selectedLocation.petPolicy.serviceAnimalsAllowed && (
+                      <p>✅ {language === 'zh' ? '服務動物允許' : 'Service Animals Allowed'}</p>
+                    )}
+                    {selectedLocation.petPolicy.hasLeashRequirement && (
+                      <p>⛓️ {language === 'zh' ? '需要繫牽繩' : 'Leash Required'}</p>
+                    )}
+                    {selectedLocation.petPolicy.hasDesignatedPetAreas && (
+                      <p>🏞️ {language === 'zh' ? '專區' : 'Designated Pet Areas'}</p>
+                    )}
+                    {selectedLocation.petPolicy.hasOnSiteVeterinary && (
+                      <p>⚕️ {language === 'zh' ? '現場獸醫' : 'On-site Veterinary'}</p>
+                    )}
+                    {selectedLocation.petPolicy.petRestrictionsDetails && (
+                      <p><strong>{language === 'zh' ? '限制詳情' : 'Restrictions'}</strong>: {selectedLocation.petPolicy.petRestrictionsDetails}</p>
+                    )}
+                    {selectedLocation.petPolicy.petPolicyNotes && (
+                      <p><strong>{language === 'zh' ? '備註' : 'Notes'}</strong>: {selectedLocation.petPolicy.petPolicyNotes}</p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>

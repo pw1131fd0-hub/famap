@@ -105,6 +105,19 @@ export let mockLocations: Location[] = [
     },
     reservedTimes: {
       hasReservedTimes: false
+    },
+    nursingRoom: {
+      hasDedicatedNursingRoom: false,
+      nursingRoomNotes: '公園內無專門哺乳室，建議使用育嬰室或家庭廁所'
+    },
+    petPolicy: {
+      petsAllowed: true,
+      dogsAllowed: true,
+      catsAllowed: true,
+      serviceAnimalsAllowed: true,
+      hasLeashRequirement: true,
+      hasDesignatedPetAreas: false,
+      petPolicyNotes: '寵物須繫牽繩，不得進入兒童遊戲場。歡迎在公園散步區遛狗'
     }
   },
   {
@@ -206,6 +219,24 @@ export let mockLocations: Location[] = [
       parentChildHours: '每週三下午 2:00-4:00 為親子時段，5折優惠',
       toddlerSpecificTimes: '每月第一個週日 10:00-12:00 為幼兒專屬時間',
       reservedTimesNotes: '親子時段人數較少，特別適合1-3歲幼兒。需提前線上預約'
+    },
+    nursingRoom: {
+      hasDedicatedNursingRoom: true,
+      isPrivate: true,
+      hasSeating: true,
+      hasChangingTable: true,
+      hasAirConditioning: true,
+      hasWifi: true,
+      hasRefrigerator: true,
+      hasPowerOutlet: true,
+      hasHandWashing: true,
+      cleanlinessRating: 4.8,
+      roomCount: 2,
+      nursingRoomNotes: '二樓和三樓各有一間專門哺乳室，設備完善，非常乾淨。可預約獲得優先使用權'
+    },
+    petPolicy: {
+      petsAllowed: false,
+      petPolicyNotes: '遊樂園內禁止寵物進入（導盲犬除外）'
     }
   },
   {
@@ -301,6 +332,24 @@ export let mockLocations: Location[] = [
     reservedTimes: {
       hasReservedTimes: false,
       quietHours: '週二至週四上午 10:00-12:00 遊客較少'
+    },
+    nursingRoom: {
+      hasDedicatedNursingRoom: true,
+      isPrivate: true,
+      hasSeating: true,
+      hasChangingTable: true,
+      hasAirConditioning: true,
+      hasRefrigerator: true,
+      hasPowerOutlet: true,
+      hasHandWashing: true,
+      cleanlinessRating: 4.7,
+      roomCount: 1,
+      nursingRoomNotes: '一樓設有哺乳室，空調舒適，設備齊全，每日清潔'
+    },
+    petPolicy: {
+      petsAllowed: false,
+      serviceAnimalsAllowed: true,
+      petPolicyNotes: '導盲犬等服務犬允許進入，其他寵物禁止'
     }
   },
   {
@@ -398,6 +447,24 @@ export let mockLocations: Location[] = [
       parentChildHours: '每週一上午 11:00-13:00 為親子寧靜時段，音樂會降低音量',
       toddlerSpecificTimes: '每週六下午 3:00-5:00 限嬰幼兒時段（0-3歲），特別安全',
       reservedTimesNotes: '需提前電話或線上預約。親子時段享有10%餐點折扣'
+    },
+    nursingRoom: {
+      hasDedicatedNursingRoom: true,
+      isPrivate: true,
+      hasSeating: true,
+      hasChangingTable: true,
+      hasAirConditioning: true,
+      hasWifi: true,
+      hasRefrigerator: true,
+      hasPowerOutlet: true,
+      hasHandWashing: true,
+      cleanlinessRating: 4.9,
+      roomCount: 2,
+      nursingRoomNotes: '兩間寬敞的哺乳室，設施高級，提供舒適的哺乳環境。冰箱儲存母乳，插座可充電'
+    },
+    petPolicy: {
+      petsAllowed: false,
+      petPolicyNotes: '餐廳內不允許寵物進入'
     }
   },
   {
@@ -494,6 +561,23 @@ export let mockLocations: Location[] = [
       parentChildHours: '每週六日上午 10:00-11:00 為親子游泳課程時間',
       toddlerSpecificTimes: '每週三下午 3:00-4:00 嬰幼兒專屬暖水池時間',
       reservedTimesNotes: '需提前報名。親子課程專業教練指導，費用另計'
+    },
+    nursingRoom: {
+      hasDedicatedNursingRoom: true,
+      isPrivate: true,
+      hasSeating: true,
+      hasChangingTable: true,
+      hasAirConditioning: true,
+      hasPowerOutlet: true,
+      hasRefrigerator: true,
+      hasHandWashing: true,
+      cleanlinessRating: 4.6,
+      roomCount: 1,
+      nursingRoomNotes: '嬰兒室備有舒適的哺乳環境、冰箱存放母乳，提供更衣表'
+    },
+    petPolicy: {
+      petsAllowed: false,
+      petPolicyNotes: '運動中心禁止寵物進入'
     }
   },
   {
@@ -588,6 +672,22 @@ export let mockLocations: Location[] = [
       parentChildHours: '每週五上午 9:00-10:00 親子游泳時段',
       toddlerSpecificTimes: '每週一、三下午 2:00-3:00 為嬰幼兒溫水池時間',
       reservedTimesNotes: '親子課程人數較少，適合1-3歲幼兒。費用另計'
+    },
+    nursingRoom: {
+      hasDedicatedNursingRoom: true,
+      isPrivate: false,
+      hasSeating: true,
+      hasChangingTable: true,
+      hasAirConditioning: true,
+      hasRefrigerator: false,
+      hasHandWashing: true,
+      cleanlinessRating: 4.5,
+      roomCount: 1,
+      nursingRoomNotes: '更衣室內設有哺乳坐席，環境乾淨。不適合長期停留'
+    },
+    petPolicy: {
+      petsAllowed: false,
+      petPolicyNotes: '運動中心禁止寵物進入'
     }
   },
   {
@@ -683,6 +783,18 @@ export let mockLocations: Location[] = [
     reservedTimes: {
       hasReservedTimes: false,
       quietHours: '開園初期（上午 10:00-12:00）遊客相對較少'
+    },
+    nursingRoom: {
+      hasDedicatedNursingRoom: false,
+      hasSeating: true,
+      hasChangingTable: true,
+      hasAirConditioning: true,
+      cleanlinessRating: 4.3,
+      nursingRoomNotes: '無專門哺乳室，但更衣室內有舒適的親子更衣間可用於哺乳。環境較潮濕'
+    },
+    petPolicy: {
+      petsAllowed: false,
+      petPolicyNotes: '水上樂園禁止寵物進入'
     }
   },
 ];
