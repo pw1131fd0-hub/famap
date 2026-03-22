@@ -532,6 +532,27 @@ function App() {
                     >
                       ♿ {t.facilities.wheelchair_accessible}
                     </button>
+                    <button
+                      className={`quick-facility-btn ${facilitiesFilter.includes('air_conditioned') ? 'active' : ''}`}
+                      onClick={() => toggleFacilityFilter('air_conditioned')}
+                      title={t.facilities.air_conditioned}
+                    >
+                      ❄️ {t.facilities.air_conditioned}
+                    </button>
+                    <button
+                      className={`quick-facility-btn ${facilitiesFilter.includes('swimming_pool') ? 'active' : ''}`}
+                      onClick={() => toggleFacilityFilter('swimming_pool')}
+                      title={t.facilities.swimming_pool}
+                    >
+                      🏊 {t.facilities.swimming_pool}
+                    </button>
+                    <button
+                      className={`quick-facility-btn ${facilitiesFilter.includes('kids_menu') ? 'active' : ''}`}
+                      onClick={() => toggleFacilityFilter('kids_menu')}
+                      title={t.facilities.kids_menu}
+                    >
+                      🍽️ {t.facilities.kids_menu}
+                    </button>
                   </div>
                   <nav className="category-list">
                     {categories.map((cat) => (
