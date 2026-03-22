@@ -1477,6 +1477,75 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.heightBasedPricing && (
+                  <div className="section" style={{ marginBottom: '20px', padding: '16px', backgroundColor: '#f9f9f9', borderRadius: '8px', borderLeft: '4px solid #3b82f6' }}>
+                    <h3>📏 {language === 'zh' ? '身高定價資訊' : 'Height-Based Pricing'}</h3>
+                    {selectedLocation.heightBasedPricing.hasHeightBasedPricing && (
+                      <p><strong>{language === 'zh' ? '身高定價' : 'Height-Based Pricing'}</strong>: {language === 'zh' ? '有' : 'Yes'}</p>
+                    )}
+                    {selectedLocation.heightBasedPricing.childHeightThreshold && (
+                      <p><strong>{language === 'zh' ? '兒童身高門檻' : 'Child Height Threshold'}</strong>: {selectedLocation.heightBasedPricing.childHeightThreshold}cm</p>
+                    )}
+                    {selectedLocation.heightBasedPricing.childPrice && (
+                      <p><strong>{language === 'zh' ? '兒童票價' : 'Child Price'}</strong>: {selectedLocation.heightBasedPricing.childPrice}</p>
+                    )}
+                    {selectedLocation.heightBasedPricing.adultHeight && (
+                      <p><strong>{language === 'zh' ? '成人身高門檻' : 'Adult Height Threshold'}</strong>: {selectedLocation.heightBasedPricing.adultHeight}cm</p>
+                    )}
+                    {selectedLocation.heightBasedPricing.freeHeightThreshold && (
+                      <p><strong>{language === 'zh' ? '免費身高門檻' : 'Free Entry Height'}</strong>: {selectedLocation.heightBasedPricing.freeHeightThreshold}cm</p>
+                    )}
+                    {selectedLocation.heightBasedPricing.pricingNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.heightBasedPricing.pricingNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.drinkingWater && (
+                  <div className="section" style={{ marginBottom: '20px', padding: '16px', backgroundColor: '#f0fdf4', borderRadius: '8px', borderLeft: '4px solid #10b981' }}>
+                    <h3>💧 {language === 'zh' ? '飲用水資訊' : 'Drinking Water'}</h3>
+                    {selectedLocation.drinkingWater.hasDrinkingWater && (
+                      <p><strong>{language === 'zh' ? '飲水機可用' : 'Drinking Water Available'}</strong>: {language === 'zh' ? '有' : 'Yes'}</p>
+                    )}
+                    {selectedLocation.drinkingWater.waterFountainQuantity && (
+                      <p><strong>{language === 'zh' ? '飲水機數量' : 'Water Fountain Count'}</strong>: {selectedLocation.drinkingWater.waterFountainQuantity}</p>
+                    )}
+                    {selectedLocation.drinkingWater.waterQuality && (
+                      <p><strong>{language === 'zh' ? '水質' : 'Water Quality'}</strong>: {language === 'zh' ? (selectedLocation.drinkingWater.waterQuality === 'excellent' ? '優良' : selectedLocation.drinkingWater.waterQuality === 'good' ? '良好' : '一般') : selectedLocation.drinkingWater.waterQuality}</p>
+                    )}
+                    {selectedLocation.drinkingWater.isWaterChilled && (
+                      <p><strong>{language === 'zh' ? '冷飲水' : 'Chilled Water'}</strong>: {language === 'zh' ? '有' : 'Yes'}</p>
+                    )}
+                    {selectedLocation.drinkingWater.waterTemperature && (
+                      <p><strong>{language === 'zh' ? '水溫' : 'Water Temperature'}</strong>: {selectedLocation.drinkingWater.waterTemperature}</p>
+                    )}
+                    {selectedLocation.drinkingWater.waterAccessibilityNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.drinkingWater.waterAccessibilityNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.diaperChanging && (
+                  <div className="section" style={{ marginBottom: '20px', padding: '16px', backgroundColor: '#fdf2f8', borderRadius: '8px', borderLeft: '4px solid #ec4899' }}>
+                    <h3>👶 {language === 'zh' ? '尿布台設施' : 'Diaper Changing Facilities'}</h3>
+                    {selectedLocation.diaperChanging.hasDiaperChangingTables && (
+                      <p><strong>{language === 'zh' ? '有尿布台' : 'Has Diaper Tables'}</strong>: {language === 'zh' ? '有' : 'Yes'}</p>
+                    )}
+                    {selectedLocation.diaperChanging.changingTableQuantity && (
+                      <p><strong>{language === 'zh' ? '尿布台數量' : 'Table Count'}</strong>: {selectedLocation.diaperChanging.changingTableQuantity}</p>
+                    )}
+                    {selectedLocation.diaperChanging.changingTableLocations && selectedLocation.diaperChanging.changingTableLocations.length > 0 && (
+                      <p><strong>{language === 'zh' ? '位置' : 'Locations'}</strong>: {selectedLocation.diaperChanging.changingTableLocations.join(', ')}</p>
+                    )}
+                    {selectedLocation.diaperChanging.hasDiaperDisposal && (
+                      <p><strong>{language === 'zh' ? '尿布丟棄箱' : 'Diaper Disposal'}</strong>: {language === 'zh' ? '有' : 'Yes'}</p>
+                    )}
+                    {selectedLocation.diaperChanging.cleanlinessRating && (
+                      <p><strong>{language === 'zh' ? '清潔度' : 'Cleanliness'}</strong>: {selectedLocation.diaperChanging.cleanlinessRating}/5</p>
+                    )}
+                    {selectedLocation.diaperChanging.changingFacilitiesNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.diaperChanging.changingFacilitiesNotes}</p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>

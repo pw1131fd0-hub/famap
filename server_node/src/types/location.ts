@@ -381,6 +381,41 @@ export interface TaiwanSchoolHolidayInfo {
   holidayNotes?: string; // e.g., "Very crowded during Lunar New Year and summer vacation; quiet during weekdays in regular school term. Recommend visiting on weekday mornings or off-season."
 }
 
+export interface HeightBasedPricingInfo {
+  hasHeightBasedPricing?: boolean; // Many Taiwan attractions charge by height not age
+  childHeightThreshold?: number; // Child pricing height threshold in cm (e.g., 100cm)
+  childPrice?: string; // Price for children under threshold
+  adultHeight?: number; // Height above which full price applies (cm)
+  freeHeightThreshold?: number; // Free entry height in cm (very young children)
+  heightMeasurementLocation?: string; // Where height is measured (entrance)
+  pricingNotes?: string; // e.g., "Under 100cm free, 100-150cm NT$200, over 150cm NT$500. Height measured at entrance."
+}
+
+export interface DrinkingWaterInfo {
+  hasDrinkingWater?: boolean; // Drinking water stations available
+  drinkingWaterSources?: string[]; // e.g., ["water fountains", "refill stations", "indoor fountains"]
+  waterFountainQuantity?: number; // Number of water fountains
+  waterQuality?: 'excellent' | 'good' | 'fair'; // Water quality rating
+  isWaterChilled?: boolean; // Is water chilled/cooled (important in Taiwan heat)
+  hasRefillableBottleStations?: boolean; // Can refill water bottles
+  waterTemperature?: string; // e.g., "Room temperature" or "Chilled 5-10°C"
+  waterAccessibilityNotes?: string; // e.g., "Water fountains throughout park, chilled water in main pavilion"
+}
+
+export interface DiaperChangingFacilitiesInfo {
+  hasDiaperChangingTables?: boolean; // Dedicated diaper changing tables (beyond just toilets)
+  changingTableQuantity?: number; // Number of changing tables
+  changingTableLocations?: string[]; // e.g., ["main restroom", "family restroom", "nursing room"]
+  hasDiaperDisposal?: boolean; // Proper disposal for used diapers
+  hasRunningWater?: boolean; // Sink at changing table for hand washing
+  hasHandSanitizer?: boolean; // Hand sanitizer available
+  cleanlinessRating?: number; // 1-5 stars for cleanliness
+  isParentSupervisionVisiblity?: boolean; // Parent can supervise other children while changing
+  hasPrivacyScreen?: boolean; // Privacy provided at changing tables
+  hasMaps?: boolean; // Diaper changing supply map available
+  changingFacilitiesNotes?: string; // e.g., "4 dedicated changing tables in main and family restrooms, very clean, disposal bins available, running water, hand soap provided"
+}
+
 export interface Location {
   id: string;
   name: {
@@ -443,6 +478,9 @@ export interface Location {
   photoVideo?: PhotoVideoPolicy;
   visitDuration?: VisitDurationRecommendation;
   schoolHolidays?: TaiwanSchoolHolidayInfo;
+  heightBasedPricing?: HeightBasedPricingInfo;
+  drinkingWater?: DrinkingWaterInfo;
+  diaperChanging?: DiaperChangingFacilitiesInfo;
 }
 
 export interface SearchParams {

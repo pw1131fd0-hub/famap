@@ -243,6 +243,32 @@ export let mockLocations: Location[] = [
       holidaySpecialEventsOrHours: '農曆新年期間有特色活動，延長開放時間',
       holidayBookingRecommendation: '假期期間人潮眾多，建議提前規劃，週末特別擁擠',
       holidayNotes: '暑假和農曆新年為尖峰期。平日較少遊客，特別是上班日上午。學期中週末仍有適度人潮。'
+    },
+    heightBasedPricing: {
+      hasHeightBasedPricing: false,
+      pricingNotes: '公園免費開放，無身高或年齡限制'
+    },
+    drinkingWater: {
+      hasDrinkingWater: true,
+      drinkingWaterSources: ['water fountains', 'refill stations'],
+      waterFountainQuantity: 12,
+      waterQuality: 'excellent',
+      isWaterChilled: false,
+      hasRefillableBottleStations: true,
+      waterTemperature: '常溫',
+      waterAccessibilityNotes: '園區各處均有飲水機，涼亭附近特別集中。可自帶水瓶自助裝水。'
+    },
+    diaperChanging: {
+      hasDiaperChangingTables: true,
+      changingTableQuantity: 4,
+      changingTableLocations: ['main restroom', 'family restroom'],
+      hasDiaperDisposal: true,
+      hasRunningWater: true,
+      hasHandSanitizer: true,
+      cleanlinessRating: 4.2,
+      isParentSupervisionVisiblity: true,
+      hasPrivacyScreen: true,
+      changingFacilitiesNotes: '主廁所與家庭廁所各設2個尿布台，保持清潔，備有濕紙巾和尿布丟棄桶。'
     }
   },
   {
@@ -518,6 +544,37 @@ export let mockLocations: Location[] = [
       holidaySpecialEventsOrHours: '農曆新年期間延長營業時間至晚間，舉辦特色表演',
       holidayBookingRecommendation: '假期期間人潮眾多，週末特別擁擠，強烈建議平日前往或提前線上購票',
       holidayNotes: '暑假和農曆新年為全年最擁擠時期。平日人潮較少。週末通常需排隊等待各遊樂設施。'
+    },
+    heightBasedPricing: {
+      hasHeightBasedPricing: true,
+      childHeightThreshold: 100,
+      childPrice: 'NT$200',
+      adultHeight: 140,
+      freeHeightThreshold: 80,
+      heightMeasurementLocation: '售票處',
+      pricingNotes: '身高未滿80公分免費，80-100公分NT$200，100-140公分NT$350，超過140公分NT$400。家長可於售票處驗證身高。'
+    },
+    drinkingWater: {
+      hasDrinkingWater: true,
+      drinkingWaterSources: ['water fountains', 'refill stations'],
+      waterFountainQuantity: 8,
+      waterQuality: 'good',
+      isWaterChilled: true,
+      hasRefillableBottleStations: true,
+      waterTemperature: '冷飲水 (約5-10°C)',
+      waterAccessibilityNotes: '園區各區都有飲水機，提供冰冷飲水。可自帶水瓶裝水。遊樂設施附近特別設置飲水站。'
+    },
+    diaperChanging: {
+      hasDiaperChangingTables: true,
+      changingTableQuantity: 6,
+      changingTableLocations: ['main restroom', 'family restroom', 'nursing room area'],
+      hasDiaperDisposal: true,
+      hasRunningWater: true,
+      hasHandSanitizer: true,
+      cleanlinessRating: 4.6,
+      isParentSupervisionVisiblity: true,
+      hasPrivacyScreen: true,
+      changingFacilitiesNotes: '樂園各主要區域設置尿布台，共6個。備有一次性尿布、濕紙巾和尿布丟棄桶。維持衛生高標準。'
     }
   },
   {
@@ -773,6 +830,32 @@ export let mockLocations: Location[] = [
       holidaySpecialEventsOrHours: '農曆新年期間舉辦特展和教育活動，延長開放時間',
       holidayBookingRecommendation: '假期期間人潮眾多，建議避開午餐時段和週末',
       holidayNotes: '農曆新年期間人潮最多。暑假平日仍有適度遊客。平日上午最清靜。'
+    },
+    heightBasedPricing: {
+      hasHeightBasedPricing: false,
+      pricingNotes: '成人NT$50-100，學生和兒童優惠票。無身高限制。'
+    },
+    drinkingWater: {
+      hasDrinkingWater: true,
+      drinkingWaterSources: ['water fountains'],
+      waterFountainQuantity: 4,
+      waterQuality: 'good',
+      isWaterChilled: false,
+      hasRefillableBottleStations: true,
+      waterTemperature: '常溫',
+      waterAccessibilityNotes: '博物館大廳和每層樓都有飲水機。一樓服務台附近有冷水飲用器。'
+    },
+    diaperChanging: {
+      hasDiaperChangingTables: true,
+      changingTableQuantity: 3,
+      changingTableLocations: ['family restroom'],
+      hasDiaperDisposal: true,
+      hasRunningWater: true,
+      hasHandSanitizer: true,
+      cleanlinessRating: 4.3,
+      isParentSupervisionVisiblity: true,
+      hasPrivacyScreen: true,
+      changingFacilitiesNotes: '博物館設有親子廁所，備有尿布台、濕紙巾和尿布垃圾桶。定期清潔維護。'
     }
   },
   {
@@ -1038,6 +1121,32 @@ export let mockLocations: Location[] = [
       holidaySpecialEventsOrHours: '農曆新年期間舉辦特別親子活動',
       holidayBookingRecommendation: '假期期間建議提前預約，午餐時段最擁擠',
       holidayNotes: '農曆新年期間人潮眾多。暑假和寒假期間平日仍有適度人潮。用餐時段通常較擁擠。'
+    },
+    heightBasedPricing: {
+      hasHeightBasedPricing: false,
+      pricingNotes: '成人NT$200-400，兒童NT$150-300。2歲以下免費。無身高限制。'
+    },
+    drinkingWater: {
+      hasDrinkingWater: true,
+      drinkingWaterSources: ['water fountains', 'refill stations'],
+      waterFountainQuantity: 3,
+      waterQuality: 'good',
+      isWaterChilled: true,
+      hasRefillableBottleStations: true,
+      waterTemperature: '冷飲水',
+      waterAccessibilityNotes: '餐廳入口、用餐區和遊戲室均有飲水機。提供冰冷飲用水和溫水。可自帶水瓶。'
+    },
+    diaperChanging: {
+      hasDiaperChangingTables: true,
+      changingTableQuantity: 4,
+      changingTableLocations: ['restroom', 'family restroom', 'nursing room'],
+      hasDiaperDisposal: true,
+      hasRunningWater: true,
+      hasHandSanitizer: true,
+      cleanlinessRating: 4.7,
+      isParentSupervisionVisiblity: true,
+      hasPrivacyScreen: true,
+      changingFacilitiesNotes: '餐廳多個廁所和親子廁所設有尿布台。全新設施，清潔度極高。備有免費尿布、濕紙巾和垃圾桶。'
     }
   },
   {
@@ -1289,6 +1398,32 @@ export let mockLocations: Location[] = [
       holidaySpecialEventsOrHours: '暑假期間加開游泳課程班次',
       holidayBookingRecommendation: '寒假和暑假期間報名課程需提前預約，周末尖峰時段擁擠',
       holidayNotes: '寒假和暑假是兒童游泳課程高峰期。平日下午人潮相對較少。週末通常擁擠。'
+    },
+    heightBasedPricing: {
+      hasHeightBasedPricing: false,
+      pricingNotes: '單次入場NT$100-150，課程包費用另計。無身高限制。'
+    },
+    drinkingWater: {
+      hasDrinkingWater: true,
+      drinkingWaterSources: ['water fountains', 'refill stations'],
+      waterFountainQuantity: 6,
+      waterQuality: 'excellent',
+      isWaterChilled: true,
+      hasRefillableBottleStations: true,
+      waterTemperature: '冷飲水',
+      waterAccessibilityNotes: '親子中心各樓層都有飲水機。提供冷熱飲用水。游泳結束後特別需要飲水。'
+    },
+    diaperChanging: {
+      hasDiaperChangingTables: true,
+      changingTableQuantity: 5,
+      changingTableLocations: ['main restroom', 'family restroom', 'nursing room'],
+      hasDiaperDisposal: true,
+      hasRunningWater: true,
+      hasHandSanitizer: true,
+      cleanlinessRating: 4.5,
+      isParentSupervisionVisiblity: true,
+      hasPrivacyScreen: true,
+      changingFacilitiesNotes: '運動中心設有多個尿布台，分布於各廁所。備有清潔用品和垃圾桶。運動後可直接使用。'
     }
   },
   {
@@ -1535,6 +1670,32 @@ export let mockLocations: Location[] = [
       holidaySpecialEventsOrHours: '暑假期間增加課程班次',
       holidayBookingRecommendation: '暑假期間課程名額有限，需提前預約',
       holidayNotes: '暑假最繁忙，課程與自由游泳區都擁擠。平日下午人潮最少。週末尖峰時段需等候。'
+    },
+    heightBasedPricing: {
+      hasHeightBasedPricing: false,
+      pricingNotes: '單次入場NT$100，課程包另計。無身高限制。'
+    },
+    drinkingWater: {
+      hasDrinkingWater: true,
+      drinkingWaterSources: ['water fountains', 'refill stations'],
+      waterFountainQuantity: 5,
+      waterQuality: 'excellent',
+      isWaterChilled: true,
+      hasRefillableBottleStations: true,
+      waterTemperature: '冷飲水',
+      waterAccessibilityNotes: '運動中心各處都有飲水機。提供冷水和溫水。游泳後務必補充水分。'
+    },
+    diaperChanging: {
+      hasDiaperChangingTables: true,
+      changingTableQuantity: 4,
+      changingTableLocations: ['main restroom', 'family restroom', 'changing room'],
+      hasDiaperDisposal: true,
+      hasRunningWater: true,
+      hasHandSanitizer: true,
+      cleanlinessRating: 4.4,
+      isParentSupervisionVisiblity: true,
+      hasPrivacyScreen: true,
+      changingFacilitiesNotes: '游泳中心多個廁所設有尿布台。潔淨度良好，備有清潔用品和垃圾桶。游泳前後可使用。'
     }
   },
   {
@@ -1800,6 +1961,37 @@ export let mockLocations: Location[] = [
       holidaySpecialEventsOrHours: '暑假期間延長營運時間，週末至晚間20:00',
       holidayBookingRecommendation: '暑假期間強烈建議提前線上購票，避免現場排隊。週末必提前購票',
       holidayNotes: '水上樂園為季節性設施，6月中至9月營運。暑假尖峰期排隊時間長。平日相對較少人。開園初期人最少。'
+    },
+    heightBasedPricing: {
+      hasHeightBasedPricing: true,
+      childHeightThreshold: 110,
+      childPrice: 'NT$400',
+      adultHeight: 150,
+      freeHeightThreshold: 100,
+      heightMeasurementLocation: '售票處',
+      pricingNotes: '身高未滿100公分免費，100-110公分NT$400，110-150公分NT$600，超過150公分NT$800。於售票處驗證身高。'
+    },
+    drinkingWater: {
+      hasDrinkingWater: true,
+      drinkingWaterSources: ['water fountains', 'refill stations'],
+      waterFountainQuantity: 10,
+      waterQuality: 'good',
+      isWaterChilled: true,
+      hasRefillableBottleStations: true,
+      waterTemperature: '冷飲水 (約10°C)',
+      waterAccessibilityNotes: '水上樂園各區都有飲水機，提供冷飲水。在台灣炎熱夏季必不可少。可自帶水瓶。'
+    },
+    diaperChanging: {
+      hasDiaperChangingTables: true,
+      changingTableQuantity: 6,
+      changingTableLocations: ['main restroom', 'family restroom', 'changing area'],
+      hasDiaperDisposal: true,
+      hasRunningWater: true,
+      hasHandSanitizer: true,
+      cleanlinessRating: 4.3,
+      isParentSupervisionVisiblity: true,
+      hasPrivacyScreen: true,
+      changingFacilitiesNotes: '水上樂園各區設置尿布台，共6個。備有免費尿布、濕紙巾和垃圾桶。因為是水上樂園，維持中等清潔度。'
     }
   },
 ];

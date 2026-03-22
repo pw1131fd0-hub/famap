@@ -381,6 +381,41 @@ export interface TaiwanSchoolHolidayInfo {
   holidayNotes?: string;
 }
 
+export interface HeightBasedPricingInfo {
+  hasHeightBasedPricing?: boolean;
+  childHeightThreshold?: number;
+  childPrice?: string;
+  adultHeight?: number;
+  freeHeightThreshold?: number;
+  heightMeasurementLocation?: string;
+  pricingNotes?: string;
+}
+
+export interface DrinkingWaterInfo {
+  hasDrinkingWater?: boolean;
+  drinkingWaterSources?: string[];
+  waterFountainQuantity?: number;
+  waterQuality?: 'excellent' | 'good' | 'fair';
+  isWaterChilled?: boolean;
+  hasRefillableBottleStations?: boolean;
+  waterTemperature?: string;
+  waterAccessibilityNotes?: string;
+}
+
+export interface DiaperChangingFacilitiesInfo {
+  hasDiaperChangingTables?: boolean;
+  changingTableQuantity?: number;
+  changingTableLocations?: string[];
+  hasDiaperDisposal?: boolean;
+  hasRunningWater?: boolean;
+  hasHandSanitizer?: boolean;
+  cleanlinessRating?: number;
+  isParentSupervisionVisiblity?: boolean;
+  hasPrivacyScreen?: boolean;
+  hasMaps?: boolean;
+  changingFacilitiesNotes?: string;
+}
+
 export interface Location {
   id: string;
   name: {
@@ -443,6 +478,9 @@ export interface Location {
   photoVideo?: PhotoVideoPolicy;
   visitDuration?: VisitDurationRecommendation;
   schoolHolidays?: TaiwanSchoolHolidayInfo;
+  heightBasedPricing?: HeightBasedPricingInfo;
+  drinkingWater?: DrinkingWaterInfo;
+  diaperChanging?: DiaperChangingFacilitiesInfo;
 }
 
 export interface Review {
