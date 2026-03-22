@@ -104,6 +104,15 @@ export interface QualityMetricsInfo {
   cleanlinessNotes?: string; // e.g., "frequently cleaned", "cleaning schedule posted"
 }
 
+export interface BookingInfo {
+  requiresPreBooking?: boolean; // Must book in advance
+  offersOnlineBooking?: boolean; // Can book online
+  bookingMethods?: string[]; // e.g., ["phone", "online", "wechat", "line"]
+  bookingNotes?: string; // e.g., "Weekend visits require booking 3 days in advance"
+  groupDiscountAvailable?: boolean; // Family/group discounts
+  discountNotes?: string; // e.g., "Family packages available for 4+ people"
+}
+
 export interface Location {
   id: string;
   name: {
@@ -143,6 +152,7 @@ export interface Location {
   activity?: ActivityInfo;
   safety?: SafetyInfo;
   qualityMetrics?: QualityMetricsInfo;
+  booking?: BookingInfo;
 }
 
 export interface Review {
@@ -194,6 +204,7 @@ export interface LocationCreateDTO {
   activity?: ActivityInfo;
   safety?: SafetyInfo;
   qualityMetrics?: QualityMetricsInfo;
+  booking?: BookingInfo;
 }
 
 export interface Favorite {

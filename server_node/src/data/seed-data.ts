@@ -23,6 +23,15 @@ export let mockLocations: Location[] = [
     address: { zh: '台北市大安區新生南路二段1號', en: 'No. 1, Sec. 2, Xinsheng S. Rd., Daan Dist., Taipei' },
     facilities: ['stroller_accessible', 'nursing_room', 'public_toilet'],
     averageRating: 4.8,
+    operatingHours: {
+      monday: '05:00 - 23:00',
+      tuesday: '05:00 - 23:00',
+      wednesday: '05:00 - 23:00',
+      thursday: '05:00 - 23:00',
+      friday: '05:00 - 23:00',
+      saturday: '05:00 - 23:00',
+      sunday: '05:00 - 23:00',
+    },
     ageRange: { minAge: 1, maxAge: 12 },
     pricing: { isFree: true },
     phoneNumber: '02-2700-8600',
@@ -58,6 +67,12 @@ export let mockLocations: Location[] = [
       maintenanceStatus: 'excellent',
       lastMaintenanceDate: '2026-03-15T00:00:00Z',
       cleanlinessNotes: '每日清潔，廁所設施維護良好'
+    },
+    booking: {
+      requiresPreBooking: false,
+      offersOnlineBooking: false,
+      groupDiscountAvailable: true,
+      discountNotes: '大型團體（10人以上）可享優惠，請電話洽詢'
     }
   },
   {
@@ -69,6 +84,15 @@ export let mockLocations: Location[] = [
     address: { zh: '台北市士林區承德路五段55號', en: 'No. 55, Sec. 5, Chengde Rd., Shilin Dist., Taipei' },
     facilities: ['stroller_accessible', 'nursing_room', 'high_chair'],
     averageRating: 4.7,
+    operatingHours: {
+      monday: '09:00 - 18:00',
+      tuesday: '09:00 - 18:00',
+      wednesday: '09:00 - 18:00',
+      thursday: '09:00 - 18:00',
+      friday: '09:00 - 20:00',
+      saturday: '09:00 - 21:00',
+      sunday: '09:00 - 20:00',
+    },
     ageRange: { minAge: 2, maxAge: 15 },
     pricing: { isFree: false, priceRange: '200-500 NTD' },
     phoneNumber: '02-2833-6666',
@@ -105,6 +129,14 @@ export let mockLocations: Location[] = [
       maintenanceStatus: 'excellent',
       lastMaintenanceDate: '2026-03-10T00:00:00Z',
       cleanlinessNotes: '設施新穎，每日清潔管理'
+    },
+    booking: {
+      requiresPreBooking: false,
+      offersOnlineBooking: true,
+      bookingMethods: ['phone', 'online', 'wechat'],
+      bookingNotes: '主日及假日建議事先線上購票，可享購票優惠',
+      groupDiscountAvailable: true,
+      discountNotes: '10人以上團體購票享95折，20人以上享9折'
     }
   },
   {
@@ -116,6 +148,15 @@ export let mockLocations: Location[] = [
     address: { zh: '台北市中正區襄陽路2號', en: 'No. 2, Xiangyang Rd., Zhongzheng Dist., Taipei' },
     facilities: ['stroller_accessible', 'nursing_room'],
     averageRating: 4.5,
+    operatingHours: {
+      monday: '休館',
+      tuesday: '10:00 - 18:00',
+      wednesday: '10:00 - 18:00',
+      thursday: '10:00 - 18:00',
+      friday: '10:00 - 18:00',
+      saturday: '10:00 - 18:00',
+      sunday: '10:00 - 18:00',
+    },
     ageRange: { minAge: 3, maxAge: 14 },
     pricing: { isFree: false, priceRange: '30-100 NTD' },
     phoneNumber: '02-2382-2566',
@@ -152,6 +193,14 @@ export let mockLocations: Location[] = [
       maintenanceStatus: 'good',
       lastMaintenanceDate: '2026-03-01T00:00:00Z',
       cleanlinessNotes: '歷史建築，定期維護清潔'
+    },
+    booking: {
+      requiresPreBooking: false,
+      offersOnlineBooking: false,
+      bookingMethods: ['phone'],
+      bookingNotes: '團體導覽需提前2週預約，散客可直接購票入場',
+      groupDiscountAvailable: true,
+      discountNotes: '20人以上團體購票享5折優惠'
     }
   },
   {
@@ -163,6 +212,15 @@ export let mockLocations: Location[] = [
     address: { zh: '台北市信義區', en: 'Xinyi Dist., Taipei' },
     facilities: ['high_chair', 'nursing_room', 'air_conditioned', 'kids_menu', 'indoor_play'],
     averageRating: 4.2,
+    operatingHours: {
+      monday: '11:00 - 22:00',
+      tuesday: '11:00 - 22:00',
+      wednesday: '11:00 - 22:00',
+      thursday: '11:00 - 22:00',
+      friday: '11:00 - 23:00',
+      saturday: '10:30 - 23:00',
+      sunday: '10:30 - 22:00',
+    },
     ageRange: { minAge: 0, maxAge: 8 },
     pricing: { isFree: false, priceRange: '400-800 NTD' },
     phoneNumber: '02-8101-0888',
@@ -199,6 +257,14 @@ export let mockLocations: Location[] = [
       maintenanceStatus: 'good',
       lastMaintenanceDate: '2026-03-12T00:00:00Z',
       cleanlinessNotes: '每日清潔消毒遊戲設施'
+    },
+    booking: {
+      requiresPreBooking: false,
+      offersOnlineBooking: true,
+      bookingMethods: ['phone', 'online', 'line'],
+      bookingNotes: '假日建議事先預約，現場候位時間可能較長',
+      groupDiscountAvailable: true,
+      discountNotes: '6人以上預約享生日蛋糕9折優惠'
     }
   },
   {
@@ -210,6 +276,15 @@ export let mockLocations: Location[] = [
     address: { zh: '台北市南港區經貿二路191號', en: 'No. 191, Jingmao 2nd Rd., Nangang Dist., Taipei' },
     facilities: ['air_conditioned', 'nursing_room', 'kids_menu', 'parking', 'mrt_nearby', 'indoor_play'],
     averageRating: 4.6,
+    operatingHours: {
+      monday: '09:00 - 21:00',
+      tuesday: '09:00 - 21:00',
+      wednesday: '09:00 - 21:00',
+      thursday: '09:00 - 21:00',
+      friday: '09:00 - 21:00',
+      saturday: '08:00 - 21:00',
+      sunday: '08:00 - 21:00',
+    },
     ageRange: { minAge: 0, maxAge: 10 },
     pricing: { isFree: true },
     phoneNumber: '02-2655-0988',
@@ -246,6 +321,12 @@ export let mockLocations: Location[] = [
       maintenanceStatus: 'excellent',
       lastMaintenanceDate: '2026-03-18T00:00:00Z',
       cleanlinessNotes: '全新設施，清潔度一流'
+    },
+    booking: {
+      requiresPreBooking: false,
+      offersOnlineBooking: false,
+      groupDiscountAvailable: false,
+      bookingNotes: '免費入場，無需預約，隨時可訪'
     }
   },
   {
@@ -257,6 +338,15 @@ export let mockLocations: Location[] = [
     address: { zh: '台北市內湖區湖興路300號', en: 'No. 300, Huxing Rd., Neihu Dist., Taipei' },
     facilities: ['swimming_pool', 'water_play', 'nursing_room', 'air_conditioned', 'drinking_water', 'public_toilet'],
     averageRating: 4.5,
+    operatingHours: {
+      monday: '06:00 - 22:00',
+      tuesday: '06:00 - 22:00',
+      wednesday: '06:00 - 22:00',
+      thursday: '06:00 - 22:00',
+      friday: '06:00 - 23:00',
+      saturday: '07:00 - 23:00',
+      sunday: '07:00 - 22:00',
+    },
     ageRange: { minAge: 3, maxAge: 16 },
     pricing: { isFree: false, priceRange: '100-200 NTD' },
     phoneNumber: '02-8751-5000',
@@ -292,6 +382,14 @@ export let mockLocations: Location[] = [
       maintenanceStatus: 'good',
       lastMaintenanceDate: '2026-03-08T00:00:00Z',
       cleanlinessNotes: '池水定期檢測，衛生標準達標'
+    },
+    booking: {
+      requiresPreBooking: true,
+      offersOnlineBooking: true,
+      bookingMethods: ['phone', 'online'],
+      bookingNotes: '兒童游泳課程需提前預約，一般泳客散客亦可直接購票',
+      groupDiscountAvailable: true,
+      discountNotes: '10人以上團體購票享8折優惠'
     }
   },
   {
@@ -303,6 +401,15 @@ export let mockLocations: Location[] = [
     address: { zh: '新北市新店區中興路1號', en: 'No. 1, Zhongxing Rd., Xindian Dist., New Taipei' },
     facilities: ['swimming_pool', 'water_play', 'shaded_area', 'nursing_room', 'mrt_nearby', 'outdoor_seating'],
     averageRating: 4.4,
+    operatingHours: {
+      monday: '09:00 - 18:00',
+      tuesday: '09:00 - 18:00',
+      wednesday: '09:00 - 18:00',
+      thursday: '09:00 - 18:00',
+      friday: '09:00 - 20:00',
+      saturday: '08:00 - 20:00',
+      sunday: '08:00 - 20:00',
+    },
     ageRange: { minAge: 2, maxAge: 14 },
     pricing: { isFree: false, priceRange: '300-600 NTD' },
     phoneNumber: '02-2918-9077',
@@ -338,6 +445,14 @@ export let mockLocations: Location[] = [
       maintenanceStatus: 'good',
       lastMaintenanceDate: '2026-03-05T00:00:00Z',
       cleanlinessNotes: '季節性開放，開放期間每日清潔'
+    },
+    booking: {
+      requiresPreBooking: false,
+      offersOnlineBooking: true,
+      bookingMethods: ['phone', 'online'],
+      bookingNotes: '夏季假日建議事先購票，可線上預約以節省排隊時間',
+      groupDiscountAvailable: true,
+      discountNotes: '15人以上團體購票享85折，並免費贈送小禮物'
     }
   },
 ];

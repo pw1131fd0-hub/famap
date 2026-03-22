@@ -1,5 +1,15 @@
 export type Category = 'park' | 'nursing_room' | 'restaurant' | 'medical' | 'attraction' | 'other';
 
+export interface OperatingHours {
+  monday?: string;
+  tuesday?: string;
+  wednesday?: string;
+  thursday?: string;
+  friday?: string;
+  saturday?: string;
+  sunday?: string;
+}
+
 export interface AgeRange {
   minAge?: number;
   maxAge?: number;
@@ -94,6 +104,15 @@ export interface QualityMetricsInfo {
   cleanlinessNotes?: string; // e.g., "frequently cleaned", "cleaning schedule posted"
 }
 
+export interface BookingInfo {
+  requiresPreBooking?: boolean; // Must book in advance
+  offersOnlineBooking?: boolean; // Can book online
+  bookingMethods?: string[]; // e.g., ["phone", "online", "wechat", "line"]
+  bookingNotes?: string; // e.g., "Weekend visits require booking 3 days in advance"
+  groupDiscountAvailable?: boolean; // Family/group discounts
+  discountNotes?: string; // e.g., "Family packages available for 4+ people"
+}
+
 export interface Location {
   id: string;
   name: {
@@ -116,6 +135,7 @@ export interface Location {
   facilities: string[];
   averageRating: number;
   photoUrl?: string;
+  operatingHours?: OperatingHours;
   ageRange?: AgeRange;
   pricing?: PricingInfo;
   phoneNumber?: string;
@@ -132,6 +152,7 @@ export interface Location {
   activity?: ActivityInfo;
   safety?: SafetyInfo;
   qualityMetrics?: QualityMetricsInfo;
+  booking?: BookingInfo;
 }
 
 export interface SearchParams {
