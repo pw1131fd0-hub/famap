@@ -642,6 +642,108 @@ function App() {
                     <p>{selectedLocation.allergens.commonAllergens.join(', ')}</p>
                   </div>
                 )}
+                {selectedLocation.crowding && (
+                  <div className="detail-section">
+                    <h4>👥 {language === 'zh' ? '人氣資訊' : 'Crowding Info'}</h4>
+                    {selectedLocation.crowding.quietHours && (
+                      <p>
+                        <strong>{language === 'zh' ? '安靜時段' : 'Quiet Hours'}</strong>: {selectedLocation.crowding.quietHours}
+                      </p>
+                    )}
+                    {selectedLocation.crowding.peakHours && (
+                      <p>
+                        <strong>{language === 'zh' ? '尖峰時段' : 'Peak Hours'}</strong>: {selectedLocation.crowding.peakHours}
+                      </p>
+                    )}
+                    {selectedLocation.crowding.averageCrowding && (
+                      <p>
+                        <strong>{language === 'zh' ? '平均人潮' : 'Average Crowding'}</strong>: {
+                          selectedLocation.crowding.averageCrowding === 'light' ? (language === 'zh' ? '人少' : 'Light') :
+                          selectedLocation.crowding.averageCrowding === 'moderate' ? (language === 'zh' ? '中等' : 'Moderate') :
+                          (language === 'zh' ? '人多' : 'Heavy')
+                        }
+                      </p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.nursingAmenities && (
+                  <div className="detail-section">
+                    <h4>👶 {language === 'zh' ? '哺乳/換尿布設施' : 'Nursing & Diaper Facilities'}</h4>
+                    {selectedLocation.nursingAmenities.hasDedicatedArea && (
+                      <p>
+                        <strong>{language === 'zh' ? '專用區域' : 'Dedicated Area'}</strong>: {language === 'zh' ? '✅ 有' : '✅ Available'}
+                      </p>
+                    )}
+                    {selectedLocation.nursingAmenities.hasChangingTable && (
+                      <p>
+                        <strong>{language === 'zh' ? '換尿布台' : 'Changing Table'}</strong>: {language === 'zh' ? '✅ 有' : '✅ Available'}
+                      </p>
+                    )}
+                    {selectedLocation.nursingAmenities.hasPowerOutlet && (
+                      <p>
+                        <strong>{language === 'zh' ? '電源' : 'Power Outlet'}</strong>: {language === 'zh' ? '✅ 有(可用溫奶器)' : '✅ Available (for warmers)'}
+                      </p>
+                    )}
+                    {selectedLocation.nursingAmenities.hasRefrigerator && (
+                      <p>
+                        <strong>{language === 'zh' ? '冰箱' : 'Refrigerator'}</strong>: {language === 'zh' ? '✅ 有(可冷藏母乳)' : '✅ Available (for breast milk)'}
+                      </p>
+                    )}
+                    {selectedLocation.nursingAmenities.hasWarmWater && (
+                      <p>
+                        <strong>{language === 'zh' ? '熱水' : 'Warm Water'}</strong>: {language === 'zh' ? '✅ 有(可泡奶粉)' : '✅ Available (for formula)'}
+                      </p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.weatherCoverage && (
+                  <div className="detail-section">
+                    <h4>🌦️ {language === 'zh' ? '天候保護' : 'Weather Coverage'}</h4>
+                    <p>
+                      <strong>{language === 'zh' ? '室內/戶外' : 'Indoor/Outdoor'}</strong>: {selectedLocation.weatherCoverage.isIndoor ? (language === 'zh' ? '🏢 室內' : '🏢 Indoor') : (language === 'zh' ? '🏞️ 戶外' : '🏞️ Outdoor')}
+                    </p>
+                    {selectedLocation.weatherCoverage.hasRoof && (
+                      <p>
+                        <strong>{language === 'zh' ? '有屋頂' : 'Has Roof'}</strong>: {language === 'zh' ? '✅ 是' : '✅ Yes'}
+                      </p>
+                    )}
+                    {selectedLocation.weatherCoverage.hasShade && (
+                      <p>
+                        <strong>{language === 'zh' ? '有遮蔭' : 'Has Shade'}</strong>: {language === 'zh' ? '✅ 是' : '✅ Yes'}
+                      </p>
+                    )}
+                    {selectedLocation.weatherCoverage.weatherProtection && (
+                      <p>
+                        <strong>{language === 'zh' ? '說明' : 'Details'}</strong>: {selectedLocation.weatherCoverage.weatherProtection}
+                      </p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.nearbyAmenities && (
+                  <div className="detail-section">
+                    <h4>🏪 {language === 'zh' ? '附近設施' : 'Nearby Amenities'}</h4>
+                    {selectedLocation.nearbyAmenities.convenientStores !== undefined && selectedLocation.nearbyAmenities.convenientStores > 0 && (
+                      <p>
+                        <strong>{language === 'zh' ? '便利商店' : 'Convenient Stores'}</strong>: {selectedLocation.nearbyAmenities.convenientStores} {language === 'zh' ? '家(200m內)' : ' shops (within 200m)'}
+                      </p>
+                    )}
+                    {selectedLocation.nearbyAmenities.nearbyRestrooms && (
+                      <p>
+                        <strong>{language === 'zh' ? '附近廁所' : 'Nearby Restrooms'}</strong>: {language === 'zh' ? '✅ 有' : '✅ Available'}
+                      </p>
+                    )}
+                    {selectedLocation.nearbyAmenities.nearbyRestaurants && (
+                      <p>
+                        <strong>{language === 'zh' ? '附近餐廳' : 'Nearby Restaurants'}</strong>: {language === 'zh' ? '✅ 有' : '✅ Available'}
+                      </p>
+                    )}
+                    {selectedLocation.nearbyAmenities.nearbyPublicTransit && (
+                      <p>
+                        <strong>{language === 'zh' ? '大眾運輸' : 'Public Transit'}</strong>: {selectedLocation.nearbyAmenities.nearbyPublicTransit}
+                      </p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>

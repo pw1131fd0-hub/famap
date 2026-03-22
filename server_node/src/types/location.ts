@@ -35,6 +35,34 @@ export interface AllergenInfo {
   commonAllergens?: string[]; // e.g., ['peanuts', 'shellfish', 'dairy']
 }
 
+export interface CrowdingInfo {
+  quietHours?: string; // e.g., "weekday mornings 9-11am"
+  peakHours?: string; // e.g., "weekends 2-6pm"
+  averageCrowding?: 'light' | 'moderate' | 'heavy'; // general crowding level
+}
+
+export interface NursingAmenitiesInfo {
+  hasDedicatedArea?: boolean;
+  hasChangingTable?: boolean;
+  hasPowerOutlet?: boolean; // for bottle warmers
+  hasRefrigerator?: boolean; // to store breast milk
+  hasWarmWater?: boolean; // for formula preparation
+}
+
+export interface WeatherCoverageInfo {
+  isIndoor: boolean;
+  hasRoof?: boolean;
+  hasShade?: boolean;
+  weatherProtection?: string; // e.g., "mostly outdoor with covered pavilion"
+}
+
+export interface NearbyAmenitiesInfo {
+  convenientStores?: number; // count nearby (within 200m)
+  nearbyRestrooms?: boolean;
+  nearbyRestaurants?: boolean;
+  nearbyPublicTransit?: string; // e.g., "MRT station 200m away"
+}
+
 export interface Location {
   id: string;
   name: {
@@ -65,6 +93,10 @@ export interface Location {
   toilet?: ToiletInfo;
   hasWiFi?: boolean;
   allergens?: AllergenInfo;
+  crowding?: CrowdingInfo;
+  nursingAmenities?: NursingAmenitiesInfo;
+  weatherCoverage?: WeatherCoverageInfo;
+  nearbyAmenities?: NearbyAmenitiesInfo;
 }
 
 export interface SearchParams {

@@ -28,6 +28,39 @@ mock_locations: List[Dict[str, Any]] = [
         },
         "facilities": ["stroller_accessible", "nursing_room", "public_toilet"],
         "averageRating": 4.8,
+        "phoneNumber": "02-2700-8600",
+        "publicTransit": {
+            "nearestMRT": {"line": "信義線", "station": "大安站", "distance": 300},
+            "busLines": ["15", "235", "240", "278"]
+        },
+        "parking": {"available": True, "cost": "每小時40元", "hasValidation": False},
+        "toilet": {"available": True, "childrenFriendly": True, "hasChangingTable": True},
+        "hasWiFi": False,
+        "allergens": {"commonAllergens": []},
+        "crowding": {
+            "quietHours": "平日上午9-11點",
+            "peakHours": "週末下午2-6點",
+            "averageCrowding": "moderate"
+        },
+        "nursingAmenities": {
+            "hasDedicatedArea": True,
+            "hasChangingTable": True,
+            "hasPowerOutlet": True,
+            "hasRefrigerator": False,
+            "hasWarmWater": False
+        },
+        "weatherCoverage": {
+            "isIndoor": False,
+            "hasRoof": False,
+            "hasShade": True,
+            "weatherProtection": "樹蔭覆蓋，下雨時人煙稀少"
+        },
+        "nearbyAmenities": {
+            "convenientStores": 5,
+            "nearbyRestrooms": True,
+            "nearbyRestaurants": True,
+            "nearbyPublicTransit": "信義線大安站 300m"
+        }
     },
     {
         "id": "2",
@@ -44,6 +77,39 @@ mock_locations: List[Dict[str, Any]] = [
         },
         "facilities": ["stroller_accessible", "nursing_room", "high_chair"],
         "averageRating": 4.7,
+        "phoneNumber": "02-2833-6666",
+        "publicTransit": {
+            "nearestMRT": {"line": "淡水線", "station": "劍潭站", "distance": 500},
+            "busLines": ["255", "260", "303", "325"]
+        },
+        "parking": {"available": True, "cost": "每小時40-80元", "hasValidation": True},
+        "toilet": {"available": True, "childrenFriendly": True, "hasChangingTable": True},
+        "hasWiFi": True,
+        "allergens": {"commonAllergens": []},
+        "crowding": {
+            "quietHours": "平日下午1-3點",
+            "peakHours": "週末全天，特別是假日",
+            "averageCrowding": "heavy"
+        },
+        "nursingAmenities": {
+            "hasDedicatedArea": True,
+            "hasChangingTable": True,
+            "hasPowerOutlet": True,
+            "hasRefrigerator": True,
+            "hasWarmWater": True
+        },
+        "weatherCoverage": {
+            "isIndoor": False,
+            "hasRoof": True,
+            "hasShade": True,
+            "weatherProtection": "部分設施有遮蔽，室內館也有"
+        },
+        "nearbyAmenities": {
+            "convenientStores": 8,
+            "nearbyRestrooms": True,
+            "nearbyRestaurants": True,
+            "nearbyPublicTransit": "淡水線劍潭站 500m"
+        }
     },
     {
         "id": "3",
@@ -60,6 +126,39 @@ mock_locations: List[Dict[str, Any]] = [
         },
         "facilities": ["stroller_accessible", "nursing_room"],
         "averageRating": 4.5,
+        "phoneNumber": "02-2382-2566",
+        "publicTransit": {
+            "nearestMRT": {"line": "紅線", "station": "台大醫院站", "distance": 200},
+            "busLines": ["1", "3", "15", "227"]
+        },
+        "parking": {"available": True, "cost": "每小時40元", "hasValidation": False},
+        "toilet": {"available": True, "childrenFriendly": True, "hasChangingTable": False},
+        "hasWiFi": True,
+        "allergens": {"commonAllergens": []},
+        "crowding": {
+            "quietHours": "平日上午10-12點",
+            "peakHours": "週末下午3-5點",
+            "averageCrowding": "light"
+        },
+        "nursingAmenities": {
+            "hasDedicatedArea": False,
+            "hasChangingTable": False,
+            "hasPowerOutlet": False,
+            "hasRefrigerator": False,
+            "hasWarmWater": False
+        },
+        "weatherCoverage": {
+            "isIndoor": True,
+            "hasRoof": True,
+            "hasShade": True,
+            "weatherProtection": "室內展廳，完全不受天候影響"
+        },
+        "nearbyAmenities": {
+            "convenientStores": 10,
+            "nearbyRestrooms": True,
+            "nearbyRestaurants": True,
+            "nearbyPublicTransit": "紅線台大醫院站 200m"
+        }
     },
     {
         "id": "4",
@@ -73,6 +172,39 @@ mock_locations: List[Dict[str, Any]] = [
         "address": {"zh": "台北市信義區", "en": "Xinyi Dist., Taipei"},
         "facilities": ["high_chair", "nursing_room"],
         "averageRating": 4.2,
+        "phoneNumber": "02-8789-5555",
+        "publicTransit": {
+            "nearestMRT": {"line": "信義線", "station": "信義安和站", "distance": 150},
+            "busLines": ["46", "207", "297"]
+        },
+        "parking": {"available": True, "cost": "消費滿額可折抵", "hasValidation": True},
+        "toilet": {"available": True, "childrenFriendly": True, "hasChangingTable": True},
+        "hasWiFi": True,
+        "allergens": {"commonAllergens": ["milk", "eggs", "peanuts"]},
+        "crowding": {
+            "quietHours": "平日上午11點-下午1點",
+            "peakHours": "週末中午11-1點，下午3-6點",
+            "averageCrowding": "moderate"
+        },
+        "nursingAmenities": {
+            "hasDedicatedArea": True,
+            "hasChangingTable": True,
+            "hasPowerOutlet": True,
+            "hasRefrigerator": True,
+            "hasWarmWater": True
+        },
+        "weatherCoverage": {
+            "isIndoor": True,
+            "hasRoof": True,
+            "hasShade": True,
+            "weatherProtection": "完全室內，可舒適進餐"
+        },
+        "nearbyAmenities": {
+            "convenientStores": 12,
+            "nearbyRestrooms": True,
+            "nearbyRestaurants": True,
+            "nearbyPublicTransit": "信義線信義安和站 150m"
+        }
     },
 ]
 
