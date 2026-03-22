@@ -2086,6 +2086,137 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.weatherAndSunSafety && (
+                  <div className="location-section" style={{ borderTop: '2px solid #f59e0b', paddingTop: '12px', marginTop: '12px' }}>
+                    <h3>☀️ {language === 'zh' ? '天氣與防曬安全' : 'Weather & Sun Safety'}</h3>
+                    {selectedLocation.weatherAndSunSafety.hasOutdoorExposure !== undefined && (
+                      <p><strong>{language === 'zh' ? '室外暴露' : 'Outdoor Exposure'}</strong>: {selectedLocation.weatherAndSunSafety.hasOutdoorExposure ? '✅ ' + (language === 'zh' ? '有' : 'Yes') : '❌ ' + (language === 'zh' ? '無' : 'No')}</p>
+                    )}
+                    {selectedLocation.weatherAndSunSafety.uvRiskLevel && (
+                      <p><strong>{language === 'zh' ? '紫外線風險' : 'UV Risk Level'}</strong>: {
+                        selectedLocation.weatherAndSunSafety.uvRiskLevel === 'extreme' ? '🔴 ' + (language === 'zh' ? '極端' : 'Extreme') :
+                        selectedLocation.weatherAndSunSafety.uvRiskLevel === 'very high' ? '🔴 ' + (language === 'zh' ? '非常高' : 'Very High') :
+                        selectedLocation.weatherAndSunSafety.uvRiskLevel === 'high' ? '🟠 ' + (language === 'zh' ? '高' : 'High') :
+                        selectedLocation.weatherAndSunSafety.uvRiskLevel === 'moderate' ? '🟡 ' + (language === 'zh' ? '中等' : 'Moderate') :
+                        '🟢 ' + (language === 'zh' ? '低' : 'Low')
+                      }</p>
+                    )}
+                    {selectedLocation.weatherAndSunSafety.peakUVMonth && selectedLocation.weatherAndSunSafety.peakUVMonth.length > 0 && (
+                      <p><strong>{language === 'zh' ? '紫外線峰值月份' : 'Peak UV Months'}</strong>: {selectedLocation.weatherAndSunSafety.peakUVMonth.join(', ')}</p>
+                    )}
+                    {selectedLocation.weatherAndSunSafety.recommendedSunProtection && selectedLocation.weatherAndSunSafety.recommendedSunProtection.length > 0 && (
+                      <p><strong>{language === 'zh' ? '防曬建議' : 'Sun Protection'}</strong>: {selectedLocation.weatherAndSunSafety.recommendedSunProtection.join(', ')}</p>
+                    )}
+                    {selectedLocation.weatherAndSunSafety.sunExposureRisk && (
+                      <p><strong>{language === 'zh' ? '日曬風險' : 'Sun Exposure Risk'}</strong>: {selectedLocation.weatherAndSunSafety.sunExposureRisk}</p>
+                    )}
+                    {selectedLocation.weatherAndSunSafety.shadeAvailability && (
+                      <p><strong>{language === 'zh' ? '遮蔭可用性' : 'Shade Availability'}</strong>: {
+                        selectedLocation.weatherAndSunSafety.shadeAvailability === 'abundant' ? '🟢 ' + (language === 'zh' ? '充足' : 'Abundant') :
+                        selectedLocation.weatherAndSunSafety.shadeAvailability === 'moderate' ? '🟡 ' + (language === 'zh' ? '中等' : 'Moderate') :
+                        selectedLocation.weatherAndSunSafety.shadeAvailability === 'limited' ? '🟠 ' + (language === 'zh' ? '有限' : 'Limited') :
+                        '🔴 ' + (language === 'zh' ? '最少' : 'Minimal')
+                      }</p>
+                    )}
+                    {selectedLocation.weatherAndSunSafety.umbrellaAllowed !== undefined && (
+                      <p><strong>{language === 'zh' ? '允許使用傘' : 'Umbrella Allowed'}</strong>: {selectedLocation.weatherAndSunSafety.umbrellaAllowed ? '✅' : '❌'}</p>
+                    )}
+                    {selectedLocation.weatherAndSunSafety.sunriseToSunsetTiming && (
+                      <p><strong>{language === 'zh' ? '日出日落時間' : 'Sunrise to Sunset'}</strong>: {selectedLocation.weatherAndSunSafety.sunriseToSunsetTiming}</p>
+                    )}
+                    {selectedLocation.weatherAndSunSafety.bestSafeTimeToVisit && (
+                      <p><strong>{language === 'zh' ? '最安全造訪時間' : 'Best Safe Time to Visit'}</strong>: {selectedLocation.weatherAndSunSafety.bestSafeTimeToVisit}</p>
+                    )}
+                    {selectedLocation.weatherAndSunSafety.heatStressRisk && (
+                      <p><strong>{language === 'zh' ? '熱應激風險' : 'Heat Stress Risk'}</strong>: {selectedLocation.weatherAndSunSafety.heatStressRisk}</p>
+                    )}
+                    {selectedLocation.weatherAndSunSafety.mosquitoSeasonInfo && (
+                      <p><strong>{language === 'zh' ? '蚊子季節信息' : 'Mosquito Season'}</strong>: {selectedLocation.weatherAndSunSafety.mosquitoSeasonInfo}</p>
+                    )}
+                    {selectedLocation.weatherAndSunSafety.sunburnWarning && (
+                      <p>⚠️ {language === 'zh' ? '曬傷警告：風險顯著' : 'Sunburn Warning: Significant Risk'}</p>
+                    )}
+                    {selectedLocation.weatherAndSunSafety.photosensitivityRisk && (
+                      <p>⚠️ {language === 'zh' ? '光敏感風險：高強度眩光' : 'Photosensitivity Risk: High Glare'}</p>
+                    )}
+                    {selectedLocation.weatherAndSunSafety.recommendedClothing && selectedLocation.weatherAndSunSafety.recommendedClothing.length > 0 && (
+                      <p><strong>{language === 'zh' ? '建議著裝' : 'Recommended Clothing'}</strong>: {selectedLocation.weatherAndSunSafety.recommendedClothing.join(', ')}</p>
+                    )}
+                    {selectedLocation.weatherAndSunSafety.sunscreenRecommendation && (
+                      <p><strong>{language === 'zh' ? '防曬霜建議' : 'Sunscreen Recommendation'}</strong>: {selectedLocation.weatherAndSunSafety.sunscreenRecommendation}</p>
+                    )}
+                    {selectedLocation.weatherAndSunSafety.indoorAlternativesAvailable !== undefined && (
+                      <p><strong>{language === 'zh' ? '室內替代方案' : 'Indoor Alternatives'}</strong>: {selectedLocation.weatherAndSunSafety.indoorAlternativesAvailable ? '✅ ' + (language === 'zh' ? '有' : 'Available') : '❌ ' + (language === 'zh' ? '無' : 'Not Available')}</p>
+                    )}
+                    {selectedLocation.weatherAndSunSafety.weatherProtectionNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.weatherAndSunSafety.weatherProtectionNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.walkingDistanceAndDifficulty && (
+                  <div className="location-section" style={{ borderTop: '2px solid #06b6d4', paddingTop: '12px', marginTop: '12px' }}>
+                    <h3>🚶 {language === 'zh' ? '行走距離與難度' : 'Walking Distance & Difficulty'}</h3>
+                    {selectedLocation.walkingDistanceAndDifficulty.totalWalkingDistance !== undefined && (
+                      <p><strong>{language === 'zh' ? '總行走距離' : 'Total Walking Distance'}</strong>: {selectedLocation.walkingDistanceAndDifficulty.totalWalkingDistance}m</p>
+                    )}
+                    {selectedLocation.walkingDistanceAndDifficulty.mainAttractionsAccessibility && (
+                      <p><strong>{language === 'zh' ? '主要景點易達性' : 'Main Attractions Accessibility'}</strong>: {selectedLocation.walkingDistanceAndDifficulty.mainAttractionsAccessibility}</p>
+                    )}
+                    {selectedLocation.walkingDistanceAndDifficulty.strollerWalking && (
+                      <div style={{ marginLeft: '16px', paddingLeft: '12px', borderLeft: '2px solid #06b6d4' }}>
+                        <p><strong>{language === 'zh' ? '嬰兒車使用' : 'Stroller Accessibility'}</strong>:</p>
+                        {selectedLocation.walkingDistanceAndDifficulty.strollerWalking.isStrollerFriendly !== undefined && (
+                          <p style={{ marginLeft: '12px' }}><strong>{language === 'zh' ? '嬰兒車友善' : 'Stroller-Friendly'}</strong>: {selectedLocation.walkingDistanceAndDifficulty.strollerWalking.isStrollerFriendly ? '✅' : '❌'}</p>
+                        )}
+                        {selectedLocation.walkingDistanceAndDifficulty.strollerWalking.difficultSections && (
+                          <p style={{ marginLeft: '12px' }}><strong>{language === 'zh' ? '困難路段' : 'Difficult Sections'}</strong>: {selectedLocation.walkingDistanceAndDifficulty.strollerWalking.difficultSections}</p>
+                        )}
+                        {selectedLocation.walkingDistanceAndDifficulty.strollerWalking.flatPathPercentage !== undefined && (
+                          <p style={{ marginLeft: '12px' }}><strong>{language === 'zh' ? '平坦路徑' : 'Flat Paths'}</strong>: {selectedLocation.walkingDistanceAndDifficulty.strollerWalking.flatPathPercentage}%</p>
+                        )}
+                        {selectedLocation.walkingDistanceAndDifficulty.strollerWalking.maxSlopePercentage !== undefined && (
+                          <p style={{ marginLeft: '12px' }}><strong>{language === 'zh' ? '最大坡度' : 'Max Slope'}</strong>: {selectedLocation.walkingDistanceAndDifficulty.strollerWalking.maxSlopePercentage}%</p>
+                        )}
+                      </div>
+                    )}
+                    {selectedLocation.walkingDistanceAndDifficulty.carryingSmallChildrenDifficulty && (
+                      <p><strong>{language === 'zh' ? '懷抱幼兒難度' : 'Carrying Children Difficulty'}</strong>: {
+                        selectedLocation.walkingDistanceAndDifficulty.carryingSmallChildrenDifficulty === 'easy' ? '🟢 ' + (language === 'zh' ? '容易' : 'Easy') :
+                        selectedLocation.walkingDistanceAndDifficulty.carryingSmallChildrenDifficulty === 'moderate' ? '🟡 ' + (language === 'zh' ? '中等' : 'Moderate') :
+                        '🔴 ' + (language === 'zh' ? '困難' : 'Challenging')
+                      }</p>
+                    )}
+                    {selectedLocation.walkingDistanceAndDifficulty.ageGroupPhysicalDemands && (
+                      <div style={{ marginLeft: '16px', paddingLeft: '12px', borderLeft: '2px solid #06b6d4' }}>
+                        <p><strong>{language === 'zh' ? '年齡組體力要求' : 'Age Group Physical Demands'}</strong>:</p>
+                        {selectedLocation.walkingDistanceAndDifficulty.ageGroupPhysicalDemands.toddlers && (
+                          <p style={{ marginLeft: '12px' }}><strong>{language === 'zh' ? '幼兒' : 'Toddlers'}</strong>: {selectedLocation.walkingDistanceAndDifficulty.ageGroupPhysicalDemands.toddlers}</p>
+                        )}
+                        {selectedLocation.walkingDistanceAndDifficulty.ageGroupPhysicalDemands.preschool && (
+                          <p style={{ marginLeft: '12px' }}><strong>{language === 'zh' ? '學齡前' : 'Preschool'}</strong>: {selectedLocation.walkingDistanceAndDifficulty.ageGroupPhysicalDemands.preschool}</p>
+                        )}
+                        {selectedLocation.walkingDistanceAndDifficulty.ageGroupPhysicalDemands.schoolAge && (
+                          <p style={{ marginLeft: '12px' }}><strong>{language === 'zh' ? '學齡兒童' : 'School-Age'}</strong>: {selectedLocation.walkingDistanceAndDifficulty.ageGroupPhysicalDemands.schoolAge}</p>
+                        )}
+                      </div>
+                    )}
+                    {selectedLocation.walkingDistanceAndDifficulty.restAreaFrequency && (
+                      <p><strong>{language === 'zh' ? '休息區頻率' : 'Rest Area Frequency'}</strong>: {selectedLocation.walkingDistanceAndDifficulty.restAreaFrequency}</p>
+                    )}
+                    {selectedLocation.walkingDistanceAndDifficulty.benchesToAmenitiesRatio && (
+                      <p><strong>{language === 'zh' ? '座位與便利設施' : 'Benches & Amenities'}</strong>: {selectedLocation.walkingDistanceAndDifficulty.benchesToAmenitiesRatio}</p>
+                    )}
+                    {selectedLocation.walkingDistanceAndDifficulty.timeToMainAttraction !== undefined && (
+                      <p><strong>{language === 'zh' ? '至主要景點時間' : 'Time to Main Attraction'}</strong>: {selectedLocation.walkingDistanceAndDifficulty.timeToMainAttraction} {language === 'zh' ? '分鐘' : 'minutes'}</p>
+                    )}
+                    {selectedLocation.walkingDistanceAndDifficulty.roundTripWalkingTime !== undefined && (
+                      <p><strong>{language === 'zh' ? '往返行走時間' : 'Round-trip Walking Time'}</strong>: {selectedLocation.walkingDistanceAndDifficulty.roundTripWalkingTime} {language === 'zh' ? '分鐘' : 'minutes'}</p>
+                    )}
+                    {selectedLocation.walkingDistanceAndDifficulty.walkingDifficultyNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.walkingDistanceAndDifficulty.walkingDifficultyNotes}</p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>
