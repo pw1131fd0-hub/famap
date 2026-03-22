@@ -917,6 +917,79 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.payment && (
+                  <div className="detail-section">
+                    <h4>💳 {language === 'zh' ? '付款方式' : 'Payment Methods'}</h4>
+                    {selectedLocation.payment.acceptsCash && <p>✅ {language === 'zh' ? '現金' : 'Cash'}</p>}
+                    {selectedLocation.payment.acceptsLinePay && <p>✅ LINE Pay</p>}
+                    {selectedLocation.payment.acceptsWeChatPay && <p>✅ WeChat Pay</p>}
+                    {selectedLocation.payment.acceptsAlipay && <p>✅ AliPay</p>}
+                    {selectedLocation.payment.acceptsApplePay && <p>✅ Apple Pay</p>}
+                    {selectedLocation.payment.acceptsSamsungPay && <p>✅ Samsung Pay</p>}
+                    {selectedLocation.payment.acceptsCreditCard && <p>✅ {language === 'zh' ? '信用卡' : 'Credit Card'}</p>}
+                    {selectedLocation.payment.acceptsDebitCard && <p>✅ {language === 'zh' ? '金融卡' : 'Debit Card'}</p>}
+                    {selectedLocation.payment.paymentNotes && (
+                      <p><strong>{language === 'zh' ? '備註' : 'Notes'}</strong>: {selectedLocation.payment.paymentNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.outsideFood && (
+                  <div className="detail-section">
+                    <h4>🍱 {language === 'zh' ? '飲食政策' : 'Food Policy'}</h4>
+                    <p>
+                      <strong>{language === 'zh' ? '可帶食物' : 'Bring Food'}</strong>: {selectedLocation.outsideFood.allowsOutsideFood ? '✅' : '❌'}
+                    </p>
+                    <p>
+                      <strong>{language === 'zh' ? '可帶飲料' : 'Bring Beverages'}</strong>: {selectedLocation.outsideFood.allowsOutsideBeverages ? '✅' : '❌'}
+                    </p>
+                    {selectedLocation.outsideFood.hasPicnicAreas && (
+                      <p>✅ {language === 'zh' ? '有野餐區' : 'Has Picnic Areas'}</p>
+                    )}
+                    {selectedLocation.outsideFood.hasRefrigeratedStorage && (
+                      <p>✅ {language === 'zh' ? '冷藏儲存' : 'Refrigerated Storage'}</p>
+                    )}
+                    {selectedLocation.outsideFood.foodPolicyNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.outsideFood.foodPolicyNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.stroller && (
+                  <div className="detail-section">
+                    <h4>👶 {language === 'zh' ? '嬰兒車' : 'Stroller'}</h4>
+                    <p>
+                      <strong>{language === 'zh' ? '適合嬰兒車' : 'Stroller Friendly'}</strong>: {selectedLocation.stroller.strollerFriendly ? '✅' : '❌'}
+                    </p>
+                    {selectedLocation.stroller.hasStrollerStorage && (
+                      <p>✅ {language === 'zh' ? '有停放區' : 'Has Storage Area'}</p>
+                    )}
+                    {selectedLocation.stroller.hasStrollerRental && (
+                      <p>✅ {language === 'zh' ? '可租賃' : 'Stroller Rental Available'}</p>
+                    )}
+                    {selectedLocation.stroller.strollerStorageNotes && (
+                      <p><strong>{language === 'zh' ? '停放說明' : 'Storage Info'}</strong>: {selectedLocation.stroller.strollerStorageNotes}</p>
+                    )}
+                    {selectedLocation.stroller.restrictedAreas && (
+                      <p><strong>{language === 'zh' ? '限制區域' : 'Restricted Areas'}</strong>: {selectedLocation.stroller.restrictedAreas}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.reservedTimes && (
+                  <div className="detail-section">
+                    <h4>🕐 {language === 'zh' ? '預約時段' : 'Reserved Times'}</h4>
+                    {selectedLocation.reservedTimes.parentChildHours && (
+                      <p><strong>{language === 'zh' ? '親子時段' : 'Parent-Child Hours'}</strong>: {selectedLocation.reservedTimes.parentChildHours}</p>
+                    )}
+                    {selectedLocation.reservedTimes.toddlerSpecificTimes && (
+                      <p><strong>{language === 'zh' ? '幼兒時段' : 'Toddler Times'}</strong>: {selectedLocation.reservedTimes.toddlerSpecificTimes}</p>
+                    )}
+                    {selectedLocation.reservedTimes.quietHours && (
+                      <p><strong>{language === 'zh' ? '安靜時段' : 'Quiet Hours'}</strong>: {selectedLocation.reservedTimes.quietHours}</p>
+                    )}
+                    {selectedLocation.reservedTimes.reservedTimesNotes && (
+                      <p><strong>{language === 'zh' ? '備註' : 'Notes'}</strong>: {selectedLocation.reservedTimes.reservedTimesNotes}</p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>
