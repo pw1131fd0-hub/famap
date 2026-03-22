@@ -793,8 +793,18 @@ function App() {
                           <p className="distance-text">📍 {formatDistance(calculateDistance(position[0], position[1], loc.coordinates.lat, loc.coordinates.lng))}</p>
                         </div>
                         <p className="address-text">{loc.address[language]}</p>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px', gap: '8px', flexWrap: 'wrap' }}>
                           <div className="rating">⭐ {loc.averageRating}</div>
+                          {loc.pricing?.isFree && (
+                            <div style={{ fontSize: '0.75em', background: '#d4edda', color: '#155724', padding: '2px 6px', borderRadius: '3px', fontWeight: '600' }}>
+                              💚 {language === 'zh' ? '免費' : 'FREE'}
+                            </div>
+                          )}
+                          {loc.pricing?.priceRange && !loc.pricing?.isFree && (
+                            <div style={{ fontSize: '0.75em', background: '#fff3cd', color: '#856404', padding: '2px 6px', borderRadius: '3px', fontWeight: '600' }}>
+                              💳 {loc.pricing.priceRange}
+                            </div>
+                          )}
                           {hasCriticalFacility && (
                             <div style={{ fontSize: '0.8em', color: '#ff6b6b', fontWeight: '600' }}>
                               ⚠️ {language === 'zh' ? '有必要設施' : 'Key Facilities'}

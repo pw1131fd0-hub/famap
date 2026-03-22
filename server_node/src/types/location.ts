@@ -5,6 +5,11 @@ export interface AgeRange {
   maxAge?: number;
 }
 
+export interface PricingInfo {
+  isFree: boolean;
+  priceRange?: string;
+}
+
 export interface Location {
   id: string;
   name: {
@@ -28,6 +33,7 @@ export interface Location {
   averageRating: number;
   photoUrl?: string;
   ageRange?: AgeRange;
+  pricing?: PricingInfo;
 }
 
 export interface SearchParams {

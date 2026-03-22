@@ -24,6 +24,7 @@ export let mockLocations: Location[] = [
     facilities: ['stroller_accessible', 'nursing_room', 'public_toilet'],
     averageRating: 4.8,
     ageRange: { minAge: 1, maxAge: 12 },
+    pricing: { isFree: true },
   },
   {
     id: '2',
@@ -35,6 +36,7 @@ export let mockLocations: Location[] = [
     facilities: ['stroller_accessible', 'nursing_room', 'high_chair'],
     averageRating: 4.7,
     ageRange: { minAge: 2, maxAge: 15 },
+    pricing: { isFree: false, priceRange: '200-500 NTD' },
   },
   {
     id: '3',
@@ -46,6 +48,7 @@ export let mockLocations: Location[] = [
     facilities: ['stroller_accessible', 'nursing_room'],
     averageRating: 4.5,
     ageRange: { minAge: 3, maxAge: 14 },
+    pricing: { isFree: false, priceRange: '30-100 NTD' },
   },
   {
     id: '4',
@@ -57,6 +60,7 @@ export let mockLocations: Location[] = [
     facilities: ['high_chair', 'nursing_room', 'air_conditioned', 'kids_menu', 'indoor_play'],
     averageRating: 4.2,
     ageRange: { minAge: 0, maxAge: 8 },
+    pricing: { isFree: false, priceRange: '400-800 NTD' },
   },
   {
     id: '5',
@@ -68,6 +72,7 @@ export let mockLocations: Location[] = [
     facilities: ['air_conditioned', 'nursing_room', 'kids_menu', 'parking', 'mrt_nearby', 'indoor_play'],
     averageRating: 4.6,
     ageRange: { minAge: 0, maxAge: 10 },
+    pricing: { isFree: true },
   },
   {
     id: '6',
@@ -79,6 +84,7 @@ export let mockLocations: Location[] = [
     facilities: ['swimming_pool', 'water_play', 'nursing_room', 'air_conditioned', 'drinking_water', 'public_toilet'],
     averageRating: 4.5,
     ageRange: { minAge: 3, maxAge: 16 },
+    pricing: { isFree: false, priceRange: '100-200 NTD' },
   },
   {
     id: '7',
@@ -90,6 +96,7 @@ export let mockLocations: Location[] = [
     facilities: ['swimming_pool', 'water_play', 'shaded_area', 'nursing_room', 'mrt_nearby', 'outdoor_seating'],
     averageRating: 4.4,
     ageRange: { minAge: 2, maxAge: 14 },
+    pricing: { isFree: false, priceRange: '300-600 NTD' },
   },
 ];
 
