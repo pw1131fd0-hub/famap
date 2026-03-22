@@ -341,6 +341,46 @@ export interface EntertainmentScheduleInfo {
   entertainmentNotes?: string;
 }
 
+export interface PhotoVideoPolicy {
+  allowsPhotography?: boolean;
+  allowsVideoRecording?: boolean;
+  photographyRestrictions?: string;
+  videoRecordingRestrictions?: string;
+  flashPhotographyAllowed?: boolean;
+  tripodAllowed?: boolean;
+  commercialPhotographyAllowed?: boolean;
+  photoVideoNotes?: string;
+}
+
+export interface VisitDurationRecommendation {
+  recommendedDurationMinutes?: number;
+  recommendedDurationText?: string;
+  quickVisitMinutes?: number;
+  fullExperienceDurationMinutes?: number;
+  mustSeeActivityDurationMinutes?: number;
+  includesMealTimeRecommendation?: boolean;
+  mealTimeSuggestion?: string;
+  restTimeRecommendation?: boolean;
+  bestTimeToVisit?: string;
+  durationNotes?: string;
+}
+
+export interface TaiwanSchoolHolidayInfo {
+  winterVacationDates?: string;
+  summerVacationDates?: string;
+  midAutumnFestival?: string;
+  lunarNewYearDates?: string;
+  dragonBoatFestivalDate?: string;
+  doubleNinthFestivalDate?: string;
+  weeklyHolidaysInfo?: string;
+  winterVacationCrowding?: 'light' | 'moderate' | 'heavy';
+  summerVacationCrowding?: 'light' | 'moderate' | 'heavy';
+  lunarNewYearCrowding?: 'light' | 'moderate' | 'heavy';
+  holidaySpecialEventsOrHours?: string;
+  holidayBookingRecommendation?: string;
+  holidayNotes?: string;
+}
+
 export interface Location {
   id: string;
   name: {
@@ -400,6 +440,9 @@ export interface Location {
   specialNeeds?: SpecialNeedsServicesInfo;
   medicalServices?: FirstAidAndMedicalInfo;
   entertainmentSchedule?: EntertainmentScheduleInfo;
+  photoVideo?: PhotoVideoPolicy;
+  visitDuration?: VisitDurationRecommendation;
+  schoolHolidays?: TaiwanSchoolHolidayInfo;
 }
 
 export interface Review {
@@ -471,6 +514,9 @@ export interface LocationCreateDTO {
   specialNeeds?: SpecialNeedsServicesInfo;
   medicalServices?: FirstAidAndMedicalInfo;
   entertainmentSchedule?: EntertainmentScheduleInfo;
+  photoVideo?: PhotoVideoPolicy;
+  visitDuration?: VisitDurationRecommendation;
+  schoolHolidays?: TaiwanSchoolHolidayInfo;
 }
 
 export interface Favorite {
