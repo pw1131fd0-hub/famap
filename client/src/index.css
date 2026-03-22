@@ -458,6 +458,27 @@ body {
   transform: translateY(-1px);
 }
 
+.phone-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background-color: #06b6d4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.phone-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
 .reviews-list {
 
   margin-top: 32px;

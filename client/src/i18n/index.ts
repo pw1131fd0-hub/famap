@@ -77,6 +77,7 @@ export const translations = {
       closed: '已關閉',
       isFree: '免費',
       directions: '導航',
+      phone: '聯繫電話',
     },
     reviews: {
       title: '評論',
@@ -165,6 +166,7 @@ export const translations = {
       closed: 'Closed',
       isFree: 'Free',
       directions: 'Directions',
+      phone: 'Phone',
     },
     reviews: {
       title: 'Reviews',

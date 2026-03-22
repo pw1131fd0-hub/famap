@@ -34,6 +34,7 @@ export interface Location {
   photoUrl?: string;
   ageRange?: AgeRange;
   pricing?: PricingInfo;
+  phoneNumber?: string;
 }
 
 export interface SearchParams {

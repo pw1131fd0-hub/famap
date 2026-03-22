@@ -25,6 +25,7 @@ export let mockLocations: Location[] = [
     averageRating: 4.8,
     ageRange: { minAge: 1, maxAge: 12 },
     pricing: { isFree: true },
+    phoneNumber: '02-2700-8600',
   },
   {
     id: '2',
@@ -37,6 +38,7 @@ export let mockLocations: Location[] = [
     averageRating: 4.7,
     ageRange: { minAge: 2, maxAge: 15 },
     pricing: { isFree: false, priceRange: '200-500 NTD' },
+    phoneNumber: '02-2833-6666',
   },
   {
     id: '3',
@@ -49,6 +51,7 @@ export let mockLocations: Location[] = [
     averageRating: 4.5,
     ageRange: { minAge: 3, maxAge: 14 },
     pricing: { isFree: false, priceRange: '30-100 NTD' },
+    phoneNumber: '02-2382-2566',
   },
   {
     id: '4',
@@ -61,6 +64,7 @@ export let mockLocations: Location[] = [
     averageRating: 4.2,
     ageRange: { minAge: 0, maxAge: 8 },
     pricing: { isFree: false, priceRange: '400-800 NTD' },
+    phoneNumber: '02-8101-0888',
   },
   {
     id: '5',
@@ -73,6 +77,7 @@ export let mockLocations: Location[] = [
     averageRating: 4.6,
     ageRange: { minAge: 0, maxAge: 10 },
     pricing: { isFree: true },
+    phoneNumber: '02-2655-0988',
   },
   {
     id: '6',
@@ -85,6 +90,7 @@ export let mockLocations: Location[] = [
     averageRating: 4.5,
     ageRange: { minAge: 3, maxAge: 16 },
     pricing: { isFree: false, priceRange: '100-200 NTD' },
+    phoneNumber: '02-8751-5000',
   },
   {
     id: '7',
@@ -97,6 +103,7 @@ export let mockLocations: Location[] = [
     averageRating: 4.4,
     ageRange: { minAge: 2, maxAge: 14 },
     pricing: { isFree: false, priceRange: '300-600 NTD' },
+    phoneNumber: '02-2918-9077',
   },
 ];
 

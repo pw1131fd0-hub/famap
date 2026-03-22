@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Filter, Heart, List, Menu, ChevronDown } from 'lucide-react';
 import { locationApi, reviewApi, favoriteApi } from './services/api';
-import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO } from './types';
+import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO, OperatingHours } from './types';
 import { useTranslation } from './i18n/useTranslation';
 import { ReviewList } from './components/ReviewList';
 import { ReviewForm } from './components/ReviewForm';
@@ -116,7 +116,7 @@ const createGlowingIcon = (category: string) => {
 const MOCK_USER_ID = 'u1';
 
 // Function to check if location is currently open
-const isLocationOpen = (operatingHours?: Record<string, string>): { isOpen: boolean; message: string } => {
+const isLocationOpen = (operatingHours?: OperatingHours): { isOpen: boolean; message: string } => {
   if (!operatingHours) {
     return { isOpen: true, message: '營業時間未知' };
   }
@@ -506,6 +506,18 @@ function App() {
                     <span>{t.locationDetail.directions}</span>
                   </a>
                 </div>
+                {selectedLocation.phoneNumber && (
+                  <div className="detail-section">
+                    <h4>{t.locationDetail.phone || 'Phone'}</h4>
+                    <a
+                      href={`tel:${selectedLocation.phoneNumber}`}
+                      className="phone-button"
+                      title="Call"
+                    >
+                      📞 {selectedLocation.phoneNumber}
+                    </a>
+                  </div>
+                )}
                 {selectedLocation.pricing && (
                   <div className="detail-section">
                     <h4>{t.locationDetail.pricing}</h4>

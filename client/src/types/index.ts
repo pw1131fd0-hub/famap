@@ -45,6 +45,7 @@ export interface Location {
   operatingHours?: OperatingHours;
   ageRange?: AgeRange;
   pricing?: PricingInfo;
+  phoneNumber?: string;
 }
 
 export interface Review {
@@ -82,6 +83,7 @@ export interface LocationCreateDTO {
   operatingHours?: OperatingHours;
   ageRange?: AgeRange;
   pricing?: PricingInfo;
+  phoneNumber?: string;
 }
 
 export interface Favorite {
