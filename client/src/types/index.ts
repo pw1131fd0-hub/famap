@@ -273,6 +273,57 @@ export interface LostChildProtocolInfo {
   lostChildProtocolNotes?: string;
 }
 
+export interface ParentRestAreaInfo {
+  hasRestAreas?: boolean;
+  hasComfortableSeating?: boolean;
+  hasShadeOrIndoor?: boolean;
+  hasFeedingAreas?: boolean;
+  hasRefreshmentAccess?: boolean;
+  hasChargingStations?: boolean;
+  restAreaQuantity?: number;
+  restAreaCleanlinessRating?: number;
+  restAreaNotes?: string;
+}
+
+export interface EventSpaceInfo {
+  hasEventSpaces?: boolean;
+  hasIndoorEventSpace?: boolean;
+  hasOutdoorEventSpace?: boolean;
+  birthdayPartyPackages?: boolean;
+  eventSpaceCapacity?: string;
+  maxPartyGroupSize?: number;
+  requiresAdvanceBooking?: boolean;
+  partyPackageIncludes?: string[];
+  partyPriceRange?: string;
+  eventNotes?: string;
+}
+
+export interface SpecialNeedsServicesInfo {
+  hasAutismFriendlyHours?: boolean;
+  sensoryFriendlyEnvironment?: boolean;
+  quietZonesAvailable?: boolean;
+  staffTrainedInSpecialNeeds?: boolean;
+  wheelchairAccessibilityBeyondBasic?: boolean;
+  visuallyImpairedSupport?: boolean;
+  hearingImpairedSupport?: boolean;
+  developmentalDelayServices?: boolean;
+  specialNeedsSchedule?: string;
+  specialNeedsNotes?: string;
+}
+
+export interface FirstAidAndMedicalInfo {
+  hasAED?: boolean;
+  aedLocation?: string;
+  hasFirstAidKit?: boolean;
+  hasStaffFirstAidTraining?: boolean;
+  hasMedicalStaff?: boolean;
+  nearbyHospital?: string;
+  hospitalDistance?: number;
+  emergencyContactNumbers?: string[];
+  incidentResponseCapability?: 'comprehensive' | 'standard' | 'basic';
+  medicalNotes?: string;
+}
+
 export interface Location {
   id: string;
   name: {
@@ -327,6 +378,10 @@ export interface Location {
   highChair?: HighChairInfo;
   ageSpecificBathroom?: AgeSpecificBathroomInfo;
   lostChildProtocol?: LostChildProtocolInfo;
+  parentRestArea?: ParentRestAreaInfo;
+  eventSpace?: EventSpaceInfo;
+  specialNeeds?: SpecialNeedsServicesInfo;
+  medicalServices?: FirstAidAndMedicalInfo;
 }
 
 export interface Review {
@@ -386,10 +441,17 @@ export interface LocationCreateDTO {
   reservedTimes?: ReservedTimesInfo;
   nursingRoom?: NursingRoomDetails;
   petPolicy?: PetPolicy;
+  climateComfort?: ClimateComfortInfo;
+  sanitationProtocols?: SanitationProtocolsInfo;
+  staffLanguage?: StaffLanguageInfo;
   waterSafety?: WaterSafetyInfo;
   highChair?: HighChairInfo;
   ageSpecificBathroom?: AgeSpecificBathroomInfo;
   lostChildProtocol?: LostChildProtocolInfo;
+  parentRestArea?: ParentRestAreaInfo;
+  eventSpace?: EventSpaceInfo;
+  specialNeeds?: SpecialNeedsServicesInfo;
+  medicalServices?: FirstAidAndMedicalInfo;
 }
 
 export interface Favorite {

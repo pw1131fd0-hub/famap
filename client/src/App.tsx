@@ -1284,6 +1284,86 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.parentRestArea && (
+                  <div className="location-section" style={{ borderTop: '2px solid #f9a825', paddingTop: '12px', marginTop: '12px' }}>
+                    <h3>👪 {language === 'zh' ? '家長休息區' : 'Parent Rest Area'}</h3>
+                    {selectedLocation.parentRestArea.hasRestAreas && (
+                      <p>✅ {language === 'zh' ? '有舒適休息區' : 'Comfortable Rest Areas Available'}</p>
+                    )}
+                    {selectedLocation.parentRestArea.restAreaQuantity && (
+                      <p><strong>{language === 'zh' ? '休息區數量' : 'Number of Rest Areas'}</strong>: {selectedLocation.parentRestArea.restAreaQuantity}</p>
+                    )}
+                    {selectedLocation.parentRestArea.restAreaCleanlinessRating && (
+                      <p><strong>{language === 'zh' ? '清潔度評分' : 'Cleanliness Rating'}</strong>: ⭐ {selectedLocation.parentRestArea.restAreaCleanlinessRating}/5</p>
+                    )}
+                    {selectedLocation.parentRestArea.restAreaNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.parentRestArea.restAreaNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.eventSpace && (
+                  <div className="location-section" style={{ borderTop: '2px solid #ec4899', paddingTop: '12px', marginTop: '12px' }}>
+                    <h3>🎉 {language === 'zh' ? '派對與活動空間' : 'Event & Party Spaces'}</h3>
+                    {selectedLocation.eventSpace.hasEventSpaces && (
+                      <p>✅ {language === 'zh' ? '有派對空間' : 'Event Spaces Available'}</p>
+                    )}
+                    {selectedLocation.eventSpace.birthdayPartyPackages && (
+                      <p>✅ {language === 'zh' ? '提供生日派對套餐' : 'Birthday Party Packages Available'}</p>
+                    )}
+                    {selectedLocation.eventSpace.eventSpaceCapacity && (
+                      <p><strong>{language === 'zh' ? '容納人數' : 'Capacity'}</strong>: {selectedLocation.eventSpace.eventSpaceCapacity}</p>
+                    )}
+                    {selectedLocation.eventSpace.partyPriceRange && (
+                      <p><strong>{language === 'zh' ? '派對價格' : 'Party Price Range'}</strong>: {selectedLocation.eventSpace.partyPriceRange}</p>
+                    )}
+                    {selectedLocation.eventSpace.eventNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.eventSpace.eventNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.specialNeeds && (
+                  <div className="location-section" style={{ borderTop: '2px solid #8b5cf6', paddingTop: '12px', marginTop: '12px' }}>
+                    <h3>🤝 {language === 'zh' ? '特殊需求服務' : 'Special Needs Services'}</h3>
+                    {selectedLocation.specialNeeds.hasAutismFriendlyHours && (
+                      <p>✅ {language === 'zh' ? '有自閉症友善時段' : 'Autism-Friendly Hours Available'}</p>
+                    )}
+                    {selectedLocation.specialNeeds.sensoryFriendlyEnvironment && (
+                      <p>✅ {language === 'zh' ? '感官友善環境' : 'Sensory-Friendly Environment'}</p>
+                    )}
+                    {selectedLocation.specialNeeds.quietZonesAvailable && (
+                      <p>✅ {language === 'zh' ? '有安靜區域' : 'Quiet Zones Available'}</p>
+                    )}
+                    {selectedLocation.specialNeeds.specialNeedsSchedule && (
+                      <p><strong>{language === 'zh' ? '特殊時段' : 'Special Schedule'}</strong>: {selectedLocation.specialNeeds.specialNeedsSchedule}</p>
+                    )}
+                    {selectedLocation.specialNeeds.specialNeedsNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.specialNeeds.specialNeedsNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.medicalServices && (
+                  <div className="location-section" style={{ borderTop: '2px solid #ef4444', paddingTop: '12px', marginTop: '12px' }}>
+                    <h3>🏥 {language === 'zh' ? '醫療與急救服務' : 'Medical & First Aid Services'}</h3>
+                    {selectedLocation.medicalServices.hasAED && (
+                      <p>✅ {language === 'zh' ? '有AED自動除顫器' : 'AED Available'}</p>
+                    )}
+                    {selectedLocation.medicalServices.aedLocation && (
+                      <p><strong>{language === 'zh' ? 'AED位置' : 'AED Location'}</strong>: {selectedLocation.medicalServices.aedLocation}</p>
+                    )}
+                    {selectedLocation.medicalServices.hasFirstAidKit && (
+                      <p>✅ {language === 'zh' ? '有急救箱' : 'First Aid Kit Available'}</p>
+                    )}
+                    {selectedLocation.medicalServices.hasMedicalStaff && (
+                      <p>✅ {language === 'zh' ? '有醫療人員駐守' : 'Medical Staff On-Site'}</p>
+                    )}
+                    {selectedLocation.medicalServices.nearbyHospital && (
+                      <p><strong>{language === 'zh' ? '最近醫院' : 'Nearby Hospital'}</strong>: {selectedLocation.medicalServices.nearbyHospital} ({selectedLocation.medicalServices.hospitalDistance}m)</p>
+                    )}
+                    {selectedLocation.medicalServices.medicalNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.medicalServices.medicalNotes}</p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>

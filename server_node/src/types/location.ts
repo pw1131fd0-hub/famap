@@ -273,6 +273,57 @@ export interface LostChildProtocolInfo {
   lostChildProtocolNotes?: string; // e.g., "Clear lost child protocol, staff trained, ID wristbands available, emergency PA system, meeting point near entrance"
 }
 
+export interface ParentRestAreaInfo {
+  hasRestAreas?: boolean; // Dedicated seating and rest areas for parents
+  hasComfortableSeating?: boolean; // Chairs, benches, couches for sitting
+  hasShadeOrIndoor?: boolean; // Protected rest areas
+  hasFeedingAreas?: boolean; // Designated nursing/feeding zones
+  hasRefreshmentAccess?: boolean; // Nearby water, refreshments
+  hasChargingStations?: boolean; // Phone/device charging available
+  restAreaQuantity?: number; // Number of rest areas
+  restAreaCleanlinessRating?: number; // 1-5 stars
+  restAreaNotes?: string; // e.g., "Multiple rest areas with comfortable seating, charging stations, water access, very clean"
+}
+
+export interface EventSpaceInfo {
+  hasEventSpaces?: boolean; // Party/event venues available
+  hasIndoorEventSpace?: boolean; // Indoor party areas
+  hasOutdoorEventSpace?: boolean; // Outdoor party areas
+  birthdayPartyPackages?: boolean; // Special birthday party offerings
+  eventSpaceCapacity?: string; // e.g., "30-100 people"
+  maxPartyGroupSize?: number; // Maximum group size for events
+  requiresAdvanceBooking?: boolean; // Booking required for events
+  partyPackageIncludes?: string[]; // e.g., ["catering", "decorations", "entertainment", "cleaning"]
+  partyPriceRange?: string; // e.g., "NT$2000-5000"
+  eventNotes?: string; // e.g., "Birthday packages include cake table, decorations, and staff support; min 20 people required"
+}
+
+export interface SpecialNeedsServicesInfo {
+  hasAutismFriendlyHours?: boolean; // Special quiet hours for autistic children
+  sensoryFriendlyEnvironment?: boolean; // Designed with sensory sensitivities in mind
+  quietZonesAvailable?: boolean; // Low-stimulus areas for overwhelmed children
+  staffTrainedInSpecialNeeds?: boolean; // Staff trained for special needs support
+  wheelchairAccessibilityBeyondBasic?: boolean; // Full venue wheelchair accessibility
+  visuallyImpairedSupport?: boolean; // Audio descriptions, high-contrast signage
+  hearingImpairedSupport?: boolean; // Visual alerts, sign language staff available
+  developmentalDelayServices?: boolean; // Support for children with developmental delays
+  specialNeedsSchedule?: string; // e.g., "Autism-friendly hours: Saturdays 9-11am, Wednesdays 6-7pm"
+  specialNeedsNotes?: string; // e.g., "Quiet sensory rooms available, trained staff, low-stimulus areas, visual schedules posted"
+}
+
+export interface FirstAidAndMedicalInfo {
+  hasAED?: boolean; // Automated External Defibrillator available
+  aedLocation?: string; // Where AED is located
+  hasFirstAidKit?: boolean; // Basic first aid supplies available
+  hasStaffFirstAidTraining?: boolean; // Staff trained in first aid
+  hasMedicalStaff?: boolean; // Doctor or nurse on-site or available
+  nearbyHospital?: string; // Nearest hospital name and distance
+  hospitalDistance?: number; // In meters or km
+  emergencyContactNumbers?: string[]; // Posted emergency numbers
+  incidentResponseCapability?: 'comprehensive' | 'standard' | 'basic'; // How well equipped for emergencies
+  medicalNotes?: string; // e.g., "AED on entrance wall, first aid trained staff, Taipei Veterans General Hospital 2km away, emergency call system on-site"
+}
+
 export interface Location {
   id: string;
   name: {
@@ -327,6 +378,10 @@ export interface Location {
   highChair?: HighChairInfo;
   ageSpecificBathroom?: AgeSpecificBathroomInfo;
   lostChildProtocol?: LostChildProtocolInfo;
+  parentRestArea?: ParentRestAreaInfo;
+  eventSpace?: EventSpaceInfo;
+  specialNeeds?: SpecialNeedsServicesInfo;
+  medicalServices?: FirstAidAndMedicalInfo;
 }
 
 export interface SearchParams {

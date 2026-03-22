@@ -170,6 +170,35 @@ export let mockLocations: Location[] = [
       meetingPointDesignated: true,
       staffTrainingLevel: 'basic',
       lostChildProtocolNotes: '公園有遺失兒童處理程序，主要入口處設有明確集合點。工作人員具備基本訓練。'
+    },
+    parentRestArea: {
+      hasRestAreas: true,
+      hasComfortableSeating: true,
+      hasShadeOrIndoor: true,
+      restAreaQuantity: 8,
+      restAreaCleanlinessRating: 4.5,
+      restAreaNotes: '公園內有多個休息區，備有涼亭和長椅。提供飲水台和簡單飲食區。'
+    },
+    eventSpace: {
+      hasEventSpaces: false,
+      eventNotes: '戶外公園，無專門派對空間。可申請使用指定區域辦活動。'
+    },
+    specialNeeds: {
+      hasAutismFriendlyHours: false,
+      sensoryFriendlyEnvironment: false,
+      quietZonesAvailable: true,
+      wheelchairAccessibilityBeyondBasic: true,
+      specialNeedsNotes: '無特定友善時段。園內寬敞，無障礙通道完整。較安靜的區域適合感官敏感兒童。'
+    },
+    medicalServices: {
+      hasAED: false,
+      hasFirstAidKit: true,
+      hasStaffFirstAidTraining: false,
+      hasMedicalStaff: false,
+      nearbyHospital: '台大醫院',
+      hospitalDistance: 1500,
+      incidentResponseCapability: 'basic',
+      medicalNotes: '公園內備有基礎急救箱。最近醫院為台大醫院。'
     }
   },
   {
@@ -354,6 +383,47 @@ export let mockLocations: Location[] = [
       meetingPointDesignated: true,
       staffTrainingLevel: 'comprehensive',
       lostChildProtocolNotes: '完善的遺失兒童處理程序，提供身份手環識別系統，廣播尋人系統，多個集合點。工作人員經過全面訓練。'
+    },
+    parentRestArea: {
+      hasRestAreas: true,
+      hasComfortableSeating: true,
+      hasShadeOrIndoor: true,
+      hasFeedingAreas: true,
+      hasRefreshmentAccess: true,
+      restAreaQuantity: 5,
+      restAreaCleanlinessRating: 4.9,
+      restAreaNotes: '多個舒適休息區，配備長椅沙發。設有親子餐飲區和哺乳室附近的安靜區域。'
+    },
+    eventSpace: {
+      hasEventSpaces: true,
+      hasIndoorEventSpace: true,
+      birthdayPartyPackages: true,
+      eventSpaceCapacity: '20-80人',
+      maxPartyGroupSize: 80,
+      requiresAdvanceBooking: true,
+      partyPackageIncludes: ['租賃場地', '教育表演', '點心飲料'],
+      partyPriceRange: 'NT$3000-8000',
+      eventNotes: '室內派對空間可容納20-80人，包含主題教育表演和飲料。需提前預約。'
+    },
+    specialNeeds: {
+      hasAutismFriendlyHours: false,
+      sensoryFriendlyEnvironment: false,
+      quietZonesAvailable: true,
+      staffTrainedInSpecialNeeds: false,
+      wheelchairAccessibilityBeyondBasic: true,
+      specialNeedsNotes: '無專門友善時段。展覽區內無障礙設施完善。某些展區較擁擠，可能不適合感官敏感兒童。'
+    },
+    medicalServices: {
+      hasAED: true,
+      aedLocation: '主要入口和3F展覽區',
+      hasFirstAidKit: true,
+      hasStaffFirstAidTraining: true,
+      hasMedicalStaff: false,
+      nearbyHospital: '台大醫院',
+      hospitalDistance: 800,
+      emergencyContactNumbers: ['02-2382-2699'],
+      incidentResponseCapability: 'standard',
+      medicalNotes: '館內設有AED和急救室。工作人員受過培訓。緊急聯絡電話貼於館內各處。'
     }
   },
   {
@@ -524,6 +594,41 @@ export let mockLocations: Location[] = [
       meetingPointDesignated: true,
       staffTrainingLevel: 'standard',
       lostChildProtocolNotes: '博物館備有遺失兒童處理程序，設有多個明確集合點。工作人員經過標準訓練。'
+    },
+    parentRestArea: {
+      hasRestAreas: true,
+      hasComfortableSeating: true,
+      hasShadeOrIndoor: true,
+      hasFeedingAreas: true,
+      hasChargingStations: true,
+      restAreaQuantity: 6,
+      restAreaCleanlinessRating: 4.8,
+      restAreaNotes: '多個舒適休息區配備沙發椅。設有充電站供家長使用手機。主要展廳外設有親子餐飲區。'
+    },
+    eventSpace: {
+      hasEventSpaces: false,
+      eventNotes: '博物館內無派對空間。可詢問館方特殊活動租借。'
+    },
+    specialNeeds: {
+      hasAutismFriendlyHours: false,
+      sensoryFriendlyEnvironment: false,
+      quietZonesAvailable: true,
+      staffTrainedInSpecialNeeds: false,
+      wheelchairAccessibilityBeyondBasic: true,
+      visuallyImpairedSupport: true,
+      specialNeedsNotes: '無特殊友善時段。無障礙設施完善。特定展區配備視覺障礙者觸覺展示。安靜學習區適合感官敏感兒童。'
+    },
+    medicalServices: {
+      hasAED: true,
+      aedLocation: '一樓大廳和二樓休息區',
+      hasFirstAidKit: true,
+      hasStaffFirstAidTraining: true,
+      hasMedicalStaff: false,
+      nearbyHospital: '台大醫院',
+      hospitalDistance: 600,
+      emergencyContactNumbers: ['02-2382-2699', '119'],
+      incidentResponseCapability: 'standard',
+      medicalNotes: '館內設有AED和完整急救設備。工作人員受過急救訓練。'
     }
   },
   {
@@ -696,6 +801,49 @@ export let mockLocations: Location[] = [
       staffIdentificationSystem: true,
       staffTrainingLevel: 'basic',
       lostChildProtocolNotes: '餐廳備有基本遺失兒童處理程序。工作人員具備基礎安全訓練。'
+    },
+    parentRestArea: {
+      hasRestAreas: true,
+      hasComfortableSeating: true,
+      hasShadeOrIndoor: true,
+      hasFeedingAreas: true,
+      hasRefreshmentAccess: true,
+      hasChargingStations: true,
+      restAreaQuantity: 4,
+      restAreaCleanlinessRating: 4.9,
+      restAreaNotes: '親子餐廳內有多個舒適用餐區和休息沙發。設有充電站和飲用水。'
+    },
+    eventSpace: {
+      hasEventSpaces: true,
+      hasIndoorEventSpace: true,
+      birthdayPartyPackages: true,
+      eventSpaceCapacity: '15-40人',
+      maxPartyGroupSize: 40,
+      requiresAdvanceBooking: true,
+      partyPackageIncludes: ['遊戲區場地', '簡餐', '基本裝飾'],
+      partyPriceRange: 'NT$1800-3500',
+      eventNotes: '提供派對場地，含簡餐和遊戲區使用。需提前7日預約。'
+    },
+    specialNeeds: {
+      hasAutismFriendlyHours: true,
+      sensoryFriendlyEnvironment: true,
+      quietZonesAvailable: true,
+      staffTrainedInSpecialNeeds: true,
+      wheelchairAccessibilityBeyondBasic: true,
+      specialNeedsSchedule: '安靜時段：週三下午2-4點',
+      specialNeedsNotes: '親子餐廳主動設置安靜時段。遊戲區有感官友善區域。工作人員對特殊需求兒童友善。'
+    },
+    medicalServices: {
+      hasAED: true,
+      aedLocation: '入口附近和員工休息室',
+      hasFirstAidKit: true,
+      hasStaffFirstAidTraining: true,
+      hasMedicalStaff: false,
+      nearbyHospital: '新光醫院',
+      hospitalDistance: 1200,
+      emergencyContactNumbers: ['02-5555-XXXX', '119'],
+      incidentResponseCapability: 'standard',
+      medicalNotes: '設有AED和完整急救箱。工作人員受過CPR訓練。'
     }
   },
   {
@@ -870,6 +1018,39 @@ export let mockLocations: Location[] = [
       meetingPointDesignated: true,
       staffTrainingLevel: 'comprehensive',
       lostChildProtocolNotes: '親子中心備有完善遺失兒童處理程序，設有多個明確集合點。工作人員經過全面訓練。'
+    },
+    parentRestArea: {
+      hasRestAreas: true,
+      hasComfortableSeating: true,
+      hasShadeOrIndoor: true,
+      hasFeedingAreas: true,
+      restAreaQuantity: 3,
+      restAreaCleanlinessRating: 4.6,
+      restAreaNotes: '親子中心有舒適休息區，備有沙發和飲水設施。'
+    },
+    eventSpace: {
+      hasEventSpaces: false,
+      eventNotes: '親子中心內無專門派對空間。體育中心另有會議室可租借。'
+    },
+    specialNeeds: {
+      hasAutismFriendlyHours: false,
+      sensoryFriendlyEnvironment: false,
+      quietZonesAvailable: true,
+      staffTrainedInSpecialNeeds: false,
+      wheelchairAccessibilityBeyondBasic: true,
+      specialNeedsNotes: '無特定友善時段。無障礙設施完善。游泳池有固定式遊客用斜坡進出。'
+    },
+    medicalServices: {
+      hasAED: true,
+      aedLocation: '大廳和游泳池畔',
+      hasFirstAidKit: true,
+      hasStaffFirstAidTraining: true,
+      hasMedicalStaff: false,
+      nearbyHospital: '北慈醫院',
+      hospitalDistance: 1500,
+      emergencyContactNumbers: ['02-XXXX-XXXX', '119'],
+      incidentResponseCapability: 'standard',
+      medicalNotes: '運動中心備有AED和急救站。救生員和工作人員均受過訓練。'
     }
   },
   {
@@ -1040,6 +1221,38 @@ export let mockLocations: Location[] = [
       meetingPointDesignated: true,
       staffTrainingLevel: 'standard',
       lostChildProtocolNotes: '運動中心備有標準遺失兒童處理程序。工作人員經過訓練，備有緊急程序。'
+    },
+    parentRestArea: {
+      hasRestAreas: true,
+      hasComfortableSeating: true,
+      hasShadeOrIndoor: false,
+      hasFeedingAreas: true,
+      restAreaQuantity: 5,
+      restAreaCleanlinessRating: 4.4,
+      restAreaNotes: '運動中心有多個戶外休息區，部分有遮陽。設有飲水和簡餐區。'
+    },
+    eventSpace: {
+      hasEventSpaces: false,
+      eventNotes: '運動中心內無派對空間。可接洽管理單位特殊活動申請。'
+    },
+    specialNeeds: {
+      hasAutismFriendlyHours: false,
+      sensoryFriendlyEnvironment: false,
+      quietZonesAvailable: true,
+      wheelchairAccessibilityBeyondBasic: true,
+      specialNeedsNotes: '無特定友善時段。無障礙設施完善。安靜區域適合敏感兒童使用。'
+    },
+    medicalServices: {
+      hasAED: true,
+      aedLocation: '入口大廳',
+      hasFirstAidKit: true,
+      hasStaffFirstAidTraining: true,
+      hasMedicalStaff: false,
+      nearbyHospital: '恩主公醫院',
+      hospitalDistance: 1800,
+      emergencyContactNumbers: ['02-XXXX-XXXX', '119'],
+      incidentResponseCapability: 'standard',
+      medicalNotes: '運動設施備有AED和救急箱。工作人員均受過基本訓練。'
     }
   },
   {
@@ -1213,6 +1426,47 @@ export let mockLocations: Location[] = [
       meetingPointDesignated: true,
       staffTrainingLevel: 'comprehensive',
       lostChildProtocolNotes: '水上樂園備有完善遺失兒童處理程序。提供身份手環系統，多個集合點，廣播系統。工作人員經過全面訓練。'
+    },
+    parentRestArea: {
+      hasRestAreas: true,
+      hasComfortableSeating: true,
+      hasShadeOrIndoor: true,
+      hasFeedingAreas: true,
+      hasRefreshmentAccess: true,
+      restAreaQuantity: 8,
+      restAreaCleanlinessRating: 4.6,
+      restAreaNotes: '水上樂園有多個遮陽休息區，備有遮陽傘和涼亭。食堂和餐飲區提供飲食。'
+    },
+    eventSpace: {
+      hasEventSpaces: true,
+      hasIndoorEventSpace: false,
+      hasOutdoorEventSpace: true,
+      birthdayPartyPackages: true,
+      eventSpaceCapacity: '50-200人',
+      maxPartyGroupSize: 200,
+      requiresAdvanceBooking: true,
+      partyPackageIncludes: ['樂園入場', '專屬派對區域', '飲料小食', '救生員管理'],
+      partyPriceRange: 'NT$5000-15000',
+      eventNotes: '水上樂園提供派對包廂，含園區入場和飲食。大型派對需提前預約。'
+    },
+    specialNeeds: {
+      hasAutismFriendlyHours: false,
+      sensoryFriendlyEnvironment: false,
+      quietZonesAvailable: true,
+      wheelchairAccessibilityBeyondBasic: true,
+      specialNeedsNotes: '無特定友善時段。無障礙設施完善。有安靜休息區適合感官敏感兒童。'
+    },
+    medicalServices: {
+      hasAED: true,
+      aedLocation: '入口、救生所、食堂區',
+      hasFirstAidKit: true,
+      hasStaffFirstAidTraining: true,
+      hasMedicalStaff: true,
+      nearbyHospital: '中山醫院',
+      hospitalDistance: 2000,
+      emergencyContactNumbers: ['02-XXXX-XXXX', '119'],
+      incidentResponseCapability: 'comprehensive',
+      medicalNotes: '水上樂園設有完整醫療站，配備AED和急救設備。駐場護士提供基礎醫療。'
     }
   },
 ];
