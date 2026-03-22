@@ -17,7 +17,7 @@ export let mockLocations: Location[] = [
   {
     id: '1',
     name: { zh: '大安森林公園', en: 'Daan Forest Park' },
-    description: { zh: '台北市中心最大的森林公園，有大型兒童遊戲場和沙坑。', en: 'The largest forest park in Taipei with a large playground and sandbox.' },
+    description: { zh: '台北市中心最大的森林公園，有大型兒童遊戲場、沙坑、草坪野餐區。適合親子散步、騎自行車、野餐。空氣清新，樹蔭充足，特別適合炎熱天氣。免費開放，全天24小時。', en: 'The largest forest park in central Taipei with a large playground, sandbox, picnic areas on lawns. Perfect for family walks, cycling, and picnics. Fresh air, abundant shade, especially suitable for hot weather. Free admission, open 24 hours.' },
     category: 'park',
     coordinates: { lat: 25.0312, lng: 121.5361 },
     address: { zh: '台北市大安區新生南路二段1號', en: 'No. 1, Sec. 2, Xinsheng S. Rd., Daan Dist., Taipei' },
@@ -629,7 +629,7 @@ export let mockLocations: Location[] = [
   {
     id: '2',
     name: { zh: '台北市兒童新樂園', en: 'Taipei Children\'s Amusement Park' },
-    description: { zh: '專為兒童設計的主題樂園，設施豐富。', en: 'A theme park designed specifically for children with many attractions.' },
+    description: { zh: '台北最大的兒童主題樂園，擁有超過20項遊樂設施，包括雲霄飛車、旋轉木馬、水上遊樂設施。設有親子時段和感官友善時間。專業工作人員監管，安全設施完善。室內冷氣區、餐飲區、哺乳室、尿布台齊全。', en: 'Taipei\'s largest children\'s theme park with over 20 attractions including roller coasters, carousels, water rides. Offers parent-child time slots and sensory-friendly hours. Professional staff supervision with excellent safety facilities. Air-conditioned indoor areas, dining options, nursing rooms, and changing tables.' },
     category: 'park',
     coordinates: { lat: 25.0970, lng: 121.5147 },
     address: { zh: '台北市士林區承德路五段55號', en: 'No. 55, Sec. 5, Chengde Rd., Shilin Dist., Taipei' },
@@ -1391,7 +1391,7 @@ export let mockLocations: Location[] = [
   {
     id: '3',
     name: { zh: '國立臺灣博物館', en: 'National Taiwan Museum' },
-    description: { zh: '日治時期建築，有適合兒童的自然生態展示區。', en: 'Japanese colonial era building with natural ecology exhibits for children.' },
+    description: { zh: '臺灣歷史最悠久的博物館，建築物本身就是歷史古蹟。展覽涵蓋自然生態、台灣古生物、原住民文化等，設有互動式兒童展區和工作坊。室內冷氣舒適，適合雨天或炎熱天氣。週一休館，建議避開假期人潮。', en: 'Taiwan\'s oldest museum housed in a historic colonial-era building. Exhibits cover natural ecology, ancient fossils, and indigenous culture with interactive children\'s zones and workshops. Air-conditioned comfort perfect for rainy or hot days. Closed Mondays; avoid peak holiday hours.' },
     category: 'attraction',
     coordinates: { lat: 25.0428, lng: 121.5148 },
     address: { zh: '台北市中正區襄陽路2號', en: 'No. 2, Xiangyang Rd., Zhongzheng Dist., Taipei' },
@@ -2042,7 +2042,7 @@ export let mockLocations: Location[] = [
   {
     id: '4',
     name: { zh: '親子餐廳範例', en: 'Kids Friendly Restaurant' },
-    description: { zh: '提供室內遊戲室和兒童餐。', en: 'Offers indoor playground and kids menu.' },
+    description: { zh: '台北信義區親子餐廳，提供寬敞室內遊戲室、兒童友善餐點、高椅、尿布台。家長可在舒適區域用餐，孩子在安全遊戲區活動。適合1-8歲，特別適合下雨天。寵物不可進入。', en: 'Parent-friendly restaurant in Taipei\'s Xinyi District with spacious indoor play area, kid-friendly meals, high chairs, and changing tables. Parents dine comfortably while children play safely. Perfect for ages 1-8, especially on rainy days. No pets allowed.' },
     category: 'restaurant',
     coordinates: { lat: 25.0330, lng: 121.5654 },
     address: { zh: '台北市信義區', en: 'Xinyi Dist., Taipei' },
@@ -2689,7 +2689,7 @@ export let mockLocations: Location[] = [
   {
     id: '5',
     name: { zh: '南港軟體園區親子中心', en: 'Nangang Software Park Family Center' },
-    description: { zh: '全新室內親子設施，四季恆溫冷氣。', en: 'Modern indoor family facility with year-round air conditioning.' },
+    description: { zh: '南港新興親子天堂，完全室內冷氣環境適合全年四季。設有多層樓遊戲區、爬網區、滑梯、球池等。MRT站直達，免費停車。特別適合炎夏或雨天，適合0-10歲。哺乳室、尿布台完善。', en: 'Nangang\'s newest family paradise with fully air-conditioned indoor spaces for year-round comfort. Multi-level play areas, climbing nets, slides, and ball pits. Direct MRT access, free parking. Perfect for scorching summers or rainy days, ages 0-10. Excellent nursing rooms and changing facilities.' },
     category: 'park',
     coordinates: { lat: 25.0556, lng: 121.6089 },
     address: { zh: '台北市南港區經貿二路191號', en: 'No. 191, Jingmao 2nd Rd., Nangang Dist., Taipei' },
@@ -3350,7 +3350,7 @@ export let mockLocations: Location[] = [
   {
     id: '6',
     name: { zh: '內湖運動中心游泳池', en: 'Neihu Sports Center Swimming Pool' },
-    description: { zh: '專業兒童游泳課程和暖水池。', en: 'Professional kids swimming lessons and heated pools.' },
+    description: { zh: '台北內湖運動中心游泳設施齊全，有多個暖水池、兒童淺水池、專業游泳教練。提供兒童游泳課程，四季溫度控制。生活品質中心提供淋浴、更衣室、哺乳室。適合3-16歲學習游泳。免費停車，票價便宜。', en: 'Neihu Sports Center with comprehensive swimming facilities including heated pools, shallow children\'s pools, and professional coaches. Offers kids swimming lessons with year-round temperature control. Modern facilities with showers, changing rooms, nursing areas. Perfect for ages 3-16 to learn swimming. Free parking, affordable rates.' },
     category: 'park',
     coordinates: { lat: 25.0830, lng: 121.5917 },
     address: { zh: '台北市內湖區湖興路300號', en: 'No. 300, Huxing Rd., Neihu Dist., Taipei' },
@@ -4027,7 +4027,7 @@ export let mockLocations: Location[] = [
   {
     id: '7',
     name: { zh: '新北新店陽光休閒園區', en: 'Xindian Sunshine Leisure Park' },
-    description: { zh: '水上樂園和泳池，夏日消暑好去處。', en: 'Water park and swimming area, perfect for summer fun.' },
+    description: { zh: '新北新店人氣水上樂園，設有多個主題水上遊樂設施、兒童淺水池、滑水道、造浪池。夏日必去消暑景點。有大量遮陽區、樹蔭、涼亭。尿布台、哺乳室完善。免費停車。適合2-14歲全家出遊。', en: 'Popular water park in Xindian, New Taipei with themed water attractions, children\'s shallow pools, water slides, and wave pools. Summer must-visit for cooling off. Ample shaded areas, trees, pavilions. Well-equipped changing tables and nursing rooms. Free parking. Perfect for family outings with ages 2-14.' },
     category: 'park',
     coordinates: { lat: 24.9806, lng: 121.5433 },
     address: { zh: '新北市新店區中興路1號', en: 'No. 1, Zhongxing Rd., Xindian Dist., New Taipei' },

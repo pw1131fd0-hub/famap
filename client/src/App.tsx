@@ -44,33 +44,44 @@ const DAY_NAMES_ZH: Record<string, string> = {
 };
 
 // City data with coordinates and descriptions
-type CityKey = 'taipei' | 'new_taipei' | 'taoyuan';
+type CityKey = 'taipei' | 'new_taipei' | 'keelung' | 'taoyuan';
 
 interface City {
   key: CityKey;
   name: string;
   description: string;
   center: [number, number];
+  defaultZoom: number;
 }
 
 const CITIES: City[] = [
-  { 
-    key: 'taipei', 
-    name: '台北市', 
+  {
+    key: 'taipei',
+    name: '台北市',
     description: '首都核心，親子設施最密集',
-    center: [25.0330, 121.5654] 
+    center: [25.0330, 121.5654],
+    defaultZoom: 13
   },
-  { 
-    key: 'new_taipei', 
-    name: '新北市', 
+  {
+    key: 'new_taipei',
+    name: '新北市',
     description: '大台北生活圈，山水景點多',
-    center: [25.0169, 121.4628] 
+    center: [25.0169, 121.4628],
+    defaultZoom: 12
   },
-  { 
-    key: 'taoyuan', 
-    name: '桃園市', 
+  {
+    key: 'keelung',
+    name: '基隆市',
+    description: '北台灣門戶，山海親子景點',
+    center: [25.1276, 121.7440],
+    defaultZoom: 13
+  },
+  {
+    key: 'taoyuan',
+    name: '桃園市',
     description: '機場所在地，親子樂園豐富',
-    center: [24.9937, 121.3000] 
+    center: [24.9937, 121.3000],
+    defaultZoom: 12
   },
 ];
 
@@ -83,32 +94,41 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
-// Custom glowing marker icon
+// Custom glowing marker icon with category-specific symbols
 const createGlowingIcon = (category: string) => {
-  const colors: Record<string, string> = {
-    park: '#22c55e',
-    nursing_room: '#ec4899',
-    restaurant: '#f97316',
-    medical: '#ef4444',
-    attraction: '#8b5cf6',
-    other: '#6b7280',
+  const iconConfig: Record<string, { color: string; emoji: string; label: string }> = {
+    park: { color: '#22c55e', emoji: '🌳', label: 'Park' },
+    nursing_room: { color: '#ec4899', emoji: '👶', label: 'Nursing' },
+    restaurant: { color: '#f97316', emoji: '🍽️', label: 'Food' },
+    medical: { color: '#ef4444', emoji: '🏥', label: 'Medical' },
+    attraction: { color: '#8b5cf6', emoji: '🎪', label: 'Attraction' },
+    other: { color: '#6b7280', emoji: '📍', label: 'Location' },
   };
-  const color = colors[category] || colors.other;
-  
+
+  const config = iconConfig[category] || iconConfig.other;
+  const { color, emoji } = config;
+
   return L.divIcon({
     className: 'custom-marker',
     html: `<div style="
       background: ${color};
-      width: 24px;
-      height: 24px;
+      width: 32px;
+      height: 40px;
       border-radius: 50% 50% 50% 0;
       transform: rotate(-45deg);
       border: 3px solid white;
       box-shadow: 0 0 12px ${color}, 0 2px 8px rgba(0,0,0,0.3);
-    "></div>`,
-    iconSize: [24, 24],
-    iconAnchor: [12, 24],
-    popupAnchor: [0, -24],
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+    ">
+      <div style="transform: rotate(45deg);">${emoji}</div>
+    </div>`,
+    iconSize: [32, 40],
+    iconAnchor: [16, 40],
+    popupAnchor: [0, -40],
   });
 };
 
@@ -177,7 +197,7 @@ function MapEvents({ onPositionChange }: { onPositionChange: (pos: [number, numb
   return null;
 }
 
-function MapUpdater({ center }: { center: [number, number] }) {
+function MapUpdater({ center, zoom }: { center: [number, number]; zoom?: number }) {
   const map = useMap();
   useEffect(() => {
     const currentCenter = map.getCenter();
@@ -187,9 +207,10 @@ function MapUpdater({ center }: { center: [number, number] }) {
     );
     // Only set view if the change is significant (e.g., more than 0.0001 degrees)
     if (distance > 0.0001) {
-      map.setView(center, map.getZoom());
+      const newZoom = zoom !== undefined ? zoom : map.getZoom();
+      map.setView(center, newZoom, { animate: true, duration: 0.5 });
     }
-  }, [center, map]);
+  }, [center, zoom, map]);
   return null;
 }
 
@@ -198,6 +219,7 @@ function App() {
   const [selectedCity, setSelectedCity] = useState<CityKey>('taipei');
   const [cityDropdownOpen, setCityDropdownOpen] = useState(false);
   const [position, setPosition] = useState<[number, number]>(CITIES[0].center); // Taipei
+  const [zoom, setZoom] = useState<number>(CITIES[0].defaultZoom);
   const [locations, setLocations] = useState<Location[]>([]);
   const [favorites, setFavorites] = useState<Location[]>([]);
   const [showFavorites, setShowFavorites] = useState(false);
@@ -287,6 +309,7 @@ function App() {
     if (city) {
       setSelectedCity(cityKey);
       setPosition(city.center);
+      setZoom(city.defaultZoom);
       setCityDropdownOpen(false);
     }
   };
@@ -2587,12 +2610,12 @@ function App() {
         </aside>
 
         <main className="map-view">
-          <MapContainer center={position} zoom={13} scrollWheelZoom={true} style={{ height: '100%', width: '100%' }}>
+          <MapContainer center={position} zoom={zoom} scrollWheelZoom={true} style={{ height: '100%', width: '100%' }}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <MapUpdater center={position} />
+            <MapUpdater center={position} zoom={zoom} />
             <MapEvents onPositionChange={setPosition} />
             <MarkerClusterGroup chunkedLoading>
               {locations.map((loc) => (
