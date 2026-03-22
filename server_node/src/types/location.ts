@@ -468,6 +468,50 @@ export interface OnSiteDiningInfo {
   diningNotes?: string; // Complete dining information
 }
 
+export interface QueueWaitTimeInfo {
+  typicalWaitTimeMinutes?: number; // Typical wait time in minutes during normal hours
+  peakHourWaitTimeMinutes?: number; // Wait time during peak hours (weekends/holidays)
+  offPeakWaitTimeMinutes?: number; // Wait time during quiet periods
+  seasonalWaitTimeNote?: string; // e.g., "Winter vacations (Jan-Feb) very busy, summer weekends extremely crowded"
+  holidayWaitTimeMinutes?: number; // Expected wait during major holidays (CNY, summer break)
+  fastPassAvailable?: boolean; // Skip-the-line pass available?
+  fastPassPrice?: string; // Cost of fast pass
+  reservationSystemAvailable?: boolean; // Can you book a time slot in advance?
+  estimatedWaitNotes?: string; // e.g., "10-20 min typical, 1-2 hours on weekends, fast passes available NT$500"
+  peakDaysOfWeek?: string; // e.g., "Saturday/Sunday 2-6pm very busy"
+  quietTimesRecommendation?: string; // e.g., "Weekday mornings 9-11am, rainy days"
+  queueWaitTimeNotes?: string; // Complete wait time information
+}
+
+export interface InfantSpecificInfo {
+  suitableForNewborns?: boolean; // 0-3 months old
+  hasDarkQuietSpaces?: boolean; // For nursing/sleeping newborns (黑暗安靜空間)
+  temperatureControlledNursingAreas?: boolean; // Climate-controlled nursing spaces
+  hasChangeTableAvailability?: number; // Number of changing tables dedicated for infants
+  minimalLoudNoiseAreas?: boolean; // Quiet zones away from loud activities
+  infantCarriageSpaceAvailable?: boolean; // Can carry infant car seats/carriers inside?
+  hasInfantSpecificRestRooms?: boolean; // Dedicated quiet rooms for infant rest/sleep
+  recommendedVisitDurationForInfants?: string; // e.g., "Maximum 2 hours with infant under 3 months"
+  infantCaregiversAvailable?: boolean; // Staff trained in infant care?
+  mommyFrienlyEnvironment?: boolean; // Overall infant-friendly atmosphere
+  infantSpecificNotes?: string; // e.g., "Quiet nursing area with dimmed lights, changing tables available, minimal crowds before 10am recommended for infants"
+}
+
+export interface StorageLockerInfo {
+  hasLockers?: boolean; // Lockers or storage available
+  lockerQuantity?: number; // Number of lockers
+  lockerSize?: string; // e.g., "small", "medium", "large", or specific dimensions
+  lockerCost?: string; // Cost per use or rental period (e.g., "Free", "NT$20 for 4 hours")
+  coinOrCardRequired?: boolean; // Does locker require coin/card?
+  hasLargeStorage?: boolean; // Larger storage for strollers, bags (like coat check)
+  storageAttendantAvailable?: boolean; // Staff-attended storage area?
+  storageSecurity?: 'excellent' | 'good' | 'fair' | 'basic'; // Security rating for stored items
+  storageNotes?: string; // e.g., "Coin lockers (NT$20-50) throughout park, large bag storage at entrance, attended coat check available"
+  luggage?: boolean; // Can store suitcases?
+  storageHours?: string; // Hours available (may differ from venue hours)
+  lockerAccessibility?: boolean; // Accessible locker sizes available?
+}
+
 export interface Location {
   id: string;
   name: {
@@ -536,6 +580,9 @@ export interface Location {
   equipmentRental?: EquipmentRentalInfo;
   membership?: MembershipPassInfo;
   onSiteDining?: OnSiteDiningInfo;
+  queueWaitTime?: QueueWaitTimeInfo;
+  infantSpecific?: InfantSpecificInfo;
+  storageLocker?: StorageLockerInfo;
 }
 
 export interface SearchParams {

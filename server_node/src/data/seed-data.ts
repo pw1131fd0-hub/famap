@@ -295,6 +295,31 @@ export let mockLocations: Location[] = [
       foodPriceRange: 'NT$30-80',
       diningOptionsDescription: '有小食亭販售飲料和簡餐',
       diningNotes: '公園內僅有小食亭，建議自帶便當和飲水'
+    },
+    queueWaitTime: {
+      typicalWaitTimeMinutes: 0,
+      peakHourWaitTimeMinutes: 0,
+      offPeakWaitTimeMinutes: 0,
+      seasonalWaitTimeNote: '公園免費開放，無排隊問題',
+      estimatedWaitNotes: '無排隊，隨時可入場'
+    },
+    infantSpecific: {
+      suitableForNewborns: true,
+      hasDarkQuietSpaces: false,
+      temperatureControlledNursingAreas: false,
+      hasChangeTableAvailability: 5,
+      minimalLoudNoiseAreas: true,
+      infantCarriageSpaceAvailable: true,
+      hasInfantSpecificRestRooms: false,
+      recommendedVisitDurationForInfants: '2-3 小時',
+      infantCaregiversAvailable: false,
+      mommyFrienlyEnvironment: true,
+      infantSpecificNotes: '大樹遮蔭很適合新生兒，早上9-11點人少很安靜。有多個廁所有尿布台'
+    },
+    storageLocker: {
+      hasLockers: false,
+      hasLargeStorage: false,
+      storageNotes: '公園無置物櫃，建議自行攜帶或使用推車存放'
     }
   },
   {
@@ -642,6 +667,42 @@ export let mockLocations: Location[] = [
       diningSeatingDescription: '室內餐飲區可容納200人，提供高椅供嬰幼兒使用',
       diningHours: '09:00 - 20:00',
       diningNotes: '美食廣場價格中等，停留時間長建議於園內購餐。有溫奶器供訪客使用。'
+    },
+    queueWaitTime: {
+      typicalWaitTimeMinutes: 15,
+      peakHourWaitTimeMinutes: 45,
+      offPeakWaitTimeMinutes: 5,
+      seasonalWaitTimeNote: '寒假暑假尖峰時段排隊1-2小時，平日上午10-11點較空',
+      holidayWaitTimeMinutes: 120,
+      fastPassAvailable: true,
+      fastPassPrice: 'NT$600-800',
+      estimatedWaitNotes: '平日10-15分鐘，週末45分鐘，假期1-2小時。快速通關票可加快入場',
+      peakDaysOfWeek: '週末和假期下午人最多',
+      quietTimesRecommendation: '平日上午10-11點最空，下午3-4點人稍少'
+    },
+    infantSpecific: {
+      suitableForNewborns: false,
+      hasDarkQuietSpaces: true,
+      temperatureControlledNursingAreas: true,
+      hasChangeTableAvailability: 8,
+      minimalLoudNoiseAreas: true,
+      infantCarriageSpaceAvailable: true,
+      hasInfantSpecificRestRooms: true,
+      recommendedVisitDurationForInfants: '1-2 小時',
+      infantCaregiversAvailable: true,
+      mommyFrienlyEnvironment: true,
+      infantSpecificNotes: '有專門的哺乳室和安靜休息區很適合小寶寶，但建議避免尖峰時段以減少刺激'
+    },
+    storageLocker: {
+      hasLockers: true,
+      lockerQuantity: 100,
+      lockerSize: 'small, medium, large',
+      lockerCost: 'NT$20-50',
+      coinOrCardRequired: true,
+      hasLargeStorage: true,
+      storageAttendantAvailable: true,
+      storageSecurity: 'excellent',
+      storageNotes: '園區各處有投幣置物櫃（NT$20-50），大型行李可至服務台寄放，有專人看管'
     }
   },
   {
@@ -950,6 +1011,33 @@ export let mockLocations: Location[] = [
       diningSeatingDescription: '咖啡廳座位約30個，適合簡單用餐或歇息',
       diningHours: '09:00 - 17:00 (時間與博物館開放時間一致)',
       diningNotes: '咖啡廳飲食選擇有限，不建議作為主要用餐地點。建議自帶便食或到附近用餐。'
+    },
+    queueWaitTime: {
+      typicalWaitTimeMinutes: 10,
+      peakHourWaitTimeMinutes: 30,
+      offPeakWaitTimeMinutes: 3,
+      seasonalWaitTimeNote: '假期人較多，平日上午人少',
+      estimatedWaitNotes: '通常排隊10分鐘，假期週末30分鐘，平日上午3-5分鐘'
+    },
+    infantSpecific: {
+      suitableForNewborns: false,
+      hasDarkQuietSpaces: true,
+      temperatureControlledNursingAreas: true,
+      hasChangeTableAvailability: 4,
+      minimalLoudNoiseAreas: true,
+      infantCarriageSpaceAvailable: true,
+      hasInfantSpecificRestRooms: false,
+      recommendedVisitDurationForInfants: '1-1.5 小時',
+      infantCaregiversAvailable: false,
+      mommyFrienlyEnvironment: true,
+      infantSpecificNotes: '室內環境溫度恆定很適合小寶寶，但展示品較多，寶寶推車容易碰到展品，建議早上參訪人較少'
+    },
+    storageLocker: {
+      hasLockers: false,
+      hasLargeStorage: true,
+      storageAttendantAvailable: true,
+      storageSecurity: 'excellent',
+      storageNotes: '大型行李和推車可於入口寄放，有專人管理，免費'
     }
   },
   {
@@ -1272,6 +1360,33 @@ export let mockLocations: Location[] = [
       diningSeatingDescription: '寬敞用餐區可容納100人，高椅多張，適合家庭用餐',
       diningHours: '11:00 - 22:00',
       diningNotes: '餐點品質優良，特別適合家庭用餐。提供溫奶器和食物溫加服務。'
+    },
+    queueWaitTime: {
+      typicalWaitTimeMinutes: 20,
+      peakHourWaitTimeMinutes: 60,
+      offPeakWaitTimeMinutes: 5,
+      seasonalWaitTimeNote: '周末午餐和晚餐時段排隊1小時，平日下午2-4點較空',
+      estimatedWaitNotes: '平日午餐20分鐘，週末60分鐘，平日下午2-4點最快5分鐘',
+      peakDaysOfWeek: '週末12-1點和6-7點人最多',
+      quietTimesRecommendation: '平日下午2-4點，週末上午10-11點'
+    },
+    infantSpecific: {
+      suitableForNewborns: false,
+      hasDarkQuietSpaces: false,
+      temperatureControlledNursingAreas: true,
+      hasChangeTableAvailability: 3,
+      minimalLoudNoiseAreas: false,
+      infantCarriageSpaceAvailable: true,
+      hasInfantSpecificRestRooms: true,
+      recommendedVisitDurationForInfants: '1-1.5 小時',
+      infantCaregiversAvailable: true,
+      mommyFrienlyEnvironment: true,
+      infantSpecificNotes: '有哺乳室和高椅，室內隔音還可以，適合帶小寶寶用餐'
+    },
+    storageLocker: {
+      hasLockers: false,
+      hasLargeStorage: false,
+      storageNotes: '餐廳內無置物櫃，推車可靠牆放置'
     }
   },
   {
@@ -1585,6 +1700,36 @@ export let mockLocations: Location[] = [
       diningSeatingDescription: '咖啡廳座位區可容納50人，提供冷暖飲區',
       diningHours: '07:00 - 21:00',
       diningNotes: '設施簡單，建議自帶便當。課程結束後運動飲品選擇豐富。'
+    },
+    queueWaitTime: {
+      typicalWaitTimeMinutes: 5,
+      peakHourWaitTimeMinutes: 15,
+      offPeakWaitTimeMinutes: 0,
+      seasonalWaitTimeNote: '會員優先入場，非會員在尖峰時段等待15分鐘',
+      estimatedWaitNotes: '會員無需排隊，非會員平日5分鐘，週末15分鐘'
+    },
+    infantSpecific: {
+      suitableForNewborns: true,
+      hasDarkQuietSpaces: true,
+      temperatureControlledNursingAreas: true,
+      hasChangeTableAvailability: 6,
+      minimalLoudNoiseAreas: true,
+      infantCarriageSpaceAvailable: true,
+      hasInfantSpecificRestRooms: true,
+      recommendedVisitDurationForInfants: '2-3 小時',
+      infantCaregiversAvailable: true,
+      mommyFrienlyEnvironment: true,
+      infantSpecificNotes: '專為親子家庭設計，環境非常適合新生兒，有多個安靜休息區和哺乳室'
+    },
+    storageLocker: {
+      hasLockers: true,
+      lockerQuantity: 50,
+      lockerSize: 'medium, large',
+      lockerCost: '免費',
+      hasLargeStorage: true,
+      storageAttendantAvailable: false,
+      storageSecurity: 'good',
+      storageNotes: '免費置物櫃和行李寄放區'
     }
   },
   {
@@ -1890,6 +2035,38 @@ export let mockLocations: Location[] = [
       diningSeatingDescription: '簡單戶外座位區',
       diningHours: '06:00 - 21:00',
       diningNotes: '食物選擇有限。強烈建議自帶便當或到附近便利商店購買。'
+    },
+    queueWaitTime: {
+      typicalWaitTimeMinutes: 10,
+      peakHourWaitTimeMinutes: 40,
+      offPeakWaitTimeMinutes: 2,
+      seasonalWaitTimeNote: '夏季特別擁擠，下午時段尤其人多。平日早上開放後人最少',
+      holidayWaitTimeMinutes: 90,
+      estimatedWaitNotes: '平日早上2-5分鐘，下午40分鐘，夏天尖峰1-1.5小時'
+    },
+    infantSpecific: {
+      suitableForNewborns: false,
+      hasDarkQuietSpaces: false,
+      temperatureControlledNursingAreas: false,
+      hasChangeTableAvailability: 5,
+      minimalLoudNoiseAreas: false,
+      infantCarriageSpaceAvailable: true,
+      hasInfantSpecificRestRooms: false,
+      recommendedVisitDurationForInfants: '不建議新生兒',
+      infantCaregiversAvailable: false,
+      mommyFrienlyEnvironment: false,
+      infantSpecificNotes: '運動中心的游泳池太深不適合新生兒，建議1歲以上幼童方可入水'
+    },
+    storageLocker: {
+      hasLockers: true,
+      lockerQuantity: 200,
+      lockerSize: 'small',
+      lockerCost: 'NT$20',
+      coinOrCardRequired: true,
+      hasLargeStorage: true,
+      storageAttendantAvailable: true,
+      storageSecurity: 'excellent',
+      storageNotes: '投幣置物櫃NT$20，大型行李可於服務台寄放'
     }
   },
   {
@@ -2222,6 +2399,40 @@ export let mockLocations: Location[] = [
       diningSeatingDescription: '戶外用餐區遮陰良好，可容納500人',
       diningHours: '09:00 - 18:00 (跟隨樂園營運時間)',
       diningNotes: '水上樂園餐飲選擇豐富但價格偏高。建議自帶便當和飲水，另外購買冷飲補充電解質。'
+    },
+    queueWaitTime: {
+      typicalWaitTimeMinutes: 20,
+      peakHourWaitTimeMinutes: 90,
+      offPeakWaitTimeMinutes: 5,
+      seasonalWaitTimeNote: '夏季週末人爆滿，排隊1-2小時。非尖峰日期（雨天、平日）人很少',
+      holidayWaitTimeMinutes: 120,
+      fastPassAvailable: true,
+      fastPassPrice: 'NT$800-1000',
+      estimatedWaitNotes: '夏季週末排隊1-2小時，非假期平日5-10分鐘，快速通關票可跳過排隊'
+    },
+    infantSpecific: {
+      suitableForNewborns: false,
+      hasDarkQuietSpaces: false,
+      temperatureControlledNursingAreas: false,
+      hasChangeTableAvailability: 8,
+      minimalLoudNoiseAreas: false,
+      infantCarriageSpaceAvailable: true,
+      hasInfantSpecificRestRooms: true,
+      recommendedVisitDurationForInfants: '不建議新生兒',
+      infantCaregiversAvailable: false,
+      mommyFrienlyEnvironment: false,
+      infantSpecificNotes: '水樂園非常擁擠吵雜不適合新生兒。建議6個月以上且有游泳經驗的寶寶方可參加'
+    },
+    storageLocker: {
+      hasLockers: true,
+      lockerQuantity: 300,
+      lockerSize: 'small, medium',
+      lockerCost: 'NT$30-50',
+      coinOrCardRequired: true,
+      hasLargeStorage: false,
+      storageAttendantAvailable: false,
+      storageSecurity: 'good',
+      storageNotes: '投幣置物櫃分佈在各區，容量有限，尖峰時段可能不夠'
     }
   },
 ];

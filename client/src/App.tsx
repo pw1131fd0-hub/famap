@@ -1663,6 +1663,96 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.queueWaitTime && (
+                  <div className="location-detail-section">
+                    <h4>⏳ {language === 'zh' ? '排隊等待時間' : 'Queue Wait Time'}</h4>
+                    {selectedLocation.queueWaitTime.typicalWaitTimeMinutes !== undefined && (
+                      <p><strong>{language === 'zh' ? '一般等待' : 'Typical Wait'}</strong>: {selectedLocation.queueWaitTime.typicalWaitTimeMinutes} {language === 'zh' ? '分鐘' : 'mins'}</p>
+                    )}
+                    {selectedLocation.queueWaitTime.peakHourWaitTimeMinutes !== undefined && (
+                      <p><strong>{language === 'zh' ? '尖峰時段' : 'Peak Hours'}</strong>: {selectedLocation.queueWaitTime.peakHourWaitTimeMinutes} {language === 'zh' ? '分鐘' : 'mins'}</p>
+                    )}
+                    {selectedLocation.queueWaitTime.offPeakWaitTimeMinutes !== undefined && (
+                      <p><strong>{language === 'zh' ? '非尖峰' : 'Off-Peak'}</strong>: {selectedLocation.queueWaitTime.offPeakWaitTimeMinutes} {language === 'zh' ? '分鐘' : 'mins'}</p>
+                    )}
+                    {selectedLocation.queueWaitTime.holidayWaitTimeMinutes !== undefined && (
+                      <p><strong>{language === 'zh' ? '假日' : 'Holidays'}</strong>: {selectedLocation.queueWaitTime.holidayWaitTimeMinutes} {language === 'zh' ? '分鐘' : 'mins'}</p>
+                    )}
+                    {selectedLocation.queueWaitTime.fastPassAvailable && (
+                      <p>✓ {language === 'zh' ? '快速通關票可用' : 'Fast Pass Available'} {selectedLocation.queueWaitTime.fastPassPrice && `: ${selectedLocation.queueWaitTime.fastPassPrice}`}</p>
+                    )}
+                    {selectedLocation.queueWaitTime.reservationSystemAvailable && (
+                      <p>✓ {language === 'zh' ? '可預約時間' : 'Time Slots Available'}</p>
+                    )}
+                    {selectedLocation.queueWaitTime.quietTimesRecommendation && (
+                      <p><strong>{language === 'zh' ? '建議時段' : 'Best Times'}</strong>: {selectedLocation.queueWaitTime.quietTimesRecommendation}</p>
+                    )}
+                    {selectedLocation.queueWaitTime.queueWaitTimeNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.queueWaitTime.queueWaitTimeNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.infantSpecific && (
+                  <div className="location-detail-section">
+                    <h4>👶 {language === 'zh' ? '嬰兒友善' : 'Infant Friendly'}</h4>
+                    {selectedLocation.infantSpecific.suitableForNewborns && (
+                      <p>✓ {language === 'zh' ? '適合新生兒' : 'Suitable for Newborns'}</p>
+                    )}
+                    {selectedLocation.infantSpecific.hasDarkQuietSpaces && (
+                      <p>✓ {language === 'zh' ? '有暗靜空間' : 'Has Dark Quiet Spaces'}</p>
+                    )}
+                    {selectedLocation.infantSpecific.temperatureControlledNursingAreas && (
+                      <p>✓ {language === 'zh' ? '溫度控制的哺乳區' : 'Temperature-Controlled Nursing Areas'}</p>
+                    )}
+                    {selectedLocation.infantSpecific.hasChangeTableAvailability !== undefined && selectedLocation.infantSpecific.hasChangeTableAvailability > 0 && (
+                      <p>✓ {language === 'zh' ? '尿布台可用' : 'Changing Tables Available'}: {selectedLocation.infantSpecific.hasChangeTableAvailability}</p>
+                    )}
+                    {selectedLocation.infantSpecific.minimalLoudNoiseAreas && (
+                      <p>✓ {language === 'zh' ? '有安靜區域' : 'Quiet Areas Available'}</p>
+                    )}
+                    {selectedLocation.infantSpecific.infantCarriageSpaceAvailable && (
+                      <p>✓ {language === 'zh' ? '可置放嬰兒車' : 'Stroller Space Available'}</p>
+                    )}
+                    {selectedLocation.infantSpecific.hasInfantSpecificRestRooms && (
+                      <p>✓ {language === 'zh' ? '嬰兒專用休息室' : 'Infant Rest Rooms'}</p>
+                    )}
+                    {selectedLocation.infantSpecific.infantCaregiversAvailable && (
+                      <p>✓ {language === 'zh' ? '有受訓護理人員' : 'Trained Caregivers'}</p>
+                    )}
+                    {selectedLocation.infantSpecific.recommendedVisitDurationForInfants && (
+                      <p><strong>{language === 'zh' ? '建議時長' : 'Recommended Duration'}</strong>: {selectedLocation.infantSpecific.recommendedVisitDurationForInfants}</p>
+                    )}
+                    {selectedLocation.infantSpecific.infantSpecificNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.infantSpecific.infantSpecificNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.storageLocker && (
+                  <div className="location-detail-section">
+                    <h4>🔒 {language === 'zh' ? '置物櫃與儲存' : 'Storage & Lockers'}</h4>
+                    {selectedLocation.storageLocker.hasLockers && (
+                      <p>✓ {language === 'zh' ? '有置物櫃' : 'Lockers Available'}  {selectedLocation.storageLocker.lockerQuantity && `(${selectedLocation.storageLocker.lockerQuantity})`}</p>
+                    )}
+                    {selectedLocation.storageLocker.lockerSize && (
+                      <p><strong>{language === 'zh' ? '置物櫃大小' : 'Locker Sizes'}</strong>: {selectedLocation.storageLocker.lockerSize}</p>
+                    )}
+                    {selectedLocation.storageLocker.lockerCost && (
+                      <p><strong>{language === 'zh' ? '置物櫃費用' : 'Cost'}</strong>: {selectedLocation.storageLocker.lockerCost}</p>
+                    )}
+                    {selectedLocation.storageLocker.hasLargeStorage && (
+                      <p>✓ {language === 'zh' ? '大型行李儲存' : 'Large Luggage Storage'}</p>
+                    )}
+                    {selectedLocation.storageLocker.storageAttendantAvailable && (
+                      <p>✓ {language === 'zh' ? '有工作人員看管' : 'Attendant Supervised'}</p>
+                    )}
+                    {selectedLocation.storageLocker.luggage && (
+                      <p>✓ {language === 'zh' ? '可存放行李箱' : 'Can Store Luggage'}</p>
+                    )}
+                    {selectedLocation.storageLocker.storageNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.storageLocker.storageNotes}</p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>
