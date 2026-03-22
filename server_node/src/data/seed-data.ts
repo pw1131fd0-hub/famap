@@ -73,6 +73,15 @@ export let mockLocations: Location[] = [
       offersOnlineBooking: false,
       groupDiscountAvailable: true,
       discountNotes: '大型團體（10人以上）可享優惠，請電話洽詢'
+    },
+    seasonal: {
+      bestSeasons: ['spring', 'fall'],
+      summerNotes: '夏季炎熱（30-35°C），建議早上或傍晚造訪，公園內樹蔭充足',
+      winterNotes: '冬季溫和（10-15°C），適合散步和騎自行車',
+      rainySeasonNotes: '林區步道可能泥濘，建議穿防水鞋。五月至九月為台灣颱風季',
+      seasonalActivities: '春季賞花，秋季野餐和登山散步',
+      schoolHolidayCrowding: 'heavy',
+      seasonalClosures: '颱風警報期間可能短期關閉某些設施'
     }
   },
   {
@@ -137,6 +146,15 @@ export let mockLocations: Location[] = [
       bookingNotes: '主日及假日建議事先線上購票，可享購票優惠',
       groupDiscountAvailable: true,
       discountNotes: '10人以上團體購票享95折，20人以上享9折'
+    },
+    seasonal: {
+      bestSeasons: ['spring', 'fall'],
+      summerNotes: '夏季炎熱（30-35°C），但有許多遮蔭區域和水上遊戲設施，建議早上或傍晚遊玩',
+      winterNotes: '冬季涼爽（10-15°C），遊客較少，遊玩時間較短',
+      rainySeasonNotes: '部分戶外設施在雨季可能關閉。五月至九月為颱風季',
+      seasonalActivities: '春季親子踏青，夏季水上樂園活動，冬季特別燈飾',
+      schoolHolidayCrowding: 'heavy',
+      seasonalClosures: '颱風警報期間整園關閉，暴雨期間部分設施停止運作'
     }
   },
   {
@@ -201,6 +219,15 @@ export let mockLocations: Location[] = [
       bookingNotes: '團體導覽需提前2週預約，散客可直接購票入場',
       groupDiscountAvailable: true,
       discountNotes: '20人以上團體購票享5折優惠'
+    },
+    seasonal: {
+      bestSeasons: ['spring', 'summer', 'fall', 'winter'],
+      summerNotes: '夏季炎熱時的完美去處，博物館內空調舒適，全年溫度恆定',
+      winterNotes: '冬季雨季時，室內博物館是理想活動選擇',
+      rainySeasonNotes: '下雨天完全不受影響，適合全天室內參觀',
+      seasonalActivities: '全年有特展，夏假期間有兒童工作坊，冬季有節慶展覽',
+      schoolHolidayCrowding: 'moderate',
+      seasonalClosures: '週一休館，特殊假期可能調整開放時間'
     }
   },
   {
@@ -265,6 +292,15 @@ export let mockLocations: Location[] = [
       bookingNotes: '假日建議事先預約，現場候位時間可能較長',
       groupDiscountAvailable: true,
       discountNotes: '6人以上預約享生日蛋糕9折優惠'
+    },
+    seasonal: {
+      bestSeasons: ['spring', 'summer', 'fall', 'winter'],
+      summerNotes: '夏季炎熱，但餐廳室內冷氣充足，適合躲避高溫',
+      winterNotes: '冬季室內溫暖舒適，親子用餐最佳去處',
+      rainySeasonNotes: '完全室內設施，雨天無影響，全年舒適用餐',
+      seasonalActivities: '全年提供兒童遊戲室，假期有主題派對活動',
+      schoolHolidayCrowding: 'heavy',
+      seasonalClosures: '無季節性關閉，全年營業'
     }
   },
   {
@@ -327,6 +363,15 @@ export let mockLocations: Location[] = [
       offersOnlineBooking: false,
       groupDiscountAvailable: false,
       bookingNotes: '免費入場，無需預約，隨時可訪'
+    },
+    seasonal: {
+      bestSeasons: ['spring', 'summer', 'fall', 'winter'],
+      summerNotes: '夏季炎熱時的最佳避暑勝地，四季恆溫空調環境',
+      winterNotes: '冬季完全舒適，避免戶外寒風，親子活動首選',
+      rainySeasonNotes: '颱風或暴雨時完全不受影響的完美選擇',
+      seasonalActivities: '全年無休閒活動，新穎設施四季皆宜',
+      schoolHolidayCrowding: 'moderate',
+      seasonalClosures: '無季節性關閉，全年開放'
     }
   },
   {
@@ -390,6 +435,15 @@ export let mockLocations: Location[] = [
       bookingNotes: '兒童游泳課程需提前預約，一般泳客散客亦可直接購票',
       groupDiscountAvailable: true,
       discountNotes: '10人以上團體購票享8折優惠'
+    },
+    seasonal: {
+      bestSeasons: ['spring', 'fall'],
+      summerNotes: '夏季熱水池適合游泳，室內恆溫舒適，戶外池可能較熱',
+      winterNotes: '冬季暖水池是冬季游泳的絕佳選擇，溫度舒適恆定',
+      rainySeasonNotes: '室內游泳池不受天氣影響，下雨天依然可照常營業',
+      seasonalActivities: '春秋適合戶外水上活動，冬季有溫水課程，夏季有兒童游泳營',
+      schoolHolidayCrowding: 'heavy',
+      seasonalClosures: '暑期課程眾多，需提前預約；冬季部分時段可能進行維護'
     }
   },
   {
@@ -453,6 +507,15 @@ export let mockLocations: Location[] = [
       bookingNotes: '夏季假日建議事先購票，可線上預約以節省排隊時間',
       groupDiscountAvailable: true,
       discountNotes: '15人以上團體購票享85折，並免費贈送小禮物'
+    },
+    seasonal: {
+      bestSeasons: ['summer'],
+      summerNotes: '夏季（6月中-8月底）是水上樂園的營運季節，溫度25-30°C最舒適',
+      winterNotes: '冬季關閉，不建議前往',
+      rainySeasonNotes: '雨季期間可能短期關閉，颱風時整園停業，建議提前確認',
+      seasonalActivities: '夏季限定，有波浪池、滑水道、懶人河等水上活動，特別受暑假小孩歡迎',
+      schoolHolidayCrowding: 'heavy',
+      seasonalClosures: '11月至5月關閉，6月至9月營業。颱風警報期間立即關閉，暴雨時暫停營業'
     }
   },
 ];

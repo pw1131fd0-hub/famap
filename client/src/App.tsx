@@ -871,6 +871,52 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.seasonal && (
+                  <div className="detail-section">
+                    <h4>🌍 {language === 'zh' ? '季節信息' : 'Seasonal Information'}</h4>
+                    {selectedLocation.seasonal.bestSeasons && selectedLocation.seasonal.bestSeasons.length > 0 && (
+                      <p>
+                        <strong>{language === 'zh' ? '最佳季節' : 'Best Seasons'}</strong>: {selectedLocation.seasonal.bestSeasons.map(s => language === 'zh' ?
+                          (s === 'spring' ? '🌸 春季' : s === 'summer' ? '☀️ 夏季' : s === 'fall' ? '🍁 秋季' : '❄️ 冬季') :
+                          (s === 'spring' ? '🌸 Spring' : s === 'summer' ? '☀️ Summer' : s === 'fall' ? '🍁 Fall' : '❄️ Winter')).join(', ')}
+                      </p>
+                    )}
+                    {selectedLocation.seasonal.summerNotes && (
+                      <p>
+                        <strong>{language === 'zh' ? '夏季提示' : 'Summer Tips'}</strong>: {selectedLocation.seasonal.summerNotes}
+                      </p>
+                    )}
+                    {selectedLocation.seasonal.winterNotes && (
+                      <p>
+                        <strong>{language === 'zh' ? '冬季提示' : 'Winter Tips'}</strong>: {selectedLocation.seasonal.winterNotes}
+                      </p>
+                    )}
+                    {selectedLocation.seasonal.rainySeasonNotes && (
+                      <p>
+                        <strong>{language === 'zh' ? '雨季/颱風' : 'Rainy Season/Typhoon'}</strong>: {selectedLocation.seasonal.rainySeasonNotes}
+                      </p>
+                    )}
+                    {selectedLocation.seasonal.seasonalActivities && (
+                      <p>
+                        <strong>{language === 'zh' ? '季節活動' : 'Seasonal Activities'}</strong>: {selectedLocation.seasonal.seasonalActivities}
+                      </p>
+                    )}
+                    {selectedLocation.seasonal.schoolHolidayCrowding && (
+                      <p>
+                        <strong>{language === 'zh' ? '假期人潮' : 'School Holiday Crowds'}</strong>: {language === 'zh' ?
+                          (selectedLocation.seasonal.schoolHolidayCrowding === 'light' ? '🟢 較少' :
+                           selectedLocation.seasonal.schoolHolidayCrowding === 'moderate' ? '🟡 適中' : '🔴 很多') :
+                          (selectedLocation.seasonal.schoolHolidayCrowding === 'light' ? '🟢 Light' :
+                           selectedLocation.seasonal.schoolHolidayCrowding === 'moderate' ? '🟡 Moderate' : '🔴 Heavy')}
+                      </p>
+                    )}
+                    {selectedLocation.seasonal.seasonalClosures && (
+                      <p>
+                        <strong>{language === 'zh' ? '季節性關閉' : 'Seasonal Closures'}</strong>: {selectedLocation.seasonal.seasonalClosures}
+                      </p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>

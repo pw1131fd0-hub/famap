@@ -113,6 +113,16 @@ export interface BookingInfo {
   discountNotes?: string; // e.g., "Family packages available for 4+ people"
 }
 
+export interface SeasonalInfo {
+  bestSeasons?: string[]; // e.g., ["spring", "fall"] - 'spring', 'summer', 'fall', 'winter'
+  summerNotes?: string; // e.g., "Very hot (30-35°C), has air conditioning indoors"
+  winterNotes?: string; // e.g., "Mild (10-15°C), some outdoor areas may close"
+  rainySeasonNotes?: string; // e.g., "Covered areas available, typhoon season (Jul-Sep)"
+  seasonalActivities?: string; // e.g., "Summer water activities, winter lighting festivals"
+  schoolHolidayCrowding?: 'light' | 'moderate' | 'heavy'; // Expected crowding during school holidays
+  seasonalClosures?: string; // e.g., "Closed during typhoon warnings"
+}
+
 export interface Location {
   id: string;
   name: {
@@ -153,6 +163,7 @@ export interface Location {
   safety?: SafetyInfo;
   qualityMetrics?: QualityMetricsInfo;
   booking?: BookingInfo;
+  seasonal?: SeasonalInfo;
 }
 
 export interface Review {
@@ -205,6 +216,7 @@ export interface LocationCreateDTO {
   safety?: SafetyInfo;
   qualityMetrics?: QualityMetricsInfo;
   booking?: BookingInfo;
+  seasonal?: SeasonalInfo;
 }
 
 export interface Favorite {
