@@ -70,6 +70,7 @@ export const translations = {
       pricing: '費用',
       closed: '已關閉',
       isFree: '免費',
+      directions: '導航',
     },
     reviews: {
       title: '評論',
@@ -151,6 +152,7 @@ export const translations = {
       pricing: 'Pricing',
       closed: 'Closed',
       isFree: 'Free',
+      directions: 'Directions',
     },
     reviews: {
       title: 'Reviews',

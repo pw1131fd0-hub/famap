@@ -383,6 +383,16 @@ function App() {
                 <div className="detail-section">
                   <h4>{t.locationDetail.address}</h4>
                   <p>{selectedLocation.address[language]}</p>
+                  <a
+                    href={`https://www.google.com/maps/search/${encodeURIComponent(selectedLocation.name[language])},${encodeURIComponent(selectedLocation.address[language])}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="directions-button"
+                    title={t.locationDetail.directions}
+                  >
+                    <MapPin size={16} />
+                    <span>{t.locationDetail.directions}</span>
+                  </a>
                 </div>
                 {selectedLocation.pricing && (
                   <div className="detail-section">
