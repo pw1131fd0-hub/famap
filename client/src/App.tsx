@@ -161,6 +161,10 @@ function App() {
   const [showAddLocation, setShowAddLocation] = useState(false);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [facilitiesFilter, setFacilitiesFilter] = useState<string[]>([]);
+  const [childAge, setChildAge] = useState<number | undefined>(() => {
+    const saved = localStorage.getItem('childAge');
+    return saved ? parseInt(saved, 10) : undefined;
+  });
 
   const fetchLocations = useCallback(async () => {
     setLoading(true);
@@ -288,11 +292,37 @@ function App() {
     );
   };
 
+  const isAgeAppropriate = (location: Location): boolean => {
+    if (childAge === undefined || !location.ageRange) return true;
+    const { minAge, maxAge } = location.ageRange;
+    if (minAge !== undefined && childAge < minAge) return false;
+    if (maxAge !== undefined && childAge > maxAge) return false;
+    return true;
+  };
+
+  const handleChildAgeChange = (age: number | undefined) => {
+    setChildAge(age);
+    if (age !== undefined) {
+      localStorage.setItem('childAge', age.toString());
+    } else {
+      localStorage.removeItem('childAge');
+    }
+  };
+
   const getFilteredLocations = (locs: Location[]) => {
-    if (facilitiesFilter.length === 0) return locs;
-    return locs.filter(loc =>
-      facilitiesFilter.every(facility => loc.facilities.includes(facility))
-    );
+    let filtered = locs;
+
+    if (facilitiesFilter.length > 0) {
+      filtered = filtered.filter(loc =>
+        facilitiesFilter.every(facility => loc.facilities.includes(facility))
+      );
+    }
+
+    if (childAge !== undefined) {
+      filtered = filtered.filter(isAgeAppropriate);
+    }
+
+    return filtered;
   };
 
   const categories: Array<{ key: Category | undefined; icon: React.ElementType; label: string }> = [
@@ -502,6 +532,44 @@ function App() {
                       <Plus size={18} />
                       <span>{t.common.addLocation}</span>
                     </button>
+                  </div>
+                  <div className="age-filter-section">
+                    <label htmlFor="child-age" style={{ fontSize: '0.9em', fontWeight: '500', display: 'block', marginBottom: '8px' }}>
+                      👶 {language === 'zh' ? '孩子年齡' : "Child's Age"}
+                    </label>
+                    <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                      <input
+                        id="child-age"
+                        type="number"
+                        min="0"
+                        max="18"
+                        value={childAge ?? ''}
+                        onChange={(e) => handleChildAgeChange(e.target.value ? parseInt(e.target.value, 10) : undefined)}
+                        placeholder={language === 'zh' ? '輸入年齡' : 'Enter age'}
+                        style={{
+                          flex: 1,
+                          padding: '8px',
+                          border: '1px solid #ddd',
+                          borderRadius: '4px',
+                          fontSize: '0.9em',
+                        }}
+                      />
+                      {childAge !== undefined && (
+                        <button
+                          onClick={() => handleChildAgeChange(undefined)}
+                          style={{
+                            padding: '6px 10px',
+                            background: '#f0f0f0',
+                            border: 'none',
+                            borderRadius: '4px',
+                            cursor: 'pointer',
+                            fontSize: '0.85em',
+                          }}
+                        >
+                          ✕
+                        </button>
+                      )}
+                    </div>
                   </div>
                   <div className="quick-facility-filters">
                     <button

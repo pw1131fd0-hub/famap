@@ -1,5 +1,10 @@
 export type Category = 'park' | 'nursing_room' | 'restaurant' | 'medical' | 'attraction' | 'other';
 
+export interface AgeRange {
+  minAge?: number;
+  maxAge?: number;
+}
+
 export interface Location {
   id: string;
   name: {
@@ -22,6 +27,7 @@ export interface Location {
   facilities: string[];
   averageRating: number;
   photoUrl?: string;
+  ageRange?: AgeRange;
 }
 
 export interface SearchParams {

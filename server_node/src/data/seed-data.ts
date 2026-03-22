@@ -23,6 +23,7 @@ export let mockLocations: Location[] = [
     address: { zh: '台北市大安區新生南路二段1號', en: 'No. 1, Sec. 2, Xinsheng S. Rd., Daan Dist., Taipei' },
     facilities: ['stroller_accessible', 'nursing_room', 'public_toilet'],
     averageRating: 4.8,
+    ageRange: { minAge: 1, maxAge: 12 },
   },
   {
     id: '2',
@@ -33,6 +34,7 @@ export let mockLocations: Location[] = [
     address: { zh: '台北市士林區承德路五段55號', en: 'No. 55, Sec. 5, Chengde Rd., Shilin Dist., Taipei' },
     facilities: ['stroller_accessible', 'nursing_room', 'high_chair'],
     averageRating: 4.7,
+    ageRange: { minAge: 2, maxAge: 15 },
   },
   {
     id: '3',
@@ -43,6 +45,7 @@ export let mockLocations: Location[] = [
     address: { zh: '台北市中正區襄陽路2號', en: 'No. 2, Xiangyang Rd., Zhongzheng Dist., Taipei' },
     facilities: ['stroller_accessible', 'nursing_room'],
     averageRating: 4.5,
+    ageRange: { minAge: 3, maxAge: 14 },
   },
   {
     id: '4',
@@ -53,6 +56,7 @@ export let mockLocations: Location[] = [
     address: { zh: '台北市信義區', en: 'Xinyi Dist., Taipei' },
     facilities: ['high_chair', 'nursing_room', 'air_conditioned', 'kids_menu', 'indoor_play'],
     averageRating: 4.2,
+    ageRange: { minAge: 0, maxAge: 8 },
   },
   {
     id: '5',
@@ -63,6 +67,7 @@ export let mockLocations: Location[] = [
     address: { zh: '台北市南港區經貿二路191號', en: 'No. 191, Jingmao 2nd Rd., Nangang Dist., Taipei' },
     facilities: ['air_conditioned', 'nursing_room', 'kids_menu', 'parking', 'mrt_nearby', 'indoor_play'],
     averageRating: 4.6,
+    ageRange: { minAge: 0, maxAge: 10 },
   },
   {
     id: '6',
@@ -73,6 +78,7 @@ export let mockLocations: Location[] = [
     address: { zh: '台北市內湖區湖興路300號', en: 'No. 300, Huxing Rd., Neihu Dist., Taipei' },
     facilities: ['swimming_pool', 'water_play', 'nursing_room', 'air_conditioned', 'drinking_water', 'public_toilet'],
     averageRating: 4.5,
+    ageRange: { minAge: 3, maxAge: 16 },
   },
   {
     id: '7',
@@ -83,6 +89,7 @@ export let mockLocations: Location[] = [
     address: { zh: '新北市新店區中興路1號', en: 'No. 1, Zhongxing Rd., Xindian Dist., New Taipei' },
     facilities: ['swimming_pool', 'water_play', 'shaded_area', 'nursing_room', 'mrt_nearby', 'outdoor_seating'],
     averageRating: 4.4,
+    ageRange: { minAge: 2, maxAge: 14 },
   },
 ];
 
