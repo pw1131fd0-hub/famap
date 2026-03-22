@@ -579,6 +579,49 @@ export interface PlaygroundEquipmentAndActivityInfo {
   playgroundAndActivityNotes?: string;
 }
 
+export interface NavigationFromTransitInfo {
+  hasPublicTransitAccess?: boolean;
+  mrtDirections?: {
+    station: string;
+    distance: number;
+    walkingTimeMinutes?: number;
+    directions?: string;
+    exitNumber?: string;
+    elevatorAvailable?: boolean;
+  };
+  busDirections?: {
+    busLines?: string[];
+    stopName?: string;
+    walkingTimeMinutes?: number;
+    directions?: string;
+    frequency?: string;
+  };
+  cyclingDirections?: {
+    bikeAccessible?: boolean;
+    bikeStorageAvailable?: boolean;
+    directions?: string;
+    estimatedCyclingTimeMinutes?: number;
+  };
+  driversLicenseAccess?: {
+    drivingTimeFromCityCenter?: number;
+    parkingEntrance?: string;
+    gpsCoordinates?: { lat: number; lng: number };
+    accessRoadType?: string;
+  };
+  accessibleTransportOptions?: {
+    wheelchairAccessibleMRT?: boolean;
+    elevatorAtStation?: boolean;
+    accessibleBusAvailable?: boolean;
+  };
+  entranceLocation?: {
+    mainEntranceName?: string;
+    alternateEntrances?: string[];
+    closestEntranceFromTransit?: string;
+    disabledAccessEntrance?: string;
+  };
+  navigationNotes?: string;
+}
+
 export interface Location {
   id: string;
   name: {
@@ -654,6 +697,7 @@ export interface Location {
   visitCost?: ComprehensiveVisitCostInfo;
   healthDocumentation?: HealthDocumentationRequirementsInfo;
   playgroundAndActivity?: PlaygroundEquipmentAndActivityInfo;
+  navigationFromTransit?: NavigationFromTransitInfo;
 }
 
 export interface Review {

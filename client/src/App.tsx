@@ -1872,6 +1872,59 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.navigationFromTransit && (
+                  <div className="detail-section">
+                    <h4>🚇 {language === 'zh' ? '交通導航' : 'Navigation & Transit'}</h4>
+                    {selectedLocation.navigationFromTransit.mrtDirections && (
+                      <div>
+                        <p><strong>🚇 {language === 'zh' ? 'MRT捷運' : 'MRT'}</strong></p>
+                        <p>{language === 'zh' ? '站名' : 'Station'}: {selectedLocation.navigationFromTransit.mrtDirections.station}</p>
+                        <p>{language === 'zh' ? '距離' : 'Distance'}: {selectedLocation.navigationFromTransit.mrtDirections.distance}m</p>
+                        {selectedLocation.navigationFromTransit.mrtDirections.walkingTimeMinutes && (
+                          <p>{language === 'zh' ? '步行時間' : 'Walking Time'}: {selectedLocation.navigationFromTransit.mrtDirections.walkingTimeMinutes} {language === 'zh' ? '分鐘' : 'min'}</p>
+                        )}
+                        {selectedLocation.navigationFromTransit.mrtDirections.exitNumber && (
+                          <p>{language === 'zh' ? '出口' : 'Exit'}: {selectedLocation.navigationFromTransit.mrtDirections.exitNumber}</p>
+                        )}
+                        {selectedLocation.navigationFromTransit.mrtDirections.directions && (
+                          <p>{language === 'zh' ? '方向' : 'Directions'}: {selectedLocation.navigationFromTransit.mrtDirections.directions}</p>
+                        )}
+                      </div>
+                    )}
+                    {selectedLocation.navigationFromTransit.busDirections && (
+                      <div>
+                        <p><strong>🚌 {language === 'zh' ? '公車' : 'Bus'}</strong></p>
+                        {selectedLocation.navigationFromTransit.busDirections.busLines && selectedLocation.navigationFromTransit.busDirections.busLines.length > 0 && (
+                          <p>{language === 'zh' ? '公車線號' : 'Bus Lines'}: {selectedLocation.navigationFromTransit.busDirections.busLines.join(', ')}</p>
+                        )}
+                        {selectedLocation.navigationFromTransit.busDirections.stopName && (
+                          <p>{language === 'zh' ? '站點' : 'Stop'}: {selectedLocation.navigationFromTransit.busDirections.stopName}</p>
+                        )}
+                        {selectedLocation.navigationFromTransit.busDirections.walkingTimeMinutes && (
+                          <p>{language === 'zh' ? '步行時間' : 'Walking Time'}: {selectedLocation.navigationFromTransit.busDirections.walkingTimeMinutes} {language === 'zh' ? '分鐘' : 'min'}</p>
+                        )}
+                        {selectedLocation.navigationFromTransit.busDirections.directions && (
+                          <p>{language === 'zh' ? '方向' : 'Directions'}: {selectedLocation.navigationFromTransit.busDirections.directions}</p>
+                        )}
+                      </div>
+                    )}
+                    {selectedLocation.navigationFromTransit.driversLicenseAccess && selectedLocation.navigationFromTransit.driversLicenseAccess.drivingTimeFromCityCenter && (
+                      <div>
+                        <p><strong>🚗 {language === 'zh' ? '開車' : 'Driving'}</strong></p>
+                        <p>{language === 'zh' ? '從市中心車程' : 'From City Center'}: {selectedLocation.navigationFromTransit.driversLicenseAccess.drivingTimeFromCityCenter} {language === 'zh' ? '分鐘' : 'min'}</p>
+                        {selectedLocation.navigationFromTransit.driversLicenseAccess.parkingEntrance && (
+                          <p>{language === 'zh' ? '停車入口' : 'Parking Entrance'}: {selectedLocation.navigationFromTransit.driversLicenseAccess.parkingEntrance}</p>
+                        )}
+                        {selectedLocation.navigationFromTransit.driversLicenseAccess.gpsCoordinates && (
+                          <p>GPS: {selectedLocation.navigationFromTransit.driversLicenseAccess.gpsCoordinates.lat.toFixed(4)}, {selectedLocation.navigationFromTransit.driversLicenseAccess.gpsCoordinates.lng.toFixed(4)}</p>
+                        )}
+                      </div>
+                    )}
+                    {selectedLocation.navigationFromTransit.navigationNotes && (
+                      <p><strong>{language === 'zh' ? '完整導航信息' : 'Complete Navigation Info'}</strong>: {selectedLocation.navigationFromTransit.navigationNotes}</p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>

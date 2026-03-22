@@ -580,6 +580,49 @@ export interface PlaygroundEquipmentAndActivityInfo {
   playgroundAndActivityNotes?: string; // Complete playground and activity information
 }
 
+export interface NavigationFromTransitInfo {
+  hasPublicTransitAccess?: boolean; // Is the venue accessible by public transit?
+  mrtDirections?: {
+    station: string; // e.g., "科技大樓站 (Nanjing Fuxing Station, Brown Line)"
+    distance: number; // in meters
+    walkingTimeMinutes?: number; // Estimated walking time
+    directions?: string; // Step-by-step directions from station to entrance
+    exitNumber?: string; // Exit number to use
+    elevatorAvailable?: boolean; // Is there an elevator at the station?
+  };
+  busDirections?: {
+    busLines?: string[]; // e.g., ["15", "32", "38"]
+    stopName?: string; // Bus stop name
+    walkingTimeMinutes?: number; // Walking time from bus stop to entrance
+    directions?: string; // Step-by-step directions from bus stop
+    frequency?: string; // How often buses run (e.g., "every 5-10 minutes during peak hours")
+  };
+  cyclingDirections?: {
+    bikeAccessible?: boolean; // Can you cycle there?
+    bikeStorageAvailable?: boolean; // Bike parking available?
+    directions?: string; // Cycling route directions
+    estimatedCyclingTimeMinutes?: number; // Time to cycle from transit hub
+  };
+  driversLicenseAccess?: {
+    drivingTimeFromCityCenter?: number; // in minutes
+    parkingEntrance?: string; // Directions to parking entrance
+    gpsCoordinates?: { lat: number; lng: number }; // GPS for venue or parking
+    accessRoadType?: string; // e.g., "main road", "residential area", "highway"
+  };
+  accessibleTransportOptions?: {
+    wheelchairAccessibleMRT?: boolean; // Wheelchair accessible station/exit?
+    elevatorAtStation?: boolean; // Elevator availability for strollers
+    accessibleBusAvailable?: boolean; // Low-floor accessible buses available?
+  };
+  entranceLocation?: {
+    mainEntranceName?: string; // Name of main entrance
+    alternateEntrances?: string[]; // Other entrance options
+    closestEntranceFromTransit?: string; // Which entrance is closest to transit?
+    disabledAccessEntrance?: string; // Entrance for wheelchair users
+  };
+  navigationNotes?: string; // Complete navigation information (e.g., "From MRT: Exit 2, turn left, walk 350m to main gate. Watch for traffic at intersection. Total walk 8 mins. From bus stop: walk 200m along Xinsheng Rd to south entrance")
+}
+
 export interface Location {
   id: string;
   name: {
@@ -655,6 +698,7 @@ export interface Location {
   visitCost?: ComprehensiveVisitCostInfo;
   healthDocumentation?: HealthDocumentationRequirementsInfo;
   playgroundAndActivity?: PlaygroundEquipmentAndActivityInfo;
+  navigationFromTransit?: NavigationFromTransitInfo;
 }
 
 export interface SearchParams {

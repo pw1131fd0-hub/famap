@@ -373,6 +373,48 @@ export let mockLocations: Location[] = [
       suggestedDurationPerActivityType: '沙坑：45分鐘、秋千：30分鐘、滑梯：20分鐘、登山：60-120分鐘',
       outdoorVsIndoorActivities: '95%戶外，5%涼亭和廁所室內',
       playgroundAndActivityNotes: '台北最大親子公園，遊樂設施齊全，適合各年齡層。沙坑特別受歡迎，建議上午9-11點或下午4點後到訪避免人潮。'
+    },
+    navigationFromTransit: {
+      hasPublicTransitAccess: true,
+      mrtDirections: {
+        station: '科技大樓站 (Brown Line)',
+        distance: 450,
+        walkingTimeMinutes: 8,
+        directions: 'MRT出站後右轉沿著新生南路二段直走，過十字路口即可看到公園南入口。沿著圍牆走約5分鐘可抵達主入口',
+        exitNumber: '1號出口',
+        elevatorAvailable: true
+      },
+      busDirections: {
+        busLines: ['15', '32', '38', '72'],
+        stopName: '新生南路公園站',
+        walkingTimeMinutes: 2,
+        directions: '下車後即為公園南邊，直接進入即可',
+        frequency: '尖峰時段每5-10分鐘一班，離峰時段每10-15分鐘一班'
+      },
+      cyclingDirections: {
+        bikeAccessible: true,
+        bikeStorageAvailable: true,
+        directions: '沿著自行車專用道可直達公園各入口，公園內無自行車禁區',
+        estimatedCyclingTimeMinutes: 5
+      },
+      driversLicenseAccess: {
+        drivingTimeFromCityCenter: 15,
+        parkingEntrance: '新生南路二段或南京東路方向停車場入口',
+        gpsCoordinates: { lat: 25.0312, lng: 121.5361 },
+        accessRoadType: '台北市中心，鄰近新生南路幹道'
+      },
+      accessibleTransportOptions: {
+        wheelchairAccessibleMRT: true,
+        elevatorAtStation: true,
+        accessibleBusAvailable: true
+      },
+      entranceLocation: {
+        mainEntranceName: '新生南路一段主入口（南邊）',
+        alternateEntrances: ['新生南路二段東入口', '南京東路北入口', '忠孝東路西側小徑'],
+        closestEntranceFromTransit: '從MRT科技大樓站：新生南路南入口（最近，步行5分鐘）；從公車站：新生南路南站即為公園邊界',
+        disabledAccessEntrance: '新生南路二段設有無障礙通道和停車場'
+      },
+      navigationNotes: '大安森林公園為台北市中心開放式公園，交通便利。MRT科技大樓站1號出口步行8分鐘可到，或搭公車至新生南路公園站（15、32、38、72號），下車即到。開車可停至周邊停車場或公園北側地下停車場。自行車友善，可直達各入口。進入公園後沿著標示牌可找到各遊樂區和停車位置。'
     }
   },
   {
@@ -813,6 +855,48 @@ export let mockLocations: Location[] = [
       suggestedDurationPerActivityType: '旋轉木馬：5分鐘、大遊樂設施：3-5分鐘排隊加遊玩、水上區：60分鐘、遊戲機區：30-45分鐘',
       outdoorVsIndoorActivities: '60%戶外（遊樂設施、水上區），40%室內（遊戲機館、表演廳、餐飲區）',
       playgroundAndActivityNotes: '兒童樂園有30+項遊樂設施，適合各年齡層。高峰時段（周末下午2-6pm）排隊時間可達30-60分鐘。建議平日上午或親子時段造訪以避免人潮。水上遊樂設施夏季非常受歡迎。'
+    },
+    navigationFromTransit: {
+      hasPublicTransitAccess: true,
+      mrtDirections: {
+        station: '士林站 (Red Line)',
+        distance: 1200,
+        walkingTimeMinutes: 15,
+        directions: 'MRT士林站2號出口，沿著承德路五段直走，約15分鐘可到樂園。經過馬術場後樂園即在右手邊',
+        exitNumber: '2號出口',
+        elevatorAvailable: true
+      },
+      busDirections: {
+        busLines: ['11', '26', '27', '32', '55'],
+        stopName: '兒童新樂園站',
+        walkingTimeMinutes: 5,
+        directions: '下車後沿著巴士站標示直走，可看到樂園大門',
+        frequency: '尖峰時段每3-8分鐘一班，離峰時段每10-15分鐘一班'
+      },
+      cyclingDirections: {
+        bikeAccessible: true,
+        bikeStorageAvailable: true,
+        directions: '沿著承德路自行車道可直達樂園停車場',
+        estimatedCyclingTimeMinutes: 8
+      },
+      driversLicenseAccess: {
+        drivingTimeFromCityCenter: 20,
+        parkingEntrance: '承德路五段兒童新樂園地下停車場',
+        gpsCoordinates: { lat: 25.0970, lng: 121.5147 },
+        accessRoadType: '士林區主要幹道，鄰近外雙溪'
+      },
+      accessibleTransportOptions: {
+        wheelchairAccessibleMRT: true,
+        elevatorAtStation: true,
+        accessibleBusAvailable: true
+      },
+      entranceLocation: {
+        mainEntranceName: '承德路五段主入口',
+        alternateEntrances: ['親子停車場入口', '遠足停車場入口'],
+        closestEntranceFromTransit: '從MRT士林站：承德路五段主入口（步行15分鐘）；從巴士站：兒童新樂園站（最近，下車即到）',
+        disabledAccessEntrance: '地下停車場內有無障礙電梯和專用通道'
+      },
+      navigationNotes: '兒童新樂園位於台北市士林區，交通便利。MRT士林站紅線2號出口步行15分鐘，或搭巴士11、26、27、32、55號至兒童新樂園站（最方便，下車即到）。開車前往設有地下停車場（200元/時，樂園購票憑證可折抵停車費）。停車場內設有無障礙電梯和專用通道。'
     }
   },
   {
@@ -1203,6 +1287,48 @@ export let mockLocations: Location[] = [
       suggestedDurationPerActivityType: '化石區：30-40分鐘、VR體驗：15-20分鐘（需排隊）、地質展區：20-30分鐘',
       outdoorVsIndoorActivities: '100%室內，完全空調控制',
       playgroundAndActivityNotes: '博物館為教育性室內景點，無傳統遊樂場。適合對古生物和地質有興趣的兒童。互動展示很受歡迎，高峰時段（假日下午）互動設備需排隊20-30分鐘。2-3歲幼兒可能難以享受，建議3歲以上兒童。'
+    },
+    navigationFromTransit: {
+      hasPublicTransitAccess: true,
+      mrtDirections: {
+        station: '台大醫院站 (Blue/Red Line)',
+        distance: 600,
+        walkingTimeMinutes: 8,
+        directions: 'MRT台大醫院站南港線/紅線轉乘點，1號出口沿著中山南路直走，過二二八和平公園，中山南路2號館入口',
+        exitNumber: '1號出口',
+        elevatorAvailable: true
+      },
+      busDirections: {
+        busLines: ['1', '2', '3', '5', '15', '22', '25'],
+        stopName: '國立臺灣博物館站',
+        walkingTimeMinutes: 2,
+        directions: '多條公車直達博物館門口，下車即到',
+        frequency: '尖峰時段每3-5分鐘一班，離峰時段每8-12分鐘一班'
+      },
+      cyclingDirections: {
+        bikeAccessible: true,
+        bikeStorageAvailable: true,
+        directions: '沿著中山南路自行車道可直達博物館，博物館外有停自行車處',
+        estimatedCyclingTimeMinutes: 10
+      },
+      driversLicenseAccess: {
+        drivingTimeFromCityCenter: 10,
+        parkingEntrance: '二二八和平公園地下停車場或中山南路路邊停車格',
+        gpsCoordinates: { lat: 25.0311, lng: 121.5142 },
+        accessRoadType: '台北市中正區中山南路，鄰近總統府和公園'
+      },
+      accessibleTransportOptions: {
+        wheelchairAccessibleMRT: true,
+        elevatorAtStation: true,
+        accessibleBusAvailable: true
+      },
+      entranceLocation: {
+        mainEntranceName: '中山南路2號館主入口',
+        alternateEntrances: ['100號館側邊入口'],
+        closestEntranceFromTransit: '從MRT台大醫院站：中山南路2號館主入口（步行8分鐘）；從公車站：直達館前（最近，下車即到）',
+        disabledAccessEntrance: '中山南路主入口設有無障礙坡道和停車位'
+      },
+      navigationNotes: '國立臺灣博物館位於台北市中正區，交通便利。MRT台大醫院站1號出口步行8分鐘，或搭多條公車（1、2、3、5、15、22、25等）直達博物館門口（最方便）。開車可停至二二八和平公園地下停車場或中山南路路邊停車格。館內位於中山南路，鄰近總統府和和平公園，景點眾多。'
     }
   },
   {
@@ -1607,6 +1733,48 @@ export let mockLocations: Location[] = [
       suggestedDurationPerActivityType: '軟墊區：20-30分鐘、球池：15-20分鐘、扮家家：20-30分鐘、整體遊玩：1.5-2小時',
       outdoorVsIndoorActivities: '100%室內，完全空調',
       playgroundAndActivityNotes: '專為1-6歲設計的安全室內遊樂設施。冬季和雨天的完美選擇，空調舒適。設施清潔衛生，玩具定期消毒。特別適合幼齡兒童和新生兒。高峰時段（周末下午）人滿為患，建議平日或上午到訪。'
+    },
+    navigationFromTransit: {
+      hasPublicTransitAccess: true,
+      mrtDirections: {
+        station: '信義安和站 (Blue Line)',
+        distance: 400,
+        walkingTimeMinutes: 6,
+        directions: 'MRT信義安和站4號出口，沿著信義路直走，見信義路五段時右轉，餐廳在轉角處',
+        exitNumber: '4號出口',
+        elevatorAvailable: true
+      },
+      busDirections: {
+        busLines: ['20', '33', '37', '38', '39'],
+        stopName: '信義路五段站',
+        walkingTimeMinutes: 3,
+        directions: '下車後在對面可看到餐廳，過馬路即到',
+        frequency: '尖峰時段每5-8分鐘一班，離峰時段每10-15分鐘一班'
+      },
+      cyclingDirections: {
+        bikeAccessible: true,
+        bikeStorageAvailable: true,
+        directions: '沿著信義路自行車道可直達，餐廳外有停放自行車位置',
+        estimatedCyclingTimeMinutes: 5
+      },
+      driversLicenseAccess: {
+        drivingTimeFromCityCenter: 15,
+        parkingEntrance: '信義路五段地下停車場或周邊停車格',
+        gpsCoordinates: { lat: 25.0330, lng: 121.5654 },
+        accessRoadType: '台北市信義區主要幹道'
+      },
+      accessibleTransportOptions: {
+        wheelchairAccessibleMRT: true,
+        elevatorAtStation: true,
+        accessibleBusAvailable: true
+      },
+      entranceLocation: {
+        mainEntranceName: '信義路五段餐廳主入口',
+        alternateEntrances: ['側邊停車場入口'],
+        closestEntranceFromTransit: '從MRT信義安和站：信義路主入口（步行6分鐘）；從公車站：信義路五段站（最近，對面即到）',
+        disabledAccessEntrance: '主入口設有無障礙坡道'
+      },
+      navigationNotes: '親子餐廳位於台北市信義區信義路五段，交通便利。MRT信義安和站藍線4號出口步行6分鐘，或搭公車20、33、37、38、39號至信義路五段站（最方便，下車對面即到）。設有停車場，自行車停放位方便。餐廳內為室內遊樂設施，全年空調舒適。'
     }
   },
   {
@@ -2007,6 +2175,48 @@ export let mockLocations: Location[] = [
       suggestedDurationPerActivityType: '嬰兒池：20-30分鐘、兒童淺水池：45-60分鐘、游泳課：60分鐘、整體遊玩：1.5-2小時',
       outdoorVsIndoorActivities: '70%室內（加溫池），30%戶外（夏季開放）',
       playgroundAndActivityNotes: '南港軟體園區親子中心特別適合1-8歲的水上活動和游泳學習。嬰兒溫水池很溫暖安全，兒童淺水池人氣旺盛。周末假日人多排隊，建議平日上午到訪。專業游泳教練提供各年齡段課程。高峰時段淺水池可能擁擠。'
+    },
+    navigationFromTransit: {
+      hasPublicTransitAccess: true,
+      mrtDirections: {
+        station: '南港軟體園區站 (Brown Line)',
+        distance: 100,
+        walkingTimeMinutes: 2,
+        directions: 'MRT南港軟體園區站1號出口直達親子中心，出站即到，無需轉彎',
+        exitNumber: '1號出口',
+        elevatorAvailable: true
+      },
+      busDirections: {
+        busLines: ['270', '275', '605'],
+        stopName: '南港軟體園區站',
+        walkingTimeMinutes: 3,
+        directions: '下車後沿著園區指標直走，親子中心在園區中央',
+        frequency: '尖峰時段每8-10分鐘一班，離峰時段每12-15分鐘一班'
+      },
+      cyclingDirections: {
+        bikeAccessible: true,
+        bikeStorageAvailable: true,
+        directions: '軟體園區內有完整自行車道，親子中心外有自行車停放區',
+        estimatedCyclingTimeMinutes: 8
+      },
+      driversLicenseAccess: {
+        drivingTimeFromCityCenter: 20,
+        parkingEntrance: '南港軟體園區停車場（經貿二路入口）',
+        gpsCoordinates: { lat: 25.0556, lng: 121.6089 },
+        accessRoadType: '南港區園區內部道路'
+      },
+      accessibleTransportOptions: {
+        wheelchairAccessibleMRT: true,
+        elevatorAtStation: true,
+        accessibleBusAvailable: true
+      },
+      entranceLocation: {
+        mainEntranceName: '經貿二路191號主入口',
+        alternateEntrances: ['園區內側入口'],
+        closestEntranceFromTransit: '從MRT南港軟體園區站：1號出口直達（最近，步行2分鐘）',
+        disabledAccessEntrance: '主入口設有無障礙電梯和停車位'
+      },
+      navigationNotes: '南港軟體園區親子中心位於南港區軟體園區內，交通非常便利。MRT棕線南港軟體園區站1號出口步行2分鐘直達（最方便），或搭公車270、275、605號至園區站（下車後步行3分鐘）。園區內有停車場，自行車設施完善。中心位於園區中央，標示清楚易找。'
     }
   },
   {
@@ -2401,6 +2611,48 @@ export let mockLocations: Location[] = [
       suggestedDurationPerActivityType: '淺水池：30-45分鐘、遊泳課程：60分鐘、自由遊玩：1-2小時',
       outdoorVsIndoorActivities: '冬季100%室內，夏季70%室內+30%戶外',
       playgroundAndActivityNotes: '內湖運動中心為公設游泳設施，主要用於競技和訓練，不若兒童新樂園般有娛樂設施。適合4歲以上想學習游泳的兒童。淺水池適合初學者，但高峰時段（周末下午和晚間）常排隊。夏季水滑梯超人氣，等待時間長。建議預約游泳課程以保證時間。'
+    },
+    navigationFromTransit: {
+      hasPublicTransitAccess: true,
+      mrtDirections: {
+        station: '文湖線內湖站（規劃中）',
+        distance: 800,
+        walkingTimeMinutes: 12,
+        directions: '目前無直達MRT，可搭民權路相關公車或自行開車',
+        exitNumber: '待建',
+        elevatorAvailable: false
+      },
+      busDirections: {
+        busLines: ['205', '212', '247', '256'],
+        stopName: '內湖運動中心站',
+        walkingTimeMinutes: 5,
+        directions: '下車後沿著民權路直走，運動中心在右側',
+        frequency: '尖峰時段每8-12分鐘一班，離峰時段每15-20分鐘一班'
+      },
+      cyclingDirections: {
+        bikeAccessible: true,
+        bikeStorageAvailable: true,
+        directions: '沿著民權路自行車道可直達，運動中心外有自行車停放區',
+        estimatedCyclingTimeMinutes: 12
+      },
+      driversLicenseAccess: {
+        drivingTimeFromCityCenter: 25,
+        parkingEntrance: '民權路運動中心地下停車場',
+        gpsCoordinates: { lat: 25.0832, lng: 121.5876 },
+        accessRoadType: '台北市內湖區民權路幹道'
+      },
+      accessibleTransportOptions: {
+        wheelchairAccessibleMRT: false,
+        elevatorAtStation: false,
+        accessibleBusAvailable: true
+      },
+      entranceLocation: {
+        mainEntranceName: '民權路運動中心主入口',
+        alternateEntrances: ['停車場出入口'],
+        closestEntranceFromTransit: '從公車站：民權路內湖運動中心站（下車步行5分鐘即到）',
+        disabledAccessEntrance: '主入口設有無障礙坡道和停車位'
+      },
+      navigationNotes: '內湖運動中心位於台北市內湖區民權路，目前無直達MRT（文湖線內湖站規劃中）。搭公車205、212、247、256號至內湖運動中心站（下車步行5分鐘），或開車至民權路地下停車場（方便快速）。自行車沿著民權路專用道可直達。停車場設有無障礙設施。'
     }
   },
   {
@@ -2824,6 +3076,48 @@ export let mockLocations: Location[] = [
       suggestedDurationPerActivityType: '水滑梯排隊+遊玩：15-30分鐘、波浪池：30-45分鐘、懶人漂流河：20分鐘、整體遊玩時間：4-6小時',
       outdoorVsIndoorActivities: '100%戶外，無室內設施',
       playgroundAndActivityNotes: '新店水上樂園是台北地區最大的水上樂園，適合4歲以上學齡兒童和青少年。擁有30多項水上設施和遊樂。高峰期（周末和暑假）人非常多，排隊時間長達30-60分鐘。建議早上8-10點到達或參加夜間活動。4歲以下兒童不建議，因無特別設施。務必做好防曬和補充水分。'
+    },
+    navigationFromTransit: {
+      hasPublicTransitAccess: true,
+      mrtDirections: {
+        station: '新店站 (Green Line)',
+        distance: 2000,
+        walkingTimeMinutes: 25,
+        directions: 'MRT新店站2號出口，沿著中興路直走，過新店溪橋後即為園區',
+        exitNumber: '2號出口',
+        elevatorAvailable: true
+      },
+      busDirections: {
+        busLines: ['58', '59', '208', '248', '915'],
+        stopName: '新店水上樂園站',
+        walkingTimeMinutes: 5,
+        directions: '下車後沿著指標直走，園區入口明顯',
+        frequency: '尖峰時段每8-15分鐘一班，離峰時段每15-20分鐘一班'
+      },
+      cyclingDirections: {
+        bikeAccessible: true,
+        bikeStorageAvailable: true,
+        directions: '沿著新店溪自行車道可直達，園區外有停自行車區',
+        estimatedCyclingTimeMinutes: 20
+      },
+      driversLicenseAccess: {
+        drivingTimeFromCityCenter: 30,
+        parkingEntrance: '中興路新店水上樂園停車場',
+        gpsCoordinates: { lat: 24.9806, lng: 121.5433 },
+        accessRoadType: '新北市新店區主要道路'
+      },
+      accessibleTransportOptions: {
+        wheelchairAccessibleMRT: true,
+        elevatorAtStation: true,
+        accessibleBusAvailable: true
+      },
+      entranceLocation: {
+        mainEntranceName: '中興路1號主入口',
+        alternateEntrances: ['停車場入口', '新店溪河濱公園入口'],
+        closestEntranceFromTransit: '從MRT新店站：中興路主入口（步行25分鐘較遠，建議搭計程車或公車）；從公車站：新店水上樂園站（最近，步行5分鐘）',
+        disabledAccessEntrance: '主入口設有無障礙停車位和坡道'
+      },
+      navigationNotes: '新店水上樂園位於新北市新店區中興路，交通相對不如市區方便。MRT新店站綠線2號出口步行25分鐘較遠，建議搭公車58、59、208、248或915號至新店水上樂園站（下車步行5分鐘，最方便）。或自行開車至中興路停車場（推薦）。位於新店溪河濱公園附近，風景優美。'
     }
   },
 ];
