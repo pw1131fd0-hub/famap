@@ -57,6 +57,11 @@ export const translations = {
       address: '地址',
       rating: '評分',
       facilities: '設施',
+      openingHours: '營業時間',
+      ageRange: '建議年齡',
+      pricing: '費用',
+      closed: '已關閉',
+      isFree: '免費',
     },
     reviews: {
       title: '評論',
@@ -125,6 +130,11 @@ export const translations = {
       address: 'Address',
       rating: 'Rating',
       facilities: 'Facilities',
+      openingHours: 'Hours',
+      ageRange: 'Recommended Age',
+      pricing: 'Pricing',
+      closed: 'Closed',
+      isFree: 'Free',
     },
     reviews: {
       title: 'Reviews',

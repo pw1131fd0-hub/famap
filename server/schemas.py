@@ -18,6 +18,23 @@ class Coordinates(BaseModel):
     lat: float
     lng: float
 
+class OperatingHours(BaseModel):
+    monday: Optional[str] = None
+    tuesday: Optional[str] = None
+    wednesday: Optional[str] = None
+    thursday: Optional[str] = None
+    friday: Optional[str] = None
+    saturday: Optional[str] = None
+    sunday: Optional[str] = None
+
+class AgeRange(BaseModel):
+    minAge: Optional[int] = None
+    maxAge: Optional[int] = None
+
+class PricingInfo(BaseModel):
+    isFree: bool = True
+    priceRange: Optional[str] = None  # e.g., "100-500 NTD"
+
 class LocationBase(BaseModel):
     name: LocalizedString
     description: LocalizedString
@@ -25,6 +42,9 @@ class LocationBase(BaseModel):
     coordinates: Coordinates
     address: LocalizedString
     facilities: List[str]
+    operatingHours: Optional[OperatingHours] = None
+    ageRange: Optional[AgeRange] = None
+    pricing: Optional[PricingInfo] = None
 
 class LocationCreate(LocationBase):
     pass

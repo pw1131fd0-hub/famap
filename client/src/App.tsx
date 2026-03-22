@@ -32,6 +32,17 @@ const formatDistance = (distanceKm: number): string => {
   return `${distanceKm.toFixed(1)}km`;
 };
 
+// Day names mapping
+const DAY_NAMES_ZH: Record<string, string> = {
+  monday: '一',
+  tuesday: '二',
+  wednesday: '三',
+  thursday: '四',
+  friday: '五',
+  saturday: '六',
+  sunday: '日',
+};
+
 // City data with coordinates and descriptions
 type CityKey = 'taipei' | 'new_taipei' | 'taoyuan';
 
@@ -373,6 +384,41 @@ function App() {
                   <h4>{t.locationDetail.address}</h4>
                   <p>{selectedLocation.address[language]}</p>
                 </div>
+                {selectedLocation.pricing && (
+                  <div className="detail-section">
+                    <h4>{t.locationDetail.pricing}</h4>
+                    <p>{selectedLocation.pricing.isFree ? t.locationDetail.isFree : selectedLocation.pricing.priceRange || 'Paid'}</p>
+                  </div>
+                )}
+                {selectedLocation.ageRange && (selectedLocation.ageRange.minAge !== undefined || selectedLocation.ageRange.maxAge !== undefined) && (
+                  <div className="detail-section">
+                    <h4>{t.locationDetail.ageRange}</h4>
+                    <p>
+                      {selectedLocation.ageRange.minAge && selectedLocation.ageRange.maxAge
+                        ? `${selectedLocation.ageRange.minAge} - ${selectedLocation.ageRange.maxAge} ${language === 'zh' ? '歲' : 'years'}`
+                        : selectedLocation.ageRange.minAge ? `${selectedLocation.ageRange.minAge}+ ${language === 'zh' ? '歲' : 'years'}`
+                        : `Up to ${selectedLocation.ageRange.maxAge} ${language === 'zh' ? '歲' : 'years'}`}
+                    </p>
+                  </div>
+                )}
+                {selectedLocation.operatingHours && (
+                  <div className="detail-section">
+                    <h4>{t.locationDetail.openingHours}</h4>
+                    <div className="hours-list">
+                      {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day) => {
+                        const dayName = language === 'zh'
+                          ? DAY_NAMES_ZH[day]
+                          : day.substring(0, 3).toUpperCase();
+                        const hours = selectedLocation.operatingHours![day as keyof typeof selectedLocation.operatingHours];
+                        return hours ? (
+                          <p key={day} className="hours-item">
+                            <strong>{language === 'zh' ? `週${dayName}` : dayName}:</strong> {hours}
+                          </p>
+                        ) : null;
+                      })}
+                    </div>
+                  </div>
+                )}
                 <div className="detail-section">
                   <h4>{t.locationDetail.facilities}</h4>
                   <div className="facility-chips">

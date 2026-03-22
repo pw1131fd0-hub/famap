@@ -1,5 +1,25 @@
 export type Category = 'park' | 'nursing_room' | 'restaurant' | 'medical' | 'attraction' | 'other';
 
+export interface OperatingHours {
+  monday?: string;
+  tuesday?: string;
+  wednesday?: string;
+  thursday?: string;
+  friday?: string;
+  saturday?: string;
+  sunday?: string;
+}
+
+export interface AgeRange {
+  minAge?: number;
+  maxAge?: number;
+}
+
+export interface PricingInfo {
+  isFree: boolean;
+  priceRange?: string;
+}
+
 export interface Location {
   id: string;
   name: {
@@ -22,6 +42,9 @@ export interface Location {
   facilities: string[];
   averageRating: number;
   photoUrl?: string;
+  operatingHours?: OperatingHours;
+  ageRange?: AgeRange;
+  pricing?: PricingInfo;
 }
 
 export interface Review {
@@ -56,6 +79,9 @@ export interface LocationCreateDTO {
   coordinates: { lat: number; lng: number };
   address: { zh: string; en: string };
   facilities: string[];
+  operatingHours?: OperatingHours;
+  ageRange?: AgeRange;
+  pricing?: PricingInfo;
 }
 
 export interface Favorite {
