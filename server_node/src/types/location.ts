@@ -801,6 +801,28 @@ export interface NoiseAndSensoryEnvironmentInfo {
   sensoryEnvironmentNotes?: string; // e.g., "Best for sensory-sensitive families during quiet hours (weekday mornings). Main playground is loud; quieter activities available indoors. Autism-friendly hours available with reduced stimulation."
 }
 
+export interface InsectAndAllergenEnvironmentInfo {
+  mosquitoRisk?: 'none' | 'low' | 'moderate' | 'high' | 'very_high'; // Overall mosquito prevalence
+  mosquitoSeasons?: string[]; // e.g., ["May-October", "year-round in some areas"]
+  peakMosquitoMonths?: string; // e.g., "July-September, especially dusk hours"
+  beeAndWaspRisk?: 'none' | 'low' | 'moderate' | 'high'; // Risk of bee/wasp encounters
+  beeWaspSeasons?: string; // e.g., "Spring-fall, especially near flowers"
+  spiderPresence?: 'none' | 'minimal' | 'moderate' | 'common'; // Spider frequency
+  otherInsectsInfo?: string; // e.g., "Dragonflies near water areas, grasshoppers in summer, no fire ants"
+  pollenLevels?: 'low' | 'moderate' | 'high' | 'very_high'; // Pollen concentration risk
+  allergenicPlants?: string[]; // e.g., ["acacia", "mango tree pollen", "grass pollen in summer"]
+  peakPollenMonths?: string; // e.g., "March-May for mango pollen"
+  insectRepellentAvailable?: boolean; // Can you buy or are provided mosquito repellent?
+  mosquitoNetAvailable?: boolean; // Mosquito nets provided or available for rent?
+  hasScreensOrBarriers?: boolean; // Screened areas for mosquito protection?
+  indoorVsOutdoorInsectRisk?: string; // e.g., "Outdoor areas high risk May-October; indoor areas minimal risk"
+  insectPreventionMeasures?: string[]; // e.g., ["mosquito spraying program", "standing water management", "sealed ventilation windows"]
+  staffAlertnessToInsects?: boolean; // Do staff respond to insect issues?
+  bestTimeToAvoidInsects?: string; // e.g., "Visit during dry season (Nov-Apr) or morning hours (8-11am) to avoid peak mosquito activity"
+  insectAllergenNotes?: string; // e.g., "High mosquito activity May-October, especially at dusk. Indoor areas and main pavilion have screens. Insect repellent recommended. Alternative: visit early morning or dry season months."
+}
+
+
 export interface Location {
   id: string;
   name: {
@@ -882,6 +904,7 @@ export interface Location {
   weatherAndSunSafety?: WeatherAndSunSafetyInfo;
   walkingDistanceAndDifficulty?: WalkingDistanceAndDifficultyInfo;
   noiseAndSensoryEnvironment?: NoiseAndSensoryEnvironmentInfo;
+  insectAndAllergenEnvironment?: InsectAndAllergenEnvironmentInfo;
 }
 
 export interface SearchParams {

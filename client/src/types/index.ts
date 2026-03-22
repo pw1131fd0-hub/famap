@@ -800,6 +800,27 @@ export interface NoiseAndSensoryEnvironmentInfo {
   sensoryEnvironmentNotes?: string;
 }
 
+export interface InsectAndAllergenEnvironmentInfo {
+  mosquitoRisk?: 'none' | 'low' | 'moderate' | 'high' | 'very_high';
+  mosquitoSeasons?: string[];
+  peakMosquitoMonths?: string;
+  beeAndWaspRisk?: 'none' | 'low' | 'moderate' | 'high';
+  beeWaspSeasons?: string;
+  spiderPresence?: 'none' | 'minimal' | 'moderate' | 'common';
+  otherInsectsInfo?: string;
+  pollenLevels?: 'low' | 'moderate' | 'high' | 'very_high';
+  allergenicPlants?: string[];
+  peakPollenMonths?: string;
+  insectRepellentAvailable?: boolean;
+  mosquitoNetAvailable?: boolean;
+  hasScreensOrBarriers?: boolean;
+  indoorVsOutdoorInsectRisk?: string;
+  insectPreventionMeasures?: string[];
+  staffAlertnessToInsects?: boolean;
+  bestTimeToAvoidInsects?: string;
+  insectAllergenNotes?: string;
+}
+
 export interface Location {
   id: string;
   name: {
@@ -881,6 +902,7 @@ export interface Location {
   weatherAndSunSafety?: WeatherAndSunSafetyInfo;
   walkingDistanceAndDifficulty?: WalkingDistanceAndDifficultyInfo;
   noiseAndSensoryEnvironment?: NoiseAndSensoryEnvironmentInfo;
+  insectAndAllergenEnvironment?: InsectAndAllergenEnvironmentInfo;
 }
 
 export interface Review {

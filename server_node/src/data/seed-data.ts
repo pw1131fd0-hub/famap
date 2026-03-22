@@ -570,6 +570,26 @@ export let mockLocations: Location[] = [
       echoProblems: false,
       staffSensoryAwareness: 'basic',
       sensoryEnvironmentNotes: '戶外公園對感官敏感兒童而言，應選擇平日上午造訪。林區區域非常寧靜，適合需要感官調節的家庭。週末應避免。清晨散步是感官敏感家庭的理想選擇。'
+    },
+    insectAndAllergenEnvironment: {
+      mosquitoRisk: 'moderate',
+      mosquitoSeasons: ['5月至10月'],
+      peakMosquitoMonths: '7月至9月，黃昏和夜間最嚴重',
+      beeAndWaspRisk: 'low',
+      beeWaspSeasons: '春季花期（3月至5月）和夏季，靠近花園區域',
+      spiderPresence: 'minimal',
+      otherInsectsInfo: '蜻蜓和蟬在夏季常見，特別是在林區和池塘附近；沒有火蟻',
+      pollenLevels: 'moderate',
+      allergenicPlants: ['樟樹', '相思樹', '夏季草花'],
+      peakPollenMonths: '春季（3月至5月）和秋季（9月至11月）',
+      insectRepellentAvailable: true,
+      mosquitoNetAvailable: false,
+      hasScreensOrBarriers: false,
+      indoorVsOutdoorInsectRisk: '戶外區域5-10月蚊蟲風險中等；林區相對較低；室內設施無蚊蟲',
+      insectPreventionMeasures: ['公園全年滅蚊計劃', '池塘定期清理防止孳生', '開放空間設計減少死角'],
+      staffAlertnessToInsects: true,
+      bestTimeToAvoidInsects: '平日上午9時至下午2時蚊蟲最少，或選擇冬季11月至4月訪問',
+      insectAllergenNotes: '大安森林公園5月至10月蚊蟲活動頻繁，黃昏特別嚴重。建議穿著長袖褲和使用防蚊液。早晨訪問時蚊蟲最少。冬季蚊蟲幾乎沒有。林區比遊樂場蚊蟲少。過敏體質兒童注意春秋季節樟樹花粉。'
     }
   },
   {
@@ -1226,6 +1246,26 @@ export let mockLocations: Location[] = [
       echoProblems: true,
       staffSensoryAwareness: 'basic',
       sensoryEnvironmentNotes: '兒童樂園整體非常嘈雜，不適合感官敏感或自閉症兒童。週一至週五上午相對較靜，但仍有可觀噪音。家有感官敏感兒童應考慮其他場所。加強音樂或閃烁燈光的遊樂設施應讓敏感兒童避開。'
+    },
+    insectAndAllergenEnvironment: {
+      mosquitoRisk: 'very_high',
+      mosquitoSeasons: ['6月至10月'],
+      peakMosquitoMonths: '7月至9月全天，特別是黃昏',
+      beeAndWaspRisk: 'moderate',
+      beeWaspSeasons: '春季和夏季，特別是靠近樹木和花卉區域',
+      spiderPresence: 'minimal',
+      otherInsectsInfo: '蜻蜓在夏季常見；沒有火蟻；蟬鳴聲明顯',
+      pollenLevels: 'moderate',
+      allergenicPlants: ['相思樹', '夏季草花'],
+      peakPollenMonths: '春季（3月至5月）',
+      insectRepellentAvailable: false,
+      mosquitoNetAvailable: false,
+      hasScreensOrBarriers: false,
+      indoorVsOutdoorInsectRisk: '室外遊樂園區6月至10月蚊蟲風險非常高；室內遊樂設施無蚊蟲',
+      insectPreventionMeasures: ['定期園區噴灑防蚊（安全成分）'],
+      staffAlertnessToInsects: true,
+      bestTimeToAvoidInsects: '冬季11月至4月幾乎沒有蚊蟲；夏季應早上9-11時或傍晚6時後訪問',
+      insectAllergenNotes: '兒童新樂園6月至10月蚊蟲非常嚴重，特別是黃昏。強烈建議自備防蚊液。室外遊樂園區風險很高，室內設施可避免蚊蟲。冬季為理想避蚊季節。'
     }
   },
   {
@@ -1822,6 +1862,26 @@ export let mockLocations: Location[] = [
       echoProblems: false,
       staffSensoryAwareness: 'trained',
       sensoryEnvironmentNotes: '國立臺灣博物館是感官敏感和自閉症兒童的優選場所。安靜的文化教育環境、柔和照明、有限刺激。平日上午造訪最佳，避免週末和導覽時段。完全室內、恆溫、寧靜、低刺激——對感官敏感家庭極為友善。'
+    },
+    insectAndAllergenEnvironment: {
+      mosquitoRisk: 'none',
+      mosquitoSeasons: [],
+      peakMosquitoMonths: '無蚊蟲風險',
+      beeAndWaspRisk: 'none',
+      beeWaspSeasons: '完全室內設施',
+      spiderPresence: 'none',
+      otherInsectsInfo: '完全室內控制環境，無蟲蟲風險',
+      pollenLevels: 'low',
+      allergenicPlants: [],
+      peakPollenMonths: '無顯著花粉',
+      insectRepellentAvailable: false,
+      mosquitoNetAvailable: false,
+      hasScreensOrBarriers: false,
+      indoorVsOutdoorInsectRisk: '完全室內設施，無蚊蟲和花粉風險',
+      insectPreventionMeasures: ['空調系統過濾', '密閉門窗防止蟲蟲進入'],
+      staffAlertnessToInsects: false,
+      bestTimeToAvoidInsects: '全年任何時間都可安心訪問',
+      insectAllergenNotes: '國立臺灣博物館完全室內，無蚊蟲問題。花粉和過敏原風險極低，適合過敏和蟲敏感兒童。全年任何季節都是理想選擇。'
     }
   },
   {
@@ -2414,6 +2474,26 @@ export let mockLocations: Location[] = [
       echoProblems: false,
       staffSensoryAwareness: 'trained',
       sensoryEnvironmentNotes: '親子餐廳噪音適中，特別是用餐區。對大多數兒童來說舒適。感官敏感兒童應選擇非用餐時段和用餐區。下午茶時間是最寧靜時段。整體環境友善，但遊樂區會有典型兒童活動的聲音。'
+    },
+    insectAndAllergenEnvironment: {
+      mosquitoRisk: 'low',
+      mosquitoSeasons: ['6月至10月，但風險較低'],
+      peakMosquitoMonths: '夏季黃昏可能出現',
+      beeAndWaspRisk: 'low',
+      beeWaspSeasons: '春夏季靠近窗戶可能出現',
+      spiderPresence: 'minimal',
+      otherInsectsInfo: '室內控制環境，蟲蟲風險最小',
+      pollenLevels: 'low',
+      allergenicPlants: ['可能有窗外花卉花粉'],
+      peakPollenMonths: '春季（3月至5月）',
+      insectRepellentAvailable: true,
+      mosquitoNetAvailable: false,
+      hasScreensOrBarriers: true,
+      indoorVsOutdoorInsectRisk: '主要室內，空調區域無蚊蟲；靠近窗戶遊樂區夏季可能有蚊蟲',
+      insectPreventionMeasures: ['窗戶紗窗', '空調維持舒適溫度降低蚊蟲活動'],
+      staffAlertnessToInsects: true,
+      bestTimeToAvoidInsects: '冬季11月至4月無蚊蟲；夏季中午訪問蚊蟲最少',
+      insectAllergenNotes: '親子餐廳主要室內，蚊蟲風險低。遊樂區靠近窗戶夏季可能偶見蚊蟲，但不嚴重。空調區域完全無蚊蟲。過敏兒童應避免春季高花粉期間。'
     }
   },
   {
@@ -3020,6 +3100,26 @@ export let mockLocations: Location[] = [
       echoProblems: false,
       staffSensoryAwareness: 'comprehensive',
       sensoryEnvironmentNotes: '南港軟體園區親子中心是感官敏感和自閉症兒童的優選場所。現代化設計、隔音良好、寧靜、低刺激、清潔無味。平日造訪尤佳，特別是週一至週四上午。工作人員具備感官意識。整體環境完全適合各種感官敏感度的家庭。'
+    },
+    insectAndAllergenEnvironment: {
+      mosquitoRisk: 'none',
+      mosquitoSeasons: [],
+      peakMosquitoMonths: '現代密閉設施，無蚊蟲',
+      beeAndWaspRisk: 'none',
+      beeWaspSeasons: '完全室內',
+      spiderPresence: 'none',
+      otherInsectsInfo: '超現代設施，每日清潔維護，蟲蟲進入機率極低',
+      pollenLevels: 'none',
+      allergenicPlants: [],
+      peakPollenMonths: '空氣濾淨系統去除花粉',
+      insectRepellentAvailable: false,
+      mosquitoNetAvailable: false,
+      hasScreensOrBarriers: false,
+      indoorVsOutdoorInsectRisk: '完全室內超現代設施，無蚊蟲和花粉風險',
+      insectPreventionMeasures: ['高效空氣濾淨系統（HEPA）', '密閉現代窗戶系統', '每日深度清潔'],
+      staffAlertnessToInsects: false,
+      bestTimeToAvoidInsects: '全年任何時間都完全安心',
+      insectAllergenNotes: '南港軟體園區親子中心為現代密閉設施，完全無蚊蟲和花粉風險。高效空氣濾淨系統提供最潔淨環境。過敏和蟲敏感兒童的理想選擇。全年任何季節訪問都是安心的。'
     }
   },
   {
@@ -3607,6 +3707,26 @@ export let mockLocations: Location[] = [
       echoProblems: true,
       staffSensoryAwareness: 'basic',
       sensoryEnvironmentNotes: '運動中心主要面向活躍兒童，噪音適度。感官敏感兒童應在平日上午造訪，避開課程時間。室內泳池迴響較多；室外區相對好。氯氣味道可能對敏感兒童帶來不適。建議感官敏感家庭提前查看課程表以避開尖峰時段。'
+    },
+    insectAndAllergenEnvironment: {
+      mosquitoRisk: 'moderate',
+      mosquitoSeasons: ['6月至10月'],
+      peakMosquitoMonths: '7月至9月，特別是黃昏和靠近水區',
+      beeAndWaspRisk: 'low',
+      beeWaspSeasons: '春夏季可能靠近樹木',
+      spiderPresence: 'minimal',
+      otherInsectsInfo: '夏季有蜻蜓靠近水區；沒有火蟻',
+      pollenLevels: 'moderate',
+      allergenicPlants: ['相思樹', '水邊植物'],
+      peakPollenMonths: '春季（3月至5月）',
+      insectRepellentAvailable: true,
+      mosquitoNetAvailable: false,
+      hasScreensOrBarriers: false,
+      indoorVsOutdoorInsectRisk: '室外泳池和運動區6月至10月蚊蟲風險中等；室內更衣室無蚊蟲',
+      insectPreventionMeasures: ['定期排水維護防止蚊蟲孳生', '戶外燈光管理', '草地定期修剪'],
+      staffAlertnessToInsects: true,
+      bestTimeToAvoidInsects: '冬季11月至4月蚊蟲最少；夏季上午10時至下午3時蚊蟲較少',
+      insectAllergenNotes: '內湖運動中心戶外泳池區6月至10月蚊蟲風險中等，尤其黃昏。建議自備防蚊液。室外區域蚊蟲較多；室內設施無蚊蟲。冬季為最佳季節。'
     }
   },
   {
@@ -4230,6 +4350,26 @@ export let mockLocations: Location[] = [
       echoProblems: false,
       staffSensoryAwareness: 'minimal',
       sensoryEnvironmentNotes: '水上樂園是充滿感官刺激的環境，不適合感官敏感或自閉症兒童。開放式戶外園區、高噪音、尖叫聲、強烈日光、多感官刺激。感官敏感家庭應嚴重考慮此地點。若必須造訪，建議：早起來園、帶耳塞、計畫短時間停留。感官友善場所（博物館、親子中心）是更好選擇。'
+    },
+    insectAndAllergenEnvironment: {
+      mosquitoRisk: 'very_high',
+      mosquitoSeasons: ['6月至10月'],
+      peakMosquitoMonths: '7月至9月全天，尤其傍晚和夜間',
+      beeAndWaspRisk: 'moderate',
+      beeWaspSeasons: '春夏季，靠近樹木和花卉區域',
+      spiderPresence: 'moderate',
+      otherInsectsInfo: '蜻蜓在水區常見；蟬鳴明顯；可能有螞蟻和蜘蛛',
+      pollenLevels: 'moderate',
+      allergenicPlants: ['相思樹', '水邊植物', '夏季草花'],
+      peakPollenMonths: '春季（3月至5月）',
+      insectRepellentAvailable: true,
+      mosquitoNetAvailable: false,
+      hasScreensOrBarriers: false,
+      indoorVsOutdoorInsectRisk: '完全戶外園區，6月至10月蚊蟲風險非常高，尤其靠近草地和水區',
+      insectPreventionMeasures: ['夏季定期滅蚊噴灑', '草地修剪維護', '垃圾清理防止蚊蟲孳生'],
+      staffAlertnessToInsects: true,
+      bestTimeToAvoidInsects: '冬季11月至4月蚊蟲最少；夏季上午8-11時蚊蟲最少',
+      insectAllergenNotes: '新店陽光園區為完全戶外水樂園，6月至10月蚊蟲風險非常高，特別是傍晚。強烈建議自備防蚊液並頻繁補擦。靠近草地區域蚊蟲更多。被蚊子叮咬敏感的兒童應避免夏季黃昏訪問。冬季為理想季節。'
     }
   },
 ];
