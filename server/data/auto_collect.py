@@ -111,6 +111,16 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
                     facilities.append('nursing_room')
                 if tags.get('changing_table') == 'yes':
                     facilities.append('changing_table')
+                if tags.get('toilets') == 'yes':
+                    facilities.append('public_toilet')
+                if tags.get('wheelchair') == 'yes':
+                    facilities.append('wheelchair_accessible')
+                if tags.get('drinking_water') == 'yes':
+                    facilities.append('drinking_water')
+                if tags.get('internet_access') == 'yes' or tags.get('wifi') == 'yes':
+                    facilities.append('wifi')
+                if tags.get('parking') == 'yes' or tags.get('parking:fee') in ['yes', 'no']:
+                    facilities.append('parking')
                 
                 if not name_zh:
                     if tourism == 'museum': name_zh = '博物館'
@@ -130,6 +140,17 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
                 facilities = ['stroller_accessible']
                 if leisure == 'park': facilities.append('public_toilet')
                 if leisure == 'playground': facilities.append('high_chair')
+                # Check for additional park facilities
+                if tags.get('toilets') == 'yes':
+                    facilities.append('public_toilet')
+                if tags.get('wheelchair') == 'yes':
+                    facilities.append('wheelchair_accessible')
+                if tags.get('drinking_water') == 'yes':
+                    facilities.append('drinking_water')
+                if tags.get('shade') == 'yes':
+                    facilities.append('shaded_area')
+                if tags.get('playground:equipment') or tags.get('play_equipment'):
+                    facilities.append('playground_equipment')
                 if not name_zh:
                     name_zh = '公園/遊樂場' if leisure in ['park', 'playground'] else '綠地'
                 if not name_en:
@@ -140,6 +161,16 @@ async def fetch_osm_data(lat=None, lng=None, radius=None):
                 facilities = ['stroller_accessible']
                 if tags.get('high_chair') == 'yes':
                     facilities.append('high_chair')
+                if tags.get('toilets') == 'yes':
+                    facilities.append('public_toilet')
+                if tags.get('wheelchair') == 'yes':
+                    facilities.append('wheelchair_accessible')
+                if tags.get('internet_access') == 'yes' or tags.get('wifi') == 'yes':
+                    facilities.append('wifi')
+                if tags.get('outdoor_seating') == 'yes':
+                    facilities.append('outdoor_seating')
+                if tags.get('changing_table') == 'yes':
+                    facilities.append('changing_table')
                 if not name_zh: name_zh = '親子友善餐廳'
                 if not name_en: name_en = 'Kid Friendly Restaurant'
 
