@@ -623,6 +623,37 @@ export interface NavigationFromTransitInfo {
   navigationNotes?: string; // Complete navigation information (e.g., "From MRT: Exit 2, turn left, walk 350m to main gate. Watch for traffic at intersection. Total walk 8 mins. From bus stop: walk 200m along Xinsheng Rd to south entrance")
 }
 
+export interface PhotographySpotsAndServicesInfo {
+  bestPhotoSpots?: {
+    spotName: string; // e.g., "Main Entrance with Fountain"
+    description: string; // Description of the spot
+    bestTimeOfDay?: string; // e.g., "Golden hour (4-6pm)"
+    ageAppropriate?: string; // e.g., "All ages, especially kids 3-8"
+    photoTip?: string; // Photography suggestion
+  }[];
+  photoBooth?: {
+    available: boolean;
+    locations?: string[]; // Where photo booths are located
+    price?: string; // Cost per photo
+    instantPrints?: boolean; // Can you get prints immediately?
+    digitalCopies?: boolean; // Digital copies available?
+  };
+  professionalPhotoServices?: {
+    available: boolean;
+    types?: string[]; // e.g., ["family portraits", "kids action shots"]
+    booking?: string; // How to book
+    pricing?: string; // Price range
+    turnaroundTime?: string; // When photos are ready
+  };
+  scenicLocations?: string[]; // Best scenic locations for photos
+  allowedEquipment?: string[]; // e.g., ["tripod", "drone", "professional camera"]
+  photoStorageSpots?: {
+    hasCloud?: boolean; // WiFi to upload to cloud?
+    hasUSBServices?: boolean; // USB backup services?
+  };
+  photographyNotes?: string; // General photography tips and guidelines
+}
+
 export interface Location {
   id: string;
   name: {
@@ -699,6 +730,7 @@ export interface Location {
   healthDocumentation?: HealthDocumentationRequirementsInfo;
   playgroundAndActivity?: PlaygroundEquipmentAndActivityInfo;
   navigationFromTransit?: NavigationFromTransitInfo;
+  photographySpotsAndServices?: PhotographySpotsAndServicesInfo;
 }
 
 export interface SearchParams {

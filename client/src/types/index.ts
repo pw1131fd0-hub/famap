@@ -622,6 +622,37 @@ export interface NavigationFromTransitInfo {
   navigationNotes?: string;
 }
 
+export interface PhotographySpotsAndServicesInfo {
+  bestPhotoSpots?: {
+    spotName: string;
+    description: string;
+    bestTimeOfDay?: string;
+    ageAppropriate?: string;
+    photoTip?: string;
+  }[];
+  photoBooth?: {
+    available: boolean;
+    locations?: string[];
+    price?: string;
+    instantPrints?: boolean;
+    digitalCopies?: boolean;
+  };
+  professionalPhotoServices?: {
+    available: boolean;
+    types?: string[];
+    booking?: string;
+    pricing?: string;
+    turnaroundTime?: string;
+  };
+  scenicLocations?: string[];
+  allowedEquipment?: string[];
+  photoStorageSpots?: {
+    hasCloud?: boolean;
+    hasUSBServices?: boolean;
+  };
+  photographyNotes?: string;
+}
+
 export interface Location {
   id: string;
   name: {
@@ -698,6 +729,7 @@ export interface Location {
   healthDocumentation?: HealthDocumentationRequirementsInfo;
   playgroundAndActivity?: PlaygroundEquipmentAndActivityInfo;
   navigationFromTransit?: NavigationFromTransitInfo;
+  photographySpotsAndServices?: PhotographySpotsAndServicesInfo;
 }
 
 export interface Review {
@@ -781,6 +813,12 @@ export interface LocationCreateDTO {
   queueWaitTime?: QueueWaitTimeInfo;
   infantSpecific?: InfantSpecificInfo;
   storageLocker?: StorageLockerInfo;
+  childAgeCompatibility?: ChildAgeCombinationSuitabilityInfo;
+  visitCost?: ComprehensiveVisitCostInfo;
+  healthDocumentation?: HealthDocumentationRequirementsInfo;
+  playgroundAndActivity?: PlaygroundEquipmentAndActivityInfo;
+  navigationFromTransit?: NavigationFromTransitInfo;
+  photographySpotsAndServices?: PhotographySpotsAndServicesInfo;
 }
 
 export interface Favorite {

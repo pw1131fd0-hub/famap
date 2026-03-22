@@ -1925,6 +1925,68 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.photographySpotsAndServices && (
+                  <div className="detail-section">
+                    <h4>📸 {language === 'zh' ? '拍照景點與服務' : 'Photography Spots & Services'}</h4>
+                    {selectedLocation.photographySpotsAndServices.bestPhotoSpots && selectedLocation.photographySpotsAndServices.bestPhotoSpots.length > 0 && (
+                      <div>
+                        <p><strong>{language === 'zh' ? '最佳拍照景點' : 'Best Photo Spots'}</strong></p>
+                        {selectedLocation.photographySpotsAndServices.bestPhotoSpots.map((spot, idx) => (
+                          <div key={idx} style={{ marginLeft: '10px', marginBottom: '8px', borderLeft: '3px solid #ffd700', paddingLeft: '10px' }}>
+                            <p><strong>{spot.spotName}</strong></p>
+                            {spot.description && <p>{spot.description}</p>}
+                            {spot.bestTimeOfDay && <p>{language === 'zh' ? '最佳時間' : 'Best Time'}: {spot.bestTimeOfDay}</p>}
+                            {spot.ageAppropriate && <p>{language === 'zh' ? '適合年齡' : 'Age Group'}: {spot.ageAppropriate}</p>}
+                            {spot.photoTip && <p>{language === 'zh' ? '拍照建議' : 'Photo Tip'}: {spot.photoTip}</p>}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {selectedLocation.photographySpotsAndServices.photoBooth && selectedLocation.photographySpotsAndServices.photoBooth.available && (
+                      <div>
+                        <p><strong>📷 {language === 'zh' ? '拍照機' : 'Photo Booth'}</strong></p>
+                        {selectedLocation.photographySpotsAndServices.photoBooth.locations && selectedLocation.photographySpotsAndServices.photoBooth.locations.length > 0 && (
+                          <p>{language === 'zh' ? '位置' : 'Locations'}: {selectedLocation.photographySpotsAndServices.photoBooth.locations.join(', ')}</p>
+                        )}
+                        {selectedLocation.photographySpotsAndServices.photoBooth.price && (
+                          <p>{language === 'zh' ? '價格' : 'Price'}: {selectedLocation.photographySpotsAndServices.photoBooth.price}</p>
+                        )}
+                        {selectedLocation.photographySpotsAndServices.photoBooth.instantPrints && (
+                          <p>✓ {language === 'zh' ? '可即時打印' : 'Instant Prints Available'}</p>
+                        )}
+                        {selectedLocation.photographySpotsAndServices.photoBooth.digitalCopies && (
+                          <p>✓ {language === 'zh' ? '提供數位檔案' : 'Digital Copies Available'}</p>
+                        )}
+                      </div>
+                    )}
+                    {selectedLocation.photographySpotsAndServices.professionalPhotoServices && selectedLocation.photographySpotsAndServices.professionalPhotoServices.available && (
+                      <div>
+                        <p><strong>📸 {language === 'zh' ? '專業攝影服務' : 'Professional Photography'}</strong></p>
+                        {selectedLocation.photographySpotsAndServices.professionalPhotoServices.types && selectedLocation.photographySpotsAndServices.professionalPhotoServices.types.length > 0 && (
+                          <p>{language === 'zh' ? '服務類型' : 'Types'}: {selectedLocation.photographySpotsAndServices.professionalPhotoServices.types.join(', ')}</p>
+                        )}
+                        {selectedLocation.photographySpotsAndServices.professionalPhotoServices.pricing && (
+                          <p>{language === 'zh' ? '價格' : 'Pricing'}: {selectedLocation.photographySpotsAndServices.professionalPhotoServices.pricing}</p>
+                        )}
+                        {selectedLocation.photographySpotsAndServices.professionalPhotoServices.booking && (
+                          <p>{language === 'zh' ? '預訂方式' : 'Booking'}: {selectedLocation.photographySpotsAndServices.professionalPhotoServices.booking}</p>
+                        )}
+                        {selectedLocation.photographySpotsAndServices.professionalPhotoServices.turnaroundTime && (
+                          <p>{language === 'zh' ? '交付時間' : 'Turnaround Time'}: {selectedLocation.photographySpotsAndServices.professionalPhotoServices.turnaroundTime}</p>
+                        )}
+                      </div>
+                    )}
+                    {selectedLocation.photographySpotsAndServices.scenicLocations && selectedLocation.photographySpotsAndServices.scenicLocations.length > 0 && (
+                      <p><strong>{language === 'zh' ? '景觀地點' : 'Scenic Locations'}</strong>: {selectedLocation.photographySpotsAndServices.scenicLocations.join(', ')}</p>
+                    )}
+                    {selectedLocation.photographySpotsAndServices.allowedEquipment && selectedLocation.photographySpotsAndServices.allowedEquipment.length > 0 && (
+                      <p><strong>{language === 'zh' ? '允許的設備' : 'Allowed Equipment'}</strong>: {selectedLocation.photographySpotsAndServices.allowedEquipment.join(', ')}</p>
+                    )}
+                    {selectedLocation.photographySpotsAndServices.photographyNotes && (
+                      <p><strong>{language === 'zh' ? '拍照建議' : 'Photography Notes'}</strong>: {selectedLocation.photographySpotsAndServices.photographyNotes}</p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>

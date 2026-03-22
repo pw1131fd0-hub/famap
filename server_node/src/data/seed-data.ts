@@ -415,6 +415,45 @@ export let mockLocations: Location[] = [
         disabledAccessEntrance: '新生南路二段設有無障礙通道和停車場'
       },
       navigationNotes: '大安森林公園為台北市中心開放式公園，交通便利。MRT科技大樓站1號出口步行8分鐘可到，或搭公車至新生南路公園站（15、32、38、72號），下車即到。開車可停至周邊停車場或公園北側地下停車場。自行車友善，可直達各入口。進入公園後沿著標示牌可找到各遊樂區和停車位置。'
+    },
+    photographySpotsAndServices: {
+      bestPhotoSpots: [
+        {
+          spotName: '音樂台噴水池',
+          description: '公園最知名的噴水池，背景為綠樹和天空，適合家庭合照',
+          bestTimeOfDay: '下午4-6點夕陽時刻，水彩效果最佳',
+          ageAppropriate: '所有年齡，特別是3-10歲孩童',
+          photoTip: '在噴水池邊角度可拍到多層次的噴泉效果'
+        },
+        {
+          spotName: '觀日平台',
+          description: '公園最高點，可俯瞰整個公園和遠處台北101的景致',
+          bestTimeOfDay: '日出時刻（6-7點）或日落時刻（5-6點）',
+          ageAppropriate: '適合所有年齡的全家福照片',
+          photoTip: '帶著小朋友在平台背景拍攝，整個台北城市盡在眼底'
+        },
+        {
+          spotName: '林蔭步道',
+          description: '綠樹成蔭的步道，陽光透過樹葉灑落，營造溫暖氛圍',
+          bestTimeOfDay: '上午10點-11點半，側光效果最佳',
+          ageAppropriate: '所有年齡',
+          photoTip: '利用樹葉與陽光的對比，拍出溫馨的親子互動照'
+        }
+      ],
+      photoBooth: {
+        available: false,
+        locations: []
+      },
+      professionalPhotoServices: {
+        available: false
+      },
+      scenicLocations: ['音樂台區域', '觀日平台', '林蔭步道', '中央草坪'],
+      allowedEquipment: ['相機', '手機', '腳架（在非人流密集區使用）'],
+      photoStorageSpots: {
+        hasCloud: true,
+        hasUSBServices: false
+      },
+      photographyNotes: '大安森林公園四季景色各異，春天櫻花、夏天綠蔭、秋天楓葉、冬天也有其特色。遊客眾多，建議早晨或傍晚拍照。尊重他人，不影響遊樂設施的正常使用。'
     }
   },
   {
@@ -897,6 +936,52 @@ export let mockLocations: Location[] = [
         disabledAccessEntrance: '地下停車場內有無障礙電梯和專用通道'
       },
       navigationNotes: '兒童新樂園位於台北市士林區，交通便利。MRT士林站紅線2號出口步行15分鐘，或搭巴士11、26、27、32、55號至兒童新樂園站（最方便，下車即到）。開車前往設有地下停車場（200元/時，樂園購票憑證可折抵停車費）。停車場內設有無障礙電梯和專用通道。'
+    },
+    photographySpotsAndServices: {
+      bestPhotoSpots: [
+        {
+          spotName: '樂園入口標誌',
+          description: '樂園大門前的彩色標誌牆，是最受歡迎的打卡景點',
+          bestTimeOfDay: '上午10-11點，光線最柔和，背景清晰',
+          ageAppropriate: '所有年齡',
+          photoTip: '可以拍小朋友站在標誌前開心微笑的全身照'
+        },
+        {
+          spotName: '旋轉木馬',
+          description: '經典的旋轉木馬設施，色彩繽紛，適合拍攝兒童歡樂的瞬間',
+          bestTimeOfDay: '下午1-3點，避免逆光',
+          ageAppropriate: '2-10歲兒童',
+          photoTip: '在旋轉木馬運行時拍攝，可以捕捉孩童臉上的歡樂笑容'
+        },
+        {
+          spotName: '水上遊樂區',
+          description: '夏季水上樂園，孩童嬉水的開心時刻',
+          bestTimeOfDay: '下午2-4點，逆光會有水花閃爍效果',
+          ageAppropriate: '3-12歲',
+          photoTip: '防水手機或相機，拍攝孩子在水中玩樂的自然表情'
+        }
+      ],
+      photoBooth: {
+        available: true,
+        locations: ['遊樂園內商店區', '出口禮品店'],
+        price: '150-300 NTD/4張照片',
+        instantPrints: true,
+        digitalCopies: true
+      },
+      professionalPhotoServices: {
+        available: true,
+        types: ['家庭合照', '兒童寫真', '生日派對攝影'],
+        booking: '需提前預約，請在入園時至客服中心詢問',
+        pricing: '家庭合照 1,500-2,000 NTD，5-10張精修照片',
+        turnaroundTime: '3-5個工作天'
+      },
+      scenicLocations: ['樂園入口', '旋轉木馬', '水上遊樂區', '摩天輪'],
+      allowedEquipment: ['相機', '手機', '腳架（限於指定區域）'],
+      photoStorageSpots: {
+        hasCloud: true,
+        hasUSBServices: false
+      },
+      photographyNotes: '樂園內各設施都是很好的拍照背景。建議穿著色彩鮮豔的衣服以與背景形成對比。高峰期人潮眾多，早晨或黃昏人較少，更適合拍照。園區禁止使用自拍棒和無人機。'
     }
   },
   {
@@ -1329,6 +1414,44 @@ export let mockLocations: Location[] = [
         disabledAccessEntrance: '中山南路主入口設有無障礙坡道和停車位'
       },
       navigationNotes: '國立臺灣博物館位於台北市中正區，交通便利。MRT台大醫院站1號出口步行8分鐘，或搭多條公車（1、2、3、5、15、22、25等）直達博物館門口（最方便）。開車可停至二二八和平公園地下停車場或中山南路路邊停車格。館內位於中山南路，鄰近總統府和和平公園，景點眾多。'
+    },
+    photographySpotsAndServices: {
+      bestPhotoSpots: [
+        {
+          spotName: '博物館建築外觀',
+          description: '日治時期的白色新古典建築，莊重典雅，是台北重要地標',
+          bestTimeOfDay: '上午9-10點，側光打在建築上很漂亮',
+          ageAppropriate: '全年齡',
+          photoTip: '可在博物館前廣場拍攝全景，或在樓梯上拍攝仰角'
+        },
+        {
+          spotName: '館內自然標本展示區',
+          description: '恐龍骨骼和台灣動物標本，小朋友最喜歡的拍照區域',
+          bestTimeOfDay: '上午10-11點，自然採光最佳',
+          ageAppropriate: '3-12歲兒童',
+          photoTip: '拍攝孩子在展示品前驚訝的表情'
+        },
+        {
+          spotName: '二二八和平公園',
+          description: '博物館鄰近的綠色公園，有水池和古樹',
+          bestTimeOfDay: '下午3-4點，樹蔭光線柔和',
+          ageAppropriate: '全年齡',
+          photoTip: '在公園水池邊拍攝，倒影效果很美'
+        }
+      ],
+      photoBooth: {
+        available: false
+      },
+      professionalPhotoServices: {
+        available: false
+      },
+      scenicLocations: ['博物館前廣場', '建築外觀', '自然標本展示區', '二二八公園'],
+      allowedEquipment: ['相機', '手機', '腳架（需詢問館方）'],
+      photoStorageSpots: {
+        hasCloud: true,
+        hasUSBServices: false
+      },
+      photographyNotes: '博物館內部光線較暗，建議使用高感光度相機或手機夜拍功能。展示區內許多玻璃櫃可能反光，需調整角度。館內禁止使用閃光燈以保護文物。鄰近的二二八公園也是很好的戶外拍照地點。'
     }
   },
   {
@@ -1775,6 +1898,41 @@ export let mockLocations: Location[] = [
         disabledAccessEntrance: '主入口設有無障礙坡道'
       },
       navigationNotes: '親子餐廳位於台北市信義區信義路五段，交通便利。MRT信義安和站藍線4號出口步行6分鐘，或搭公車20、33、37、38、39號至信義路五段站（最方便，下車對面即到）。設有停車場，自行車停放位方便。餐廳內為室內遊樂設施，全年空調舒適。'
+    },
+    photographySpotsAndServices: {
+      bestPhotoSpots: [
+        {
+          spotName: '餐廳的彩色主題區',
+          description: '親子餐廳內彩色裝潢的用餐區，色彩繽紛適合拍照',
+          bestTimeOfDay: '中午11-12點和傍晚5-6點，自然採光最佳',
+          ageAppropriate: '所有年齡',
+          photoTip: '小朋友在彩色背景前很上鏡，拍攝用餐時的自然互動'
+        },
+        {
+          spotName: '室內遊樂區',
+          description: '兒童遊樂設施和軟墊區，孩子開心玩耍的時刻',
+          bestTimeOfDay: '全天可拍，但上午人較少，光線較好',
+          ageAppropriate: '1-8歲幼兒',
+          photoTip: '拍攝孩子專注遊玩的表情，充滿生活感'
+        }
+      ],
+      photoBooth: {
+        available: false
+      },
+      professionalPhotoServices: {
+        available: true,
+        types: ['家庭聚餐拍照', '慶生活動拍攝'],
+        booking: '可於預訂時告知，額外收費',
+        pricing: '通常與慶生套餐一起計算，或單點 800-1200 NTD',
+        turnaroundTime: '拍攝當天可領取電子檔'
+      },
+      scenicLocations: ['主餐飲區', '室內遊樂區', '門口裝飾'],
+      allowedEquipment: ['相機', '手機'],
+      photoStorageSpots: {
+        hasCloud: true,
+        hasUSBServices: false
+      },
+      photographyNotes: '親子餐廳內部環境整潔舒適，光線充足。拍照時請注意不影響其他用餐顧客。餐廳經常有人潮，建議在非用餐尖峰時段拍照。室內遊樂設施是很好的兒童活動背景。'
     }
   },
   {
@@ -2217,6 +2375,44 @@ export let mockLocations: Location[] = [
         disabledAccessEntrance: '主入口設有無障礙電梯和停車位'
       },
       navigationNotes: '南港軟體園區親子中心位於南港區軟體園區內，交通非常便利。MRT棕線南港軟體園區站1號出口步行2分鐘直達（最方便），或搭公車270、275、605號至園區站（下車後步行3分鐘）。園區內有停車場，自行車設施完善。中心位於園區中央，標示清楚易找。'
+    },
+    photographySpotsAndServices: {
+      bestPhotoSpots: [
+        {
+          spotName: '親子中心入口',
+          description: '現代化親子中心的玻璃幕牆入口，背景簡潔現代',
+          bestTimeOfDay: '上午10-11點，自然光最好',
+          ageAppropriate: '全年齡',
+          photoTip: '在入口拍攝全家福，背景建築和諧簡潔'
+        },
+        {
+          spotName: '室內遊樂設施區',
+          description: '寬敞明亮的遊樂區，設施多樣',
+          bestTimeOfDay: '上午，人較少光線好',
+          ageAppropriate: '1-8歲',
+          photoTip: '拍攝孩子在各種設施上遊玩的活動照'
+        },
+        {
+          spotName: '軟體園區外部景觀',
+          description: '園區內綠樹和建築景觀',
+          bestTimeOfDay: '下午2-3點',
+          ageAppropriate: '全年齡',
+          photoTip: '園區環境舒適，適合全家戶外合照'
+        }
+      ],
+      photoBooth: {
+        available: false
+      },
+      professionalPhotoServices: {
+        available: false
+      },
+      scenicLocations: ['親子中心入口', '遊樂設施區', '園區綠地'],
+      allowedEquipment: ['相機', '手機'],
+      photoStorageSpots: {
+        hasCloud: true,
+        hasUSBServices: false
+      },
+      photographyNotes: '親子中心環境新穎整潔，採光充足。室內設施現代化，適合拍攝兒童活動。園區周邊也有不少戶外拍照點。建議預約參訪時間以獲得最佳拍照環境。'
     }
   },
   {
@@ -2653,6 +2849,37 @@ export let mockLocations: Location[] = [
         disabledAccessEntrance: '主入口設有無障礙坡道和停車位'
       },
       navigationNotes: '內湖運動中心位於台北市內湖區民權路，目前無直達MRT（文湖線內湖站規劃中）。搭公車205、212、247、256號至內湖運動中心站（下車步行5分鐘），或開車至民權路地下停車場（方便快速）。自行車沿著民權路專用道可直達。停車場設有無障礙設施。'
+    },
+    photographySpotsAndServices: {
+      bestPhotoSpots: [
+        {
+          spotName: '游泳池畔',
+          description: '運動中心的游泳池，孩童戲水的開心時刻',
+          bestTimeOfDay: '下午2-4點，逆光會有水花閃爍效果',
+          ageAppropriate: '3-12歲',
+          photoTip: '拍攝孩子在水中活動，需要防水相機或手機'
+        },
+        {
+          spotName: '體育館外觀',
+          description: '現代化的運動中心建築',
+          bestTimeOfDay: '上午10-11點，側光效果好',
+          ageAppropriate: '全年齡',
+          photoTip: '可在建築前拍全家福或兒童肖像'
+        }
+      ],
+      photoBooth: {
+        available: false
+      },
+      professionalPhotoServices: {
+        available: false
+      },
+      scenicLocations: ['游泳池', '運動中心外觀'],
+      allowedEquipment: ['相機', '防水手機殼'],
+      photoStorageSpots: {
+        hasCloud: true,
+        hasUSBServices: false
+      },
+      photographyNotes: '運動中心環境整潔，但室內光線可能較暗。游泳池畔拍照時需注意安全。建議帶防水相機或手機殼保護設備。戶外拍照點主要為建築外觀，景觀簡潔。'
     }
   },
   {
@@ -3118,6 +3345,44 @@ export let mockLocations: Location[] = [
         disabledAccessEntrance: '主入口設有無障礙停車位和坡道'
       },
       navigationNotes: '新店水上樂園位於新北市新店區中興路，交通相對不如市區方便。MRT新店站綠線2號出口步行25分鐘較遠，建議搭公車58、59、208、248或915號至新店水上樂園站（下車步行5分鐘，最方便）。或自行開車至中興路停車場（推薦）。位於新店溪河濱公園附近，風景優美。'
+    },
+    photographySpotsAndServices: {
+      bestPhotoSpots: [
+        {
+          spotName: '水上樂園入口',
+          description: '樂園大門和標誌，夏日的經典拍照地點',
+          bestTimeOfDay: '上午9-10點，背光前的角度最佳',
+          ageAppropriate: '全年齡',
+          photoTip: '在入口牌子前拍全家福，表現出來水樂園的歡樂氛圍'
+        },
+        {
+          spotName: '水上設施區',
+          description: '各種水上滑梯和遊樂設施，孩童戲水嬉笑聲',
+          bestTimeOfDay: '下午1-3點，逆光時水花最閃爍',
+          ageAppropriate: '3-14歲',
+          photoTip: '拍攝孩童在水中開心遊樂的自然表情，逆光會有水珠閃爍效果'
+        },
+        {
+          spotName: '新店溪河濱風景',
+          description: '樂園鄰近河邊，有優美的河岸景觀',
+          bestTimeOfDay: '下午4-5點，河面反光美麗',
+          ageAppropriate: '全年齡',
+          photoTip: '在河邊拍攝全景照，背景是新店溪和遠方山脈'
+        }
+      ],
+      photoBooth: {
+        available: false
+      },
+      professionalPhotoServices: {
+        available: false
+      },
+      scenicLocations: ['樂園入口', '水上滑梯區', '新店溪河邊', '園區景觀'],
+      allowedEquipment: ['防水相機', '防水手機殼', '水下攝像機'],
+      photoStorageSpots: {
+        hasCloud: true,
+        hasUSBServices: false
+      },
+      photographyNotes: '水上樂園夏季是最佳拍照季節，但人潮眾多。建議早晨開園時段拍照。水上拍照必須使用防水設備。園區周邊河岸景觀優美，可拍風景照。禁止使用無人機。'
     }
   },
 ];
