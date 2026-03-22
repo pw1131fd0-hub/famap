@@ -615,6 +615,15 @@ export let mockLocations: Location[] = [
       seasonalWeatherImpact: '5月至9月為台灣雨季和颱風季，不利於訪問。',
       rainySeasonNotes: '台灣5月至9月為雨季和颱風高風險期。建議選擇乾季（10月至4月）訪問大安森林公園。',
       rainyDayNotes: '大安森林公園不適合雨天訪問。戶外林地路面易滑，遊樂場設施在雨天不安全。颱風季尤其應避免。家庭應選擇天氣良好的日子，或考慮室內替代地點如博物館。'
+    },
+    rideRestrictions: {
+      hasRideRestrictions: false,
+      ridesRequiringRestrictions: [],
+      toddlerRideOptions: [],
+      preschoolRideOptions: [],
+      schoolAgeRideOptions: [],
+      teenAdvancedRideOptions: [],
+      rideRestrictionNotes: '大安森林公園為自然公園，無遊樂園遊樂設施。所有遊樂設備開放給所有年齡兒童使用。'
     }
   },
   {
@@ -1317,6 +1326,66 @@ export let mockLocations: Location[] = [
       seasonalWeatherImpact: '雨天時戶外遊樂設施關閉；颱風季（7-9月）園區可能關閉。',
       rainySeasonNotes: '台灣5月至9月為雨季。兒童新樂園在雨天會關閉許多戶外遊樂設施。颱風季尤其不適合訪問。建議選擇乾季訪問以享受完整的園區體驗。',
       rainyDayNotes: '兒童新樂園不適合雨天訪問。大多數遊樂設施為戶外式，雨天會關閉。有少量室內替代活動，但體驗受限。颱風警報日期間園區完全關閉。建議：選擇晴朗日子訪問，避免5月至9月雨季和颱風季，考慮完全室內替代地點如博物館或親子中心。'
+    },
+    rideRestrictions: {
+      hasRideRestrictions: true,
+      ridesRequiringRestrictions: [
+        {
+          rideName: '過山車',
+          minimumAge: 8,
+          minimumHeight: 120,
+          accompaniedByAdultRequired: false,
+          restrictionReason: '兒童身高需達到120公分以上，年齡8歲以上才能安全乘坐。安全帽必須貼合。',
+          safetyEquipmentRequired: ['安全帽', '安全帶']
+        },
+        {
+          rideName: '自由落體機',
+          minimumAge: 10,
+          minimumHeight: 130,
+          accompaniedByAdultRequired: false,
+          restrictionReason: '為確保安全，身高130公分以上、年齡10歲才能乘坐。年紀太小可能無法適應高度和失重感。',
+          safetyEquipmentRequired: ['安全帶']
+        },
+        {
+          rideName: '摩天輪',
+          minimumAge: 3,
+          minimumHeight: 90,
+          accompaniedByAdultRequired: true,
+          restrictionReason: '3歲以上可乘坐，但需由成人陪同監督。身高90公分以上。適合全家享受。',
+          safetyEquipmentRequired: []
+        },
+        {
+          rideName: '水上遊樂設施',
+          minimumAge: 5,
+          minimumHeight: 100,
+          accompaniedByAdultRequired: false,
+          restrictionReason: '5歲以上、身高100公分以上才能參加水上遊樂。強烈建議自備防曬乳液。',
+          safetyEquipmentRequired: ['救生衣可選']
+        },
+        {
+          rideName: '旋轉木馬',
+          minimumAge: 2,
+          minimumHeight: 85,
+          accompaniedByAdultRequired: true,
+          restrictionReason: '2歲以上可乘坐，幼兒需由成人陪同。安全可靠。',
+          safetyEquipmentRequired: []
+        }
+      ],
+      allRidesAgeRange: '2-15歲',
+      toddlerRideOptions: ['旋轉木馬', '嬰兒車友善的室內遊樂區'],
+      preschoolRideOptions: ['旋轉木馬', '摩天輪', '溫和旋轉遊樂設施', '室內遊戲區'],
+      schoolAgeRideOptions: ['過山車', '水上遊樂設施', '自由落體機', '摩天輪', '室內迷宮'],
+      teenAdvancedRideOptions: ['過山車', '自由落體機', '高空跳躍', '水上刺激設施'],
+      restrictionMeasurementMethod: '入園時在服務台測量身高，脫鞋測量，精確到公分。',
+      heightStickersProvided: true,
+      hasWristbandSystem: false,
+      heightMeasurementAccuracy: '精確到公分',
+      safetyInspectionFrequency: '每日營運前進行安全檢查，每週詳細檢驗。',
+      safetyStaffTrainingLevel: 'Certified amusement park safety officers (認證遊樂園安全官員)',
+      needsToMeasureOnDay: true,
+      exceptionPolicies: '身高差2公分以內、可由成人陪同全程、填寫家長責任書，可能核准乘坐。請洽服務台。',
+      restrictionEnforcementLevel: 'strict',
+      rideRestrictionNotes: '台北市兒童新樂園對所有遊樂設施有嚴格的年齡和身高限制，以確保兒童安全。所有限制都是基於安全工程和專業評估。家長可在入園時向服務台查詢特定遊樂設施的限制。建議提前告訴孩子他們可以乘坐的遊樂設施，以避免失望。具有身體限制或健康問題的兒童應向工作人員報告。'
     }
   },
   {
@@ -1959,6 +2028,15 @@ export let mockLocations: Location[] = [
       seasonalWeatherImpact: '天氣對博物館訪問沒有負面影響，雨天反而是訪問的好時機。',
       rainySeasonNotes: '台灣5月至9月為雨季。國立臺灣博物館是雨季訪問的理想選擇！完全室內設施，無天氣影響。',
       rainyDayNotes: '國立臺灣博物館是雨天訪問的完美地點！完全室內設施，所有展示和活動不受天氣影響。無停車場困擾、無推嬰兒車困難。多樓層設計適合各年齡兒童。強烈推薦雨天、颱風季和夏季炎熱時訪問。全年任何季節都是優秀選擇。'
+    },
+    rideRestrictions: {
+      hasRideRestrictions: false,
+      ridesRequiringRestrictions: [],
+      toddlerRideOptions: [],
+      preschoolRideOptions: [],
+      schoolAgeRideOptions: [],
+      teenAdvancedRideOptions: [],
+      rideRestrictionNotes: '國立臺灣博物館為博物館，無遊樂園遊樂設施。所有展示和活動對所有年齡開放，無身高或年齡限制。家長應注意樓梯和陡峭路面對幼兒的安全影響。'
     }
   },
   {
@@ -2597,6 +2675,15 @@ export let mockLocations: Location[] = [
       seasonalWeatherImpact: '天氣對餐廳訪問沒有影響，可全年訪問。',
       rainySeasonNotes: '台灣5月至9月為雨季。親子餐廳是雨季訪問的好選擇，可吃飯又能遊玩。',
       rainyDayNotes: '親子餐廳適合雨天訪問！完全室內設施，遊樂和用餐都不受天氣影響。特別適合：需要用餐的家庭、尋找室內遊樂場所、避雨同時放鬆。可結合用餐時間，讓小孩邊玩邊吃，是雨天親子活動的絕佳選擇。'
+    },
+    rideRestrictions: {
+      hasRideRestrictions: false,
+      ridesRequiringRestrictions: [],
+      toddlerRideOptions: ['室內遊戲區所有設施'],
+      preschoolRideOptions: ['室內遊戲區所有設施'],
+      schoolAgeRideOptions: ['室內遊戲區所有設施'],
+      teenAdvancedRideOptions: ['遊戲中心'],
+      rideRestrictionNotes: '親子餐廳為室內餐飲和遊樂場所，無傳統遊樂園遊樂設施。所有遊樂設備對兒童開放，無年齡或身高限制。家長應監督幼兒使用遊樂設施，注意安全。'
     }
   },
   {
@@ -3249,6 +3336,15 @@ export let mockLocations: Location[] = [
       seasonalWeatherImpact: '無季節或天氣影響，全年恆溫舒適。',
       rainySeasonNotes: '台灣5月至9月為雨季。南港軟體園區親子中心是雨季的最佳選擇！現代設施、恆溫舒適、無天氣影響。',
       rainyDayNotes: '南港軟體園區親子中心是雨天訪問的終極選擇！超現代密閉設施，完全不受天氣影響。特別適合：尋求完全室內環保境、避免雨季困擾、感官敏感家庭。設施完善、員工訓練充分、環境清潔舒適。強烈推薦雨天、颱風季、極端天氣時訪問。全年任何時間都是優秀選擇。'
+    },
+    rideRestrictions: {
+      hasRideRestrictions: false,
+      ridesRequiringRestrictions: [],
+      toddlerRideOptions: ['幼兒遊樂區所有設施'],
+      preschoolRideOptions: ['互動遊樂區所有設施'],
+      schoolAgeRideOptions: ['活動中心所有設施'],
+      teenAdvancedRideOptions: ['團隊活動、運動設施'],
+      rideRestrictionNotes: '南港軟體園區親子中心為現代室內親子中心，無傳統遊樂園遊樂設施。所有設施針對不同年齡優化，無硬性年齡或身高限制。工作人員會根據兒童年齡和能力推薦適合的活動。所有設施符合國際安全標準。'
     }
   },
   {
@@ -3882,6 +3978,50 @@ export let mockLocations: Location[] = [
       seasonalWeatherImpact: '雨天時室外設施受影響，但室內遊泳池和運動設施不受影響。',
       rainySeasonNotes: '台灣5月至9月為雨季。內湖運動中心雨天可以游泳！室內泳池完全不受天氣影響。',
       rainyDayNotes: '內湖運動中心雨天仍可訪問。室外泳池在雨天可能不適合，但室內泳池設施完全正常。特別適合：需要游泳運動、雨天運動、冬季活動。建議：雨天重點選擇室內設施，避免室外區域。夏季可訪問室外泳池，冬季則專注室內。'
+    },
+    rideRestrictions: {
+      hasRideRestrictions: true,
+      ridesRequiringRestrictions: [
+        {
+          rideName: '室外泳池',
+          minimumAge: 5,
+          minimumHeight: 110,
+          accompaniedByAdultRequired: true,
+          restrictionReason: '5歲以上、身高110公分才能進入成人泳池。幼兒必須由成人全程陪同監督。',
+          safetyEquipmentRequired: ['救生衣可選']
+        },
+        {
+          rideName: '兒童戲水區',
+          minimumAge: 2,
+          minimumHeight: 80,
+          accompaniedByAdultRequired: true,
+          restrictionReason: '2歲以上可使用兒童戲水區，需由成人全程陪同。深度約60公分。',
+          safetyEquipmentRequired: ['救生衣建議']
+        },
+        {
+          rideName: '室內泳池',
+          minimumAge: 5,
+          minimumHeight: 110,
+          accompaniedByAdultRequired: false,
+          restrictionReason: '5歲以上、身高110公分以上可使用。強烈建議學過游泳。',
+          safetyEquipmentRequired: ['救生衣可選']
+        }
+      ],
+      allRidesAgeRange: '2-65歲',
+      toddlerRideOptions: ['兒童戲水區（2-4歲）'],
+      preschoolRideOptions: ['兒童戲水區', '游泳課程'],
+      schoolAgeRideOptions: ['室內泳池', '室外泳池', '潛水課程'],
+      teenAdvancedRideOptions: ['所有泳池設施', '進階水上運動'],
+      restrictionMeasurementMethod: '入場時在服務台測量身高，脫鞋測量。',
+      heightStickersProvided: false,
+      hasWristbandSystem: false,
+      heightMeasurementAccuracy: '精確到公分',
+      safetyInspectionFrequency: '每日營運前安全檢查，水質每日檢測。',
+      safetyStaffTrainingLevel: 'Certified aquatic safety officers (認證水上安全官員)',
+      needsToMeasureOnDay: true,
+      exceptionPolicies: '身高低於限制但家長確認游泳能力可向服務台申請。需填寫豁免書。',
+      restrictionEnforcementLevel: 'moderate',
+      rideRestrictionNotes: '內湖運動中心為公共運動設施，有泳池安全限制。所有限制都是為了兒童安全。家長應確認兒童游泳能力。強烈建議幼兒參加游泳課程。救生衣可在服務台免費借用。'
     }
   },
   {
@@ -4551,6 +4691,58 @@ export let mockLocations: Location[] = [
       seasonalWeatherImpact: '雨天園區關閉或限制；颱風季無法營運。',
       rainySeasonNotes: '台灣5月至9月為雨季和颱風高風險期。新店陽光園區在此期間不建議訪問，園區可能因豪雨或颱風警報關閉。',
       rainyDayNotes: '新店陽光園區不適合雨天訪問。完全戶外水樂園，無任何室內替代活動。雨天園區安全風險高，可能關閉。特別警告：避免5月至9月雨季和颱風季訪問。建議選擇天氣晴朗的日子（10月至4月乾季）。必須訪問時選擇完全晴朗無雨的日期。'
+    },
+    rideRestrictions: {
+      hasRideRestrictions: true,
+      ridesRequiringRestrictions: [
+        {
+          rideName: '大水滑梯',
+          minimumAge: 8,
+          minimumHeight: 120,
+          accompaniedByAdultRequired: false,
+          restrictionReason: '8歲以上、身高120公分才能乘坐。安全考慮，兒童身高需足以適應滑行力度。',
+          safetyEquipmentRequired: ['救生衣']
+        },
+        {
+          rideName: '旋轉水樂園',
+          minimumAge: 5,
+          minimumHeight: 100,
+          accompaniedByAdultRequired: true,
+          restrictionReason: '5歲以上、身高100公分可乘坐，但需由成人陪同全程。',
+          safetyEquipmentRequired: ['救生衣必須']
+        },
+        {
+          rideName: '幼兒戲水區',
+          minimumAge: 1,
+          minimumHeight: 70,
+          accompaniedByAdultRequired: true,
+          restrictionReason: '1歲以上可進入幼兒戲水區，深度60公分，必須由成人全程照管。',
+          safetyEquipmentRequired: ['救生衣建議']
+        },
+        {
+          rideName: '浪花池',
+          minimumAge: 4,
+          minimumHeight: 95,
+          accompaniedByAdultRequired: false,
+          restrictionReason: '4歲以上、身高95公分可進入。波浪較溫和，適合初學者。',
+          safetyEquipmentRequired: ['救生衣可選']
+        }
+      ],
+      allRidesAgeRange: '1-60歲',
+      toddlerRideOptions: ['幼兒戲水區、兒童浅水區'],
+      preschoolRideOptions: ['幼兒戲水區', '浪花池', '溫和滑梯'],
+      schoolAgeRideOptions: ['浪花池', '大水滑梯', '旋轉水樂園', '進階滑梯'],
+      teenAdvancedRideOptions: ['所有高速滑梯', '急流漂浮', '進階水上遊樂'],
+      restrictionMeasurementMethod: '入園時在檢票處測量身高，脫鞋測量到最近0.5公分。',
+      heightStickersProvided: true,
+      hasWristbandSystem: true,
+      heightMeasurementAccuracy: '精確到0.5公分',
+      safetyInspectionFrequency: '每日營運前2小時進行全面安全檢查。',
+      safetyStaffTrainingLevel: 'Certified water park safety experts (認證水樂園安全專家)',
+      needsToMeasureOnDay: true,
+      exceptionPolicies: '身高差5公分以內但家長確認水性良好可申請豁免。需簽署責任書。',
+      restrictionEnforcementLevel: 'strict',
+      rideRestrictionNotes: '新店陽光園區為水樂園，對水上遊樂設施有嚴格的年齡和身高限制。所有限制都是為了安全。強烈建議不會游泳的兒童穿著救生衣。園區有專業救生員駐守。家長應確認兒童游泳能力。限制執行很嚴格，無特殊豁免。'
     }
   },
 ];

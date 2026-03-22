@@ -848,6 +848,36 @@ export interface RainyDayAlternativesAndIndoorActivitiesInfo {
   rainyDayNotes?: string; // Complete rainy day/weather alternatives information
 }
 
+export interface RideAgeHeightRestrictionInfo {
+  hasRideRestrictions?: boolean; // Does venue have rides with age/height restrictions?
+  ridesRequiringRestrictions?: {
+    rideName: string; // e.g., "Roller Coaster", "Water Slide"
+    minimumAge?: number; // Minimum age in years
+    minimumHeight?: number; // Minimum height in cm
+    maximumAge?: number; // Maximum age (rare, but some rides not suitable for very old visitors)
+    maxHeight?: number; // Maximum height in cm (rare, for safety)
+    accompaniedByAdultRequired?: boolean; // Child must be with adult?
+    adultHeightRequired?: number; // Adult must be certain height?
+    restrictionReason?: string; // e.g., "Safety reason: child must be tall enough to reach safety bar"
+    safetyEquipmentRequired?: string[]; // e.g., ["safety harness", "life jacket"]
+  }[];
+  allRidesAgeRange?: string; // e.g., "Most rides 100cm-180cm"
+  toddlerRideOptions?: string[]; // Rides suitable for toddlers without restrictions
+  preschoolRideOptions?: string[]; // Rides for preschool kids
+  schoolAgeRideOptions?: string[]; // Rides for school-age kids
+  teenAdvancedRideOptions?: string[]; // Advanced/extreme rides for teens
+  restrictionMeasurementMethod?: string; // e.g., "Height measured at entrance with shoe off"
+  heightStickersProvided?: boolean; // Staff use height stickers to indicate eligible rides?
+  hasWristbandSystem?: boolean; // Wristband indicating age/height category?
+  heightMeasurementAccuracy?: string; // e.g., "Measured to nearest cm"
+  safetyInspectionFrequency?: string; // e.g., "Daily safety checks on all rides"
+  safetyStaffTrainingLevel?: string; // e.g., "Certified amusement park safety officers"
+  needsToMeasureOnDay?: boolean; // Height changes day-to-day or can use prior measurement?
+  exceptionPolicies?: string; // e.g., "Children 2cm below minimum may ride with parent waiver"
+  restrictionEnforcementLevel?: 'strict' | 'moderate' | 'flexible'; // How strictly enforced
+  rideRestrictionNotes?: string; // Complete age/height restrictions information for families
+}
+
 export interface Location {
   id: string;
   name: {
@@ -931,6 +961,7 @@ export interface Location {
   noiseAndSensoryEnvironment?: NoiseAndSensoryEnvironmentInfo;
   insectAndAllergenEnvironment?: InsectAndAllergenEnvironmentInfo;
   rainyDayAlternatives?: RainyDayAlternativesAndIndoorActivitiesInfo;
+  rideRestrictions?: RideAgeHeightRestrictionInfo;
 }
 
 export interface Review {
