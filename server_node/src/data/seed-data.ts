@@ -209,6 +209,40 @@ export let mockLocations: Location[] = [
       performanceLanguage: [],
       performanceLocation: '戶外',
       entertainmentNotes: '公園為開放式遊樂區域，無定期表演或活動。家庭可自行組織野餐和戶外活動。'
+    },
+    photoVideo: {
+      allowsPhotography: true,
+      allowsVideoRecording: true,
+      photographyRestrictions: '無特殊限制',
+      flashPhotographyAllowed: true,
+      tripodAllowed: false,
+      photoVideoNotes: '公園內可自由拍照和錄影。不允許使用三腳架以維護安全'
+    },
+    visitDuration: {
+      recommendedDurationMinutes: 120,
+      recommendedDurationText: '2-3小時',
+      quickVisitMinutes: 60,
+      fullExperienceDurationMinutes: 180,
+      mustSeeActivityDurationMinutes: 90,
+      includesMealTimeRecommendation: false,
+      restTimeRecommendation: true,
+      bestTimeToVisit: '平日上午9-11點人煙稀少，下午2點後也較少人。週末建議早上前往',
+      durationNotes: '大型遊戲場和沙坑適合2-3小時遊玩。建議安排休息時間。自備食物可在野餐區享用。'
+    },
+    schoolHolidays: {
+      winterVacationDates: '1月下旬 - 2月初',
+      summerVacationDates: '7月初 - 8月底',
+      midAutumnFestival: '9月中旬',
+      lunarNewYearDates: '2月中旬 (農曆新年)',
+      dragonBoatFestivalDate: '6月中旬',
+      doubleNinthFestivalDate: '10月初',
+      weeklyHolidaysInfo: '全年開放',
+      winterVacationCrowding: 'moderate',
+      summerVacationCrowding: 'heavy',
+      lunarNewYearCrowding: 'heavy',
+      holidaySpecialEventsOrHours: '農曆新年期間有特色活動，延長開放時間',
+      holidayBookingRecommendation: '假期期間人潮眾多，建議提前規劃，週末特別擁擠',
+      holidayNotes: '暑假和農曆新年為尖峰期。平日較少遊客，特別是上班日上午。學期中週末仍有適度人潮。'
     }
   },
   {
@@ -449,6 +483,41 @@ export let mockLocations: Location[] = [
       performanceLanguage: ['普通話', '台語'],
       performanceLocation: '室內表演廳',
       entertainmentNotes: '每週末及假日提供3場精彩表演，免額外購票。小朋友可在表演中互動參與。'
+    },
+    photoVideo: {
+      allowsPhotography: true,
+      allowsVideoRecording: true,
+      photographyRestrictions: '遊樂設施及表演可自由拍照',
+      flashPhotographyAllowed: true,
+      tripodAllowed: false,
+      photoVideoNotes: '樂園內可自由拍照和錄影。表演區不允許專業錄影設備，禁止三腳架使用'
+    },
+    visitDuration: {
+      recommendedDurationMinutes: 240,
+      recommendedDurationText: '4-5小時',
+      quickVisitMinutes: 180,
+      fullExperienceDurationMinutes: 300,
+      mustSeeActivityDurationMinutes: 180,
+      includesMealTimeRecommendation: true,
+      mealTimeSuggestion: '1-1.5小時用於午餐',
+      restTimeRecommendation: true,
+      bestTimeToVisit: '平日下午1-3點人潮最少。週末建議早上開園時或下午4點後前往',
+      durationNotes: '樂園設施眾多，建議安排4-5小時完整遊玩所有主要區域。含午餐時間。建議中途安排休息'
+    },
+    schoolHolidays: {
+      winterVacationDates: '1月下旬 - 2月初',
+      summerVacationDates: '7月初 - 8月底',
+      midAutumnFestival: '9月中旬',
+      lunarNewYearDates: '2月中旬 (農曆新年)',
+      dragonBoatFestivalDate: '6月中旬',
+      doubleNinthFestivalDate: '10月初',
+      weeklyHolidaysInfo: '全年開放',
+      winterVacationCrowding: 'heavy',
+      summerVacationCrowding: 'heavy',
+      lunarNewYearCrowding: 'heavy',
+      holidaySpecialEventsOrHours: '農曆新年期間延長營業時間至晚間，舉辦特色表演',
+      holidayBookingRecommendation: '假期期間人潮眾多，週末特別擁擠，強烈建議平日前往或提前線上購票',
+      holidayNotes: '暑假和農曆新年為全年最擁擠時期。平日人潮較少。週末通常需排隊等待各遊樂設施。'
     }
   },
   {
@@ -669,6 +738,41 @@ export let mockLocations: Location[] = [
       performanceLanguage: ['普通話', '台語'],
       performanceLocation: '特展廳',
       entertainmentNotes: '定期舉辦教育導覽和互動演示。週末提供兒童友善的解說活動，帶領小朋友認識台灣自然歷史。'
+    },
+    photoVideo: {
+      allowsPhotography: true,
+      allowsVideoRecording: false,
+      photographyRestrictions: '個人拍照可以，某些特展廳禁止拍照，請詢問館員',
+      flashPhotographyAllowed: false,
+      tripodAllowed: false,
+      commercialPhotographyAllowed: false,
+      photoVideoNotes: '博物館禁止商業攝影和錄影。個人拍照可以，但某些展區禁止閃光燈。請尊重他人遊館體驗'
+    },
+    visitDuration: {
+      recommendedDurationMinutes: 150,
+      recommendedDurationText: '2.5-3小時',
+      quickVisitMinutes: 90,
+      fullExperienceDurationMinutes: 180,
+      mustSeeActivityDurationMinutes: 120,
+      includesMealTimeRecommendation: false,
+      restTimeRecommendation: true,
+      bestTimeToVisit: '平日上午10-12點人較少，適合細細欣賞展品。避免週末午餐時間人潮',
+      durationNotes: '適合2.5-3小時參觀。自然生態展廳最受兒童歡迎。建議中途在休息區休息。'
+    },
+    schoolHolidays: {
+      winterVacationDates: '1月下旬 - 2月初',
+      summerVacationDates: '7月初 - 8月底',
+      midAutumnFestival: '9月中旬',
+      lunarNewYearDates: '2月中旬 (農曆新年)',
+      dragonBoatFestivalDate: '6月中旬',
+      doubleNinthFestivalDate: '10月初',
+      weeklyHolidaysInfo: '每週一休館',
+      winterVacationCrowding: 'moderate',
+      summerVacationCrowding: 'heavy',
+      lunarNewYearCrowding: 'heavy',
+      holidaySpecialEventsOrHours: '農曆新年期間舉辦特展和教育活動，延長開放時間',
+      holidayBookingRecommendation: '假期期間人潮眾多，建議避開午餐時段和週末',
+      holidayNotes: '農曆新年期間人潮最多。暑假平日仍有適度遊客。平日上午最清靜。'
     }
   },
   {
@@ -899,6 +1003,41 @@ export let mockLocations: Location[] = [
       performanceLanguage: ['普通話', '台語'],
       performanceLocation: '室內多功能廳',
       entertainmentNotes: '餐廳定期舉辦親子友善表演。表演期間家長可在旁邊休息區放鬆。表演免額外費用。'
+    },
+    photoVideo: {
+      allowsPhotography: true,
+      allowsVideoRecording: true,
+      photographyRestrictions: '可以拍照，但表演期間不要影響他人',
+      flashPhotographyAllowed: false,
+      tripodAllowed: false,
+      photoVideoNotes: '餐廳內可拍照和錄影。禁止使用閃光燈以免驚嚇幼兒。表演期間錄影請保持低調'
+    },
+    visitDuration: {
+      recommendedDurationMinutes: 120,
+      recommendedDurationText: '2-2.5小時',
+      quickVisitMinutes: 60,
+      fullExperienceDurationMinutes: 150,
+      mustSeeActivityDurationMinutes: 90,
+      includesMealTimeRecommendation: true,
+      mealTimeSuggestion: '1小時用於用餐',
+      restTimeRecommendation: true,
+      bestTimeToVisit: '平日上午人較少。避免午餐尖峰時間11:30-13:00和晚餐時間17:30-19:00',
+      durationNotes: '親子餐廳適合2-2.5小時用餐和遊玩。含用餐時間。適合與嬰幼兒同行的家庭。'
+    },
+    schoolHolidays: {
+      winterVacationDates: '1月下旬 - 2月初',
+      summerVacationDates: '7月初 - 8月底',
+      midAutumnFestival: '9月中旬',
+      lunarNewYearDates: '2月中旬 (農曆新年)',
+      dragonBoatFestivalDate: '6月中旬',
+      doubleNinthFestivalDate: '10月初',
+      weeklyHolidaysInfo: '全年開放',
+      winterVacationCrowding: 'moderate',
+      summerVacationCrowding: 'moderate',
+      lunarNewYearCrowding: 'heavy',
+      holidaySpecialEventsOrHours: '農曆新年期間舉辦特別親子活動',
+      holidayBookingRecommendation: '假期期間建議提前預約，午餐時段最擁擠',
+      holidayNotes: '農曆新年期間人潮眾多。暑假和寒假期間平日仍有適度人潮。用餐時段通常較擁擠。'
     }
   },
   {
@@ -1116,6 +1255,40 @@ export let mockLocations: Location[] = [
       performanceLanguage: [],
       performanceLocation: '多功能區',
       entertainmentNotes: '親子中心設有遊樂設施、游泳池和活動區。定期舉辦親子課程和工坊（如瑜伽、舞蹈），但無定期表演節目。'
+    },
+    photoVideo: {
+      allowsPhotography: true,
+      allowsVideoRecording: true,
+      photographyRestrictions: '游泳池可拍照，但禁止在更衣室和浴室拍照',
+      flashPhotographyAllowed: false,
+      tripodAllowed: false,
+      photoVideoNotes: '親子中心可拍照和錄影。游泳池区域禁止閃光燈。尊重隱私，禁止在更衣室錄影。'
+    },
+    visitDuration: {
+      recommendedDurationMinutes: 90,
+      recommendedDurationText: '1.5-2小時',
+      quickVisitMinutes: 60,
+      fullExperienceDurationMinutes: 120,
+      mustSeeActivityDurationMinutes: 90,
+      includesMealTimeRecommendation: false,
+      restTimeRecommendation: false,
+      bestTimeToVisit: '平日下午1-4點人較少。避免放學時間16:00-18:00和週末',
+      durationNotes: '游泳課程通常30-45分鐘。遊樂區遊玩約1小時。加上更衣時間共1.5-2小時。'
+    },
+    schoolHolidays: {
+      winterVacationDates: '1月下旬 - 2月初',
+      summerVacationDates: '7月初 - 8月底',
+      midAutumnFestival: '9月中旬',
+      lunarNewYearDates: '2月中旬 (農曆新年)',
+      dragonBoatFestivalDate: '6月中旬',
+      doubleNinthFestivalDate: '10月初',
+      weeklyHolidaysInfo: '全年開放',
+      winterVacationCrowding: 'heavy',
+      summerVacationCrowding: 'heavy',
+      lunarNewYearCrowding: 'moderate',
+      holidaySpecialEventsOrHours: '暑假期間加開游泳課程班次',
+      holidayBookingRecommendation: '寒假和暑假期間報名課程需提前預約，周末尖峰時段擁擠',
+      holidayNotes: '寒假和暑假是兒童游泳課程高峰期。平日下午人潮相對較少。週末通常擁擠。'
     }
   },
   {
@@ -1328,6 +1501,40 @@ export let mockLocations: Location[] = [
       performanceLanguage: [],
       performanceLocation: '游泳區',
       entertainmentNotes: '運動中心提供游泳課程和水上運動活動。定期舉辦親子游泳班和水中有氧課程，但無定期表演。'
+    },
+    photoVideo: {
+      allowsPhotography: true,
+      allowsVideoRecording: false,
+      photographyRestrictions: '游泳池可拍照但禁止錄影，保護隱私',
+      flashPhotographyAllowed: false,
+      tripodAllowed: false,
+      photoVideoNotes: '運動中心禁止錄影以保護隱私。個人拍照可以但禁止使用閃光燈，禁止三腳架。'
+    },
+    visitDuration: {
+      recommendedDurationMinutes: 90,
+      recommendedDurationText: '1.5-2小時',
+      quickVisitMinutes: 60,
+      fullExperienceDurationMinutes: 120,
+      mustSeeActivityDurationMinutes: 60,
+      includesMealTimeRecommendation: false,
+      restTimeRecommendation: false,
+      bestTimeToVisit: '平日下午1-4點人較少。避免放學時間和週末',
+      durationNotes: '游泳課程通常45-60分鐘。加上更衣和熱身時間共1.5-2小時。'
+    },
+    schoolHolidays: {
+      winterVacationDates: '1月下旬 - 2月初',
+      summerVacationDates: '7月初 - 8月底',
+      midAutumnFestival: '9月中旬',
+      lunarNewYearDates: '2月中旬 (農曆新年)',
+      dragonBoatFestivalDate: '6月中旬',
+      doubleNinthFestivalDate: '10月初',
+      weeklyHolidaysInfo: '全年開放',
+      winterVacationCrowding: 'moderate',
+      summerVacationCrowding: 'heavy',
+      lunarNewYearCrowding: 'moderate',
+      holidaySpecialEventsOrHours: '暑假期間增加課程班次',
+      holidayBookingRecommendation: '暑假期間課程名額有限，需提前預約',
+      holidayNotes: '暑假最繁忙，課程與自由游泳區都擁擠。平日下午人潮最少。週末尖峰時段需等候。'
     }
   },
   {
@@ -1558,6 +1765,41 @@ export let mockLocations: Location[] = [
       performanceLocation: '水上樂園主舞台',
       seasonalPerformances: '暑假期間每日表演，平日和假日週末場次',
       entertainmentNotes: '水上樂園提供季節性表演和互動式水上遊戲。夏季表演頻率較高，結合消暑活動。所有表演已包含在樂園入場券內。'
+    },
+    photoVideo: {
+      allowsPhotography: true,
+      allowsVideoRecording: true,
+      photographyRestrictions: '水上樂園內可拍照和錄影',
+      flashPhotographyAllowed: false,
+      tripodAllowed: false,
+      photoVideoNotes: '樂園內可拍照和錄影。禁止使用閃光燈以保護眼睛。禁止三腳架確保安全。'
+    },
+    visitDuration: {
+      recommendedDurationMinutes: 300,
+      recommendedDurationText: '5-6小時',
+      quickVisitMinutes: 180,
+      fullExperienceDurationMinutes: 360,
+      mustSeeActivityDurationMinutes: 240,
+      includesMealTimeRecommendation: true,
+      mealTimeSuggestion: '1-1.5小時用於午餐',
+      restTimeRecommendation: true,
+      bestTimeToVisit: '開園初期（上午10-12點）人潮較少。避免中午12-14點和傍晚17點後人潮',
+      durationNotes: '水上樂園適合安排5-6小時完整體驗。含午餐和休息時間。夏季遊玩人可能較長。'
+    },
+    schoolHolidays: {
+      winterVacationDates: '1月下旬 - 2月初 (冬季關閉)',
+      summerVacationDates: '7月初 - 8月底 (尖峰營運期)',
+      midAutumnFestival: '9月中旬',
+      lunarNewYearDates: '2月中旬 (冬季關閉)',
+      dragonBoatFestivalDate: '6月中旬',
+      doubleNinthFestivalDate: '10月初 (季末營運)',
+      weeklyHolidaysInfo: '6月中-9月營運，11月-5月關閉',
+      winterVacationCrowding: 'light',
+      summerVacationCrowding: 'heavy',
+      lunarNewYearCrowding: 'light',
+      holidaySpecialEventsOrHours: '暑假期間延長營運時間，週末至晚間20:00',
+      holidayBookingRecommendation: '暑假期間強烈建議提前線上購票，避免現場排隊。週末必提前購票',
+      holidayNotes: '水上樂園為季節性設施，6月中至9月營運。暑假尖峰期排隊時間長。平日相對較少人。開園初期人最少。'
     }
   },
 ];

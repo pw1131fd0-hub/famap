@@ -1396,6 +1396,87 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.photoVideo && (
+                  <div className="location-section" style={{ borderTop: '2px solid #f59e0b', paddingTop: '12px', marginTop: '12px' }}>
+                    <h3>📸 {language === 'zh' ? '拍照與錄影政策' : 'Photo & Video Policy'}</h3>
+                    {selectedLocation.photoVideo.allowsPhotography && (
+                      <p>✅ {language === 'zh' ? '可以拍照' : 'Photography Allowed'}</p>
+                    )}
+                    {selectedLocation.photoVideo.allowsVideoRecording && (
+                      <p>✅ {language === 'zh' ? '可以錄影' : 'Video Recording Allowed'}</p>
+                    )}
+                    {selectedLocation.photoVideo.photographyRestrictions && (
+                      <p><strong>{language === 'zh' ? '拍照限制' : 'Photography Restrictions'}</strong>: {selectedLocation.photoVideo.photographyRestrictions}</p>
+                    )}
+                    {selectedLocation.photoVideo.flashPhotographyAllowed && (
+                      <p>✅ {language === 'zh' ? '允許閃光燈' : 'Flash Photography Allowed'}</p>
+                    )}
+                    {selectedLocation.photoVideo.tripodAllowed && (
+                      <p>✅ {language === 'zh' ? '可以使用三腳架' : 'Tripod Allowed'}</p>
+                    )}
+                    {selectedLocation.photoVideo.photoVideoNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.photoVideo.photoVideoNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.visitDuration && (
+                  <div className="location-section" style={{ borderTop: '2px solid #10b981', paddingTop: '12px', marginTop: '12px' }}>
+                    <h3>⏱️ {language === 'zh' ? '參訪時間建議' : 'Recommended Visit Duration'}</h3>
+                    {selectedLocation.visitDuration.recommendedDurationText && (
+                      <p><strong>{language === 'zh' ? '建議停留時間' : 'Recommended Duration'}</strong>: {selectedLocation.visitDuration.recommendedDurationText}</p>
+                    )}
+                    {selectedLocation.visitDuration.quickVisitMinutes && (
+                      <p><strong>{language === 'zh' ? '快速參訪' : 'Quick Visit'}</strong>: {selectedLocation.visitDuration.quickVisitMinutes} {language === 'zh' ? '分鐘' : 'minutes'}</p>
+                    )}
+                    {selectedLocation.visitDuration.fullExperienceDurationMinutes && (
+                      <p><strong>{language === 'zh' ? '完整體驗' : 'Full Experience'}</strong>: {selectedLocation.visitDuration.fullExperienceDurationMinutes} {language === 'zh' ? '分鐘' : 'minutes'}</p>
+                    )}
+                    {selectedLocation.visitDuration.includesMealTimeRecommendation && (
+                      <p>✅ {language === 'zh' ? '需要預留用餐時間' : 'Plan Time for Meals'}</p>
+                    )}
+                    {selectedLocation.visitDuration.restTimeRecommendation && (
+                      <p>✅ {language === 'zh' ? '建議安排休息時間' : 'Plan Rest Breaks'}</p>
+                    )}
+                    {selectedLocation.visitDuration.bestTimeToVisit && (
+                      <p><strong>{language === 'zh' ? '最佳參訪時間' : 'Best Time to Visit'}</strong>: {selectedLocation.visitDuration.bestTimeToVisit}</p>
+                    )}
+                    {selectedLocation.visitDuration.durationNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.visitDuration.durationNotes}</p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.schoolHolidays && (
+                  <div className="location-section" style={{ borderTop: '2px solid #ef4444', paddingTop: '12px', marginTop: '12px' }}>
+                    <h3>🏫 {language === 'zh' ? '學期假期與人潮資訊' : 'School Holidays & Crowds'}</h3>
+                    {selectedLocation.schoolHolidays.winterVacationDates && (
+                      <p><strong>{language === 'zh' ? '寒假期間' : 'Winter Vacation'}</strong>: {selectedLocation.schoolHolidays.winterVacationDates}</p>
+                    )}
+                    {selectedLocation.schoolHolidays.winterVacationCrowding && (
+                      <p><strong>{language === 'zh' ? '寒假人潮' : 'Winter Crowds'}</strong>: {language === 'zh' ? (selectedLocation.schoolHolidays.winterVacationCrowding === 'light' ? '清淡' : selectedLocation.schoolHolidays.winterVacationCrowding === 'moderate' ? '適中' : '眾多') : selectedLocation.schoolHolidays.winterVacationCrowding}</p>
+                    )}
+                    {selectedLocation.schoolHolidays.summerVacationDates && (
+                      <p><strong>{language === 'zh' ? '暑假期間' : 'Summer Vacation'}</strong>: {selectedLocation.schoolHolidays.summerVacationDates}</p>
+                    )}
+                    {selectedLocation.schoolHolidays.summerVacationCrowding && (
+                      <p><strong>{language === 'zh' ? '暑假人潮' : 'Summer Crowds'}</strong>: {language === 'zh' ? (selectedLocation.schoolHolidays.summerVacationCrowding === 'light' ? '清淡' : selectedLocation.schoolHolidays.summerVacationCrowding === 'moderate' ? '適中' : '眾多') : selectedLocation.schoolHolidays.summerVacationCrowding}</p>
+                    )}
+                    {selectedLocation.schoolHolidays.lunarNewYearDates && (
+                      <p><strong>{language === 'zh' ? '農曆新年' : 'Lunar New Year'}</strong>: {selectedLocation.schoolHolidays.lunarNewYearDates}</p>
+                    )}
+                    {selectedLocation.schoolHolidays.lunarNewYearCrowding && (
+                      <p><strong>{language === 'zh' ? '農曆新年人潮' : 'Lunar New Year Crowds'}</strong>: {language === 'zh' ? (selectedLocation.schoolHolidays.lunarNewYearCrowding === 'light' ? '清淡' : selectedLocation.schoolHolidays.lunarNewYearCrowding === 'moderate' ? '適中' : '眾多') : selectedLocation.schoolHolidays.lunarNewYearCrowding}</p>
+                    )}
+                    {selectedLocation.schoolHolidays.holidaySpecialEventsOrHours && (
+                      <p><strong>{language === 'zh' ? '假期特別活動' : 'Holiday Events'}</strong>: {selectedLocation.schoolHolidays.holidaySpecialEventsOrHours}</p>
+                    )}
+                    {selectedLocation.schoolHolidays.holidayBookingRecommendation && (
+                      <p><strong>{language === 'zh' ? '假期預約建議' : 'Holiday Booking Tips'}</strong>: {selectedLocation.schoolHolidays.holidayBookingRecommendation}</p>
+                    )}
+                    {selectedLocation.schoolHolidays.holidayNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.schoolHolidays.holidayNotes}</p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>

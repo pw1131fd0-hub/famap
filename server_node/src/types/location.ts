@@ -341,6 +341,46 @@ export interface EntertainmentScheduleInfo {
   entertainmentNotes?: string; // e.g., "Daily puppet shows suitable for ages 2-10, no reservation needed, approximately 25 minutes each performance"
 }
 
+export interface PhotoVideoPolicy {
+  allowsPhotography?: boolean; // Can families take photos?
+  allowsVideoRecording?: boolean; // Can families record videos?
+  photographyRestrictions?: string; // e.g., "Photos allowed except in exhibition areas", "Professional photography prohibited"
+  videoRecordingRestrictions?: string; // e.g., "Videos for personal use only", "Commercial recording prohibited"
+  flashPhotographyAllowed?: boolean; // Some venues don't allow flash
+  tripodAllowed?: boolean; // Can use tripod/selfie stick?
+  commercialPhotographyAllowed?: boolean; // For social media content creators
+  photoVideoNotes?: string; // e.g., "Personal photography allowed, no flash in museum exhibits, video recording requires permission for commercial use"
+}
+
+export interface VisitDurationRecommendation {
+  recommendedDurationMinutes?: number; // Recommended minimum hours for a full experience (in minutes)
+  recommendedDurationText?: string; // e.g., "2-3 hours", "Half day" , "Full day"
+  quickVisitMinutes?: number; // Quick visit timeframe (in minutes)
+  fullExperienceDurationMinutes?: number; // Full experience timeframe (in minutes)
+  mustSeeActivityDurationMinutes?: number; // Must-see activities duration
+  includesMealTimeRecommendation?: boolean; // Should families budget time for eating?
+  mealTimeSuggestion?: string; // e.g., "1-1.5 hours recommended for lunch"
+  restTimeRecommendation?: boolean; // Should families plan rest breaks?
+  bestTimeToVisit?: string; // e.g., "Morning visits less crowded, afternoon quieter after 4pm"
+  durationNotes?: string; // e.g., "Recommend 3-4 hours including meal time; children ages 2-8 usually spend 3-4 hours for core activities"
+}
+
+export interface TaiwanSchoolHolidayInfo {
+  winterVacationDates?: string; // e.g., "Late Jan - Early Feb" (寒假)
+  summerVacationDates?: string; // e.g., "Early Jul - Late Aug" (暑假)
+  midAutumnFestival?: string; // e.g., "Sep 10-12" (中秋節)
+  lunarNewYearDates?: string; // e.g., "Feb 17-24, 2026" (農曆新年)
+  dragonBoatFestivalDate?: string; // e.g., "Jun 10" (端午節)
+  doubleNinthFestivalDate?: string; // e.g., "Oct 10" (重陽節)
+  weeklyHolidaysInfo?: string; // e.g., "Closed Mondays except holidays"
+  winterVacationCrowding?: 'light' | 'moderate' | 'heavy'; // Crowding during winter break
+  summerVacationCrowding?: 'light' | 'moderate' | 'heavy'; // Crowding during summer break
+  lunarNewYearCrowding?: 'light' | 'moderate' | 'heavy'; // Peak crowding during Chinese New Year
+  holidaySpecialEventsOrHours?: string; // e.g., "Special CNY performances Feb 17-24, extended hours during summer vacation"
+  holidayBookingRecommendation?: string; // e.g., "Pre-book required during winter/summer vacations, especially on weekends"
+  holidayNotes?: string; // e.g., "Very crowded during Lunar New Year and summer vacation; quiet during weekdays in regular school term. Recommend visiting on weekday mornings or off-season."
+}
+
 export interface Location {
   id: string;
   name: {
@@ -400,6 +440,9 @@ export interface Location {
   specialNeeds?: SpecialNeedsServicesInfo;
   medicalServices?: FirstAidAndMedicalInfo;
   entertainmentSchedule?: EntertainmentScheduleInfo;
+  photoVideo?: PhotoVideoPolicy;
+  visitDuration?: VisitDurationRecommendation;
+  schoolHolidays?: TaiwanSchoolHolidayInfo;
 }
 
 export interface SearchParams {
