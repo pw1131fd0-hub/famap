@@ -578,6 +578,70 @@ function App() {
                     ))}
                   </div>
                 </div>
+                {selectedLocation.publicTransit && (
+                  <div className="detail-section">
+                    <h4>🚇 {language === 'zh' ? '公共運輸' : 'Public Transit'}</h4>
+                    {selectedLocation.publicTransit.nearestMRT && (
+                      <p>
+                        <strong>{language === 'zh' ? '最近捷運' : 'Nearest MRT'}:</strong> {selectedLocation.publicTransit.nearestMRT.station}
+                        ({selectedLocation.publicTransit.nearestMRT.line}) - 約 {Math.round(selectedLocation.publicTransit.nearestMRT.distance / 100)}00m
+                      </p>
+                    )}
+                    {selectedLocation.publicTransit.busLines && selectedLocation.publicTransit.busLines.length > 0 && (
+                      <p>
+                        <strong>{language === 'zh' ? '公車路線' : 'Bus Lines'}:</strong> {selectedLocation.publicTransit.busLines.join(', ')}
+                      </p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.parking && (
+                  <div className="detail-section">
+                    <h4>🅿️ {language === 'zh' ? '停車資訊' : 'Parking'}</h4>
+                    <p>
+                      <strong>{language === 'zh' ? '停車' : 'Parking'}</strong>: {selectedLocation.parking.available ? (language === 'zh' ? '✅ 有停車位' : '✅ Available') : (language === 'zh' ? '❌ 無停車位' : '❌ Not Available')}
+                    </p>
+                    {selectedLocation.parking.cost && (
+                      <p>
+                        <strong>{language === 'zh' ? '費用' : 'Cost'}</strong>: {selectedLocation.parking.cost}
+                      </p>
+                    )}
+                    {selectedLocation.parking.hasValidation && (
+                      <p>
+                        <strong>{language === 'zh' ? '停車驗證' : 'Validation'}</strong>: {language === 'zh' ? '✅ 有停車驗證' : '✅ Available'}
+                      </p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.toilet && (
+                  <div className="detail-section">
+                    <h4>🚽 {language === 'zh' ? '廁所設施' : 'Toilet Facilities'}</h4>
+                    <p>
+                      <strong>{language === 'zh' ? '廁所' : 'Toilet'}</strong>: {selectedLocation.toilet.available ? (language === 'zh' ? '✅ 有廁所' : '✅ Available') : (language === 'zh' ? '❌ 無廁所' : '❌ Not Available')}
+                    </p>
+                    {selectedLocation.toilet.childrenFriendly && (
+                      <p>
+                        <strong>{language === 'zh' ? '兒童友善' : 'Kid-Friendly'}</strong>: {language === 'zh' ? '✅ 是' : '✅ Yes'}
+                      </p>
+                    )}
+                    {selectedLocation.toilet.hasChangingTable && (
+                      <p>
+                        <strong>{language === 'zh' ? '換尿布台' : 'Changing Table'}</strong>: {language === 'zh' ? '✅ 有' : '✅ Available'}
+                      </p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.hasWiFi && (
+                  <div className="detail-section">
+                    <h4>📶 WiFi</h4>
+                    <p>{language === 'zh' ? '✅ 有免費WiFi' : '✅ Free WiFi Available'}</p>
+                  </div>
+                )}
+                {selectedLocation.allergens && selectedLocation.allergens.commonAllergens && selectedLocation.allergens.commonAllergens.length > 0 && (
+                  <div className="detail-section">
+                    <h4>⚠️ {language === 'zh' ? '常見過敏原' : 'Common Allergens'}</h4>
+                    <p>{selectedLocation.allergens.commonAllergens.join(', ')}</p>
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>

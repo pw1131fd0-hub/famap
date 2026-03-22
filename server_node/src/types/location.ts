@@ -10,6 +10,31 @@ export interface PricingInfo {
   priceRange?: string;
 }
 
+export interface PublicTransitInfo {
+  nearestMRT?: {
+    line: string;
+    station: string;
+    distance: number; // in meters
+  };
+  busLines?: string[];
+}
+
+export interface ParkingInfo {
+  available: boolean;
+  cost?: string;
+  hasValidation: boolean;
+}
+
+export interface ToiletInfo {
+  available: boolean;
+  childrenFriendly: boolean;
+  hasChangingTable: boolean;
+}
+
+export interface AllergenInfo {
+  commonAllergens?: string[]; // e.g., ['peanuts', 'shellfish', 'dairy']
+}
+
 export interface Location {
   id: string;
   name: {
@@ -35,6 +60,11 @@ export interface Location {
   ageRange?: AgeRange;
   pricing?: PricingInfo;
   phoneNumber?: string;
+  publicTransit?: PublicTransitInfo;
+  parking?: ParkingInfo;
+  toilet?: ToiletInfo;
+  hasWiFi?: boolean;
+  allergens?: AllergenInfo;
 }
 
 export interface SearchParams {

@@ -26,6 +26,13 @@ export let mockLocations: Location[] = [
     ageRange: { minAge: 1, maxAge: 12 },
     pricing: { isFree: true },
     phoneNumber: '02-2700-8600',
+    publicTransit: {
+      nearestMRT: { line: '棕線 (Brown Line)', station: '科技大樓站', distance: 450 },
+      busLines: ['15', '32', '38', '72'],
+    },
+    parking: { available: true, cost: '免費停車', hasValidation: false },
+    toilet: { available: true, childrenFriendly: true, hasChangingTable: true },
+    hasWiFi: false,
   },
   {
     id: '2',
@@ -39,6 +46,13 @@ export let mockLocations: Location[] = [
     ageRange: { minAge: 2, maxAge: 15 },
     pricing: { isFree: false, priceRange: '200-500 NTD' },
     phoneNumber: '02-2833-6666',
+    publicTransit: {
+      nearestMRT: { line: '紅線 (Red Line)', station: '士林站', distance: 1200 },
+      busLines: ['11', '26', '27', '32', '55'],
+    },
+    parking: { available: true, cost: '200 NTD/時', hasValidation: true },
+    toilet: { available: true, childrenFriendly: true, hasChangingTable: true },
+    hasWiFi: true,
   },
   {
     id: '3',
@@ -52,19 +66,34 @@ export let mockLocations: Location[] = [
     ageRange: { minAge: 3, maxAge: 14 },
     pricing: { isFree: false, priceRange: '30-100 NTD' },
     phoneNumber: '02-2382-2566',
+    publicTransit: {
+      nearestMRT: { line: '綠線 (Green Line)', station: '國父紀念館站', distance: 350 },
+      busLines: ['1', '15', '33', '38'],
+    },
+    parking: { available: true, cost: '1小時 80 NTD', hasValidation: true },
+    toilet: { available: true, childrenFriendly: true, hasChangingTable: true },
+    hasWiFi: true,
   },
   {
     id: '4',
     name: { zh: '親子餐廳範例', en: 'Kids Friendly Restaurant' },
     description: { zh: '提供室內遊戲室和兒童餐。', en: 'Offers indoor playground and kids menu.' },
     category: 'restaurant',
-    coordinates: { lat: 25.0330, lng: 121.5654 }, // Near Taipei 101
+    coordinates: { lat: 25.0330, lng: 121.5654 },
     address: { zh: '台北市信義區', en: 'Xinyi Dist., Taipei' },
     facilities: ['high_chair', 'nursing_room', 'air_conditioned', 'kids_menu', 'indoor_play'],
     averageRating: 4.2,
     ageRange: { minAge: 0, maxAge: 8 },
     pricing: { isFree: false, priceRange: '400-800 NTD' },
     phoneNumber: '02-8101-0888',
+    publicTransit: {
+      nearestMRT: { line: '紅線 (Red Line)', station: '信義安和站', distance: 280 },
+      busLines: ['33', '37', '41', '52'],
+    },
+    parking: { available: true, cost: '樓下停車場', hasValidation: true },
+    toilet: { available: true, childrenFriendly: true, hasChangingTable: true },
+    hasWiFi: true,
+    allergens: { commonAllergens: ['milk', 'eggs', 'peanuts'] },
   },
   {
     id: '5',
@@ -78,6 +107,13 @@ export let mockLocations: Location[] = [
     ageRange: { minAge: 0, maxAge: 10 },
     pricing: { isFree: true },
     phoneNumber: '02-2655-0988',
+    publicTransit: {
+      nearestMRT: { line: '棕線 (Brown Line)', station: '南港軟體園區站', distance: 100 },
+      busLines: ['270', '275', '605'],
+    },
+    parking: { available: true, cost: '免費停車', hasValidation: false },
+    toilet: { available: true, childrenFriendly: true, hasChangingTable: true },
+    hasWiFi: true,
   },
   {
     id: '6',
@@ -91,6 +127,13 @@ export let mockLocations: Location[] = [
     ageRange: { minAge: 3, maxAge: 16 },
     pricing: { isFree: false, priceRange: '100-200 NTD' },
     phoneNumber: '02-8751-5000',
+    publicTransit: {
+      nearestMRT: { line: '棕線 (Brown Line)', station: '南港軟體園區站', distance: 2000 },
+      busLines: ['201', '202', '267'],
+    },
+    parking: { available: true, cost: '免費停車', hasValidation: false },
+    toilet: { available: true, childrenFriendly: true, hasChangingTable: true },
+    hasWiFi: false,
   },
   {
     id: '7',
@@ -104,6 +147,13 @@ export let mockLocations: Location[] = [
     ageRange: { minAge: 2, maxAge: 14 },
     pricing: { isFree: false, priceRange: '300-600 NTD' },
     phoneNumber: '02-2918-9077',
+    publicTransit: {
+      nearestMRT: { line: '綠線 (Green Line)', station: '新店站', distance: 800 },
+      busLines: ['648', '649', '671'],
+    },
+    parking: { available: true, cost: '免費停車', hasValidation: false },
+    toilet: { available: true, childrenFriendly: true, hasChangingTable: true },
+    hasWiFi: true,
   },
 ];
 
