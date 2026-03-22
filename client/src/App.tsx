@@ -2628,9 +2628,27 @@ function App() {
                   }}
                 >
                   <Popup>
-                    <div className="popup-content">
-                      <strong>{loc.name[language]}</strong>
-                      <p style={{fontSize: '0.9em', maxHeight: '60px', overflow: 'hidden', textOverflow: 'ellipsis'}}>{loc.description[language]}</p>
+                    <div className="popup-content" style={{ width: '300px' }}>
+                      <div style={{ marginBottom: '8px' }}>
+                        <strong style={{ fontSize: '1.1em' }}>{loc.name[language]}</strong>
+                        <div style={{ fontSize: '0.75em', color: '#666', marginTop: '4px' }}>
+                          {t.categories[loc.category]} {loc.averageRating > 0 && `⭐ ${loc.averageRating.toFixed(1)}`}
+                        </div>
+                      </div>
+                      <p style={{fontSize: '0.85em', maxHeight: '100px', overflow: 'hidden', textOverflow: 'ellipsis', lineHeight: '1.3', marginBottom: '8px', color: '#333'}}>{loc.description[language]}</p>
+                      {loc.facilities && loc.facilities.length > 0 && (
+                        <div style={{ fontSize: '0.75em', marginBottom: '8px' }}>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                            {loc.facilities.slice(0, 3).map((f, i) => (
+                              <span key={i} style={{ background: '#f0f0f0', padding: '2px 6px', borderRadius: '3px' }}>{f}</span>
+                            ))}
+                            {loc.facilities.length > 3 && <span style={{ background: '#f0f0f0', padding: '2px 6px', borderRadius: '3px' }}>+{loc.facilities.length - 3}</span>}
+                          </div>
+                        </div>
+                      )}
+                      <div style={{ fontSize: '0.75em', color: '#0066cc', textAlign: 'center', marginTop: '8px', fontWeight: '500' }}>
+                        {language === 'zh' ? '👉 點擊查看完整資訊' : '👉 Click for details'}
+                      </div>
                     </div>
                   </Popup>
                 </Marker>
