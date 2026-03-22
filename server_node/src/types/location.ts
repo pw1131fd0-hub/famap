@@ -324,6 +324,23 @@ export interface FirstAidAndMedicalInfo {
   medicalNotes?: string; // e.g., "AED on entrance wall, first aid trained staff, Taipei Veterans General Hospital 2km away, emergency call system on-site"
 }
 
+export interface EntertainmentScheduleInfo {
+  hasPerformances?: boolean; // Live shows, performances, or demonstrations available
+  performanceTypes?: string[]; // e.g., ["live music", "magic show", "puppet theater", "dance performance", "educational demo"]
+  performanceSchedule?: string; // e.g., "Daily shows at 11am, 2pm, 4pm"
+  hasWeeklyShows?: boolean; // Regular weekly schedule
+  showDuration?: string; // e.g., "20-30 minutes"
+  minAgeForShow?: number; // Minimum age recommendation
+  maxAgeForShow?: number; // Maximum age recommendation
+  performanceContent?: string; // e.g., "Interactive music performance for ages 2-8"
+  requiresAdvanceBooking?: boolean; // Need to book seats for shows
+  hasInteractiveActivities?: boolean; // Kids can participate in performance
+  performanceLanguage?: string[]; // e.g., ["Mandarin", "English", "non-verbal"]
+  performanceLocation?: string; // e.g., "Indoor theater" or "Outdoor stage"
+  seasonalPerformances?: string; // e.g., "Special holiday shows Dec-Jan"
+  entertainmentNotes?: string; // e.g., "Daily puppet shows suitable for ages 2-10, no reservation needed, approximately 25 minutes each performance"
+}
+
 export interface Location {
   id: string;
   name: {
@@ -382,6 +399,7 @@ export interface Location {
   eventSpace?: EventSpaceInfo;
   specialNeeds?: SpecialNeedsServicesInfo;
   medicalServices?: FirstAidAndMedicalInfo;
+  entertainmentSchedule?: EntertainmentScheduleInfo;
 }
 
 export interface SearchParams {

@@ -324,6 +324,23 @@ export interface FirstAidAndMedicalInfo {
   medicalNotes?: string;
 }
 
+export interface EntertainmentScheduleInfo {
+  hasPerformances?: boolean;
+  performanceTypes?: string[];
+  performanceSchedule?: string;
+  hasWeeklyShows?: boolean;
+  showDuration?: string;
+  minAgeForShow?: number;
+  maxAgeForShow?: number;
+  performanceContent?: string;
+  requiresAdvanceBooking?: boolean;
+  hasInteractiveActivities?: boolean;
+  performanceLanguage?: string[];
+  performanceLocation?: string;
+  seasonalPerformances?: string;
+  entertainmentNotes?: string;
+}
+
 export interface Location {
   id: string;
   name: {
@@ -382,6 +399,7 @@ export interface Location {
   eventSpace?: EventSpaceInfo;
   specialNeeds?: SpecialNeedsServicesInfo;
   medicalServices?: FirstAidAndMedicalInfo;
+  entertainmentSchedule?: EntertainmentScheduleInfo;
 }
 
 export interface Review {
@@ -452,6 +470,7 @@ export interface LocationCreateDTO {
   eventSpace?: EventSpaceInfo;
   specialNeeds?: SpecialNeedsServicesInfo;
   medicalServices?: FirstAidAndMedicalInfo;
+  entertainmentSchedule?: EntertainmentScheduleInfo;
 }
 
 export interface Favorite {

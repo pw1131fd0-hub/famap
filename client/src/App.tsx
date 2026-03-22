@@ -1364,6 +1364,38 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.entertainmentSchedule && (
+                  <div className="location-section" style={{ borderTop: '2px solid #8b5cf6', paddingTop: '12px', marginTop: '12px' }}>
+                    <h3>🎭 {language === 'zh' ? '表演與娛樂活動' : 'Entertainment & Performances'}</h3>
+                    {selectedLocation.entertainmentSchedule.hasPerformances && (
+                      <p>✅ {language === 'zh' ? '有表演和娛樂活動' : 'Performances Available'}</p>
+                    )}
+                    {selectedLocation.entertainmentSchedule.performanceTypes && selectedLocation.entertainmentSchedule.performanceTypes.length > 0 && (
+                      <p><strong>{language === 'zh' ? '表演類型' : 'Performance Types'}</strong>: {selectedLocation.entertainmentSchedule.performanceTypes.join(', ')}</p>
+                    )}
+                    {selectedLocation.entertainmentSchedule.performanceSchedule && (
+                      <p><strong>{language === 'zh' ? '表演時間' : 'Schedule'}</strong>: {selectedLocation.entertainmentSchedule.performanceSchedule}</p>
+                    )}
+                    {selectedLocation.entertainmentSchedule.showDuration && (
+                      <p><strong>{language === 'zh' ? '表演時長' : 'Duration'}</strong>: {selectedLocation.entertainmentSchedule.showDuration}</p>
+                    )}
+                    {selectedLocation.entertainmentSchedule.minAgeForShow !== undefined && selectedLocation.entertainmentSchedule.maxAgeForShow !== undefined && (
+                      <p><strong>{language === 'zh' ? '適合年齡' : 'Age Range'}</strong>: {selectedLocation.entertainmentSchedule.minAgeForShow}-{selectedLocation.entertainmentSchedule.maxAgeForShow} {language === 'zh' ? '歲' : 'years'}</p>
+                    )}
+                    {selectedLocation.entertainmentSchedule.hasInteractiveActivities && (
+                      <p>✅ {language === 'zh' ? '有互動式活動' : 'Interactive Activities Available'}</p>
+                    )}
+                    {selectedLocation.entertainmentSchedule.performanceLocation && (
+                      <p><strong>{language === 'zh' ? '表演地點' : 'Location'}</strong>: {selectedLocation.entertainmentSchedule.performanceLocation}</p>
+                    )}
+                    {selectedLocation.entertainmentSchedule.seasonalPerformances && (
+                      <p><strong>{language === 'zh' ? '季節特別表演' : 'Seasonal Shows'}</strong>: {selectedLocation.entertainmentSchedule.seasonalPerformances}</p>
+                    )}
+                    {selectedLocation.entertainmentSchedule.entertainmentNotes && (
+                      <p><strong>{language === 'zh' ? '詳情' : 'Details'}</strong>: {selectedLocation.entertainmentSchedule.entertainmentNotes}</p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>

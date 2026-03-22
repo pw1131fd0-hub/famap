@@ -199,6 +199,16 @@ export let mockLocations: Location[] = [
       hospitalDistance: 1500,
       incidentResponseCapability: 'basic',
       medicalNotes: '公園內備有基礎急救箱。最近醫院為台大醫院。'
+    },
+    entertainmentSchedule: {
+      hasPerformances: false,
+      performanceTypes: [],
+      performanceSchedule: '無定期表演',
+      hasWeeklyShows: false,
+      performanceContent: '公園為開放式遊樂設施，無定期表演',
+      performanceLanguage: [],
+      performanceLocation: '戶外',
+      entertainmentNotes: '公園為開放式遊樂區域，無定期表演或活動。家庭可自行組織野餐和戶外活動。'
     }
   },
   {
@@ -424,6 +434,21 @@ export let mockLocations: Location[] = [
       emergencyContactNumbers: ['02-2382-2699'],
       incidentResponseCapability: 'standard',
       medicalNotes: '館內設有AED和急救室。工作人員受過培訓。緊急聯絡電話貼於館內各處。'
+    },
+    entertainmentSchedule: {
+      hasPerformances: true,
+      performanceTypes: ['live music show', 'educational performance', 'puppet theater', 'interactive dance'],
+      performanceSchedule: '週末及假日每日11:00, 14:00, 16:00各一場',
+      hasWeeklyShows: true,
+      showDuration: '20-25分鐘',
+      minAgeForShow: 2,
+      maxAgeForShow: 12,
+      performanceContent: '適合2-12歲兒童的互動式表演，結合音樂、舞蹈和教育元素',
+      requiresAdvanceBooking: false,
+      hasInteractiveActivities: true,
+      performanceLanguage: ['普通話', '台語'],
+      performanceLocation: '室內表演廳',
+      entertainmentNotes: '每週末及假日提供3場精彩表演，免額外購票。小朋友可在表演中互動參與。'
     }
   },
   {
@@ -629,6 +654,21 @@ export let mockLocations: Location[] = [
       emergencyContactNumbers: ['02-2382-2699', '119'],
       incidentResponseCapability: 'standard',
       medicalNotes: '館內設有AED和完整急救設備。工作人員受過急救訓練。'
+    },
+    entertainmentSchedule: {
+      hasPerformances: true,
+      performanceTypes: ['educational demonstration', 'interactive workshop', 'guided tour'],
+      performanceSchedule: '週六、日下午14:00-15:00，假日上午11:00-12:00',
+      hasWeeklyShows: true,
+      showDuration: '30-45分鐘',
+      minAgeForShow: 5,
+      maxAgeForShow: 12,
+      performanceContent: '互動式自然科學教育展示，講解台灣的古生物和地質',
+      requiresAdvanceBooking: false,
+      hasInteractiveActivities: true,
+      performanceLanguage: ['普通話', '台語'],
+      performanceLocation: '特展廳',
+      entertainmentNotes: '定期舉辦教育導覽和互動演示。週末提供兒童友善的解說活動，帶領小朋友認識台灣自然歷史。'
     }
   },
   {
@@ -844,6 +884,21 @@ export let mockLocations: Location[] = [
       emergencyContactNumbers: ['02-5555-XXXX', '119'],
       incidentResponseCapability: 'standard',
       medicalNotes: '設有AED和完整急救箱。工作人員受過CPR訓練。'
+    },
+    entertainmentSchedule: {
+      hasPerformances: true,
+      performanceTypes: ['live music', 'puppet show', 'storytelling', 'interactive game'],
+      performanceSchedule: '每週三、六下午15:00-16:00，每月特別表演',
+      hasWeeklyShows: true,
+      showDuration: '25-35分鐘',
+      minAgeForShow: 1,
+      maxAgeForShow: 8,
+      performanceContent: '親子友善的音樂表演和木偶劇，適合幼兒和學齡前兒童',
+      requiresAdvanceBooking: false,
+      hasInteractiveActivities: true,
+      performanceLanguage: ['普通話', '台語'],
+      performanceLocation: '室內多功能廳',
+      entertainmentNotes: '餐廳定期舉辦親子友善表演。表演期間家長可在旁邊休息區放鬆。表演免額外費用。'
     }
   },
   {
@@ -1051,6 +1106,16 @@ export let mockLocations: Location[] = [
       emergencyContactNumbers: ['02-XXXX-XXXX', '119'],
       incidentResponseCapability: 'standard',
       medicalNotes: '運動中心備有AED和急救站。救生員和工作人員均受過訓練。'
+    },
+    entertainmentSchedule: {
+      hasPerformances: false,
+      performanceTypes: [],
+      performanceSchedule: '無定期表演',
+      hasWeeklyShows: false,
+      performanceContent: '親子中心主要以設施活動為主，無定期表演',
+      performanceLanguage: [],
+      performanceLocation: '多功能區',
+      entertainmentNotes: '親子中心設有遊樂設施、游泳池和活動區。定期舉辦親子課程和工坊（如瑜伽、舞蹈），但無定期表演節目。'
     }
   },
   {
@@ -1253,6 +1318,16 @@ export let mockLocations: Location[] = [
       emergencyContactNumbers: ['02-XXXX-XXXX', '119'],
       incidentResponseCapability: 'standard',
       medicalNotes: '運動設施備有AED和救急箱。工作人員均受過基本訓練。'
+    },
+    entertainmentSchedule: {
+      hasPerformances: false,
+      performanceTypes: [],
+      performanceSchedule: '無定期表演',
+      hasWeeklyShows: false,
+      performanceContent: '運動中心以水上運動和健身課程為主，無專業表演節目',
+      performanceLanguage: [],
+      performanceLocation: '游泳區',
+      entertainmentNotes: '運動中心提供游泳課程和水上運動活動。定期舉辦親子游泳班和水中有氧課程，但無定期表演。'
     }
   },
   {
@@ -1467,6 +1542,22 @@ export let mockLocations: Location[] = [
       emergencyContactNumbers: ['02-XXXX-XXXX', '119'],
       incidentResponseCapability: 'comprehensive',
       medicalNotes: '水上樂園設有完整醫療站，配備AED和急救設備。駐場護士提供基礎醫療。'
+    },
+    entertainmentSchedule: {
+      hasPerformances: true,
+      performanceTypes: ['water games', 'entertainment shows', 'music performance'],
+      performanceSchedule: '夏季每日11:00、15:00，其他季節週末10:30、14:30',
+      hasWeeklyShows: true,
+      showDuration: '30-45分鐘',
+      minAgeForShow: 2,
+      maxAgeForShow: 15,
+      performanceContent: '水上樂園提供互動式水上遊戲表演和音樂展演，全家都能參與',
+      requiresAdvanceBooking: false,
+      hasInteractiveActivities: true,
+      performanceLanguage: ['普通話', '台語'],
+      performanceLocation: '水上樂園主舞台',
+      seasonalPerformances: '暑假期間每日表演，平日和假日週末場次',
+      entertainmentNotes: '水上樂園提供季節性表演和互動式水上遊戲。夏季表演頻率較高，結合消暑活動。所有表演已包含在樂園入場券內。'
     }
   },
 ];
