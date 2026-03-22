@@ -160,6 +160,7 @@ function App() {
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
   const [showAddLocation, setShowAddLocation] = useState(false);
   const [reviews, setReviews] = useState<Review[]>([]);
+  const [facilitiesFilter, setFacilitiesFilter] = useState<string[]>([]);
 
   const fetchLocations = useCallback(async () => {
     setLoading(true);
@@ -277,6 +278,21 @@ function App() {
     } catch (error) {
       console.error('Failed to toggle favorite:', error);
     }
+  };
+
+  const toggleFacilityFilter = (facility: string) => {
+    setFacilitiesFilter(prev =>
+      prev.includes(facility)
+        ? prev.filter(f => f !== facility)
+        : [...prev, facility]
+    );
+  };
+
+  const getFilteredLocations = (locs: Location[]) => {
+    if (facilitiesFilter.length === 0) return locs;
+    return locs.filter(loc =>
+      facilitiesFilter.every(facility => loc.facilities.includes(facility))
+    );
   };
 
   const categories: Array<{ key: Category | undefined; icon: React.ElementType; label: string }> = [
@@ -470,7 +486,7 @@ function App() {
               {!showFavorites ? (
                 <>
                   <div className="sidebar-tools">
-                    <button 
+                    <button
                       className={`tool-button ${strollerOnly ? 'active' : ''}`}
                       onClick={() => setStrollerOnly(!strollerOnly)}
                       title={t.common.filterStroller}
@@ -478,13 +494,43 @@ function App() {
                       <Filter size={18} />
                       <span>{t.common.filterStroller}</span>
                     </button>
-                    <button 
+                    <button
                       className="tool-button primary"
                       onClick={() => setShowAddLocation(true)}
                       title={t.common.addLocation}
                     >
                       <Plus size={18} />
                       <span>{t.common.addLocation}</span>
+                    </button>
+                  </div>
+                  <div className="quick-facility-filters">
+                    <button
+                      className={`quick-facility-btn ${facilitiesFilter.includes('public_toilet') ? 'active' : ''}`}
+                      onClick={() => toggleFacilityFilter('public_toilet')}
+                      title={t.facilities.public_toilet}
+                    >
+                      🚽 {t.facilities.public_toilet}
+                    </button>
+                    <button
+                      className={`quick-facility-btn ${facilitiesFilter.includes('nursing_room') ? 'active' : ''}`}
+                      onClick={() => toggleFacilityFilter('nursing_room')}
+                      title={t.facilities.nursing_room}
+                    >
+                      🧴 {t.facilities.nursing_room}
+                    </button>
+                    <button
+                      className={`quick-facility-btn ${facilitiesFilter.includes('drinking_water') ? 'active' : ''}`}
+                      onClick={() => toggleFacilityFilter('drinking_water')}
+                      title={t.facilities.drinking_water}
+                    >
+                      💧 {t.facilities.drinking_water}
+                    </button>
+                    <button
+                      className={`quick-facility-btn ${facilitiesFilter.includes('wheelchair_accessible') ? 'active' : ''}`}
+                      onClick={() => toggleFacilityFilter('wheelchair_accessible')}
+                      title={t.facilities.wheelchair_accessible}
+                    >
+                      ♿ {t.facilities.wheelchair_accessible}
                     </button>
                   </div>
                   <nav className="category-list">
@@ -505,7 +551,7 @@ function App() {
               {loading && <div className="loading-overlay">{t.common.loading}</div>}
 
               <div className="locations-list">
-                {(showFavorites ? favorites : locations).length === 0 ? (
+                {getFilteredLocations(showFavorites ? favorites : locations).length === 0 ? (
                   <div className="empty-state">
                     {loading ? (
                       <p>{t.common.loading}</p>
@@ -514,7 +560,7 @@ function App() {
                     )}
                   </div>
                 ) : (
-                  (showFavorites ? favorites : locations).map((loc) => (
+                  getFilteredLocations(showFavorites ? favorites : locations).map((loc) => (
                     <div 
                       key={loc.id} 
                       className="location-card"

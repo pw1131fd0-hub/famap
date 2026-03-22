@@ -688,6 +688,45 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
+.quick-facility-filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 12px 16px;
+  background-color: var(--bg-cream);
+  border-bottom: 1px solid var(--border);
+}
+
+.quick-facility-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 8px;
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dark);
+  transition: all 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.quick-facility-btn:hover {
+  background: var(--secondary);
+  border-color: var(--primary);
+}
+
+.quick-facility-btn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
 .tool-button {
   flex: 1;
   display: flex;
