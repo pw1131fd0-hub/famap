@@ -115,6 +115,30 @@ const createGlowingIcon = (category: string) => {
 // Hardcoded user ID for demonstration (MVP)
 const MOCK_USER_ID = 'u1';
 
+// Function to check if location is currently open
+const isLocationOpen = (operatingHours?: Record<string, string>): { isOpen: boolean; message: string } => {
+  if (!operatingHours) {
+    return { isOpen: true, message: '營業時間未知' };
+  }
+
+  const now = new Date();
+  const dayOfWeek = now.getDay();
+  const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  const todayName = dayNames[dayOfWeek];
+  const todayHours = operatingHours[todayName as keyof typeof operatingHours];
+
+  if (!todayHours || todayHours === '休息' || todayHours === 'Closed') {
+    return { isOpen: false, message: '今日休息' };
+  }
+
+  // Simple check if hours contain typical time patterns
+  if (todayHours.includes('24小時') || todayHours.includes('24 hours')) {
+    return { isOpen: true, message: '24小時' };
+  }
+
+  return { isOpen: true, message: '營業中' };
+};
+
 // Component to handle map view updates
 function MapEvents({ onPositionChange }: { onPositionChange: (pos: [number, number]) => void }) {
   const map = useMap();
@@ -477,7 +501,24 @@ function App() {
                 )}
                 {selectedLocation.operatingHours && (
                   <div className="detail-section">
-                    <h4>{t.locationDetail.openingHours}</h4>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                      <h4>{t.locationDetail.openingHours}</h4>
+                      {(() => {
+                        const { isOpen, message } = isLocationOpen(selectedLocation.operatingHours);
+                        return (
+                          <span style={{
+                            padding: '4px 10px',
+                            borderRadius: '4px',
+                            fontSize: '0.8em',
+                            fontWeight: '600',
+                            background: isOpen ? '#d4edda' : '#f8d7da',
+                            color: isOpen ? '#155724' : '#721c24',
+                          }}>
+                            {isOpen ? '🟢' : '🔴'} {message}
+                          </span>
+                        );
+                      })()}
+                    </div>
                     <div className="hours-list">
                       {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day) => {
                         const dayName = language === 'zh'
