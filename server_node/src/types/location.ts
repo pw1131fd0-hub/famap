@@ -123,6 +123,42 @@ export interface SeasonalInfo {
   seasonalClosures?: string; // e.g., "Closed during typhoon warnings"
 }
 
+export interface PaymentInfo {
+  acceptsCash?: boolean; // 現金
+  acceptsLinePay?: boolean; // LINE Pay (very common in Taiwan)
+  acceptsWeChatPay?: boolean; // WeChat Pay (for mainland visitors)
+  acceptsAlipay?: boolean; // AliPay (for mainland visitors)
+  acceptsApplePay?: boolean; // Apple Pay
+  acceptsSamsungPay?: boolean; // Samsung Pay
+  acceptsCreditCard?: boolean; // Visa, Mastercard
+  acceptsDebitCard?: boolean;
+  paymentNotes?: string; // e.g., "Online booking requires credit card, entrance accepts all methods"
+}
+
+export interface OutsideFoodPolicy {
+  allowsOutsideFood?: boolean; // Can families bring own food/picnic?
+  allowsOutsideBeverages?: boolean; // Can bring own drinks?
+  hasPicnicAreas?: boolean; // Designated picnic areas available?
+  hasRefrigeratedStorage?: boolean; // Can store brought food/drinks?
+  foodPolicyNotes?: string; // e.g., "Picnic allowed in designated areas, no hot drinks allowed"
+}
+
+export interface StrollerInfo {
+  strollerFriendly?: boolean; // General stroller accessibility
+  hasStrollerStorage?: boolean; // Dedicated stroller parking/storage area
+  hasStrollerRental?: boolean; // Can rent stroller on-site
+  strollerStorageNotes?: string; // e.g., "Free stroller storage near entrance, max 4 hours"
+  restrictedAreas?: string; // e.g., "Stroller not allowed in play areas, can be stored nearby"
+}
+
+export interface ReservedTimesInfo {
+  hasReservedTimes?: boolean; // Special hours for specific groups
+  parentChildHours?: string; // 親子時段 - common in Taiwan
+  toddlerSpecificTimes?: string; // Times for infants/toddlers (0-2 years)
+  quietHours?: string; // Low-stimulus hours for sensitive children
+  reservedTimesNotes?: string; // e.g., "Wednesday 10-12am parent-child hours, reserve online"
+}
+
 export interface Location {
   id: string;
   name: {
@@ -164,6 +200,10 @@ export interface Location {
   qualityMetrics?: QualityMetricsInfo;
   booking?: BookingInfo;
   seasonal?: SeasonalInfo;
+  payment?: PaymentInfo;
+  outsideFood?: OutsideFoodPolicy;
+  stroller?: StrollerInfo;
+  reservedTimes?: ReservedTimesInfo;
 }
 
 export interface SearchParams {

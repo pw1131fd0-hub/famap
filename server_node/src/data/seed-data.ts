@@ -82,6 +82,29 @@ export let mockLocations: Location[] = [
       seasonalActivities: '春季賞花，秋季野餐和登山散步',
       schoolHolidayCrowding: 'heavy',
       seasonalClosures: '颱風警報期間可能短期關閉某些設施'
+    },
+    payment: {
+      acceptsCash: true,
+      acceptsLinePay: false,
+      acceptsCreditCard: false,
+      paymentNotes: '公園免費開放，無需付款'
+    },
+    outsideFood: {
+      allowsOutsideFood: true,
+      allowsOutsideBeverages: true,
+      hasPicnicAreas: true,
+      hasRefrigeratedStorage: false,
+      foodPolicyNotes: '公園內有多個野餐區，歡迎自備食物和飲料'
+    },
+    stroller: {
+      strollerFriendly: true,
+      hasStrollerStorage: false,
+      hasStrollerRental: false,
+      strollerStorageNotes: '主要步道皆可推嬰兒車，但某些林區小路可能不便',
+      restrictedAreas: '部分登山路徑不適合嬰兒車'
+    },
+    reservedTimes: {
+      hasReservedTimes: false
     }
   },
   {
@@ -155,6 +178,34 @@ export let mockLocations: Location[] = [
       seasonalActivities: '春季親子踏青，夏季水上樂園活動，冬季特別燈飾',
       schoolHolidayCrowding: 'heavy',
       seasonalClosures: '颱風警報期間整園關閉，暴雨期間部分設施停止運作'
+    },
+    payment: {
+      acceptsCash: true,
+      acceptsLinePay: true,
+      acceptsWeChatPay: true,
+      acceptsApplePay: true,
+      acceptsCreditCard: true,
+      paymentNotes: '售票處接受現金、信用卡、LINE Pay、WeChat Pay、Apple Pay等多種支付方式'
+    },
+    outsideFood: {
+      allowsOutsideFood: false,
+      allowsOutsideBeverages: true,
+      hasPicnicAreas: false,
+      hasRefrigeratedStorage: false,
+      foodPolicyNotes: '園內不允許自帶食物，但有多家餐飲設施。可自帶飲水瓶'
+    },
+    stroller: {
+      strollerFriendly: true,
+      hasStrollerStorage: true,
+      hasStrollerRental: true,
+      strollerStorageNotes: '免費嬰兒車停放區位於入口旁，可租賃嬰兒車（100 NTD/日）',
+      restrictedAreas: '部分遊樂設施區域不可推嬰兒車進入'
+    },
+    reservedTimes: {
+      hasReservedTimes: true,
+      parentChildHours: '每週三下午 2:00-4:00 為親子時段，5折優惠',
+      toddlerSpecificTimes: '每月第一個週日 10:00-12:00 為幼兒專屬時間',
+      reservedTimesNotes: '親子時段人數較少，特別適合1-3歲幼兒。需提前線上預約'
     }
   },
   {
@@ -228,6 +279,28 @@ export let mockLocations: Location[] = [
       seasonalActivities: '全年有特展，夏假期間有兒童工作坊，冬季有節慶展覽',
       schoolHolidayCrowding: 'moderate',
       seasonalClosures: '週一休館，特殊假期可能調整開放時間'
+    },
+    payment: {
+      acceptsCash: true,
+      acceptsLinePay: true,
+      acceptsCreditCard: true,
+      paymentNotes: '票價可現金或信用卡購買，入口處接受 LINE Pay'
+    },
+    outsideFood: {
+      allowsOutsideFood: false,
+      allowsOutsideBeverages: false,
+      hasPicnicAreas: false,
+      foodPolicyNotes: '館內不允許自帶食物和飲料，但有飲水機可用'
+    },
+    stroller: {
+      strollerFriendly: true,
+      hasStrollerStorage: true,
+      hasStrollerRental: false,
+      strollerStorageNotes: '入口有免費嬰兒車停放區，可將嬰兒車暫放'
+    },
+    reservedTimes: {
+      hasReservedTimes: false,
+      quietHours: '週二至週四上午 10:00-12:00 遊客較少'
     }
   },
   {
@@ -301,6 +374,30 @@ export let mockLocations: Location[] = [
       seasonalActivities: '全年提供兒童遊戲室，假期有主題派對活動',
       schoolHolidayCrowding: 'heavy',
       seasonalClosures: '無季節性關閉，全年營業'
+    },
+    payment: {
+      acceptsCash: true,
+      acceptsLinePay: true,
+      acceptsWeChatPay: true,
+      acceptsCreditCard: true,
+      paymentNotes: '餐飲接受現金、信用卡、LINE Pay、WeChat Pay 等多種支付'
+    },
+    outsideFood: {
+      allowsOutsideFood: false,
+      allowsOutsideBeverages: false,
+      foodPolicyNotes: '餐廳內不允許自帶食物和飲料，請享用餐廳提供的兒童友善餐點'
+    },
+    stroller: {
+      strollerFriendly: true,
+      hasStrollerStorage: true,
+      hasStrollerRental: false,
+      strollerStorageNotes: '入口有專用嬰兒車停放區，餐廳內寬敞可直接推嬰兒車進入'
+    },
+    reservedTimes: {
+      hasReservedTimes: true,
+      parentChildHours: '每週一上午 11:00-13:00 為親子寧靜時段，音樂會降低音量',
+      toddlerSpecificTimes: '每週六下午 3:00-5:00 限嬰幼兒時段（0-3歲），特別安全',
+      reservedTimesNotes: '需提前電話或線上預約。親子時段享有10%餐點折扣'
     }
   },
   {
@@ -372,6 +469,31 @@ export let mockLocations: Location[] = [
       seasonalActivities: '全年無休閒活動，新穎設施四季皆宜',
       schoolHolidayCrowding: 'moderate',
       seasonalClosures: '無季節性關閉，全年開放'
+    },
+    payment: {
+      acceptsCash: true,
+      acceptsCreditCard: true,
+      acceptsLinePay: true,
+      paymentNotes: '中心接受現金、信用卡、LINE Pay 支付。區民享優惠價格'
+    },
+    outsideFood: {
+      allowsOutsideFood: false,
+      allowsOutsideBeverages: true,
+      hasPicnicAreas: false,
+      hasRefrigeratedStorage: false,
+      foodPolicyNotes: '中心內不允許自帶食物，備有飲水機。可自帶飲水瓶'
+    },
+    stroller: {
+      strollerFriendly: true,
+      hasStrollerStorage: true,
+      hasStrollerRental: false,
+      strollerStorageNotes: '更衣室外有免費嬰兒車停放區'
+    },
+    reservedTimes: {
+      hasReservedTimes: true,
+      parentChildHours: '每週六日上午 10:00-11:00 為親子游泳課程時間',
+      toddlerSpecificTimes: '每週三下午 3:00-4:00 嬰幼兒專屬暖水池時間',
+      reservedTimesNotes: '需提前報名。親子課程專業教練指導，費用另計'
     }
   },
   {
@@ -444,6 +566,28 @@ export let mockLocations: Location[] = [
       seasonalActivities: '春秋適合戶外水上活動，冬季有溫水課程，夏季有兒童游泳營',
       schoolHolidayCrowding: 'heavy',
       seasonalClosures: '暑期課程眾多，需提前預約；冬季部分時段可能進行維護'
+    },
+    payment: {
+      acceptsCash: true,
+      acceptsCreditCard: true,
+      acceptsLinePay: true,
+      paymentNotes: '運動中心接受現金、信用卡、LINE Pay。憑身分證件可享優惠'
+    },
+    outsideFood: {
+      allowsOutsideFood: false,
+      allowsOutsideBeverages: true,
+      foodPolicyNotes: '設施內不允許自帶食物，有便利商店和餐飲區。自帶飲水瓶可用'
+    },
+    stroller: {
+      strollerFriendly: true,
+      hasStrollerStorage: true,
+      strollerStorageNotes: '更衣室區域有嬰兒車停放區。遊泳時可妥善安置'
+    },
+    reservedTimes: {
+      hasReservedTimes: true,
+      parentChildHours: '每週五上午 9:00-10:00 親子游泳時段',
+      toddlerSpecificTimes: '每週一、三下午 2:00-3:00 為嬰幼兒溫水池時間',
+      reservedTimesNotes: '親子課程人數較少，適合1-3歲幼兒。費用另計'
     }
   },
   {
@@ -516,6 +660,29 @@ export let mockLocations: Location[] = [
       seasonalActivities: '夏季限定，有波浪池、滑水道、懶人河等水上活動，特別受暑假小孩歡迎',
       schoolHolidayCrowding: 'heavy',
       seasonalClosures: '11月至5月關閉，6月至9月營業。颱風警報期間立即關閉，暴雨時暫停營業'
+    },
+    payment: {
+      acceptsCash: true,
+      acceptsLinePay: true,
+      acceptsCreditCard: true,
+      paymentNotes: '售票處接受現金、信用卡、LINE Pay 等方式。提前線上購票可享優惠'
+    },
+    outsideFood: {
+      allowsOutsideFood: false,
+      allowsOutsideBeverages: false,
+      hasPicnicAreas: false,
+      foodPolicyNotes: '園內不允許自帶食物和飲料。園內有飲食區和便利商店'
+    },
+    stroller: {
+      strollerFriendly: false,
+      hasStrollerStorage: true,
+      hasStrollerRental: false,
+      strollerStorageNotes: '入口有免費嬰兒車停放區，但園內水上設施不建議推嬰兒車',
+      restrictedAreas: '水上樂園內各區域皆不適合推嬰兒車，建議停放在入口'
+    },
+    reservedTimes: {
+      hasReservedTimes: false,
+      quietHours: '開園初期（上午 10:00-12:00）遊客相對較少'
     }
   },
 ];
