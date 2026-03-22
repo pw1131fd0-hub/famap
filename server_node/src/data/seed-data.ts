@@ -33,6 +33,32 @@ export let mockLocations: Location[] = [
     parking: { available: true, cost: '免費停車', hasValidation: false },
     toilet: { available: true, childrenFriendly: true, hasChangingTable: true },
     hasWiFi: false,
+    accessibility: {
+      wheelchairAccessible: true,
+      accessibleToilet: true,
+      disabledParking: true,
+      hasRamp: true,
+      accessibilityNotes: '主要遊戲區有無障礙通道，但某些林區路徑較崎嶇'
+    },
+    activity: {
+      activityTypes: ['sandbox play', 'slide', 'swing', 'climbing', 'nature trail', 'picnic'],
+      equipment: ['large playground', 'sandbox', 'swing set', 'climbing structures', 'open field'],
+      ageAppropriate: { minAge: 1, maxAge: 12 },
+      mainActivities: '大型遊戲場適合1-12歲，沙坑特別適合2-5歲'
+    },
+    safety: {
+      playAreaSafety: 'excellent',
+      firstAidAvailable: true,
+      supervisionAvailable: false,
+      safetyRating: 4.8,
+      safetyNotes: '定期安全檢查，遊戲設施維護良好'
+    },
+    qualityMetrics: {
+      cleanlinessRating: 4.7,
+      maintenanceStatus: 'excellent',
+      lastMaintenanceDate: '2026-03-15T00:00:00Z',
+      cleanlinessNotes: '每日清潔，廁所設施維護良好'
+    }
   },
   {
     id: '2',
@@ -53,6 +79,33 @@ export let mockLocations: Location[] = [
     parking: { available: true, cost: '200 NTD/時', hasValidation: true },
     toilet: { available: true, childrenFriendly: true, hasChangingTable: true },
     hasWiFi: true,
+    accessibility: {
+      wheelchairAccessible: true,
+      accessibleToilet: true,
+      disabledParking: true,
+      hasElevator: true,
+      hasRamp: true,
+      accessibilityNotes: '園區完全無障礙，具備無障礙停車位和電梯'
+    },
+    activity: {
+      activityTypes: ['amusement rides', 'roller coaster', 'water ride', 'shooting game', 'carousel'],
+      equipment: ['rides', 'arcade', 'water fountains', 'shaded areas'],
+      ageAppropriate: { minAge: 2, maxAge: 15 },
+      mainActivities: '適合2-15歲，遊樂設施豐富'
+    },
+    safety: {
+      playAreaSafety: 'excellent',
+      firstAidAvailable: true,
+      supervisionAvailable: true,
+      safetyRating: 4.9,
+      safetyNotes: '定期安全檢驗，工作人員訓練充分'
+    },
+    qualityMetrics: {
+      cleanlinessRating: 4.8,
+      maintenanceStatus: 'excellent',
+      lastMaintenanceDate: '2026-03-10T00:00:00Z',
+      cleanlinessNotes: '設施新穎，每日清潔管理'
+    }
   },
   {
     id: '3',
@@ -73,6 +126,33 @@ export let mockLocations: Location[] = [
     parking: { available: true, cost: '1小時 80 NTD', hasValidation: true },
     toilet: { available: true, childrenFriendly: true, hasChangingTable: true },
     hasWiFi: true,
+    accessibility: {
+      wheelchairAccessible: true,
+      accessibleToilet: true,
+      disabledParking: true,
+      hasElevator: true,
+      hasRamp: true,
+      accessibilityNotes: '建築物完全無障礙改建，設置電梯和無障礙停車位'
+    },
+    activity: {
+      activityTypes: ['museum exhibition', 'interactive display', 'nature education', 'children workshop'],
+      equipment: ['exhibition halls', 'interactive stations', 'learning materials'],
+      ageAppropriate: { minAge: 3, maxAge: 14 },
+      mainActivities: '互動式自然生態展示，適合3-14歲學習'
+    },
+    safety: {
+      playAreaSafety: 'good',
+      firstAidAvailable: true,
+      supervisionAvailable: true,
+      safetyRating: 4.6,
+      safetyNotes: '館內工作人員隨時可提供協助'
+    },
+    qualityMetrics: {
+      cleanlinessRating: 4.6,
+      maintenanceStatus: 'good',
+      lastMaintenanceDate: '2026-03-01T00:00:00Z',
+      cleanlinessNotes: '歷史建築，定期維護清潔'
+    }
   },
   {
     id: '4',
@@ -94,6 +174,32 @@ export let mockLocations: Location[] = [
     toilet: { available: true, childrenFriendly: true, hasChangingTable: true },
     hasWiFi: true,
     allergens: { commonAllergens: ['milk', 'eggs', 'peanuts'] },
+    accessibility: {
+      wheelchairAccessible: true,
+      accessibleToilet: true,
+      disabledParking: true,
+      hasElevator: true,
+      accessibilityNotes: '室內遊戲室完全無障礙，備有無障礙停車位'
+    },
+    activity: {
+      activityTypes: ['indoor play', 'dining', 'arcade games', 'ball pit'],
+      equipment: ['indoor play structures', 'arcade', 'ball pit', 'dining area'],
+      ageAppropriate: { minAge: 0, maxAge: 8 },
+      mainActivities: '室內遊戲室，特別適合0-8歲幼兒'
+    },
+    safety: {
+      playAreaSafety: 'good',
+      firstAidAvailable: true,
+      supervisionAvailable: true,
+      safetyRating: 4.4,
+      safetyNotes: '工作人員監督遊戲區'
+    },
+    qualityMetrics: {
+      cleanlinessRating: 4.5,
+      maintenanceStatus: 'good',
+      lastMaintenanceDate: '2026-03-12T00:00:00Z',
+      cleanlinessNotes: '每日清潔消毒遊戲設施'
+    }
   },
   {
     id: '5',
@@ -114,6 +220,33 @@ export let mockLocations: Location[] = [
     parking: { available: true, cost: '免費停車', hasValidation: false },
     toilet: { available: true, childrenFriendly: true, hasChangingTable: true },
     hasWiFi: true,
+    accessibility: {
+      wheelchairAccessible: true,
+      accessibleToilet: true,
+      disabledParking: true,
+      hasElevator: true,
+      hasRamp: true,
+      accessibilityNotes: '全新設施完全無障礙，備有輪椅專用停車位和電梯'
+    },
+    activity: {
+      activityTypes: ['indoor play', 'soft play', 'climbing', 'slides', 'interactive games'],
+      equipment: ['soft play structures', 'slides', 'climbing wall', 'game stations'],
+      ageAppropriate: { minAge: 0, maxAge: 10 },
+      mainActivities: '現代室內親子設施，四季恆溫'
+    },
+    safety: {
+      playAreaSafety: 'excellent',
+      firstAidAvailable: true,
+      supervisionAvailable: true,
+      safetyRating: 4.7,
+      safetyNotes: '現代化設施，安全標準最新'
+    },
+    qualityMetrics: {
+      cleanlinessRating: 4.7,
+      maintenanceStatus: 'excellent',
+      lastMaintenanceDate: '2026-03-18T00:00:00Z',
+      cleanlinessNotes: '全新設施，清潔度一流'
+    }
   },
   {
     id: '6',
@@ -134,6 +267,32 @@ export let mockLocations: Location[] = [
     parking: { available: true, cost: '免費停車', hasValidation: false },
     toilet: { available: true, childrenFriendly: true, hasChangingTable: true },
     hasWiFi: false,
+    accessibility: {
+      wheelchairAccessible: true,
+      accessibleToilet: true,
+      disabledParking: true,
+      hasRamp: true,
+      accessibilityNotes: '運動中心設施無障礙，游泳池區域備有輪椅進出通道'
+    },
+    activity: {
+      activityTypes: ['swimming', 'water play', 'swimming lessons', 'diving', 'water aerobics'],
+      equipment: ['heated pools', 'children pools', 'diving board', 'water slides'],
+      ageAppropriate: { minAge: 3, maxAge: 16 },
+      mainActivities: '專業兒童游泳課程和暖水池，適合3-16歲'
+    },
+    safety: {
+      playAreaSafety: 'excellent',
+      firstAidAvailable: true,
+      supervisionAvailable: true,
+      safetyRating: 4.6,
+      safetyNotes: '救生員全時值班，定期安全檢查'
+    },
+    qualityMetrics: {
+      cleanlinessRating: 4.5,
+      maintenanceStatus: 'good',
+      lastMaintenanceDate: '2026-03-08T00:00:00Z',
+      cleanlinessNotes: '池水定期檢測，衛生標準達標'
+    }
   },
   {
     id: '7',
@@ -154,6 +313,32 @@ export let mockLocations: Location[] = [
     parking: { available: true, cost: '免費停車', hasValidation: false },
     toilet: { available: true, childrenFriendly: true, hasChangingTable: true },
     hasWiFi: true,
+    accessibility: {
+      wheelchairAccessible: true,
+      accessibleToilet: true,
+      disabledParking: true,
+      hasRamp: true,
+      accessibilityNotes: '水上樂園部分設施無障礙，備有無障礙停車位和專用通道'
+    },
+    activity: {
+      activityTypes: ['water slide', 'wave pool', 'swimming', 'lazy river', 'water play'],
+      equipment: ['water slides', 'wave machine', 'swimming pools', 'lazy river'],
+      ageAppropriate: { minAge: 2, maxAge: 14 },
+      mainActivities: '水上樂園，夏日消暑好去處，適合2-14歲'
+    },
+    safety: {
+      playAreaSafety: 'good',
+      firstAidAvailable: true,
+      supervisionAvailable: true,
+      safetyRating: 4.5,
+      safetyNotes: '救生員配置充足，定期安全巡檢'
+    },
+    qualityMetrics: {
+      cleanlinessRating: 4.4,
+      maintenanceStatus: 'good',
+      lastMaintenanceDate: '2026-03-05T00:00:00Z',
+      cleanlinessNotes: '季節性開放，開放期間每日清潔'
+    }
   },
 ];
 

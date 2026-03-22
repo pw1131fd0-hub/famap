@@ -63,6 +63,37 @@ export interface NearbyAmenitiesInfo {
   nearbyPublicTransit?: string; // e.g., "MRT station 200m away"
 }
 
+export interface AccessibilityInfo {
+  wheelchairAccessible?: boolean; // more detailed than just stroller
+  accessibleToilet?: boolean;
+  disabledParking?: boolean;
+  hasElevator?: boolean;
+  hasRamp?: boolean;
+  accessibilityNotes?: string; // e.g., "limited wheelchair access in second floor play area"
+}
+
+export interface ActivityInfo {
+  activityTypes?: string[]; // e.g., ["sandbox play", "slide", "swing", "rock climbing", "nature trail"]
+  equipment?: string[]; // e.g., ["climbing structures", "spring riders", "seesaws"]
+  ageAppropriate?: AgeRange; // recommended ages for main activities
+  mainActivities?: string; // e.g., "play area for ages 2-8"
+}
+
+export interface SafetyInfo {
+  playAreaSafety?: 'excellent' | 'good' | 'fair' | 'needs_improvement'; // safety assessment
+  firstAidAvailable?: boolean;
+  supervisionAvailable?: boolean; // staff supervision
+  safetyRating?: number; // 1-5 stars
+  safetyNotes?: string; // e.g., "regular safety inspections", "equipment well-maintained"
+}
+
+export interface QualityMetricsInfo {
+  cleanlinessRating?: number; // 1-5 stars based on recent feedback
+  maintenanceStatus?: 'excellent' | 'good' | 'fair' | 'needs_improvement';
+  lastMaintenanceDate?: string; // ISO date
+  cleanlinessNotes?: string; // e.g., "frequently cleaned", "cleaning schedule posted"
+}
+
 export interface Location {
   id: string;
   name: {
@@ -97,6 +128,10 @@ export interface Location {
   nursingAmenities?: NursingAmenitiesInfo;
   weatherCoverage?: WeatherCoverageInfo;
   nearbyAmenities?: NearbyAmenitiesInfo;
+  accessibility?: AccessibilityInfo;
+  activity?: ActivityInfo;
+  safety?: SafetyInfo;
+  qualityMetrics?: QualityMetricsInfo;
 }
 
 export interface SearchParams {

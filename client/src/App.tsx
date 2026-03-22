@@ -744,6 +744,133 @@ function App() {
                     )}
                   </div>
                 )}
+                {selectedLocation.accessibility && (
+                  <div className="detail-section">
+                    <h4>♿ {language === 'zh' ? '無障礙設施' : 'Accessibility Features'}</h4>
+                    {selectedLocation.accessibility.wheelchairAccessible && (
+                      <p>
+                        <strong>{language === 'zh' ? '輪椅可進入' : 'Wheelchair Accessible'}</strong>: {language === 'zh' ? '✅ 是' : '✅ Yes'}
+                      </p>
+                    )}
+                    {selectedLocation.accessibility.accessibleToilet && (
+                      <p>
+                        <strong>{language === 'zh' ? '無障礙廁所' : 'Accessible Toilet'}</strong>: {language === 'zh' ? '✅ 有' : '✅ Available'}
+                      </p>
+                    )}
+                    {selectedLocation.accessibility.disabledParking && (
+                      <p>
+                        <strong>{language === 'zh' ? '身心障礙停車位' : 'Disabled Parking'}</strong>: {language === 'zh' ? '✅ 有' : '✅ Available'}
+                      </p>
+                    )}
+                    {selectedLocation.accessibility.hasElevator && (
+                      <p>
+                        <strong>{language === 'zh' ? '電梯' : 'Elevator'}</strong>: {language === 'zh' ? '✅ 有' : '✅ Available'}
+                      </p>
+                    )}
+                    {selectedLocation.accessibility.hasRamp && (
+                      <p>
+                        <strong>{language === 'zh' ? '坡道' : 'Ramp'}</strong>: {language === 'zh' ? '✅ 有' : '✅ Available'}
+                      </p>
+                    )}
+                    {selectedLocation.accessibility.accessibilityNotes && (
+                      <p>
+                        <strong>{language === 'zh' ? '說明' : 'Details'}</strong>: {selectedLocation.accessibility.accessibilityNotes}
+                      </p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.activity && (
+                  <div className="detail-section">
+                    <h4>🎪 {language === 'zh' ? '遊戲活動' : 'Activities & Equipment'}</h4>
+                    {selectedLocation.activity.mainActivities && (
+                      <p>
+                        <strong>{language === 'zh' ? '主要活動' : 'Main Activities'}</strong>: {selectedLocation.activity.mainActivities}
+                      </p>
+                    )}
+                    {selectedLocation.activity.activityTypes && selectedLocation.activity.activityTypes.length > 0 && (
+                      <p>
+                        <strong>{language === 'zh' ? '活動類型' : 'Activity Types'}</strong>: {selectedLocation.activity.activityTypes.join(', ')}
+                      </p>
+                    )}
+                    {selectedLocation.activity.equipment && selectedLocation.activity.equipment.length > 0 && (
+                      <p>
+                        <strong>{language === 'zh' ? '設施設備' : 'Equipment'}</strong>: {selectedLocation.activity.equipment.join(', ')}
+                      </p>
+                    )}
+                    {selectedLocation.activity.ageAppropriate && (
+                      <p>
+                        <strong>{language === 'zh' ? '適合年齡' : 'Age Range'}</strong>: {selectedLocation.activity.ageAppropriate.minAge || 0} - {selectedLocation.activity.ageAppropriate.maxAge || '18'} {language === 'zh' ? '歲' : ' years'}
+                      </p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.safety && (
+                  <div className="detail-section">
+                    <h4>🛡️ {language === 'zh' ? '安全信息' : 'Safety Information'}</h4>
+                    {selectedLocation.safety.safetyRating && (
+                      <p>
+                        <strong>{language === 'zh' ? '安全評分' : 'Safety Rating'}</strong>: {'⭐'.repeat(Math.round(selectedLocation.safety.safetyRating))} ({selectedLocation.safety.safetyRating.toFixed(1)}/5)
+                      </p>
+                    )}
+                    {selectedLocation.safety.playAreaSafety && (
+                      <p>
+                        <strong>{language === 'zh' ? '遊戲區安全' : 'Play Area Safety'}</strong>: {language === 'zh' ?
+                          (selectedLocation.safety.playAreaSafety === 'excellent' ? '🟢 優良' :
+                           selectedLocation.safety.playAreaSafety === 'good' ? '🟢 良好' :
+                           selectedLocation.safety.playAreaSafety === 'fair' ? '🟡 普通' : '🔴 需改善') :
+                          (selectedLocation.safety.playAreaSafety === 'excellent' ? '🟢 Excellent' :
+                           selectedLocation.safety.playAreaSafety === 'good' ? '🟢 Good' :
+                           selectedLocation.safety.playAreaSafety === 'fair' ? '🟡 Fair' : '🔴 Needs Improvement')}
+                      </p>
+                    )}
+                    {selectedLocation.safety.firstAidAvailable && (
+                      <p>
+                        <strong>{language === 'zh' ? '急救設備' : 'First Aid Available'}</strong>: {language === 'zh' ? '✅ 有' : '✅ Yes'}
+                      </p>
+                    )}
+                    {selectedLocation.safety.supervisionAvailable && (
+                      <p>
+                        <strong>{language === 'zh' ? '工作人員監督' : 'Staff Supervision'}</strong>: {language === 'zh' ? '✅ 有' : '✅ Available'}
+                      </p>
+                    )}
+                    {selectedLocation.safety.safetyNotes && (
+                      <p>
+                        <strong>{language === 'zh' ? '說明' : 'Details'}</strong>: {selectedLocation.safety.safetyNotes}
+                      </p>
+                    )}
+                  </div>
+                )}
+                {selectedLocation.qualityMetrics && (
+                  <div className="detail-section">
+                    <h4>✨ {language === 'zh' ? '清潔與維護' : 'Cleanliness & Maintenance'}</h4>
+                    {selectedLocation.qualityMetrics.cleanlinessRating && (
+                      <p>
+                        <strong>{language === 'zh' ? '清潔度評分' : 'Cleanliness Rating'}</strong>: {'⭐'.repeat(Math.round(selectedLocation.qualityMetrics.cleanlinessRating))} ({selectedLocation.qualityMetrics.cleanlinessRating.toFixed(1)}/5)
+                      </p>
+                    )}
+                    {selectedLocation.qualityMetrics.maintenanceStatus && (
+                      <p>
+                        <strong>{language === 'zh' ? '維護狀態' : 'Maintenance Status'}</strong>: {language === 'zh' ?
+                          (selectedLocation.qualityMetrics.maintenanceStatus === 'excellent' ? '🟢 優良' :
+                           selectedLocation.qualityMetrics.maintenanceStatus === 'good' ? '🟢 良好' :
+                           selectedLocation.qualityMetrics.maintenanceStatus === 'fair' ? '🟡 普通' : '🔴 需改善') :
+                          (selectedLocation.qualityMetrics.maintenanceStatus === 'excellent' ? '🟢 Excellent' :
+                           selectedLocation.qualityMetrics.maintenanceStatus === 'good' ? '🟢 Good' :
+                           selectedLocation.qualityMetrics.maintenanceStatus === 'fair' ? '🟡 Fair' : '🔴 Needs Improvement')}
+                      </p>
+                    )}
+                    {selectedLocation.qualityMetrics.lastMaintenanceDate && (
+                      <p>
+                        <strong>{language === 'zh' ? '最後維護日期' : 'Last Maintenance'}</strong>: {new Date(selectedLocation.qualityMetrics.lastMaintenanceDate).toLocaleDateString(language === 'zh' ? 'zh-TW' : 'en-US')}
+                      </p>
+                    )}
+                    {selectedLocation.qualityMetrics.cleanlinessNotes && (
+                      <p>
+                        <strong>{language === 'zh' ? '說明' : 'Details'}</strong>: {selectedLocation.qualityMetrics.cleanlinessNotes}
+                      </p>
+                    )}
+                  </div>
+                )}
                 <ReviewList reviews={reviews} />
                 <ReviewForm onSubmit={handlePostReview} />
               </div>
