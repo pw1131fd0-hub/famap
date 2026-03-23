@@ -1007,6 +1007,22 @@ export interface ReviewCreateDTO {
   userName?: string;
 }
 
+export interface CrowdednessReport {
+  id: string;
+  locationId: string;
+  userId: string;
+  userName: string;
+  crowdingLevel: 'light' | 'moderate' | 'heavy'; // current real-time crowding
+  comment?: string;
+  createdAt: string;
+}
+
+export interface CrowdednessReportCreateDTO {
+  crowdingLevel: 'light' | 'moderate' | 'heavy';
+  comment?: string;
+  userName?: string;
+}
+
 export interface SearchParams {
   lat: number;
   lng: number;

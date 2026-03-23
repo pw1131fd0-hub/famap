@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import 'leaflet/dist/leaflet.css';
 import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Menu, ChevronDown, Filter, Heart, List, Moon, Sun } from 'lucide-react';
-import { locationApi, reviewApi, favoriteApi } from './services/api';
-import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO } from './types';
+import { locationApi, reviewApi, favoriteApi, crowdinessApi } from './services/api';
+import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO, CrowdednessReport, CrowdednessReportCreateDTO } from './types';
 import { useTranslation } from './i18n/useTranslation';
 import { LocationForm } from './components/LocationForm';
 import { LocationDetailPanel } from './components/LocationDetailPanel';
@@ -37,6 +37,7 @@ function App() {
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
   const [showAddLocation, setShowAddLocation] = useState(false);
   const [reviews, setReviews] = useState<Review[]>([]);
+  const [crowdednessReports, setCrowdednessReports] = useState<CrowdednessReport[]>([]);
   const [facilitiesFilter, setFacilitiesFilter] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
   // Age filtering disabled for mobile stability
@@ -141,6 +142,23 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
     fetchReviews();
   }, [selectedLocation]);
 
+  useEffect(() => {
+    const fetchCrowdednessReports = async () => {
+      if (selectedLocation) {
+        try {
+          const data = await crowdinessApi.getByLocationId(selectedLocation.id);
+          setCrowdednessReports(data);
+        } catch (error) {
+          console.error('Failed to fetch crowdedness reports:', error);
+        }
+      } else {
+        setCrowdednessReports([]);
+      }
+    };
+
+    fetchCrowdednessReports();
+  }, [selectedLocation]);
+
   const handleFindMe = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -183,6 +201,17 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
       setReviews([newReview, ...reviews]);
     } catch (error) {
       console.error('Failed to post review:', error);
+      throw error;
+    }
+  };
+
+  const handlePostCrowdednessReport = async (reportDto: CrowdednessReportCreateDTO) => {
+    if (!selectedLocation) return;
+    try {
+      const newReport = await crowdinessApi.create(selectedLocation.id, reportDto);
+      setCrowdednessReports([newReport, ...crowdednessReports]);
+    } catch (error) {
+      console.error('Failed to post crowdedness report:', error);
       throw error;
     }
   };
@@ -358,6 +387,8 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
               onClose={() => setSelectedLocation(null)}
               reviews={reviews}
               onReviewSubmit={handlePostReview}
+              crowdednessReports={crowdednessReports}
+              onCrowdednessReportSubmit={handlePostCrowdednessReport}
               expandedSections={expandedSections}
               onToggleSection={toggleSection}
             />

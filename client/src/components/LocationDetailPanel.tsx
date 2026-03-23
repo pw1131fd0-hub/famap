@@ -1,9 +1,11 @@
 import { X, Heart, MapPin } from 'lucide-react';
-import type { Location, Review, ReviewCreateDTO } from '../types';
+import type { Location, Review, ReviewCreateDTO, CrowdednessReport, CrowdednessReportCreateDTO } from '../types';
 import { useTranslation } from '../i18n/useTranslation';
 import { CollapsibleSection } from './CollapsibleSection';
 import { ReviewList } from './ReviewList';
 import { ReviewForm } from './ReviewForm';
+import { CrowdednessReportForm } from './CrowdednessReportForm';
+import { CrowdednessReportList } from './CrowdednessReportList';
 import { isLocationOpen } from '../utils/locationUtils';
 import { DAY_NAMES_ZH } from '../config/mapConfig';
 
@@ -14,6 +16,8 @@ interface LocationDetailPanelProps {
   onClose: () => void;
   reviews: Review[];
   onReviewSubmit: (data: ReviewCreateDTO) => Promise<void>;
+  crowdednessReports: CrowdednessReport[];
+  onCrowdednessReportSubmit: (data: CrowdednessReportCreateDTO) => Promise<void>;
   expandedSections: Record<string, boolean>;
   onToggleSection: (section: string) => void;
 }
@@ -25,6 +29,8 @@ export function LocationDetailPanel({
   onClose,
   reviews,
   onReviewSubmit,
+  crowdednessReports,
+  onCrowdednessReportSubmit,
   expandedSections,
   onToggleSection,
 }: LocationDetailPanelProps) {
@@ -497,6 +503,25 @@ export function LocationDetailPanel({
             )}
           </div>
         )}
+
+        {/* Crowdedness Reports Section */}
+        <CollapsibleSection
+          title={language === 'zh' ? '實時人潮報告' : 'Real-time Crowding Reports'}
+          emoji="👥"
+          isExpanded={expandedSections['crowdedness']}
+          onToggle={() => onToggleSection('crowdedness')}
+        >
+          <div className="detail-section">
+            <CrowdednessReportForm
+              onSubmit={onCrowdednessReportSubmit}
+              language={language}
+            />
+            <CrowdednessReportList
+              reports={crowdednessReports}
+              language={language}
+            />
+          </div>
+        </CollapsibleSection>
 
         {/* Reviews Section */}
         <div className="detail-section">

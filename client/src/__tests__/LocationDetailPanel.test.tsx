@@ -116,6 +116,7 @@ describe('LocationDetailPanel', () => {
   const mockOnClose = vi.fn();
   const mockOnFavoriteToggle = vi.fn();
   const mockOnReviewSubmit = vi.fn();
+  const mockOnCrowdednessReportSubmit = vi.fn();
   const mockOnToggleSection = vi.fn();
 
   beforeEach(() => {
@@ -132,6 +133,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -151,6 +154,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -172,6 +177,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -195,6 +202,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -214,6 +223,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -233,6 +244,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -256,6 +269,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ facilities: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -277,6 +292,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ transit: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -297,6 +314,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ transit: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -316,6 +335,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ amenities: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -335,6 +356,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ amenities: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -354,6 +377,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ comfort: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -373,6 +398,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{}}
           onToggleSection={mockOnToggleSection}
         />
@@ -393,6 +420,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{}}
           onToggleSection={mockOnToggleSection}
         />
@@ -413,6 +442,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{}}
           onToggleSection={mockOnToggleSection}
         />
@@ -433,6 +464,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{}}
           onToggleSection={mockOnToggleSection}
         />
@@ -453,6 +486,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{}}
           onToggleSection={mockOnToggleSection}
         />
@@ -490,6 +525,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={[]}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{}}
           onToggleSection={mockOnToggleSection}
         />
@@ -509,6 +546,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -527,6 +566,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -551,6 +592,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -575,6 +618,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -599,6 +644,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -618,6 +665,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ facilities: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -639,6 +688,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ transit: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -658,6 +709,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ transit: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -678,6 +731,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ amenities: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -698,6 +753,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{}}
           onToggleSection={mockOnToggleSection}
         />
@@ -718,6 +775,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{}}
           onToggleSection={mockOnToggleSection}
         />
@@ -738,6 +797,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{}}
           onToggleSection={mockOnToggleSection}
         />
@@ -758,6 +819,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -782,6 +845,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -802,6 +867,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{}}
           onToggleSection={mockOnToggleSection}
         />
@@ -822,6 +889,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ transit: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -842,6 +911,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ comfort: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -863,6 +934,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{}}
           onToggleSection={mockOnToggleSection}
         />
@@ -883,6 +956,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{}}
           onToggleSection={mockOnToggleSection}
         />
@@ -902,6 +977,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{}}
           onToggleSection={mockOnToggleSection}
         />
@@ -929,6 +1006,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ transit: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -948,6 +1027,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{}}
           onToggleSection={mockOnToggleSection}
         />
@@ -975,6 +1056,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ transit: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -995,6 +1078,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: false }}
           onToggleSection={mockOnToggleSection}
         />
@@ -1015,6 +1100,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -1038,6 +1125,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{
             basic: true,
             facilities: true,
@@ -1064,6 +1153,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -1086,6 +1177,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -1106,6 +1199,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={mockReviews}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: true }}
           onToggleSection={mockOnToggleSection}
         />
@@ -1137,6 +1232,8 @@ describe('LocationDetailPanel', () => {
           onClose={mockOnClose}
           reviews={[]}
           onReviewSubmit={mockOnReviewSubmit}
+          crowdednessReports={[]}
+          onCrowdednessReportSubmit={mockOnCrowdednessReportSubmit}
           expandedSections={{ basic: true }}
           onToggleSection={mockOnToggleSection}
         />

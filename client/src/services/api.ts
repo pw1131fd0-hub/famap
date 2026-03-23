@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { Location, SearchParams, Review, ReviewCreateDTO, LocationCreateDTO, Favorite } from '../types';
+import type { Location, SearchParams, Review, ReviewCreateDTO, LocationCreateDTO, Favorite, CrowdednessReport, CrowdednessReportCreateDTO } from '../types';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 const REQUEST_TIMEOUT = 10000; // 10 seconds
@@ -147,6 +147,20 @@ export const favoriteApi = {
       retryableGet<{ isFavorited: boolean }>('/favorites/check', { params: { userId, locationId } })
     );
     return data.isFavorited;
+  },
+};
+
+export const crowdinessApi = {
+  getByLocationId: async (locationId: string): Promise<CrowdednessReport[]> => {
+    const cacheKey = getCacheKey('GET', `/locations/${locationId}/crowdedness`, undefined);
+    return cachedGet(cacheKey, () => retryableGet<CrowdednessReport[]>(`/locations/${locationId}/crowdedness`));
+  },
+  create: async (locationId: string, report: CrowdednessReportCreateDTO): Promise<CrowdednessReport> => {
+    // Invalidate crowdedness cache for this location
+    const cacheKey = getCacheKey('GET', `/locations/${locationId}/crowdedness`, undefined);
+    requestCache.delete(cacheKey);
+    const response = await api.post<CrowdednessReport>(`/locations/${locationId}/crowdedness`, report);
+    return response.data;
   },
 };
 
