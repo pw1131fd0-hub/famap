@@ -51,7 +51,7 @@ export async function saveLocations(cacheKey: string, locations: Location[]): Pr
       tx.objectStore(META_STORE).put({ key: cacheKey, fetchedAt: Date.now() }),
       tx.done,
     ]);
-  } catch (e) {
+  } catch {
     // IndexedDB may be unavailable in some contexts (e.g., private browsing in Firefox)
     // Silently fail — app continues working via in-memory cache
   }
@@ -65,7 +65,7 @@ export async function loadLocations(cacheKey: string): Promise<Location[] | null
     if (Date.now() - meta.fetchedAt > CACHE_TTL_MS) return null;
     const all = await db.getAll(LOCATIONS_STORE);
     return all;
-  } catch (e) {
+  } catch {
     return null;
   }
 }
@@ -79,7 +79,7 @@ export async function clearOfflineDb(): Promise<void> {
       tx.objectStore(META_STORE).clear(),
       tx.done,
     ]);
-  } catch (e) {
+  } catch {
     // Silently fail
   }
 }
@@ -90,7 +90,7 @@ export async function isOfflineCacheAvailable(cacheKey: string): Promise<boolean
     const meta = await db.get(META_STORE, cacheKey);
     if (!meta) return false;
     return Date.now() - meta.fetchedAt <= CACHE_TTL_MS;
-  } catch (e) {
+  } catch {
     return false;
   }
 }

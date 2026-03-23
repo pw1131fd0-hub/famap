@@ -19,7 +19,7 @@ interface FetchOptions {
  */
 export function useFetch<T>(
   fetcher: () => Promise<T>,
-  deps: any[] = [],
+  deps?: ReadonlyArray<unknown>,
   options: FetchOptions = {}
 ): FetchState<T> {
   const [data, setData] = useState<T | null>(null);
@@ -27,6 +27,7 @@ export function useFetch<T>(
   const [loading, setLoading] = useState(false);
   const isMountedRef = useRef(true);
   const retryCountRef = useRef(0);
+  const immediateRef = useRef(options.immediate !== false);
 
   const execute = useCallback(async () => {
     if (!isMountedRef.current) return;
@@ -63,14 +64,14 @@ export function useFetch<T>(
 
   useEffect(() => {
     isMountedRef.current = true;
-    if (options.immediate !== false) {
+    if (immediateRef.current) {
       execute();
     }
 
     return () => {
       isMountedRef.current = false;
     };
-  }, deps);
+  }, [execute, deps]);
 
   return { data, error, loading, retry };
 }

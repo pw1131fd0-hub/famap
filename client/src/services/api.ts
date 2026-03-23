@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { Location, SearchParams, Review, ReviewCreateDTO, LocationCreateDTO, Favorite, CrowdednessReport, CrowdednessReportCreateDTO, Event } from '../types';
+import type { Location, SearchParams, Review, ReviewCreateDTO, LocationCreateDTO, Favorite, CrowdednessReport, CrowdednessReportCreateDTO, Event, EventCreateDTO } from '../types';
 import { saveLocations, loadLocations, clearOfflineDb } from './offlineDb';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
@@ -8,14 +8,19 @@ const MAX_RETRIES = 2;
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 // Cache for GET requests
-interface CacheEntry<T> {
+interface CacheEntry<T = unknown> {
   data: T;
   timestamp: number;
   pending?: Promise<T>;
 }
 
-const requestCache = new Map<string, CacheEntry<any>>();
-const pendingRequests = new Map<string, Promise<any>>();
+interface AxiosConfig {
+  params?: Record<string, unknown>;
+  timeout?: number;
+}
+
+const requestCache = new Map<string, CacheEntry>();
+const pendingRequests = new Map<string, Promise<unknown>>();
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -26,26 +31,26 @@ const api = axios.create({
 api.interceptors.response.use(
   response => response,
   error => {
-    const message = error.response?.data?.detail || error.message || 'Request failed';
+    const message = (error.response?.data as { detail?: string })?.detail || error.message || 'Request failed';
     const newError = new Error(message);
-    (newError as any).originalError = error;
+    Object.assign(newError, { originalError: error });
     return Promise.reject(newError);
   }
 );
 
 // Utility to generate cache key
-function getCacheKey(method: string, url: string, params?: any): string {
+function getCacheKey(method: string, url: string, params?: Record<string, unknown>): string {
   const paramStr = params ? JSON.stringify(params) : '';
   return `${method}:${url}:${paramStr}`;
 }
 
 // Utility to check if cache is still valid
-function isCacheValid(entry: CacheEntry<any>): boolean {
+function isCacheValid(entry: CacheEntry): boolean {
   return Date.now() - entry.timestamp < CACHE_DURATION;
 }
 
 // Utility for retryable requests
-async function retryableGet<T>(url: string, config?: any): Promise<T> {
+async function retryableGet<T>(url: string, config?: AxiosConfig): Promise<T> {
   let lastError: Error | null = null;
 
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
@@ -184,7 +189,7 @@ export const eventsApi = {
     const cacheKey = getCacheKey('GET', `/locations/${locationId}/events`, undefined);
     return cachedGet(cacheKey, () => retryableGet<Event[]>(`/locations/${locationId}/events`));
   },
-  create: async (locationId: string, event: any): Promise<Event> => {
+  create: async (locationId: string, event: EventCreateDTO): Promise<Event> => {
     // Invalidate events cache for this location
     const cacheKey = getCacheKey('GET', `/locations/${locationId}/events`, undefined);
     requestCache.delete(cacheKey);

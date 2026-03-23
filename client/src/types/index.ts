@@ -1128,6 +1128,23 @@ export interface Event {
   updatedAt: string;
 }
 
+export interface EventCreateDTO {
+  title: {
+    zh: string;
+    en: string;
+  };
+  description: {
+    zh: string;
+    en: string;
+  };
+  eventType: EventType;
+  startDate: string;
+  endDate: string;
+  ageRange?: AgeRange;
+  capacity?: number;
+  price?: number;
+}
+
 export interface Favorite {
   id: string;
   userId: string;

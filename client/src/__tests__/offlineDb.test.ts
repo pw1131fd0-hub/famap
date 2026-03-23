@@ -2,11 +2,24 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 // Mock idb before importing offlineDb
 vi.mock('idb', () => {
-  const mockStore = new Map<string, any>();
-  const mockMeta = new Map<string, any>();
+  interface MockStoreValue {
+    id?: string;
+    key?: string;
+  }
 
-  const makeStore = (map: Map<string, any>) => ({
-    put: vi.fn(async (value: any) => { map.set(value.id ?? value.key, value); }),
+  interface UpgradeHandler {
+    (db: { objectStoreNames: { contains: () => boolean }; createObjectStore: () => { createIndex: () => void } }): void;
+  }
+
+  interface MockDBUpgradeEvent {
+    upgrade?: UpgradeHandler;
+  }
+
+  const mockStore = new Map<string, MockStoreValue>();
+  const mockMeta = new Map<string, MockStoreValue>();
+
+  const makeStore = (map: Map<string, MockStoreValue>) => ({
+    put: vi.fn(async (value: MockStoreValue) => { map.set(value.id ?? value.key ?? '', value); }),
     get: vi.fn(async (key: string) => map.get(key)),
     getAll: vi.fn(async () => [...map.values()]),
     clear: vi.fn(async () => map.clear()),
@@ -16,13 +29,13 @@ vi.mock('idb', () => {
   const metaStore = makeStore(mockMeta);
 
   return {
-    openDB: vi.fn(async (_name: string, _version: number, { upgrade }: any) => {
+    openDB: vi.fn(async (_name: string, _version: number, config: MockDBUpgradeEvent) => {
       const db = {
         objectStoreNames: { contains: () => false },
         createObjectStore: vi.fn(() => ({
           createIndex: vi.fn(),
         })),
-        transaction: vi.fn((_stores: string[], _mode: string) => ({
+        transaction: vi.fn(() => ({
           objectStore: vi.fn((name: string) => {
             if (name === 'locations') return locationStore;
             return metaStore;
@@ -35,7 +48,7 @@ vi.mock('idb', () => {
         }),
         getAll: vi.fn(async () => [...mockStore.values()]),
       };
-      if (upgrade) upgrade(db);
+      if (config.upgrade) config.upgrade(db);
       return db;
     }),
   };

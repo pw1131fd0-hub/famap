@@ -43,8 +43,8 @@ export function usePerformance(componentName: string, enabled = import.meta.env.
 /**
  * Hook to measure async operation performance
  */
-export function useAsyncPerformance(operationName: string) {
-  return (asyncFn: () => Promise<any>) => {
+export function useAsyncPerformance<T>(operationName: string) {
+  return (asyncFn: () => Promise<T>) => {
     return async () => {
       const start = performance.now();
       try {

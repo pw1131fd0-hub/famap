@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Search } from 'lucide-react';
 import type { Location } from '../types';
 
@@ -16,7 +16,6 @@ export function SearchSuggestions({
   language,
   onSelectSuggestion,
 }: SearchSuggestionsProps) {
-  const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const filteredSuggestions = query.trim() ? locations.filter(loc => {
@@ -29,10 +28,7 @@ export function SearchSuggestions({
     );
   }).slice(0, 5) : [];
 
-  useEffect(() => {
-    setShowSuggestions(query.trim().length > 0 && filteredSuggestions.length > 0);
-    setSelectedIndex(-1);
-  }, [query, filteredSuggestions.length]);
+  const showSuggestions = query.trim().length > 0 && filteredSuggestions.length > 0;
 
   if (!showSuggestions) return null;
 
@@ -44,7 +40,6 @@ export function SearchSuggestions({
           className={`suggestion-item ${idx === selectedIndex ? 'selected' : ''}`}
           onClick={() => {
             onSelectSuggestion(loc);
-            setShowSuggestions(false);
           }}
           onMouseEnter={() => setSelectedIndex(idx)}
         >

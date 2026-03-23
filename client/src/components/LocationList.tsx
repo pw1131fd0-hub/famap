@@ -1,6 +1,7 @@
 import { useMemo, memo } from 'react';
 import { Heart } from 'lucide-react';
 import type { Location } from '../types';
+import type { TranslationKeys } from '../i18n';
 import { useTranslation } from '../i18n/useTranslation';
 import { calculateDistance, formatDistance, getLocationFamilyScore } from '../utils/locationUtils';
 import { LocationListSkeleton } from './LocationSkeleton';
@@ -32,7 +33,7 @@ const LocationCard = memo(({
   position: [number, number];
   isFavorite: boolean;
   language: string;
-  t: any;
+  t: TranslationKeys;
   onLocationClick: (location: Location) => void;
   onFavoriteToggle: (e: React.MouseEvent, locationId: string) => void;
 }) => {
