@@ -15,11 +15,11 @@ interface CacheEntry<T = unknown> {
 }
 
 interface AxiosConfig {
-  params?: Record<string, unknown>;
+  params?: unknown;
   timeout?: number;
 }
 
-const requestCache = new Map<string, CacheEntry>();
+const requestCache = new Map<string, CacheEntry<unknown>>();
 const pendingRequests = new Map<string, Promise<unknown>>();
 
 const api = axios.create({
@@ -39,7 +39,7 @@ api.interceptors.response.use(
 );
 
 // Utility to generate cache key
-function getCacheKey(method: string, url: string, params?: Record<string, unknown>): string {
+function getCacheKey(method: string, url: string, params?: unknown): string {
   const paramStr = params ? JSON.stringify(params) : '';
   return `${method}:${url}:${paramStr}`;
 }
@@ -79,12 +79,12 @@ async function cachedGet<T>(key: string, fetcher: () => Promise<T>): Promise<T> 
 
   // Check if request is already in flight (deduplication)
   if (pendingRequests.has(key)) {
-    return pendingRequests.get(key)!;
+    return pendingRequests.get(key)! as Promise<T>;
   }
 
   // Make the request
   const promise = fetcher();
-  pendingRequests.set(key, promise);
+  pendingRequests.set(key, promise as Promise<unknown>);
 
   try {
     const data = await promise;
