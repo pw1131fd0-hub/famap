@@ -1648,3 +1648,33 @@ html.dark-mode .events-list-empty {
   background-color: var(--bg-dark);
   color: #666;
 }
+
+/* ===== Offline Banner ===== */
+.offline-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: #f59e0b;
+  color: #1a1a1a;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: 'Noto Sans TC', sans-serif;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.offline-icon {
+  font-size: 1rem;
+}
+
+html.dark-mode .offline-banner {
+  background-color: #d97706;
+  color: #fff;
+}

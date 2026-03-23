@@ -49,6 +49,7 @@ function App() {
   
 const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     'basic': true, // Always show basic info
     'facilities': true,
@@ -81,6 +82,18 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
       return newMode;
     });
   };
+
+  // Track online/offline status
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
 
   useEffect(() => {
     if (darkMode) {
@@ -303,6 +316,12 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
 
   return (
     <div className="app-layout">
+      {!isOnline && (
+        <div className="offline-banner" role="alert" aria-live="polite">
+          <span className="offline-icon">📵</span>
+          <span>{language === 'zh' ? '您目前離線 — 顯示快取資料' : 'You are offline — showing cached data'}</span>
+        </div>
+      )}
       <header className="app-header">
         <div className="logo-section">
           <button

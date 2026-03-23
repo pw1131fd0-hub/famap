@@ -1,5 +1,6 @@
 import axios from 'axios';
 import type { Location, SearchParams, Review, ReviewCreateDTO, LocationCreateDTO, Favorite, CrowdednessReport, CrowdednessReportCreateDTO, Event } from '../types';
+import { saveLocations, loadLocations, clearOfflineDb } from './offlineDb';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 const REQUEST_TIMEOUT = 10000; // 10 seconds
@@ -95,7 +96,21 @@ async function cachedGet<T>(key: string, fetcher: () => Promise<T>): Promise<T> 
 export const locationApi = {
   getNearby: async (params: SearchParams): Promise<Location[]> => {
     const cacheKey = getCacheKey('GET', '/locations/', params);
-    return cachedGet(cacheKey, () => retryableGet<Location[]>('/locations/', { params }));
+    // Check in-memory cache first (L1)
+    const cached = requestCache.get(cacheKey);
+    if (cached && isCacheValid(cached)) {
+      return cached.data as Location[];
+    }
+    // Check IndexedDB (L2 offline cache)
+    const offlineData = await loadLocations(cacheKey);
+    if (offlineData && offlineData.length > 0 && !navigator.onLine) {
+      requestCache.set(cacheKey, { data: offlineData, timestamp: Date.now() });
+      return offlineData;
+    }
+    // Fetch from network, persist to IndexedDB
+    const result = await cachedGet(cacheKey, () => retryableGet<Location[]>('/locations/', { params }));
+    saveLocations(cacheKey, result).catch(() => {});
+    return result;
   },
   getById: async (id: string): Promise<Location> => {
     const cacheKey = getCacheKey('GET', `/locations/${id}/`, undefined);
@@ -183,4 +198,8 @@ export const cacheUtils = {
   clear: () => requestCache.clear(),
   getSize: () => requestCache.size,
   getCacheEntry: (key: string) => requestCache.get(key),
+  clearAllCaches: async () => {
+    requestCache.clear();
+    await clearOfflineDb();
+  },
 };

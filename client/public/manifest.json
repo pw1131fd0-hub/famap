@@ -1,0 +1,21 @@
+{
+  "name": "FamMap 親子地圖",
+  "short_name": "FamMap",
+  "description": "親子友善地點探索平台 - Family-friendly location discovery platform",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#A7C7E7",
+  "background_color": "#FFFDD0",
+  "lang": "zh-TW",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["travel", "navigation", "lifestyle"],
+  "screenshots": []
+}
