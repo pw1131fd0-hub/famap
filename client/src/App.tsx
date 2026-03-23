@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import 'leaflet/dist/leaflet.css';
-import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Menu, ChevronDown, Filter, Heart, List } from 'lucide-react';
+import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Menu, ChevronDown, Filter, Heart, List, Moon, Sun } from 'lucide-react';
 import { locationApi, reviewApi, favoriteApi } from './services/api';
 import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO } from './types';
 import { useTranslation } from './i18n/useTranslation';
@@ -21,6 +21,10 @@ const MOCK_USER_ID = 'u1';
 
 function App() {
   const { language, setLanguage, t } = useTranslation();
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem('darkMode');
+    return saved ? JSON.parse(saved) : false;
+  });
   const [selectedCity, setSelectedCity] = useState<CityKey>('taipei');
   const [cityDropdownOpen, setCityDropdownOpen] = useState(false);
   const [position, setPosition] = useState<[number, number]>(CITIES[0].center); // Taipei
@@ -62,6 +66,27 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
       [section]: !prev[section]
     }));
   };
+
+  const toggleDarkMode = () => {
+    setDarkMode((prev: boolean) => {
+      const newMode = !prev;
+      localStorage.setItem('darkMode', JSON.stringify(newMode));
+      if (newMode) {
+        document.documentElement.classList.add('dark-mode');
+      } else {
+        document.documentElement.classList.remove('dark-mode');
+      }
+      return newMode;
+    });
+  };
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark-mode');
+    } else {
+      document.documentElement.classList.remove('dark-mode');
+    }
+  }, []);
 
   const fetchLocations = useCallback(async () => {
     setLoading(true);
@@ -261,6 +286,13 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
           >
             <Globe size={20} />
             <span className="lang-text">{language === 'zh' ? 'EN' : '中'}</span>
+          </button>
+          <button
+            onClick={toggleDarkMode}
+            className="icon-button"
+            title={darkMode ? 'Light Mode' : 'Dark Mode'}
+          >
+            {darkMode ? <Sun size={20} /> : <Moon size={20} />}
           </button>
         </div>
       </header>

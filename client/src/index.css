@@ -1,5 +1,5 @@
 :root {
-  /* Color Palette from PRD */
+  /* Color Palette from PRD - Light Mode */
   --primary: #A7C7E7;
   --secondary: #FDFD96;
   --bg-cream: #FFFDD0;
@@ -17,6 +17,22 @@
   font-family: var(--sans);
   color: var(--text-dark);
   background-color: var(--bg-cream);
+}
+
+/* Dark Mode - softer grays/blues as per PRD */
+html.dark-mode {
+  --primary: #5B7FA6;
+  --secondary: #7B7B40;
+  --bg-cream: #1A1F2E;
+  --bg-white: #2D3748;
+  --bg-gray: #374151;
+  --text-dark: #E5E7EB;
+  --text-h: #F3F4F6;
+  --text-muted: #9CA3AF;
+  --accent: #FF8B7D;
+  --accent-bg: #663D3D;
+  --border: #4B5563;
+  --shadow: rgba(0, 0, 0, 0.3) 0 4px 6px -1px, rgba(0, 0, 0, 0.2) 0 2px 4px -1px;
 }
 
 body {

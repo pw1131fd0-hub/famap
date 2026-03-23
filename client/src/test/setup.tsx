@@ -2,8 +2,9 @@ import '@testing-library/jest-dom';
 import { vi } from 'vitest';
 import * as React from 'react';
 
-// React 19 exports act directly from react, not from react-dom/test-utils
-// No need for polyfill as vitest handles this automatically
+// React 19 exports act directly from react
+// Ensure act is available globally for testing-library
+globalThis.React = React;
 
 // Mock axios
 vi.mock('axios', () => {
