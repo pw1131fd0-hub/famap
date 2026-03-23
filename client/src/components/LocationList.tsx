@@ -3,6 +3,7 @@ import { Heart } from 'lucide-react';
 import type { Location } from '../types';
 import { useTranslation } from '../i18n/useTranslation';
 import { calculateDistance, formatDistance, getLocationFamilyScore } from '../utils/locationUtils';
+import { LocationListSkeleton } from './LocationSkeleton';
 
 interface LocationListProps {
   locations: Location[];
@@ -154,20 +155,20 @@ function LocationListImpl({
     return sorted;
   }, [showFavorites, favorites, locations, searchQuery, facilitiesFilter, sortBy, position, language]);
 
+  if (loading && filteredLocations.length === 0) {
+    return <LocationListSkeleton />;
+  }
+
   if (filteredLocations.length === 0) {
     return (
       <div className="location-list-empty">
-        {loading ? (
-          <p>{t.common.loading}</p>
-        ) : (
-          <p>{showFavorites ? t.common.noFavorites : t.common.noLocations}</p>
-        )}
+        <p>{showFavorites ? t.common.noFavorites : t.common.noLocations}</p>
       </div>
     );
   }
 
   return (
-    <div className="location-list">
+    <div className={`location-list ${loading ? 'loading' : ''}`}>
       {filteredLocations.map((loc) => (
         <LocationCard
           key={loc.id}

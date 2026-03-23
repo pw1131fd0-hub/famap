@@ -114,7 +114,7 @@ describe('LocationList', () => {
   });
 
   it('displays loading state when no locations', () => {
-    render(
+    const { container } = render(
       <LanguageProvider>
         <LocationList
           locations={[]}
@@ -128,7 +128,7 @@ describe('LocationList', () => {
       </LanguageProvider>
     );
 
-    expect(screen.getByText(/載入中/)).toBeInTheDocument();
+    expect(container.querySelector('.location-list-skeleton')).toBeInTheDocument();
   });
 
   it('displays no locations message', () => {
