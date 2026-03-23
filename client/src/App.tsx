@@ -11,6 +11,56 @@ import { ReviewList } from './components/ReviewList';
 import { ReviewForm } from './components/ReviewForm';
 import { LocationForm } from './components/LocationForm';
 
+// Collapsible section component for performance optimization
+interface CollapsibleSectionProps {
+  title: string;
+  isExpanded: boolean;
+  onToggle: () => void;
+  children: React.ReactNode;
+  emoji?: string;
+}
+
+const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({
+  title,
+  isExpanded,
+  onToggle,
+  children,
+  emoji = ''
+}) => (
+  <div className="detail-section">
+    <button
+      onClick={onToggle}
+      style={{
+        width: '100%',
+        padding: '8px 12px',
+        background: isExpanded ? '#f0f8ff' : '#fafafa',
+        border: '1px solid #e0e0e0',
+        borderRadius: '4px',
+        cursor: 'pointer',
+        textAlign: 'left',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        fontSize: '0.95em',
+        fontWeight: '600',
+        transition: 'all 0.2s ease'
+      }}
+    >
+      <span>{emoji} {title}</span>
+      <span style={{
+        display: 'inline-block',
+        transition: 'transform 0.2s ease',
+        transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)'
+      }}>▼</span>
+    </button>
+    {isExpanded && (
+      <div style={{ paddingTop: '8px' }}>
+        {children}
+      </div>
+    )}
+  </div>
+);
+
 // Utility function to calculate distance between two coordinates (Haversine formula)
 const calculateDistance = (lat1: number, lng1: number, lat2: number, lng2: number): number => {
   const R = 6371; // Earth's radius in kilometers
@@ -231,11 +281,31 @@ function App() {
   const [showAddLocation, setShowAddLocation] = useState(false);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [facilitiesFilter, setFacilitiesFilter] = useState<string[]>([]);
-  const [childAge, setChildAge] = useState<number | undefined>(() => {
-    const saved = localStorage.getItem('childAge');
-    return saved ? parseInt(saved, 10) : undefined;
-  });
+  // Age filtering disabled for mobile stability
+  // const [childAge, setChildAge] = useState<number | undefined>(() => {
+  //   const saved = localStorage.getItem('childAge');
+  //   return saved ? parseInt(saved, 10) : undefined;
+  // });
   const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance');
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
+    'basic': true, // Always show basic info
+    'facilities': true,
+    'operating': true,
+    'transit': false,
+    'safety': false,
+    'amenities': false,
+    'comfort': false,
+    'food': false,
+    'bookings': false,
+    'taiwan': false,
+  });
+
+  const toggleSection = (section: string) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
 
   const fetchLocations = useCallback(async () => {
     setLoading(true);
@@ -364,22 +434,23 @@ function App() {
     );
   };
 
-  const isAgeAppropriate = (location: Location): boolean => {
-    if (childAge === undefined || !location.ageRange) return true;
-    const { minAge, maxAge } = location.ageRange;
-    if (minAge !== undefined && childAge < minAge) return false;
-    if (maxAge !== undefined && childAge > maxAge) return false;
-    return true;
-  };
+  // Age filtering disabled for mobile stability
+  // const isAgeAppropriate = (location: Location): boolean => {
+  //   if (childAge === undefined || !location.ageRange) return true;
+  //   const { minAge, maxAge } = location.ageRange;
+  //   if (minAge !== undefined && childAge < minAge) return false;
+  //   if (maxAge !== undefined && childAge > maxAge) return false;
+  //   return true;
+  // };
 
-  const handleChildAgeChange = (age: number | undefined) => {
-    setChildAge(age);
-    if (age !== undefined) {
-      localStorage.setItem('childAge', age.toString());
-    } else {
-      localStorage.removeItem('childAge');
-    }
-  };
+  // const handleChildAgeChange = (age: number | undefined) => {
+  //   setChildAge(age);
+  //   if (age !== undefined) {
+  //     localStorage.setItem('childAge', age.toString());
+  //   } else {
+  //     localStorage.removeItem('childAge');
+  //   }
+  // };
 
   const getFilteredLocations = (locs: Location[]) => {
     let filtered = locs;
@@ -390,9 +461,9 @@ function App() {
       );
     }
 
-    if (childAge !== undefined) {
-      filtered = filtered.filter(isAgeAppropriate);
-    }
+    // if (childAge !== undefined) {
+    //   filtered = filtered.filter(isAgeAppropriate);
+    // }
 
     // Sort based on selected option
     const sorted = [...filtered].sort((a, b) => {
@@ -515,179 +586,226 @@ function App() {
                 </button>
               </header>
               <div className="detail-content">
-                <div className="detail-section">
-                  <h4>{t.locationDetail.address}</h4>
-                  <p>{selectedLocation.address[language]}</p>
-                  <a
-                    href={`https://www.google.com/maps/search/${encodeURIComponent(selectedLocation.name[language])},${encodeURIComponent(selectedLocation.address[language])}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="directions-button"
-                    title={t.locationDetail.directions}
-                  >
-                    <MapPin size={16} />
-                    <span>{t.locationDetail.directions}</span>
-                  </a>
-                </div>
-                {selectedLocation.phoneNumber && (
+                {/* Basic Information - Always Expanded */}
+                <CollapsibleSection
+                  title={language === 'zh' ? '基本信息' : 'Basic Info'}
+                  emoji="ℹ️"
+                  isExpanded={expandedSections['basic']}
+                  onToggle={() => toggleSection('basic')}
+                >
                   <div className="detail-section">
-                    <h4>{t.locationDetail.phone || 'Phone'}</h4>
+                    <h4>{t.locationDetail.address}</h4>
+                    <p>{selectedLocation.address[language]}</p>
                     <a
-                      href={`tel:${selectedLocation.phoneNumber}`}
-                      className="phone-button"
-                      title="Call"
+                      href={`https://www.google.com/maps/search/${encodeURIComponent(selectedLocation.name[language])},${encodeURIComponent(selectedLocation.address[language])}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="directions-button"
+                      title={t.locationDetail.directions}
                     >
-                      📞 {selectedLocation.phoneNumber}
+                      <MapPin size={16} />
+                      <span>{t.locationDetail.directions}</span>
                     </a>
                   </div>
-                )}
-                {selectedLocation.pricing && (
-                  <div className="detail-section">
-                    <h4>{t.locationDetail.pricing}</h4>
-                    <p>{selectedLocation.pricing.isFree ? t.locationDetail.isFree : selectedLocation.pricing.priceRange || 'Paid'}</p>
-                  </div>
-                )}
-                {selectedLocation.ageRange && (selectedLocation.ageRange.minAge !== undefined || selectedLocation.ageRange.maxAge !== undefined) && (
-                  <div className="detail-section">
-                    <h4>{t.locationDetail.ageRange}</h4>
-                    <p>
-                      {selectedLocation.ageRange.minAge && selectedLocation.ageRange.maxAge
-                        ? `${selectedLocation.ageRange.minAge} - ${selectedLocation.ageRange.maxAge} ${language === 'zh' ? '歲' : 'years'}`
-                        : selectedLocation.ageRange.minAge ? `${selectedLocation.ageRange.minAge}+ ${language === 'zh' ? '歲' : 'years'}`
-                        : `Up to ${selectedLocation.ageRange.maxAge} ${language === 'zh' ? '歲' : 'years'}`}
-                    </p>
-                  </div>
-                )}
-                {selectedLocation.operatingHours && (
-                  <div className="detail-section">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                      <h4>{t.locationDetail.openingHours}</h4>
-                      {(() => {
-                        const { isOpen, message } = isLocationOpen(selectedLocation.operatingHours);
-                        return (
-                          <span style={{
-                            padding: '4px 10px',
-                            borderRadius: '4px',
-                            fontSize: '0.8em',
-                            fontWeight: '600',
-                            background: isOpen ? '#d4edda' : '#f8d7da',
-                            color: isOpen ? '#155724' : '#721c24',
-                          }}>
-                            {isOpen ? '🟢' : '🔴'} {message}
-                          </span>
-                        );
-                      })()}
+                  {selectedLocation.phoneNumber && (
+                    <div className="detail-section">
+                      <h4>{t.locationDetail.phone || 'Phone'}</h4>
+                      <a
+                        href={`tel:${selectedLocation.phoneNumber}`}
+                        className="phone-button"
+                        title="Call"
+                      >
+                        📞 {selectedLocation.phoneNumber}
+                      </a>
                     </div>
-                    <div className="hours-list">
-                      {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day) => {
-                        const dayName = language === 'zh'
-                          ? DAY_NAMES_ZH[day]
-                          : day.substring(0, 3).toUpperCase();
-                        const hours = selectedLocation.operatingHours![day as keyof typeof selectedLocation.operatingHours];
-                        return hours ? (
-                          <p key={day} className="hours-item">
-                            <strong>{language === 'zh' ? `週${dayName}` : dayName}:</strong> {hours}
+                  )}
+                  {selectedLocation.pricing && (
+                    <div className="detail-section">
+                      <h4>{t.locationDetail.pricing}</h4>
+                      <p>{selectedLocation.pricing.isFree ? t.locationDetail.isFree : selectedLocation.pricing.priceRange || 'Paid'}</p>
+                    </div>
+                  )}
+                  {selectedLocation.ageRange && (selectedLocation.ageRange.minAge !== undefined || selectedLocation.ageRange.maxAge !== undefined) && (
+                    <div className="detail-section">
+                      <h4>{t.locationDetail.ageRange}</h4>
+                      <p>
+                        {selectedLocation.ageRange.minAge && selectedLocation.ageRange.maxAge
+                          ? `${selectedLocation.ageRange.minAge} - ${selectedLocation.ageRange.maxAge} ${language === 'zh' ? '歲' : 'years'}`
+                          : selectedLocation.ageRange.minAge ? `${selectedLocation.ageRange.minAge}+ ${language === 'zh' ? '歲' : 'years'}`
+                          : `Up to ${selectedLocation.ageRange.maxAge} ${language === 'zh' ? '歲' : 'years'}`}
+                      </p>
+                    </div>
+                  )}
+                </CollapsibleSection>
+
+                {/* Operating Hours & Facilities */}
+                {(selectedLocation.operatingHours || selectedLocation.facilities) && (
+                  <CollapsibleSection
+                    title={language === 'zh' ? '設施與營業時間' : 'Facilities & Hours'}
+                    emoji="🏢"
+                    isExpanded={expandedSections['facilities']}
+                    onToggle={() => toggleSection('facilities')}
+                  >
+                    {selectedLocation.operatingHours && (
+                      <div className="detail-section">
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                          <h4>{t.locationDetail.openingHours}</h4>
+                          {(() => {
+                            const { isOpen, message } = isLocationOpen(selectedLocation.operatingHours);
+                            return (
+                              <span style={{
+                                padding: '4px 10px',
+                                borderRadius: '4px',
+                                fontSize: '0.8em',
+                                fontWeight: '600',
+                                background: isOpen ? '#d4edda' : '#f8d7da',
+                                color: isOpen ? '#155724' : '#721c24',
+                              }}>
+                                {isOpen ? '🟢' : '🔴'} {message}
+                              </span>
+                            );
+                          })()}
+                        </div>
+                        <div className="hours-list">
+                          {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day) => {
+                            const dayName = language === 'zh'
+                              ? DAY_NAMES_ZH[day]
+                              : day.substring(0, 3).toUpperCase();
+                            const hours = selectedLocation.operatingHours![day as keyof typeof selectedLocation.operatingHours];
+                            return hours ? (
+                              <p key={day} className="hours-item">
+                                <strong>{language === 'zh' ? `週${dayName}` : dayName}:</strong> {hours}
+                              </p>
+                            ) : null;
+                          })}
+                        </div>
+                      </div>
+                    )}
+                    <div className="detail-section">
+                      <h4>{t.locationDetail.facilities}</h4>
+                      <div className="facility-chips">
+                        {selectedLocation.facilities.map(f => (
+                          <span key={f} className="chip">{t.facilities[f as keyof typeof t.facilities] || f}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </CollapsibleSection>
+                )}
+                {/* Transit & Parking */}
+                {(selectedLocation.publicTransit || selectedLocation.parking) && (
+                  <CollapsibleSection
+                    title={language === 'zh' ? '交通與停車' : 'Transit & Parking'}
+                    emoji="🚗"
+                    isExpanded={expandedSections['transit']}
+                    onToggle={() => toggleSection('transit')}
+                  >
+                    {selectedLocation.publicTransit && (
+                      <div className="detail-section">
+                        <h4>🚇 {language === 'zh' ? '公共運輸' : 'Public Transit'}</h4>
+                        {selectedLocation.publicTransit.nearestMRT && (
+                          <p>
+                            <strong>{language === 'zh' ? '最近捷運' : 'Nearest MRT'}:</strong> {selectedLocation.publicTransit.nearestMRT.station}
+                            ({selectedLocation.publicTransit.nearestMRT.line}) - 約 {Math.round(selectedLocation.publicTransit.nearestMRT.distance / 100)}00m
                           </p>
-                        ) : null;
-                      })}
-                    </div>
-                  </div>
-                )}
-                <div className="detail-section">
-                  <h4>{t.locationDetail.facilities}</h4>
-                  <div className="facility-chips">
-                    {selectedLocation.facilities.map(f => (
-                      <span key={f} className="chip">{t.facilities[f as keyof typeof t.facilities] || f}</span>
-                    ))}
-                  </div>
-                </div>
-                {selectedLocation.publicTransit && (
-                  <div className="detail-section">
-                    <h4>🚇 {language === 'zh' ? '公共運輸' : 'Public Transit'}</h4>
-                    {selectedLocation.publicTransit.nearestMRT && (
-                      <p>
-                        <strong>{language === 'zh' ? '最近捷運' : 'Nearest MRT'}:</strong> {selectedLocation.publicTransit.nearestMRT.station}
-                        ({selectedLocation.publicTransit.nearestMRT.line}) - 約 {Math.round(selectedLocation.publicTransit.nearestMRT.distance / 100)}00m
-                      </p>
+                        )}
+                        {selectedLocation.publicTransit.busLines && selectedLocation.publicTransit.busLines.length > 0 && (
+                          <p>
+                            <strong>{language === 'zh' ? '公車路線' : 'Bus Lines'}:</strong> {selectedLocation.publicTransit.busLines.join(', ')}
+                          </p>
+                        )}
+                      </div>
                     )}
-                    {selectedLocation.publicTransit.busLines && selectedLocation.publicTransit.busLines.length > 0 && (
-                      <p>
-                        <strong>{language === 'zh' ? '公車路線' : 'Bus Lines'}:</strong> {selectedLocation.publicTransit.busLines.join(', ')}
-                      </p>
+                    {selectedLocation.parking && (
+                      <div className="detail-section">
+                        <h4>🅿️ {language === 'zh' ? '停車資訊' : 'Parking'}</h4>
+                        <p>
+                          <strong>{language === 'zh' ? '停車' : 'Parking'}</strong>: {selectedLocation.parking.available ? (language === 'zh' ? '✅ 有停車位' : '✅ Available') : (language === 'zh' ? '❌ 無停車位' : '❌ Not Available')}
+                        </p>
+                        {selectedLocation.parking.cost && (
+                          <p>
+                            <strong>{language === 'zh' ? '費用' : 'Cost'}</strong>: {selectedLocation.parking.cost}
+                          </p>
+                        )}
+                        {selectedLocation.parking.hasValidation && (
+                          <p>
+                            <strong>{language === 'zh' ? '停車驗證' : 'Validation'}</strong>: {language === 'zh' ? '✅ 有停車驗證' : '✅ Available'}
+                          </p>
+                        )}
+                      </div>
                     )}
-                  </div>
+                  </CollapsibleSection>
                 )}
-                {selectedLocation.parking && (
-                  <div className="detail-section">
-                    <h4>🅿️ {language === 'zh' ? '停車資訊' : 'Parking'}</h4>
-                    <p>
-                      <strong>{language === 'zh' ? '停車' : 'Parking'}</strong>: {selectedLocation.parking.available ? (language === 'zh' ? '✅ 有停車位' : '✅ Available') : (language === 'zh' ? '❌ 無停車位' : '❌ Not Available')}
-                    </p>
-                    {selectedLocation.parking.cost && (
-                      <p>
-                        <strong>{language === 'zh' ? '費用' : 'Cost'}</strong>: {selectedLocation.parking.cost}
-                      </p>
+                {/* Amenities */}
+                {(selectedLocation.toilet || selectedLocation.hasWiFi || selectedLocation.allergens) && (
+                  <CollapsibleSection
+                    title={language === 'zh' ? '便利設施' : 'Amenities'}
+                    emoji="🏪"
+                    isExpanded={expandedSections['amenities']}
+                    onToggle={() => toggleSection('amenities')}
+                  >
+                    {selectedLocation.toilet && (
+                      <div className="detail-section">
+                        <h4>🚽 {language === 'zh' ? '廁所設施' : 'Toilet Facilities'}</h4>
+                        <p>
+                          <strong>{language === 'zh' ? '廁所' : 'Toilet'}</strong>: {selectedLocation.toilet.available ? (language === 'zh' ? '✅ 有廁所' : '✅ Available') : (language === 'zh' ? '❌ 無廁所' : '❌ Not Available')}
+                        </p>
+                        {selectedLocation.toilet.childrenFriendly && (
+                          <p>
+                            <strong>{language === 'zh' ? '兒童友善' : 'Kid-Friendly'}</strong>: {language === 'zh' ? '✅ 是' : '✅ Yes'}
+                          </p>
+                        )}
+                        {selectedLocation.toilet.hasChangingTable && (
+                          <p>
+                            <strong>{language === 'zh' ? '換尿布台' : 'Changing Table'}</strong>: {language === 'zh' ? '✅ 有' : '✅ Available'}
+                          </p>
+                        )}
+                      </div>
                     )}
-                    {selectedLocation.parking.hasValidation && (
-                      <p>
-                        <strong>{language === 'zh' ? '停車驗證' : 'Validation'}</strong>: {language === 'zh' ? '✅ 有停車驗證' : '✅ Available'}
-                      </p>
+                    {selectedLocation.hasWiFi && (
+                      <div className="detail-section">
+                        <h4>📶 WiFi</h4>
+                        <p>{language === 'zh' ? '✅ 有免費WiFi' : '✅ Free WiFi Available'}</p>
+                      </div>
                     )}
-                  </div>
-                )}
-                {selectedLocation.toilet && (
-                  <div className="detail-section">
-                    <h4>🚽 {language === 'zh' ? '廁所設施' : 'Toilet Facilities'}</h4>
-                    <p>
-                      <strong>{language === 'zh' ? '廁所' : 'Toilet'}</strong>: {selectedLocation.toilet.available ? (language === 'zh' ? '✅ 有廁所' : '✅ Available') : (language === 'zh' ? '❌ 無廁所' : '❌ Not Available')}
-                    </p>
-                    {selectedLocation.toilet.childrenFriendly && (
-                      <p>
-                        <strong>{language === 'zh' ? '兒童友善' : 'Kid-Friendly'}</strong>: {language === 'zh' ? '✅ 是' : '✅ Yes'}
-                      </p>
+                    {selectedLocation.allergens && selectedLocation.allergens.commonAllergens && selectedLocation.allergens.commonAllergens.length > 0 && (
+                      <div className="detail-section">
+                        <h4>⚠️ {language === 'zh' ? '常見過敏原' : 'Common Allergens'}</h4>
+                        <p>{selectedLocation.allergens.commonAllergens.join(', ')}</p>
+                      </div>
                     )}
-                    {selectedLocation.toilet.hasChangingTable && (
-                      <p>
-                        <strong>{language === 'zh' ? '換尿布台' : 'Changing Table'}</strong>: {language === 'zh' ? '✅ 有' : '✅ Available'}
-                      </p>
-                    )}
-                  </div>
+                  </CollapsibleSection>
                 )}
-                {selectedLocation.hasWiFi && (
-                  <div className="detail-section">
-                    <h4>📶 WiFi</h4>
-                    <p>{language === 'zh' ? '✅ 有免費WiFi' : '✅ Free WiFi Available'}</p>
-                  </div>
-                )}
-                {selectedLocation.allergens && selectedLocation.allergens.commonAllergens && selectedLocation.allergens.commonAllergens.length > 0 && (
-                  <div className="detail-section">
-                    <h4>⚠️ {language === 'zh' ? '常見過敏原' : 'Common Allergens'}</h4>
-                    <p>{selectedLocation.allergens.commonAllergens.join(', ')}</p>
-                  </div>
-                )}
+                {/* Comfort & Crowding */}
                 {selectedLocation.crowding && (
-                  <div className="detail-section">
-                    <h4>👥 {language === 'zh' ? '人氣資訊' : 'Crowding Info'}</h4>
-                    {selectedLocation.crowding.quietHours && (
-                      <p>
-                        <strong>{language === 'zh' ? '安靜時段' : 'Quiet Hours'}</strong>: {selectedLocation.crowding.quietHours}
-                      </p>
-                    )}
-                    {selectedLocation.crowding.peakHours && (
-                      <p>
-                        <strong>{language === 'zh' ? '尖峰時段' : 'Peak Hours'}</strong>: {selectedLocation.crowding.peakHours}
-                      </p>
-                    )}
-                    {selectedLocation.crowding.averageCrowding && (
-                      <p>
-                        <strong>{language === 'zh' ? '平均人潮' : 'Average Crowding'}</strong>: {
-                          selectedLocation.crowding.averageCrowding === 'light' ? (language === 'zh' ? '人少' : 'Light') :
-                          selectedLocation.crowding.averageCrowding === 'moderate' ? (language === 'zh' ? '中等' : 'Moderate') :
-                          (language === 'zh' ? '人多' : 'Heavy')
-                        }
-                      </p>
-                    )}
-                  </div>
+                  <CollapsibleSection
+                    title={language === 'zh' ? '舒適度與人潮' : 'Comfort & Crowding'}
+                    emoji="👥"
+                    isExpanded={expandedSections['comfort']}
+                    onToggle={() => toggleSection('comfort')}
+                  >
+                    <div className="detail-section">
+                      <h4>👥 {language === 'zh' ? '人氣資訊' : 'Crowding Info'}</h4>
+                      {selectedLocation.crowding.quietHours && (
+                        <p>
+                          <strong>{language === 'zh' ? '安靜時段' : 'Quiet Hours'}</strong>: {selectedLocation.crowding.quietHours}
+                        </p>
+                      )}
+                      {selectedLocation.crowding.peakHours && (
+                        <p>
+                          <strong>{language === 'zh' ? '尖峰時段' : 'Peak Hours'}</strong>: {selectedLocation.crowding.peakHours}
+                        </p>
+                      )}
+                      {selectedLocation.crowding.averageCrowding && (
+                        <p>
+                          <strong>{language === 'zh' ? '平均人潮' : 'Average Crowding'}</strong>: {
+                            selectedLocation.crowding.averageCrowding === 'light' ? (language === 'zh' ? '人少' : 'Light') :
+                            selectedLocation.crowding.averageCrowding === 'moderate' ? (language === 'zh' ? '中等' : 'Moderate') :
+                            (language === 'zh' ? '人多' : 'Heavy')
+                          }
+                        </p>
+                      )}
+                    </div>
+                  </CollapsibleSection>
                 )}
                 {selectedLocation.nursingAmenities && (
                   <div className="detail-section">
