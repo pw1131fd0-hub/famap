@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
 import uvicorn
 import os
 from dotenv import load_dotenv
@@ -9,11 +10,9 @@ from data.auto_collect import fetch_osm_data, save_locations
 
 load_dotenv()
 
-app = FastAPI(title="FamMap API", redirect_slashes=False)
-
-@app.on_event("startup")
-async def startup_event():
-    # If we have very few locations, try a quick fetch for central Taipei
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup event
     if len(mock_locations) < 10:
         print("Initial location count low. Fetching default Taipei spots...")
         new_locs = await fetch_osm_data(25.0330, 121.5654, 5000)
@@ -25,6 +24,11 @@ async def startup_event():
                     mock_locations.append(loc)
             save_locations(new_locs)
             print(f"Pre-loaded {len(new_locs)} locations.")
+    yield
+    # Shutdown event (cleanup if needed)
+    pass
+
+app = FastAPI(title="FamMap API", redirect_slashes=False, lifespan=lifespan)
 
 # CORS middleware
 origins_env = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173,http://localhost:3000")
