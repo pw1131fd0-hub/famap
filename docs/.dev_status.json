@@ -100,5 +100,15 @@
     "exceeds_dev_threshold": true,
     "ready_for_production": false
   },
-  "updated_at": "2026-03-23T18:54:00Z"
+  "final_metrics": {
+    "total_tests_passing": 173,
+    "client_test_count": 115,
+    "server_test_count": 58,
+    "client_coverage_statements": "88.71%",
+    "client_coverage_lines": "89.92%",
+    "server_coverage_statements": "95.52%",
+    "server_coverage_lines": "96.06%",
+    "combined_coverage": "92.12% statements, 93.49% lines"
+  },
+  "updated_at": "2026-03-23T18:56:43Z"
 }
