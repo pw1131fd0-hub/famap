@@ -286,7 +286,11 @@ function App() {
   //   const saved = localStorage.getItem('childAge');
   //   return saved ? parseInt(saved, 10) : undefined;
   // });
-  const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance');
+  
+  // childAge filter disabled
+  const childAge = undefined;
+  const handleChildAgeChange = (_: number | undefined) => {};
+const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     'basic': true, // Always show basic info
     'facilities': true,
