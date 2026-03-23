@@ -19,7 +19,9 @@ client = TestClient(app)
 def test_health_check():
     response = client.get("/health")
     assert response.status_code == 200
-    assert response.json() == {"status": "ok", "message": "FamMap API (FastAPI) is running"}
+    data = response.json()
+    assert data["status"] == "alive"
+    assert "timestamp" in data
 
 def test_get_locations():
     # Provide coordinates in Taipei
