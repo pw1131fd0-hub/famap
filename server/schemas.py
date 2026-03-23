@@ -126,3 +126,32 @@ class PetPolicy(BaseModel):
     hasOnSiteVeterinary: Optional[bool] = None
     petRestrictionsDetails: Optional[str] = None
     petPolicyNotes: Optional[str] = None
+
+class EventType(str, Enum):
+    BIRTHDAY_PARTY = "birthday_party"
+    CLASS = "class"
+    WORKSHOP = "workshop"
+    PERFORMANCE = "performance"
+    ACTIVITY = "activity"
+    OTHER = "other"
+
+class EventBase(BaseModel):
+    title: LocalizedString
+    description: LocalizedString
+    eventType: EventType
+    startDate: str  # ISO format datetime
+    endDate: str    # ISO format datetime
+    ageRange: Optional[AgeRange] = None
+    capacity: Optional[int] = None
+    price: Optional[float] = 0
+
+class EventCreate(EventBase):
+    pass
+
+class Event(EventBase):
+    id: str
+    locationId: str
+    createdAt: str
+    updatedAt: str
+
+    model_config = ConfigDict(from_attributes=True)

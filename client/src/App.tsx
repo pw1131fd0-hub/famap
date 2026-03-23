@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import 'leaflet/dist/leaflet.css';
 import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Menu, ChevronDown, Filter, Heart, List, Moon, Sun } from 'lucide-react';
-import { locationApi, reviewApi, favoriteApi, crowdinessApi } from './services/api';
-import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO, CrowdednessReport, CrowdednessReportCreateDTO } from './types';
+import { locationApi, reviewApi, favoriteApi, crowdinessApi, eventsApi } from './services/api';
+import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO, CrowdednessReport, CrowdednessReportCreateDTO, Event } from './types';
 import { useTranslation } from './i18n/useTranslation';
 import { LocationForm } from './components/LocationForm';
 import { LocationDetailPanel } from './components/LocationDetailPanel';
@@ -38,6 +38,7 @@ function App() {
   const [showAddLocation, setShowAddLocation] = useState(false);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [crowdednessReports, setCrowdednessReports] = useState<CrowdednessReport[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
   const [facilitiesFilter, setFacilitiesFilter] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
   // Age filtering disabled for mobile stability
@@ -157,6 +158,23 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
     };
 
     fetchCrowdednessReports();
+  }, [selectedLocation]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      if (selectedLocation) {
+        try {
+          const data = await eventsApi.getByLocationId(selectedLocation.id);
+          setEvents(data);
+        } catch (error) {
+          console.error('Failed to fetch events:', error);
+        }
+      } else {
+        setEvents([]);
+      }
+    };
+
+    fetchEvents();
   }, [selectedLocation]);
 
   const handleFindMe = () => {
@@ -389,6 +407,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
               onReviewSubmit={handlePostReview}
               crowdednessReports={crowdednessReports}
               onCrowdednessReportSubmit={handlePostCrowdednessReport}
+              events={events}
               expandedSections={expandedSections}
               onToggleSection={toggleSection}
             />

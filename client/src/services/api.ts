@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { Location, SearchParams, Review, ReviewCreateDTO, LocationCreateDTO, Favorite, CrowdednessReport, CrowdednessReportCreateDTO } from '../types';
+import type { Location, SearchParams, Review, ReviewCreateDTO, LocationCreateDTO, Favorite, CrowdednessReport, CrowdednessReportCreateDTO, Event } from '../types';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 const REQUEST_TIMEOUT = 10000; // 10 seconds
@@ -160,6 +160,20 @@ export const crowdinessApi = {
     const cacheKey = getCacheKey('GET', `/locations/${locationId}/crowdedness`, undefined);
     requestCache.delete(cacheKey);
     const response = await api.post<CrowdednessReport>(`/locations/${locationId}/crowdedness`, report);
+    return response.data;
+  },
+};
+
+export const eventsApi = {
+  getByLocationId: async (locationId: string): Promise<Event[]> => {
+    const cacheKey = getCacheKey('GET', `/locations/${locationId}/events`, undefined);
+    return cachedGet(cacheKey, () => retryableGet<Event[]>(`/locations/${locationId}/events`));
+  },
+  create: async (locationId: string, event: any): Promise<Event> => {
+    // Invalidate events cache for this location
+    const cacheKey = getCacheKey('GET', `/locations/${locationId}/events`, undefined);
+    requestCache.delete(cacheKey);
+    const response = await api.post<Event>(`/locations/${locationId}/events`, event);
     return response.data;
   },
 };

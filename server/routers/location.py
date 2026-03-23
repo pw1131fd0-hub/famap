@@ -2,8 +2,10 @@ from fastapi import APIRouter, HTTPException, Query
 from typing import List, Optional
 import math
 import sys
+import uuid
+from datetime import datetime, UTC
 sys.path.append('..')
-from schemas import Location, SearchParams, Category, LocationCreate
+from schemas import Location, SearchParams, Category, LocationCreate, Event, EventCreate
 from data.seed_data import mock_locations
 from data.auto_collect import fetch_osm_data, save_locations
 
@@ -108,4 +110,34 @@ async def update_location(location_id: str, location_update: dict):
         if loc["id"] == location_id:
             loc.update(location_update)
             return loc
+    raise HTTPException(status_code=404, detail="Location not found")
+
+@router.get("/{location_id}/events", response_model=List[Event])
+async def get_events(location_id: str):
+    """Get all events for a specific location"""
+    for loc in mock_locations:
+        if loc["id"] == location_id:
+            # Initialize events if they don't exist
+            if "events" not in loc:
+                loc["events"] = []
+            return loc["events"]
+    raise HTTPException(status_code=404, detail="Location not found")
+
+@router.post("/{location_id}/events", response_model=Event)
+async def create_event(location_id: str, event: EventCreate):
+    """Create a new event for a location"""
+    for loc in mock_locations:
+        if loc["id"] == location_id:
+            # Initialize events if they don't exist
+            if "events" not in loc:
+                loc["events"] = []
+
+            new_event = event.model_dump()
+            new_event["id"] = str(uuid.uuid4())
+            new_event["locationId"] = location_id
+            new_event["createdAt"] = str(datetime.now(UTC).isoformat())
+            new_event["updatedAt"] = str(datetime.now(UTC).isoformat())
+
+            loc["events"].append(new_event)
+            return new_event
     raise HTTPException(status_code=404, detail="Location not found")

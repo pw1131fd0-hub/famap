@@ -989,6 +989,7 @@ export interface Location {
   rainyDayAlternatives?: RainyDayAlternativesAndIndoorActivitiesInfo;
   rideRestrictions?: RideAgeHeightRestrictionInfo;
   airQuality?: AirQualityAndPollutionInfo;
+  events?: Event[];
 }
 
 export interface Review {
@@ -1102,6 +1103,29 @@ export interface LocationCreateDTO {
   rainyDayAlternatives?: RainyDayAlternativesAndIndoorActivitiesInfo;
   rideRestrictions?: RideAgeHeightRestrictionInfo;
   airQuality?: AirQualityAndPollutionInfo;
+}
+
+export type EventType = 'birthday_party' | 'class' | 'workshop' | 'performance' | 'activity' | 'other';
+
+export interface Event {
+  id: string;
+  locationId: string;
+  title: {
+    zh: string;
+    en: string;
+  };
+  description: {
+    zh: string;
+    en: string;
+  };
+  eventType: EventType;
+  startDate: string; // ISO format
+  endDate: string;   // ISO format
+  ageRange?: AgeRange;
+  capacity?: number;
+  price?: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Favorite {

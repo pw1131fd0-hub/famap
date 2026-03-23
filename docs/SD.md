@@ -23,6 +23,14 @@
   - Post a review.
   - Body: `{ rating, comment, photos[] }`
 
+### 1.2.5 Events API (P2 Feature)
+- `GET /api/locations/:id/events`
+  - Get upcoming events for a location.
+  - Returns: `Array<Event>`
+- `POST /api/locations/:id/events` (Authenticated)
+  - Create a new event for a location.
+  - Body: `EventCreateDTO`
+
 ### 1.3 Favorites API (Authenticated)
 - `GET /api/favorites`
   - List user's favorite locations.
@@ -96,6 +104,25 @@
 | `comment` | TEXT | User comment |
 | `photos` | TEXT[] | Array of photo URLs |
 | `created_at` | TIMESTAMP | |
+
+### 2.6 Table: `events` (P2 Feature)
+| Column | Type | Description |
+|---|---|---|
+| `id` | UUID (PK) | Unique identifier |
+| `location_id` | UUID (FK) | Reference to `locations` |
+| `title_zh` | TEXT | Event title in Traditional Chinese |
+| `title_en` | TEXT | Event title in English |
+| `description_zh` | TEXT | Event description in Traditional Chinese |
+| `description_en` | TEXT | Event description in English |
+| `event_type` | VARCHAR(50) | e.g., 'birthday_party', 'class', 'workshop', 'performance', 'activity' |
+| `start_date` | TIMESTAMP | Event start time |
+| `end_date` | TIMESTAMP | Event end time |
+| `ageRange_min` | INT | Minimum recommended age |
+| `ageRange_max` | INT | Maximum recommended age |
+| `capacity` | INT | Maximum number of participants |
+| `price` | FLOAT | Event price |
+| `created_at` | TIMESTAMP | Creation time |
+| `updated_at` | TIMESTAMP | Last update time |
 
 ## 3. Error Handling Strategy
 - **Client Errors (4xx):**

@@ -1519,3 +1519,132 @@ html.dark-mode .no-reports-message {
   background-color: var(--bg-dark);
   border: 1px solid var(--border-dark);
 }
+
+/* Events List Styles */
+.events-list {
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-coral);
+}
+
+.events-list h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.events-list-empty {
+  padding: 12px;
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.event-item {
+  padding: 12px;
+  margin-bottom: 10px;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  border-left: 3px solid var(--primary-blue);
+}
+
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.event-header h4 {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-dark);
+  flex: 1;
+}
+
+.event-type-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  background-color: var(--secondary-yellow);
+  color: var(--text-dark);
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.event-description {
+  font-size: 13px;
+  color: #666;
+  margin: 8px 0;
+  line-height: 1.4;
+}
+
+.event-details {
+  font-size: 12px;
+  color: #555;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.event-details strong {
+  color: var(--text-dark);
+}
+
+.event-time,
+.event-age-range,
+.event-capacity,
+.event-price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Dark mode events */
+html.dark-mode .events-list {
+  background-color: var(--bg-dark);
+  border-left-color: var(--accent-coral);
+}
+
+html.dark-mode .event-item {
+  background-color: var(--bg-dark-secondary);
+  border-color: var(--border-dark);
+  border-left-color: var(--primary-blue);
+}
+
+html.dark-mode .event-header h4 {
+  color: var(--text-light);
+}
+
+html.dark-mode .event-type-badge {
+  background-color: #6b6b1f;
+  color: #ffd700;
+}
+
+html.dark-mode .event-description {
+  color: #aaa;
+}
+
+html.dark-mode .event-details {
+  color: #999;
+}
+
+html.dark-mode .event-details strong {
+  color: #ddd;
+}
+
+html.dark-mode .events-list-empty {
+  background-color: var(--bg-dark);
+  color: #666;
+}

@@ -1,11 +1,12 @@
 import { X, Heart, MapPin } from 'lucide-react';
-import type { Location, Review, ReviewCreateDTO, CrowdednessReport, CrowdednessReportCreateDTO } from '../types';
+import type { Location, Review, ReviewCreateDTO, CrowdednessReport, CrowdednessReportCreateDTO, Event } from '../types';
 import { useTranslation } from '../i18n/useTranslation';
 import { CollapsibleSection } from './CollapsibleSection';
 import { ReviewList } from './ReviewList';
 import { ReviewForm } from './ReviewForm';
 import { CrowdednessReportForm } from './CrowdednessReportForm';
 import { CrowdednessReportList } from './CrowdednessReportList';
+import { EventsList } from './EventsList';
 import { isLocationOpen } from '../utils/locationUtils';
 import { DAY_NAMES_ZH } from '../config/mapConfig';
 
@@ -18,6 +19,7 @@ interface LocationDetailPanelProps {
   onReviewSubmit: (data: ReviewCreateDTO) => Promise<void>;
   crowdednessReports: CrowdednessReport[];
   onCrowdednessReportSubmit: (data: CrowdednessReportCreateDTO) => Promise<void>;
+  events?: Event[];
   expandedSections: Record<string, boolean>;
   onToggleSection: (section: string) => void;
 }
@@ -31,6 +33,7 @@ export function LocationDetailPanel({
   onReviewSubmit,
   crowdednessReports,
   onCrowdednessReportSubmit,
+  events,
   expandedSections,
   onToggleSection,
 }: LocationDetailPanelProps) {
@@ -522,6 +525,12 @@ export function LocationDetailPanel({
             />
           </div>
         </CollapsibleSection>
+
+        {/* Events Section */}
+        <EventsList
+          events={events}
+          language={language}
+        />
 
         {/* Reviews Section */}
         <div className="detail-section">

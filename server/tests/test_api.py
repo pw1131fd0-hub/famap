@@ -135,3 +135,50 @@ def test_get_me():
     response = client.get("/api/auth/me")
     assert response.status_code == 200
     assert "email" in response.json()
+
+def test_get_events():
+    """Test getting events for a location"""
+    if not mock_locations:
+        return
+    loc_id = mock_locations[0]["id"]
+    response = client.get(f"/api/locations/{loc_id}/events")
+    assert response.status_code == 200
+    assert isinstance(response.json(), list)
+
+def test_create_event():
+    """Test creating an event for a location"""
+    if not mock_locations:
+        return
+    loc_id = mock_locations[0]["id"]
+    new_event = {
+        "title": {"zh": "兒童生日派對", "en": "Kids Birthday Party"},
+        "description": {"zh": "歡慶小壽星的日子", "en": "Celebrate a child's birthday"},
+        "eventType": "birthday_party",
+        "startDate": "2026-04-01T10:00:00",
+        "endDate": "2026-04-01T12:00:00",
+        "ageRange": {"minAge": 3, "maxAge": 10},
+        "capacity": 20,
+        "price": 500
+    }
+    response = client.post(f"/api/locations/{loc_id}/events", json=new_event)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["title"]["zh"] == "兒童生日派對"
+    assert data["eventType"] == "birthday_party"
+    assert "id" in data
+    assert "locationId" in data
+    assert data["locationId"] == loc_id
+
+def test_create_event_not_found():
+    """Test creating an event for a non-existent location"""
+    new_event = {
+        "title": {"zh": "測試活動", "en": "Test Event"},
+        "description": {"zh": "測試", "en": "Test"},
+        "eventType": "activity",
+        "startDate": "2026-04-01T10:00:00",
+        "endDate": "2026-04-01T12:00:00",
+        "capacity": 10,
+        "price": 0
+    }
+    response = client.post("/api/locations/invalid_loc_999/events", json=new_event)
+    assert response.status_code == 404
