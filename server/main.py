@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 from routers import location, favorite, review, auth
 from data.seed_data import mock_locations
 from data.auto_collect import fetch_osm_data, save_locations
-import asyncio
 
 load_dotenv()
 
