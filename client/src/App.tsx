@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import 'leaflet/dist/leaflet.css';
-import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Menu, ChevronDown, Filter, Heart, List, Moon, Sun } from 'lucide-react';
+import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Menu, ChevronDown, Filter, Heart, List, Moon, Sun, Route } from 'lucide-react';
 import { locationApi, reviewApi, favoriteApi, crowdinessApi, eventsApi } from './services/api';
 import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO, CrowdednessReport, CrowdednessReportCreateDTO, Event } from './types';
 import { useTranslation } from './i18n/useTranslation';
@@ -8,6 +8,7 @@ import { LocationForm } from './components/LocationForm';
 import { LocationDetailPanel } from './components/LocationDetailPanel';
 import { LocationList } from './components/LocationList';
 import { MapPanel } from './components/MapPanel';
+import { RoutePlanner } from './components/RoutePlanner';
 import { CITIES, initializeLeafletIcons } from './config/mapConfig';
 import type { CityKey } from './config/mapConfig';
 
@@ -36,6 +37,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
   const [showAddLocation, setShowAddLocation] = useState(false);
+  const [showRoutePlanner, setShowRoutePlanner] = useState(false);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [crowdednessReports, setCrowdednessReports] = useState<CrowdednessReport[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
@@ -399,7 +401,13 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
       <div className="main-content">
         {sidebarOpen && <div className="sidebar-backdrop" onClick={() => setSidebarOpen(false)} />}
         <aside className={`sidebar${sidebarOpen ? ' sidebar-open' : ''}`}>
-          {showAddLocation ? (
+          {showRoutePlanner ? (
+            <RoutePlanner
+              locations={locations}
+              userLocation={position}
+              onClose={() => setShowRoutePlanner(false)}
+            />
+          ) : showAddLocation ? (
             <div className="location-form-container">
               <header className="detail-header">
                 <h2>{t.common.addLocation}</h2>
@@ -478,6 +486,15 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                     >
                       <Filter size={18} />
                       <span>{t.common.filterStroller}</span>
+                    </button>
+                    <button
+                      className="tool-button"
+                      onClick={() => setShowRoutePlanner(!showRoutePlanner)}
+                      title={language === 'zh' ? '規劃路線' : 'Plan Route'}
+                      aria-pressed={showRoutePlanner}
+                    >
+                      <Route size={18} />
+                      <span>{language === 'zh' ? '規劃路線' : 'Plan Route'}</span>
                     </button>
                     <button
                       className="tool-button primary"
