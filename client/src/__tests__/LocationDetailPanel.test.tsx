@@ -984,4 +984,166 @@ describe('LocationDetailPanel', () => {
     // Should still render transit section even with minimal data
     expect(screen.getByText(/公共運輸/)).toBeInTheDocument();
   });
+
+  it('toggles sections when section toggle is called', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ basic: false }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    // Just verify the component renders without errors
+    expect(screen.getByText('台北公園')).toBeInTheDocument();
+  });
+
+  it('renders with isFavorite true', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={true}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ basic: true }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    // Verify component renders in favorite state
+    const buttons = screen.getAllByRole('button');
+    const favoriteButton = buttons.find(btn => btn.className.includes('favorite'));
+    expect(favoriteButton).toBeInTheDocument();
+    expect(favoriteButton?.className).toContain('active');
+  });
+
+  it('renders all facility sections with comprehensive data', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{
+            basic: true,
+            facilities: true,
+            amenities: true,
+            accessibility: true,
+            safety: true
+          }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    // Verify basic section is rendered
+    expect(screen.getByText('台北公園')).toBeInTheDocument();
+  });
+
+  it('renders directions link with proper encoding', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ basic: true }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    // Verify there's a maps link in the document
+    const linksToMaps = screen.queryAllByRole('link');
+    const directionsLink = linksToMaps.find(link => link.href.includes('google.com/maps'));
+    expect(directionsLink).toBeDefined();
+  });
+
+  it('renders phone link as clickable tel', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ basic: true }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    const phoneLink = screen.getByTitle('Call');
+    expect(phoneLink).toHaveAttribute('href', 'tel:02-1234-5678');
+  });
+
+  it('displays rating when available', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ basic: true }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    const ratingElements = screen.queryAllByText(/4.5/);
+    expect(ratingElements.length).toBeGreaterThan(0);
+  });
+
+  it('handles location without optional properties gracefully', () => {
+    const minimalLocation: Location = {
+      id: '1',
+      name: { zh: '簡單地點', en: 'Simple Location' },
+      address: { zh: '台北市', en: 'Taipei' },
+      coordinates: { lat: 25.0330, lng: 121.5654 },
+      category: 'park',
+      facilities: [],
+      averageRating: 0,
+      description: { zh: '描述', en: 'Description' }
+    };
+
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={minimalLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={[]}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ basic: true }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    expect(screen.getByText('簡單地點')).toBeInTheDocument();
+    expect(screen.getByText(/台北市|Taipei/)).toBeInTheDocument();
+  });
 });

@@ -2,9 +2,11 @@ import express, { type Request, type Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
+import swaggerUi from 'swagger-ui-express';
 import locationRoutes from './routes/locationRoutes.js';
 import favoriteRoutes from './routes/favoriteRoutes.js';
 import authRoutes from './routes/authRoutes.js';
+import { swaggerSpec } from './swagger.js';
 
 dotenv.config();
 
@@ -18,6 +20,22 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
+
+// Swagger documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+  swaggerOptions: {
+    urls: [
+      { url: '/swagger.json', name: 'FamMap API' }
+    ],
+    defaultModelsExpandDepth: 2,
+    defaultModelExpandDepth: 2
+  }
+}));
+
+app.get('/swagger.json', (req: Request, res: Response) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+});
 
 // Routes
 app.use('/api/locations', locationRoutes);

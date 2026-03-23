@@ -1,0 +1,137 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ master, main, develop ]
+  pull_request:
+    branches: [ master, main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      # Client Tests
+      - name: Install client dependencies
+        run: cd client && npm ci
+
+      - name: Run client tests
+        run: cd client && npm test -- --passWithNoTests
+
+      - name: Check client build
+        run: cd client && npm run build
+
+      - name: Upload client coverage
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./client/coverage/coverage-final.json
+          flags: client
+          name: client-coverage
+
+  backend-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      # Backend Tests
+      - name: Install backend dependencies
+        run: cd server_node && npm ci
+
+      - name: Run backend tests
+        run: cd server_node && npm test
+
+      - name: Upload backend coverage
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./server_node/coverage/coverage-final.json
+          flags: backend
+          name: backend-coverage
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install client dependencies
+        run: cd client && npm ci
+
+      - name: Run ESLint
+        run: cd client && npm run lint
+        continue-on-error: true
+
+  security:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Install client dependencies
+        run: cd client && npm ci
+
+      - name: Audit client packages
+        run: cd client && npm audit --production || true
+
+      - name: Install backend dependencies
+        run: cd server_node && npm ci
+
+      - name: Audit backend packages
+        run: cd server_node && npm audit --production || true
+
+  deploy-preview:
+    needs: [test, backend-test]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Build client
+        run: cd client && npm ci && npm run build
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: client-build
+          path: client/dist
+          retention-days: 7
