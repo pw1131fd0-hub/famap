@@ -6,7 +6,7 @@ import uvicorn
 import os
 from datetime import datetime, UTC
 from dotenv import load_dotenv
-from routers import location, favorite, review, auth, recommendations, route_planner
+from routers import location, favorite, review, auth, recommendations, route_planner, smart_suggestions
 from data.seed_data import mock_locations
 from data.auto_collect import fetch_osm_data, save_locations
 from middleware import ErrorHandlingMiddleware, RequestTimingMiddleware, RequestLoggingMiddleware
@@ -119,6 +119,7 @@ app.include_router(favorite.router, prefix="/api/favorites", tags=["favorites"])
 app.include_router(review.router, prefix="/api/reviews", tags=["reviews"])
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
 app.include_router(recommendations.router, prefix="/api/recommendations", tags=["recommendations"])
+app.include_router(smart_suggestions.router, prefix="/api/suggestions", tags=["suggestions"])
 app.include_router(route_planner.router)
 
 if __name__ == "__main__":

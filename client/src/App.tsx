@@ -9,6 +9,7 @@ import { LocationDetailPanel } from './components/LocationDetailPanel';
 import { LocationList } from './components/LocationList';
 import { MapPanel } from './components/MapPanel';
 import { RoutePlanner } from './components/RoutePlanner';
+import { GoNowSuggestions } from './components/GoNowSuggestions';
 import { CITIES, initializeLeafletIcons } from './config/mapConfig';
 import type { CityKey } from './config/mapConfig';
 
@@ -476,6 +477,23 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                       aria-label="Search locations"
                     />
                   </div>
+
+                  <div style={{ padding: '12px', borderBottom: '1px solid var(--border)', backgroundColor: 'var(--bg-secondary)' }}>
+                    <GoNowSuggestions
+                      lat={position[0]}
+                      lng={position[1]}
+                      onSelectLocation={(locationId) => {
+                        const loc = locations.find(l => l.id === locationId);
+                        if (loc) {
+                          setSelectedLocation(loc);
+                        }
+                      }}
+                      onNavigate={(lat, lng) => {
+                        setPosition([lat, lng]);
+                      }}
+                    />
+                  </div>
+
                   <div className="sidebar-tools">
                     <button
                       className={`tool-button ${strollerOnly ? 'active' : ''}`}
