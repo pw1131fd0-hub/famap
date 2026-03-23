@@ -2,189 +2,25 @@ import { useState, useEffect, useCallback } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
 import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Filter, Heart, List, Menu, ChevronDown } from 'lucide-react';
 import { locationApi, reviewApi, favoriteApi } from './services/api';
-import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO, OperatingHours } from './types';
+import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO } from './types';
 import { useTranslation } from './i18n/useTranslation';
 import { ReviewList } from './components/ReviewList';
 import { ReviewForm } from './components/ReviewForm';
 import { LocationForm } from './components/LocationForm';
 import { CollapsibleSection } from './components/CollapsibleSection';
+import { calculateDistance, formatDistance, isLocationOpen, getLocationFamilyScore } from './utils/locationUtils';
+import { CITIES, initializeLeafletIcons, createGlowingIcon, DAY_NAMES_ZH } from './config/mapConfig';
+import type { CityKey } from './config/mapConfig';
 
 console.log('Famap loaded');
 
-// Utility function to calculate distance between two coordinates (Haversine formula)
-const calculateDistance = (lat1: number, lng1: number, lat2: number, lng2: number): number => {
-  const R = 6371; // Earth's radius in kilometers
-  const dLat = (lat2 - lat1) * (Math.PI / 180);
-  const dLng = (lng2 - lng1) * (Math.PI / 180);
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
-    Math.sin(dLng / 2) * Math.sin(dLng / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return R * c;
-};
-
-// Format distance for display
-const formatDistance = (distanceKm: number): string => {
-  if (distanceKm < 1) {
-    return `${(distanceKm * 1000).toFixed(0)}m`;
-  }
-  return `${distanceKm.toFixed(1)}km`;
-};
-
-// Day names mapping
-const DAY_NAMES_ZH: Record<string, string> = {
-  monday: '一',
-  tuesday: '二',
-  wednesday: '三',
-  thursday: '四',
-  friday: '五',
-  saturday: '六',
-  sunday: '日',
-};
-
-// City data with coordinates and descriptions
-type CityKey = 'taipei' | 'new_taipei' | 'keelung' | 'taoyuan';
-
-interface City {
-  key: CityKey;
-  name: string;
-  description: string;
-  center: [number, number];
-  defaultZoom: number;
-}
-
-const CITIES: City[] = [
-  {
-    key: 'taipei',
-    name: '台北市',
-    description: '首都核心，親子設施最密集',
-    center: [25.0330, 121.5654],
-    defaultZoom: 13
-  },
-  {
-    key: 'new_taipei',
-    name: '新北市',
-    description: '大台北生活圈，山水景點多',
-    center: [25.0169, 121.4628],
-    defaultZoom: 12
-  },
-  {
-    key: 'keelung',
-    name: '基隆市',
-    description: '北台灣門戶，山海親子景點',
-    center: [25.1276, 121.7440],
-    defaultZoom: 13
-  },
-  {
-    key: 'taoyuan',
-    name: '桃園市',
-    description: '機場所在地，親子樂園豐富',
-    center: [24.9937, 121.3000],
-    defaultZoom: 12
-  },
-];
-
-// Fix for default marker icons in Leaflet with React
-// @ts-expect-error - Leaflet icon hack
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-});
-
-// Custom glowing marker icon with category-specific symbols
-const createGlowingIcon = (category: string) => {
-  const iconConfig: Record<string, { color: string; emoji: string; label: string }> = {
-    park: { color: '#22c55e', emoji: '🌳', label: 'Park' },
-    nursing_room: { color: '#ec4899', emoji: '👶', label: 'Nursing' },
-    restaurant: { color: '#f97316', emoji: '🍽️', label: 'Food' },
-    medical: { color: '#ef4444', emoji: '🏥', label: 'Medical' },
-    attraction: { color: '#8b5cf6', emoji: '🎪', label: 'Attraction' },
-    other: { color: '#6b7280', emoji: '📍', label: 'Location' },
-  };
-
-  const config = iconConfig[category] || iconConfig.other;
-  const { color, emoji } = config;
-
-  return L.divIcon({
-    className: 'custom-marker',
-    html: `<div style="
-      background: ${color};
-      width: 32px;
-      height: 40px;
-      border-radius: 50% 50% 50% 0;
-      transform: rotate(-45deg);
-      border: 3px solid white;
-      box-shadow: 0 0 12px ${color}, 0 2px 8px rgba(0,0,0,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: bold;
-    ">
-      <div style="transform: rotate(45deg);">${emoji}</div>
-    </div>`,
-    iconSize: [32, 40],
-    iconAnchor: [16, 40],
-    popupAnchor: [0, -40],
-  });
-};
+// Initialize Leaflet icons
+initializeLeafletIcons();
 
 // Hardcoded user ID for demonstration (MVP)
 const MOCK_USER_ID = 'u1';
-
-// Function to check if location is currently open
-const isLocationOpen = (operatingHours?: OperatingHours): { isOpen: boolean; message: string } => {
-  if (!operatingHours) {
-    return { isOpen: true, message: '營業時間未知' };
-  }
-
-  const now = new Date();
-  const dayOfWeek = now.getDay();
-  const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-  const todayName = dayNames[dayOfWeek];
-  const todayHours = operatingHours[todayName as keyof typeof operatingHours];
-
-  if (!todayHours || todayHours === '休息' || todayHours === 'Closed') {
-    return { isOpen: false, message: '今日休息' };
-  }
-
-  // Simple check if hours contain typical time patterns
-  if (todayHours.includes('24小時') || todayHours.includes('24 hours')) {
-    return { isOpen: true, message: '24小時' };
-  }
-
-  return { isOpen: true, message: '營業中' };
-};
-
-// Calculate family-friendliness score
-const getLocationFamilyScore = (location: Location): number => {
-  let score = 0;
-  const keyFacilities = [
-    'nursing_room',
-    'public_toilet',
-    'stroller_accessible',
-    'changing_table',
-    'high_chair',
-    'kids_menu',
-    'air_conditioned',
-    'parking',
-    'drinking_water',
-  ];
-
-  keyFacilities.forEach(facility => {
-    if (location.facilities.includes(facility)) {
-      score += 1;
-    }
-  });
-
-  return score;
-};
 
 // Component to handle map view updates
 function MapEvents({ onPositionChange }: { onPositionChange: (pos: [number, number]) => void }) {

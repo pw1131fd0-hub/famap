@@ -1929,7 +1929,7 @@ export let mockLocations: Location[] = [
       peakUVMonth: [],
       recommendedSunProtection: [],
       sunExposureRisk: '室內博物館，無戶外陽光暴露風險',
-      shadeAvailability: 'na',
+      shadeAvailability: 'minimal',
       umbrellaAllowed: true,
       sunriseToSunsetTiming: 'N/A',
       bestSafeTimeToVisit: '任何時段皆可，不受陽光影響',
@@ -2548,8 +2548,7 @@ export let mockLocations: Location[] = [
         ageGroup: '2-6歲搭配家長',
         schedule: '每週日上午11-12pm',
         duration: '60分鐘',
-        pricing: 'NT$600-1000（含材料和午餐）',
-        mealIncluded: true
+        pricing: 'NT$600-1000（含材料和午餐）'
       },
       summitCamps: {
         available: false
@@ -2576,7 +2575,7 @@ export let mockLocations: Location[] = [
       peakUVMonth: [],
       recommendedSunProtection: [],
       sunExposureRisk: '室內餐廳，無戶外陽光暴露風險',
-      shadeAvailability: 'na',
+      shadeAvailability: 'minimal',
       umbrellaAllowed: true,
       sunriseToSunsetTiming: 'N/A',
       bestSafeTimeToVisit: '任何時段皆可',
@@ -3237,7 +3236,7 @@ export let mockLocations: Location[] = [
       peakUVMonth: [],
       recommendedSunProtection: [],
       sunExposureRisk: '室內親子中心，無戶外陽光暴露',
-      shadeAvailability: 'na',
+      shadeAvailability: 'minimal',
       umbrellaAllowed: true,
       sunriseToSunsetTiming: 'N/A',
       bestSafeTimeToVisit: '任何時段皆可',
@@ -3299,7 +3298,7 @@ export let mockLocations: Location[] = [
       beeWaspSeasons: '完全室內',
       spiderPresence: 'none',
       otherInsectsInfo: '超現代設施，每日清潔維護，蟲蟲進入機率極低',
-      pollenLevels: 'none',
+      pollenLevels: 'low',
       allergenicPlants: [],
       peakPollenMonths: '空氣濾淨系統去除花粉',
       insectRepellentAvailable: false,
