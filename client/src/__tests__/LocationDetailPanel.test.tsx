@@ -1072,7 +1072,7 @@ describe('LocationDetailPanel', () => {
 
     // Verify there's a maps link in the document
     const linksToMaps = screen.queryAllByRole('link');
-    const directionsLink = linksToMaps.find(link => link.href.includes('google.com/maps'));
+    const directionsLink = linksToMaps.find(link => (link as HTMLAnchorElement).href?.includes('google.com/maps'));
     expect(directionsLink).toBeDefined();
   });
 
