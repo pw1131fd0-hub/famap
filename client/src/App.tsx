@@ -10,58 +10,9 @@ import { useTranslation } from './i18n/useTranslation';
 import { ReviewList } from './components/ReviewList';
 import { ReviewForm } from './components/ReviewForm';
 import { LocationForm } from './components/LocationForm';
+import { CollapsibleSection } from './components/CollapsibleSection';
 
 console.log('Famap loaded');
-
-// Collapsible section component for performance optimization
-interface CollapsibleSectionProps {
-  title: string;
-  isExpanded: boolean;
-  onToggle: () => void;
-  children: React.ReactNode;
-  emoji?: string;
-}
-
-const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({
-  title,
-  isExpanded,
-  onToggle,
-  children,
-  emoji = ''
-}) => (
-  <div className="detail-section">
-    <button
-      onClick={onToggle}
-      style={{
-        width: '100%',
-        padding: '8px 12px',
-        background: isExpanded ? '#f0f8ff' : '#fafafa',
-        border: '1px solid #e0e0e0',
-        borderRadius: '4px',
-        cursor: 'pointer',
-        textAlign: 'left',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        fontSize: '0.95em',
-        fontWeight: '600',
-        transition: 'all 0.2s ease'
-      }}
-    >
-      <span>{emoji} {title}</span>
-      <span style={{
-        display: 'inline-block',
-        transition: 'transform 0.2s ease',
-        transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)'
-      }}>▼</span>
-    </button>
-    {isExpanded && (
-      <div style={{ paddingTop: '8px' }}>
-        {children}
-      </div>
-    )}
-  </div>
-);
 
 // Utility function to calculate distance between two coordinates (Haversine formula)
 const calculateDistance = (lat1: number, lng1: number, lat2: number, lng2: number): number => {
@@ -289,9 +240,6 @@ function App() {
   //   return saved ? parseInt(saved, 10) : undefined;
   // });
   
-  // childAge filter disabled
-  const childAge = undefined;
-  const handleChildAgeChange = (_: number | undefined) => {};
 const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     'basic': true, // Always show basic info
@@ -2489,44 +2437,6 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                       <Plus size={18} />
                       <span>{t.common.addLocation}</span>
                     </button>
-                  </div>
-                  <div className="age-filter-section">
-                    <label htmlFor="child-age" style={{ fontSize: '0.9em', fontWeight: '500', display: 'block', marginBottom: '8px' }}>
-                      👶 {language === 'zh' ? '孩子年齡' : "Child's Age"}
-                    </label>
-                    <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                      <input
-                        id="child-age"
-                        type="number"
-                        min="0"
-                        max="18"
-                        value={childAge ?? ''}
-                        onChange={(e) => handleChildAgeChange(e.target.value ? parseInt(e.target.value, 10) : undefined)}
-                        placeholder={language === 'zh' ? '輸入年齡' : 'Enter age'}
-                        style={{
-                          flex: 1,
-                          padding: '8px',
-                          border: '1px solid #ddd',
-                          borderRadius: '4px',
-                          fontSize: '0.9em',
-                        }}
-                      />
-                      {childAge !== undefined && (
-                        <button
-                          onClick={() => handleChildAgeChange(undefined)}
-                          style={{
-                            padding: '6px 10px',
-                            background: '#f0f0f0',
-                            border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer',
-                            fontSize: '0.85em',
-                          }}
-                        >
-                          ✕
-                        </button>
-                      )}
-                    </div>
                   </div>
                   <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid #eee' }}>
                     <label style={{ fontSize: '0.9em', fontWeight: '500', display: 'block', marginBottom: '8px' }}>
