@@ -11,6 +11,8 @@ import { ReviewList } from './components/ReviewList';
 import { ReviewForm } from './components/ReviewForm';
 import { LocationForm } from './components/LocationForm';
 
+console.log('Famap loaded');
+
 // Collapsible section component for performance optimization
 interface CollapsibleSectionProps {
   title: string;
