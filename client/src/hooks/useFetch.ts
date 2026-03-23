@@ -79,8 +79,7 @@ export function useFetch<T>(
  * Hook for managing paginated data fetching
  */
 export function usePaginatedFetch<T>(
-  fetcher: (page: number) => Promise<T[]>,
-  deps: any[] = []
+  fetcher: (page: number) => Promise<T[]>
 ) {
   const [items, setItems] = useState<T[]>([]);
   const [page, setPage] = useState(1);

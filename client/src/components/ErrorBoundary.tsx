@@ -37,7 +37,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
     }));
 
     // Log to external error tracking service (e.g., Sentry) in production
-    if (process.env.NODE_ENV === 'production') {
+    if (!import.meta.env.DEV) {
       // TODO: Integrate with Sentry or similar service
       // captureException(error, { contexts: { react: errorInfo } });
     }
@@ -54,7 +54,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
         return this.props.fallback;
       }
 
-      const isDevelopment = process.env.NODE_ENV === 'development';
+      const isDevelopment = import.meta.env.DEV;
       const errorMessage = this.state.error?.message || 'An unexpected error occurred';
       const stackTrace = isDevelopment ? this.state.error?.stack : null;
 

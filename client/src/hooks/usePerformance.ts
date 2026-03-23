@@ -10,7 +10,7 @@ interface PerformanceMetrics {
  * Hook to monitor component performance
  * Logs render time and count to help identify performance bottlenecks
  */
-export function usePerformance(componentName: string, enabled = process.env.NODE_ENV === 'development') {
+export function usePerformance(componentName: string, enabled = import.meta.env.DEV) {
   const metricsRef = useRef<PerformanceMetrics>({
     renderTime: 0,
     lastRenderTime: Date.now(),

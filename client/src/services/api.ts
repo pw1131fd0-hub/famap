@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import type { Location, SearchParams, Review, ReviewCreateDTO, LocationCreateDTO, Favorite } from '../types';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';

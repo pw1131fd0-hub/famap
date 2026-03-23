@@ -1,4 +1,4 @@
-import { useMemo, memo, useCallback } from 'react';
+import { useMemo, memo } from 'react';
 import { Heart } from 'lucide-react';
 import type { Location } from '../types';
 import { useTranslation } from '../i18n/useTranslation';
@@ -49,7 +49,7 @@ const LocationCard = memo(({
       style={hasCriticalFacility ? { borderLeft: '3px solid #ff6b6b' } : {}}
     >
       <div className="card-header">
-        <h3>{location.name[language]}</h3>
+        <h3>{location.name[language as keyof typeof location.name]}</h3>
         <button
           className={`favorite-icon-button ${isFavorite ? 'active' : ''}`}
           onClick={(e) => onFavoriteToggle(e, location.id)}
@@ -62,7 +62,7 @@ const LocationCard = memo(({
         <p className="category-label">{t.categories[location.category]}</p>
         <p className="distance-text">📍 {formatDistance(distance)}</p>
       </div>
-      <p className="address-text">{location.address[language]}</p>
+      <p className="address-text">{location.address[language as keyof typeof location.address]}</p>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px', gap: '8px', flexWrap: 'wrap' }}>
         <div className="rating">⭐ {location.averageRating}</div>
         {(() => {

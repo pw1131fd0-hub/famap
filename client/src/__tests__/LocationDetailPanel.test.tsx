@@ -765,7 +765,7 @@ describe('LocationDetailPanel', () => {
     );
 
     const directionsLinks = screen.getAllByRole('link');
-    const directionsButton = directionsLinks.find(link => link.href.includes('google.com/maps'));
+    const directionsButton = directionsLinks.find(link => (link as HTMLAnchorElement).href.includes('google.com/maps'));
     expect(directionsButton).toBeDefined();
     if (directionsButton) {
       expect(directionsButton).toHaveAttribute('target', '_blank');
@@ -915,7 +915,8 @@ describe('LocationDetailPanel', () => {
     const noParkingLocation = {
       ...mockLocation,
       parking: {
-        available: false
+        available: false,
+        hasValidation: false
       }
     };
 
