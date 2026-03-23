@@ -1,6 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import type { ReviewCreateDTO } from '../types';
 import { ReviewForm } from '../components/ReviewForm';
 import { LanguageProvider } from '../i18n/LanguageContext';
 
@@ -136,7 +135,7 @@ describe('ReviewForm', () => {
   });
 
   it('disables submit button while submitting', async () => {
-    const slowOnSubmit = vi.fn(async (_review: ReviewCreateDTO): Promise<void> => {
+    const slowOnSubmit = vi.fn(async (): Promise<void> => {
       return new Promise(resolve => setTimeout(resolve, 100));
     });
     render(

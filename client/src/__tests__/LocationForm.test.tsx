@@ -1,6 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import type { LocationCreateDTO } from '../types';
 import { LocationForm } from '../components/LocationForm';
 import { LanguageProvider } from '../i18n/LanguageContext';
 
@@ -129,7 +128,7 @@ describe('LocationForm', () => {
   });
 
   it('disables submit button while submitting', async () => {
-    const slowOnSubmit = vi.fn(async (_location: LocationCreateDTO): Promise<void> => {
+    const slowOnSubmit = vi.fn(async (): Promise<void> => {
       return new Promise(resolve => setTimeout(resolve, 100));
     });
     render(
