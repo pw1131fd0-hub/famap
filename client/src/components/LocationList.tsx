@@ -13,6 +13,7 @@ interface LocationListProps {
   onFavoriteToggle: (e: React.MouseEvent, locationId: string) => void;
   facilitiesFilter?: string[];
   sortBy?: 'distance' | 'rating' | 'name';
+  searchQuery?: string;
 }
 
 export function LocationList({
@@ -25,11 +26,25 @@ export function LocationList({
   onFavoriteToggle,
   facilitiesFilter = [],
   sortBy = 'distance',
+  searchQuery = '',
 }: LocationListProps) {
   const { language, t } = useTranslation();
 
   const getFilteredLocations = (locs: Location[]) => {
     let filtered = locs;
+
+    // Filter by search query (name)
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(loc =>
+        loc.name.zh.toLowerCase().includes(query) ||
+        loc.name.en.toLowerCase().includes(query) ||
+        (loc.address && (
+          loc.address.zh?.toLowerCase().includes(query) ||
+          loc.address.en?.toLowerCase().includes(query)
+        ))
+      );
+    }
 
     if (facilitiesFilter.length > 0) {
       filtered = filtered.filter(loc =>

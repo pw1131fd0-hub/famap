@@ -40,6 +40,7 @@ function App() {
   const [showAddLocation, setShowAddLocation] = useState(false);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [facilitiesFilter, setFacilitiesFilter] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>('');
   // Age filtering disabled for mobile stability
   // const [childAge, setChildAge] = useState<number | undefined>(() => {
   //   const saved = localStorage.getItem('childAge');
@@ -356,6 +357,23 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
 
               {!showFavorites ? (
                 <>
+                  <div style={{ padding: '12px', borderBottom: '1px solid var(--border)' }}>
+                    <input
+                      type="text"
+                      placeholder={t.common.searchPlaceholder}
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      style={{
+                        width: '100%',
+                        padding: '8px 12px',
+                        border: '1px solid var(--border)',
+                        borderRadius: '6px',
+                        fontSize: '14px',
+                        fontFamily: 'inherit',
+                      }}
+                      aria-label="Search locations"
+                    />
+                  </div>
                   <div className="sidebar-tools">
                     <button
                       className={`tool-button ${strollerOnly ? 'active' : ''}`}
@@ -502,6 +520,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                 loading={loading}
                 facilitiesFilter={facilitiesFilter}
                 sortBy={sortBy}
+                searchQuery={searchQuery}
                 onLocationClick={(loc) => {
                   setPosition([loc.coordinates.lat, loc.coordinates.lng]);
                   setSelectedLocation(loc);
