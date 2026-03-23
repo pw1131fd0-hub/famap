@@ -155,3 +155,27 @@ class Event(EventBase):
     updatedAt: str
 
     model_config = ConfigDict(from_attributes=True)
+
+class LocationQualityScore(BaseModel):
+    """
+    Comprehensive quality score for a location based on multiple factors.
+    Helps families discover trustworthy and well-maintained venues.
+    """
+    locationId: str
+    overallScore: float  # 0-100
+    ratingScore: float  # Based on review ratings
+    recencyScore: float  # Higher for recently updated locations
+    verificationScore: float  # Based on data verification
+    communityTrustScore: float  # Based on review count and consistency
+    recommendationReason: str  # Why this location is recommended
+    trustLevel: str  # "high", "medium", "low"
+    reviewCount: int
+    lastVerifiedDate: Optional[str] = None
+    isVerified: bool = False
+
+class RecommendedLocation(BaseModel):
+    """Location with quality score and recommendation reason"""
+    location: Location
+    qualityScore: LocationQualityScore
+    recommendationScore: float  # 0-100
+    matchReason: str  # Why recommended for this user
