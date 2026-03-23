@@ -12,8 +12,8 @@ describe('LocationDetailPanel', () => {
     coordinates: { lat: 25.0330, lng: 121.5654 },
     category: 'park',
     facilities: ['changing_table', 'high_chair'],
-    rating: 4.5,
-    reviews: [],
+    averageRating: 4.5,
+    description: { zh: '台北市中心的公園', en: 'Park in central Taipei' },
     phoneNumber: '02-1234-5678',
     pricing: { isFree: true },
     ageRange: { minAge: 0, maxAge: 12 },
@@ -240,7 +240,7 @@ describe('LocationDetailPanel', () => {
     );
 
     // Check for age range information - contains 0-12 or similar
-    const elements = screen.getAllByText((content, element) => {
+    const elements = screen.getAllByText((_, element) => {
       return element?.textContent?.includes('0') === true || element?.textContent?.includes('12') === true;
     });
     expect(elements.length).toBeGreaterThan(0);

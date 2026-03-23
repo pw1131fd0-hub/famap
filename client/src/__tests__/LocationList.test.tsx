@@ -10,11 +10,11 @@ describe('LocationList', () => {
       id: '1',
       name: { zh: '台北公園', en: 'Taipei Park' },
       address: { zh: '台北市中山區', en: 'Zhongshan, Taipei' },
+      description: { zh: '台北市中心的公園', en: 'Park in central Taipei' },
       coordinates: { lat: 25.0330, lng: 121.5654 },
       category: 'park',
       facilities: ['changing_table', 'high_chair'],
       averageRating: 4.5,
-      reviews: [],
       pricing: { isFree: true },
       accessibility: { wheelchairAccessible: true }
     },
@@ -22,22 +22,22 @@ describe('LocationList', () => {
       id: '2',
       name: { zh: '兒童醫院', en: 'Children Hospital' },
       address: { zh: '台北市信義區', en: 'Xinyi, Taipei' },
+      description: { zh: '提供兒童醫療服務', en: 'Children medical services' },
       coordinates: { lat: 25.0440, lng: 121.5640 },
       category: 'medical',
       facilities: ['public_toilet', 'nursing_room', 'medical'],
       averageRating: 4.8,
-      reviews: [],
       pricing: { isFree: false, priceRange: '$100-300' }
     },
     {
       id: '3',
       name: { zh: '親子餐廳', en: 'Family Restaurant' },
       address: { zh: '台北市大安區', en: 'Daan, Taipei' },
+      description: { zh: '家庭友善的餐廳', en: 'Family-friendly restaurant' },
       coordinates: { lat: 25.0250, lng: 121.5550 },
       category: 'restaurant',
       facilities: ['high_chair', 'changing_table'],
-      averageRating: 4.2,
-      reviews: []
+      averageRating: 4.2
     }
   ];
 
