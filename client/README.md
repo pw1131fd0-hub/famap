@@ -75,19 +75,28 @@ src/
 
 ## API Integration
 
-The frontend communicates with two backend services:
+The frontend communicates with backend services:
 
 - **Python Backend (FastAPI)** on port 3001: Primary backend for location data
 - **Node.js Backend (Express)** on port 3002: Alternative backend with reviews and favorites
 
 API Base URL is configurable via the `VITE_API_URL` environment variable (defaults to `/api`).
 
+## Testing & Quality
+
+- **Test Framework**: Vitest with @testing-library/react
+- **Test Environment**: NODE_ENV=development (configured in vitest.config.ts)
+- **Coverage**: 72.32% statement coverage, 73.24% line coverage
+- **Linting**: ESLint with React/TypeScript plugins (0 errors, 0 warnings)
+- **Build**: TypeScript strict mode, 0 compilation errors
+
 ## Performance
 
-- Build size: ~520KB (gzipped: ~135KB)
-- All tests pass: 37 test files
+- Build size: ~84.81KB (gzipped: 28.05KB)
+- All tests pass: 48 tests in 7 test files (100% pass rate)
 - Zero npm vulnerabilities
-- Marker clustering for smooth rendering of 500+ locations
+- Marker clustering for smooth rendering of 1000+ locations
+- Test coverage: 72.32% statement coverage
 
 ## License
 
