@@ -97,4 +97,122 @@ describe('API Services', () => {
       expect(axiosInstance.get).toHaveBeenCalledWith('/favorites/check', expect.anything());
     });
   });
+
+  describe('Error Handling', () => {
+    it('handles getNearby network errors', async () => {
+      const error = new Error('Network error');
+      vi.mocked(axiosInstance.get).mockRejectedValue(error);
+      await expect(locationApi.getNearby({ lat: 0, lng: 0, radius: 1000 })).rejects.toThrow();
+    });
+
+    it('handles create location errors', async () => {
+      const error = new Error('Validation error');
+      vi.mocked(axiosInstance.post).mockRejectedValue(error);
+      const location: LocationCreateDTO = {
+        name: { zh: 'Test', en: 'Test' },
+        description: { zh: 'Test', en: 'Test' },
+        category: 'park',
+        coordinates: { lat: 0, lng: 0 },
+        address: { zh: 'Test', en: 'Test' },
+        facilities: [],
+      };
+      await expect(locationApi.create(location)).rejects.toThrow();
+    });
+
+    it('handles review creation errors', async () => {
+      const error = new Error('Review creation failed');
+      vi.mocked(axiosInstance.post).mockRejectedValue(error);
+      const review: ReviewCreateDTO = {
+        rating: 5,
+        comment: 'Test',
+        userName: 'Test User',
+      };
+      await expect(reviewApi.create('1', review)).rejects.toThrow();
+    });
+
+    it('handles favorite retrieval errors', async () => {
+      const error = new Error('Favorites fetch failed');
+      vi.mocked(axiosInstance.get).mockRejectedValue(error);
+      await expect(favoriteApi.getFavorites('u1')).rejects.toThrow();
+    });
+  });
+
+  describe('Edge Cases', () => {
+    it('handles empty location list response', async () => {
+      vi.mocked(axiosInstance.get).mockResolvedValue({ data: [] });
+      const result = await locationApi.getNearby({ lat: 25.0, lng: 121.5, radius: 100 });
+      expect(result).toEqual([]);
+    });
+
+    it('handles null coordinates in getNearby', async () => {
+      vi.mocked(axiosInstance.get).mockResolvedValue({ data: [] });
+      await locationApi.getNearby({ lat: 0, lng: 0, radius: 0 });
+      expect(axiosInstance.get).toHaveBeenCalled();
+    });
+
+    it('handles very large radius in getNearby', async () => {
+      vi.mocked(axiosInstance.get).mockResolvedValue({ data: [] });
+      await locationApi.getNearby({ lat: 0, lng: 0, radius: 1000000 });
+      expect(axiosInstance.get).toHaveBeenCalledWith('/locations/', expect.anything());
+    });
+
+    it('handles empty favorites list', async () => {
+      vi.mocked(axiosInstance.get).mockResolvedValue({ data: [] });
+      const result = await favoriteApi.getFavorites('u1');
+      expect(result).toEqual([]);
+    });
+
+    it('handles review with empty comment', async () => {
+      vi.mocked(axiosInstance.post).mockResolvedValue({ data: {} });
+      const review: ReviewCreateDTO = {
+        rating: 5,
+        comment: '',
+        userName: 'Test User',
+      };
+      await reviewApi.create('1', review);
+      expect(axiosInstance.post).toHaveBeenCalled();
+    });
+
+    it('handles review with minimum rating', async () => {
+      vi.mocked(axiosInstance.post).mockResolvedValue({ data: {} });
+      const review: ReviewCreateDTO = {
+        rating: 1,
+        comment: 'Not great',
+        userName: 'Test User',
+      };
+      await reviewApi.create('1', review);
+      expect(axiosInstance.post).toHaveBeenCalled();
+    });
+
+    it('handles review with maximum rating', async () => {
+      vi.mocked(axiosInstance.post).mockResolvedValue({ data: {} });
+      const review: ReviewCreateDTO = {
+        rating: 5,
+        comment: 'Perfect!',
+        userName: 'Test User',
+      };
+      await reviewApi.create('1', review);
+      expect(axiosInstance.post).toHaveBeenCalled();
+    });
+
+    it('handles location with minimal data', async () => {
+      vi.mocked(axiosInstance.post).mockResolvedValue({ data: {} });
+      const location: LocationCreateDTO = {
+        name: { zh: 'A', en: 'A' },
+        description: { zh: 'B', en: 'B' },
+        category: 'park',
+        coordinates: { lat: 0, lng: 0 },
+        address: { zh: 'C', en: 'C' },
+        facilities: [],
+      };
+      await locationApi.create(location);
+      expect(axiosInstance.post).toHaveBeenCalled();
+    });
+
+    it('handles check favorite with false result', async () => {
+      vi.mocked(axiosInstance.get).mockResolvedValue({ data: { isFavorited: false } });
+      const result = await favoriteApi.check('u1', 'l1');
+      expect(result).toBe(false);
+    });
+  });
 });

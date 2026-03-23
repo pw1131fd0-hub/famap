@@ -535,4 +535,452 @@ describe('LocationDetailPanel', () => {
 
     expect(screen.getByRole('button', { name: /移除收藏|remove from favorites/i })).toBeInTheDocument();
   });
+
+  it('handles pricing paid state', () => {
+    const paidLocation = {
+      ...mockLocation,
+      pricing: { isFree: false, priceRange: 'NT$100-200' }
+    };
+
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={paidLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ basic: true }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    expect(screen.getByText(/NT\$100-200/)).toBeInTheDocument();
+  });
+
+  it('handles age range with only minAge', () => {
+    const ageMinOnlyLocation = {
+      ...mockLocation,
+      ageRange: { minAge: 5 }
+    };
+
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={ageMinOnlyLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ basic: true }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    expect(screen.getByText(/5\+/)).toBeInTheDocument();
+  });
+
+  it('handles age range with only maxAge', () => {
+    const ageMaxOnlyLocation = {
+      ...mockLocation,
+      ageRange: { maxAge: 12 }
+    };
+
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={ageMaxOnlyLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ basic: true }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    expect(screen.getByText(/Up to 12/)).toBeInTheDocument();
+  });
+
+  it('displays operating hours status indicator', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ facilities: true }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    // Should display opening hours title and status indicator
+    const elements = screen.getAllByText('營業時間');
+    expect(elements.length).toBeGreaterThan(0);
+  });
+
+  it('handles parking cost information', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ transit: true }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    expect(screen.getByText(/\$50\/hour/)).toBeInTheDocument();
+  });
+
+  it('handles parking validation', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ transit: true }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    const elements = screen.getAllByText(/停車驗證/);
+    expect(elements.length).toBeGreaterThan(0);
+  });
+
+  it('displays toilet facilities details', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ amenities: true }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    expect(screen.getByText(/廁所設施/)).toBeInTheDocument();
+    expect(screen.getByText(/兒童友善/)).toBeInTheDocument();
+  });
+
+  it('handles weather coverage details', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{}}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    expect(screen.getByText(/天候保護/)).toBeInTheDocument();
+    expect(screen.getByText(/有遮蔭/)).toBeInTheDocument();
+  });
+
+  it('handles nearby amenities', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{}}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    expect(screen.getByText(/便利商店/)).toBeInTheDocument();
+    expect(screen.getByText(/家\(200m內\)/)).toBeInTheDocument();
+  });
+
+  it('displays activity information', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{}}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    expect(screen.getByText(/遊戲活動/)).toBeInTheDocument();
+    expect(screen.getByText(/Playground/)).toBeInTheDocument();
+  });
+
+  it('handles directions button correctly', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ basic: true }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    const directionsLinks = screen.getAllByRole('link');
+    const directionsButton = directionsLinks.find(link => link.href.includes('google.com/maps'));
+    expect(directionsButton).toBeDefined();
+    if (directionsButton) {
+      expect(directionsButton).toHaveAttribute('target', '_blank');
+    }
+  });
+
+  it('handles phone button correctly', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ basic: true }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    const phoneButton = screen.getByRole('link', { name: /02-1234-5678/ });
+    expect(phoneButton).toHaveAttribute('href', 'tel:02-1234-5678');
+  });
+
+  it('displays elevator accessibility feature', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{}}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    // Elevator is false in mock, so it should not display
+    expect(screen.queryByText(/電梯/)).not.toBeInTheDocument();
+  });
+
+  it('handles bus lines correctly', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ transit: true }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    expect(screen.getByText(/公車路線/)).toBeInTheDocument();
+    expect(screen.getByText(/22, 25/)).toBeInTheDocument();
+  });
+
+  it('displays crowding quiet and peak hours', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ comfort: true }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    expect(screen.getByText(/安靜時段/)).toBeInTheDocument();
+    expect(screen.getByText(/09:00-12:00/)).toBeInTheDocument();
+    expect(screen.getByText(/尖峰時段/)).toBeInTheDocument();
+  });
+
+  it('handles nursing power outlet correctly', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{}}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    expect(screen.getByText(/電源/)).toBeInTheDocument();
+    expect(screen.getByText(/可用溫奶器/)).toBeInTheDocument();
+  });
+
+  it('displays quality metrics maintenance date', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{}}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    expect(screen.getByText(/最後維護日期/)).toBeInTheDocument();
+  });
+
+  it('displays accessibility ramp correctly', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{}}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    expect(screen.getByText(/坡道/)).toBeInTheDocument();
+  });
+
+  it('handles no parking available state', () => {
+    const noParkingLocation = {
+      ...mockLocation,
+      parking: {
+        available: false
+      }
+    };
+
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={noParkingLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ transit: true }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    expect(screen.getByText(/無停車位/)).toBeInTheDocument();
+  });
+
+  it('displays different safety ratings', () => {
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={mockLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{}}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    // Check for safety rating text
+    expect(screen.getByText(/安全評分/)).toBeInTheDocument();
+  });
+
+  it('handles missing optional transit data', () => {
+    const minimalTransitLocation = {
+      ...mockLocation,
+      publicTransit: {
+        busLines: []
+      }
+    };
+
+    render(
+      <LanguageProvider>
+        <LocationDetailPanel
+          location={minimalTransitLocation}
+          isFavorite={false}
+          onFavoriteToggle={mockOnFavoriteToggle}
+          onClose={mockOnClose}
+          reviews={mockReviews}
+          onReviewSubmit={mockOnReviewSubmit}
+          expandedSections={{ transit: true }}
+          onToggleSection={mockOnToggleSection}
+        />
+      </LanguageProvider>
+    );
+
+    // Should still render transit section even with minimal data
+    expect(screen.getByText(/公共運輸/)).toBeInTheDocument();
+  });
 });
