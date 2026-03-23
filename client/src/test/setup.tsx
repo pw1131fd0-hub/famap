@@ -1,5 +1,13 @@
 import '@testing-library/jest-dom';
 import { vi } from 'vitest';
+import * as React from 'react';
+
+// Fix React 19 compatibility with testing-library
+// React 19 exports act directly from react, not from react-dom/test-utils
+if (!React.act) {
+  const ReactDOM = require('react-dom');
+  React.act = ReactDOM.act;
+}
 
 // Mock axios
 vi.mock('axios', () => {

@@ -1,0 +1,13 @@
+{
+  "active": true,
+  "iteration": 1,
+  "minIterations": 1,
+  "maxIterations": 1,
+  "completionPromise": "COMPLETE",
+  "tasksMode": false,
+  "taskPromise": "READY_FOR_NEXT_TASK",
+  "prompt": "Test ralph in famap dir\n",
+  "startedAt": "2026-03-23T02:10:43.928Z",
+  "model": "",
+  "agent": "claude-code"
+}
