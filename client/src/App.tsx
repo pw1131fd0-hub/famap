@@ -12,6 +12,7 @@ import { RoutePlanner } from './components/RoutePlanner';
 import { GoNowSuggestions } from './components/GoNowSuggestions';
 import { CITIES, initializeLeafletIcons } from './config/mapConfig';
 import type { CityKey } from './config/mapConfig';
+import performanceMonitor from './utils/performanceMonitoring';
 
 // Initialize Leaflet icons
 initializeLeafletIcons();
@@ -109,14 +110,19 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
   const fetchLocations = useCallback(async () => {
     setLoading(true);
     try {
-      const data = await locationApi.getNearby({
-        lat: position[0],
-        lng: position[1],
-        radius: 5000,
-        category: selectedCategory,
-        stroller_accessible: strollerOnly || undefined,
-        limit: 150,
-      });
+      const data = await performanceMonitor.measureAsync(
+        'fetch_nearby_locations',
+        () => locationApi.getNearby({
+          lat: position[0],
+          lng: position[1],
+          radius: 5000,
+          category: selectedCategory,
+          stroller_accessible: strollerOnly || undefined,
+          limit: 150,
+        }),
+        'api',
+        { category: selectedCategory, strollerOnly }
+      );
       setLocations(data);
     } catch (error) {
       console.error('Failed to fetch locations:', error);

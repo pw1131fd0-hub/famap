@@ -113,26 +113,30 @@ class ErrorTracker {
    * Send error to tracking service
    */
   private sendToTracking(error: Error, context?: ErrorContext): void {
-    // Implement your error tracking endpoint
-    // const payload = {
-    //   message: error.message,
-    //   stack: error.stack,
-    //   timestamp: new Date().toISOString(),
-    //   context,
-    //   userAgent: navigator.userAgent,
-    //   location: window.location.href,
-    //   environment: import.meta.env.VITE_ENVIRONMENT || 'production'
-    // };
-    // fetch('/api/errors', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(payload),
-    //   keepalive: true
-    // }).catch(console.error);
+    // Send to backend error tracking endpoint
+    const payload = {
+      message: error.message,
+      stack: error.stack,
+      timestamp: new Date().toISOString(),
+      severity: context?.severity || 'medium',
+      context,
+      userAgent: navigator.userAgent,
+      url: window.location.href,
+      environment: import.meta.env.VITE_ENVIRONMENT || 'production'
+    };
 
-    // For now, just ensure error and context parameters are used to avoid warnings
-    void error;
-    void context;
+    // Use keepalive to ensure error is sent even if page unloads
+    fetch('/api/monitoring/errors', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      keepalive: true
+    }).catch(err => {
+      // Silently fail if error tracking fails to avoid infinite loops
+      if (!this.isDev) {
+        console.error('[Error Tracking Failed]', err);
+      }
+    });
   }
 
   /**
