@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, memo, useCallback } from 'react';
 import { Heart } from 'lucide-react';
 import type { Location } from '../types';
 import { useTranslation } from '../i18n/useTranslation';
@@ -17,7 +17,88 @@ interface LocationListProps {
   searchQuery?: string;
 }
 
-export function LocationList({
+// Memoized location card component to prevent unnecessary re-renders
+const LocationCard = memo(({
+  location,
+  position,
+  isFavorite,
+  language,
+  t,
+  onLocationClick,
+  onFavoriteToggle,
+}: {
+  location: Location;
+  position: [number, number];
+  isFavorite: boolean;
+  language: string;
+  t: any;
+  onLocationClick: (location: Location) => void;
+  onFavoriteToggle: (e: React.MouseEvent, locationId: string) => void;
+}) => {
+  const criticalFacilities = location.facilities.filter(f =>
+    ['public_toilet', 'nursing_room', 'medical'].includes(f) ||
+    (location.category === 'medical')
+  );
+  const hasCriticalFacility = criticalFacilities.length > 0 || location.category === 'medical';
+  const distance = calculateDistance(position[0], position[1], location.coordinates.lat, location.coordinates.lng);
+
+  return (
+    <div
+      className="location-card"
+      onClick={() => onLocationClick(location)}
+      style={hasCriticalFacility ? { borderLeft: '3px solid #ff6b6b' } : {}}
+    >
+      <div className="card-header">
+        <h3>{location.name[language]}</h3>
+        <button
+          className={`favorite-icon-button ${isFavorite ? 'active' : ''}`}
+          onClick={(e) => onFavoriteToggle(e, location.id)}
+          aria-label={isFavorite ? t.common.removeFromFavorites : t.common.addToFavorites}
+        >
+          <Heart size={18} fill={isFavorite ? "currentColor" : "none"} />
+        </button>
+      </div>
+      <div className="card-meta">
+        <p className="category-label">{t.categories[location.category]}</p>
+        <p className="distance-text">📍 {formatDistance(distance)}</p>
+      </div>
+      <p className="address-text">{location.address[language]}</p>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px', gap: '8px', flexWrap: 'wrap' }}>
+        <div className="rating">⭐ {location.averageRating}</div>
+        {(() => {
+          const familyScore = getLocationFamilyScore(location);
+          if (familyScore >= 6) {
+            return (
+              <div style={{ fontSize: '0.75em', background: '#c3e6cb', color: '#155724', padding: '2px 6px', borderRadius: '3px', fontWeight: '600' }}>
+                👨‍👩‍👧‍👦 {language === 'zh' ? '親子友善' : 'Family-Friendly'}
+              </div>
+            );
+          }
+          return null;
+        })()}
+        {location.pricing?.isFree && (
+          <div style={{ fontSize: '0.75em', background: '#d4edda', color: '#155724', padding: '2px 6px', borderRadius: '3px', fontWeight: '600' }}>
+            💚 {language === 'zh' ? '免費' : 'FREE'}
+          </div>
+        )}
+        {location.pricing?.priceRange && !location.pricing?.isFree && (
+          <div style={{ fontSize: '0.75em', background: '#fff3cd', color: '#856404', padding: '2px 6px', borderRadius: '3px', fontWeight: '600' }}>
+            💳 {location.pricing.priceRange}
+          </div>
+        )}
+        {hasCriticalFacility && (
+          <div style={{ fontSize: '0.8em', color: '#ff6b6b', fontWeight: '600' }}>
+            ⚠️ {language === 'zh' ? '有必要設施' : 'Key Facilities'}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+});
+
+LocationCard.displayName = 'LocationCard';
+
+function LocationListImpl({
   locations,
   position,
   favorites,
@@ -87,68 +168,34 @@ export function LocationList({
 
   return (
     <div className="location-list">
-      {filteredLocations.map((loc) => {
-        const criticalFacilities = loc.facilities.filter(f =>
-          ['public_toilet', 'nursing_room', 'medical'].includes(f) ||
-          (loc.category === 'medical')
-        );
-        const hasCriticalFacility = criticalFacilities.length > 0 || loc.category === 'medical';
-        const isFavorite = favorites.some(f => f.id === loc.id);
-
-        return (
-          <div
-            key={loc.id}
-            className="location-card"
-            onClick={() => onLocationClick(loc)}
-            style={hasCriticalFacility ? { borderLeft: '3px solid #ff6b6b' } : {}}
-          >
-            <div className="card-header">
-              <h3>{loc.name[language]}</h3>
-              <button
-                className={`favorite-icon-button ${isFavorite ? 'active' : ''}`}
-                onClick={(e) => onFavoriteToggle(e, loc.id)}
-                aria-label={isFavorite ? t.common.removeFromFavorites : t.common.addToFavorites}
-              >
-                <Heart size={18} fill={isFavorite ? "currentColor" : "none"} />
-              </button>
-            </div>
-            <div className="card-meta">
-              <p className="category-label">{t.categories[loc.category]}</p>
-              <p className="distance-text">📍 {formatDistance(calculateDistance(position[0], position[1], loc.coordinates.lat, loc.coordinates.lng))}</p>
-            </div>
-            <p className="address-text">{loc.address[language]}</p>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px', gap: '8px', flexWrap: 'wrap' }}>
-              <div className="rating">⭐ {loc.averageRating}</div>
-              {(() => {
-                const familyScore = getLocationFamilyScore(loc);
-                if (familyScore >= 6) {
-                  return (
-                    <div style={{ fontSize: '0.75em', background: '#c3e6cb', color: '#155724', padding: '2px 6px', borderRadius: '3px', fontWeight: '600' }}>
-                      👨‍👩‍👧‍👦 {language === 'zh' ? '親子友善' : 'Family-Friendly'}
-                    </div>
-                  );
-                }
-                return null;
-              })()}
-              {loc.pricing?.isFree && (
-                <div style={{ fontSize: '0.75em', background: '#d4edda', color: '#155724', padding: '2px 6px', borderRadius: '3px', fontWeight: '600' }}>
-                  💚 {language === 'zh' ? '免費' : 'FREE'}
-                </div>
-              )}
-              {loc.pricing?.priceRange && !loc.pricing?.isFree && (
-                <div style={{ fontSize: '0.75em', background: '#fff3cd', color: '#856404', padding: '2px 6px', borderRadius: '3px', fontWeight: '600' }}>
-                  💳 {loc.pricing.priceRange}
-                </div>
-              )}
-              {hasCriticalFacility && (
-                <div style={{ fontSize: '0.8em', color: '#ff6b6b', fontWeight: '600' }}>
-                  ⚠️ {language === 'zh' ? '有必要設施' : 'Key Facilities'}
-                </div>
-              )}
-            </div>
-          </div>
-        );
-      })}
+      {filteredLocations.map((loc) => (
+        <LocationCard
+          key={loc.id}
+          location={loc}
+          position={position}
+          isFavorite={favorites.some(f => f.id === loc.id)}
+          language={language}
+          t={t}
+          onLocationClick={onLocationClick}
+          onFavoriteToggle={onFavoriteToggle}
+        />
+      ))}
     </div>
   );
 }
+
+// Export memoized version to prevent unnecessary re-renders
+export const LocationList = memo(LocationListImpl, (prevProps, nextProps) => {
+  // Custom comparison function for memo
+  // Return true if props are equal (skip re-render), false otherwise
+  return (
+    prevProps.locations === nextProps.locations &&
+    prevProps.position === nextProps.position &&
+    prevProps.favorites === nextProps.favorites &&
+    prevProps.showFavorites === nextProps.showFavorites &&
+    prevProps.loading === nextProps.loading &&
+    prevProps.facilitiesFilter === nextProps.facilitiesFilter &&
+    prevProps.sortBy === nextProps.sortBy &&
+    prevProps.searchQuery === nextProps.searchQuery
+  );
+});

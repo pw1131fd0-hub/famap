@@ -33,7 +33,9 @@ describe('ErrorBoundary', () => {
     );
 
     expect(screen.getByText(/Something went wrong/)).toBeInTheDocument();
-    expect(screen.getByText(/Test error message/)).toBeInTheDocument();
+    // Use getAllByText and check the first one (the p tag, not the pre tag)
+    const errorMessages = screen.getAllByText(/Test error message/);
+    expect(errorMessages.length).toBeGreaterThan(0);
   });
 
   it('displays generic error message when error has no message', () => {
@@ -71,7 +73,9 @@ describe('ErrorBoundary', () => {
     );
 
     expect(screen.getByText(/Something went wrong/)).toBeInTheDocument();
-    expect(screen.getByText(/Nested error/)).toBeInTheDocument();
+    // Use getAllByText and check the first one (the p tag, not the pre tag)
+    const errorMessages = screen.getAllByText(/Nested error/);
+    expect(errorMessages.length).toBeGreaterThan(0);
   });
 
   it('renders alert icon when error occurs', () => {

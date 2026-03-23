@@ -3,6 +3,29 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import App from '../App.tsx';
 import { LanguageProvider } from '../i18n/LanguageContext.tsx';
 
+// Mock axios
+vi.mock('axios', () => {
+  const mockAxiosInstance = {
+    get: vi.fn(),
+    post: vi.fn(),
+    delete: vi.fn(),
+    create: vi.fn().mockReturnThis(),
+    interceptors: {
+      response: {
+        use: vi.fn(),
+      },
+      request: {
+        use: vi.fn(),
+      },
+    },
+  };
+  return {
+    default: {
+      create: vi.fn(() => mockAxiosInstance),
+    }
+  };
+});
+
 // Mock geolocation
 const mockGeolocation = {
   getCurrentPosition: vi.fn(),
