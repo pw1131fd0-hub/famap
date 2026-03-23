@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Heart } from 'lucide-react';
 import type { Location } from '../types';
 import { useTranslation } from '../i18n/useTranslation';
@@ -30,8 +31,8 @@ export function LocationList({
 }: LocationListProps) {
   const { language, t } = useTranslation();
 
-  const getFilteredLocations = (locs: Location[]) => {
-    let filtered = locs;
+  const filteredLocations = useMemo(() => {
+    let filtered = showFavorites ? favorites : locations;
 
     // Filter by search query (name)
     if (searchQuery.trim()) {
@@ -70,9 +71,7 @@ export function LocationList({
     });
 
     return sorted;
-  };
-
-  const filteredLocations = getFilteredLocations(showFavorites ? favorites : locations);
+  }, [showFavorites, favorites, locations, searchQuery, facilitiesFilter, sortBy, position, language]);
 
   if (filteredLocations.length === 0) {
     return (

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import 'leaflet/dist/leaflet.css';
 import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Menu, ChevronDown, Filter, Heart, List, Moon, Sun } from 'lucide-react';
 import { locationApi, reviewApi, favoriteApi } from './services/api';
@@ -10,8 +10,6 @@ import { LocationList } from './components/LocationList';
 import { MapPanel } from './components/MapPanel';
 import { CITIES, initializeLeafletIcons } from './config/mapConfig';
 import type { CityKey } from './config/mapConfig';
-
-console.log('Famap loaded');
 
 // Initialize Leaflet icons
 initializeLeafletIcons();
@@ -48,6 +46,7 @@ function App() {
   // });
   
 const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     'basic': true, // Always show basic info
     'facilities': true,
@@ -87,7 +86,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
     } else {
       document.documentElement.classList.remove('dark-mode');
     }
-  }, []);
+  }, [darkMode]);
 
   const fetchLocations = useCallback(async () => {
     setLoading(true);
@@ -147,12 +146,23 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
       navigator.geolocation.getCurrentPosition(
         (pos) => {
           setPosition([pos.coords.latitude, pos.coords.longitude]);
+          setErrorMessage(null);
         },
         (err) => {
           console.error('Geolocation error:', err);
-          alert('Could not get your location. Defaulting to Taipei.');
+          const message = language === 'zh'
+            ? '無法獲取您的位置，使用台北作為預設位置。'
+            : 'Could not get your location. Defaulting to Taipei.';
+          setErrorMessage(message);
+          setTimeout(() => setErrorMessage(null), 3000);
         }
       );
+    } else {
+      const message = language === 'zh'
+        ? '您的瀏覽器不支援地理定位。'
+        : 'Geolocation is not supported by your browser.';
+      setErrorMessage(message);
+      setTimeout(() => setErrorMessage(null), 3000);
     }
   };
 
@@ -234,7 +244,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
   //   }
   // };
 
-  const categories: Array<{ key: Category | undefined; icon: React.ElementType; label: string }> = [
+  const categories = useMemo(() => [
     { key: undefined, icon: MapPin, label: t.common.all },
     { key: 'park', icon: Park, label: t.categories.park },
     { key: 'nursing_room', icon: Baby, label: t.categories.nursing_room },
@@ -242,21 +252,30 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
     { key: 'attraction', icon: Globe, label: t.categories.attraction },
     { key: 'medical', icon: Hospital, label: t.categories.medical },
     { key: 'other', icon: MapPin, label: t.categories.other },
-  ];
+  ], [t]);
 
   return (
     <div className="app-layout">
       <header className="app-header">
         <div className="logo-section">
-          <button className="icon-button sidebar-toggle-btn" onClick={() => setSidebarOpen(!sidebarOpen)} title="Menu">
+          <button
+            className="icon-button sidebar-toggle-btn"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            title="Menu"
+            aria-expanded={sidebarOpen}
+            aria-label="Toggle sidebar menu"
+          >
             <Menu size={20} />
           </button>
           <h1>FamMap</h1>
         </div>
         <div className="city-selector">
-          <button 
+          <button
             className="city-selector-button"
             onClick={() => setCityDropdownOpen(!cityDropdownOpen)}
+            aria-expanded={cityDropdownOpen}
+            aria-haspopup="true"
+            aria-label={`City selector, currently ${CITIES.find(c => c.key === selectedCity)?.name}`}
           >
             <span className="city-name">{CITIES.find(c => c.key === selectedCity)?.name}</span>
             <ChevronDown size={16} className={cityDropdownOpen ? 'rotate' : ''} />
@@ -297,6 +316,19 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
           </button>
         </div>
       </header>
+
+      {errorMessage && (
+        <div className="error-banner" role="alert">
+          <button
+            onClick={() => setErrorMessage(null)}
+            className="error-banner-close"
+            aria-label="Close error message"
+          >
+            <X size={16} />
+          </button>
+          <span className="error-banner-text">{errorMessage}</span>
+        </div>
+      )}
 
       <div className="main-content">
         {sidebarOpen && <div className="sidebar-backdrop" onClick={() => setSidebarOpen(false)} />}
@@ -363,14 +395,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                       placeholder={t.common.searchPlaceholder}
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      style={{
-                        width: '100%',
-                        padding: '8px 12px',
-                        border: '1px solid var(--border)',
-                        borderRadius: '6px',
-                        fontSize: '14px',
-                        fontFamily: 'inherit',
-                      }}
+                      className="search-input"
                       aria-label="Search locations"
                     />
                   </div>
@@ -379,6 +404,8 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                       className={`tool-button ${strollerOnly ? 'active' : ''}`}
                       onClick={() => setStrollerOnly(!strollerOnly)}
                       title={t.common.filterStroller}
+                      aria-pressed={strollerOnly}
+                      aria-label={strollerOnly ? `Disable ${t.common.filterStroller}` : `Enable ${t.common.filterStroller}`}
                     >
                       <Filter size={18} />
                       <span>{t.common.filterStroller}</span>
@@ -392,53 +419,26 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                       <span>{t.common.addLocation}</span>
                     </button>
                   </div>
-                  <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid #eee' }}>
-                    <label style={{ fontSize: '0.9em', fontWeight: '500', display: 'block', marginBottom: '8px' }}>
+                  <div className="sort-buttons-container">
+                    <label className="sort-buttons-label">
                       🔀 {language === 'zh' ? '排序' : 'Sort by'}
                     </label>
-                    <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                    <div className="sort-buttons">
                       <button
                         onClick={() => setSortBy('distance')}
-                        style={{
-                          padding: '6px 10px',
-                          background: sortBy === 'distance' ? '#3b82f6' : '#f0f0f0',
-                          color: sortBy === 'distance' ? 'white' : '#333',
-                          border: 'none',
-                          borderRadius: '4px',
-                          cursor: 'pointer',
-                          fontSize: '0.85em',
-                          fontWeight: sortBy === 'distance' ? '600' : '400',
-                        }}
+                        className={`sort-button ${sortBy === 'distance' ? 'active' : ''}`}
                       >
                         📍 {language === 'zh' ? '距離' : 'Distance'}
                       </button>
                       <button
                         onClick={() => setSortBy('rating')}
-                        style={{
-                          padding: '6px 10px',
-                          background: sortBy === 'rating' ? '#3b82f6' : '#f0f0f0',
-                          color: sortBy === 'rating' ? 'white' : '#333',
-                          border: 'none',
-                          borderRadius: '4px',
-                          cursor: 'pointer',
-                          fontSize: '0.85em',
-                          fontWeight: sortBy === 'rating' ? '600' : '400',
-                        }}
+                        className={`sort-button ${sortBy === 'rating' ? 'active' : ''}`}
                       >
                         ⭐ {language === 'zh' ? '評分' : 'Rating'}
                       </button>
                       <button
                         onClick={() => setSortBy('name')}
-                        style={{
-                          padding: '6px 10px',
-                          background: sortBy === 'name' ? '#3b82f6' : '#f0f0f0',
-                          color: sortBy === 'name' ? 'white' : '#333',
-                          border: 'none',
-                          borderRadius: '4px',
-                          cursor: 'pointer',
-                          fontSize: '0.85em',
-                          fontWeight: sortBy === 'name' ? '600' : '400',
-                        }}
+                        className={`sort-button ${sortBy === 'name' ? 'active' : ''}`}
                       >
                         A-Z {language === 'zh' ? '名稱' : 'Name'}
                       </button>
@@ -449,6 +449,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                       className={`quick-facility-btn ${facilitiesFilter.includes('public_toilet') ? 'active' : ''}`}
                       onClick={() => toggleFacilityFilter('public_toilet')}
                       title={t.facilities.public_toilet}
+                      aria-pressed={facilitiesFilter.includes('public_toilet')}
                     >
                       🚽 {t.facilities.public_toilet}
                     </button>
@@ -456,6 +457,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                       className={`quick-facility-btn ${facilitiesFilter.includes('nursing_room') ? 'active' : ''}`}
                       onClick={() => toggleFacilityFilter('nursing_room')}
                       title={t.facilities.nursing_room}
+                      aria-pressed={facilitiesFilter.includes('nursing_room')}
                     >
                       🧴 {t.facilities.nursing_room}
                     </button>
@@ -463,6 +465,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                       className={`quick-facility-btn ${facilitiesFilter.includes('drinking_water') ? 'active' : ''}`}
                       onClick={() => toggleFacilityFilter('drinking_water')}
                       title={t.facilities.drinking_water}
+                      aria-pressed={facilitiesFilter.includes('drinking_water')}
                     >
                       💧 {t.facilities.drinking_water}
                     </button>
@@ -470,6 +473,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                       className={`quick-facility-btn ${facilitiesFilter.includes('wheelchair_accessible') ? 'active' : ''}`}
                       onClick={() => toggleFacilityFilter('wheelchair_accessible')}
                       title={t.facilities.wheelchair_accessible}
+                      aria-pressed={facilitiesFilter.includes('wheelchair_accessible')}
                     >
                       ♿ {t.facilities.wheelchair_accessible}
                     </button>
@@ -477,6 +481,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                       className={`quick-facility-btn ${facilitiesFilter.includes('air_conditioned') ? 'active' : ''}`}
                       onClick={() => toggleFacilityFilter('air_conditioned')}
                       title={t.facilities.air_conditioned}
+                      aria-pressed={facilitiesFilter.includes('air_conditioned')}
                     >
                       ❄️ {t.facilities.air_conditioned}
                     </button>
@@ -484,6 +489,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                       className={`quick-facility-btn ${facilitiesFilter.includes('swimming_pool') ? 'active' : ''}`}
                       onClick={() => toggleFacilityFilter('swimming_pool')}
                       title={t.facilities.swimming_pool}
+                      aria-pressed={facilitiesFilter.includes('swimming_pool')}
                     >
                       🏊 {t.facilities.swimming_pool}
                     </button>
@@ -491,16 +497,19 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                       className={`quick-facility-btn ${facilitiesFilter.includes('kids_menu') ? 'active' : ''}`}
                       onClick={() => toggleFacilityFilter('kids_menu')}
                       title={t.facilities.kids_menu}
+                      aria-pressed={facilitiesFilter.includes('kids_menu')}
                     >
                       🍽️ {t.facilities.kids_menu}
                     </button>
                   </div>
-                  <nav className="category-list">
+                  <nav className="category-list" aria-label="Location categories">
                     {categories.map((cat) => (
                       <button
                         key={cat.key || 'all'}
                         className={`category-item ${selectedCategory === cat.key ? 'active' : ''}`}
-                        onClick={() => setSelectedCategory(cat.key)}
+                        onClick={() => setSelectedCategory(cat.key as Category | undefined)}
+                        aria-current={selectedCategory === cat.key ? 'page' : undefined}
+                        aria-label={`Filter by ${cat.label}`}
                       >
                         <cat.icon size={20} />
                         <span>{cat.label}</span>
