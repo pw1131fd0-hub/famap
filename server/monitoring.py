@@ -2,7 +2,7 @@
 
 import logging
 import json
-from datetime import datetime
+from datetime import datetime, UTC
 from typing import Any, Optional
 import os
 
@@ -15,7 +15,7 @@ if LOG_FORMAT == "json":
         """JSON log formatter for structured logging"""
         def format(self, record: logging.LogRecord) -> str:
             log_data = {
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": datetime.now(UTC).isoformat(),
                 "level": record.levelname,
                 "logger": record.name,
                 "message": record.getMessage(),
@@ -31,7 +31,7 @@ else:
         """Text log formatter"""
         def format(self, record: logging.LogRecord) -> str:
             return (
-                f"[{datetime.utcnow().isoformat()}] "
+                f"[{datetime.now(UTC).isoformat()}] "
                 f"{record.levelname:8} {record.name}: {record.getMessage()}"
             )
 
@@ -63,14 +63,14 @@ class RequestLogger:
         self.logger = logger
         self.method = method
         self.path = path
-        self.start_time = datetime.utcnow()
+        self.start_time = datetime.now(UTC)
 
     def __enter__(self):
         self.logger.info(f"Request started: {self.method} {self.path}")
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        duration = (datetime.utcnow() - self.start_time).total_seconds()
+        duration = (datetime.now(UTC) - self.start_time).total_seconds()
         if exc_type:
             self.logger.error(
                 f"Request failed: {self.method} {self.path} ({duration:.2f}s)",
@@ -99,7 +99,7 @@ class ErrorTracker:
             **kwargs: Additional context
         """
         error_record = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "type": error_type,
             "message": message,
             **kwargs

@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
 import uvicorn
 import os
-from datetime import datetime
+from datetime import datetime, UTC
 from dotenv import load_dotenv
 from routers import location, favorite, review, auth
 from data.seed_data import mock_locations
@@ -20,7 +20,7 @@ logger = setup_logging(__name__)
 # Version and environment info
 VERSION = "5.0.0"
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
-START_TIME = datetime.utcnow()
+START_TIME = datetime.now(UTC)
 
 logger.info(f"FamMap API v{VERSION} starting in {ENVIRONMENT} mode")
 
@@ -70,7 +70,7 @@ app.add_middleware(
 @app.get("/health")
 async def health_check():
     """Liveness probe - returns immediately if server is alive"""
-    return {"status": "alive", "timestamp": datetime.utcnow().isoformat()}
+    return {"status": "alive", "timestamp": datetime.now(UTC).isoformat()}
 
 @app.get("/health/ready")
 async def readiness_check():
@@ -82,7 +82,7 @@ async def readiness_check():
             content={
                 "status": "ready" if data_count > 0 else "initializing",
                 "locations_available": data_count,
-                "timestamp": datetime.utcnow().isoformat()
+                "timestamp": datetime.now(UTC).isoformat()
             }
         )
     except Exception as e:
@@ -94,14 +94,14 @@ async def readiness_check():
 @app.get("/health/live")
 async def liveness_check():
     """Detailed liveness check with environment info"""
-    uptime_seconds = (datetime.utcnow() - START_TIME).total_seconds()
+    uptime_seconds = (datetime.now(UTC) - START_TIME).total_seconds()
     return {
         "status": "live",
         "version": VERSION,
         "environment": ENVIRONMENT,
         "uptime_seconds": uptime_seconds,
         "started_at": START_TIME.isoformat(),
-        "timestamp": datetime.utcnow().isoformat()
+        "timestamp": datetime.now(UTC).isoformat()
     }
 
 @app.get("/version")
