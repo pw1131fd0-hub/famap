@@ -3,6 +3,8 @@
  * Tracks and reports performance metrics to backend
  */
 
+import { addBreadcrumb } from './sentryConfig';
+
 export interface PerformanceMetric {
   name: string;
   value: number; // in milliseconds
@@ -29,7 +31,7 @@ class PerformanceMonitor {
   endMeasure(label: string, category?: string, context?: Record<string, any>): number {
     const startTime = this.timers.get(label);
     if (!startTime) {
-      console.warn(`No start time found for label: ${label}`);
+      addBreadcrumb(`No start time found for label: ${label}`, 'warning', 'performance_monitoring');
       return 0;
     }
 
@@ -98,15 +100,23 @@ class PerformanceMonitor {
 
     // Log in dev mode
     if (this.isDev) {
-      console.log(`[Performance] ${metric.name}: ${metric.value.toFixed(2)}ms`, metric.category);
+      addBreadcrumb(
+        `${metric.name}: ${metric.value.toFixed(2)}ms`,
+        'debug',
+        metric.category || 'performance',
+        { value: metric.value }
+      );
     }
 
     // Send to backend in production
     if (!this.isDev) {
       this.sendMetricToBackend(metric).catch(err => {
-        if (this.isDev) {
-          console.error('[Performance Metric Send Failed]', err);
-        }
+        addBreadcrumb(
+          'Performance metric send failed',
+          'error',
+          'performance_monitoring',
+          { metric: metric.name, error: String(err) }
+        );
       });
     }
   }
@@ -123,10 +133,13 @@ class PerformanceMonitor {
         keepalive: true
       });
     } catch (error) {
-      // Silently fail to avoid affecting application
-      if (this.isDev) {
-        console.error('[Failed to send performance metric]', error);
-      }
+      // Log through proper error tracking (silently fail to avoid affecting application)
+      addBreadcrumb(
+        'Failed to send performance metric to backend',
+        'debug',
+        'performance_monitoring',
+        { metric: metric.name, error: String(error) }
+      );
     }
   }
 
@@ -197,9 +210,11 @@ class PerformanceMonitor {
    */
   observeWebVitals(): void {
     if (!('PerformanceObserver' in window)) {
-      if (this.isDev) {
-        console.warn('PerformanceObserver not supported');
-      }
+      addBreadcrumb(
+        'PerformanceObserver not supported in this browser',
+        'warning',
+        'web_vitals'
+      );
       return;
     }
 
@@ -216,9 +231,12 @@ class PerformanceMonitor {
       });
       lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
     } catch (error) {
-      if (this.isDev) {
-        console.warn('LCP observation failed', error);
-      }
+      addBreadcrumb(
+        'LCP observation failed',
+        'warning',
+        'web_vitals',
+        { error: String(error) }
+      );
     }
 
     // Observe Cumulative Layout Shift (CLS)
@@ -239,9 +257,12 @@ class PerformanceMonitor {
       });
       clsObserver.observe({ entryTypes: ['layout-shift'] });
     } catch (error) {
-      if (this.isDev) {
-        console.warn('CLS observation failed', error);
-      }
+      addBreadcrumb(
+        'CLS observation failed',
+        'warning',
+        'web_vitals',
+        { error: String(error) }
+      );
     }
 
     // Observe First Input Delay (FID)
@@ -257,9 +278,12 @@ class PerformanceMonitor {
       });
       fidObserver.observe({ entryTypes: ['first-input'] });
     } catch (error) {
-      if (this.isDev) {
-        console.warn('FID observation failed', error);
-      }
+      addBreadcrumb(
+        'FID observation failed',
+        'warning',
+        'web_vitals',
+        { error: String(error) }
+      );
     }
   }
 

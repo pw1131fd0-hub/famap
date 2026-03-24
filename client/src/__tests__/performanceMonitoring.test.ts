@@ -1,5 +1,11 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import performanceMonitor from '../utils/performanceMonitoring';
+import * as sentryConfig from '../utils/sentryConfig';
+
+// Mock the addBreadcrumb function
+vi.mock('../utils/sentryConfig', () => ({
+  addBreadcrumb: vi.fn(),
+}));
 
 describe('Performance Monitoring', () => {
   beforeEach(() => {
@@ -76,10 +82,12 @@ describe('Performance Monitoring', () => {
     });
 
     it('should warn if ending non-existent measurement', () => {
-      const consoleSpy = vi.spyOn(console, 'warn');
       performanceMonitor.endMeasure('non-existent');
-      expect(consoleSpy).toHaveBeenCalled();
-      consoleSpy.mockRestore();
+      expect(sentryConfig.addBreadcrumb).toHaveBeenCalledWith(
+        expect.stringContaining('No start time found'),
+        'warning',
+        'performance_monitoring'
+      );
     });
   });
 
