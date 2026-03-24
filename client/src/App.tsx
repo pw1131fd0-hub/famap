@@ -16,6 +16,7 @@ import { PersonalizedRecommendations } from './components/PersonalizedRecommenda
 import { LocationComparison } from './components/LocationComparison';
 import { SmartTipsPanel } from './components/SmartTipsPanel';
 import OutingPlanner from './components/OutingPlanner';
+import { FamilyTripPlanner } from './components/FamilyTripPlanner';
 import { CITIES, initializeLeafletIcons } from './config/mapConfig';
 import type { CityKey } from './config/mapConfig';
 import performanceMonitor from './utils/performanceMonitoring';
@@ -55,6 +56,7 @@ function App() {
   const [showAddLocation, setShowAddLocation] = useState(false);
   const [showRoutePlanner, setShowRoutePlanner] = useState(false);
   const [showOutingPlanner, setShowOutingPlanner] = useState(false);
+  const [showFamilyTripPlanner, setShowFamilyTripPlanner] = useState(false);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [crowdednessReports, setCrowdednessReports] = useState<CrowdednessReport[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
@@ -627,6 +629,15 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                     </button>
                     <button
                       className="tool-button"
+                      onClick={() => setShowFamilyTripPlanner(!showFamilyTripPlanner)}
+                      title={language === 'zh' ? '家庭出遊規劃' : 'Family Trip Planner'}
+                      aria-pressed={showFamilyTripPlanner}
+                    >
+                      <Users size={18} />
+                      <span>{language === 'zh' ? '出遊規劃' : 'Trip Plan'}</span>
+                    </button>
+                    <button
+                      className="tool-button"
                       onClick={() => {
                         if (comparisonLocations.length > 0) {
                           setShowComparison(!showComparison);
@@ -774,6 +785,12 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                         setSidebarOpen(false);
                       }}
                       userLocation={{ lat: position[0], lng: position[1] }}
+                    />
+                  )}
+
+                  {showFamilyTripPlanner && (
+                    <FamilyTripPlanner
+                      darkMode={darkMode}
                     />
                   )}
                 </>

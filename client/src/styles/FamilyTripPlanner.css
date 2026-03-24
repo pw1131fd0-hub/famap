@@ -1,0 +1,468 @@
+.family-trip-planner {
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.family-trip-planner.dark-mode {
+  background: #1e1e1e;
+  color: #e0e0e0;
+}
+
+.ftp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.ftp-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ftp-title h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.ftp-btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #A7C7E7;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.ftp-btn-primary:hover {
+  background: #90b5d8;
+}
+
+.dark-mode .ftp-btn-primary {
+  background: #5a8dc9;
+}
+
+.dark-mode .ftp-btn-primary:hover {
+  background: #4a7db9;
+}
+
+.ftp-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.ftp-modal {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .ftp-modal {
+  background: #2d2d2d;
+  color: #e0e0e0;
+}
+
+.ftp-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.ftp-modal-header h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.ftp-btn-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: color 0.2s ease;
+}
+
+.dark-mode .ftp-btn-close {
+  color: #aaa;
+}
+
+.ftp-btn-close:hover {
+  color: #333;
+}
+
+.dark-mode .ftp-btn-close:hover {
+  color: #fff;
+}
+
+.ftp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ftp-form input,
+.ftp-form textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.dark-mode .ftp-form input,
+.dark-mode .ftp-form textarea {
+  background: #3d3d3d;
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+.ftp-form input:focus,
+.ftp-form textarea:focus {
+  outline: none;
+  border-color: #A7C7E7;
+}
+
+.ftp-budget-input {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ftp-budget-input label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.ftp-trips-list {
+  display: grid;
+  gap: 16px;
+}
+
+.ftp-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #999;
+}
+
+.ftp-empty-state svg {
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.ftp-empty-state p {
+  font-size: 16px;
+  margin: 0;
+}
+
+.ftp-trip-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 4px solid #FDFD96;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ftp-trip-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dark-mode .ftp-trip-card {
+  background: #2d2d2d;
+  border-left-color: #FFD700;
+}
+
+.ftp-trip-card.planning {
+  border-left-color: #FDFD96;
+}
+
+.ftp-trip-card.confirmed {
+  border-left-color: #90EE90;
+}
+
+.ftp-trip-card.completed {
+  border-left-color: #87CEEB;
+}
+
+.ftp-trip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.ftp-trip-info h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.ftp-trip-meta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.ftp-trip-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #666;
+}
+
+.dark-mode .ftp-trip-meta span {
+  color: #aaa;
+}
+
+.ftp-status {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.ftp-status.planning {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.ftp-status.confirmed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.ftp-status.completed {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.ftp-trip-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.ftp-btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.dark-mode .ftp-btn-icon {
+  color: #aaa;
+}
+
+.ftp-btn-icon:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.dark-mode .ftp-btn-icon:hover {
+  background: #3d3d3d;
+  color: #fff;
+}
+
+.ftp-btn-icon.danger:hover {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.dark-mode .ftp-btn-icon.danger:hover {
+  background: #3d2d2d;
+  color: #ff6b6b;
+}
+
+.ftp-trip-details {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+}
+
+.dark-mode .ftp-trip-details {
+  border-top-color: #444;
+}
+
+.ftp-section {
+  margin-bottom: 16px;
+}
+
+.ftp-section h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dark-mode .ftp-section h4 {
+  color: #aaa;
+}
+
+.ftp-members {
+  display: grid;
+  gap: 8px;
+}
+
+.ftp-member {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  background: #f8f9fa;
+  border-radius: 6px;
+}
+
+.dark-mode .ftp-member {
+  background: #3d3d3d;
+}
+
+.ftp-member-avatar {
+  width: 36px;
+  height: 36px;
+  background: #A7C7E7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: white;
+  flex-shrink: 0;
+}
+
+.ftp-member-info {
+  flex: 1;
+}
+
+.ftp-member-info div {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.ftp-member-info small {
+  display: block;
+  color: #999;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.dark-mode .ftp-member-info small {
+  color: #aaa;
+}
+
+.ftp-status-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ftp-status-btn {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.dark-mode .ftp-status-btn {
+  background: #3d3d3d;
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+.ftp-status-btn.active {
+  background: #A7C7E7;
+  border-color: #A7C7E7;
+  color: white;
+}
+
+.ftp-status-btn:hover {
+  background: #f0f0f0;
+  border-color: #A7C7E7;
+}
+
+.dark-mode .ftp-status-btn:hover {
+  background: #4d4d4d;
+  border-color: #A7C7E7;
+}
+
+.ftp-notes {
+  margin: 0;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  color: #555;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.dark-mode .ftp-notes {
+  background: #3d3d3d;
+  color: #d0d0d0;
+}
+
+@media (max-width: 768px) {
+  .ftp-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .ftp-btn-primary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .ftp-trip-header {
+    flex-direction: column;
+  }
+
+  .ftp-trip-meta {
+    width: 100%;
+  }
+
+  .ftp-trip-actions {
+    align-self: flex-end;
+  }
+
+  .ftp-modal {
+    width: 95%;
+  }
+}
