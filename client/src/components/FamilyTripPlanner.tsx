@@ -3,6 +3,7 @@ import {
   Users, Plus, Trash2, DollarSign, Download, X, ChevronDown, Calendar
 } from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
+import { TripExportPanel } from './TripExportPanel';
 import type { Location } from '../types';
 import '../styles/FamilyTripPlanner.css';
 
@@ -45,6 +46,7 @@ export function FamilyTripPlanner({ darkMode }: Props) {
   const [trips, setTrips] = useState<FamilyTrip[]>([]);
   const [showCreateTrip, setShowCreateTrip] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState<FamilyTrip | null>(null);
+  const [exportTrip, setExportTrip] = useState<FamilyTrip | null>(null);
   const [currentUser] = useState({ id: 'u1', name: 'Parent' });
   const [tripForm, setTripForm] = useState({
     name: '',
@@ -147,32 +149,12 @@ export function FamilyTripPlanner({ darkMode }: Props) {
   // Future feature: Calculate voting statistics for location proposals
   // const getVoteStats = (trip: FamilyTrip, location: Location) => { ... };
 
-  const exportTrip = (trip: FamilyTrip) => {
-    const content = `
-Family Trip Plan: ${trip.name}
-Date: ${new Date(trip.date).toLocaleDateString(language === 'zh' ? 'zh-TW' : 'en-US')}
-Budget: $${trip.budget}
-Status: ${trip.status}
+  const handleExportTrip = (trip: FamilyTrip) => {
+    setExportTrip(trip);
+  };
 
-Family Members:
-${trip.members.map(m => `- ${m.name} (${m.role})`).join('\n')}
-
-Suggested Locations:
-${trip.suggestedLocations.map(l => `- ${language === 'zh' ? l.name.zh : l.name.en}`).join('\n')}
-
-Notes:
-${trip.notes}
-
-Generated: ${new Date().toLocaleString()}
-    `;
-
-    const element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
-    element.setAttribute('download', `trip_${trip.id}.txt`);
-    element.style.display = 'none';
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
+  const handleCloseExport = () => {
+    setExportTrip(null);
   };
 
   return (
@@ -286,7 +268,7 @@ Generated: ${new Date().toLocaleString()}
                   </button>
                   <button
                     className="ftp-btn-icon"
-                    onClick={() => exportTrip(trip)}
+                    onClick={() => handleExportTrip(trip)}
                     title={language === 'zh' ? '匯出計畫' : 'Export'}
                   >
                     <Download size={20} />
@@ -356,6 +338,16 @@ Generated: ${new Date().toLocaleString()}
           ))
         )}
       </div>
+
+      {exportTrip && (
+        <div className="ftp-modal-overlay">
+          <TripExportPanel
+            trip={exportTrip}
+            onClose={handleCloseExport}
+            darkMode={darkMode}
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -1,0 +1,418 @@
+.trip-export-panel {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  margin: 0 auto;
+  overflow: hidden;
+  animation: slideInUp 0.3s ease-out;
+}
+
+.trip-export-panel.dark {
+  background: #1a1a1a;
+  color: #e0e0e0;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.export-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 2px solid #A7C7E7;
+  background: linear-gradient(135deg, #A7C7E7 0%, #E8F3FF 100%);
+}
+
+.trip-export-panel.dark .export-header {
+  background: linear-gradient(135deg, #2a4a7a 0%, #1a3a6a 100%);
+  border-bottom-color: #3a5a9a;
+}
+
+.export-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.trip-export-panel.dark .export-header h3 {
+  color: #e0e0e0;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: #333;
+}
+
+.trip-export-panel.dark .close-btn {
+  color: #aaa;
+}
+
+.trip-export-panel.dark .close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+}
+
+.export-content {
+  padding: 20px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.export-section,
+.share-section,
+.info-section,
+.trip-summary {
+  margin-bottom: 24px;
+}
+
+.export-section h4,
+.share-section h4,
+.info-section h4,
+.trip-summary h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.trip-export-panel.dark .export-section h4,
+.trip-export-panel.dark .share-section h4,
+.trip-export-panel.dark .info-section h4,
+.trip-export-panel.dark .trip-summary h4 {
+  color: #b0b0b0;
+}
+
+.export-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.export-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 8px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  color: #333;
+}
+
+.trip-export-panel.dark .export-btn {
+  background: #2a2a2a;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+.export-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-color: #A7C7E7;
+}
+
+.export-btn.calendar-btn {
+  border-color: #ffc107;
+}
+
+.export-btn.calendar-btn:hover {
+  background: #fff9e6;
+  color: #ff9500;
+}
+
+.trip-export-panel.dark .export-btn.calendar-btn:hover {
+  background: #3a3a2a;
+  border-color: #ffc107;
+}
+
+.export-btn.pdf-btn {
+  border-color: #FF6F61;
+}
+
+.export-btn.pdf-btn:hover {
+  background: #ffe8e3;
+  color: #FF6F61;
+}
+
+.trip-export-panel.dark .export-btn.pdf-btn:hover {
+  background: #3a2a2a;
+  border-color: #FF6F61;
+}
+
+.export-btn.csv-btn {
+  border-color: #4CAF50;
+}
+
+.export-btn.csv-btn:hover {
+  background: #e8f5e9;
+  color: #4CAF50;
+}
+
+.trip-export-panel.dark .export-btn.csv-btn:hover {
+  background: #2a3a2a;
+  border-color: #4CAF50;
+}
+
+.share-description {
+  font-size: 13px;
+  color: #666;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+}
+
+.trip-export-panel.dark .share-description {
+  color: #aaa;
+}
+
+.share-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border: 2px solid #FF6F61;
+  border-radius: 8px;
+  background: white;
+  color: #FF6F61;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.trip-export-panel.dark .share-btn {
+  background: #2a2a2a;
+  border-color: #FF8076;
+  color: #FF8076;
+}
+
+.share-btn:hover {
+  background: #ffe8e3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.trip-export-panel.dark .share-btn:hover {
+  background: #3a2a2a;
+}
+
+.share-link-container {
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+.trip-export-panel.dark .share-link-container {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+.share-link-input {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.share-link {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: monospace;
+  word-break: break-all;
+  background: white;
+  color: #333;
+}
+
+.trip-export-panel.dark .share-link {
+  background: #1a1a1a;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+.share-link:focus {
+  outline: none;
+  border-color: #A7C7E7;
+}
+
+.copy-btn {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.2s ease;
+}
+
+.trip-export-panel.dark .copy-btn {
+  background: #1a1a1a;
+  border-color: #444;
+  color: #aaa;
+}
+
+.copy-btn:hover {
+  background: #A7C7E7;
+  border-color: #A7C7E7;
+  color: white;
+}
+
+.trip-export-panel.dark .copy-btn:hover {
+  background: #4a7a9a;
+  border-color: #4a7a9a;
+}
+
+.link-info {
+  font-size: 12px;
+  color: #666;
+  margin: 8px 0;
+}
+
+.trip-export-panel.dark .link-info {
+  color: #aaa;
+}
+
+.hide-link-btn {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: transparent;
+  color: #666;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.trip-export-panel.dark .hide-link-btn {
+  border-color: #444;
+  color: #aaa;
+}
+
+.hide-link-btn:hover {
+  background: #f0f0f0;
+}
+
+.trip-export-panel.dark .hide-link-btn:hover {
+  background: #3a3a3a;
+}
+
+.tips-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tips-list li {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.4;
+  padding-left: 0;
+}
+
+.trip-export-panel.dark .tips-list li {
+  color: #aaa;
+}
+
+.trip-summary {
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+.trip-export-panel.dark .trip-summary {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 13px;
+}
+
+.summary-row .label {
+  font-weight: 600;
+  color: #333;
+}
+
+.trip-export-panel.dark .summary-row .label {
+  color: #aaa;
+}
+
+.summary-row .value {
+  color: #666;
+  font-weight: 500;
+}
+
+.trip-export-panel.dark .summary-row .value {
+  color: #e0e0e0;
+}
+
+.summary-row:not(:last-child) {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.trip-export-panel.dark .summary-row:not(:last-child) {
+  border-bottom-color: #444;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .export-buttons {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .export-btn {
+    font-size: 11px;
+    padding: 10px 6px;
+  }
+
+  .export-content {
+    padding: 16px;
+  }
+}
