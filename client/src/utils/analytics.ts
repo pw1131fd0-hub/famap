@@ -209,18 +209,20 @@ class Analytics {
     if (this.events.length === 0) return;
 
     if (!this.isDev) {
-      // Send to analytics backend (implement your backend endpoint)
-      // const batch = {
-      //   sessionId: this.sessionId,
-      //   events: this.events,
-      //   timestamp: Date.now()
-      // };
-      // fetch('/api/analytics/events', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(batch),
-      //   keepalive: true // Continue sending even if page unloads
-      // }).catch(console.error);
+      // Send to analytics backend
+      const batch = {
+        sessionId: this.sessionId,
+        events: this.events,
+        timestamp: Date.now()
+      };
+      fetch('/api/analytics/events', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(batch),
+        keepalive: true // Continue sending even if page unloads
+      }).catch(() => {
+        // Silently fail - analytics should never break the app
+      });
     }
 
     // Clear events after flushing

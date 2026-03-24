@@ -62,9 +62,9 @@ describe('Error Tracking System', () => {
 
     const summary = errorTracker.getErrorSummary();
     expect(summary.totalErrors).toBe(3);
-    expect(summary.byServerity.low).toBe(1);
-    expect(summary.byServerity.high).toBe(1);
-    expect(summary.byServerity.critical).toBe(1);
+    expect(summary.bySeverity.low).toBe(1);
+    expect(summary.bySeverity.high).toBe(1);
+    expect(summary.bySeverity.critical).toBe(1);
   });
 
   it('should enforce max log size', () => {

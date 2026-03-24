@@ -171,7 +171,7 @@ class ErrorTracker {
 
     return {
       totalErrors: this.errorLog.length,
-      byServerity: severityCount,
+      bySeverity: severityCount,
       lastError: this.errorLog[this.errorLog.length - 1]?.error?.message
     };
   }

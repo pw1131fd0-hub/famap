@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import 'leaflet/dist/leaflet.css';
-import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Menu, ChevronDown, Filter, Heart, List, Moon, Sun, Route, Bell } from 'lucide-react';
+import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Menu, ChevronDown, Filter, Heart, List, Moon, Sun, Route, Bell, Users } from 'lucide-react';
 import { locationApi, reviewApi, favoriteApi, crowdinessApi, eventsApi } from './services/api';
 import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO, CrowdednessReport, CrowdednessReportCreateDTO, Event } from './types';
 import { useTranslation } from './i18n/useTranslation';
@@ -11,6 +11,8 @@ import { MapPanel } from './components/MapPanel';
 import { RoutePlanner } from './components/RoutePlanner';
 import { GoNowSuggestions } from './components/GoNowSuggestions';
 import { AlertCenter } from './components/AlertCenter';
+import { FamilyProfileManager } from './components/FamilyProfileManager';
+import { PersonalizedRecommendations } from './components/PersonalizedRecommendations';
 import { CITIES, initializeLeafletIcons } from './config/mapConfig';
 import type { CityKey } from './config/mapConfig';
 import performanceMonitor from './utils/performanceMonitoring';
@@ -68,6 +70,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
     'taiwan': false,
   });
   const [showAlertCenter, setShowAlertCenter] = useState(false);
+  const [showFamilyProfile, setShowFamilyProfile] = useState(false);
 
   const toggleSection = (section: string) => {
     setExpandedSections(prev => ({
@@ -377,6 +380,14 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
             <Navigation size={20} />
           </button>
           <button
+            onClick={() => setShowFamilyProfile(true)}
+            className="icon-button"
+            title={language === 'zh' ? '家庭設定檔' : 'Family Profile'}
+            aria-label={language === 'zh' ? '家庭設定檔' : 'Family Profile'}
+          >
+            <Users size={20} />
+          </button>
+          <button
             onClick={() => setShowAlertCenter(!showAlertCenter)}
             className="icon-button"
             title={language === 'zh' ? '通知中心' : 'Alert Center'}
@@ -504,7 +515,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                           setSelectedLocation(loc);
                         }
                       }}
-                      onNavigate={(lat, lng) => {
+                      onNavigate={(lat, lng, _name) => {
                         setPosition([lat, lng]);
                       }}
                     />
@@ -641,6 +652,22 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
 
               {loading && <div className="loading-overlay">{t.common.loading}</div>}
 
+              {!showFavorites && !searchQuery && (
+                <PersonalizedRecommendations
+                  locations={locations}
+                  onSelectLocation={(locationId) => {
+                    const loc = locations.find(l => l.id === locationId);
+                    if (loc) {
+                      setPosition([loc.coordinates.lat, loc.coordinates.lng]);
+                      setSelectedLocation(loc);
+                      setSidebarOpen(false);
+                    }
+                  }}
+                  language={language}
+                  limit={3}
+                />
+              )}
+
               <LocationList
                 locations={locations}
                 position={position}
@@ -677,6 +704,10 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
       </div>
 
       <AlertCenter isOpen={showAlertCenter} onClose={() => setShowAlertCenter(false)} />
+      <FamilyProfileManager
+        isOpen={showFamilyProfile}
+        onClose={() => setShowFamilyProfile(false)}
+      />
     </div>
   );
 }
