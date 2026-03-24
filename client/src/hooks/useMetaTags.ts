@@ -9,14 +9,14 @@ import type { Location } from '../types';
 /**
  * Hook to update meta tags for a page or location
  */
-export function useMetaTags(config: MetaTagConfig | null, dependencies?: React.DependencyList): void {
+export function useMetaTags(config: MetaTagConfig | null): void {
   useEffect(() => {
     if (config) {
       updateMetaTags(config);
     } else {
       resetMetaTags();
     }
-  }, dependencies || [config]);
+  }, [config]);
 }
 
 /**

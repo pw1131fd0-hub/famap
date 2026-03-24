@@ -336,7 +336,7 @@ describe('Trip Export Utils', () => {
       try {
         downloadICalendar(mockTrip);
         expect(createElementSpy).toHaveBeenCalledWith('a');
-      } catch (_e) {
+      } catch {
         // Expected in test environment
       }
       createElementSpy.mockRestore();

@@ -122,7 +122,7 @@ export function parseShareData(encodedData: string): TripData | null {
         createdAt: new Date().toISOString()
       };
     }
-  } catch (_e) {
+  } catch {
     // Invalid share data
   }
   return null;
