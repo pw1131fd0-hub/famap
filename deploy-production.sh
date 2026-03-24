@@ -70,7 +70,7 @@ log "✓ Backup created at $BACKUP_DIR"
 # Step 3: Build client
 log "Step 3: Building client application..."
 cd client
-npm ci --prefer-offline --no-audit || {
+npm install --include=dev || {
     error "npm install failed"
     exit 1
 }
@@ -150,6 +150,7 @@ log "✓ Performance metrics acceptable"
 log "Step 9: Generating deployment report..."
 
 REPORT_FILE="$BACKUP_DIR/deployment-report.txt"
+mkdir -p "$BACKUP_DIR" || warning "Could not create backup directory"
 {
     echo "FamMap Production Deployment Report"
     echo "===================================="
@@ -158,7 +159,7 @@ REPORT_FILE="$BACKUP_DIR/deployment-report.txt"
     echo "Git branch: $(git rev-parse --abbrev-ref HEAD)"
     echo ""
     echo "Client Build:"
-    echo "  - Build time: $(ls -l client/dist/index.html | awk '{print $6, $7, $8}')"
+    echo "  - Build time: $(ls -l client/dist/index.html 2>/dev/null | awk '{print $6, $7, $8}' || echo 'N/A')"
     echo "  - Build size: $BUILD_SIZE"
     echo ""
     echo "Server Tests:"
@@ -172,6 +173,9 @@ log "✓ Deployment report: $REPORT_FILE"
 
 # Step 10: Final verification
 log "Step 10: Final verification..."
+
+# Return to root directory for final checks
+cd ..
 
 # Check required files exist
 REQUIRED_FILES=(
