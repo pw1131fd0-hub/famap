@@ -1,14 +1,12 @@
-import { X, Copy, Trash2, Star, Download, Upload } from 'lucide-react';
+import { X, Copy, Trash2, Star } from 'lucide-react';
 import { useState } from 'react';
 import {
-  getSavedSearches,
-  saveSavedSearch,
   deleteSavedSearch,
   recordSearchUsage,
   duplicateSavedSearch,
   getSortedSearches
 } from '../utils/savedSearches';
-import type { SavedSearch, SearchFilters } from '../utils/savedSearches';
+import type { SavedSearch } from '../utils/savedSearches';
 
 interface SavedSearchesPanelProps {
   onClose: () => void;
@@ -23,8 +21,6 @@ export function SavedSearchesPanel({
 }: SavedSearchesPanelProps) {
   const [searches, setSearches] = useState<SavedSearch[]>(getSortedSearches('recent'));
   const [sortBy, setSortBy] = useState<'recent' | 'frequency' | 'created'>('recent');
-  const [newSearchName, setNewSearchName] = useState('');
-  const [selectedForRename, setSelectedForRename] = useState<string | null>(null);
 
   const labels = {
     zh: {

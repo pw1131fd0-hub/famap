@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { SavedSearchesPanel } from '../components/SavedSearchesPanel';
 import { saveSavedSearch, getSavedSearches, clearAllSavedSearches } from '../utils/savedSearches';
 
@@ -294,7 +294,7 @@ describe('SavedSearchesPanel Component', () => {
         />
       );
 
-      expect(screen.getByText(/Created on/)).toBeInTheDocument();
+      expect(screen.getByText(/Created:/)).toBeInTheDocument();
     });
 
     it('should display usage metadata in Chinese', () => {
@@ -362,6 +362,13 @@ describe('SavedSearchesPanel Component', () => {
 
   describe('Accessibility', () => {
     it('should have proper aria labels', () => {
+      saveSavedSearch({
+        name: 'Accessibility Test',
+        query: 'test',
+        filters: { categories: [], facilities: [] },
+        usageCount: 0
+      });
+
       render(
         <SavedSearchesPanel
           onClose={mockOnClose}

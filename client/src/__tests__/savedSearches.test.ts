@@ -9,8 +9,7 @@ import {
   duplicateSavedSearch,
   clearAllSavedSearches,
   exportSearches,
-  importSearches,
-  type SavedSearch
+  importSearches
 } from '../utils/savedSearches';
 
 describe('Saved Searches Utility', () => {
@@ -30,7 +29,7 @@ describe('Saved Searches Utility', () => {
     });
 
     it('should return saved searches from localStorage', () => {
-      const search = saveSavedSearch({
+      saveSavedSearch({
         name: 'Test Search',
         query: 'park',
         filters: { categories: ['park'], facilities: [] },
@@ -302,7 +301,7 @@ describe('Saved Searches Utility', () => {
     });
 
     it('should skip duplicate searches', () => {
-      const search = saveSavedSearch({
+      saveSavedSearch({
         name: 'Existing',
         query: 'existing',
         filters: { categories: [], facilities: [] },
