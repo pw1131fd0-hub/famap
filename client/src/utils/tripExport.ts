@@ -164,7 +164,7 @@ export function generateTripHTML(trip: TripData, language: 'zh' | 'en'): string 
     </head>
     <body>
       <div class="header">
-        <h1>${trip.name}</h1>
+        <h1>${t('tripName')}: ${trip.name}</h1>
         <p>${t('date')}: ${new Date(trip.date).toLocaleDateString()}</p>
       </div>
 
@@ -226,8 +226,8 @@ export function downloadTripHTML(trip: TripData, language: 'zh' | 'en' = 'en'): 
  */
 export function generateTripCSV(trip: TripData, language: 'zh' | 'en' = 'en'): string {
   const headers = language === 'zh'
-    ? ['旅行名稱', '日期', '預算', '已花費', '成員', '地點名稱', '地址', '類別']
-    : ['Trip Name', 'Date', 'Budget', 'Spent', 'Members', 'Location', 'Address', 'Category'];
+    ? ['旅行名稱', '日期', '預算', '已花費', '成員', '備註', '地點名稱', '地址', '類別']
+    : ['Trip Name', 'Date', 'Budget', 'Spent', 'Members', 'Notes', 'Location', 'Address', 'Category'];
 
   const locations = trip.finalLocations.length > 0 ? trip.finalLocations : trip.suggestedLocations;
   const members = trip.members.map(m => m.name).join('; ');
@@ -235,7 +235,7 @@ export function generateTripCSV(trip: TripData, language: 'zh' | 'en' = 'en'): s
   const rows = [headers];
 
   if (locations.length === 0) {
-    rows.push([trip.name, trip.date, trip.budget, trip.totalSpent, members, '', '', '']);
+    rows.push([trip.name, trip.date, trip.budget.toString(), trip.totalSpent.toString(), members, trip.notes, '', '', '']);
   } else {
     locations.forEach((loc, idx) => {
       rows.push([
@@ -244,6 +244,7 @@ export function generateTripCSV(trip: TripData, language: 'zh' | 'en' = 'en'): s
         idx === 0 ? trip.budget.toString() : '',
         idx === 0 ? trip.totalSpent.toString() : '',
         idx === 0 ? members : '',
+        idx === 0 ? trip.notes : '',
         loc.name,
         loc.address || '',
         loc.category || ''

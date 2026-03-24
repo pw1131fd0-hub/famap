@@ -6,6 +6,9 @@ import {
   generateTripHTML,
   generateTripCSV,
   generateShareLink,
+  downloadICalendar,
+  downloadTripHTML,
+  downloadTripCSV,
   type TripData
 } from '../utils/tripExport';
 import type { Location } from '../types';
@@ -332,7 +335,6 @@ describe('Trip Export Utils', () => {
   describe('Download functions', () => {
     it('should handle download without errors', () => {
       const createElementSpy = vi.spyOn(document, 'createElement');
-      const { downloadICalendar } = require('../utils/tripExport');
 
       try {
         downloadICalendar(mockTrip);
