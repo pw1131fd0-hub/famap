@@ -32,7 +32,7 @@ describe('SmartTipsPanel', () => {
   });
 
   it('should add new dismissed tips to localStorage', () => {
-    let dismissed = new Set<string>();
+    const dismissed = new Set<string>();
     dismissed.add('tip1');
 
     localStorage.setItem('dismissedTips', JSON.stringify(Array.from(dismissed)));
@@ -83,7 +83,7 @@ describe('SmartTipsPanel', () => {
   });
 
   it('should handle tip dismissal state', () => {
-    let dismissedTips = new Set<string>();
+    const dismissedTips = new Set<string>();
 
     expect(dismissedTips.has('welcome')).toBe(false);
 
