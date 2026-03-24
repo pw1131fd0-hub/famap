@@ -13,6 +13,7 @@ import { GoNowSuggestions } from './components/GoNowSuggestions';
 import { AlertCenter } from './components/AlertCenter';
 import { FamilyProfileManager } from './components/FamilyProfileManager';
 import { PersonalizedRecommendations } from './components/PersonalizedRecommendations';
+import OutingPlanner from './components/OutingPlanner';
 import { CITIES, initializeLeafletIcons } from './config/mapConfig';
 import type { CityKey } from './config/mapConfig';
 import performanceMonitor from './utils/performanceMonitoring';
@@ -43,6 +44,7 @@ function App() {
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
   const [showAddLocation, setShowAddLocation] = useState(false);
   const [showRoutePlanner, setShowRoutePlanner] = useState(false);
+  const [showOutingPlanner, setShowOutingPlanner] = useState(false);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [crowdednessReports, setCrowdednessReports] = useState<CrowdednessReport[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
@@ -542,6 +544,15 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                       <span>{language === 'zh' ? '規劃路線' : 'Plan Route'}</span>
                     </button>
                     <button
+                      className="tool-button"
+                      onClick={() => setShowOutingPlanner(!showOutingPlanner)}
+                      title={language === 'zh' ? '智慧遊玩規劃' : 'Smart Outing Planner'}
+                      aria-pressed={showOutingPlanner}
+                    >
+                      <Users size={18} />
+                      <span>{language === 'zh' ? '遊玩規劃' : 'Outing Plan'}</span>
+                    </button>
+                    <button
                       className="tool-button primary"
                       onClick={() => setShowAddLocation(true)}
                       title={t.common.addLocation}
@@ -653,19 +664,33 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
               {loading && <div className="loading-overlay">{t.common.loading}</div>}
 
               {!showFavorites && !searchQuery && (
-                <PersonalizedRecommendations
-                  locations={locations}
-                  onSelectLocation={(locationId) => {
-                    const loc = locations.find(l => l.id === locationId);
-                    if (loc) {
-                      setPosition([loc.coordinates.lat, loc.coordinates.lng]);
-                      setSelectedLocation(loc);
-                      setSidebarOpen(false);
-                    }
-                  }}
-                  language={language}
-                  limit={3}
-                />
+                <>
+                  <PersonalizedRecommendations
+                    locations={locations}
+                    onSelectLocation={(locationId) => {
+                      const loc = locations.find(l => l.id === locationId);
+                      if (loc) {
+                        setPosition([loc.coordinates.lat, loc.coordinates.lng]);
+                        setSelectedLocation(loc);
+                        setSidebarOpen(false);
+                      }
+                    }}
+                    language={language}
+                    limit={3}
+                  />
+
+                  {showOutingPlanner && (
+                    <OutingPlanner
+                      locations={locations}
+                      onSelectLocation={(location) => {
+                        setPosition([location.coordinates.lat, location.coordinates.lng]);
+                        setSelectedLocation(location);
+                        setSidebarOpen(false);
+                      }}
+                      userLocation={{ lat: position[0], lng: position[1] }}
+                    />
+                  )}
+                </>
               )}
 
               <LocationList
