@@ -16,9 +16,12 @@ describe('Saved Searches Utility', () => {
   beforeEach(() => {
     localStorage.clear();
     vi.clearAllMocks();
+    vi.useFakeTimers();
   });
 
   afterEach(() => {
+    vi.runAllTimers();
+    vi.useRealTimers();
     localStorage.clear();
   });
 
