@@ -13,6 +13,7 @@ import { GoNowSuggestions } from './components/GoNowSuggestions';
 import { AlertCenter } from './components/AlertCenter';
 import { FamilyProfileManager } from './components/FamilyProfileManager';
 import { PersonalizedRecommendations } from './components/PersonalizedRecommendations';
+import { LocationComparison } from './components/LocationComparison';
 import OutingPlanner from './components/OutingPlanner';
 import { CITIES, initializeLeafletIcons } from './config/mapConfig';
 import type { CityKey } from './config/mapConfig';
@@ -73,6 +74,8 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
   });
   const [showAlertCenter, setShowAlertCenter] = useState(false);
   const [showFamilyProfile, setShowFamilyProfile] = useState(false);
+  const [comparisonLocations, setComparisonLocations] = useState<Location[]>([]);
+  const [showComparison, setShowComparison] = useState(false);
 
   const toggleSection = (section: string) => {
     setExpandedSections(prev => ({
@@ -294,6 +297,22 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
     }
   };
 
+  const toggleComparison = (e: React.MouseEvent, locationId: string) => {
+    e.stopPropagation();
+    const isInComparison = comparisonLocations.some(l => l.id === locationId);
+    const location = locations.find(l => l.id === locationId);
+    if (!location) return;
+
+    if (isInComparison) {
+      setComparisonLocations(comparisonLocations.filter(l => l.id !== locationId));
+    } else {
+      // Limit to 3 locations for comparison
+      if (comparisonLocations.length < 3) {
+        setComparisonLocations([...comparisonLocations, location]);
+      }
+    }
+  };
+
   const toggleFacilityFilter = (facility: string) => {
     setFacilitiesFilter(prev =>
       prev.includes(facility)
@@ -467,6 +486,8 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
               events={events}
               expandedSections={expandedSections}
               onToggleSection={toggleSection}
+              isInComparison={comparisonLocations.some(l => l.id === selectedLocation.id)}
+              onComparisonToggle={(e) => toggleComparison(e, selectedLocation.id)}
             />
           ) : (
             <>
@@ -551,6 +572,19 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                     >
                       <Users size={18} />
                       <span>{language === 'zh' ? '遊玩規劃' : 'Outing Plan'}</span>
+                    </button>
+                    <button
+                      className="tool-button"
+                      onClick={() => {
+                        if (comparisonLocations.length > 0) {
+                          setShowComparison(!showComparison);
+                        }
+                      }}
+                      disabled={comparisonLocations.length === 0}
+                      title={language === 'zh' ? '比較位置' : 'Compare Locations'}
+                      aria-pressed={showComparison}
+                    >
+                      <span>{language === 'zh' ? '比較' : 'Compare'}</span>
                     </button>
                     <button
                       className="tool-button primary"
@@ -733,6 +767,12 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
         isOpen={showFamilyProfile}
         onClose={() => setShowFamilyProfile(false)}
       />
+      {showComparison && comparisonLocations.length > 0 && (
+        <LocationComparison
+          locations={comparisonLocations}
+          onClose={() => setShowComparison(false)}
+        />
+      )}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { X, Heart, MapPin } from 'lucide-react';
+import { X, Heart, MapPin, Copy } from 'lucide-react';
 import type { Location, Review, ReviewCreateDTO, CrowdednessReport, CrowdednessReportCreateDTO, Event } from '../types';
 import { useTranslation } from '../i18n/useTranslation';
 import { CollapsibleSection } from './CollapsibleSection';
@@ -22,6 +22,8 @@ interface LocationDetailPanelProps {
   events?: Event[];
   expandedSections: Record<string, boolean>;
   onToggleSection: (section: string) => void;
+  isInComparison?: boolean;
+  onComparisonToggle?: (e: React.MouseEvent) => void;
 }
 
 export function LocationDetailPanel({
@@ -36,6 +38,8 @@ export function LocationDetailPanel({
   events,
   expandedSections,
   onToggleSection,
+  isInComparison = false,
+  onComparisonToggle,
 }: LocationDetailPanelProps) {
   const { language, t } = useTranslation();
 
@@ -52,6 +56,16 @@ export function LocationDetailPanel({
             >
               <Heart size={24} fill={isFavorite ? "currentColor" : "none"} />
             </button>
+            {onComparisonToggle && (
+              <button
+                className={`comparison-button ${isInComparison ? 'active' : ''}`}
+                onClick={onComparisonToggle}
+                aria-label={isInComparison ? (language === 'zh' ? '從比較中移除' : 'Remove from comparison') : (language === 'zh' ? '加入比較' : 'Add to comparison')}
+                title={isInComparison ? (language === 'zh' ? '從比較中移除' : 'Remove from comparison') : (language === 'zh' ? '加入比較' : 'Add to comparison')}
+              >
+                <Copy size={24} />
+              </button>
+            )}
           </div>
           <p className="category-label">{t.categories[location.category]}</p>
         </div>
