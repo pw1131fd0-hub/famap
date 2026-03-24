@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import type { Event } from '../types';
 
 describe('EventsList Component Utilities', () => {
@@ -14,9 +14,11 @@ describe('EventsList Component Utilities', () => {
         eventType: 'birthday_party',
         startDate: new Date('2026-04-01T10:00:00').toISOString(),
         endDate: new Date('2026-04-01T14:00:00').toISOString(),
-        ageRange: { min: 5, max: 10 },
+        ageRange: { minAge: 5, maxAge: 10 },
         capacity: 20,
         price: 500,
+        createdAt: new Date('2026-03-20T10:00:00').toISOString(),
+        updatedAt: new Date('2026-03-20T10:00:00').toISOString(),
       },
       {
         id: '2',
@@ -26,9 +28,11 @@ describe('EventsList Component Utilities', () => {
         eventType: 'class',
         startDate: new Date('2026-04-02T14:00:00').toISOString(),
         endDate: new Date('2026-04-02T15:30:00').toISOString(),
-        ageRange: { min: 3, max: 7 },
+        ageRange: { minAge: 3, maxAge: 7 },
         capacity: 15,
         price: 300,
+        createdAt: new Date('2026-03-20T10:00:00').toISOString(),
+        updatedAt: new Date('2026-03-20T10:00:00').toISOString(),
       },
       {
         id: '3',
@@ -38,9 +42,11 @@ describe('EventsList Component Utilities', () => {
         eventType: 'performance',
         startDate: new Date('2026-04-03T18:00:00').toISOString(),
         endDate: new Date('2026-04-03T19:00:00').toISOString(),
-        ageRange: { min: 0, max: 12 },
+        ageRange: { minAge: 0, maxAge: 12 },
         capacity: 50,
         price: 200,
+        createdAt: new Date('2026-03-20T10:00:00').toISOString(),
+        updatedAt: new Date('2026-03-20T10:00:00').toISOString(),
       },
     ];
   });
@@ -163,8 +169,12 @@ describe('EventsList Component Utilities', () => {
     it('should have valid age ranges', () => {
       mockEvents.forEach(event => {
         if (event.ageRange) {
-          expect(event.ageRange.min).toBeGreaterThanOrEqual(0);
-          expect(event.ageRange.max).toBeGreaterThanOrEqual(event.ageRange.min);
+          if (event.ageRange.minAge !== undefined) {
+            expect(event.ageRange.minAge).toBeGreaterThanOrEqual(0);
+          }
+          if (event.ageRange.maxAge !== undefined && event.ageRange.minAge !== undefined) {
+            expect(event.ageRange.maxAge).toBeGreaterThanOrEqual(event.ageRange.minAge);
+          }
         }
       });
     });
@@ -194,40 +204,48 @@ describe('EventsList Component Utilities', () => {
     it('should filter events by age compatibility', () => {
       const targetAge = 6;
       const compatible = mockEvents.filter(e =>
-        !e.ageRange || (e.ageRange.min <= targetAge && e.ageRange.max >= targetAge)
+        !e.ageRange || (!e.ageRange.minAge && !e.ageRange.maxAge) ||
+        ((!e.ageRange.minAge || e.ageRange.minAge <= targetAge) &&
+         (!e.ageRange.maxAge || e.ageRange.maxAge >= targetAge))
       );
       expect(compatible.length).toBeGreaterThan(0);
     });
 
     it('should filter events by price range', () => {
       const maxPrice = 350;
-      const affordable = mockEvents.filter(e => e.price <= maxPrice);
+      const affordable = mockEvents.filter(e => (e.price || 0) <= maxPrice);
       expect(affordable.length).toBeGreaterThan(0);
       affordable.forEach(e => {
-        expect(e.price).toBeLessThanOrEqual(maxPrice);
+        expect(e.price || 0).toBeLessThanOrEqual(maxPrice);
       });
     });
   });
 
   describe('Event Statistics', () => {
     it('should calculate total capacity', () => {
-      const totalCapacity = mockEvents.reduce((sum, e) => sum + e.capacity, 0);
+      const totalCapacity = mockEvents.reduce((sum, e) => sum + (e.capacity || 0), 0);
       expect(totalCapacity).toBe(85); // 20 + 15 + 50
     });
 
     it('should calculate average price', () => {
-      const avgPrice = mockEvents.reduce((sum, e) => sum + e.price, 0) / mockEvents.length;
+      const avgPrice = mockEvents.reduce((sum, e) => sum + (e.price || 0), 0) / mockEvents.length;
       expect(avgPrice).toBeGreaterThan(0);
     });
 
     it('should identify cheapest event', () => {
-      const cheapest = mockEvents.reduce((min, e) => e.price < min.price ? e : min);
-      expect(cheapest.price).toBe(200);
+      const eventsWithPrice = mockEvents.filter(e => e.price !== undefined);
+      if (eventsWithPrice.length > 0) {
+        const cheapest = eventsWithPrice.reduce((min, e) => (e.price || Infinity) < (min.price || Infinity) ? e : min);
+        expect(cheapest.price).toBe(200);
+      }
     });
 
     it('should identify most expensive event', () => {
-      const mostExpensive = mockEvents.reduce((max, e) => e.price > max.price ? e : max);
-      expect(mostExpensive.price).toBe(500);
+      const eventsWithPrice = mockEvents.filter(e => e.price !== undefined);
+      if (eventsWithPrice.length > 0) {
+        const mostExpensive = eventsWithPrice.reduce((max, e) => (e.price || 0) > (max.price || 0) ? e : max);
+        expect(mostExpensive.price).toBe(500);
+      }
     });
   });
 
