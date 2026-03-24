@@ -43,7 +43,6 @@ export interface AlertPreferences {
 
 const STORAGE_KEY = 'fammap_alerts';
 const PREFERENCES_KEY = 'fammap_alert_preferences';
-const ALERT_HISTORY_KEY = 'fammap_alert_history';
 const MAX_ALERTS = 50;
 const ALERT_TTL = 7 * 24 * 60 * 60 * 1000; // 7 days
 
@@ -444,7 +443,6 @@ export function generatePromotionAlert(
   promotionDetails: string,
   expiryDate?: number
 ): Alert {
-  const preferences = loadAlertPreferences();
 
   const daysUntil = expiryDate
     ? Math.floor((expiryDate - Date.now()) / (24 * 60 * 60 * 1000))

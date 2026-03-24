@@ -21,7 +21,6 @@ import {
   generatePromotionAlert,
   getDisplayableAlerts,
   groupAlertsByType,
-  type Alert,
   type AlertPreferences,
 } from '../utils/alertSystem';
 

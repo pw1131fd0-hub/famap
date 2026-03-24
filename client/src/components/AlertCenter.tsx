@@ -5,7 +5,6 @@ import {
   AlertCircle,
   AlertTriangle,
   Info,
-  Settings,
   Eye,
   EyeOff,
   Trash2,
@@ -18,7 +17,6 @@ import {
   markAllAlertsAsRead,
   deleteAlert,
   clearAllAlerts,
-  groupAlertsByType,
   loadAlertPreferences,
   saveAlertPreferences,
   getDefaultAlertPreferences,
@@ -34,10 +32,9 @@ interface AlertCenterProps {
 }
 
 export function AlertCenter({ isOpen, onClose }: AlertCenterProps) {
-  const { language, t } = useTranslation();
+  const { language } = useTranslation();
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
-  const [showSettings, setShowSettings] = useState(false);
   const [preferences, setPreferences] = useState<AlertPreferences>(
     getDefaultAlertPreferences()
   );
@@ -143,7 +140,6 @@ export function AlertCenter({ isOpen, onClose }: AlertCenterProps) {
         ? []
         : alerts;
 
-  const grouped = groupAlertsByType();
   const totalAlerts = alerts.length;
 
   return (
@@ -442,7 +438,7 @@ export function AlertCenter({ isOpen, onClose }: AlertCenterProps) {
         </div>
 
         {/* Footer */}
-        {!showSettings && displayAlerts.length > 0 && (
+        {activeTab !== 'settings' && displayAlerts.length > 0 && (
           <div className="alert-footer">
             <button
               className="footer-btn secondary"
