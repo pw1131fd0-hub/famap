@@ -5,14 +5,13 @@ import type { Location } from '../types';
 
 const mockLocation: Location = {
   id: 'loc1',
-  name: 'Test Park',
+  name: { zh: '測試公園', en: 'Test Park' },
   category: 'park',
-  address: '123 Test Street',
+  address: { zh: '123 測試街', en: '123 Test Street' },
+  description: { zh: '一個美麗的公園', en: 'A beautiful park' },
   coordinates: { lat: 25.033, lng: 121.565 },
   averageRating: 4.5,
   facilities: [],
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
   phoneNumber: '02-XXXX-XXXX'
 };
 
