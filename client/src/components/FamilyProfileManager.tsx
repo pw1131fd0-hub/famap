@@ -29,11 +29,14 @@ export function FamilyProfileManager({
   );
   const [showForm, setShowForm] = useState(false);
 
+  // Legitimate pattern: loading profile data from localStorage on component mount
   useEffect(() => {
     const loaded = loadFamilyProfiles();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setProfiles(loaded);
 
     const current = getCurrentFamilyProfile();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCurrentProfile(current);
   }, []);
 

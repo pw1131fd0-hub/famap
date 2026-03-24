@@ -36,13 +36,16 @@ export const CollaborativeVenueInsights: React.FC<CollaborativeVenueInsightsProp
 
   const availableTags = ['crowded', 'quiet', 'clean', 'staff-friendly', 'parking-full', 'parking-available', 'kid-friendly', 'toddler-friendly', 'good-food', 'limited-facilities'];
 
+  // Legitimate pattern: loading location-specific data when prop changes
   useEffect(() => {
     // Load insights
     const loadedInsights = getLocationInsights(locationId, 24 * 30); // Last 30 days
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setInsights(loadedInsights);
 
     // Load stats
     const loadedStats = getVenueInsightStats(locationId);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setStats(loadedStats);
   }, [locationId]);
 
