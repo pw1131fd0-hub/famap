@@ -14,10 +14,12 @@ import { AlertCenter } from './components/AlertCenter';
 import { FamilyProfileManager } from './components/FamilyProfileManager';
 import { PersonalizedRecommendations } from './components/PersonalizedRecommendations';
 import { LocationComparison } from './components/LocationComparison';
+import { SmartTipsPanel } from './components/SmartTipsPanel';
 import OutingPlanner from './components/OutingPlanner';
 import { CITIES, initializeLeafletIcons } from './config/mapConfig';
 import type { CityKey } from './config/mapConfig';
 import performanceMonitor from './utils/performanceMonitoring';
+import './styles/SmartTipsPanel.css';
 
 // Initialize Leaflet icons
 initializeLeafletIcons();
@@ -76,6 +78,12 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
   const [showFamilyProfile, setShowFamilyProfile] = useState(false);
   const [comparisonLocations, setComparisonLocations] = useState<Location[]>([]);
   const [showComparison, setShowComparison] = useState(false);
+  const [showSmartTips, setShowSmartTips] = useState(() => {
+    // Show tips if user hasn't dismissed them all and first time visiting
+    const dismissedTips = localStorage.getItem('dismissedTips');
+    const hasVisited = localStorage.getItem('fammap_visited');
+    return !hasVisited && !dismissedTips;
+  });
 
   const toggleSection = (section: string) => {
     setExpandedSections(prev => ({
@@ -96,6 +104,14 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
       return newMode;
     });
   };
+
+  // Mark first visit for smart tips
+  useEffect(() => {
+    const hasVisited = localStorage.getItem('fammap_visited');
+    if (!hasVisited) {
+      localStorage.setItem('fammap_visited', 'true');
+    }
+  }, []);
 
   // Track online/offline status
   useEffect(() => {
@@ -773,6 +789,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
           onClose={() => setShowComparison(false)}
         />
       )}
+      <SmartTipsPanel visible={showSmartTips} onClose={() => setShowSmartTips(false)} />
     </div>
   );
 }

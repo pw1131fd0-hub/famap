@@ -1,0 +1,163 @@
+.smart-tips-panel {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  max-width: 360px;
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(400px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.smart-tips-content {
+  background: white;
+  border-radius: 12px;
+  border-left: 4px solid #A7C7E7;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  padding: 16px;
+  font-family: 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+}
+
+.smart-tips-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.smart-tips-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+}
+
+.smart-tips-header h3 {
+  flex: 1;
+  margin: 0;
+  font-size: 0.95em;
+  font-weight: 600;
+  color: #333;
+}
+
+.smart-tips-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.smart-tips-close:hover {
+  color: #333;
+}
+
+.smart-tips-description {
+  margin: 0;
+  font-size: 0.85em;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.smart-tips-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.smart-tips-dismiss {
+  background: #A7C7E7;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.8em;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: background-color 0.2s;
+}
+
+.smart-tips-dismiss:hover {
+  background: #91b3d9;
+}
+
+.smart-tips-progress {
+  font-size: 0.75em;
+  color: #999;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .smart-tips-panel {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    max-width: none;
+  }
+
+  .smart-tips-header {
+    gap: 8px;
+  }
+
+  .smart-tips-header h3 {
+    font-size: 0.9em;
+  }
+
+  .smart-tips-description {
+    font-size: 0.8em;
+  }
+}
+
+/* Dark mode */
+.dark-mode .smart-tips-content {
+  background: #2d2d2d;
+  color: #e0e0e0;
+}
+
+.dark-mode .smart-tips-header h3 {
+  color: #e0e0e0;
+}
+
+.dark-mode .smart-tips-description {
+  color: #b0b0b0;
+}
+
+.dark-mode .smart-tips-close {
+  color: #888;
+}
+
+.dark-mode .smart-tips-close:hover {
+  color: #e0e0e0;
+}
+
+.dark-mode .smart-tips-dismiss {
+  background: #5a7fa3;
+}
+
+.dark-mode .smart-tips-dismiss:hover {
+  background: #6a8fb3;
+}
+
+.dark-mode .smart-tips-progress {
+  color: #888;
+}
