@@ -2,6 +2,7 @@ import { useState, useCallback, useMemo } from 'react';
 import { MapPin, X, ArrowRight, Clock, Compass } from 'lucide-react';
 import type { Location } from '../types';
 import { useTranslation } from '../i18n/useTranslation';
+import { captureException } from '../utils/sentryConfig';
 
 export interface RouteStop {
   location_id: string;
@@ -71,7 +72,10 @@ export function RoutePlanner({ locations, userLocation, onRouteSelected, onClose
       onRouteSelected?.(route);
     } catch (err) {
       setError(language === 'zh' ? '無法優化路線' : 'Failed to optimize route');
-      console.error(err);
+      captureException(err instanceof Error ? err : new Error(String(err)), {
+        context: 'routeOptimization',
+        selectedLocations: selectedLocations.length,
+      });
     } finally {
       setLoading(false);
     }

@@ -1,6 +1,6 @@
 import React, { type ReactNode } from 'react';
 import { AlertCircle, RotateCw } from 'lucide-react';
-import { captureException } from '../utils/sentryConfig';
+import { captureException, addBreadcrumb } from '../utils/sentryConfig';
 
 interface Props {
   children: ReactNode;
@@ -25,7 +25,10 @@ export class ErrorBoundary extends React.Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('ErrorBoundary caught:', error, errorInfo);
+    addBreadcrumb('ErrorBoundary caught error', 'error', 'react', {
+      error: error.message,
+      componentStack: errorInfo.componentStack,
+    });
 
     // Call custom error handler if provided
     if (this.props.onError) {

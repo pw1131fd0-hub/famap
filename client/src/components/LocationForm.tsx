@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { type LocationCreateDTO, type Category } from '../types';
 import { useTranslation } from '../i18n/useTranslation';
+import { captureException } from '../utils/sentryConfig';
 
 interface LocationFormProps {
   onSubmit: (location: LocationCreateDTO) => Promise<void>;
@@ -44,7 +45,9 @@ export const LocationForm: React.FC<LocationFormProps> = ({ onSubmit, onCancel, 
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Failed to submit location';
       setError(message);
-      console.error('Failed to submit location:', err);
+      captureException(err instanceof Error ? err : new Error(String(err)), {
+        context: 'LocationForm submit',
+      });
     } finally {
       setLoading(false);
     }

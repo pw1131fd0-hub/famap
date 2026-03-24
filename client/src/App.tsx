@@ -19,7 +19,7 @@ import OutingPlanner from './components/OutingPlanner';
 import { CITIES, initializeLeafletIcons } from './config/mapConfig';
 import type { CityKey } from './config/mapConfig';
 import performanceMonitor from './utils/performanceMonitoring';
-import { initializeSentry, addBreadcrumb } from './utils/sentryConfig';
+import { initializeSentry, addBreadcrumb, captureException } from './utils/sentryConfig';
 import './styles/SmartTipsPanel.css';
 
 // Initialize error tracking and monitoring
@@ -158,7 +158,11 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
       );
       setLocations(data);
     } catch (error) {
-      console.error('Failed to fetch locations:', error);
+      captureException(error instanceof Error ? error : new Error(String(error)), {
+        context: 'fetchLocations',
+        category: selectedCategory,
+        strollerOnly,
+      });
     } finally {
       setLoading(false);
     }
@@ -174,7 +178,10 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
         const data = await favoriteApi.getFavorites(MOCK_USER_ID);
         setFavorites(data);
       } catch (error) {
-        console.error('Failed to fetch favorites:', error);
+        captureException(error instanceof Error ? error : new Error(String(error)), {
+          context: 'fetchFavorites',
+          userId: MOCK_USER_ID,
+        });
       }
     };
 
@@ -188,7 +195,10 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
           const data = await reviewApi.getByLocationId(selectedLocation.id);
           setReviews(data);
         } catch (error) {
-          console.error('Failed to fetch reviews:', error);
+          captureException(error instanceof Error ? error : new Error(String(error)), {
+            context: 'fetchReviews',
+            locationId: selectedLocation?.id,
+          });
         }
       } else {
         setReviews([]);
@@ -205,7 +215,10 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
           const data = await crowdinessApi.getByLocationId(selectedLocation.id);
           setCrowdednessReports(data);
         } catch (error) {
-          console.error('Failed to fetch crowdedness reports:', error);
+          captureException(error instanceof Error ? error : new Error(String(error)), {
+            context: 'fetchCrowdednessReports',
+            locationId: selectedLocation?.id,
+          });
         }
       } else {
         setCrowdednessReports([]);
@@ -222,7 +235,10 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
           const data = await eventsApi.getByLocationId(selectedLocation.id);
           setEvents(data);
         } catch (error) {
-          console.error('Failed to fetch events:', error);
+          captureException(error instanceof Error ? error : new Error(String(error)), {
+            context: 'fetchEvents',
+            locationId: selectedLocation?.id,
+          });
         }
       } else {
         setEvents([]);
@@ -240,7 +256,9 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
           setErrorMessage(null);
         },
         (err) => {
-          console.error('Geolocation error:', err);
+          captureException(err instanceof Error ? err : new Error(String(err)), {
+        context: 'geolocation',
+      });
           const message = language === 'zh'
             ? '無法獲取您的位置，使用台北作為預設位置。'
             : 'Could not get your location. Defaulting to Taipei.';
@@ -273,7 +291,10 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
       const newReview = await reviewApi.create(selectedLocation.id, reviewDto);
       setReviews([newReview, ...reviews]);
     } catch (error) {
-      console.error('Failed to post review:', error);
+      captureException(error instanceof Error ? error : new Error(String(error)), {
+        context: 'postReview',
+        locationId: selectedLocation?.id,
+      });
       throw error;
     }
   };
@@ -284,7 +305,10 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
       const newReport = await crowdinessApi.create(selectedLocation.id, reportDto);
       setCrowdednessReports([newReport, ...crowdednessReports]);
     } catch (error) {
-      console.error('Failed to post crowdedness report:', error);
+      captureException(error instanceof Error ? error : new Error(String(error)), {
+        context: 'postCrowdednessReport',
+        locationId: selectedLocation?.id,
+      });
       throw error;
     }
   };
@@ -296,7 +320,9 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
       setShowAddLocation(false);
       setSelectedLocation(newLocation);
     } catch (error) {
-      console.error('Failed to create location:', error);
+      captureException(error instanceof Error ? error : new Error(String(error)), {
+        context: 'createLocation',
+      });
       throw error;
     }
   };
@@ -316,7 +342,10 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
         }
       }
     } catch (error) {
-      console.error('Failed to toggle favorite:', error);
+      captureException(error instanceof Error ? error : new Error(String(error)), {
+        context: 'toggleFavorite',
+        locationId,
+      });
     }
   };
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { ReviewCreateDTO } from '../types';
 import { useTranslation } from '../i18n/useTranslation';
+import { captureException } from '../utils/sentryConfig';
 
 interface ReviewFormProps {
   onSubmit: (review: ReviewCreateDTO) => Promise<void>;
@@ -36,7 +37,9 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit }) => {
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Failed to submit review';
       setError(message);
-      console.error('Failed to submit review:', err);
+      captureException(err instanceof Error ? err : new Error(String(err)), {
+        context: 'ReviewForm submit',
+      });
     } finally {
       setSubmitting(false);
     }
