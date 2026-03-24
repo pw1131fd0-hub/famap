@@ -1,5 +1,6 @@
 import React, { type ReactNode } from 'react';
 import { AlertCircle, RotateCw } from 'lucide-react';
+import { captureException } from '../utils/sentryConfig';
 
 interface Props {
   children: ReactNode;
@@ -36,11 +37,13 @@ export class ErrorBoundary extends React.Component<Props, State> {
       errorCount: prev.errorCount + 1
     }));
 
-    // Log to external error tracking service (e.g., Sentry) in production
-    if (!import.meta.env.DEV) {
-      // TODO: Integrate with Sentry or similar service
-      // captureException(error, { contexts: { react: errorInfo } });
-    }
+    // Log to error tracking service
+    captureException(error, {
+      react: {
+        componentStack: errorInfo.componentStack,
+        errorCount: this.state.errorCount + 1,
+      },
+    });
   }
 
   resetError = () => {

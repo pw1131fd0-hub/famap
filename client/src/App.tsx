@@ -19,10 +19,17 @@ import OutingPlanner from './components/OutingPlanner';
 import { CITIES, initializeLeafletIcons } from './config/mapConfig';
 import type { CityKey } from './config/mapConfig';
 import performanceMonitor from './utils/performanceMonitoring';
+import { initializeSentry, addBreadcrumb } from './utils/sentryConfig';
 import './styles/SmartTipsPanel.css';
+
+// Initialize error tracking and monitoring
+initializeSentry();
 
 // Initialize Leaflet icons
 initializeLeafletIcons();
+
+// Add initial breadcrumb for app startup
+addBreadcrumb('FamMap application initialized', 'info', 'app-lifecycle');
 
 // Hardcoded user ID for demonstration (MVP)
 const MOCK_USER_ID = 'u1';
