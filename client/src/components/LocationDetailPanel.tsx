@@ -8,6 +8,7 @@ import { ReviewForm } from './ReviewForm';
 import { CrowdednessReportForm } from './CrowdednessReportForm';
 import { CrowdednessReportList } from './CrowdednessReportList';
 import { EventsList } from './EventsList';
+import { LocationInsightsPanel } from './LocationInsightsPanel';
 import { isLocationOpen } from '../utils/locationUtils';
 import { DAY_NAMES_ZH } from '../config/mapConfig';
 
@@ -130,6 +131,13 @@ export function LocationDetailPanel({
             </div>
           )}
         </CollapsibleSection>
+
+        {/* Location Insights & Analytics */}
+        <LocationInsightsPanel
+          location={location}
+          reviews={reviews}
+          crowdednessReports={crowdednessReports}
+        />
 
         {/* Operating Hours & Facilities */}
         {(location.operatingHours || location.facilities) && (
