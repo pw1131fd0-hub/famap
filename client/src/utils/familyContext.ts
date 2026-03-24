@@ -209,23 +209,23 @@ export function calculateFamilySuitabilityScore(
   const reasoning: string[] = [];
 
   // Safety score (based on location type and child ages)
-  let safetyScore = calculateSafetyScore(location, family, reasoning);
+  const safetyScore = calculateSafetyScore(location, family, reasoning);
 
   // Facilities score (based on available facilities)
-  let facilitiesScore = calculateFacilitiesScore(location, family, reasoning);
+  const facilitiesScore = calculateFacilitiesScore(location, family, reasoning);
 
   // Accessibility score
-  let accessibilityScore = calculateAccessibilityScore(
+  const accessibilityScore = calculateAccessibilityScore(
     location,
     family,
     reasoning
   );
 
   // Atmosphere score (based on location type and family preference)
-  let atmosphereScore = calculateAtmosphereScore(location, family, reasoning);
+  const atmosphereScore = calculateAtmosphereScore(location, family, reasoning);
 
   // Timing score (based on crowd info if available)
-  let timingScore = calculateTimingScore(location, family, reasoning);
+  const timingScore = calculateTimingScore(location, family, reasoning);
 
   const overall =
     (safetyScore * 0.25 +
@@ -384,7 +384,7 @@ function calculateTimingScore(
   family: FamilyProfile,
   reasoning: string[]
 ): number {
-  let score = 75;
+  const score = 75;
 
   // Check if family prefers avoiding peak hours
   if (family.preferences.timePreferences.avoidPeakHours) {

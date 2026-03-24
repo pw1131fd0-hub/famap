@@ -538,7 +538,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                           setSelectedLocation(loc);
                         }
                       }}
-                      onNavigate={(lat, lng, _name) => {
+                      onNavigate={(lat, lng) => {
                         setPosition([lat, lng]);
                       }}
                     />

@@ -357,7 +357,7 @@ describe('AlertCenter Component', () => {
         <AlertCenter isOpen={true} onClose={mockClose} />
       );
 
-      let badge = container.querySelector('.unread-badge');
+      const badge = container.querySelector('.unread-badge');
       expect(badge?.textContent).toMatch(/1/);
 
       const markReadBtn = container.querySelector('.action-btn');

@@ -382,7 +382,7 @@ describe('Saved Searches Utility', () => {
       recordSearchUsage(search.id);
 
       // Check usage
-      let updated = getSavedSearches()[0];
+      const updated = getSavedSearches()[0];
       expect(updated.usageCount).toBe(2);
 
       // Duplicate it
