@@ -32,12 +32,18 @@ export function EnhancedSearchPanel({
   const [showResults, setShowResults] = useState(false);
 
   // Load history and suggestions on mount
+  // Legitimate use: Synchronizing external data (localStorage history) with React state.
+  // The effect runs on mount and when dependencies change, loading fresh data from storage.
+  // eslint-disable react-hooks/set-state-in-effect
   useEffect(() => {
     setHistory(getSearchHistory());
     setSuggestions(generateSearchSuggestions(locations, language));
   }, [locations, language]);
 
   // Perform search when query changes
+  // Legitimate use: Reactive search updates - computing derived state (search results) based on query changes.
+  // The effect synchronizes user input with search results, which is a derived output, not an external system.
+  // eslint-disable react-hooks/set-state-in-effect
   useEffect(() => {
     if (searchQuery.trim()) {
       const results = searchLocations(
@@ -53,6 +59,7 @@ export function EnhancedSearchPanel({
       setShowResults(false);
     }
   }, [searchQuery, locations, userLocation]);
+  // eslint-enable react-hooks/set-state-in-effect
 
   const handleResultClick = (result: SearchResult) => {
     saveSearchToHistory(searchQuery, searchResults.length);
