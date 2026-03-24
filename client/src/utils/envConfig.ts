@@ -187,8 +187,11 @@ const envManager = new EnvironmentManager();
 if (typeof window !== 'undefined') {
   try {
     envManager.init();
-  } catch (error) {
-    // Error already logged via captureException and addBreadcrumb
+  } catch (
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    error
+  ) {
+    // Error already logged via captureException and addBreadcrumb in init()
   }
 }
 

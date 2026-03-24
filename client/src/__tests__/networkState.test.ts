@@ -117,10 +117,7 @@ describe('Network State Manager', () => {
 
   describe('Real-time Detection', () => {
     it('should have working listeners mechanism', () => {
-      let callCount = 0;
-      const listener = vi.fn(() => {
-        callCount++;
-      });
+      const listener = vi.fn();
 
       const unsubscribe = networkStateManager.subscribe(listener);
       expect(unsubscribe).toBeDefined();
