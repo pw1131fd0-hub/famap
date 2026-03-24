@@ -39,17 +39,17 @@ export const CollaborativeVenueInsights: React.FC<CollaborativeVenueInsightsProp
   // Legitimate pattern: loading location-specific data when prop changes.
   // Multiple setState calls load related venue data from localStorage based on the location ID.
   // This synchronizes external data with React state when the location changes.
-  // eslint-disable react-hooks/set-state-in-effect
   useEffect(() => {
     // Load insights
     const loadedInsights = getLocationInsights(locationId, 24 * 30); // Last 30 days
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setInsights(loadedInsights);
 
     // Load stats
     const loadedStats = getVenueInsightStats(locationId);
+     
     setStats(loadedStats);
   }, [locationId]);
-  // eslint-enable react-hooks/set-state-in-effect
 
   const handleAddInsight = () => {
     if (!newInsightTitle.trim() || !newInsightContent.trim()) {

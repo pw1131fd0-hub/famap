@@ -46,16 +46,17 @@ export function AlertCenter({ isOpen, onClose }: AlertCenterProps) {
   // Legitimate pattern: syncing with localStorage (external system) when modal opens.
   // Multiple setState calls are used to synchronize all alert-related data from storage with React state
   // when the user opens the modal. This is necessary for real-time data consistency.
-  // eslint-disable react-hooks/set-state-in-effect
   useEffect(() => {
     if (isOpen) {
       const loadedAlerts = loadAlerts();
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setAlerts(loadedAlerts);
+       
       setUnreadCount(getUnreadAlertsCount());
+       
       setPreferences(loadAlertPreferences());
     }
   }, [isOpen]);
-  // eslint-enable react-hooks/set-state-in-effect
 
   const handleMarkAsRead = useCallback(
     (alertId: string) => {

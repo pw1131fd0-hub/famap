@@ -405,17 +405,17 @@
 }
 
 /* Dark Mode Support */
-:global(.dark-mode) .family-profile-card,
-:global(.dark-mode) .family-profile-modal {
+.dark-mode .family-profile-card,
+.dark-mode .family-profile-modal {
   background: #2a2a2a;
   color: #e0e0e0;
 }
 
-:global(.dark-mode) .profile-card {
+.dark-mode .profile-card {
   background: #333333;
 }
 
-:global(.dark-mode) .form-input input {
+.dark-mode .form-input input {
   background: #2a2a2a;
   color: #e0e0e0;
 }

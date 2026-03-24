@@ -224,101 +224,101 @@
 }
 
 /* Dark mode support */
-:global(.dark-mode) .saved-searches-panel {
+.dark-mode .saved-searches-panel {
   background: #2a2a2a;
   color: #e0e0e0;
 }
 
-:global(.dark-mode) .saved-searches-panel .search-header {
+.dark-mode .saved-searches-panel .search-header {
   background: #333333;
   border-bottom-color: #444444;
 }
 
-:global(.dark-mode) .saved-searches-panel .search-header h2 {
+.dark-mode .saved-searches-panel .search-header h2 {
   color: #e0e0e0;
 }
 
-:global(.dark-mode) .saved-searches-panel .close-button {
+.dark-mode .saved-searches-panel .close-button {
   color: #999999;
 }
 
-:global(.dark-mode) .saved-searches-panel .close-button:hover {
+.dark-mode .saved-searches-panel .close-button:hover {
   background: #444444;
   color: #e0e0e0;
 }
 
-:global(.dark-mode) .searches-controls {
+.dark-mode .searches-controls {
   background: #333333;
   border-bottom-color: #444444;
 }
 
-:global(.dark-mode) .sort-controls label {
+.dark-mode .sort-controls label {
   color: #b0b0b0;
 }
 
-:global(.dark-mode) .sort-btn {
+.dark-mode .sort-btn {
   background: #3a3a3a;
   border-color: #444444;
   color: #b0b0b0;
 }
 
-:global(.dark-mode) .sort-btn:hover {
+.dark-mode .sort-btn:hover {
   border-color: #A7C7E7;
   color: #A7C7E7;
 }
 
-:global(.dark-mode) .sort-btn.active {
+.dark-mode .sort-btn.active {
   background: #A7C7E7;
   border-color: #A7C7E7;
   color: #1a1a1a;
 }
 
-:global(.dark-mode) .search-item {
+.dark-mode .search-item {
   background: #3a3a3a;
   border-color: #444444;
 }
 
-:global(.dark-mode) .search-item:hover {
+.dark-mode .search-item:hover {
   border-color: #A7C7E7;
   box-shadow: 0 2px 4px rgba(167, 199, 231, 0.1);
 }
 
-:global(.dark-mode) .search-item-name {
+.dark-mode .search-item-name {
   color: #e0e0e0;
 }
 
-:global(.dark-mode) .search-item-query {
+.dark-mode .search-item-query {
   color: #b0b0b0;
 }
 
-:global(.dark-mode) .meta-info {
+.dark-mode .meta-info {
   color: #888888;
 }
 
-:global(.dark-mode) .search-item-actions {
+.dark-mode .search-item-actions {
   background: #333333;
 }
 
-:global(.dark-mode) .action-btn {
+.dark-mode .action-btn {
   color: #888888;
 }
 
-:global(.dark-mode) .action-btn:hover {
+.dark-mode .action-btn:hover {
   background: #444444;
   color: #b0b0b0;
 }
 
-:global(.dark-mode) .action-btn.delete:hover {
+.dark-mode .action-btn.delete:hover {
   background: #5a2a2a;
   color: #ff6b6b;
 }
 
-:global(.dark-mode) .action-btn.duplicate:hover {
+.dark-mode .action-btn.duplicate:hover {
   background: #2a4a2a;
   color: #66bb6a;
 }
 
-:global(.dark-mode) .no-searches {
+.dark-mode .no-searches {
   color: #666666;
 }
 

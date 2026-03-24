@@ -43,19 +43,21 @@ export const PersonalizedRecommendations: React.FC<PersonalizedRecommendationsPr
   // Legitimate pattern: computing recommendations based on preferences and props.
   // Multiple setState calls load user preferences and compute derived state (recommendations).
   // The effect runs when locations or limit change to provide fresh personalized results.
-  // eslint-disable react-hooks/set-state-in-effect
   useEffect(() => {
     // Load preferences and calculate recommendations
     const prefs = loadPreferences();
     const recs = getPersonalizedRecommendations(locations, prefs, limit);
     const summary = getPreferenceSummary(prefs);
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRecommendedLocationIds(recs);
+     
     setPreferenceSummary(summary);
+     
     setUserChildAge(prefs.childAgeRange);
+     
     setLoading(false);
   }, [locations, limit]);
-  // eslint-enable react-hooks/set-state-in-effect
 
   const handleSelectLocation = (locationId: string) => {
     // Record view in preferences

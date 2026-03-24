@@ -32,15 +32,15 @@ export function FamilyProfileManager({
   // Legitimate pattern: loading profile data from localStorage on component mount.
   // Multiple setState calls hydrate React state from persistent storage during initialization.
   // This ensures the component's state matches the saved profiles when mounted.
-  // eslint-disable react-hooks/set-state-in-effect
   useEffect(() => {
     const loaded = loadFamilyProfiles();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setProfiles(loaded);
 
     const current = getCurrentFamilyProfile();
+     
     setCurrentProfile(current);
   }, []);
-  // eslint-enable react-hooks/set-state-in-effect
 
   const handleCreateProfile = (children: Omit<ChildProfile, 'id'>[]) => {
     const newProfile = createFamilyProfile(children.length, children);
