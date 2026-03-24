@@ -3,6 +3,8 @@
  * Tracks user interactions and learns preferences to provide personalized recommendations
  */
 
+import { captureException, addBreadcrumb } from './sentryConfig';
+
 export interface UserPreference {
   locationId: string;
   viewCount: number;
@@ -65,7 +67,10 @@ export function loadPreferences(): UserPreferences {
       };
     }
   } catch (err) {
-    console.error('Failed to load preferences:', err);
+    captureException(err instanceof Error ? err : new Error(String(err)), {
+      context: 'loadPreferences',
+    });
+    addBreadcrumb('Failed to load preferences, using defaults', 'warning', 'storage');
   }
   return initializePreferences();
 }
@@ -82,7 +87,10 @@ export function savePreferences(prefs: UserPreferences): void {
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(toStore));
   } catch (err) {
-    console.error('Failed to save preferences:', err);
+    captureException(err instanceof Error ? err : new Error(String(err)), {
+      context: 'savePreferences',
+    });
+    addBreadcrumb('Failed to save preferences to storage', 'warning', 'storage');
   }
 }
 

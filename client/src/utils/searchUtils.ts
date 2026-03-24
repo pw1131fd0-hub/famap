@@ -1,4 +1,5 @@
 import type { Location } from '../types';
+import { captureException, addBreadcrumb } from './sentryConfig';
 
 export interface SearchResult {
   location: Location;
@@ -181,7 +182,10 @@ export function saveSearchToHistory(
 
     localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(updated));
   } catch (error) {
-    console.error('Failed to save search history:', error);
+    captureException(error instanceof Error ? error : new Error(String(error)), {
+      context: 'saveSearchHistory',
+    });
+    addBreadcrumb('Failed to save search history', 'warning', 'storage');
   }
 }
 
@@ -189,7 +193,10 @@ export function clearSearchHistory(): void {
   try {
     localStorage.removeItem(SEARCH_HISTORY_KEY);
   } catch (error) {
-    console.error('Failed to clear search history:', error);
+    captureException(error instanceof Error ? error : new Error(String(error)), {
+      context: 'clearSearchHistory',
+    });
+    addBreadcrumb('Failed to clear search history', 'warning', 'storage');
   }
 }
 
