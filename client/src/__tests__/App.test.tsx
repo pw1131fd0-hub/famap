@@ -331,13 +331,13 @@ describe('App', () => {
         <App />
       </LanguageProvider>
     );
-    // Click favorites tab
-    const favBtn = screen.getByText(/我的收藏|Favorites/i);
-    fireEvent.click(favBtn);
+    // Click favorites tab - use getAllByText and get the first one (sidebar tab)
+    const favBtns = screen.getAllByText(/我的收藏|Favorites/i);
+    fireEvent.click(favBtns[0]);
 
-    // Click all tab to go back
-    const allBtn = screen.getByText(/全部|All/i);
-    fireEvent.click(allBtn);
+    // Click all tab to go back - use getAllByText and get the first one (sidebar tab)
+    const allBtns = screen.getAllByText(/全部|All/i);
+    fireEvent.click(allBtns[0]);
   });
 
   it('toggles multiple sort options sequentially', () => {
