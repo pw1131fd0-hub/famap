@@ -1,6 +1,7 @@
 import { X, Heart, MapPin, Copy } from 'lucide-react';
 import type { Location, Review, ReviewCreateDTO, CrowdednessReport, CrowdednessReportCreateDTO, Event } from '../types';
 import { useTranslation } from '../i18n/useTranslation';
+import { useLocationMetaTags } from '../hooks/useMetaTags';
 import { CollapsibleSection } from './CollapsibleSection';
 import { ReviewList } from './ReviewList';
 import { ReviewForm } from './ReviewForm';
@@ -42,6 +43,7 @@ export function LocationDetailPanel({
   onComparisonToggle,
 }: LocationDetailPanelProps) {
   const { language, t } = useTranslation();
+  useLocationMetaTags(location, language);
 
   return (
     <div className="location-detail-overlay">
