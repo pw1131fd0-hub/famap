@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Settings, BarChart3, MessageSquare, Image as ImageIcon, Percent, LogOut, Mail, Phone } from 'lucide-react';
 import type { VenueManager, VenueManagerDashboardData } from '../types/venueManager';
 import '../styles/VenueManagerPortal.css';
@@ -18,11 +18,7 @@ export const VenueManagerPortal: React.FC<VenueManagerPortalProps> = ({ venueId,
   const [error, setError] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() => {
-    loadManagerData();
-  }, [venueId]);
-
-  const loadManagerData = async () => {
+  const loadManagerData = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -117,8 +113,13 @@ export const VenueManagerPortal: React.FC<VenueManagerPortalProps> = ({ venueId,
     } finally {
       setLoading(false);
     }
-  };
+  }, [venueId]);
 
+  useEffect(() => {
+    loadManagerData();
+  }, [loadManagerData]);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleLogin = (email: string, _password: string) => {
     const newManager: VenueManager = {
       id: 'mgr_' + Math.random().toString(36).substr(2, 9),
@@ -381,7 +382,6 @@ interface AnalyticsTabProps {
   data: VenueManagerDashboardData;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const AnalyticsTab: React.FC<AnalyticsTabProps> = ({ data }) => (
   <div className="vm-tab-content">
     <div className="vm-analytics-container">

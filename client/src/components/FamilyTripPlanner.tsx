@@ -57,6 +57,7 @@ export function FamilyTripPlanner({ darkMode }: Props) {
   useEffect(() => {
     const savedTrips = localStorage.getItem('familyTrips');
     if (savedTrips) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTrips(JSON.parse(savedTrips));
     }
   }, []);
