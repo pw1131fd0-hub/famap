@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import 'leaflet/dist/leaflet.css';
-import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Menu, ChevronDown, Filter, Heart, List, Moon, Sun, Route, Bell, Users } from 'lucide-react';
+import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Menu, ChevronDown, Filter, Heart, List, Moon, Sun, Route, Bell, Users, Wallet } from 'lucide-react';
 import { locationApi, reviewApi, favoriteApi, crowdinessApi, eventsApi } from './services/api';
 import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO, CrowdednessReport, CrowdednessReportCreateDTO, Event } from './types';
 import { useTranslation } from './i18n/useTranslation';
@@ -17,6 +17,7 @@ import { LocationComparison } from './components/LocationComparison';
 import { SmartTipsPanel } from './components/SmartTipsPanel';
 import OutingPlanner from './components/OutingPlanner';
 import { FamilyTripPlanner } from './components/FamilyTripPlanner';
+import { TripCostCalculator } from './components/TripCostCalculator';
 import { CITIES, initializeLeafletIcons } from './config/mapConfig';
 import type { CityKey } from './config/mapConfig';
 import performanceMonitor from './utils/performanceMonitoring';
@@ -93,6 +94,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
     const hasVisited = localStorage.getItem('fammap_visited');
     return !hasVisited && !dismissedTips;
   });
+  const [showCostCalculator, setShowCostCalculator] = useState(false);
 
   const toggleSection = (section: string) => {
     setExpandedSections(prev => ({
@@ -638,6 +640,15 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                     </button>
                     <button
                       className="tool-button"
+                      onClick={() => setShowCostCalculator(!showCostCalculator)}
+                      title={language === 'zh' ? '旅行成本計算器' : 'Trip Cost Calculator'}
+                      aria-pressed={showCostCalculator}
+                    >
+                      <Wallet size={18} />
+                      <span>{language === 'zh' ? '預算規劃' : 'Budget'}</span>
+                    </button>
+                    <button
+                      className="tool-button"
                       onClick={() => {
                         if (comparisonLocations.length > 0) {
                           setShowComparison(!showComparison);
@@ -791,6 +802,17 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                   {showFamilyTripPlanner && (
                     <FamilyTripPlanner
                       darkMode={darkMode}
+                    />
+                  )}
+
+                  {showCostCalculator && (
+                    <TripCostCalculator
+                      locations={selectedLocation ? [selectedLocation] : locations.slice(0, 5)}
+                      darkMode={darkMode}
+                      onBudgetPlanCreated={(report) => {
+                        // Could save or export the report
+                        console.log('Budget Report:', report);
+                      }}
                     />
                   )}
                 </>

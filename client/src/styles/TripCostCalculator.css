@@ -1,0 +1,587 @@
+.trip-cost-calculator {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.trip-cost-calculator.dark-mode {
+  background: #1e1e1e;
+  color: #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Header */
+.tcc-header {
+  margin-bottom: 24px;
+  text-align: center;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 16px;
+}
+
+.trip-cost-calculator.dark-mode .tcc-header {
+  border-bottom-color: #333;
+}
+
+.tcc-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 24px;
+  color: #333;
+  font-weight: 600;
+}
+
+.trip-cost-calculator.dark-mode .tcc-header h2 {
+  color: #fff;
+}
+
+.tcc-header p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.trip-cost-calculator.dark-mode .tcc-header p {
+  color: #999;
+}
+
+/* Empty State */
+.tcc-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+}
+
+.tcc-empty .tcc-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+/* Sections */
+.tcc-section {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.trip-cost-calculator.dark-mode .tcc-section {
+  background: #2a2a2a;
+}
+
+.tcc-section h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+}
+
+.trip-cost-calculator.dark-mode .tcc-section h3 {
+  color: #fff;
+}
+
+.tcc-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px 0;
+  user-select: none;
+}
+
+.tcc-section-header h3 {
+  margin: 0;
+}
+
+.tcc-section-header svg {
+  transition: transform 0.2s;
+}
+
+/* Inputs */
+.tcc-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+.tcc-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tcc-input-group label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+}
+
+.trip-cost-calculator.dark-mode .tcc-input-group label {
+  color: #aaa;
+}
+
+.tcc-input-group input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.trip-cost-calculator.dark-mode .tcc-input-group input {
+  background: #333;
+  border-color: #555;
+  color: #fff;
+}
+
+.tcc-input-group input:disabled {
+  background: #f5f5f5;
+  color: #999;
+}
+
+.trip-cost-calculator.dark-mode .tcc-input-group input:disabled {
+  background: #1e1e1e;
+  color: #666;
+}
+
+/* Radio Group */
+.tcc-radio-group {
+  display: flex;
+  gap: 16px;
+}
+
+.tcc-radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+.trip-cost-calculator.dark-mode .tcc-radio-group label {
+  color: #e0e0e0;
+}
+
+.tcc-radio-group input[type='radio'] {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  accent-color: #a7c7e7;
+}
+
+/* Summary Card */
+.tcc-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.tcc-total-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #a7c7e7 0%, #fdfd96 100%);
+  padding: 20px;
+  border-radius: 8px;
+  color: #333;
+}
+
+.trip-cost-calculator.dark-mode .tcc-total-card {
+  background: linear-gradient(135deg, #5a7c9f 0%, #8a8a4a 100%);
+  color: #fff;
+}
+
+.tcc-total-amount {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tcc-total-amount p {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.tcc-total-amount h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.tcc-per-person {
+  text-align: right;
+}
+
+.tcc-per-person p {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.tcc-per-person h4 {
+  margin: 4px 0 0 0;
+  font-size: 16px;
+}
+
+.tcc-budget-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.tcc-budget-status.within {
+  background: #d4edda;
+  color: #155724;
+  border-left: 4px solid #28a745;
+}
+
+.trip-cost-calculator.dark-mode .tcc-budget-status.within {
+  background: #1e3a1e;
+  color: #90ee90;
+  border-left-color: #28a745;
+}
+
+.tcc-budget-status.over {
+  background: #f8d7da;
+  color: #721c24;
+  border-left: 4px solid #dc3545;
+}
+
+.trip-cost-calculator.dark-mode .tcc-budget-status.over {
+  background: #3a1e1e;
+  color: #ff9999;
+  border-left-color: #dc3545;
+}
+
+/* Breakdown */
+.tcc-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tcc-breakdown-item {
+  display: grid;
+  grid-template-columns: 1fr 150px;
+  gap: 12px;
+  align-items: center;
+}
+
+.tcc-breakdown-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.tcc-breakdown-info span:last-child {
+  font-weight: 600;
+  color: #a7c7e7;
+}
+
+.trip-cost-calculator.dark-mode .tcc-breakdown-info span:last-child {
+  color: #7db8e8;
+}
+
+.tcc-breakdown-bar {
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  grid-column: 1;
+}
+
+.trip-cost-calculator.dark-mode .tcc-breakdown-bar {
+  background: #444;
+}
+
+.tcc-breakdown-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #a7c7e7 0%, #ff6f61 100%);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.tcc-breakdown-amount {
+  text-align: right;
+  font-weight: 600;
+  font-size: 13px;
+  color: #333;
+}
+
+.trip-cost-calculator.dark-mode .tcc-breakdown-amount {
+  color: #fff;
+}
+
+/* Estimates */
+.tcc-estimates {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.tcc-estimate-card {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  border: 2px solid #f0f0f0;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.trip-cost-calculator.dark-mode .tcc-estimate-card {
+  background: #333;
+  border-color: #555;
+}
+
+.tcc-estimate-card:hover {
+  border-color: #a7c7e7;
+  box-shadow: 0 4px 12px rgba(167, 199, 231, 0.2);
+}
+
+.trip-cost-calculator.dark-mode .tcc-estimate-card:hover {
+  border-color: #7db8e8;
+  box-shadow: 0 4px 12px rgba(125, 184, 232, 0.2);
+}
+
+.tcc-estimate-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.tcc-estimate-card p {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.trip-cost-calculator.dark-mode .tcc-estimate-card p {
+  color: #aaa;
+}
+
+.tcc-estimate-card h4 {
+  margin: 8px 0 0 0;
+  font-size: 18px;
+  color: #333;
+  font-weight: 700;
+}
+
+.trip-cost-calculator.dark-mode .tcc-estimate-card h4 {
+  color: #fff;
+}
+
+/* Tips */
+.tcc-tips {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tcc-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  background: white;
+  border-radius: 6px;
+  border-left: 4px solid #ff6f61;
+  font-size: 13px;
+  color: #333;
+}
+
+.trip-cost-calculator.dark-mode .tcc-tip {
+  background: #333;
+  color: #e0e0e0;
+}
+
+.tcc-tip-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* Payment Methods */
+.tcc-payment-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.tcc-payment-card {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: all 0.2s;
+}
+
+.trip-cost-calculator.dark-mode .tcc-payment-card {
+  background: #333;
+  border-color: #555;
+}
+
+.tcc-payment-card:hover {
+  border-color: #a7c7e7;
+  box-shadow: 0 4px 12px rgba(167, 199, 231, 0.2);
+}
+
+.trip-cost-calculator.dark-mode .tcc-payment-card:hover {
+  border-color: #7db8e8;
+}
+
+.tcc-payment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.tcc-payment-card h4 {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+  font-weight: 600;
+}
+
+.trip-cost-calculator.dark-mode .tcc-payment-card h4 {
+  color: #fff;
+}
+
+.tcc-discount-badge {
+  background: #fdfd96;
+  color: #333;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.trip-cost-calculator.dark-mode .tcc-discount-badge {
+  background: #5a5a2a;
+  color: #ffff99;
+}
+
+.tcc-payment-savings {
+  margin: 8px 0 4px 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.trip-cost-calculator.dark-mode .tcc-payment-savings {
+  color: #999;
+}
+
+.tcc-payment-savings strong {
+  color: #ff6f61;
+  font-weight: 700;
+}
+
+.trip-cost-calculator.dark-mode .tcc-payment-savings strong {
+  color: #ff9999;
+}
+
+.tcc-payment-availability {
+  margin: 4px 0 0 0;
+  font-size: 12px;
+  color: #999;
+}
+
+.trip-cost-calculator.dark-mode .tcc-payment-availability {
+  color: #666;
+}
+
+/* Actions */
+.tcc-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.trip-cost-calculator.dark-mode .tcc-actions {
+  border-top-color: #333;
+}
+
+.tcc-btn-primary {
+  flex: 1;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #a7c7e7 0%, #ff6f61 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.tcc-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(167, 199, 231, 0.4);
+}
+
+.tcc-btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .trip-cost-calculator {
+    padding: 16px;
+  }
+
+  .tcc-inputs {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .tcc-estimates {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .tcc-payment-methods {
+    grid-template-columns: 1fr;
+  }
+
+  .tcc-total-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: flex-start;
+  }
+
+  .tcc-breakdown-item {
+    grid-template-columns: 1fr;
+  }
+
+  .tcc-breakdown-amount {
+    text-align: left;
+    margin-top: 4px;
+  }
+}
+
+@media (max-width: 400px) {
+  .tcc-header h2 {
+    font-size: 18px;
+  }
+
+  .tcc-inputs {
+    grid-template-columns: 1fr;
+  }
+}
