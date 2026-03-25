@@ -8,7 +8,7 @@ import type {
   FamilyProfile,
   UserInteractionHistory,
 } from '../utils/familyRecommender';
-import { useLanguage } from '../i18n/LanguageContext';
+import { useLanguage } from '../i18n/useLanguage';
 import styles from '../styles/FamilyRecommendationPanel.module.css';
 
 interface FamilyRecommendationPanelProps {

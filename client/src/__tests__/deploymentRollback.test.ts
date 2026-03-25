@@ -380,7 +380,7 @@ describe('deploymentRollback', () => {
 
       // First rollback: from v1.0.2 to v1.0.1
       performRollback();
-      let current = getCurrentVersion();
+      const current = getCurrentVersion();
       expect(current?.version).toBe('v1.0.1');
 
       // Verify we can still access rollback capability

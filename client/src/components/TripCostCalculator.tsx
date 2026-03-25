@@ -330,7 +330,7 @@ export function TripCostCalculator({ locations, darkMode = false, onBudgetPlanCr
                         ? '🚌'
                         : '💰'}
                 </span>
-                <span>{tip.replace(/^[💡✨🚌💰]\s*/, '')}</span>
+                <span>{tip.replace(/^[💡✨🚌💰]\s*/u, '')}</span>
               </div>
             ))}
           </div>

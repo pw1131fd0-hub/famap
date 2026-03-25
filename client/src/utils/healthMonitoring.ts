@@ -248,7 +248,7 @@ function checkPerformanceMetrics(): HealthStatus {
       status: 'ok',
       message: `Performance good (${loadTime.toFixed(0)}ms load time)`,
     };
-  } catch (error) {
+  } catch {
     return {
       status: 'ok',
       message: 'Performance metrics unavailable (not critical)',

@@ -3,7 +3,7 @@ import { Clock, DollarSign, Users, AlertCircle, ChevronDown, Zap } from 'lucide-
 import type { Activity } from '../utils/activityPlanner';
 import { getActivityRecommendationsForFamily, formatActivityDuration } from '../utils/activityPlanner';
 import type { Location } from '../types';
-import { useLanguage } from '../i18n/LanguageContext';
+import { useLanguage } from '../i18n/useLanguage';
 
 interface IntelligentActivityPlannerProps {
   locations: Location[];
