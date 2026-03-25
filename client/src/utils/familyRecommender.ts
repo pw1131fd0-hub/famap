@@ -166,7 +166,9 @@ export function calculateBudgetMatch(
 
   if (venuePrice >= range.min && venuePrice <= range.max) {
     // Within range
-    if (venuePrice <= range.optimalMax || venuePrice >= range.optimalMin) {
+    const optimalMax = (range as { optimalMax?: number }).optimalMax;
+    const optimalMin = (range as { optimalMin?: number }).optimalMin;
+    if ((optimalMax && venuePrice <= optimalMax) || (optimalMin && venuePrice >= optimalMin)) {
       return 100;
     }
     return 80;
@@ -220,8 +222,8 @@ export function calculateSeasonalityBoost(
  */
 export function generateRecommendationReasons(
   matchFactors: RecommendationResult['matchFactors'],
-  venue: VenueCharacteristics,
-  language: 'zh' | 'en' = 'en'
+  _venue: VenueCharacteristics,
+  _language: 'zh' | 'en' = 'en'
 ): { zh: string[]; en: string[] } {
   const reasonsZh: string[] = [];
   const reasonsEn: string[] = [];
@@ -396,7 +398,7 @@ export function getTopRecommendations(
   familyProfile: FamilyProfile,
   userHistory: UserInteractionHistory,
   limit: number = 5,
-  language: 'zh' | 'en' = 'en'
+  _language: 'zh' | 'en' = 'en'
 ): RecommendationResult[] {
   const recommendations = venues
     .map(venue => {
@@ -503,7 +505,6 @@ export function getPersonalizedRecommendations(
   const {
     limit = 5,
     language = 'en',
-    includeNewVenues = true,
     boostTrending = true,
   } = options;
 

@@ -1,4 +1,4 @@
-import React, { useState, type ReactNode } from 'react';
+import React, { useContext, useState, type ReactNode } from 'react';
 import type { Language } from '../types';
 import { translations } from './index';
 import { LanguageContext } from './context';
@@ -13,4 +13,12 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
       {children}
     </LanguageContext.Provider>
   );
+};
+
+export const useLanguage = () => {
+  const context = useContext(LanguageContext);
+  if (context === undefined) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
 };

@@ -14,6 +14,8 @@ import {
   findSimilarFamilyVenues,
   getPersonalizedRecommendations,
   analyzeRecommendationQuality,
+} from '../utils/familyRecommender';
+import type {
   FamilyProfile,
   VenueCharacteristics,
   LocationWithReviews,

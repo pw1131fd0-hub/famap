@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import {
   getPersonalizedRecommendations,
+} from '../utils/familyRecommender';
+import type {
   RecommendationResult,
   LocationWithReviews,
   FamilyProfile,
