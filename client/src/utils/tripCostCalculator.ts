@@ -55,7 +55,6 @@ export interface TripBudgetPlan {
 export function calculateLocationCost(
   location: Location,
   familySize: number = 2,
-  children: number = 1,
   duration: 'short' | 'moderate' | 'long' = 'moderate'
 ): number {
   let cost = 0;
@@ -104,7 +103,7 @@ export function calculateMealCost(
   children: number = 1,
   hasOnSiteDining: boolean = true
 ): number {
-  if (!hasOnSiteDining && !location.nearby?.nearbyRestaurants) {
+  if (!hasOnSiteDining && !location.nearbyAmenities?.nearbyRestaurants) {
     return 0;
   }
 
@@ -119,7 +118,6 @@ export function calculateMealCost(
  * Calculate activity/rental cost estimate
  */
 export function calculateActivityCost(
-  location: Location,
   activities: string[] = [],
   children: number = 1
 ): number {
@@ -167,12 +165,12 @@ export function calculateTotalTripCost(
 
   // Calculate costs for each location
   locations.forEach((location) => {
-    breakdown.admission += calculateLocationCost(location, familySize, children);
+    breakdown.admission += calculateLocationCost(location, familySize);
     breakdown.parking += calculateParkingCost(location, 'moderate', hasCar);
     breakdown.meals += calculateMealCost(location, adults, children, hasOnSiteDining);
   });
 
-  breakdown.activities = calculateActivityCost(locations[0], activities, children);
+  breakdown.activities = calculateActivityCost(activities, children);
 
   // Miscellaneous costs (transportation, tips, etc.)
   breakdown.miscellaneous = Math.round(breakdown.admission * 0.1); // 10% buffer

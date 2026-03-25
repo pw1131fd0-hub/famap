@@ -20,7 +20,8 @@ import {
   compareVenueCombinations,
   suggestBudgetAlternatives,
 } from '../utils/tripCostCalculator';
-import type { Location, CostBreakdown } from '../types';
+import type { Location } from '../types';
+import type { CostBreakdown } from '../utils/tripCostCalculator';
 
 // Mock location data
 const mockLocation: Location = {
@@ -31,7 +32,6 @@ const mockLocation: Location = {
   coordinates: { lat: 25.033, lng: 121.545 },
   address: { zh: '台北市大安區辛亥路四段1號', en: '1 Xinhai Road Section 4, Daan District' },
   averageRating: 4.5,
-  totalReviews: 150,
   facilities: ['playground', 'restroom', 'picnic_area'],
   pricing: {
     isFree: true,
@@ -41,10 +41,6 @@ const mockLocation: Location = {
     available: true,
     cost: '30-50',
     hasValidation: true,
-  },
-  nearby: {
-    nearbyRestaurants: true,
-    nearbyPublicTransit: 'MRT Da\'an Station 800m',
   },
   booking: {
     requiresPreBooking: false,
@@ -73,13 +69,13 @@ describe('Trip Cost Calculator', () => {
     });
 
     it('should calculate cost based on family size', () => {
-      const cost = calculateLocationCost(mockLocation2, 4, 2);
+      const cost = calculateLocationCost(mockLocation2, 4);
       expect(cost).toBeGreaterThan(0);
     });
 
     it('should apply duration multipliers', () => {
-      const shortCost = calculateLocationCost(mockLocation2, 2, 1, 'short');
-      const longCost = calculateLocationCost(mockLocation2, 2, 1, 'long');
+      const shortCost = calculateLocationCost(mockLocation2, 2, 'short');
+      const longCost = calculateLocationCost(mockLocation2, 2, 'long');
       expect(longCost).toBeGreaterThan(shortCost);
     });
   });
@@ -91,7 +87,7 @@ describe('Trip Cost Calculator', () => {
     });
 
     it('should return 0 if parking not available', () => {
-      const noParkingLocation = { ...mockLocation, parking: { available: false } };
+      const noParkingLocation = { ...mockLocation, parking: { available: false, hasValidation: false } };
       const cost = calculateParkingCost(noParkingLocation, 'moderate', true);
       expect(cost).toBe(0);
     });
@@ -129,18 +125,18 @@ describe('Trip Cost Calculator', () => {
 
   describe('calculateActivityCost', () => {
     it('should return 0 for no activities', () => {
-      const cost = calculateActivityCost(mockLocation, [], 2);
+      const cost = calculateActivityCost([], 2);
       expect(cost).toBe(0);
     });
 
     it('should calculate cost for activities', () => {
-      const cost = calculateActivityCost(mockLocation, ['workshop', 'class'], 2);
+      const cost = calculateActivityCost(['workshop', 'class'], 2);
       expect(cost).toBeGreaterThan(0);
     });
 
     it('should multiply by children count', () => {
-      const cost1 = calculateActivityCost(mockLocation, ['workshop'], 1);
-      const cost2 = calculateActivityCost(mockLocation, ['workshop'], 2);
+      const cost1 = calculateActivityCost(['workshop'], 1);
+      const cost2 = calculateActivityCost(['workshop'], 2);
       expect(cost2).toBeGreaterThan(cost1);
     });
   });
@@ -417,7 +413,7 @@ describe('Trip Cost Calculator', () => {
     });
 
     it('should handle zero family size', () => {
-      const cost = calculateLocationCost(mockLocation, 0, 0);
+      const cost = calculateLocationCost(mockLocation, 0);
       expect(cost).toBe(0);
     });
 

@@ -4,7 +4,7 @@
  * Features: Cost breakdown, budget recommendations, savings tips, payment optimization
  */
 
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { Wallet, TrendingDown, DollarSign, AlertCircle, ChevronDown, ChevronUp } from 'lucide-react';
 import type { Location } from '../types';
 import {
@@ -25,7 +25,7 @@ interface Props {
 }
 
 export function TripCostCalculator({ locations, darkMode = false, onBudgetPlanCreated }: Props) {
-  const { language, t } = useTranslation();
+  const { language } = useTranslation();
   const [familySize, setFamilySize] = useState(4);
   const [adults, setAdults] = useState(2);
   const [children, setChildren] = useState(2);
