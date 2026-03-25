@@ -1,0 +1,10 @@
+v: 0
+app_name: "famap-server"
+micros:
+  - name: famap-backend
+    src: ./
+    engine: python3.9
+    dev: venv/bin/python -m uvicorn main:app --reload
+    run: venv/bin/python -m uvicorn main:app --port 8000
+    env:
+      - DB_TYPE=sqlite

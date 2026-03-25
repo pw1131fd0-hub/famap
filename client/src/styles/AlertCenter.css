@@ -2,11 +2,14 @@
 .alert-center {
   position: fixed;
   z-index: 1000;
-  pointer-events: none;
 }
 
 .alert-center.open {
-  pointer-events: auto;
+  display: block;
+}
+
+.alert-center.closed {
+  display: none;
 }
 
 .alert-overlay {
@@ -35,6 +38,7 @@
   flex-direction: column;
   z-index: 1001;
   animation: slideUp 0.3s ease-out;
+  touch-action: manipulation;
 }
 
 @media (max-width: 600px) {
@@ -117,12 +121,14 @@
   border: none;
   color: #999;
   cursor: pointer;
-  padding: 4px;
+  padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 6px;
   transition: all 0.2s ease;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .close-btn:hover {

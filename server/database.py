@@ -5,10 +5,15 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Default to a mock postgres URL if not provided in environment
-SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@localhost/fammap")
+# Use SQLite for local/Serverless deployment, PostgreSQL for production
+DB_TYPE = os.getenv("DB_TYPE", "sqlite")
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
+if DB_TYPE == "sqlite":
+    SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./famap.db")
+else:
+    SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@localhost/fammap")
+
+engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False} if DB_TYPE == "sqlite" else {})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()

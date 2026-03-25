@@ -151,7 +151,7 @@ export function AlertCenter({ isOpen, onClose }: AlertCenterProps) {
   return (
     <div className={`alert-center ${isOpen ? 'open' : 'closed'}`}>
       {/* Overlay */}
-      {isOpen && <div className="alert-overlay" onClick={onClose} />}
+      {isOpen && <div className="alert-overlay" onClick={(e) => { e.preventDefault(); e.stopPropagation(); onClose(); }} onTouchEnd={(e) => { e.preventDefault(); e.stopPropagation(); onClose(); }} />}
 
       {/* Modal */}
       <div className="alert-modal">
@@ -166,7 +166,12 @@ export function AlertCenter({ isOpen, onClose }: AlertCenterProps) {
               )}
             </div>
           </div>
-          <button className="close-btn" onClick={onClose} aria-label="Close">
+          <button 
+            className="close-btn" 
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); onClose(); }} 
+            onTouchEnd={(e) => { e.preventDefault(); e.stopPropagation(); onClose(); }} 
+            aria-label="Close"
+          >
             <X size={24} />
           </button>
         </div>
