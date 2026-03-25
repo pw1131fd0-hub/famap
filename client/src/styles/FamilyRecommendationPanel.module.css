@@ -1,0 +1,574 @@
+/* FamilyRecommendationPanel Styles */
+
+.panel {
+  padding: 24px;
+  border-radius: 12px;
+  margin: 16px 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.panel.light {
+  background-color: #ffffff;
+  color: #333333;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.panel.dark {
+  background-color: #2a2a2a;
+  color: #ffffff;
+  border: 1px solid #444444;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: inherit;
+}
+
+.subtitle {
+  font-size: 14px;
+  opacity: 0.7;
+  margin: 0;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 12px;
+  border-bottom: 2px solid #e0e0e0;
+  margin-bottom: 24px;
+  overflow-x: auto;
+}
+
+.panel.dark .tabs {
+  border-bottom-color: #444444;
+}
+
+.tab {
+  padding: 12px 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: inherit;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent;
+  position: relative;
+  white-space: nowrap;
+}
+
+.tab:hover {
+  opacity: 0.8;
+}
+
+.tab.active {
+  opacity: 1;
+  border-bottom-color: #A7C7E7;
+}
+
+.badge {
+  display: inline-block;
+  background-color: #FF6F61;
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+}
+
+/* Content */
+.content {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Cards Grid */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.recommendationCard {
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.recommendationCard.light {
+  background-color: #f9f9f9;
+}
+
+.recommendationCard.dark {
+  background-color: #333333;
+  border-color: #555555;
+}
+
+.recommendationCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.panel.dark .recommendationCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.venueName {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.venueCategory {
+  font-size: 13px;
+  opacity: 0.6;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.scoreBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  border-radius: 8px;
+  min-width: 70px;
+  color: white;
+  font-weight: 600;
+}
+
+.scoreBox.bg-green {
+  background-color: #4CAF50;
+}
+
+.scoreBox.bg-yellow {
+  background-color: #FFC107;
+  color: #333;
+}
+
+.scoreBox.bg-orange {
+  background-color: #FF9800;
+}
+
+.scoreValue {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.scoreLabel {
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+/* Venue Details */
+.venueDetails {
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.panel.dark .venueDetails {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  padding: 6px 0;
+}
+
+.label {
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+.value {
+  font-weight: 600;
+}
+
+/* Match Factors */
+.matchFactors {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: rgba(167, 199, 231, 0.1);
+  border-radius: 6px;
+}
+
+.panel.dark .matchFactors {
+  background: rgba(167, 199, 231, 0.15);
+}
+
+.factorRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.factorRow:last-child {
+  margin-bottom: 0;
+}
+
+.factorLabel {
+  min-width: 60px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.progressBar {
+  flex: 1;
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.panel.dark .progressBar {
+  background: #555555;
+}
+
+.progress {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.factorValue {
+  min-width: 35px;
+  text-align: right;
+  font-weight: 600;
+  color: #A7C7E7;
+}
+
+/* Reasons */
+.reasons {
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: 6px;
+  background: rgba(253, 253, 150, 0.1);
+}
+
+.panel.dark .reasons {
+  background: rgba(253, 253, 150, 0.15);
+}
+
+.reasonsTitle {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: inherit;
+}
+
+.reasonsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.reasonItem {
+  font-size: 13px;
+  padding: 4px 0;
+  opacity: 0.85;
+  line-height: 1.4;
+}
+
+.reasonItem:before {
+  content: '✓ ';
+  color: #4CAF50;
+  font-weight: 600;
+}
+
+/* Confidence */
+.confidence {
+  padding: 8px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.02);
+  font-size: 12px;
+}
+
+.panel.dark .confidence {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.confidenceLabel {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.confidenceBar {
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.panel.dark .confidenceBar {
+  background: #555555;
+}
+
+.confidenceProgress {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50, #A7C7E7);
+  border-radius: 2px;
+}
+
+/* Empty State */
+.empty {
+  text-align: center;
+  padding: 40px 20px;
+  opacity: 0.6;
+}
+
+.emptyMessage {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 8px 0;
+}
+
+.emptyHint {
+  font-size: 13px;
+  margin: 0;
+}
+
+/* Similar Items */
+.similarList,
+.newList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.similarItem,
+.newItem {
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recommendationCard.light ~ .similarItem,
+.recommendationCard.light ~ .newItem {
+  background-color: #f9f9f9;
+}
+
+.panel.dark .similarItem,
+.panel.dark .newItem {
+  background-color: #333333;
+  border-color: #555555;
+}
+
+.similarItem:hover,
+.newItem:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateX(4px);
+}
+
+.panel.dark .similarItem:hover,
+.panel.dark .newItem:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.similarInfo,
+.newInfo {
+  flex: 1;
+}
+
+.similarInfo h4,
+.newInfo h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 6px 0;
+}
+
+.similarInfo p,
+.newInfo p {
+  font-size: 13px;
+  opacity: 0.7;
+  margin: 4px 0;
+}
+
+.trending {
+  color: #FF9800 !important;
+  opacity: 1 !important;
+}
+
+.newBadge {
+  background: linear-gradient(135deg, #FF6F61, #FF9800);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-right: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.similarArrow,
+.newArrow {
+  font-size: 18px;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  margin-left: 12px;
+}
+
+.similarItem:hover .similarArrow,
+.newItem:hover .newArrow {
+  opacity: 1;
+  color: #A7C7E7;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .panel {
+    padding: 16px;
+  }
+
+  .tabs {
+    gap: 8px;
+  }
+
+  .tab {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .badge {
+    width: 20px;
+    height: 20px;
+    font-size: 11px;
+  }
+
+  .cardHeader {
+    flex-direction: column;
+  }
+
+  .scoreBox {
+    margin-top: 12px;
+    align-self: flex-start;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .venueName {
+    font-size: 16px;
+  }
+
+  .factorRow {
+    font-size: 12px;
+  }
+
+  .factorLabel {
+    min-width: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .panel {
+    padding: 12px;
+    border-radius: 8px;
+    margin: 12px 0;
+  }
+
+  .header {
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .tabs {
+    gap: 4px;
+    margin-bottom: 16px;
+  }
+
+  .tab {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .badge {
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    margin-left: 4px;
+  }
+
+  .recommendationCard {
+    padding: 16px;
+  }
+
+  .venueCategory {
+    font-size: 12px;
+  }
+
+  .scoreBox {
+    min-width: 60px;
+    padding: 8px 12px;
+  }
+
+  .scoreValue {
+    font-size: 20px;
+  }
+
+  .scoreLabel {
+    font-size: 10px;
+  }
+
+  .similarArrow,
+  .newArrow {
+    font-size: 16px;
+  }
+
+  .newBadge {
+    padding: 3px 6px;
+    font-size: 10px;
+    margin-right: 8px;
+  }
+}
