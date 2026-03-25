@@ -38,8 +38,7 @@ export interface FamilyCompatibility {
  */
 export function calculateFamilySuitabilityScore(
   location: Location,
-  reviews: Review[],
-  _crowdednessReports: CrowdednessReport[]
+  reviews: Review[]
 ): number {
   let score = 50; // Base score
 
@@ -477,8 +476,7 @@ export function generateLocationInsight(
   return {
     familySuitabilityScore: calculateFamilySuitabilityScore(
       location,
-      reviews,
-      crowdednessReports
+      reviews
     ),
     safetyRating: avgRating,
     cleanlinessRating: avgRating,

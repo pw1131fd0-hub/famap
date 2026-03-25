@@ -117,24 +117,24 @@ const mockCrowdednessReports: CrowdednessReport[] = [
 describe('Location Insights Utilities', () => {
   describe('calculateFamilySuitabilityScore', () => {
     it('should calculate score based on facilities', () => {
-      const score = calculateFamilySuitabilityScore(mockLocation, [], []);
+      const score = calculateFamilySuitabilityScore(mockLocation, []);
       expect(score).toBeGreaterThan(50);
       expect(score).toBeLessThanOrEqual(100);
     });
 
     it('should increase score with positive reviews', () => {
-      const scoreWithoutReviews = calculateFamilySuitabilityScore(mockLocation, [], []);
-      const scoreWithReviews = calculateFamilySuitabilityScore(mockLocation, mockReviewsPositive, []);
+      const scoreWithoutReviews = calculateFamilySuitabilityScore(mockLocation, []);
+      const scoreWithReviews = calculateFamilySuitabilityScore(mockLocation, mockReviewsPositive);
       expect(scoreWithReviews).toBeGreaterThanOrEqual(scoreWithoutReviews);
     });
 
     it('should decrease score with negative reviews', () => {
-      const scoreWithNegativeReviews = calculateFamilySuitabilityScore(mockLocation, mockReviewsNegative, []);
+      const scoreWithNegativeReviews = calculateFamilySuitabilityScore(mockLocation, mockReviewsNegative);
       expect(scoreWithNegativeReviews).toBeLessThanOrEqual(100);
     });
 
     it('should return score between 0 and 100', () => {
-      const score = calculateFamilySuitabilityScore(mockLocation, mockMixedReviews, []);
+      const score = calculateFamilySuitabilityScore(mockLocation, mockMixedReviews);
       expect(score).toBeGreaterThanOrEqual(0);
       expect(score).toBeLessThanOrEqual(100);
     });
