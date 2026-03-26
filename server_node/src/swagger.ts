@@ -1,3 +1,4 @@
+// @ts-ignore - swagger-jsdoc missing type declarations
 import swaggerJsdoc, { SwaggerDefinition } from 'swagger-jsdoc';
 
 const options: SwaggerDefinition = {
