@@ -31,26 +31,26 @@ const FamilyRecommendationPanel: React.FC<FamilyRecommendationPanelProps> = ({
 
   const isZh = language === 'zh';
 
-  // Default family profile
-  const defaultFamilyProfile: FamilyProfile = familyProfile || {
-    childrenAges: [5],
-    interests: ['playground', 'family'],
-    accessibilityNeeds: ['stroller_accessible'],
-    dietaryRestrictions: [],
-    budgetLevel: 'moderate',
-    preferredDistance: 15,
-  };
-
-  // Default user history
-  const defaultUserHistory: UserInteractionHistory = userHistory || {
-    searchTerms: [],
-    viewedLocations: [],
-    favoriteLocations: [],
-    previousVisits: [],
-  };
-
   // Get recommendations
   const recommendations = useMemo(() => {
+    // Default family profile
+    const defaultFamilyProfile: FamilyProfile = familyProfile || {
+      childrenAges: [5],
+      interests: ['playground', 'family'],
+      accessibilityNeeds: ['stroller_accessible'],
+      dietaryRestrictions: [],
+      budgetLevel: 'moderate',
+      preferredDistance: 15,
+    };
+
+    // Default user history
+    const defaultUserHistory: UserInteractionHistory = userHistory || {
+      searchTerms: [],
+      viewedLocations: [],
+      favoriteLocations: [],
+      previousVisits: [],
+    };
+
     return getPersonalizedRecommendations(
       venues,
       defaultFamilyProfile,
@@ -62,7 +62,7 @@ const FamilyRecommendationPanel: React.FC<FamilyRecommendationPanelProps> = ({
         boostTrending: true,
       }
     );
-  }, [venues, defaultFamilyProfile, defaultUserHistory, isZh]);
+  }, [venues, familyProfile, userHistory, isZh]);
 
   const translations = {
     title: isZh ? '個性化推薦' : 'Personalized Recommendations',

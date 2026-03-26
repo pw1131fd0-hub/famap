@@ -221,9 +221,7 @@ export function calculateSeasonalityBoost(
  * Generate recommendation reasons in multiple languages
  */
 export function generateRecommendationReasons(
-  matchFactors: RecommendationResult['matchFactors'],
-  _venue: VenueCharacteristics,
-  _language: 'zh' | 'en' = 'en'
+  matchFactors: RecommendationResult['matchFactors']
 ): { zh: string[]; en: string[] } {
   const reasonsZh: string[] = [];
   const reasonsEn: string[] = [];
@@ -397,8 +395,7 @@ export function getTopRecommendations(
   venues: LocationWithReviews[],
   familyProfile: FamilyProfile,
   userHistory: UserInteractionHistory,
-  limit: number = 5,
-  _language: 'zh' | 'en' = 'en'
+  limit: number = 5
 ): RecommendationResult[] {
   const recommendations = venues
     .map(venue => {
@@ -425,7 +422,7 @@ export function getTopRecommendations(
         venueId: venue.id,
         venueName: venue.name,
         score: finalScore,
-        reasons: generateRecommendationReasons(matchFactors, venue, 'en'),
+        reasons: generateRecommendationReasons(matchFactors),
         matchFactors,
         confidence,
       };

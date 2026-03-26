@@ -256,39 +256,23 @@ describe('familyRecommender', () => {
     };
 
     it('should generate reasons in English', () => {
-      const result = generateRecommendationReasons(
-        matchFactors,
-        mockVenue,
-        'en'
-      );
+      const result = generateRecommendationReasons(matchFactors);
       expect(result.en.length).toBeGreaterThan(0);
       expect(result.en[0]).toMatch(/[A-Z]/); // Should be English
     });
 
     it('should generate reasons in Chinese', () => {
-      const result = generateRecommendationReasons(
-        matchFactors,
-        mockVenue,
-        'zh'
-      );
+      const result = generateRecommendationReasons(matchFactors);
       expect(result.zh.length).toBeGreaterThan(0);
     });
 
     it('should mention age compatibility for high match', () => {
-      const result = generateRecommendationReasons(
-        matchFactors,
-        mockVenue,
-        'en'
-      );
+      const result = generateRecommendationReasons(matchFactors);
       expect(result.en.some(r => r.includes('age'))).toBe(true);
     });
 
     it('should mention quality for high popularity', () => {
-      const result = generateRecommendationReasons(
-        matchFactors,
-        mockVenue,
-        'en'
-      );
+      const result = generateRecommendationReasons(matchFactors);
       expect(result.en.some(r => r.toLowerCase().includes('rate'))).toBe(true);
     });
 
@@ -302,7 +286,7 @@ describe('familyRecommender', () => {
         trendingBoost: 0,
         seasonalityBoost: 0,
       };
-      const result = generateRecommendationReasons(lowFactors, mockVenue, 'en');
+      const result = generateRecommendationReasons(lowFactors);
       expect(result.en.length).toBeGreaterThan(0);
     });
   });
@@ -406,8 +390,7 @@ describe('familyRecommender', () => {
         venues,
         mockFamilyProfile,
         mockUserHistory,
-        5,
-        'en'
+        5
       );
       expect(recs.length).toBeGreaterThan(0);
       expect(recs.length).toBeLessThanOrEqual(5);
