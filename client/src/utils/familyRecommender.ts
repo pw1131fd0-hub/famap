@@ -501,7 +501,6 @@ export function getPersonalizedRecommendations(
 } {
   const {
     limit = 5,
-    language = 'en',
     boostTrending = true,
   } = options;
 
@@ -510,8 +509,7 @@ export function getPersonalizedRecommendations(
     venues,
     familyProfile,
     userHistory,
-    limit,
-    language
+    limit
   );
 
   // Find similar venues based on favorites

@@ -407,8 +407,7 @@ describe('familyRecommender', () => {
         venues,
         mockFamilyProfile,
         mockUserHistory,
-        5,
-        'en'
+        5
       );
 
       const venue1Rec = recs.find(r => r.venueId === 'venue-1');
@@ -425,8 +424,7 @@ describe('familyRecommender', () => {
         venues,
         mockFamilyProfile,
         mockUserHistory,
-        2,
-        'en'
+        2
       );
       expect(recs.length).toBeLessThanOrEqual(2);
     });
@@ -437,8 +435,7 @@ describe('familyRecommender', () => {
         venues,
         mockFamilyProfile,
         mockUserHistory,
-        5,
-        'en'
+        5
       );
       expect(recs.length).toBeGreaterThan(0);
       if (recs.length > 0 && recs[0].reasons && recs[0].reasons.en) {
@@ -452,8 +449,7 @@ describe('familyRecommender', () => {
         venues,
         mockFamilyProfile,
         mockUserHistory,
-        5,
-        'zh'
+        5
       );
       expect(recs.length).toBeGreaterThan(0);
       if (recs.length > 0 && recs[0].reasons && recs[0].reasons.zh) {
