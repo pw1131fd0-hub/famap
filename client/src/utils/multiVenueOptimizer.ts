@@ -263,7 +263,7 @@ export function suggestOptimalStartTime(
   if (locations.length === 0) return preferredStartTime;
 
   // Get the earliest opening time from all venues
-  let earliestTime = new Date(preferredStartTime);
+  const earliestTime = new Date(preferredStartTime);
   earliestTime.setHours(9, 0, 0, 0); // Default to 9 AM if no opening hours
 
   // For demonstration, suggest starting 30 minutes before first venue's typical opening

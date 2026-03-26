@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { MapPin, Clock, DollarSign, TrendingUp, Share2, Download, X } from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
 import {
@@ -27,7 +27,7 @@ export function MultiVenueOptimizer({
   const [expandedStop, setExpandedStop] = useState<number | null>(null);
   const [showShared, setShowShared] = useState(false);
 
-  useEffect(() => {
+  const calculateTrip = useCallback(() => {
     if (selectedLocations.length > 0) {
       const trip = optimizeMultiVenueTrip(
         selectedLocations,
@@ -38,6 +38,10 @@ export function MultiVenueOptimizer({
       setOptimizedTrip(trip);
     }
   }, [selectedLocations, familySize, childAges]);
+
+  useEffect(() => {
+    calculateTrip();
+  }, [calculateTrip]);
 
   const handleShare = () => {
     if (!optimizedTrip) return;
