@@ -3,13 +3,17 @@ import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { describe, it, expect, vi } from 'vitest';
 import FamilyRecommendationPanel from '../components/FamilyRecommendationPanel';
+import { LanguageProvider } from '../i18n/LanguageContext';
 import type { LocationWithReviews } from '../utils/familyRecommender';
 
-// Mock the LanguageContext
-vi.mock('../i18n/LanguageContext', () => ({
-  useLanguage: () => ({ language: 'en' }),
-  LanguageProvider: ({ children }: { children: React.ReactNode }) => children,
-}));
+// Helper to render with language provider
+const renderWithLanguage = (component: React.ReactElement) => {
+  return render(
+    <LanguageProvider>
+      {component}
+    </LanguageProvider>
+  );
+};
 
 describe('FamilyRecommendationPanel Component', () => {
   const mockVenue1: LocationWithReviews = {
@@ -44,21 +48,21 @@ describe('FamilyRecommendationPanel Component', () => {
 
   describe('Component Rendering', () => {
     it('should render without crashing', () => {
-      const { container } = render(
+      const { container } = renderWithLanguage(
         <FamilyRecommendationPanel venues={[mockVenue1, mockVenue2]} />
       );
       expect(container).toBeInTheDocument();
     });
 
     it('should accept venues prop', () => {
-      const { container } = render(
+      const { container } = renderWithLanguage(
         <FamilyRecommendationPanel venues={[mockVenue1]} />
       );
       expect(container).toBeInTheDocument();
     });
 
     it('should work with dark mode', () => {
-      const { container } = render(
+      const { container } = renderWithLanguage(
         <FamilyRecommendationPanel
           venues={[mockVenue1]}
           isDarkMode={true}
@@ -68,7 +72,7 @@ describe('FamilyRecommendationPanel Component', () => {
     });
 
     it('should work with light mode', () => {
-      const { container } = render(
+      const { container } = renderWithLanguage(
         <FamilyRecommendationPanel
           venues={[mockVenue1]}
           isDarkMode={false}
@@ -78,7 +82,7 @@ describe('FamilyRecommendationPanel Component', () => {
     });
 
     it('should handle empty venues array', () => {
-      const { container } = render(
+      const { container } = renderWithLanguage(
         <FamilyRecommendationPanel venues={[]} />
       );
       expect(container).toBeInTheDocument();
@@ -86,7 +90,7 @@ describe('FamilyRecommendationPanel Component', () => {
 
     it('should accept optional callbacks', () => {
       const mockCallback = vi.fn();
-      const { container } = render(
+      const { container } = renderWithLanguage(
         <FamilyRecommendationPanel
           venues={[mockVenue1]}
           onVenueSelect={mockCallback}
@@ -96,7 +100,7 @@ describe('FamilyRecommendationPanel Component', () => {
     });
 
     it('should accept family profile prop', () => {
-      const { container } = render(
+      const { container } = renderWithLanguage(
         <FamilyRecommendationPanel
           venues={[mockVenue1]}
           familyProfile={{
@@ -113,7 +117,7 @@ describe('FamilyRecommendationPanel Component', () => {
     });
 
     it('should accept user history prop', () => {
-      const { container } = render(
+      const { container } = renderWithLanguage(
         <FamilyRecommendationPanel
           venues={[mockVenue1]}
           userHistory={{
@@ -130,7 +134,7 @@ describe('FamilyRecommendationPanel Component', () => {
 
   describe('Component Structure', () => {
     it('should have a main panel element', () => {
-      const { container } = render(
+      const { container } = renderWithLanguage(
         <FamilyRecommendationPanel venues={[mockVenue1]} />
       );
       const panel = container.querySelector('.panel');
@@ -138,7 +142,7 @@ describe('FamilyRecommendationPanel Component', () => {
     });
 
     it('should have header with title', () => {
-      const { container } = render(
+      const { container } = renderWithLanguage(
         <FamilyRecommendationPanel venues={[mockVenue1]} />
       );
       const header = container.querySelector('.header');
@@ -146,7 +150,7 @@ describe('FamilyRecommendationPanel Component', () => {
     });
 
     it('should have tabs element', () => {
-      const { container } = render(
+      const { container } = renderWithLanguage(
         <FamilyRecommendationPanel venues={[mockVenue1]} />
       );
       const tabs = container.querySelector('.tabs');
@@ -154,7 +158,7 @@ describe('FamilyRecommendationPanel Component', () => {
     });
 
     it('should have content area', () => {
-      const { container } = render(
+      const { container } = renderWithLanguage(
         <FamilyRecommendationPanel venues={[mockVenue1]} />
       );
       const content = container.querySelector('.content');
@@ -165,14 +169,14 @@ describe('FamilyRecommendationPanel Component', () => {
   describe('Multiple Venues', () => {
     it('should handle multiple venues', () => {
       const venues = [mockVenue1, mockVenue2];
-      const { container } = render(
+      const { container } = renderWithLanguage(
         <FamilyRecommendationPanel venues={venues} />
       );
       expect(container).toBeInTheDocument();
     });
 
     it('should handle single venue', () => {
-      const { container } = render(
+      const { container } = renderWithLanguage(
         <FamilyRecommendationPanel venues={[mockVenue1]} />
       );
       expect(container).toBeInTheDocument();
@@ -181,7 +185,7 @@ describe('FamilyRecommendationPanel Component', () => {
 
   describe('Props Validation', () => {
     it('should render with all props provided', () => {
-      const { container } = render(
+      const { container } = renderWithLanguage(
         <FamilyRecommendationPanel
           venues={[mockVenue1, mockVenue2]}
           familyProfile={{
@@ -208,7 +212,7 @@ describe('FamilyRecommendationPanel Component', () => {
     });
 
     it('should work with minimal props', () => {
-      const { container } = render(
+      const { container } = renderWithLanguage(
         <FamilyRecommendationPanel venues={[mockVenue1]} />
       );
       expect(container).toBeInTheDocument();
