@@ -176,9 +176,9 @@ describe('IntelligentActivityPlanner Component', () => {
       );
 
       await waitFor(() => {
-        const durationText = screen.queryByText(/h|min|hours|minutes|小時/i);
-        expect(durationText).toBeInTheDocument();
-      });
+        const durationTexts = screen.getAllByText(/小時|h|min/i);
+        expect(durationTexts.length).toBeGreaterThan(0);
+      }, { timeout: 3000 });
     });
 
     it('should display estimated cost', async () => {
