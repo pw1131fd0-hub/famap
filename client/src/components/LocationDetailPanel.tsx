@@ -9,6 +9,7 @@ import { CrowdednessReportForm } from './CrowdednessReportForm';
 import { CrowdednessReportList } from './CrowdednessReportList';
 import { EventsList } from './EventsList';
 import { LocationInsightsPanel } from './LocationInsightsPanel';
+import BestTimeVisitRecommender from './BestTimeVisitRecommender';
 import { isLocationOpen } from '../utils/locationUtils';
 import { DAY_NAMES_ZH } from '../config/mapConfig';
 
@@ -137,6 +138,12 @@ export function LocationDetailPanel({
           location={location}
           reviews={reviews}
           crowdednessReports={crowdednessReports}
+        />
+
+        {/* Best Time to Visit Recommendations */}
+        <BestTimeVisitRecommender
+          location={location}
+          familyProfile={undefined}
         />
 
         {/* Operating Hours & Facilities */}
