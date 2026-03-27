@@ -10,12 +10,10 @@ export default defineConfig({
     env: {
       NODE_ENV: 'test'
     },
-    testTimeout: 30000,
+    testTimeout: 15000,
     hookTimeout: 10000,
     threads: false,
-    maxThreads: 1,
-    minThreads: 1,
-    singleThread: true,
+    isolate: false,
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
