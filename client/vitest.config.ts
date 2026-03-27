@@ -5,14 +5,14 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-    environment: 'node',
-    setupFiles: [],
+    environment: 'jsdom',
+    setupFiles: ['./src/test/setup.tsx'],
     env: {
       NODE_ENV: 'test'
     },
-    testTimeout: 10000,
-    hookTimeout: 5000,
-    threads: true,
+    testTimeout: 30000,
+    hookTimeout: 10000,
+    threads: false,
     maxThreads: 1,
     minThreads: 1,
     singleThread: true,

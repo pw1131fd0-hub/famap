@@ -517,10 +517,12 @@ class ActivityHistoryTracker {
    */
   private saveToStorage(): void {
     try {
-      localStorage.setItem(
-        this.storageKey,
-        JSON.stringify(this.visits)
-      );
+      if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+        localStorage.setItem(
+          this.storageKey,
+          JSON.stringify(this.visits)
+        );
+      }
     } catch (error) {
       console.error('Failed to save visit history:', error);
     }
@@ -531,14 +533,16 @@ class ActivityHistoryTracker {
    */
   private loadFromStorage(): void {
     try {
-      const data = localStorage.getItem(this.storageKey);
-      if (data) {
-        this.visits = JSON.parse(data).map(
-          (v: VisitRecord) => ({
-            ...v,
-            visitDate: new Date(v.visitDate),
-          })
-        );
+      if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+        const data = localStorage.getItem(this.storageKey);
+        if (data) {
+          this.visits = JSON.parse(data).map(
+            (v: VisitRecord) => ({
+              ...v,
+              visitDate: new Date(v.visitDate),
+            })
+          );
+        }
       }
     } catch (error) {
       console.error('Failed to load visit history:', error);
