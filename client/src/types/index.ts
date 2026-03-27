@@ -1152,4 +1152,32 @@ export interface Favorite {
   createdAt: string;
 }
 
+export interface ActivityHistoryEntry {
+  id: string;
+  userId: string;
+  locationId: string;
+  location?: Location;
+  category: string;
+  visitDate: string; // ISO format
+  duration: number; // in minutes
+  cost: number;
+  familySize: number;
+  childAge?: number; // primary child's age
+  crowdingLevel?: number; // 1-5 scale
+  satisfactionRating: number; // 1-5 scale
+  notes?: string;
+  photos?: string[];
+  childrenBehavior?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface WeeklySuggestion {
+  dayOfWeek: string;
+  suggestedLocation: Location;
+  recommendedTimeOfDay: 'morning' | 'afternoon' | 'evening';
+  confidence: number; // 0-1
+  score: number; // 0-100
+}
+
 export type Language = 'zh' | 'en';
