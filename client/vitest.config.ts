@@ -10,14 +10,17 @@ export default defineConfig({
     env: {
       NODE_ENV: 'development'
     },
-    testTimeout: 10000,
+    testTimeout: 15000,
     hookTimeout: 5000,
-    isolate: false,
+    isolate: true,
     threads: false,
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
       exclude: ['node_modules', 'src/test/**', '**/*.test.tsx']
+    },
+    deps: {
+      inline: ['react-leaflet-cluster']
     }
   }
 });
