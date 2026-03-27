@@ -3,7 +3,7 @@
  */
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { updateMetaTags, resetMetaTags } from '../utils/metaTagManager';
+import { updateMetaTags, resetMetaTags, type MetaTagConfig } from '../utils/metaTagManager';
 
 describe('metaTagManager', () => {
   beforeEach(() => {
@@ -68,7 +68,7 @@ describe('metaTagManager', () => {
     });
 
     it('should update Open Graph tags', () => {
-      const config = {
+      const config: MetaTagConfig = {
         title: 'Test Park',
         description: 'A beautiful park',
         type: 'article'
@@ -276,7 +276,7 @@ describe('metaTagManager', () => {
 
   describe('integration scenarios', () => {
     it('should handle location detail page', () => {
-      const config = {
+      const config: MetaTagConfig = {
         title: '台北大安森林公園 | FamMap 親子地圖',
         description: '台北大安森林公園 - 台灣最好的親子地點之一。有遊樂場、步道、休息區。',
         keywords: ['森林公園', '台北', '遊樂場', '親子', '台灣'],
@@ -296,7 +296,7 @@ describe('metaTagManager', () => {
     });
 
     it('should handle location list page', () => {
-      const config = {
+      const config: MetaTagConfig = {
         title: '台北市親子地點 | FamMap 親子地圖',
         description: '發現台北市的所有親子友善地點 - 公園、餐廳、育嬰室等',
         keywords: ['台北', '親子', '公園', '餐廳'],

@@ -8,19 +8,18 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.tsx'],
     env: {
-      NODE_ENV: 'development'
+      NODE_ENV: 'test'
     },
-    testTimeout: 15000,
+    testTimeout: 10000,
     hookTimeout: 5000,
-    isolate: true,
+    isolate: false,
     threads: false,
+    singleThread: true,
+    maxConcurrency: 1,
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
       exclude: ['node_modules', 'src/test/**', '**/*.test.tsx']
-    },
-    deps: {
-      inline: ['react-leaflet-cluster']
     }
   }
 });

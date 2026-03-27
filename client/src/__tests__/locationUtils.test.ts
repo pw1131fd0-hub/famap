@@ -170,13 +170,12 @@ describe('locationUtils', () => {
       mockLocation = {
         id: 'test-location',
         name: { zh: '測試地點', en: 'Test Location' },
+        description: { zh: '描述', en: 'Description' },
         category: 'park',
         coordinates: { lat: 25.0330, lng: 121.5654 },
         address: { zh: '台北市', en: 'Taipei' },
         facilities: [],
-        averageRating: 4.5,
-        reviewCount: 10,
-        photos: []
+        averageRating: 4.5
       };
     });
 
