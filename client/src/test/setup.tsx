@@ -77,10 +77,10 @@ interface MockComponentProps {
 }
 
 vi.mock('react-leaflet', () => ({
-  MapContainer: ({ children }: MockComponentProps) => <div>{children}</div>,
-  TileLayer: () => <div>TileLayer</div>,
-  Marker: ({ children }: MockComponentProps) => <div>{children}</div>,
-  Popup: ({ children }: MockComponentProps) => <div>{children}</div>,
+  MapContainer: ({ children }: MockComponentProps) => React.createElement('div', null, children),
+  TileLayer: () => React.createElement('div', null, 'TileLayer'),
+  Marker: ({ children }: MockComponentProps) => React.createElement('div', null, children),
+  Popup: ({ children }: MockComponentProps) => React.createElement('div', null, children),
   useMap: () => ({
     setView: vi.fn(),
     getZoom: vi.fn(() => 13),
@@ -91,5 +91,5 @@ vi.mock('react-leaflet', () => ({
 }));
 
 vi.mock('react-leaflet-cluster', () => ({
-  default: ({ children }: MockComponentProps) => <div>{children}</div>,
+  default: ({ children }: MockComponentProps) => React.createElement('div', null, children),
 }));

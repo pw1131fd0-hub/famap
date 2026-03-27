@@ -5,7 +5,6 @@ import { useTranslation } from '../i18n/useTranslation';
 import {
   generateWeeklyOutingSuggestions,
   calculateWeeklyScore,
-  generateWeeklySummary,
   type DetailedWeeklySuggestion,
 } from '../utils/weeklyOutingPlanner';
 import '../styles/WeeklyOutingPlanner.css';
@@ -28,7 +27,6 @@ export function WeeklyOutingPlanner({
   const [expandedDay, setExpandedDay] = useState<string | null>(null);
 
   useEffect(() => {
-    setIsLoading(true);
     // Simulate async operation for suggestions
     setTimeout(() => {
       const newSuggestions = generateWeeklyOutingSuggestions(
