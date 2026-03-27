@@ -1181,3 +1181,85 @@ export interface WeeklySuggestion {
 }
 
 export type Language = 'zh' | 'en';
+
+/**
+ * Family Community & Discovery System Types
+ */
+
+export interface FamilyProfile {
+  id: string;
+  userId?: string;
+  familyName?: string;
+  childrenAges: number[];
+  childrenCount: number;
+  interests: string[];
+  visitFrequency: 'weekly' | 'biweekly' | 'monthly' | 'occasional';
+  budget: 'budget_conscious' | 'moderate' | 'flexible';
+  specialNeeds?: string[];
+  preferredLocations?: string[];
+  groupSize: 'solo' | 'couple' | 'extended_family';
+  isVerified: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FamilyCompatibilityScore {
+  familyProfileId: string;
+  otherFamilyProfileId: string;
+  compatibilityScore: number;
+  matchReasons: string[];
+  commonInterests: string[];
+  sharedLocations: string[];
+  potentialGroupActivities: string[];
+}
+
+export interface FamilyCommunityExperience {
+  id: string;
+  familyId: string;
+  locationId: string;
+  title: string;
+  description: string;
+  rating: number;
+  childAgesAtVisit: number[];
+  visitDate: string;
+  photos?: string[];
+  likes: number;
+  comments: FamilyCommunityComment[];
+  visibility: 'public' | 'friends_only' | 'anonymous';
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FamilyCommunityComment {
+  id: string;
+  authorId: string;
+  content: string;
+  likes: number;
+  createdAt: string;
+}
+
+export interface GroupOutingProposal {
+  id: string;
+  creatorFamilyId: string;
+  locationId: string;
+  proposedDate: string;
+  proposedTime: string;
+  maxFamilies: number;
+  currentMembers: string[];
+  interests: string[];
+  ageRangeTarget: AgeRange;
+  description: string;
+  status: 'open' | 'full' | 'cancelled' | 'completed';
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FamilyDiscoveryRecommendation {
+  recommendationType: 'compatible_families' | 'group_outing' | 'similar_interests' | 'trending_location';
+  targetFamilyId?: string;
+  targetLocationId?: string;
+  targetGroupOutingId?: string;
+  reason: string;
+  confidence: number;
+  action?: string;
+}
