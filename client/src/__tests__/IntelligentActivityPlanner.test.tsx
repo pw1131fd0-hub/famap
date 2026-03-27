@@ -259,11 +259,12 @@ describe('IntelligentActivityPlanner Component', () => {
   });
 
   describe('Bilingual Support', () => {
-    it('should render component in English', () => {
+    it('should render component in default language', () => {
       renderWithLanguage(
         <IntelligentActivityPlanner locations={mockLocations} />
       );
-      expect(screen.getByText(/Intelligent Activity Planner/i)).toBeInTheDocument();
+      // Component defaults to Chinese, check for Chinese title
+      expect(screen.getByText(/智能活動計劃/i)).toBeInTheDocument();
     });
 
     it('should display both English and Chinese text for activities', async () => {

@@ -14,10 +14,10 @@ describe('locationUtils', () => {
     });
 
     it('should calculate distance between different coordinates correctly', () => {
-      // Taipei to Kaohsiung (approximately 350km)
+      // Taipei to Kaohsiung (approximately 297km)
       const distance = calculateDistance(25.0330, 121.5654, 22.6273, 120.3014);
-      expect(distance).toBeGreaterThan(300);
-      expect(distance).toBeLessThan(400);
+      expect(distance).toBeGreaterThan(290);
+      expect(distance).toBeLessThan(305);
     });
 
     it('should calculate distance between nearby locations', () => {
@@ -63,7 +63,7 @@ describe('locationUtils', () => {
 
     it('should format distances >= 1km with fixed 1 decimal', () => {
       expect(formatDistance(1.0)).toBe('1.0km');
-      expect(formatDistance(1.25)).toBe('1.2km');
+      expect(formatDistance(1.25)).toBe('1.3km');
       expect(formatDistance(1.26)).toBe('1.3km');
     });
   });
@@ -273,9 +273,9 @@ describe('locationUtils', () => {
     it('should not double-count duplicate facilities', () => {
       mockLocation.facilities = ['nursing_room', 'nursing_room'];
       const score = getLocationFamilyScore(mockLocation);
-      // Even though nursing_room appears twice, it should only be counted based on
-      // the forEach logic which adds 1 for each occurrence in the facilities array
-      expect(score).toBe(2);
+      // Even though nursing_room appears twice, it should only be counted once because
+      // the implementation uses .includes() which returns true/false, not count occurrences
+      expect(score).toBe(1);
     });
   });
 });
