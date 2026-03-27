@@ -9,7 +9,7 @@
  * - Family budget constraints
  */
 
-import type { Location, ActivityHistoryEntry, WeeklyOutingSuggestion } from '../types';
+import type { Location, ActivityHistoryEntry } from '../types';
 
 export interface FamilyWeeklyPreferences {
   preferredDaysOfWeek: number[]; // 0=Sunday, 6=Saturday
@@ -76,7 +76,6 @@ export function analyzeFamilyPreferences(
   const dayFrequency: Record<number, number> = {};
   const categoryFrequency: Record<string, number> = {};
   let totalSpending = 0;
-  let visitCount = 0;
 
   activityHistory.forEach(entry => {
     const visitDate = new Date(entry.visitDate);
@@ -84,7 +83,6 @@ export function analyzeFamilyPreferences(
     dayFrequency[dayOfWeek] = (dayFrequency[dayOfWeek] || 0) + 1;
     categoryFrequency[entry.category] = (categoryFrequency[entry.category] || 0) + 1;
     totalSpending += entry.cost || 0;
-    visitCount += 1;
   });
 
   // Find preferred days

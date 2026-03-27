@@ -21,7 +21,7 @@ export function WeeklyOutingPlanner({
   activityHistory = [],
   onSelectLocation,
 }: WeeklyOutingPlannerProps) {
-  const { language, t } = useTranslation();
+  const { language } = useTranslation();
   const [suggestions, setSuggestions] = useState<DetailedWeeklySuggestion[]>([]);
   const [overallScore, setOverallScore] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -61,7 +61,6 @@ export function WeeklyOutingPlanner({
   }
 
   const totalBudget = suggestions.reduce((sum, s) => sum + s.costEstimate, 0);
-  const summary = generateWeeklySummary(suggestions, language);
 
   return (
     <div className="weekly-outing-planner">

@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import type { Location, ActivityHistoryEntry } from '../types';
 import {
   analyzeFamilyPreferences,
@@ -263,7 +263,6 @@ describe('weeklyOutingPlanner', () => {
     it('should predict different crowds for different times of day', () => {
       const morningPrediction = predictCrowdLevel(mockLocations[0], 0, 'morning');
       const afternoonPrediction = predictCrowdLevel(mockLocations[0], 0, 'afternoon');
-      const eveningPrediction = predictCrowdLevel(mockLocations[0], 0, 'evening');
 
       expect(afternoonPrediction.estimatedWaitTime).toBeGreaterThan(
         morningPrediction.estimatedWaitTime * 0.8
