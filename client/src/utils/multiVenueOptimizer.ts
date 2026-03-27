@@ -115,6 +115,7 @@ function estimateVisitDuration(location: Location): number {
     playground: 120,
     water_park: 180,
     museum: 120,
+    attraction: 120,
     shopping: 90,
   };
   return categoryDurations[location.category] || 60;
