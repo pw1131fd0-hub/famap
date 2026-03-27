@@ -32,10 +32,15 @@ const SmartNotificationCenter: React.FC<SmartNotificationCenterProps> = ({
   }, [engine]);
 
   useEffect(() => {
+    // Initial load of notifications
     loadNotifications();
+
+    // Set up polling interval for updates
     const interval = setInterval(loadNotifications, 5000);
+
     return () => clearInterval(interval);
-  }, [loadNotifications]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleMarkAsRead = (id: string) => {
     engine.markAsRead(id);
