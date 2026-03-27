@@ -5,19 +5,17 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-    environment: 'jsdom',
-    setupFiles: ['./src/test/setup.tsx'],
+    environment: 'node',
+    setupFiles: [],
     env: {
       NODE_ENV: 'test'
     },
     testTimeout: 10000,
     hookTimeout: 5000,
-    pool: 'threads',
-    poolOptions: {
-      threads: {
-        singleThread: true
-      }
-    },
+    threads: true,
+    maxThreads: 1,
+    minThreads: 1,
+    singleThread: true,
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
