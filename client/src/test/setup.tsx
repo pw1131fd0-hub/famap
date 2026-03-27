@@ -1,6 +1,30 @@
 import '@testing-library/jest-dom';
-import { vi } from 'vitest';
+import { vi, afterEach } from 'vitest';
 import * as React from 'react';
+
+// Global cleanup after each test
+afterEach(() => {
+  // Clear all mocks
+  vi.clearAllMocks();
+  // Clear all timers
+  vi.clearAllTimers();
+  // Clear localStorage (with safe guard)
+  try {
+    if (typeof localStorage !== 'undefined' && localStorage.clear) {
+      localStorage.clear();
+    }
+  } catch {
+    // Ignore errors if localStorage is not available
+  }
+  // Clear sessionStorage (with safe guard)
+  try {
+    if (typeof sessionStorage !== 'undefined' && sessionStorage.clear) {
+      sessionStorage.clear();
+    }
+  } catch {
+    // Ignore errors if sessionStorage is not available
+  }
+});
 
 // Mock axios
 vi.mock('axios', () => {
