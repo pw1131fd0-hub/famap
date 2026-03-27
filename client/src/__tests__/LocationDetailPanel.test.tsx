@@ -385,7 +385,9 @@ describe('LocationDetailPanel', () => {
       </LanguageProvider>
     );
 
-    expect(screen.getByText(/中等/)).toBeInTheDocument();
+    // The crowding info may appear in multiple places (insights panel and detail section)
+    const crowdingElements = screen.getAllByText(/中等/);
+    expect(crowdingElements.length).toBeGreaterThan(0);
   });
 
   it('displays nursing amenities', () => {
