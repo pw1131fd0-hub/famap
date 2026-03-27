@@ -9,8 +9,7 @@ import {
   classifyError,
   shouldRetryError,
   getRetryDelay,
-  type ErrorContext,
-  type EnhancedError
+  type ErrorContext
 } from '../utils/enhancedErrorHandling';
 
 describe('Enhanced Error Handling', () => {
@@ -219,7 +218,7 @@ describe('Enhanced Error Handling', () => {
     });
 
     it('should add jitter to prevent thundering herd', () => {
-      const delays = Array.from({ length: 10 }, (_, i) => getRetryDelay(1));
+      const delays = Array.from({ length: 10 }, () => getRetryDelay(1));
       const unique = new Set(delays);
       // With jitter, delays should vary (though theoretically could collide)
       expect(unique.size).toBeGreaterThan(1);
@@ -233,11 +232,8 @@ describe('Enhanced Error Handling', () => {
     });
 
     it('should increase delay with each attempt', () => {
-      const attempt1Base = 1000; // 1000 * 2^0
-      const attempt2Base = 2000; // 1000 * 2^1
-      const attempt3Base = 4000; // 1000 * 2^2
-
       // Allow for jitter but check base is increasing
+      // Attempt 1: 1000ms (2^0), Attempt 2: 2000ms (2^1), Attempt 3: 4000ms (2^2)
       const delay1 = getRetryDelay(1);
       const delay2 = getRetryDelay(2);
       const delay3 = getRetryDelay(3);
