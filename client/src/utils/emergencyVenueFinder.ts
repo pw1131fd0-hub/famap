@@ -365,8 +365,8 @@ function checkAgeSuitability(location: Location, childAges: number[]): boolean {
     return hasHighChairs || hasFamilySeating || minAge > 3;
   }
 
-  // Parks and activities: check for age-appropriate equipment
-  if (location.category === 'park' || location.category === 'activity') {
+  // Parks and attractions: check for age-appropriate equipment
+  if (location.category === 'park' || location.category === 'attraction') {
     // Assume parks have equipment for ages 2-12
     return minAge >= 1;
   }

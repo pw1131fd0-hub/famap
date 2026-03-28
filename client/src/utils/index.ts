@@ -70,6 +70,7 @@ export * from './milestonePlanner';
 export * from './emergencyVenueFinder';
 
 // Accessibility
+export * from './accessibilityAssistant';
 export * from './accessibilityHelpers';
 
 // Error handling
