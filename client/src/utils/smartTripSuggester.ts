@@ -241,7 +241,8 @@ function calculateTimeAlignment(
   familyProfile: FamilyProfile
 ): number {
   // Prefer venues open at times family typically visits
-  const preferredTimes = (familyProfile.preferences as any)?.preferredVisitTimes || [
+  // Default to morning and afternoon as typical family visit times
+  const preferredTimes = [
     'morning',
     'afternoon',
   ];
