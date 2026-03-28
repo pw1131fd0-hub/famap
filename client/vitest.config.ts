@@ -10,25 +10,21 @@ export default defineConfig({
     env: {
       NODE_ENV: 'test'
     },
-    testTimeout: 25000,
-    hookTimeout: 15000,
-    isolatedModuleTimeout: 120000,
-    teardownTimeout: 15000,
-    // Vitest 4.1 compatible pool configuration
-    threads: true,
-    isolate: true,
-    maxThreads: 2, // Reduce from 4 to prevent resource exhaustion
-    minThreads: 1,
-    maxWorkers: 2,
-    singleThread: false,
+    testTimeout: 30000,
+    hookTimeout: 20000,
+    isolatedModuleTimeout: 150000,
+    teardownTimeout: 20000,
+    // Optimized for many test files - reduce parallelization to prevent pool timeout
+    threads: false, // Disable threading to avoid worker pool initialization overhead
+    isolate: false, // Run tests in same process to avoid isolation overhead
+    singleThread: true, // Explicit single-threaded mode
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
       exclude: ['node_modules', 'src/test/**', '**/*.test.tsx']
     },
-    // Improved test execution strategy
-    testNamePattern: undefined,
+    // Sequential test execution prevents pool exhaustion with 76 test files
     bail: 0, // Run all tests even if some fail
-    maxConcurrency: 2,
+    maxConcurrency: 1, // Run tests sequentially
   }
 });
