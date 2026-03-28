@@ -7,6 +7,7 @@
 import { useState, useEffect } from 'react';
 import {
   generateSmartTripSuggestions,
+  type TripSuggestion,
 } from '../utils/smartTripSuggester';
 import { useLanguage } from '../i18n/useLanguage';
 import '../styles/SmartTripSuggestionPanel.css';

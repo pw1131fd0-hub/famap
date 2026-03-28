@@ -29,9 +29,7 @@ export function FamilyCommunityPanel({
     // Generate recommendations
     const recs = generateFamilyRecommendations(
       currentFamily,
-      allFamilies,
-      [],
-      [],
+      allFamilies
     );
     setRecommendations(recs);
   }, [currentFamily, allFamilies]);

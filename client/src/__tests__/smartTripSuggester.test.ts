@@ -7,62 +7,59 @@ import {
 } from '../utils/smartTripSuggester';
 import type {
   SmartSuggestionContext,
-  VenueScore,
-  TripSuggestion,
 } from '../utils/smartTripSuggester';
 import type { Location, FamilyProfile, ActivityHistoryEntry } from '../types';
 
 // Mock data
 const mockFamilyProfile: FamilyProfile = {
   id: 'family_1',
-  name: 'Smith Family',
+  familyName: 'Smith Family',
   childrenAges: [5, 8, 11],
-  preferences: {
-    preferredCategories: ['park', 'restaurant', 'museum'],
-    budget: 300,
-    preferredVisitTimes: ['morning', 'afternoon'],
-  },
+  childrenCount: 3,
+  interests: ['park', 'restaurant', 'attraction'],
+  visitFrequency: 'weekly',
+  budget: 'moderate',
 };
 
 const mockVenues: Location[] = [
   {
     id: 'venue_1',
     name: { en: 'Central Park', zh: '中央公園' },
+    description: { en: 'A beautiful park', zh: '美麗的公園' },
     category: 'park',
     coordinates: { lat: 25.04, lng: 121.56 },
     address: { en: 'Taipei', zh: '台北' },
     averageRating: 4.5,
-    reviewCount: 150,
     facilities: ['restroom', 'playground', 'picnic_area'],
   },
   {
     id: 'venue_2',
     name: { en: 'Family Restaurant', zh: '家庭餐廳' },
+    description: { en: 'Family-friendly restaurant', zh: '家庭餐廳' },
     category: 'restaurant',
     coordinates: { lat: 25.05, lng: 121.57 },
     address: { en: 'Taipei', zh: '台北' },
     averageRating: 4.2,
-    reviewCount: 80,
     facilities: ['highchair', 'kids_menu', 'family_zone'],
   },
   {
     id: 'venue_3',
     name: { en: 'Children Museum', zh: '兒童美術館' },
-    category: 'museum',
+    description: { en: 'Museum for children', zh: '兒童博物館' },
+    category: 'attraction',
     coordinates: { lat: 25.03, lng: 121.55 },
     address: { en: 'Taipei', zh: '台北' },
     averageRating: 4.8,
-    reviewCount: 200,
     facilities: ['restroom', 'gift_shop', 'cafe'],
   },
   {
     id: 'venue_4',
     name: { en: 'Zoo Park', zh: '動物園' },
+    description: { en: 'Zoo with various animals', zh: '有各種動物的動物園' },
     category: 'park',
     coordinates: { lat: 25.06, lng: 121.54 },
     address: { en: 'Taipei', zh: '台北' },
     averageRating: 4.6,
-    reviewCount: 300,
     facilities: ['restroom', 'food_court', 'parking'],
   },
 ];
@@ -70,32 +67,32 @@ const mockVenues: Location[] = [
 const mockRecentHistory: ActivityHistoryEntry[] = [
   {
     id: 'visit_1',
-    familyId: 'family_1',
+    userId: 'user_1',
     locationId: 'venue_1',
-    date: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days ago
+    visitDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days ago
     duration: 120,
-    spentAmount: 50,
-    notes: 'Great park day',
+    cost: 50,
+    familySize: 3,
     category: 'park',
   },
   {
     id: 'visit_2',
-    familyId: 'family_1',
+    userId: 'user_1',
     locationId: 'venue_2',
-    date: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(), // 14 days ago
+    visitDate: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(), // 14 days ago
     duration: 90,
-    spentAmount: 120,
-    notes: 'Lunch and play',
+    cost: 120,
+    familySize: 3,
     category: 'restaurant',
   },
   {
     id: 'visit_3',
-    familyId: 'family_1',
+    userId: 'user_1',
     locationId: 'venue_4',
-    date: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString(), // 60 days ago
+    visitDate: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString(), // 60 days ago
     duration: 180,
-    spentAmount: 100,
-    notes: 'Zoo visit',
+    cost: 100,
+    familySize: 3,
     category: 'park',
   },
 ];
@@ -427,13 +424,13 @@ describe('Smart Trip Suggester', () => {
         ...mockRecentHistory,
         {
           id: 'visit_4',
-          familyId: 'family_1',
+          userId: 'user_1',
           locationId: 'venue_3',
-          date: new Date().toISOString(),
+          visitDate: new Date().toISOString(),
           duration: 120,
-          spentAmount: 80,
-          notes: 'Museum visit',
-          category: 'museum',
+          cost: 80,
+          familySize: 3,
+          category: 'attraction',
         },
       ];
 
