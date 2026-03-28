@@ -249,7 +249,7 @@ function calculateTimeAlignment(
   const venueTiming = (venue as any)?.operatingHours;
   if (!venueTiming) return 0.7;
 
-  return preferredTimes.some(t => venueTiming[t]?.open) ? 0.9 : 0.5;
+  return preferredTimes.some((t: string) => venueTiming[t]?.open) ? 0.9 : 0.5;
 }
 
 /**
@@ -318,8 +318,8 @@ function generateTripTitle(venues: Location[], index: number): string {
  * Generate reasons for the suggestion
  */
 function generateSuggestionReasons(
-  venues: Location[],
-  familyProfile: FamilyProfile,
+  _venues: Location[],
+  _familyProfile: FamilyProfile,
   venueScores: VenueScore[]
 ): string[] {
   const reasons: string[] = [];
@@ -350,7 +350,7 @@ function generateSuggestionReasons(
 /**
  * Get next available date for the trip
  */
-function getNextAvailableDate(familyProfile: FamilyProfile): Date {
+function getNextAvailableDate(_familyProfile: FamilyProfile): Date {
   const now = new Date();
   const dayOfWeek = now.getDay();
 
@@ -387,7 +387,7 @@ function getWeatherOutlook(weather: any): string {
  * Predict crowd level based on venue and date
  */
 function getPredictedCrowd(
-  venues: Location[]
+  _venues: Location[]
 ): 'light' | 'moderate' | 'heavy' {
   // Simple heuristic: weekend crowds are typically moderate
   return 'moderate';

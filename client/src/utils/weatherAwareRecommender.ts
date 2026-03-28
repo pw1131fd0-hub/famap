@@ -370,7 +370,7 @@ export function getIndoorVenueAlternatives(
 ): Location[] {
   if (weather.condition === 'rainy' || weather.condition === 'snow') {
     return allVenues.filter(venue =>
-      venue.facilities?.includes('indoor_activities') || venue.category === 'entertainment_center'
+      venue.facilities?.includes('indoor_activities') || venue.category === 'attraction'
     );
   }
   return [];
@@ -438,7 +438,7 @@ export function formatWeatherCondition(
  */
 export function getWeatherBasedActivitySuggestions(
   weather: WeatherData,
-  familyProfile?: FamilyProfile,
+  _familyProfile?: FamilyProfile,
   lang: 'zh' | 'en' = 'en'
 ): string[] {
   const suggestions: Record<string, Record<string, string[]>> = {
