@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { useLanguage } from '../hooks/useLanguage';
+import { useLanguage } from '../i18n/useLanguage';
 import {
   findConsensusVenues,
   findCompromiseVenues,
@@ -32,7 +32,6 @@ export const FamilyVenueConsensusPanel: React.FC<FamilyVenueConsensusPanelProps>
   onVenueSelected,
 }) => {
   const { language } = useLanguage();
-  const [selectedVenue, setSelectedVenue] = useState<string | null>(null);
   const [expandedVenue, setExpandedVenue] = useState<string | null>(null);
 
   const consensusResult = useMemo(
@@ -219,7 +218,6 @@ export const FamilyVenueConsensusPanel: React.FC<FamilyVenueConsensusPanelProps>
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                setSelectedVenue(venue.venueId);
                 onVenueSelected?.(venues.find((v) => v.id === venue.venueId)!);
               }}
               className="w-full mt-3 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded transition-colors"

@@ -36,7 +36,7 @@ export interface VenueCompatibilityScore {
 
 export interface ConsensusResult {
   topChoices: VenueCompatibilityScore[];
-  consensusLevel: 'strong' | 'moderate' | 'weak';
+  consensusLevel: 'strong' | 'moderate' | 'weak' | 'conflicted';
   conflictingPreferences: string[];
   recommendations: string[];
   alternativeCompromises: VenueCompatibilityScore[];
@@ -224,7 +224,6 @@ export function scoreVenueForGroup(
   const conflictAreas = identifyConflicts(members);
 
   const recommendationReason = generateRecommendationReason(
-    venue,
     overallScore,
     consensusLevel,
     satisfiedMembers.length,
@@ -309,7 +308,6 @@ export function findConsensusVenues(
  * Generate recommendation reasons
  */
 function generateRecommendationReason(
-  venue: Location,
   score: number,
   consensus: string,
   satisfiedCount: number,
