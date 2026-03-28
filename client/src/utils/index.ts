@@ -60,6 +60,9 @@ export * from './savedSearches';
 // Trip export and management
 export * from './tripExport';
 
+// Monthly travel planning
+export * from './monthlyTravelPlanner';
+
 // Accessibility
 export * from './accessibilityHelpers';
 
