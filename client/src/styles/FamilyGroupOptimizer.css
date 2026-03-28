@@ -1,0 +1,622 @@
+/* Family Group Optimizer Component Styles */
+
+.family-group-optimizer {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 16px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.family-group-optimizer.dark-mode {
+  background: linear-gradient(135deg, #2a3a4a 0%, #1a2a3a 100%);
+  color: #e0e0e0;
+}
+
+/* Header */
+.fgo-header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.fgo-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 8px 0;
+}
+
+.family-group-optimizer.dark-mode .fgo-header h2 {
+  color: #fff;
+}
+
+.fgo-header p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.family-group-optimizer.dark-mode .fgo-header p {
+  color: #aaa;
+}
+
+/* Current Family Card */
+.fgo-current-family {
+  margin-bottom: 24px;
+}
+
+.fgo-family-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.family-group-optimizer.dark-mode .fgo-family-card {
+  background: #333;
+  color: #fff;
+}
+
+.fgo-family-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 12px 0;
+}
+
+.family-group-optimizer.dark-mode .fgo-family-card h3 {
+  color: #fff;
+}
+
+.fgo-family-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fgo-detail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.fgo-detail .label {
+  font-weight: 600;
+  color: #555;
+  min-width: 80px;
+}
+
+.family-group-optimizer.dark-mode .fgo-detail .label {
+  color: #aaa;
+}
+
+.fgo-detail .value {
+  color: #333;
+}
+
+.family-group-optimizer.dark-mode .fgo-detail .value {
+  color: #ddd;
+}
+
+.fgo-interests {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.fgo-tag {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.family-group-optimizer.dark-mode .fgo-tag {
+  background: #1e3a5f;
+  color: #64b5f6;
+}
+
+/* Filters */
+.fgo-filters {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.family-group-optimizer.dark-mode .fgo-filters {
+  background: #333;
+}
+
+.fgo-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fgo-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fgo-checkbox input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #1976d2;
+}
+
+.fgo-checkbox span {
+  font-size: 14px;
+  color: #333;
+}
+
+.family-group-optimizer.dark-mode .fgo-checkbox span {
+  color: #ddd;
+}
+
+.fgo-slider-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.family-group-optimizer.dark-mode .fgo-slider-label {
+  color: #ddd;
+}
+
+.fgo-slider {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: #e0e0e0;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.family-group-optimizer.dark-mode .fgo-slider {
+  background: #555;
+}
+
+.fgo-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #1976d2;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.fgo-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #1976d2;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Matches Section */
+.fgo-matches-section {
+  margin-bottom: 24px;
+}
+
+.fgo-matches-section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 16px 0;
+}
+
+.family-group-optimizer.dark-mode .fgo-matches-section h3 {
+  color: #fff;
+}
+
+.fgo-no-matches {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  color: #666;
+}
+
+.family-group-optimizer.dark-mode .fgo-no-matches {
+  background: #333;
+  color: #aaa;
+}
+
+.fgo-no-matches p {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+}
+
+.fgo-matches-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fgo-match-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.fgo-match-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-color: #1976d2;
+}
+
+.fgo-match-card.selected {
+  border-color: #1976d2;
+  background: #f5f9ff;
+}
+
+.family-group-optimizer.dark-mode .fgo-match-card {
+  background: #333;
+  color: #fff;
+}
+
+.family-group-optimizer.dark-mode .fgo-match-card.selected {
+  background: #1e3a5f;
+  border-color: #64b5f6;
+}
+
+.fgo-match-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.fgo-match-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #1976d2;
+}
+
+.fgo-match-header h4 {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.family-group-optimizer.dark-mode .fgo-match-header h4 {
+  color: #fff;
+}
+
+.fgo-compatibility-score {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 60px;
+  text-align: center;
+}
+
+.fgo-match-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.fgo-metric {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.metric-label {
+  font-weight: 500;
+  color: #555;
+  min-width: 100px;
+}
+
+.family-group-optimizer.dark-mode .metric-label {
+  color: #aaa;
+}
+
+.metric-bar {
+  flex: 1;
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.family-group-optimizer.dark-mode .metric-bar {
+  background: #555;
+}
+
+.metric-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
+}
+
+.metric-value {
+  font-weight: 600;
+  color: #333;
+  min-width: 40px;
+  text-align: right;
+}
+
+.family-group-optimizer.dark-mode .metric-value {
+  color: #fff;
+}
+
+.fgo-match-reasons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.fgo-reason-tag {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 4px 10px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.family-group-optimizer.dark-mode .fgo-reason-tag {
+  background: #1b5e20;
+  color: #81c784;
+}
+
+/* Optimization Section */
+.fgo-optimization-section {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.family-group-optimizer.dark-mode .fgo-optimization-section {
+  background: #333;
+}
+
+.fgo-optimization-section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 16px 0;
+}
+
+.family-group-optimizer.dark-mode .fgo-optimization-section h3 {
+  color: #fff;
+}
+
+.fgo-group-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.fgo-info-card {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 8px;
+  padding: 14px;
+  text-align: center;
+}
+
+.family-group-optimizer.dark-mode .fgo-info-card {
+  background: linear-gradient(135deg, #2a3a4a 0%, #1a2a3a 100%);
+}
+
+.fgo-info-card h4 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.family-group-optimizer.dark-mode .fgo-info-card h4 {
+  color: #aaa;
+}
+
+.fgo-composition {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 4px 0;
+}
+
+.family-group-optimizer.dark-mode .fgo-composition {
+  color: #fff;
+}
+
+.fgo-group-size {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+}
+
+.family-group-optimizer.dark-mode .fgo-group-size {
+  color: #aaa;
+}
+
+.fgo-budget {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1976d2;
+  margin: 0 0 4px 0;
+}
+
+.family-group-optimizer.dark-mode .fgo-budget {
+  color: #64b5f6;
+}
+
+.fgo-budget-note {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+}
+
+.family-group-optimizer.dark-mode .fgo-budget-note {
+  color: #aaa;
+}
+
+.fgo-outing-types {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.fgo-type-tag {
+  background: #ffe0b2;
+  color: #e65100;
+  padding: 4px 10px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.family-group-optimizer.dark-mode .fgo-type-tag {
+  background: #e65100;
+  color: #ffe0b2;
+}
+
+/* Recommendations */
+.fgo-recommendations {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.family-group-optimizer.dark-mode .fgo-recommendations {
+  border-top-color: #555;
+}
+
+.fgo-recommendations h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 12px 0;
+}
+
+.family-group-optimizer.dark-mode .fgo-recommendations h4 {
+  color: #fff;
+}
+
+.fgo-recommendations-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fgo-recommendations-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.family-group-optimizer.dark-mode .fgo-recommendations-list li {
+  color: #aaa;
+}
+
+.fgo-tip-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .family-group-optimizer {
+    padding: 16px;
+  }
+
+  .fgo-header h2 {
+    font-size: 20px;
+  }
+
+  .fgo-filters {
+    flex-direction: column;
+  }
+
+  .fgo-group-info {
+    grid-template-columns: 1fr;
+  }
+
+  .fgo-match-header {
+    flex-wrap: wrap;
+  }
+
+  .fgo-match-header h4 {
+    flex-basis: 100%;
+  }
+
+  .fgo-metric {
+    flex-wrap: wrap;
+  }
+
+  .metric-bar {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .family-group-optimizer {
+    padding: 12px;
+    margin: 8px 0;
+  }
+
+  .fgo-header h2 {
+    font-size: 18px;
+  }
+
+  .fgo-match-card {
+    padding: 12px;
+  }
+
+  .fgo-compatibility-score {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
+  .fgo-optimization-section {
+    padding: 14px;
+  }
+
+  .fgo-info-card {
+    padding: 10px;
+  }
+}

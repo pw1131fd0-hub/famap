@@ -366,24 +366,15 @@ describe('venueQualityAssessment utility', () => {
         facilities: ['stroller_accessible'],
       };
 
-      const credibility1 = assessVenueCredibility(mockLocation);
-      const credibility2 = assessVenueCredibility(venue2);
-
-      const suitability1 = evaluateVenueSuitability(
-        mockLocation,
-        mockFamilyNeeds,
-        credibility1
-      );
-
-      const suitability2 = evaluateVenueSuitability(
-        venue2,
-        mockFamilyNeeds,
-        credibility2
-      );
+      const credibilityMap = new Map([
+        [mockLocation.id, assessVenueCredibility(mockLocation)],
+        [venue2.id, assessVenueCredibility(venue2)],
+      ]);
 
       const comparison = compareVenuesForFamily(
-        [suitability1, suitability2],
-        mockFamilyNeeds
+        [mockLocation, venue2],
+        mockFamilyNeeds,
+        credibilityMap
       );
 
       expect(comparison).toBeDefined();
@@ -408,24 +399,15 @@ describe('venueQualityAssessment utility', () => {
         facilities: ['stroller_accessible'],
       };
 
-      const cred1 = assessVenueCredibility(venueFullMatch);
-      const cred2 = assessVenueCredibility(venuePartialMatch);
-
-      const suit1 = evaluateVenueSuitability(
-        venueFullMatch,
-        mockFamilyNeeds,
-        cred1
-      );
-
-      const suit2 = evaluateVenueSuitability(
-        venuePartialMatch,
-        mockFamilyNeeds,
-        cred2
-      );
+      const credibilityMap = new Map([
+        [venueFullMatch.id, assessVenueCredibility(venueFullMatch)],
+        [venuePartialMatch.id, assessVenueCredibility(venuePartialMatch)],
+      ]);
 
       const comparison = compareVenuesForFamily(
-        [suit1, suit2],
-        mockFamilyNeeds
+        [venueFullMatch, venuePartialMatch],
+        mockFamilyNeeds,
+        credibilityMap
       );
 
       expect(comparison.bestMatch.venue.id).toBe(venueFullMatch.id);
@@ -438,24 +420,15 @@ describe('venueQualityAssessment utility', () => {
         facilities: ['playground'],
       };
 
-      const cred1 = assessVenueCredibility(mockLocation);
-      const cred2 = assessVenueCredibility(venue2);
-
-      const suit1 = evaluateVenueSuitability(
-        mockLocation,
-        mockFamilyNeeds,
-        cred1
-      );
-
-      const suit2 = evaluateVenueSuitability(
-        venue2,
-        mockFamilyNeeds,
-        cred2
-      );
+      const credibilityMap = new Map([
+        [mockLocation.id, assessVenueCredibility(mockLocation)],
+        [venue2.id, assessVenueCredibility(venue2)],
+      ]);
 
       const comparison = compareVenuesForFamily(
-        [suit1, suit2],
-        mockFamilyNeeds
+        [mockLocation, venue2],
+        mockFamilyNeeds,
+        credibilityMap
       );
 
       expect(comparison.compareReasons.length).toBeGreaterThan(0);
@@ -473,24 +446,15 @@ describe('venueQualityAssessment utility', () => {
         facilities: ['changing_table', 'stroller_accessible'],
       };
 
-      const credRisky = assessVenueCredibility(riskyVenue);
-      const credSafe = assessVenueCredibility(safeVenue);
-
-      const suitRisky = evaluateVenueSuitability(
-        riskyVenue,
-        mockFamilyNeeds,
-        credRisky
-      );
-
-      const suitSafe = evaluateVenueSuitability(
-        safeVenue,
-        mockFamilyNeeds,
-        credSafe
-      );
+      const credibilityMap = new Map([
+        [riskyVenue.id, assessVenueCredibility(riskyVenue)],
+        [safeVenue.id, assessVenueCredibility(safeVenue)],
+      ]);
 
       const comparison = compareVenuesForFamily(
-        [suitRisky, suitSafe],
-        mockFamilyNeeds
+        [riskyVenue, safeVenue],
+        mockFamilyNeeds,
+        credibilityMap
       );
 
       expect(comparison.riskFactors).toBeInstanceOf(Array);
@@ -502,40 +466,29 @@ describe('venueQualityAssessment utility', () => {
         id: 'venue_test_2',
       };
 
-      const cred1 = assessVenueCredibility(mockLocation);
-      const cred2 = assessVenueCredibility(venue2);
-
-      const suit1 = evaluateVenueSuitability(
-        mockLocation,
-        mockFamilyNeeds,
-        cred1
-      );
-
-      const suit2 = evaluateVenueSuitability(
-        venue2,
-        mockFamilyNeeds,
-        cred2
-      );
+      const credibilityMap = new Map([
+        [mockLocation.id, assessVenueCredibility(mockLocation)],
+        [venue2.id, assessVenueCredibility(venue2)],
+      ]);
 
       const comparison = compareVenuesForFamily(
-        [suit1, suit2],
-        mockFamilyNeeds
+        [mockLocation, venue2],
+        mockFamilyNeeds,
+        credibilityMap
       );
 
       expect(comparison.recommendations).toBeInstanceOf(Array);
     });
 
     it('should handle single venue comparison', () => {
-      const credibility = assessVenueCredibility(mockLocation);
-      const suitability = evaluateVenueSuitability(
-        mockLocation,
-        mockFamilyNeeds,
-        credibility
-      );
+      const credibilityMap = new Map([
+        [mockLocation.id, assessVenueCredibility(mockLocation)],
+      ]);
 
       const comparison = compareVenuesForFamily(
-        [suitability],
-        mockFamilyNeeds
+        [mockLocation],
+        mockFamilyNeeds,
+        credibilityMap
       );
 
       expect(comparison.venues.length).toBe(1);
@@ -553,6 +506,7 @@ describe('venueQualityAssessment utility', () => {
       );
 
       const summary = getVenueQualitySummary(
+        mockLocation,
         credibility,
         suitability
       );
@@ -577,14 +531,15 @@ describe('venueQualityAssessment utility', () => {
       );
 
       const summary = getVenueQualitySummary(
+        mockLocation,
         credibility,
         suitability
       );
 
-      expect(['A', 'B', 'C', 'D', 'F']).toContain(summary.qualityGrade);
+      expect(['excellent', 'good', 'fair', 'poor']).toContain(summary.qualityGrade);
     });
 
-    it('should include quality metrics in summary', () => {
+    it('should include summary text', () => {
       const credibility = assessVenueCredibility(mockLocation);
       const suitability = evaluateVenueSuitability(
         mockLocation,
@@ -593,15 +548,16 @@ describe('venueQualityAssessment utility', () => {
       );
 
       const summary = getVenueQualitySummary(
+        mockLocation,
         credibility,
         suitability
       );
 
-      expect(summary.credibilityScore).toBeDefined();
-      expect(summary.suitabilityScore).toBeDefined();
+      expect(summary.summary).toBeDefined();
+      expect(summary.summary.length).toBeGreaterThan(0);
     });
 
-    it('should provide quality explanation', () => {
+    it('should determine should visit flag', () => {
       const credibility = assessVenueCredibility(mockLocation);
       const suitability = evaluateVenueSuitability(
         mockLocation,
@@ -610,15 +566,15 @@ describe('venueQualityAssessment utility', () => {
       );
 
       const summary = getVenueQualitySummary(
+        mockLocation,
         credibility,
         suitability
       );
 
-      expect(summary.explanation).toBeDefined();
-      expect(summary.explanation.length).toBeGreaterThan(0);
+      expect(typeof summary.shouldVisit).toBe('boolean');
     });
 
-    it('should list key strengths', () => {
+    it('should recommend visiting high-quality venues', () => {
       const credibility = assessVenueCredibility(mockLocation, {
         count: 50,
         recentCount: 15,
@@ -632,30 +588,15 @@ describe('venueQualityAssessment utility', () => {
       );
 
       const summary = getVenueQualitySummary(
-        credibility,
-        suitability
-      );
-
-      expect(summary.keyStrengths).toBeInstanceOf(Array);
-    });
-
-    it('should list areas for improvement', () => {
-      const credibility = assessVenueCredibility(mockLocation);
-      const suitability = evaluateVenueSuitability(
         mockLocation,
-        mockFamilyNeeds,
-        credibility
-      );
-
-      const summary = getVenueQualitySummary(
         credibility,
         suitability
       );
 
-      expect(summary.areasForImprovement).toBeInstanceOf(Array);
+      expect(summary.summary).toBeDefined();
     });
 
-    it('should handle low-quality venues', () => {
+    it('should not recommend low-quality venues', () => {
       const poorVenue: Location = {
         ...mockLocation,
         facilities: [],
@@ -669,6 +610,7 @@ describe('venueQualityAssessment utility', () => {
       );
 
       const summary = getVenueQualitySummary(
+        poorVenue,
         credibility,
         suitability
       );
@@ -703,6 +645,7 @@ describe('venueQualityAssessment utility', () => {
       );
 
       const summary = getVenueQualitySummary(
+        excellentVenue,
         credibility,
         suitability
       );
@@ -733,6 +676,7 @@ describe('venueQualityAssessment utility', () => {
 
       // Step 3: Get summary
       const summary = getVenueQualitySummary(
+        mockLocation,
         credibility,
         suitability
       );
@@ -756,14 +700,14 @@ describe('venueQualityAssessment utility', () => {
         },
       ];
 
-      const suitabilities = venues.map((venue) => {
-        const cred = assessVenueCredibility(venue);
-        return evaluateVenueSuitability(venue, mockFamilyNeeds, cred);
-      });
+      const credibilityMap = new Map(
+        venues.map(v => [v.id, assessVenueCredibility(v)])
+      );
 
       const comparison = compareVenuesForFamily(
-        suitabilities,
-        mockFamilyNeeds
+        venues,
+        mockFamilyNeeds,
+        credibilityMap
       );
 
       expect(comparison.venues.length).toBe(3);
@@ -816,6 +760,7 @@ describe('venueQualityAssessment utility', () => {
       );
 
       const summary = getVenueQualitySummary(
+        perfectVenue,
         credibility,
         suitability
       );

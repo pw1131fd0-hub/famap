@@ -35,6 +35,9 @@ export { default as tripCostCalculator } from './tripCostCalculator';
 export { default as multiVenueOptimizer } from './multiVenueOptimizer';
 export { default as familyVenueConsensus } from './familyVenueConsensus';
 
+// Family group management
+export * from './familyGroupOptimizer';
+
 // Network and caching
 export { default as networkState } from './networkState';
 export { default as cacheWarmingStrategy } from './cacheWarmingStrategy';
