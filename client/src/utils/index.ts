@@ -106,41 +106,23 @@ export {
  * Re-export type definitions
  */
 export type {
-  PerformanceMetric,
-  NetworkStateChangeEvent,
-  Connection,
-  UserPreferences,
-  FamilyContext,
   Location,
   Review,
-  LocationInsight,
+  FamilyProfile,
+  Event,
+  ActivityHistoryEntry,
+  WeeklySuggestion,
 } from '../types';
 
 /**
  * Utility bundles for common operations
  */
 export const utilities = {
-  analytics: {
-    trackEvent: analyticsEngine.trackEvent,
-    trackPageView: analyticsEngine.trackPageView,
-  },
   location: {
     search: searchLocations,
     filterByCategory,
     calculateDistance,
     sortByDistance,
-  },
-  recommendations: {
-    family: familyRecommender,
-    venue: venueInsights,
-    insights: locationInsights,
-    weather: weatherAwareRecommender,
-    visitTime: bestTimeVisitPredictor,
-  },
-  network: {
-    isOnline: () => networkState.isOnline(),
-    isSlowConnection: () => networkState.isSlowConnection(),
-    waitForOnline: (timeout?: number) => networkState.waitForOnline(timeout),
   },
 };
 
