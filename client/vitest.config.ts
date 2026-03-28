@@ -10,10 +10,10 @@ export default defineConfig({
     env: {
       NODE_ENV: 'test'
     },
-    testTimeout: 30000,
-    hookTimeout: 20000,
-    isolatedModuleTimeout: 150000,
-    teardownTimeout: 20000,
+    testTimeout: 60000,
+    hookTimeout: 40000,
+    isolatedModuleTimeout: 300000,
+    teardownTimeout: 40000,
     // Optimized for many test files - reduce parallelization to prevent pool timeout
     threads: false, // Disable threading to avoid worker pool initialization overhead
     isolate: false, // Run tests in same process to avoid isolation overhead
@@ -26,5 +26,11 @@ export default defineConfig({
     // Sequential test execution prevents pool exhaustion with 76 test files
     bail: 0, // Run all tests even if some fail
     maxConcurrency: 1, // Run tests sequentially
+    pool: 'child_process', // Use child_process pool instead of threads for better compatibility
+    poolOptions: {
+      forks: 1, // Only 1 worker to prevent pool initialization timeout
+      singleFork: true, // Run all tests in a single fork
+      timeout: 300000, // Increased worker startup timeout
+    },
   }
 });

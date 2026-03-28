@@ -10,8 +10,9 @@ import type { Location } from '../types';
 import { LanguageProvider } from '../i18n/LanguageContext';
 
 // Mock the emergency venue finder utilities
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 jest.mock('../utils/emergencyVenueFinder', () => ({
-  findEmergencyVenue: jest.fn((locations, need) => {
+  findEmergencyVenue: jest.fn((locations, _need) => {
     return locations.slice(0, 2).map((loc) => ({
       locationId: loc.id,
       locationName: loc.name.en,
@@ -146,6 +147,7 @@ describe('EmergencyVenueFinder Component', () => {
   });
 
   it('displays venue results after search', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { findEmergencyVenue } = require('../utils/emergencyVenueFinder');
     findEmergencyVenue.mockReturnValue([
       {
@@ -175,6 +177,7 @@ describe('EmergencyVenueFinder Component', () => {
   });
 
   it('displays venue metrics in results', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { findEmergencyVenue } = require('../utils/emergencyVenueFinder');
     findEmergencyVenue.mockReturnValue([
       {
@@ -204,6 +207,7 @@ describe('EmergencyVenueFinder Component', () => {
 
   it('handles venue selection', async () => {
     const onVenueSelected = jest.fn();
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { findEmergencyVenue } = require('../utils/emergencyVenueFinder');
 
     findEmergencyVenue.mockReturnValue([
@@ -234,6 +238,7 @@ describe('EmergencyVenueFinder Component', () => {
   });
 
   it('handles last-minute plan generation', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { generateLastMinuteOutingPlans } = require('../utils/emergencyVenueFinder');
 
     renderComponent();
@@ -257,6 +262,7 @@ describe('EmergencyVenueFinder Component', () => {
   });
 
   it('updates emergency type when selector changes', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { findEmergencyVenue } = require('../utils/emergencyVenueFinder');
     renderComponent();
 
@@ -288,6 +294,7 @@ describe('EmergencyVenueFinder Component', () => {
   });
 
   it('displays empty state when no results found', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { findEmergencyVenue } = require('../utils/emergencyVenueFinder');
     findEmergencyVenue.mockReturnValue([]);
 
@@ -325,6 +332,7 @@ describe('EmergencyVenueFinder Component', () => {
   });
 
   it('displays crowding level badge with appropriate styling', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { findEmergencyVenue } = require('../utils/emergencyVenueFinder');
     findEmergencyVenue.mockReturnValue([
       {
@@ -351,6 +359,7 @@ describe('EmergencyVenueFinder Component', () => {
   });
 
   it('displays recommendation reasons in results', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { findEmergencyVenue } = require('../utils/emergencyVenueFinder');
     findEmergencyVenue.mockReturnValue([
       {
