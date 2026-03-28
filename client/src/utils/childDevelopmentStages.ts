@@ -482,7 +482,7 @@ export function getStageTips(stage: DevelopmentStage, lang: 'zh' | 'en' = 'en'):
         'Allow time for social interaction',
         'Plan for snack breaks',
         'Bring sunscreen and water',
-        'Consider child\\'s interests and skill level'
+        'Consider child\'s interests and skill level'
       ]
     },
     teen: {
