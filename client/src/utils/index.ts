@@ -73,6 +73,23 @@ export * from './metaTagManager';
 // Environment configuration
 export { loadEnvConfig, validateEnvVariables, getEnv, isDevelopment, isProduction } from './envConfig';
 
+// Development utilities
+export {
+  assert,
+  devAssert,
+  log,
+  PerformanceHelper,
+  perfHelper,
+  is,
+  safeJSON,
+  safeStorage,
+  debounce,
+  throttle,
+  retry,
+  ifDev,
+  getEnvironment,
+} from './devUtils';
+
 /**
  * Re-export type definitions
  */
