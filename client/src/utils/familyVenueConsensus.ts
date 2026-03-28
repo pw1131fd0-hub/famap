@@ -336,8 +336,7 @@ function generateRecommendationReason(
  */
 function generateRecommendations(
   topChoices: VenueCompatibilityScore[],
-  conflictingPreferences: string[],
-  memberCount: number
+  conflictingPreferences: string[]
 ): string[] {
   const recommendations: string[] = [];
 

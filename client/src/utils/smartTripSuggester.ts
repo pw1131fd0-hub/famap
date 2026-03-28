@@ -142,10 +142,10 @@ function calculateVisitFrequency(
   // Family likes this venue, but give novelty bonus if not visited recently
   const lastVisit = recentHistory
     .filter(h => h.locationId === venue.id)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
+    .sort((a, b) => new Date(b.visitDate).getTime() - new Date(a.visitDate).getTime())[0];
 
   const daysSinceLastVisit = lastVisit
-    ? (Date.now() - new Date(lastVisit.date).getTime()) / (1000 * 60 * 60 * 24)
+    ? (Date.now() - new Date(lastVisit.visitDate).getTime()) / (1000 * 60 * 60 * 24)
     : 999;
 
   // If visited more than 2 weeks ago, boost score; if within 1 week, reduce it
@@ -159,9 +159,9 @@ function calculateVisitFrequency(
  * Check if venue category matches family preferences
  */
 function calculateCategoryMatch(venue: Location, familyProfile: FamilyProfile): number {
-  if (!familyProfile.preferences?.preferredCategories) return 0.5;
+  if (!familyProfile.interests || familyProfile.interests.length === 0) return 0.5;
 
-  const isPreferred = familyProfile.preferences.preferredCategories.includes(
+  const isPreferred = familyProfile.interests.includes(
     venue.category as string
   );
   return isPreferred ? 0.95 : 0.3;
@@ -195,7 +195,7 @@ function calculateCrowdAvoidance(
 
   // Check if visits tend to be during high-crowd times
   const morningVisits = venueVisits.filter(v => {
-    const hour = new Date(v.date).getHours();
+    const hour = new Date(v.visitDate).getHours();
     return hour >= 6 && hour < 12;
   }).length;
 
@@ -224,7 +224,7 @@ function calculateNoveltyBoost(
   recentHistory: ActivityHistoryEntry[]
 ): number {
   const recentVisits = recentHistory.filter(h => {
-    const visitDate = new Date(h.date);
+    const visitDate = new Date(h.visitDate);
     const daysSince = (Date.now() - visitDate.getTime()) / (1000 * 60 * 60 * 24);
     return daysSince < 30;
   });
@@ -493,12 +493,12 @@ export function analyzeFamilyOutingPattern(
   let totalSpending = 0;
 
   history.forEach(entry => {
-    const date = new Date(entry.date);
+    const date = new Date(entry.visitDate);
     const dayOfWeek = date.getDay();
     dayFrequency[dayOfWeek] = (dayFrequency[dayOfWeek] || 0) + 1;
 
     categoryFrequency[entry.category] = (categoryFrequency[entry.category] || 0) + 1;
-    totalSpending += entry.spentAmount || 0;
+    totalSpending += entry.cost || 0;
   });
 
   // Find preferred days (top 3)
@@ -516,7 +516,7 @@ export function analyzeFamilyOutingPattern(
   // Calculate frequency (outings per week)
   const weeksSinceFirstOuting = Math.max(
     1,
-    (Date.now() - new Date(history[history.length - 1].date).getTime()) /
+    (Date.now() - new Date(history[history.length - 1].visitDate).getTime()) /
       (1000 * 60 * 60 * 24 * 7)
   );
   const averageFrequency = history.length / weeksSinceFirstOuting;
