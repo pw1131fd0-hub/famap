@@ -120,4 +120,14 @@ afterEach(() => {
   } catch {
     // Ignore errors
   }
+
+  // Reset circuit breaker state for api tests
+  try {
+    const api = require('../services/api');
+    if (api.circuitBreakerUtils?.reset) {
+      api.circuitBreakerUtils.reset();
+    }
+  } catch {
+    // Ignore errors if api module not loaded
+  }
 });

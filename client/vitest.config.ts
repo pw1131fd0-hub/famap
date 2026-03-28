@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-    environment: 'node', // Switched from jsdom to node to fix worker pool timeout issues - see docs/.dev_status.json iteration notes
+    environment: 'node', // Default: node for utilities. Use '// @vitest-env jsdom' in .test.tsx files that need DOM
     setupFiles: ['./src/test/setup.ts'],
     env: {
       NODE_ENV: 'test'
