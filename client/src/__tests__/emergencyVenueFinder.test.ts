@@ -185,7 +185,7 @@ describe('Emergency Venue Finder', () => {
     });
 
     it('should limit results to top 5 venues', () => {
-      const many Locations = [...mockLocations, ...mockLocations, ...mockLocations];
+      const manyLocations = [...mockLocations, ...mockLocations, ...mockLocations];
       const need: EmergencyNeed = {
         type: 'activity',
         urgency: 'low',

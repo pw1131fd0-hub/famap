@@ -1,0 +1,595 @@
+/**
+ * Emergency Venue Finder Component Styles
+ * Provides clean, responsive design for emergency venue discovery
+ */
+
+.emergency-venue-finder {
+  background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 600px;
+  margin: 16px auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.evf-header {
+  text-align: center;
+  margin-bottom: 28px;
+  border-bottom: 2px solid #A7C7E7;
+  padding-bottom: 16px;
+}
+
+.evf-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333333;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+}
+
+.evf-subtitle {
+  font-size: 14px;
+  color: #666666;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Form Styles */
+.evf-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.evf-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.evf-form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.evf-value {
+  font-weight: 700;
+  color: #FF6F61;
+  font-size: 16px;
+}
+
+.evf-form-group select,
+.evf-form-group input[type='text'],
+.evf-form-group input[type='range'] {
+  padding: 10px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Noto Sans TC', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.evf-form-group select:hover,
+.evf-form-group input[type='text']:hover {
+  border-color: #A7C7E7;
+  background-color: #f9f9f9;
+}
+
+.evf-form-group select:focus,
+.evf-form-group input[type='text']:focus {
+  outline: none;
+  border-color: #A7C7E7;
+  box-shadow: 0 0 0 3px rgba(167, 199, 231, 0.1);
+}
+
+.evf-form-group input[type='range'] {
+  height: 6px;
+  padding: 0;
+  cursor: pointer;
+  accent-color: #A7C7E7;
+}
+
+/* Button Styles */
+.evf-button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.evf-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Noto Sans TC', sans-serif;
+  flex: 1;
+}
+
+.evf-btn-primary {
+  background: linear-gradient(135deg, #A7C7E7 0%, #7fa8c4 100%);
+  color: white;
+  box-shadow: 0 2px 6px rgba(167, 199, 231, 0.3);
+}
+
+.evf-btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(167, 199, 231, 0.4);
+}
+
+.evf-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.evf-btn-secondary {
+  background: linear-gradient(135deg, #FDFD96 0%, #f0f070 100%);
+  color: #333333;
+  box-shadow: 0 2px 6px rgba(253, 253, 150, 0.3);
+}
+
+.evf-btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(253, 253, 150, 0.4);
+}
+
+.evf-btn-select {
+  background: linear-gradient(135deg, #FF6F61 0%, #e85d52 100%);
+  color: white;
+  padding: 10px 16px;
+  font-size: 13px;
+  width: auto;
+  align-self: flex-start;
+}
+
+.evf-btn-select:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(255, 111, 97, 0.3);
+}
+
+/* Results Section */
+.evf-results {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 2px solid #A7C7E7;
+}
+
+.evf-results h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333333;
+  margin: 0 0 16px 0;
+}
+
+.evf-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.evf-result-card {
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 16px;
+  transition: all 0.3s ease;
+}
+
+.evf-result-card:hover {
+  border-color: #A7C7E7;
+  box-shadow: 0 4px 12px rgba(167, 199, 231, 0.15);
+  transform: translateY(-2px);
+}
+
+.evf-result-header {
+  margin-bottom: 12px;
+}
+
+.evf-result-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.evf-result-title h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333333;
+  margin: 0;
+}
+
+.evf-result-score {
+  background: linear-gradient(135deg, #A7C7E7 0%, #7fa8c4 100%);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Metrics */
+.evf-result-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.evf-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.evf-label {
+  color: #666666;
+  font-weight: 500;
+}
+
+.evf-metric .evf-value {
+  color: #333333;
+  font-weight: 700;
+}
+
+.evf-crowding {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.evf-crowding-green {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.evf-crowding-orange {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
+.evf-crowding-red {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+/* Recommendation Reasons */
+.evf-result-reasons {
+  margin-bottom: 12px;
+  padding: 12px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.evf-result-reasons .evf-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.evf-result-reasons ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.evf-result-reasons li {
+  font-size: 13px;
+  color: #555555;
+  margin-bottom: 4px;
+  padding-left: 8px;
+  position: relative;
+}
+
+.evf-result-reasons li:before {
+  content: '✓';
+  position: absolute;
+  left: -8px;
+  color: #4caf50;
+  font-weight: bold;
+}
+
+/* Empty State */
+.evf-empty {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  color: #999999;
+  font-size: 14px;
+}
+
+/* Last-Minute Plans Section */
+.evf-last-minute {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 2px solid #FDFD96;
+}
+
+.evf-last-minute h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333333;
+  margin: 0 0 16px 0;
+}
+
+.evf-last-minute h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+  margin: 0 0 12px 0;
+}
+
+/* Nearby Section */
+.evf-nearby,
+.evf-activities {
+  margin-bottom: 16px;
+  background-color: white;
+  border: 2px solid #FDFD96;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.evf-nearby-list,
+.evf-activities-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.evf-nearby-item,
+.evf-activity-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.evf-nearby-name,
+.evf-activity-category {
+  font-weight: 600;
+  color: #333333;
+  flex: 1;
+}
+
+.evf-nearby-time,
+.evf-activity-duration {
+  color: #666666;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Plan Info */
+.evf-plan-info {
+  background-color: #f0f8ff;
+  border: 2px solid #A7C7E7;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.evf-plan-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.evf-plan-item .evf-label {
+  font-weight: 600;
+  color: #333333;
+}
+
+.evf-plan-item .evf-value {
+  color: #FF6F61;
+  font-weight: 700;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .emergency-venue-finder {
+    background: linear-gradient(135deg, #2a2a2a 0%, #333333 100%);
+    color: #e0e0e0;
+  }
+
+  .evf-header {
+    border-bottom-color: #555555;
+  }
+
+  .evf-header h2 {
+    color: #ffffff;
+  }
+
+  .evf-subtitle {
+    color: #aaaaaa;
+  }
+
+  .evf-form-group label {
+    color: #e0e0e0;
+  }
+
+  .evf-form-group select,
+  .evf-form-group input[type='text'] {
+    background-color: #3a3a3a;
+    border-color: #555555;
+    color: #e0e0e0;
+  }
+
+  .evf-form-group select:hover,
+  .evf-form-group input[type='text']:hover {
+    background-color: #444444;
+    border-color: #777777;
+  }
+
+  .evf-result-card {
+    background: #3a3a3a;
+    border-color: #555555;
+    color: #e0e0e0;
+  }
+
+  .evf-result-card:hover {
+    border-color: #777777;
+  }
+
+  .evf-result-title h4 {
+    color: #ffffff;
+  }
+
+  .evf-result-metrics {
+    border-bottom-color: #555555;
+  }
+
+  .evf-label {
+    color: #aaaaaa;
+  }
+
+  .evf-result-reasons {
+    background-color: #4a4a4a;
+  }
+
+  .evf-result-reasons .evf-label {
+    color: #e0e0e0;
+  }
+
+  .evf-result-reasons li {
+    color: #cccccc;
+  }
+
+  .evf-empty {
+    background-color: #4a4a4a;
+    color: #888888;
+  }
+
+  .evf-nearby,
+  .evf-activities {
+    background-color: #3a3a3a;
+    border-color: #555555;
+  }
+
+  .evf-nearby-item,
+  .evf-activity-item {
+    background-color: #4a4a4a;
+  }
+
+  .evf-nearby-name,
+  .evf-activity-category {
+    color: #e0e0e0;
+  }
+
+  .evf-nearby-time,
+  .evf-activity-duration {
+    color: #aaaaaa;
+  }
+
+  .evf-plan-info {
+    background-color: #4a4a4a;
+    border-color: #555555;
+  }
+
+  .evf-plan-item .evf-label {
+    color: #e0e0e0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .emergency-venue-finder {
+    padding: 16px;
+  }
+
+  .evf-header h2 {
+    font-size: 20px;
+  }
+
+  .evf-button-group {
+    flex-direction: column;
+  }
+
+  .evf-result-metrics {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .evf-results-list {
+    gap: 8px;
+  }
+
+  .evf-result-card {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .emergency-venue-finder {
+    padding: 12px;
+  }
+
+  .evf-header h2 {
+    font-size: 18px;
+  }
+
+  .evf-header {
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+
+  .evf-form-group select,
+  .evf-form-group input[type='text'] {
+    font-size: 13px;
+  }
+
+  .evf-btn {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .evf-result-card {
+    padding: 10px;
+  }
+
+  .evf-result-title h4 {
+    font-size: 14px;
+  }
+
+  .evf-result-metrics {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .evf-metric {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .evf-empty {
+    padding: 24px 12px;
+  }
+
+  .evf-plan-info {
+    padding: 12px;
+  }
+
+  .evf-nearby,
+  .evf-activities {
+    padding: 12px;
+  }
+}
