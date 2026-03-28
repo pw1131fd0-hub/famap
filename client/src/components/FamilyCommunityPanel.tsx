@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { FamilyProfile, FamilyCompatibilityScore, FamilyDiscoveryRecommendation } from '../types';
-import { calculateFamilyCompatibility, findCompatibleFamilies, generateFamilyRecommendations } from '../utils/familyCommunity';
-import { useLanguage } from '../i18n/useLanguage';
+import { findCompatibleFamilies, generateFamilyRecommendations } from '../utils/familyCommunity';
 import '../styles/components/FamilyCommunityPanel.css';
 
 interface FamilyCommunityPanelProps {
@@ -17,7 +16,6 @@ export function FamilyCommunityPanel({
   onFamilySelect,
   isDarkMode = false,
 }: FamilyCommunityPanelProps) {
-  const { t } = useLanguage();
   const [compatibleFamilies, setCompatibleFamilies] = useState<FamilyCompatibilityScore[]>([]);
   const [recommendations, setRecommendations] = useState<FamilyDiscoveryRecommendation[]>([]);
   const [activeTab, setActiveTab] = useState<'compatible' | 'recommendations'>('compatible');
@@ -47,10 +45,6 @@ export function FamilyCommunityPanel({
 
   const getFamilyById = (familyId: string): FamilyProfile | undefined => {
     return allFamilies.find(f => f.id === familyId);
-  };
-
-  const formatInterests = (interests: string[]): string => {
-    return interests.slice(0, 3).join(', ');
   };
 
   const formatAges = (ages: number[]): string => {

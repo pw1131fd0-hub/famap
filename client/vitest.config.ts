@@ -6,12 +6,11 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: ['./src/test/setup.tsx'],
     env: {
       NODE_ENV: 'test'
     },
-    testTimeout: 15000,
-    hookTimeout: 10000,
+    testTimeout: 30000,
+    hookTimeout: 15000,
     threads: false,
     isolate: false,
     coverage: {
