@@ -20,6 +20,7 @@ export { default as venueInsights } from './venueInsights';
 export { default as locationInsights } from './locationInsights';
 export { default as weatherAwareRecommender } from './weatherAwareRecommender';
 export { default as bestTimeVisitPredictor } from './bestTimeVisitPredictor';
+export * from './venueQualityAssessment';
 
 // Activity and event planning
 export { default as activityPlanner } from './activityPlanner';
