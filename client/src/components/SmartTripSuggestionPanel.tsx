@@ -7,9 +7,7 @@
 import { useState, useEffect } from 'react';
 import {
   generateSmartTripSuggestions,
-  analyzeFamilyOutingPattern,
 } from '../utils/smartTripSuggester';
-import type { TripSuggestion } from '../utils/smartTripSuggester';
 import { useLanguage } from '../i18n/useLanguage';
 import '../styles/SmartTripSuggestionPanel.css';
 

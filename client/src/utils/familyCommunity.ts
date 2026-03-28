@@ -206,8 +206,6 @@ export function filterCommunityByPreferences(
 export function generateFamilyRecommendations(
   family: FamilyProfile,
   allFamilies: FamilyProfile[],
-  _allLocations?: Location[],
-  _allGroupOutings?: GroupOutingProposal[],
 ): FamilyDiscoveryRecommendation[] {
   const recommendations: FamilyDiscoveryRecommendation[] = [];
   const compatibleFamilies = findCompatibleFamilies(family, allFamilies, 60);

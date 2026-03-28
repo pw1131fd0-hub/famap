@@ -282,8 +282,7 @@ export function findConsensusVenues(
 
   const recommendations = generateRecommendations(
     topChoices,
-    conflictingPreferences,
-    members.length
+    conflictingPreferences
   );
 
   const alternativeCompromises = scoredVenues.filter(

@@ -7,13 +7,8 @@
 import React, { useMemo } from 'react';
 import {
   calculateFamilySuitability,
-  getDevelopmentStageInfo,
-  formatDevelopmentStage,
-  getStageTips,
-  type DevelopmentStage,
-  type FamilyStageSuitability
+  getDevelopmentStageInfo
 } from '../utils/childDevelopmentStages';
-import type { Theme } from './ThemeProvider';
 
 interface ChildDevelopmentRecommenderProps {
   childAges: number[];
