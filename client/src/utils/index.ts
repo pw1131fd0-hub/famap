@@ -48,10 +48,10 @@ export { default as smartNotificationEngine } from './smartNotificationEngine';
 export { default as alertSystem } from './alertSystem';
 
 // Community features
-export { default as familyCommunity } from './familyCommunity';
+export * from './familyCommunity';
 
 // Saved searches
-export { default as savedSearches } from './savedSearches';
+export * from './savedSearches';
 
 // Trip export and management
 export * from './tripExport';

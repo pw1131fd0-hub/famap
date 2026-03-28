@@ -318,8 +318,8 @@ function generateTripTitle(venues: Location[], index: number): string {
  * Generate reasons for the suggestion
  */
 function generateSuggestionReasons(
-  _venues: Location[],
-  _familyProfile: FamilyProfile,
+  venues: Location[],
+  familyProfile: FamilyProfile,
   venueScores: VenueScore[]
 ): string[] {
   const reasons: string[] = [];
