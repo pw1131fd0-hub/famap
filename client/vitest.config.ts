@@ -5,8 +5,7 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-    environment: 'jsdom',
-    setupFiles: ['./src/test/setup.tsx'],
+    environment: 'node',
     env: {
       NODE_ENV: 'test'
     },
@@ -26,11 +25,5 @@ export default defineConfig({
     // Sequential test execution prevents pool exhaustion with 76 test files
     bail: 0, // Run all tests even if some fail
     maxConcurrency: 1, // Run tests sequentially
-    pool: 'child_process', // Use child_process pool instead of threads for better compatibility
-    poolOptions: {
-      forks: 1, // Only 1 worker to prevent pool initialization timeout
-      singleFork: true, // Run all tests in a single fork
-      timeout: 300000, // Increased worker startup timeout
-    },
   }
 });

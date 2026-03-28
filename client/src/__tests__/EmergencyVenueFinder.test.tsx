@@ -10,9 +10,8 @@ import type { Location } from '../types';
 import { LanguageProvider } from '../i18n/LanguageContext';
 
 // Mock the emergency venue finder utilities
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 jest.mock('../utils/emergencyVenueFinder', () => ({
-  findEmergencyVenue: jest.fn((locations, _need) => {
+  findEmergencyVenue: jest.fn((locations) => {
     return locations.slice(0, 2).map((loc) => ({
       locationId: loc.id,
       locationName: loc.name.en,

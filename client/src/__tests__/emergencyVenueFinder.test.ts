@@ -7,7 +7,6 @@ import {
   generateLastMinuteOutingPlans,
   findSpecificEmergencyVenue,
   type EmergencyNeed,
-  type EmergencyVenueScore,
 } from '../utils/emergencyVenueFinder';
 import type { Location } from '../types';
 
