@@ -63,6 +63,9 @@ export * from './tripExport';
 // Monthly travel planning
 export * from './monthlyTravelPlanner';
 
+// Emergency and last-minute venue finding
+export * from './emergencyVenueFinder';
+
 // Accessibility
 export * from './accessibilityHelpers';
 
