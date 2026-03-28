@@ -342,6 +342,7 @@ export function calculateVenueSuitabilityForStage(
     stage,
     suitabilityScore: score,
     reasoning,
+    requiredFacilities: stageInfo.idealFacilities,
     cautions,
     tips
   };
@@ -377,19 +378,19 @@ export function calculateFamilySuitability(
     .map(s => s.stage);
 
   // Compile age appropriateness notes
-  const ageAppropiateness: string[] = [];
+  const ageApprpriateness: string[] = [];
   suitabilityByStage.forEach(s => {
     const stageInfo = getDevelopmentStageInfo(s.stage);
     if (s.suitabilityScore >= 70) {
-      ageAppropiateness.push(
+      ageApprpriateness.push(
         `Excellent for ${stageInfo.label.en} (${stageInfo.ageRange.min}-${stageInfo.ageRange.max} years)`
       );
     } else if (s.suitabilityScore >= 50) {
-      ageAppropiateness.push(
+      ageApprpriateness.push(
         `Suitable for ${stageInfo.label.en} with preparation`
       );
     } else {
-      ageAppropiateness.push(
+      ageApprpriateness.push(
         `Less ideal for ${stageInfo.label.en}`
       );
     }
