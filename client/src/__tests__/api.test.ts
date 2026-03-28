@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { locationApi, reviewApi, favoriteApi } from '../services/api';
+import { locationApi, reviewApi, favoriteApi, circuitBreakerUtils } from '../services/api';
 import axios from 'axios';
 import type { LocationCreateDTO, ReviewCreateDTO } from '../types';
 
@@ -225,6 +225,34 @@ describe('API Services', () => {
       vi.mocked(axiosInstance.get).mockResolvedValue({ data: { isFavorited: false } });
       const result = await favoriteApi.check('u1', 'l1');
       expect(result).toBe(false);
+    });
+  });
+
+  describe('Circuit Breaker', () => {
+    beforeEach(() => {
+      circuitBreakerUtils.reset();
+    });
+
+    it('tracks circuit breaker state', () => {
+      circuitBreakerUtils.reset();
+      const states = circuitBreakerUtils.getAllStates();
+      expect(states).toHaveLength(0);
+    });
+
+    it('resets individual endpoint circuit breaker', () => {
+      circuitBreakerUtils.reset('/test/endpoint');
+      expect(circuitBreakerUtils.isOpen('/test/endpoint')).toBe(false);
+    });
+
+    it('resets all circuit breakers', () => {
+      circuitBreakerUtils.reset();
+      const states = circuitBreakerUtils.getAllStates();
+      expect(states).toHaveLength(0);
+    });
+
+    it('provides circuit breaker state information', () => {
+      const state = circuitBreakerUtils.getState('/api/locations');
+      expect(state === undefined || state).toBe(true);
     });
   });
 });

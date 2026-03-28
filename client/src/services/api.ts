@@ -49,16 +49,53 @@ function isCacheValid(entry: CacheEntry): boolean {
   return Date.now() - entry.timestamp < CACHE_DURATION;
 }
 
-// Utility for retryable requests
+// Circuit breaker for tracking failed endpoints
+const circuitBreaker = new Map<string, { failureCount: number; lastFailureTime: number }>();
+const CIRCUIT_BREAKER_THRESHOLD = 3;
+const CIRCUIT_BREAKER_RESET_TIME = 60000; // 1 minute
+
+function isCircuitBreakerOpen(endpoint: string): boolean {
+  const state = circuitBreaker.get(endpoint);
+  if (!state) return false;
+
+  // Reset circuit breaker after timeout
+  if (Date.now() - state.lastFailureTime > CIRCUIT_BREAKER_RESET_TIME) {
+    circuitBreaker.delete(endpoint);
+    return false;
+  }
+
+  return state.failureCount >= CIRCUIT_BREAKER_THRESHOLD;
+}
+
+function recordFailure(endpoint: string): void {
+  const state = circuitBreaker.get(endpoint) || { failureCount: 0, lastFailureTime: Date.now() };
+  state.failureCount += 1;
+  state.lastFailureTime = Date.now();
+  circuitBreaker.set(endpoint, state);
+}
+
+function recordSuccess(endpoint: string): void {
+  circuitBreaker.delete(endpoint);
+}
+
+// Utility for retryable requests with circuit breaker
 async function retryableGet<T>(url: string, config?: AxiosConfig): Promise<T> {
   let lastError: Error | null = null;
+
+  // Check circuit breaker first
+  if (isCircuitBreakerOpen(url)) {
+    const error = new Error(`Service temporarily unavailable (circuit breaker active for ${url})`);
+    throw error;
+  }
 
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     try {
       const response = await api.get<T>(url, config);
+      recordSuccess(url);
       return response.data;
     } catch (error) {
       lastError = error as Error;
+      recordFailure(url);
       if (attempt < MAX_RETRIES) {
         // Exponential backoff: 100ms, 200ms, 400ms
         await new Promise(resolve => setTimeout(resolve, 100 * Math.pow(2, attempt)));
@@ -207,4 +244,18 @@ export const cacheUtils = {
     requestCache.clear();
     await clearOfflineDb();
   },
+};
+
+// Export circuit breaker utilities for monitoring and testing
+export const circuitBreakerUtils = {
+  getState: (endpoint: string) => circuitBreaker.get(endpoint),
+  getAllStates: () => Array.from(circuitBreaker.entries()),
+  reset: (endpoint?: string) => {
+    if (endpoint) {
+      circuitBreaker.delete(endpoint);
+    } else {
+      circuitBreaker.clear();
+    }
+  },
+  isOpen: (endpoint: string) => isCircuitBreakerOpen(endpoint),
 };

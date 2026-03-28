@@ -50,7 +50,24 @@ export class ErrorBoundary extends React.Component<Props, State> {
   }
 
   resetError = () => {
-    this.setState({ hasError: false, error: null });
+    this.setState({ hasError: false, error: null, errorCount: 0 });
+  };
+
+  reloadPage = () => {
+    // Clear all application state and reload
+    if (typeof localStorage !== 'undefined') {
+      try {
+        // Keep essential settings like language preference
+        const language = localStorage.getItem('language');
+        localStorage.clear();
+        if (language) {
+          localStorage.setItem('language', language);
+        }
+      } catch {
+        // Ignore errors if localStorage is not accessible
+      }
+    }
+    window.location.reload();
   };
 
   render() {
@@ -108,30 +125,55 @@ export class ErrorBoundary extends React.Component<Props, State> {
                 {stackTrace}
               </pre>
             )}
-            <button
-              onClick={this.resetError}
-              style={{
-                marginTop: '12px',
-                padding: '8px 16px',
-                backgroundColor: '#ff6b6b',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                fontSize: '0.9em',
-                fontWeight: '500',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                transition: 'background-color 0.2s'
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#ff5252')}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#ff6b6b')}
-              aria-label="Try again"
-            >
-              <RotateCw size={16} />
-              Try again
-            </button>
+            <div style={{
+              display: 'flex',
+              gap: '8px',
+              marginTop: '12px',
+              flexWrap: 'wrap'
+            }}>
+              <button
+                onClick={this.resetError}
+                style={{
+                  padding: '8px 16px',
+                  backgroundColor: '#ff6b6b',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '0.9em',
+                  fontWeight: '500',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  transition: 'background-color 0.2s'
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#ff5252')}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#ff6b6b')}
+                aria-label="Try again"
+              >
+                <RotateCw size={16} />
+                Try again
+              </button>
+              <button
+                onClick={this.reloadPage}
+                style={{
+                  padding: '8px 16px',
+                  backgroundColor: '#666666',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '0.9em',
+                  fontWeight: '500',
+                  transition: 'background-color 0.2s'
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#555555')}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#666666')}
+                aria-label="Reload page"
+              >
+                Reload page
+              </button>
+            </div>
             {this.state.errorCount > 3 && (
               <p style={{
                 fontSize: '0.85em',
