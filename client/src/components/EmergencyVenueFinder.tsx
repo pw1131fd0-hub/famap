@@ -7,7 +7,6 @@ import React, { useState } from 'react';
 import {
   findEmergencyVenue,
   generateLastMinuteOutingPlans,
-  findSpecificEmergencyVenue,
   type EmergencyNeed,
   type EmergencyVenueScore,
   type LastMinutePlans,
