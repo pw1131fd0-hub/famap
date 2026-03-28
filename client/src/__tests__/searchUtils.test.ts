@@ -258,12 +258,19 @@ describe('searchUtils', () => {
     });
 
     it('should handle localStorage errors gracefully', () => {
-      const spy = vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
-        throw new Error('Storage error');
-      });
+      // Mock localStorage to throw an error
+      const originalLS = (global as any).localStorage;
+      (global as any).localStorage = {
+        getItem: () => { throw new Error('Storage error'); },
+        setItem: () => {},
+        removeItem: () => {},
+        clear: () => {},
+        key: () => null,
+        length: 0,
+      };
       const history = getSearchHistory();
       expect(history).toEqual([]);
-      spy.mockRestore();
+      (global as any).localStorage = originalLS;
     });
   });
 
