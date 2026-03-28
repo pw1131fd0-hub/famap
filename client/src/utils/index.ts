@@ -60,8 +60,20 @@ export * from './tripExport';
 export * from './accessibilityHelpers';
 
 // Error handling
-export * from './enhancedErrorHandling';
-export * from './errorTracking';
+export {
+  EnhancedError,
+  ErrorContext,
+  getEnhancedError,
+  handleErrorWithContext,
+  validateError,
+  createErrorObject
+} from './enhancedErrorHandling';
+export {
+  captureErrorContext,
+  logErrorToRemote,
+  isRecoverableError,
+  getErrorSeverity,
+} from './errorTracking';
 export { default as sentryConfig, captureException, addBreadcrumb } from './sentryConfig';
 
 // Responsive design
@@ -71,7 +83,7 @@ export * from './responsiveDesignHelpers';
 export * from './metaTagManager';
 
 // Environment configuration
-export { loadEnvConfig, validateEnvVariables, getEnv, isDevelopment, isProduction } from './envConfig';
+export { isDevelopment, isProduction, initializeEnv as loadEnvConfig, getEnvConfig, getApiBaseUrl } from './envConfig';
 
 // Development utilities
 export {
