@@ -49,9 +49,29 @@ export interface VenueComparison {
  * Assess the credibility and data quality of a venue
  */
 export function assessVenueCredibility(
-  reviewData?: { count: number; recentCount: number; averageRating: number },
-  userData?: { contributionsCount: number; lastUpdateDays: number }
+  venueOrReviewData?: Location | { count: number; recentCount: number; averageRating: number },
+  reviewDataOrUserData?: { count: number; recentCount: number; averageRating: number } | { contributionsCount: number; lastUpdateDays: number },
+  userDataOverload?: { contributionsCount: number; lastUpdateDays: number }
 ): VenueCredibility {
+  // Handle both old and new function signatures for backward compatibility
+  let reviewData: { count: number; recentCount: number; averageRating: number } | undefined;
+  let userData: { contributionsCount: number; lastUpdateDays: number } | undefined;
+
+  // New signature: assessVenueCredibility(reviewData, userData)
+  // Old signature: assessVenueCredibility(venue, reviewData, userData)
+  if (venueOrReviewData && typeof venueOrReviewData === 'object' && 'count' in venueOrReviewData) {
+    // New signature
+    reviewData = venueOrReviewData;
+    userData = reviewDataOrUserData as any;
+  } else if (venueOrReviewData && typeof venueOrReviewData === 'object' && 'id' in venueOrReviewData) {
+    // Old signature with venue
+    reviewData = reviewDataOrUserData as any;
+    userData = userDataOverload;
+  } else {
+    // Default - treat first parameter as reviewData
+    reviewData = venueOrReviewData as any;
+    userData = reviewDataOrUserData as any;
+  }
   const factors: string[] = [];
   let credibilityScore = 50; // Start with baseline
 
@@ -199,7 +219,7 @@ export function compareVenuesForFamily(
   // Evaluate each venue
   const suitabilities: VenueSuitability[] = venues
     .map(venue => {
-      const credibility = credibilityScores.get(venue.id) || assessVenueCredibility();
+      const credibility = credibilityScores.get(venue.id) || assessVenueCredibility(venue);
       return evaluateVenueSuitability(venue, familyNeeds, credibility);
     })
     .sort((a, b) => {
