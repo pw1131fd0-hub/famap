@@ -1,3 +1,4 @@
+// @vitest-environment jsdom
 /**
  * Trip Cost Calculator Component Tests
  * Tests for React component rendering and interactions

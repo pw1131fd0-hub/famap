@@ -1,3 +1,4 @@
+// @vitest-environment jsdom
 /**
  * Tests for Emergency Venue Finder Component
  */

@@ -1,3 +1,4 @@
+// @vitest-environment jsdom
 import { render, screen, fireEvent, within } from '@testing-library/react';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { VenueQualityAssessment } from '../components/VenueQualityAssessment';

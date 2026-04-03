@@ -1,5 +1,10 @@
 import { vi, afterEach, beforeEach } from 'vitest';
 
+// Import jest-dom matchers when running in jsdom environment
+if (typeof window !== 'undefined' && typeof window.HTMLElement !== 'undefined') {
+  import('@testing-library/jest-dom');
+}
+
 // Setup global storage implementations for Node.js environment
 const createStorageImpl = (): Storage => {
   const store: Record<string, string> = {};
