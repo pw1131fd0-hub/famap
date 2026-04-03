@@ -3,6 +3,7 @@
  * Tests for Emergency Venue Finder Component
  */
 
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -11,9 +12,9 @@ import type { Location } from '../types';
 import { LanguageProvider } from '../i18n/LanguageContext';
 
 // Mock the emergency venue finder utilities
-jest.mock('../utils/emergencyVenueFinder', () => ({
-  findEmergencyVenue: jest.fn((locations) => {
-    return locations.slice(0, 2).map((loc) => ({
+vi.mock('../utils/emergencyVenueFinder', () => ({
+  findEmergencyVenue: vi.fn((locations: any[]) => {
+    return locations.slice(0, 2).map((loc: any) => ({
       locationId: loc.id,
       locationName: loc.name.en,
       score: 85,
@@ -27,7 +28,7 @@ jest.mock('../utils/emergencyVenueFinder', () => ({
       recommendationReason: ['Close by', 'Good facilities'],
     }));
   }),
-  generateLastMinuteOutingPlans: jest.fn(() => ({
+  generateLastMinuteOutingPlans: vi.fn(() => ({
     durationMinutes: 120,
     nearbyVenues: [],
     quickActivities: [
@@ -45,7 +46,7 @@ jest.mock('../utils/emergencyVenueFinder', () => ({
       crowdingPrediction: 'Low',
     },
   })),
-  findSpecificEmergencyVenue: jest.fn(),
+  findSpecificEmergencyVenue: vi.fn(),
 }));
 
 const mockLocations: Location[] = [
@@ -76,7 +77,7 @@ const renderComponent = (props = {}) => {
     locations: mockLocations,
     userLat: 25.033,
     userLng: 121.5154,
-    onVenueSelected: jest.fn(),
+    onVenueSelected: vi.fn(),
     ...props,
   };
 
@@ -89,7 +90,7 @@ const renderComponent = (props = {}) => {
 
 describe('EmergencyVenueFinder Component', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('renders the emergency venue finder component', () => {
@@ -206,7 +207,7 @@ describe('EmergencyVenueFinder Component', () => {
   });
 
   it('handles venue selection', async () => {
-    const onVenueSelected = jest.fn();
+    const onVenueSelected = vi.fn();
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { findEmergencyVenue } = require('../utils/emergencyVenueFinder');
 
