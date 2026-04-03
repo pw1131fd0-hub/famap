@@ -28,6 +28,7 @@ class ErrorTracker {
   private userId: string | null = null;
 
   init() {
+    if (typeof window === 'undefined' || typeof window.addEventListener !== 'function') return;
     // Set up global error handlers
     window.addEventListener('error', (event) => {
       this.captureException(event.error, {

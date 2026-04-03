@@ -32,6 +32,7 @@ class NetworkStateManager {
    */
   init(): void {
     if (this.isInitialized) return;
+    if (typeof window === 'undefined' || typeof window.addEventListener !== 'function') return;
 
     this.isInitialized = true;
     this.online = navigator.onLine ?? true;

@@ -23,6 +23,7 @@ class ErrorTracker {
    * Initialize error tracking
    */
   initialize(): void {
+    if (typeof window === 'undefined' || typeof window.addEventListener !== 'function') return;
     // Setup global error handler
     window.addEventListener('error', (event) => {
       this.captureError(event.error, {
