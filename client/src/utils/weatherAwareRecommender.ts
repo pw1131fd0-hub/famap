@@ -145,6 +145,11 @@ function calculateActivityWeatherScore(activity: string, weather: WeatherData): 
         warnings.push('Strong wind hazard for water safety');
         score -= 15;
       }
+
+      if (weather.uvi && weather.uvi > 7) {
+        warnings.push('High UV index detected');
+        tips.push('Apply sunscreen to exposed skin and bring a hat or cap');
+      }
       break;
 
     case 'museum':
@@ -283,15 +288,22 @@ function calculateWeatherRecommendation(
     mitigation: [] as string[]
   };
 
+  // Determine if venue is indoor or outdoor
+  const isIndoor = isIndoorVenue(venue);
+
   // Temperature assessment
   if (weather.temperature > preferences.maxTemperature) {
     currentScore -= 15;
     weatherImpact.negative.push(`Temperature ${weather.temperature}°C exceeds comfortable range`);
     weatherImpact.mitigation.push('Seek indoor or shaded venues');
+    // Indoor venues are better for extreme heat
+    if (isIndoor) currentScore += 10;
   } else if (weather.temperature < preferences.minTemperature) {
     currentScore -= 10;
     weatherImpact.negative.push(`Temperature ${weather.temperature}°C is quite cold`);
     weatherImpact.mitigation.push('Ensure proper clothing and warm breaks');
+    // Indoor venues are better for extreme cold
+    if (isIndoor) currentScore += 10;
   } else {
     currentScore += 10;
     weatherImpact.positive.push(`Temperature ${weather.temperature}°C is ideal`);
@@ -299,20 +311,30 @@ function calculateWeatherRecommendation(
 
   // Weather condition assessment
   if (weather.condition === 'sunny') {
-    currentScore += 15;
-    weatherImpact.positive.push('Sunny weather is great for outdoor activities');
+    if (isIndoor) {
+      currentScore += 5;
+      weatherImpact.positive.push('Sunny weather outside, indoor venue provides respite');
+    } else {
+      currentScore += 15;
+      weatherImpact.positive.push('Sunny weather is great for outdoor activities');
+    }
     if (preferences.sunSensitivity === 'high') {
       weatherImpact.mitigation.push('Remember sunscreen and UV protection');
     }
   } else if (weather.condition === 'rainy') {
-    if (preferences.rainTolerance === 'low') {
-      currentScore -= 30;
-      weatherImpact.negative.push('Rainy weather may limit outdoor activities');
+    if (isIndoor) {
+      currentScore += 35;
+      weatherImpact.positive.push('Perfect indoor venue for rainy weather');
     } else {
-      currentScore -= 15;
-      weatherImpact.negative.push('Rainy conditions require covered activities');
+      if (preferences.rainTolerance === 'low') {
+        currentScore -= 30;
+        weatherImpact.negative.push('Rainy weather may limit outdoor activities');
+      } else {
+        currentScore -= 15;
+        weatherImpact.negative.push('Rainy conditions require covered activities');
+      }
+      weatherImpact.mitigation.push('Look for indoor venues or covered areas');
     }
-    weatherImpact.mitigation.push('Look for indoor venues or covered areas');
   } else if (weather.condition === 'cloudy') {
     currentScore += 5;
     weatherImpact.positive.push('Cloudy weather is comfortable for most activities');
@@ -323,12 +345,16 @@ function calculateWeatherRecommendation(
     currentScore -= 10;
     weatherImpact.negative.push(`Wind speed ${weather.windSpeed} km/h is strong`);
     weatherImpact.mitigation.push('Seek sheltered venues');
+    // Indoor venues protected from wind
+    if (isIndoor) currentScore += 5;
   }
 
   // Precipitation assessment
   if (weather.precipitation > preferences.maxPrecipitation) {
     currentScore -= 20;
     weatherImpact.negative.push('Significant precipitation expected');
+    // Indoor venues not affected by precipitation
+    if (isIndoor) currentScore += 15;
   }
 
   // Clamp score
@@ -362,6 +388,24 @@ function calculateWeatherRecommendation(
 }
 
 /**
+ * Check if a venue is indoor or outdoor
+ */
+function isIndoorVenue(venue: Location): boolean {
+  const indoorCategories = ['museum', 'shopping_mall', 'entertainment_center', 'restaurant', 'cafe', 'library', 'cinema'];
+  const indoorFacilities = ['indoor_activities', 'indoor_play', 'shopping'];
+
+  if (indoorCategories.includes(venue.category.toLowerCase())) {
+    return true;
+  }
+
+  if (venue.facilities?.some(f => indoorFacilities.includes(f.toLowerCase()))) {
+    return true;
+  }
+
+  return false;
+}
+
+/**
  * Get alternative indoor venues when weather is poor
  */
 export function getIndoorVenueAlternatives(
@@ -369,9 +413,7 @@ export function getIndoorVenueAlternatives(
   weather: WeatherData
 ): Location[] {
   if (weather.condition === 'rainy' || weather.condition === 'snow') {
-    return allVenues.filter(venue =>
-      venue.facilities?.includes('indoor_activities') || venue.category === 'attraction'
-    );
+    return allVenues.filter(venue => isIndoorVenue(venue));
   }
   return [];
 }
