@@ -53,10 +53,10 @@ export function calculateMemberVenueScore(
   let score = 100;
   const weights = {
     category: 25,
-    facilities: 25,
-    distance: 20,
+    facilities: 30,
+    distance: 15,
     childAge: 15,
-    budget: 10,
+    budget: 15,
     weather: 5,
   };
 
@@ -82,19 +82,21 @@ export function calculateMemberVenueScore(
     }
   }
 
-  // Preferred facilities bonus
+  // Preferred facilities - deduct when missing (venues with more preferred facilities score higher)
   if (member.preferences.preferredFacilities && member.preferences.preferredFacilities.length > 0) {
     const venueFacilities = venue.facilities || [];
     const matchedPreferred = member.preferences.preferredFacilities.filter(
       (f) => venueFacilities.some((vf) => vf.toLowerCase() === f.toLowerCase())
     );
-    const bonus = (matchedPreferred.length / member.preferences.preferredFacilities.length) * (weights.facilities * 0.3);
-    score = Math.min(100, score + bonus);
+    const missingRatio = 1 - (matchedPreferred.length / member.preferences.preferredFacilities.length);
+    const deduction = missingRatio * (weights.facilities * 0.5);
+    score -= deduction;
   }
 
   // Distance (mock calculation based on coordinates)
   if (member.preferences.maxDistance && venue.coordinates) {
-    const estimatedDistance = Math.random() * 5; // Mock distance in km
+    // Deterministic mock: use coordinate values to estimate a stable distance
+    const estimatedDistance = ((venue.coordinates.lat * 7 + venue.coordinates.lng * 3) % 5) + 0.5;
     if (estimatedDistance > member.preferences.maxDistance) {
       const distanceDeduction = Math.min(weights.distance, (estimatedDistance / member.preferences.maxDistance - 1) * 20);
       score -= distanceDeduction;
@@ -117,7 +119,7 @@ export function calculateMemberVenueScore(
     const estimatedCost = venue.averageRating * 100; // Simple mock calculation
     const { min, max } = member.preferences.budgetRange;
     if (estimatedCost < min || estimatedCost > max) {
-      score -= weights.budget * 0.5;
+      score -= weights.budget;
     }
   }
 
@@ -143,7 +145,7 @@ export function identifyConflicts(members: FamilyMember[]): string[] {
 
   if (categories.size > 1) {
     const categoryList = Array.from(categories.keys()).join(', ');
-    conflicts.push(`Members prefer different categories: ${categoryList}`);
+    conflicts.push(`Members prefer different category types: ${categoryList}`);
   }
 
   // Check budget conflicts

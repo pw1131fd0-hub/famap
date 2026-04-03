@@ -354,10 +354,12 @@ function getNextAvailableDate(_familyProfile: FamilyProfile): Date {
 
   // Prefer weekends (Saturday = 6, Sunday = 0)
   let daysUntilWeekend = 0;
-  if (dayOfWeek >= 0 && dayOfWeek <= 4) {
-    daysUntilWeekend = 6 - dayOfWeek;
+  if (dayOfWeek === 6) {
+    daysUntilWeekend = 0; // Already Saturday
+  } else if (dayOfWeek === 0) {
+    daysUntilWeekend = 6; // Sunday -> next Saturday
   } else {
-    daysUntilWeekend = 6;
+    daysUntilWeekend = 6 - dayOfWeek; // Weekday -> next Saturday
   }
 
   const nextDate = new Date(now);

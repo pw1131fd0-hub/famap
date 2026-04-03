@@ -96,7 +96,7 @@ export interface BudgetBreakdown {
 export interface TimelineItem {
   daysBeforeEvent: number;
   task: string;
-  priority: 'high' | 'medium' | 'low';
+  priority: 'critical' | 'high' | 'medium' | 'low';
   estimatedTime: string;
 }
 
@@ -368,7 +368,7 @@ export function generateCelebrationTimeline(milestone: FamilyMilestone): Timelin
     timeline.push({
       daysBeforeEvent: 30,
       task: 'Book venue and confirm availability',
-      priority: 'high',
+      priority: 'critical',
       estimatedTime: '1 hour'
     });
     timeline.push({
@@ -404,7 +404,7 @@ export function generateCelebrationTimeline(milestone: FamilyMilestone): Timelin
   timeline.push({
     daysBeforeEvent: 3,
     task: 'Confirm final headcount with venue',
-    priority: 'high',
+    priority: 'critical',
     estimatedTime: '30 minutes'
   });
 
@@ -516,7 +516,7 @@ export function getStyleRecommendations(
   let recommendedStyle: VenueStyle = 'casual';
   const reasons: string[] = [];
 
-  if (age < 5) {
+  if (age <= 5) {
     recommendedStyle = 'outdoor';
     reasons.push('Outdoor venues provide space and freedom for young children');
     reasons.push('Parks and playgrounds are stimulating for toddlers');
@@ -566,7 +566,7 @@ export function checkMilestoneUrgency(milestone: FamilyMilestone): {
   } else if (daysRemaining <= 60) {
     recommendedAction = 'Start research and planning process soon';
   } else {
-    recommendedAction = 'Plenty of time for detailed planning and preparation';
+    recommendedAction = 'You have plenty of time for detailed planning and preparation';
   }
 
   return { isUrgent, daysRemaining, recommendedAction };

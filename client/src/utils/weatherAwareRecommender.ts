@@ -195,9 +195,13 @@ function calculateActivityWeatherScore(activity: string, weather: WeatherData): 
         score -= 15;
       }
 
-      if (weather.visibility && weather.visibility < 2) {
+      if (weather.visibility !== undefined && weather.visibility < 2) {
         warnings.push('Poor visibility on trails');
         score -= 20;
+        if (weather.visibility < 1) {
+          score -= 20;
+          warnings.push('Dangerously low visibility - consider postponing hike');
+        }
       }
       break;
 
@@ -293,17 +297,21 @@ function calculateWeatherRecommendation(
 
   // Temperature assessment
   if (weather.temperature > preferences.maxTemperature) {
-    currentScore -= 15;
+    const tempExcess = weather.temperature - preferences.maxTemperature;
+    const tempPenalty = 15 + Math.min(tempExcess * 3, 25);
+    currentScore -= tempPenalty;
     weatherImpact.negative.push(`Temperature ${weather.temperature}°C exceeds comfortable range`);
     weatherImpact.mitigation.push('Seek indoor or shaded venues');
     // Indoor venues are better for extreme heat
-    if (isIndoor) currentScore += 10;
+    if (isIndoor) currentScore += 20;
   } else if (weather.temperature < preferences.minTemperature) {
-    currentScore -= 10;
+    const tempDeficit = preferences.minTemperature - weather.temperature;
+    const tempPenalty = 10 + Math.min(tempDeficit * 3, 25);
+    currentScore -= tempPenalty;
     weatherImpact.negative.push(`Temperature ${weather.temperature}°C is quite cold`);
     weatherImpact.mitigation.push('Ensure proper clothing and warm breaks');
     // Indoor venues are better for extreme cold
-    if (isIndoor) currentScore += 10;
+    if (isIndoor) currentScore += 20;
   } else {
     currentScore += 10;
     weatherImpact.positive.push(`Temperature ${weather.temperature}°C is ideal`);
@@ -334,6 +342,15 @@ function calculateWeatherRecommendation(
         weatherImpact.negative.push('Rainy conditions require covered activities');
       }
       weatherImpact.mitigation.push('Look for indoor venues or covered areas');
+    }
+  } else if (weather.condition === 'snow') {
+    if (isIndoor) {
+      currentScore += 25;
+      weatherImpact.positive.push('Warm indoor venue perfect for snowy weather');
+    } else {
+      currentScore -= 20;
+      weatherImpact.negative.push('Snowy conditions limit outdoor activities');
+      weatherImpact.mitigation.push('Consider indoor alternatives');
     }
   } else if (weather.condition === 'cloudy') {
     currentScore += 5;

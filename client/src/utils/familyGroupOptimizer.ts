@@ -74,9 +74,9 @@ export function calculateInterestOverlap(
   const intersection = Array.from(interests1).filter((i) =>
     interests2.has(i)
   ).length;
-  const union = new Set([...interests1, ...interests2]).size;
+  const smaller = Math.min(interests1.size, interests2.size);
 
-  return union > 0 ? (intersection / union) * 100 : 0;
+  return smaller > 0 ? (intersection / smaller) * 100 : 0;
 }
 
 /**
@@ -173,10 +173,10 @@ export function recommendOptimalGroupSize(families: FamilyProfile[]): {
   let optimalSize = familyCount;
   let reasoning = '';
 
-  if (totalChildren > 15) {
+  if (totalChildren > 10) {
     optimalSize = Math.min(familyCount, 3);
     reasoning = 'Current group is large; recommend limiting to 3 families';
-  } else if (totalChildren < 6) {
+  } else if (totalChildren < 3) {
     optimalSize = Math.min(familyCount + 1, 4);
     reasoning = 'Small group; consider adding another family for dynamics';
   } else {
@@ -202,11 +202,11 @@ export function findFamilyMatches(
 
     const ageScore = calculateAgeGroupCompatibility(requestingFamily, candidate);
     const interestScore = calculateInterestOverlap(requestingFamily, candidate);
-    const budgetScore = considerBudget
-      ? calculateBudgetAlignment(requestingFamily, candidate)
-      : 50;
+    const budgetScore = calculateBudgetAlignment(requestingFamily, candidate);
 
-    const overallScore = (ageScore + interestScore + budgetScore) / 3;
+    const overallScore = considerBudget
+      ? (ageScore + interestScore + budgetScore) / 3
+      : (ageScore + interestScore) / 2;
 
     if (overallScore >= minimumCompatibility) {
       const reasons: string[] = [];
@@ -249,8 +249,9 @@ export function optimizeGroupForOuting(
   const maxSize = constraints?.maxGroupSize || 4;
   const selectedFamilies = families.slice(0, maxSize);
 
-  const { optimalSize, reasoning: sizeReasoning } =
+  const { optimalSize: recommendedSize, reasoning: sizeReasoning } =
     recommendOptimalGroupSize(selectedFamilies);
+  const optimalSize = Math.min(recommendedSize, maxSize);
 
   const bestVenues = availableVenues
     .map((venue) => ({

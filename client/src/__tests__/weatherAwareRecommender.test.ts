@@ -308,7 +308,7 @@ describe('weatherAwareRecommender', () => {
       ];
 
       const recommendations = recommendVenuesByWeather(venues, extremeHeat);
-      expect(recommendations[0].id).toBe('museum');
+      expect(recommendations[0].location.id).toBe('museum');
     });
 
     it('should handle extreme cold appropriately', () => {
@@ -324,7 +324,7 @@ describe('weatherAwareRecommender', () => {
       ];
 
       const recommendations = recommendVenuesByWeather(venues, extremeCold);
-      expect(recommendations[0].id).toBe('shopping');
+      expect(recommendations[0].location.id).toBe('shopping');
     });
 
     it('should handle high humidity', () => {

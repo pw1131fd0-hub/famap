@@ -1,5 +1,6 @@
 /**
  * Tests for meta tag manager
+ * @vitest-environment jsdom
  */
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';

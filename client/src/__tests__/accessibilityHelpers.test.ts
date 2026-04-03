@@ -1,3 +1,4 @@
+// @vitest-environment jsdom
 /**
  * Accessibility Helpers Tests
  * Tests for keyboard navigation, focus traps, and ARIA support

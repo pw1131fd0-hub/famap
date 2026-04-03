@@ -197,10 +197,10 @@ const DEVELOPMENT_STAGES: Record<DevelopmentStage, DevelopmentStageInfo> = {
  * Determine child development stage from age
  */
 export function getChildDevelopmentStage(ageInYears: number): DevelopmentStage {
-  if (ageInYears < 1) return 'infant';
-  if (ageInYears < 3) return 'toddler';
-  if (ageInYears < 5) return 'preschool';
-  if (ageInYears < 12) return 'school_age';
+  if (ageInYears <= 1) return 'infant';
+  if (ageInYears <= 3) return 'toddler';
+  if (ageInYears <= 5) return 'preschool';
+  if (ageInYears <= 12) return 'school_age';
   return 'teen';
 }
 
@@ -374,7 +374,7 @@ export function calculateFamilySuitability(
     b.suitabilityScore - a.suitabilityScore
   );
   const bestForStages = sortedByScore
-    .filter(s => s.suitabilityScore >= 70)
+    .filter(s => s.suitabilityScore >= 50)
     .map(s => s.stage);
 
   // Compile age appropriateness notes

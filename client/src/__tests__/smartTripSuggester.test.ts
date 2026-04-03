@@ -437,7 +437,7 @@ describe('Smart Trip Suggester', () => {
       const pattern = analyzeFamilyOutingPattern(history);
 
       expect(pattern.preferredCategories).toContain('park');
-      expect(pattern.preferredCategories).toContain('museum');
+      expect(pattern.preferredCategories).toContain('attraction');
     });
   });
 

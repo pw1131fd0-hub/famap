@@ -1,36 +1,41 @@
 /**
- * Smart Monthly Family Travel Planner
- * Generates optimized month-long family travel plans considering multiple factors
+ * Monthly Travel Planner
+ * Generates comprehensive monthly family travel plans with:
+ * - Weekly themed itineraries
+ * - Budget tracking and savings opportunities
+ * - Age-appropriate venue selection
+ * - Visit sequence optimization
+ * - Text export for sharing
  */
 
 import type { Location } from '../types';
 
-export interface MonthlyTravelPlan {
-  month: string;
-  totalBudget: number;
-  estimatedCost: number;
-  savingsOpportunities: SavingsOpportunity[];
-  weeklyPlans: WeeklyTravelPlan[];
-  summary: PlanSummary;
-  recommendations: string[];
-}
-
-export interface WeeklyTravelPlan {
-  week: number;
-  startDate: Date;
-  endDate: Date;
-  plannedVisits: PlannedVisit[];
-  estimatedCost: number;
-  theme: string;
+export interface FamilyTravelProfile {
+  childrenAges: number[];
+  interests: string[];
+  maxBudget: number;
+  preferredDays: string[]; // e.g., ['Sat', 'Sun']
+  travelDistance: 'nearby' | 'moderate' | 'far';
+  seasonPreference: string;
+  activityPreference: 'indoor' | 'outdoor' | 'mixed';
 }
 
 export interface PlannedVisit {
   location: Location;
   date: Date;
   startTime: string;
-  duration: number;
+  duration: number; // hours
   priority: 'high' | 'medium' | 'low';
   reason: string;
+  estimatedCost: number;
+}
+
+export interface WeeklyPlan {
+  week: number;
+  startDate: Date;
+  endDate: Date;
+  theme: string;
+  plannedVisits: PlannedVisit[];
   estimatedCost: number;
 }
 
@@ -44,430 +49,377 @@ export interface SavingsOpportunity {
 export interface PlanSummary {
   totalVisits: number;
   uniqueLocations: number;
-  averageSpendPerVisit: number;
-  familyFriendlinessScore: number;
-  varietyScore: number;
-  valueForMoneyScore: number;
+  familyFriendlinessScore: number; // 0-100
+  varietyScore: number; // 0-100
+  valueForMoneyScore: number; // 0-100
+}
+
+export interface MonthlyTravelPlan {
+  month: string;
+  totalBudget: number;
+  estimatedCost: number;
+  weeklyPlans: WeeklyPlan[];
+  savingsOpportunities: SavingsOpportunity[];
+  summary: PlanSummary;
   recommendations: string[];
 }
 
-export interface FamilyTravelProfile {
-  childrenAges: number[];
-  interests: string[];
-  maxBudget: number;
-  preferredDays: ('Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat' | 'Sun')[];
-  travelDistance: 'nearby' | 'moderate' | 'far';
-  seasonPreference: 'spring' | 'summer' | 'autumn' | 'winter' | 'any';
-  activityPreference: 'outdoor' | 'indoor' | 'mixed';
+const WEEK_THEMES = [
+  'Nature & Exploration',
+  'Learning & Discovery',
+  'Active Fun & Sports',
+  'Arts & Culture',
+  'Animal Adventures',
+  'Water & Outdoor Play',
+  'Science & Technology',
+  'Community & Social',
+];
+
+const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+const CATEGORY_COST_ESTIMATE: Record<string, number> = {
+  park: 10,
+  attraction: 40,
+  restaurant: 35,
+  nursing_room: 0,
+  medical: 0,
+  other: 20,
+};
+
+const AGE_SUITABLE_CATEGORIES: Record<string, string[]> = {
+  baby: ['park', 'restaurant', 'nursing_room'], // 0-2
+  toddler: ['park', 'restaurant', 'nursing_room', 'attraction'], // 3-4
+  child: ['park', 'restaurant', 'attraction', 'other'], // 5-12
+  teen: ['park', 'restaurant', 'attraction', 'other'], // 13+
+};
+
+function getAgeGroup(age: number): string {
+  if (age <= 2) return 'baby';
+  if (age <= 4) return 'toddler';
+  if (age <= 12) return 'child';
+  return 'teen';
 }
 
-/**
- * Generate a comprehensive monthly travel plan
- */
-export function generateMonthlyTravelPlan(
-  availableLocations: Location[],
-  familyProfile: FamilyTravelProfile,
-  year: number,
-  month: number
-): MonthlyTravelPlan {
-  const monthStr = new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
-
-  // Calculate estimated costs and generate weekly plans
-  const weeklyPlans = generateWeeklyPlans(availableLocations, familyProfile, year, month);
-
-  // Calculate total estimated cost
-  const estimatedCost = weeklyPlans.reduce((sum, week) => sum + week.estimatedCost, 0);
-
-  // Identify savings opportunities
-  const savingsOpportunities = identifySavingsOpportunities(availableLocations, weeklyPlans, familyProfile);
-
-  // Generate summary
-  const summary = generatePlanSummary(weeklyPlans, familyProfile);
-
-  // Generate recommendations
-  const recommendations = generateRecommendations(weeklyPlans, familyProfile, estimatedCost);
-
-  return {
-    month: monthStr,
-    totalBudget: familyProfile.maxBudget,
-    estimatedCost,
-    savingsOpportunities,
-    weeklyPlans,
-    summary,
-    recommendations,
-  };
+function getSuitableCategories(childrenAges: number[]): string[] {
+  if (childrenAges.length === 0) return ['park', 'restaurant', 'attraction', 'other'];
+  const youngest = Math.min(...childrenAges);
+  const group = getAgeGroup(youngest);
+  return AGE_SUITABLE_CATEGORIES[group] || ['park', 'restaurant', 'attraction'];
 }
 
-/**
- * Generate weekly plans for the entire month
- */
-function generateWeeklyPlans(
-  availableLocations: Location[],
-  familyProfile: FamilyTravelProfile,
-  year: number,
-  month: number
-): WeeklyTravelPlan[] {
-  const plans: WeeklyTravelPlan[] = [];
+function filterLocationsByAge(locations: Location[], childrenAges: number[]): Location[] {
+  const suitable = getSuitableCategories(childrenAges);
+  const filtered = locations.filter((loc) => suitable.includes(loc.category));
+  return filtered.length > 0 ? filtered : locations;
+}
+
+function getWeeksInMonth(year: number, month: number): { start: Date; end: Date }[] {
   const firstDay = new Date(year, month, 1);
   const lastDay = new Date(year, month + 1, 0);
+  const weeks: { start: Date; end: Date }[] = [];
 
-  let currentWeekStart = firstDay;
-  let weekNum = 1;
-
-  while (currentWeekStart < lastDay) {
-    const weekEnd = new Date(currentWeekStart);
-    weekEnd.setDate(Math.min(weekEnd.getDate() + 6, lastDay.getDate()));
-
-    const weekPlan = generateWeekPlan(
-      availableLocations,
-      familyProfile,
-      currentWeekStart,
-      weekEnd,
-      weekNum
-    );
-
-    plans.push(weekPlan);
-    currentWeekStart = new Date(weekEnd);
-    currentWeekStart.setDate(currentWeekStart.getDate() + 1);
-    weekNum++;
+  let current = new Date(firstDay);
+  while (current <= lastDay) {
+    const weekStart = new Date(current);
+    const weekEnd = new Date(current);
+    weekEnd.setDate(weekEnd.getDate() + 6);
+    if (weekEnd > lastDay) {
+      weekEnd.setTime(lastDay.getTime());
+    }
+    weeks.push({ start: weekStart, end: weekEnd });
+    current.setDate(current.getDate() + 7);
   }
 
-  return plans;
+  return weeks;
+}
+
+function getPreferredDatesInRange(
+  start: Date,
+  end: Date,
+  preferredDays: string[]
+): Date[] {
+  const dates: Date[] = [];
+  const current = new Date(start);
+  while (current <= end) {
+    const dayName = DAY_NAMES[current.getDay()];
+    if (preferredDays.length === 0 || preferredDays.includes(dayName)) {
+      dates.push(new Date(current));
+    }
+    current.setDate(current.getDate() + 1);
+  }
+  return dates;
+}
+
+function estimateCost(location: Location): number {
+  return CATEGORY_COST_ESTIMATE[location.category] || 20;
+}
+
+function selectTheme(weekIndex: number, _locations: Location[]): string {
+  return WEEK_THEMES[weekIndex % WEEK_THEMES.length];
+}
+
+function scoreFamilyFriendliness(locations: Location[]): number {
+  if (locations.length === 0) return 50;
+  const facilityScore = locations.reduce((sum, loc) => {
+    return sum + Math.min(loc.facilities.length * 15, 40);
+  }, 0) / locations.length;
+  const ratingScore = locations.reduce((sum, loc) => sum + (loc.averageRating / 5) * 60, 0) / locations.length;
+  return Math.min(100, Math.round(facilityScore + ratingScore));
+}
+
+function scoreVariety(locations: Location[]): number {
+  if (locations.length === 0) return 50;
+  const categories = new Set(locations.map((l) => l.category));
+  return Math.min(100, Math.round((categories.size / Math.max(locations.length, 1)) * 100));
+}
+
+function scoreValueForMoney(totalCost: number, budget: number, visitCount: number): number {
+  if (budget <= 0 || visitCount === 0) return 50;
+  const utilizationRatio = totalCost / budget;
+  if (utilizationRatio <= 1) {
+    return Math.min(100, Math.round(70 + (1 - utilizationRatio) * 30));
+  }
+  return Math.max(10, Math.round(70 - (utilizationRatio - 1) * 50));
+}
+
+function generateSavingsOpportunities(
+  _locations: Location[],
+  _totalCost: number
+): SavingsOpportunity[] {
+  return [
+    {
+      type: 'membership',
+      description: 'Consider annual passes for frequently visited venues',
+      potentialSavings: 50,
+      implementation: 'Purchase annual membership after 3+ visits to the same venue',
+    },
+    {
+      type: 'combo',
+      description: 'Bundle nearby venue visits to save on transportation',
+      potentialSavings: 20,
+      implementation: 'Plan visits to nearby venues on the same day',
+    },
+    {
+      type: 'seasonal',
+      description: 'Take advantage of off-peak pricing and seasonal promotions',
+      potentialSavings: 30,
+      implementation: 'Visit during weekday mornings or off-season periods',
+    },
+    {
+      type: 'bundle',
+      description: 'Look for family bundle tickets and group discounts',
+      potentialSavings: 25,
+      implementation: 'Check venue websites for family package deals before visiting',
+    },
+  ];
+}
+
+function generateRecommendations(
+  plan: { weeklyPlans: WeeklyPlan[]; estimatedCost: number; totalBudget: number },
+  profile: FamilyTravelProfile
+): string[] {
+  const recs: string[] = [];
+
+  if (plan.estimatedCost > plan.totalBudget) {
+    recs.push('Consider reducing visit frequency or choosing free venues to stay within budget.');
+  } else {
+    recs.push('Your plan is within budget - great job planning!');
+  }
+
+  if (profile.childrenAges.some((a) => a <= 2)) {
+    recs.push('Pack essentials: diapers, snacks, and a portable changing pad for young children.');
+  }
+
+  if (profile.activityPreference === 'outdoor' || profile.activityPreference === 'mixed') {
+    recs.push('Check weather forecasts before outdoor visits and have indoor backup plans.');
+  }
+
+  recs.push('Book popular venues in advance to avoid disappointment on weekends.');
+
+  return recs;
 }
 
 /**
- * Generate plan for a single week
+ * Generate a comprehensive monthly travel plan for a family
  */
-function generateWeekPlan(
-  availableLocations: Location[],
-  familyProfile: FamilyTravelProfile,
-  startDate: Date,
-  endDate: Date,
-  weekNumber: number
-): WeeklyTravelPlan {
-  // Calculate theme for the week (rotate through different themes)
-  const themes = ['Outdoor Adventure', 'Learning & Culture', 'Family Fun', 'Rest & Relaxation', 'Active Play'];
-  const theme = themes[weekNumber % themes.length];
+export function generateMonthlyTravelPlan(
+  locations: Location[],
+  profile: FamilyTravelProfile,
+  year: number,
+  month: number // 0-indexed (0=January, 11=December)
+): MonthlyTravelPlan {
+  const monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December',
+  ];
 
-  // Find suitable locations for this week
-  const suitableLocations = availableLocations
-    .filter(loc => isLocationSuitableForWeek(loc, familyProfile, theme))
-    .sort((a, b) => calculateLocationScore(b) - calculateLocationScore(a))
-    .slice(0, 3); // Pick top 3 locations
+  const suitableLocations = filterLocationsByAge(locations, profile.childrenAges);
+  const weeks = getWeeksInMonth(year, month);
 
-  // Create planned visits
-  const plannedVisits: PlannedVisit[] = suitableLocations.map((loc, idx) => {
-    const visitDate = new Date(startDate);
-    const dayOffset = familyProfile.preferredDays.length > 0
-      ? findNextPreferredDay(visitDate, familyProfile.preferredDays)
-      : idx * 2;
-    visitDate.setDate(visitDate.getDate() + dayOffset);
+  let totalEstimatedCost = 0;
+  let weeklyPlans: WeeklyPlan[] = weeks.map((week, index) => {
+    const theme = selectTheme(index, suitableLocations);
+    const preferredDates = getPreferredDatesInRange(week.start, week.end, profile.preferredDays);
+
+    const plannedVisits: PlannedVisit[] = [];
+    // Use preferred days; if none in range and preferredDays is specified, skip this week
+    const datesToUse = preferredDates.length > 0
+      ? preferredDates
+      : (profile.preferredDays.length === 0 ? [week.start] : []);
+
+    datesToUse.forEach((date, dateIndex) => {
+      if (suitableLocations.length === 0) return;
+      const locIndex = (index * 2 + dateIndex) % suitableLocations.length;
+      const location = suitableLocations[locIndex];
+      const cost = estimateCost(location);
+
+      const priorities: Array<'high' | 'medium' | 'low'> = ['high', 'medium', 'low'];
+      const priority = priorities[dateIndex % 3];
+
+      const reasons = [
+        `Great ${location.category} for family ${theme.toLowerCase()} day`,
+        `Highly rated venue perfect for ages ${profile.childrenAges.join(' and ')}`,
+        `Matches your interest in ${profile.interests[dateIndex % profile.interests.length] || 'family activities'}`,
+      ];
+
+      plannedVisits.push({
+        location,
+        date: new Date(date),
+        startTime: dateIndex === 0 ? '10:00' : '14:00',
+        duration: location.category === 'restaurant' ? 1.5 : 2.5,
+        priority,
+        reason: reasons[dateIndex % reasons.length],
+        estimatedCost: cost,
+      });
+    });
+
+    const weekCost = plannedVisits.reduce((sum, v) => sum + v.estimatedCost, 0);
+    totalEstimatedCost += weekCost;
 
     return {
-      location: loc,
-      date: visitDate,
-      startTime: '09:00',
-      duration: 3,
-      priority: idx === 0 ? 'high' : idx === 1 ? 'medium' : 'low',
-      reason: `Part of "${theme}" week exploration`,
-      estimatedCost: calculateLocationCost(loc, familyProfile),
+      week: index + 1,
+      startDate: week.start,
+      endDate: week.end,
+      theme,
+      plannedVisits,
+      estimatedCost: weekCost,
     };
-  });
+  }).filter((w) => w.plannedVisits.length > 0);
 
-  // Calculate total cost
-  const estimatedCost = plannedVisits.reduce((sum, v) => sum + v.estimatedCost, 0);
+  // Renumber weeks after filtering
+  weeklyPlans.forEach((w, i) => { w.week = i + 1; });
 
-  return {
-    week: weekNumber,
-    startDate,
-    endDate,
-    plannedVisits,
-    estimatedCost,
-    theme,
-  };
-}
+  const allVisits = weeklyPlans.flatMap((w) => w.plannedVisits);
+  const allLocations = allVisits.map((v) => v.location);
+  const uniqueLocationIds = new Set(allVisits.map((v) => v.location.id));
 
-/**
- * Check if a location is suitable for the week's theme
- */
-function isLocationSuitableForWeek(
-  location: Location,
-  familyProfile: FamilyTravelProfile,
-  theme: string
-): boolean {
-  const category = location.category;
-  const minAge = Math.min(...familyProfile.childrenAges);
-
-  // For very young children (under 3), prefer safe venues
-  if (minAge < 3) {
-    if (!['park', 'restaurant', 'nursing_room'].includes(category)) return false;
-  }
-
-  if (theme === 'Outdoor Adventure' && category !== 'park') return false;
-  if (theme === 'Learning & Culture' && !['attraction', 'park'].includes(category)) return false;
-  if (theme === 'Family Fun' && !['attraction', 'restaurant'].includes(category)) return false;
-  if (theme === 'Rest & Relaxation' && !['restaurant', 'nursing_room'].includes(category)) return false;
-  if (theme === 'Active Play' && category !== 'park') return false;
-
-  return true;
-}
-
-/**
- * Calculate suitability score for a location
- */
-function calculateLocationScore(location: Location): number {
-  let score = 0;
-
-  // Base score by category
-  const categoryScores: Record<string, number> = {
-    park: 85,
-    restaurant: 70,
-    attraction: 90,
-    medical: 30,
-    nursing_room: 40,
-    other: 50,
-  };
-  score += categoryScores[location.category] || 50;
-
-  // Bonus for family-friendly
-  if (location.averageRating && location.averageRating > 4.5) {
-    score += 15;
-  }
-
-  // Bonus for accessibility
-  if (location.facilities && location.facilities.includes('stroller_accessible')) {
-    score += 10;
-  }
-
-  return score;
-}
-
-/**
- * Calculate estimated cost for visiting a location
- */
-function calculateLocationCost(location: Location, familyProfile: FamilyTravelProfile): number {
-  const categoryBaseCosts: Record<string, number> = {
-    park: 0,
-    restaurant: 30 * familyProfile.childrenAges.length,
-    attraction: 50 * familyProfile.childrenAges.length,
-    medical: 0,
-    nursing_room: 0,
-    other: 20 * familyProfile.childrenAges.length,
-  };
-
-  return categoryBaseCosts[location.category] || 20;
-}
-
-/**
- * Find the next preferred day from a given date
- */
-function findNextPreferredDay(currentDate: Date, preferredDays: string[]): number {
-  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-  for (let i = 0; i < 7; i++) {
-    const checkDate = new Date(currentDate);
-    checkDate.setDate(checkDate.getDate() + i);
-    const dayName = dayNames[checkDate.getDay()];
-
-    if (preferredDays.includes(dayName as any)) {
-      return i;
-    }
-  }
-
-  return 0;
-}
-
-/**
- * Identify savings opportunities
- */
-function identifySavingsOpportunities(
-  availableLocations: Location[],
-  weeklyPlans: WeeklyTravelPlan[],
-  familyProfile: FamilyTravelProfile
-): SavingsOpportunity[] {
-  const opportunities: SavingsOpportunity[] = [];
-
-  // Check for membership opportunities
-  const attractionCount = weeklyPlans.reduce(
-    (sum, week) => sum + week.plannedVisits.filter(v => v.location.category === 'attraction').length,
-    0
-  );
-
-  if (attractionCount >= 4) {
-    opportunities.push({
-      type: 'membership',
-      description: 'Annual attraction pass',
-      potentialSavings: attractionCount * 30,
-      implementation: 'Purchase an annual pass at major attractions',
-    });
-  }
-
-  // Check for combo deals
-  opportunities.push({
-    type: 'combo',
-    description: 'Weekend family packages',
-    potentialSavings: attractionCount * 10,
-    implementation: 'Look for weekend combo deals at attractions',
-  });
-
-  // Seasonal savings
-  if (familyProfile.seasonPreference === 'any') {
-    opportunities.push({
-      type: 'seasonal',
-      description: 'Off-season discounts',
-      potentialSavings: 50,
-      implementation: 'Visit during off-peak seasons for better rates',
-    });
-  }
-
-  // Bundle savings for nearby venues
-  if (availableLocations.filter(l => l.category === 'restaurant').length > 5) {
-    opportunities.push({
-      type: 'bundle',
-      description: 'Dining bundle deals',
-      potentialSavings: familyProfile.childrenAges.length * 20,
-      implementation: 'Use restaurant bundles and family meal deals',
-    });
-  }
-
-  return opportunities;
-}
-
-/**
- * Generate plan summary
- */
-function generatePlanSummary(
-  weeklyPlans: WeeklyTravelPlan[],
-  familyProfile: FamilyTravelProfile
-): PlanSummary {
-  const allVisits = weeklyPlans.flatMap(w => w.plannedVisits);
-  const uniqueLocationIds = new Set(allVisits.map(v => v.location.id));
-  const totalCost = allVisits.reduce((sum, v) => sum + v.estimatedCost, 0);
-
-  // Calculate variety score (how many different categories)
-  const categorySet = new Set(allVisits.map(v => v.location.category));
-  const varietyScore = Math.min(100, (categorySet.size / 6) * 100);
-
-  // Calculate family-friendliness score
-  let familyScore = 0;
-  allVisits.forEach(visit => {
-    if (visit.location.averageRating) {
-      familyScore += Math.min(100, (visit.location.averageRating / 5) * 100);
-    }
-  });
-  familyScore = allVisits.length > 0 ? familyScore / allVisits.length : 0;
-
-  // Calculate value for money
-  const budgetUtilization = familyProfile.maxBudget > 0 ? (totalCost / familyProfile.maxBudget) * 100 : 0;
-  const valueScore = Math.max(10, 100 - Math.abs(budgetUtilization - 80));
-
-  return {
+  const summary: PlanSummary = {
     totalVisits: allVisits.length,
     uniqueLocations: uniqueLocationIds.size,
-    averageSpendPerVisit: allVisits.length > 0 ? totalCost / allVisits.length : 0,
-    familyFriendlinessScore: Math.round(familyScore),
-    varietyScore: Math.round(varietyScore),
-    valueForMoneyScore: Math.round(valueScore),
+    familyFriendlinessScore: scoreFamilyFriendliness(allLocations),
+    varietyScore: scoreVariety(allLocations),
+    valueForMoneyScore: scoreValueForMoney(totalEstimatedCost, profile.maxBudget, allVisits.length),
+  };
+
+  const plan: MonthlyTravelPlan = {
+    month: `${monthNames[month]} ${year}`,
+    totalBudget: profile.maxBudget,
+    estimatedCost: totalEstimatedCost,
+    weeklyPlans,
+    savingsOpportunities: generateSavingsOpportunities(suitableLocations, totalEstimatedCost),
+    summary,
     recommendations: [],
   };
+
+  plan.recommendations = generateRecommendations(plan, profile);
+
+  return plan;
 }
 
 /**
- * Generate personalized recommendations
+ * Optimize the sequence of planned visits by date and priority
  */
-function generateRecommendations(
-  weeklyPlans: WeeklyTravelPlan[],
-  familyProfile: FamilyTravelProfile,
-  totalCost: number
-): string[] {
-  const recommendations: string[] = [];
+export function optimizeVisitSequence(visits: PlannedVisit[]): PlannedVisit[] {
+  const priorityOrder: Record<string, number> = { high: 0, medium: 1, low: 2 };
 
-  // Budget recommendations
-  if (totalCost > familyProfile.maxBudget) {
-    recommendations.push(
-      `Total cost ($${totalCost}) exceeds budget. Consider reducing visits or looking for discounts.`
-    );
-  } else if (totalCost < familyProfile.maxBudget * 0.5) {
-    recommendations.push(
-      `You're using less than 50% of your budget. Consider adding more activities for better variety.`
-    );
-  }
-
-  // Activity variety
-  if (weeklyPlans.length > 0) {
-    recommendations.push(
-      `Great variety! Each week has a different theme to keep activities fresh and engaging.`
-    );
-  }
-
-  // Age-appropriate
-  recommendations.push(
-    `Plan is optimized for children aged ${familyProfile.childrenAges.join(', ')}.`
-  );
-
-  // Weather and season
-  if (familyProfile.seasonPreference !== 'any') {
-    recommendations.push(
-      `Plan aligns with your preferred season (${familyProfile.seasonPreference}) for optimal comfort.`
-    );
-  }
-
-  // Time management
-  recommendations.push(
-    `Average of ${(weeklyPlans.length > 0 ? weeklyPlans.reduce((sum, w) => sum + w.plannedVisits.length, 0) / weeklyPlans.length : 0).toFixed(1)} visits per week ensures balanced pacing.`
-  );
-
-  return recommendations;
-}
-
-/**
- * Calculate optimal visit sequence for minimal travel
- */
-export function optimizeVisitSequence(plannedVisits: PlannedVisit[]): PlannedVisit[] {
-  // Simple greedy algorithm - visit nearest locations first
-  const sorted = [...plannedVisits].sort((a, b) => {
-    // Prioritize by date first
-    if (a.date.getTime() !== b.date.getTime()) {
-      return a.date.getTime() - b.date.getTime();
-    }
-    // Then by priority
-    const priorityMap = { high: 0, medium: 1, low: 2 };
-    return priorityMap[a.priority] - priorityMap[b.priority];
+  return [...visits].sort((a, b) => {
+    const dateCompare = a.date.getTime() - b.date.getTime();
+    if (dateCompare !== 0) return dateCompare;
+    return priorityOrder[a.priority] - priorityOrder[b.priority];
   });
-
-  return sorted;
 }
 
 /**
- * Export plan as text/CSV format
+ * Export a monthly travel plan as formatted text
  */
 export function exportMonthlyPlanAsText(plan: MonthlyTravelPlan): string {
-  let output = `MONTHLY FAMILY TRAVEL PLAN - ${plan.month}\n`;
-  output += `${'='.repeat(60)}\n\n`;
+  const lines: string[] = [];
 
-  output += `BUDGET SUMMARY\n`;
-  output += `-`.repeat(60) + '\n';
-  output += `Total Budget: $${plan.totalBudget}\n`;
-  output += `Estimated Cost: $${plan.estimatedCost.toFixed(2)}\n`;
-  output += `Potential Savings: $${plan.savingsOpportunities.reduce((s, o) => s + o.potentialSavings, 0)}\n\n`;
+  lines.push('='.repeat(60));
+  lines.push('MONTHLY FAMILY TRAVEL PLAN');
+  lines.push(plan.month);
+  lines.push('='.repeat(60));
+  lines.push('');
 
-  output += `WEEKLY BREAKDOWN\n`;
-  output += `-`.repeat(60) + '\n';
-  plan.weeklyPlans.forEach(week => {
-    output += `\nWeek ${week.week}: ${week.theme} (${week.startDate.toLocaleDateString()} - ${week.endDate.toLocaleDateString()})\n`;
-    output += `Estimated Cost: $${week.estimatedCost.toFixed(2)}\n`;
-    week.plannedVisits.forEach(visit => {
-      output += `  • ${visit.location.name.en} on ${visit.date.toLocaleDateString()} at ${visit.startTime} (${visit.duration}h)\n`;
+  // Budget summary
+  lines.push('--- BUDGET SUMMARY ---');
+  lines.push(`Total Budget: $${plan.totalBudget.toFixed(2)}`);
+  lines.push(`Estimated Cost: $${plan.estimatedCost.toFixed(2)}`);
+  const remaining = plan.totalBudget - plan.estimatedCost;
+  lines.push(`Remaining: $${remaining.toFixed(2)}`);
+  lines.push('');
+
+  // Weekly breakdown
+  lines.push('--- WEEKLY BREAKDOWN ---');
+  plan.weeklyPlans.forEach((week) => {
+    lines.push('');
+    lines.push(`Week ${week.week}: ${week.theme}`);
+    lines.push(`  Estimated Cost: $${week.estimatedCost.toFixed(2)}`);
+    week.plannedVisits.forEach((visit) => {
+      const dateStr = visit.date.toLocaleDateString('en-US', {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+      });
+      const name =
+        (visit.location as any).name_en ||
+        (typeof visit.location.name === 'object' ? visit.location.name.en : visit.location.name) ||
+        'Unknown';
+      lines.push(`  - ${dateStr} at ${visit.startTime}: ${name} (${visit.duration}h, $${visit.estimatedCost.toFixed(2)}) [${visit.priority}]`);
+      lines.push(`    Reason: ${visit.reason}`);
     });
   });
+  lines.push('');
 
-  output += `\n\nSUMMARY\n`;
-  output += `-`.repeat(60) + '\n';
-  output += `Total Visits: ${plan.summary.totalVisits}\n`;
-  output += `Unique Locations: ${plan.summary.uniqueLocations}\n`;
-  output += `Family-Friendliness Score: ${plan.summary.familyFriendlinessScore}/100\n`;
-  output += `Variety Score: ${plan.summary.varietyScore}/100\n`;
-  output += `Value for Money Score: ${plan.summary.valueForMoneyScore}/100\n`;
+  // Savings opportunities
+  if (plan.savingsOpportunities.length > 0) {
+    lines.push('--- SAVINGS OPPORTUNITIES ---');
+    plan.savingsOpportunities.forEach((opp) => {
+      lines.push(`  [${opp.type}] ${opp.description} (Save up to $${opp.potentialSavings.toFixed(2)})`);
+      lines.push(`    How: ${opp.implementation}`);
+    });
+    lines.push('');
+  }
 
-  return output;
+  // Summary
+  lines.push('--- SUMMARY ---');
+  lines.push(`Total Visits: ${plan.summary.totalVisits}`);
+  lines.push(`Unique Locations: ${plan.summary.uniqueLocations}`);
+  lines.push(`Family-Friendliness Score: ${plan.summary.familyFriendlinessScore}/100`);
+  lines.push(`Variety Score: ${plan.summary.varietyScore}/100`);
+  lines.push(`Value for Money Score: ${plan.summary.valueForMoneyScore}/100`);
+  lines.push('');
+
+  // Recommendations
+  if (plan.recommendations.length > 0) {
+    lines.push('--- RECOMMENDATIONS ---');
+    plan.recommendations.forEach((rec, i) => {
+      lines.push(`  ${i + 1}. ${rec}`);
+    });
+  }
+
+  lines.push('');
+  lines.push('='.repeat(60));
+
+  return lines.join('\n');
 }

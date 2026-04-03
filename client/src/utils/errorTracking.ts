@@ -11,7 +11,7 @@ export interface ErrorContext {
 }
 
 class ErrorTracker {
-  private isDev = import.meta.env.DEV;
+  private isDev = import.meta.env.DEV || import.meta.env.MODE === 'test';
   private errorLog: Array<{
     timestamp: number;
     error: Error;

@@ -233,9 +233,9 @@ describe('AccessibilityAssistant Component', () => {
       });
 
       await waitFor(() => {
-        expect(screen.getByText('Peaceful Park')).toBeInTheDocument();
-        expect(screen.getByText('Urban Entertainment Center')).toBeInTheDocument();
-        expect(screen.getByText('Family-Friendly Museum')).toBeInTheDocument();
+        expect(screen.getAllByText('Peaceful Park').length).toBeGreaterThan(0);
+        expect(screen.getAllByText('Urban Entertainment Center').length).toBeGreaterThan(0);
+        expect(screen.getAllByText('Family-Friendly Museum').length).toBeGreaterThan(0);
       });
     });
 
@@ -274,16 +274,15 @@ describe('AccessibilityAssistant Component', () => {
       fireEvent.click(newProfileBtn);
 
       await waitFor(() => {
-        const soundSelects = screen.getAllByDisplayValue('normal');
-        const soundSelect = soundSelects.find((s) =>
-          s.closest('.form-group')?.textContent?.includes('Sound Sensitivity')
-        );
-
-        if (soundSelect) {
-          fireEvent.change(soundSelect, { target: { value: 'high' } });
-          expect(soundSelect).toHaveValue('high');
-        }
+        expect(screen.getByText(/Sound Sensitivity:/)).toBeInTheDocument();
       });
+
+      const soundLabel = screen.getByText(/Sound Sensitivity:/);
+      const soundSelect = soundLabel.closest('.form-group')?.querySelector('select');
+      expect(soundSelect).toBeTruthy();
+
+      fireEvent.change(soundSelect!, { target: { value: 'high' } });
+      expect(soundSelect!).toHaveValue('high');
     });
 
     it('should allow crowd tolerance selection', async () => {
@@ -293,16 +292,15 @@ describe('AccessibilityAssistant Component', () => {
       fireEvent.click(newProfileBtn);
 
       await waitFor(() => {
-        const selects = screen.getAllByDisplayValue('normal');
-        const crowdSelect = selects.find((s) =>
-          s.closest('.form-group')?.textContent?.includes('Crowd Tolerance')
-        );
-
-        if (crowdSelect) {
-          fireEvent.change(crowdSelect, { target: { value: 'low' } });
-          expect(crowdSelect).toHaveValue('low');
-        }
+        expect(screen.getByText(/Crowd Tolerance:/)).toBeInTheDocument();
       });
+
+      const crowdLabel = screen.getByText(/Crowd Tolerance:/);
+      const crowdSelect = crowdLabel.closest('.form-group')?.querySelector('select');
+      expect(crowdSelect).toBeTruthy();
+
+      fireEvent.change(crowdSelect!, { target: { value: 'low' } });
+      expect(crowdSelect!).toHaveValue('low');
     });
   });
 

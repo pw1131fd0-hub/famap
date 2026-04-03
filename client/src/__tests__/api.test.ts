@@ -30,6 +30,7 @@ describe('API Services', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    circuitBreakerUtils.reset();
   });
 
   describe('locationApi', () => {

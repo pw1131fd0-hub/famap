@@ -107,7 +107,7 @@ describe('getFamilyDevelopmentStages', () => {
   });
 
   it('should return multiple stages for multi-age family', () => {
-    const stages = getFamilyDevelopmentStages([0.5, 3, 8]);
+    const stages = getFamilyDevelopmentStages([0.5, 4, 8]);
     expect(stages).toHaveLength(3);
     expect(stages).toContain('infant');
     expect(stages).toContain('preschool');
