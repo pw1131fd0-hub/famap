@@ -49,7 +49,6 @@ export interface VenueComparison {
  * Assess the credibility and data quality of a venue
  */
 export function assessVenueCredibility(
-  venue: Location,
   reviewData?: { count: number; recentCount: number; averageRating: number },
   userData?: { contributionsCount: number; lastUpdateDays: number }
 ): VenueCredibility {
@@ -200,7 +199,7 @@ export function compareVenuesForFamily(
   // Evaluate each venue
   const suitabilities: VenueSuitability[] = venues
     .map(venue => {
-      const credibility = credibilityScores.get(venue.id) || assessVenueCredibility(venue);
+      const credibility = credibilityScores.get(venue.id) || assessVenueCredibility();
       return evaluateVenueSuitability(venue, familyNeeds, credibility);
     })
     .sort((a, b) => {

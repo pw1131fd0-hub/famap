@@ -37,7 +37,7 @@ export const VenueQualityAssessment: React.FC<VenueQualityAssessmentProps> = ({
   onDismiss,
 }) => {
   const assessment = useMemo(() => {
-    const credibility = assessVenueCredibility(venue, {
+    const credibility = assessVenueCredibility({
       count: reviewCount,
       recentCount: recentReviewCount,
       averageRating,

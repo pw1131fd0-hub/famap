@@ -82,7 +82,7 @@ export function generateMonthlyTravelPlan(
   const savingsOpportunities = identifySavingsOpportunities(availableLocations, weeklyPlans, familyProfile);
 
   // Generate summary
-  const summary = generatePlanSummary(weeklyPlans, availableLocations, familyProfile);
+  const summary = generatePlanSummary(weeklyPlans, familyProfile);
 
   // Generate recommendations
   const recommendations = generateRecommendations(weeklyPlans, familyProfile, estimatedCost);
@@ -152,7 +152,7 @@ function generateWeekPlan(
   // Find suitable locations for this week
   const suitableLocations = availableLocations
     .filter(loc => isLocationSuitableForWeek(loc, familyProfile, theme))
-    .sort((a, b) => calculateLocationScore(b, familyProfile) - calculateLocationScore(a, familyProfile))
+    .sort((a, b) => calculateLocationScore(b) - calculateLocationScore(a))
     .slice(0, 3); // Pick top 3 locations
 
   // Create planned visits
@@ -215,7 +215,7 @@ function isLocationSuitableForWeek(
 /**
  * Calculate suitability score for a location
  */
-function calculateLocationScore(location: Location, familyProfile: FamilyTravelProfile): number {
+function calculateLocationScore(location: Location): number {
   let score = 0;
 
   // Base score by category
@@ -338,7 +338,6 @@ function identifySavingsOpportunities(
  */
 function generatePlanSummary(
   weeklyPlans: WeeklyTravelPlan[],
-  availableLocations: Location[],
   familyProfile: FamilyTravelProfile
 ): PlanSummary {
   const allVisits = weeklyPlans.flatMap(w => w.plannedVisits);
@@ -458,7 +457,7 @@ export function exportMonthlyPlanAsText(plan: MonthlyTravelPlan): string {
     output += `\nWeek ${week.week}: ${week.theme} (${week.startDate.toLocaleDateString()} - ${week.endDate.toLocaleDateString()})\n`;
     output += `Estimated Cost: $${week.estimatedCost.toFixed(2)}\n`;
     week.plannedVisits.forEach(visit => {
-      output += `  • ${visit.location.name_en} on ${visit.date.toLocaleDateString()} at ${visit.startTime} (${visit.duration}h)\n`;
+      output += `  • ${visit.location.name.en} on ${visit.date.toLocaleDateString()} at ${visit.startTime} (${visit.duration}h)\n`;
     });
   });
 

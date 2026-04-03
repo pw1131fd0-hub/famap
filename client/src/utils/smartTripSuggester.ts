@@ -109,7 +109,7 @@ export function scoreVenuesForSuggestion(
       crowdAvoidance: calculateCrowdAvoidance(venue, recentHistory),
       budgetAlignment: calculateBudgetAlignment(venue, budget),
       noveltyBoost: calculateNoveltyBoost(venue, recentHistory),
-      timeAlignment: calculateTimeAlignment(venue, familyProfile),
+      timeAlignment: calculateTimeAlignment(venue),
     };
 
     const score =
@@ -237,8 +237,7 @@ function calculateNoveltyBoost(
  * Align suggestions with family's typical outing times
  */
 function calculateTimeAlignment(
-  venue: Location,
-  familyProfile: FamilyProfile
+  venue: Location
 ): number {
   // Prefer venues open at times family typically visits
   // Default to morning and afternoon as typical family visit times
@@ -276,7 +275,6 @@ function createTripFromVenues(
     venueScores.reduce((sum, v) => sum + v.score, 0) / Math.max(1, venueScores.length);
 
   const reasons = generateSuggestionReasons(
-    venues,
     context.familyProfile,
     venueScores
   );
@@ -319,7 +317,6 @@ function generateTripTitle(venues: Location[], index: number): string {
  * Generate reasons for the suggestion
  */
 function generateSuggestionReasons(
-  venues: Location[],
   familyProfile: FamilyProfile,
   venueScores: VenueScore[]
 ): string[] {

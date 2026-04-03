@@ -368,7 +368,7 @@ export function generateCelebrationTimeline(milestone: FamilyMilestone): Timelin
     timeline.push({
       daysBeforeEvent: 30,
       task: 'Book venue and confirm availability',
-      priority: 'critical',
+      priority: 'high',
       estimatedTime: '1 hour'
     });
     timeline.push({
@@ -404,7 +404,7 @@ export function generateCelebrationTimeline(milestone: FamilyMilestone): Timelin
   timeline.push({
     daysBeforeEvent: 3,
     task: 'Confirm final headcount with venue',
-    priority: 'critical',
+    priority: 'high',
     estimatedTime: '30 minutes'
   });
 
@@ -418,7 +418,7 @@ export function generateCelebrationTimeline(milestone: FamilyMilestone): Timelin
   timeline.push({
     daysBeforeEvent: 0,
     task: 'Arrive early to set up and prepare',
-    priority: 'critical',
+    priority: 'high',
     estimatedTime: '1 hour'
   });
 

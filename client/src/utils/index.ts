@@ -4,52 +4,53 @@
  */
 
 // Analytics and tracking
-export { default as analyticsEngine } from './analyticsEngine';
-export { default as healthMonitoring } from './healthMonitoring';
-export { default as performanceMonitoring } from './performanceMonitoring';
-export { default as userBehaviorTracking } from './userBehaviorTracking';
+export * from './analyticsEngine';
+export * from './healthMonitoring';
+export * from './performanceMonitoring';
+export * from './userBehaviorTracking';
 
 // Location and search utilities
-export { searchLocations, filterByCategory, calculateDistance, sortByDistance, getLocationBounds } from './searchUtils';
-export { getLocationImage, validateLocation, formatLocationAddress, getLocationDetails } from './locationUtils';
-export { default as locationComparison } from './locationComparison';
+export { searchLocations, calculateDistance } from './searchUtils';
+export * from './locationUtils';
+export * from './locationComparison';
 
 // Recommendation systems
-export { default as familyRecommender } from './familyRecommender';
-export { default as venueInsights } from './venueInsights';
-export { default as locationInsights } from './locationInsights';
-export { default as weatherAwareRecommender } from './weatherAwareRecommender';
-export { default as bestTimeVisitPredictor } from './bestTimeVisitPredictor';
+export * from './familyRecommender';
+export * from './venueInsights';
+export * from './locationInsights';
+export * from './weatherAwareRecommender';
+export * from './bestTimeVisitPredictor';
 export * from './venueQualityAssessment';
 
 // Activity and event planning
-export { default as activityPlanner } from './activityPlanner';
-export { default as outingPlanner } from './outingPlanner';
-export { default as smartTripSuggester } from './smartTripSuggester';
-export { default as weeklyOutingPlanner } from './weeklyOutingPlanner';
+export * from './activityPlanner';
+export * from './outingPlanner';
+export * from './smartTripSuggester';
+export * from './weeklyOutingPlanner';
 
 // Cost and budget
-export { default as tripCostCalculator } from './tripCostCalculator';
+export * from './tripCostCalculator';
 
 // Multi-venue optimization
-export { default as multiVenueOptimizer } from './multiVenueOptimizer';
-export { default as familyVenueConsensus } from './familyVenueConsensus';
+export * from './multiVenueOptimizer';
+export * from './familyVenueConsensus';
 
 // Family group management
 export * from './familyGroupOptimizer';
 
 // Network and caching
-export { default as networkState } from './networkState';
-export { default as cacheWarmingStrategy } from './cacheWarmingStrategy';
+export * from './networkState';
+export { cacheWarmingManager } from './cacheWarmingStrategy';
+export type { CacheWarmingConfig, CacheStrategy } from './cacheWarmingStrategy';
 
 // User preferences and context
-export { default as userPreferences } from './userPreferences';
-export { default as familyContext } from './familyContext';
-export { default as childDevelopmentStages } from './childDevelopmentStages';
+export * from './userPreferences';
+export type { ChildProfile, FamilyProfile, FamilyType } from './familyContext';
+export * from './childDevelopmentStages';
 
 // Notifications and alerts
-export { default as smartNotificationEngine } from './smartNotificationEngine';
-export { default as alertSystem } from './alertSystem';
+export * from './smartNotificationEngine';
+export * from './alertSystem';
 
 // Community features
 export * from './familyCommunity';
@@ -74,20 +75,8 @@ export * from './accessibilityAssistant';
 export * from './accessibilityHelpers';
 
 // Error handling
-export {
-  EnhancedError,
-  ErrorContext,
-  getEnhancedError,
-  handleErrorWithContext,
-  validateError,
-  createErrorObject
-} from './enhancedErrorHandling';
-export {
-  captureErrorContext,
-  logErrorToRemote,
-  isRecoverableError,
-  getErrorSeverity,
-} from './errorTracking';
+export * from './enhancedErrorHandling';
+export * from './errorTracking';
 export { default as sentryConfig, captureException, addBreadcrumb } from './sentryConfig';
 
 // Responsive design
@@ -97,24 +86,10 @@ export * from './responsiveDesignHelpers';
 export * from './metaTagManager';
 
 // Environment configuration
-export { isDevelopment, isProduction, initializeEnv as loadEnvConfig, getEnvConfig, getApiBaseUrl } from './envConfig';
+export * from './envConfig';
 
 // Development utilities
-export {
-  assert,
-  devAssert,
-  log,
-  PerformanceHelper,
-  perfHelper,
-  is,
-  safeJSON,
-  safeStorage,
-  debounce,
-  throttle,
-  retry,
-  ifDev,
-  getEnvironment,
-} from './devUtils';
+export * from './devUtils';
 
 /**
  * Re-export type definitions
@@ -122,22 +97,9 @@ export {
 export type {
   Location,
   Review,
-  FamilyProfile,
   Event,
   ActivityHistoryEntry,
   WeeklySuggestion,
 } from '../types';
 
-/**
- * Utility bundles for common operations
- */
-export const utilities = {
-  location: {
-    search: searchLocations,
-    filterByCategory,
-    calculateDistance,
-    sortByDistance,
-  },
-};
-
-export default utilities;
+export default {};
