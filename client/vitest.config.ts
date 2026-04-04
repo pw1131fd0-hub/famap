@@ -12,12 +12,9 @@ export default defineConfig({
     },
     testTimeout: 30000,
     hookTimeout: 20000,
-    isolatedModuleTimeout: 150000,
     teardownTimeout: 20000,
-    // Optimized for many test files
-    threads: false,
-    isolate: false,
-    singleThread: true,
+    // Use forks pool for proper process-level isolation between test files
+    pool: 'forks',
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
