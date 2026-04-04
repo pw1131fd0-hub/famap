@@ -132,9 +132,19 @@ def test_register_and_login():
     assert response.status_code == 401
 
 def test_get_me():
-    response = client.get("/api/auth/me")
+    # Login first to get a valid token
+    login_data = {"email": "test@example.com", "password": "password123"}
+    login_response = client.post("/api/auth/login", json=login_data)
+    assert login_response.status_code == 200
+    token = login_response.json()["access_token"]
+
+    response = client.get("/api/auth/me", headers={"Authorization": f"Bearer {token}"})
     assert response.status_code == 200
     assert "email" in response.json()
+
+def test_get_me_unauthenticated():
+    response = client.get("/api/auth/me")
+    assert response.status_code == 401
 
 def test_get_events():
     """Test getting events for a location"""

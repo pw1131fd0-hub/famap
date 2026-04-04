@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Header
 from typing import Optional
 from datetime import datetime, timezone
 import uuid
@@ -33,11 +33,52 @@ def create_jwt(payload: dict) -> str:
     header = {"alg": "HS256", "typ": "JWT"}
     b64_header = base64.urlsafe_b64encode(json.dumps(header).encode()).decode().rstrip('=')
     b64_payload = base64.urlsafe_b64encode(json.dumps(payload).encode()).decode().rstrip('=')
-    
+
     signature = hmac.new(SECRET_KEY.encode(), f"{b64_header}.{b64_payload}".encode(), hashlib.sha256).digest()
     b64_signature = base64.urlsafe_b64encode(signature).decode().rstrip('=')
-    
+
     return f"{b64_header}.{b64_payload}.{b64_signature}"
+
+
+def verify_jwt(token: str) -> Optional[dict]:
+    """Verify JWT and return payload, or None if invalid"""
+    try:
+        parts = token.split(".")
+        if len(parts) != 3:
+            return None
+        b64_header, b64_payload, b64_sig = parts
+        expected_sig = hmac.new(
+            SECRET_KEY.encode(),
+            f"{b64_header}.{b64_payload}".encode(),
+            hashlib.sha256
+        ).digest()
+        expected_b64 = base64.urlsafe_b64encode(expected_sig).decode().rstrip("=")
+        if not hmac.compare_digest(expected_b64, b64_sig):
+            return None
+        # Decode payload
+        padded = b64_payload + "=" * (4 - len(b64_payload) % 4)
+        payload = json.loads(base64.urlsafe_b64decode(padded).decode())
+        # Check expiry
+        if payload.get("exp", 0) < int(datetime.now(timezone.utc).timestamp()):
+            return None
+        return payload
+    except Exception:
+        return None
+
+
+async def get_current_user_dep(authorization: Optional[str] = Header(None)) -> dict:
+    """Dependency: extract and validate Bearer token, return user dict"""
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    token = authorization[7:]
+    payload = verify_jwt(token)
+    if payload is None:
+        raise HTTPException(status_code=401, detail="Invalid or expired token")
+    user_id = payload.get("sub")
+    user = next((u for u in mock_users if u["id"] == user_id), None)
+    if user is None:
+        raise HTTPException(status_code=401, detail="User not found")
+    return user
 
 # Mock user data with secure hashed password
 mock_users = [
@@ -80,7 +121,5 @@ async def login(user_data: dict):
     raise HTTPException(status_code=401, detail="Invalid email or password")
 
 @router.get("/me", response_model=User)
-async def get_current_user():
-    # In a real app, verify token and extract user id from request header
-    user = mock_users[0]
+async def get_current_user(user: dict = Depends(get_current_user_dep)):
     return {k: v for k, v in user.items() if k != "password"}

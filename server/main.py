@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from routers import location, favorite, review, auth, recommendations, route_planner, smart_suggestions, monitoring, seo
 from data.seed_data import mock_locations
 from data.auto_collect import fetch_osm_data, save_locations
-from middleware import ErrorHandlingMiddleware, RequestTimingMiddleware, RequestLoggingMiddleware
+from middleware import ErrorHandlingMiddleware, RequestTimingMiddleware, RequestLoggingMiddleware, SecurityHeadersMiddleware
 from monitoring import setup_logging
 
 load_dotenv()
@@ -54,6 +54,7 @@ app = FastAPI(
 app.add_middleware(RequestLoggingMiddleware)
 app.add_middleware(RequestTimingMiddleware)
 app.add_middleware(ErrorHandlingMiddleware)
+app.add_middleware(SecurityHeadersMiddleware)
 
 # CORS middleware
 origins_env = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173,http://localhost:3000")
@@ -63,8 +64,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type", "Accept", "Origin", "X-Requested-With"],
 )
 
 @app.get("/health")
