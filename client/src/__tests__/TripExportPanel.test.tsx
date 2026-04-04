@@ -128,10 +128,10 @@ describe('TripExportPanel', () => {
   it('should copy share link to clipboard', async () => {
     // Mock navigator.clipboard
     const writeTextMock = vi.fn().mockResolvedValue(undefined);
-    Object.assign(navigator, {
-      clipboard: {
-        writeText: writeTextMock
-      }
+    Object.defineProperty(navigator, 'clipboard', {
+      value: { writeText: writeTextMock },
+      writable: true,
+      configurable: true
     });
 
     render(
@@ -155,10 +155,10 @@ describe('TripExportPanel', () => {
   });
 
   it('should show copied message after copying', async () => {
-    Object.assign(navigator, {
-      clipboard: {
-        writeText: vi.fn().mockResolvedValue(undefined)
-      }
+    Object.defineProperty(navigator, 'clipboard', {
+      value: { writeText: vi.fn().mockResolvedValue(undefined) },
+      writable: true,
+      configurable: true
     });
 
     render(

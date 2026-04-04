@@ -1,8 +1,17 @@
 // @vitest-environment happy-dom
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, beforeAll, vi } from 'vitest';
 import App from '../App.tsx';
 import { LanguageProvider } from '../i18n/LanguageContext.tsx';
+
+// Mock fetch to prevent hanging from pending requests
+beforeAll(() => {
+  global.fetch = vi.fn().mockResolvedValue({
+    ok: true,
+    json: () => Promise.resolve({}),
+    text: () => Promise.resolve(''),
+  });
+});
 
 // Mock axios
 vi.mock('axios', () => {

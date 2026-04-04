@@ -1,9 +1,27 @@
 // @vitest-environment happy-dom
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import IntelligentActivityPlanner from '../components/IntelligentActivityPlanner';
 import type { Location } from '../types';
 import { LanguageProvider } from '../i18n/LanguageContext';
+
+// Mock fetch to prevent hanging from pending requests in happy-dom
+beforeAll(() => {
+  const mockFetch = vi.fn().mockResolvedValue({
+    ok: true,
+    json: () => Promise.resolve({}),
+    text: () => Promise.resolve(''),
+  });
+  global.fetch = mockFetch;
+  if (typeof window !== 'undefined') {
+    (window as any).fetch = mockFetch;
+  }
+});
+
+afterAll(() => {
+  vi.clearAllMocks();
+  vi.clearAllTimers();
+});
 
 const mockLocations: Location[] = [
   {

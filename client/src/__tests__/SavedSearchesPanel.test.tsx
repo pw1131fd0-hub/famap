@@ -248,7 +248,7 @@ describe('SavedSearchesPanel Component', () => {
       );
 
       // Mock window.confirm to return true
-      vi.spyOn(window, 'confirm').mockReturnValue(true);
+      window.confirm = vi.fn().mockReturnValue(true);
 
       const deleteButton = screen.getByTitle('Delete');
       fireEvent.click(deleteButton);
@@ -267,7 +267,7 @@ describe('SavedSearchesPanel Component', () => {
         />
       );
 
-      vi.spyOn(window, 'confirm').mockReturnValue(false);
+      window.confirm = vi.fn().mockReturnValue(false);
 
       const deleteButton = screen.getByTitle('Delete');
       fireEvent.click(deleteButton);

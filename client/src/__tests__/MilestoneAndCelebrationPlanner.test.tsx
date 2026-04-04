@@ -14,7 +14,7 @@ vi.mock('../styles/MilestoneAndCelebrationPlanner.css', () => ({}));
 
 const renderWithLanguage = (component: React.ReactElement) => {
   return render(
-    <LanguageProvider>
+    <LanguageProvider initialLanguage="en">
       {component}
     </LanguageProvider>
   );
@@ -123,10 +123,11 @@ describe('MilestoneAndCelebrationPlanner component', () => {
 
     it('should toggle venue style selection', () => {
       renderWithLanguage(<MilestoneAndCelebrationPlanner />);
+      // Casual is selected by default - clicking should deselect it
       const casualButton = screen.getByRole('button', { name: /Casual/i });
-      expect(casualButton).not.toHaveClass('selected');
-      fireEvent.click(casualButton);
       expect(casualButton).toHaveClass('selected');
+      fireEvent.click(casualButton);
+      expect(casualButton).not.toHaveClass('selected');
     });
 
     it('should allow selecting multiple venue styles', () => {

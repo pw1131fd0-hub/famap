@@ -20,7 +20,7 @@ import {
   calculateCelebrationSuccessScore,
   calculateCelebrationScore
 } from '../utils/milestonePlanner';
-import { useLanguage } from './LanguageContext';
+import { useLanguage } from '../i18n/useLanguage';
 import '../styles/MilestoneAndCelebrationPlanner.css';
 
 const MILESTONE_TYPES: { value: MilestoneType; labelEn: string; labelZh: string }[] = [
@@ -139,8 +139,9 @@ export const MilestoneAndCelebrationPlanner: React.FC<MilestoneAndCelebrationPla
         {/* Left Panel: Milestone Input */}
         <div className="input-panel">
           <div className="form-section">
-            <label>{isZh ? '里程碑類型' : 'Milestone Type'}</label>
+            <label htmlFor="milestone-type">{isZh ? '里程碑類型' : 'Milestone Type'}</label>
             <select
+              id="milestone-type"
               value={milestone.type}
               onChange={e => handleMilestoneChange('type', e.target.value)}
               className="form-select"
@@ -154,8 +155,9 @@ export const MilestoneAndCelebrationPlanner: React.FC<MilestoneAndCelebrationPla
           </div>
 
           <div className="form-section">
-            <label>{isZh ? '里程碑名稱' : 'Milestone Title'}</label>
+            <label htmlFor="milestone-title">{isZh ? '里程碑名稱' : 'Milestone Title'}</label>
             <input
+              id="milestone-title"
               type="text"
               placeholder={isZh ? '例：Sarah的5歲生日派對' : 'e.g., Sarah\'s 5th Birthday'}
               value={milestone.title}
@@ -166,8 +168,9 @@ export const MilestoneAndCelebrationPlanner: React.FC<MilestoneAndCelebrationPla
 
           <div className="form-row">
             <div className="form-section">
-              <label>{isZh ? '主人公名字' : 'Celebrant Name'}</label>
+              <label htmlFor="celebrant-name">{isZh ? '主人公名字' : 'Celebrant Name'}</label>
               <input
+                id="celebrant-name"
                 type="text"
                 placeholder={isZh ? '名字' : 'Name'}
                 value={milestone.celebrant.name}
@@ -181,8 +184,9 @@ export const MilestoneAndCelebrationPlanner: React.FC<MilestoneAndCelebrationPla
               />
             </div>
             <div className="form-section">
-              <label>{isZh ? '年齡' : 'Age'}</label>
+              <label htmlFor="celebrant-age">{isZh ? '年齡' : 'Age'}</label>
               <input
+                id="celebrant-age"
                 type="number"
                 min="0"
                 max="120"
@@ -199,8 +203,9 @@ export const MilestoneAndCelebrationPlanner: React.FC<MilestoneAndCelebrationPla
           </div>
 
           <div className="form-section">
-            <label>{isZh ? '慶祝日期' : 'Celebration Date'}</label>
+            <label htmlFor="celebration-date">{isZh ? '慶祝日期' : 'Celebration Date'}</label>
             <input
+              id="celebration-date"
               type="date"
               value={milestone.date.toISOString().split('T')[0]}
               onChange={e => handleDateChange(e.target.value)}
@@ -216,8 +221,9 @@ export const MilestoneAndCelebrationPlanner: React.FC<MilestoneAndCelebrationPla
 
           <div className="form-row">
             <div className="form-section">
-              <label>{isZh ? '參加人數' : 'Attendees'}</label>
+              <label htmlFor="attendees">{isZh ? '參加人數' : 'Attendees'}</label>
               <input
+                id="attendees"
                 type="number"
                 min="1"
                 max="500"
@@ -227,8 +233,9 @@ export const MilestoneAndCelebrationPlanner: React.FC<MilestoneAndCelebrationPla
               />
             </div>
             <div className="form-section">
-              <label>{isZh ? '預算（台幣）' : 'Budget (TWD)'}</label>
+              <label htmlFor="budget">{isZh ? '預算（台幣）' : 'Budget (TWD)'}</label>
               <input
+                id="budget"
                 type="number"
                 min="0"
                 step="100"
