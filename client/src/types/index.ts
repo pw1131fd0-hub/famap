@@ -1190,11 +1190,13 @@ export interface FamilyProfile {
   id: string;
   userId?: string;
   familyName?: string;
+  displayName?: string;
   childrenAges: number[];
   childrenCount: number;
   interests: string[];
   visitFrequency: 'weekly' | 'biweekly' | 'monthly' | 'occasional';
   budget: 'budget_conscious' | 'moderate' | 'flexible';
+  monthlyBudget?: number;
   specialNeeds?: string[];
   preferredLocations?: string[];
   groupSize: 'solo' | 'couple' | 'extended_family';

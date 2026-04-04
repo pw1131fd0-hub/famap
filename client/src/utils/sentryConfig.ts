@@ -22,7 +22,7 @@ interface ErrorEvent {
 class ErrorTracker {
   private breadcrumbs: BreadcrumbEntry[] = [];
   private maxBreadcrumbs = 50;
-  private isDev = import.meta.env.DEV;
+  private isDev = import.meta.env.DEV || import.meta.env.MODE === 'test';
   private errors: ErrorEvent[] = [];
   private maxErrors = 100;
   private userId: string | null = null;

@@ -10,7 +10,7 @@ export * from './performanceMonitoring';
 export * from './userBehaviorTracking';
 
 // Location and search utilities
-export { searchLocations, calculateDistance } from './searchUtils';
+export { searchLocations } from './searchUtils';
 export * from './locationUtils';
 export * from './locationComparison';
 
@@ -19,7 +19,8 @@ export * from './familyRecommender';
 export * from './venueInsights';
 export * from './locationInsights';
 export * from './weatherAwareRecommender';
-export * from './bestTimeVisitPredictor';
+export type { VisitTimeRecommendation, VisitPredictionInput } from './bestTimeVisitPredictor';
+export { predictBestTimes } from './bestTimeVisitPredictor';
 export * from './venueQualityAssessment';
 
 // Activity and event planning
@@ -44,16 +45,37 @@ export { cacheWarmingManager } from './cacheWarmingStrategy';
 export type { CacheWarmingConfig, CacheStrategy } from './cacheWarmingStrategy';
 
 // User preferences and context
-export * from './userPreferences';
+export type { UserPreference, UserPreferences } from './userPreferences';
+export {
+  initializePreferences,
+  loadPreferences,
+  savePreferences,
+  recordLocationView,
+  recordSearch,
+  recordLocationSave,
+  recordLocationUnsave,
+  setChildAgeRange,
+  calculateLocationPreferenceScore,
+  getPreferenceSummary,
+  clearPreferences,
+} from './userPreferences';
 export type { ChildProfile, FamilyProfile, FamilyType } from './familyContext';
 export * from './childDevelopmentStages';
 
 // Notifications and alerts
-export * from './smartNotificationEngine';
+export type { Notification, NotificationPreferences, ActivityData, LocationEvent } from './smartNotificationEngine';
+export { SmartNotificationEngine } from './smartNotificationEngine';
 export * from './alertSystem';
 
 // Community features
-export * from './familyCommunity';
+export {
+  calculateFamilyCompatibility,
+  findCompatibleFamilies,
+  scoreGroupOutingForFamily,
+  createAnonymousFamilyProfile,
+  filterCommunityByPreferences,
+  generateFamilyRecommendations,
+} from './familyCommunity';
 
 // Saved searches
 export * from './savedSearches';
@@ -71,12 +93,37 @@ export * from './milestonePlanner';
 export * from './emergencyVenueFinder';
 
 // Accessibility
-export * from './accessibilityAssistant';
+export type {
+  SpecialNeedsProfile,
+  SpecialCondition,
+  AccessibilityRequirement,
+  SensoryProfile,
+  MedicalProfile,
+  MobilityProfile,
+  VenueAccessibilityAssessment,
+  AccessibilityFeature,
+  SensoryEnvironmentAssessment,
+  MedicalFacility,
+  BestVisitTime,
+  AccessibilityWarning,
+  AccessibilityRecommendation,
+  AccessibilityOutingPlan,
+  ActivitySegment,
+  VisitOutcome,
+} from './accessibilityAssistant';
+export {
+  createSpecialNeedsProfile,
+  assessVenueAccessibility,
+  findBestAccessibleVenues,
+  createAccessibilityOutingPlan,
+  compareAccessibleVenues,
+  recordVisitOutcome,
+} from './accessibilityAssistant';
 export * from './accessibilityHelpers';
 
 // Error handling
 export * from './enhancedErrorHandling';
-export * from './errorTracking';
+export { default as errorTracker } from './errorTracking';
 export { default as sentryConfig, captureException, addBreadcrumb } from './sentryConfig';
 
 // Responsive design

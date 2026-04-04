@@ -360,7 +360,7 @@ export const MonthlyTravelPlanner: React.FC<MonthlyTravelPlannerProps> = ({ loca
                 <div className="week-visits">
                   {week.plannedVisits.map((visit, idx) => (
                     <div key={idx} className="visit-item">
-                      <div className="visit-location">{visit.location.name_en}</div>
+                      <div className="visit-location">{visit.location.name.en}</div>
                       <div className="visit-date">
                         {visit.date.toLocaleDateString()} @ {visit.startTime}
                       </div>

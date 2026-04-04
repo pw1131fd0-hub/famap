@@ -13,7 +13,7 @@ export interface PerformanceMetric {
 }
 
 class PerformanceMonitor {
-  private isDev = import.meta.env.DEV;
+  private isDev = import.meta.env.DEV || import.meta.env.MODE === 'test';
   private metrics: PerformanceMetric[] = [];
   private maxMetricsSize = 100;
   private timers: Map<string, number> = new Map();
