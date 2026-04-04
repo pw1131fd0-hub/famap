@@ -1,0 +1,263 @@
+.passport-container {
+  background: var(--bg-primary, #fff);
+  border-radius: 12px;
+  padding: 16px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.passport-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.passport-icon {
+  font-size: 28px;
+}
+
+.passport-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary, #333);
+  margin: 0;
+}
+
+.passport-subtitle {
+  font-size: 12px;
+  color: var(--text-secondary, #666);
+  margin: 2px 0 0;
+}
+
+/* Stats row */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.stat-card {
+  background: var(--bg-secondary, #f7f9fc);
+  border-radius: 8px;
+  padding: 10px 8px;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #A7C7E7;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 10px;
+  color: var(--text-secondary, #666);
+  margin-top: 2px;
+}
+
+/* Streak banner */
+.streak-banner {
+  background: linear-gradient(135deg, #FDFD96, #FFD700);
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.streak-icon {
+  font-size: 20px;
+}
+
+.streak-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+}
+
+/* Badges section */
+.badges-section {
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, #333);
+  margin: 0 0 10px;
+}
+
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 8px;
+}
+
+.badge-item {
+  background: var(--bg-secondary, #f7f9fc);
+  border-radius: 8px;
+  padding: 8px 4px;
+  text-align: center;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.badge-item.earned {
+  border-color: #A7C7E7;
+  background: #EBF5FF;
+}
+
+.badge-item.locked {
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+
+.badge-emoji {
+  font-size: 24px;
+  display: block;
+}
+
+.badge-name {
+  font-size: 10px;
+  color: var(--text-primary, #333);
+  margin-top: 4px;
+  display: block;
+  line-height: 1.2;
+}
+
+.badge-date {
+  font-size: 9px;
+  color: var(--text-secondary, #888);
+  margin-top: 2px;
+  display: block;
+}
+
+/* History section */
+.history-section {
+  margin-bottom: 12px;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.history-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px;
+  background: var(--bg-secondary, #f7f9fc);
+  border-radius: 8px;
+}
+
+.history-cat-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.history-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.history-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary, #333);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.history-date {
+  font-size: 11px;
+  color: var(--text-secondary, #888);
+  margin-top: 2px;
+}
+
+.history-notes {
+  font-size: 11px;
+  color: #666;
+  font-style: italic;
+  margin-top: 2px;
+}
+
+.no-checkins {
+  text-align: center;
+  padding: 24px 16px;
+  color: var(--text-secondary, #888);
+}
+
+.no-checkins-icon {
+  font-size: 40px;
+  margin-bottom: 8px;
+}
+
+.no-checkins p {
+  font-size: 13px;
+  margin: 0;
+}
+
+/* Check-in button */
+.checkin-btn {
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #A7C7E7;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background 0.2s;
+  font-family: inherit;
+}
+
+.checkin-btn:hover {
+  background: #8ab5d9;
+}
+
+.checkin-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.checkin-btn.checked-today {
+  background: #88c98b;
+}
+
+/* Badge earned toast */
+.badge-toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 24px;
+  font-size: 14px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateX(-50%) translateY(20px); opacity: 0; }
+  to { transform: translateX(-50%) translateY(0); opacity: 1; }
+}

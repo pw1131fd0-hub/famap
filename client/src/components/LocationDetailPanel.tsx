@@ -11,6 +11,7 @@ import { EventsList } from './EventsList';
 import { LocationInsightsPanel } from './LocationInsightsPanel';
 import BestTimeVisitRecommender from './BestTimeVisitRecommender';
 import { SmartPackingChecklist } from './SmartPackingChecklist';
+import { FamilyExplorationPassport } from './FamilyExplorationPassport';
 import { isLocationOpen } from '../utils/locationUtils';
 import { DAY_NAMES_ZH } from '../config/mapConfig';
 
@@ -152,6 +153,13 @@ export function LocationDetailPanel({
           locationId={location.id}
           venueCategory={location.category}
           language={language}
+        />
+
+        {/* Family Exploration Passport - Check-in & Badge System */}
+        <FamilyExplorationPassport
+          location={location}
+          compact
+          showHistory={false}
         />
 
         {/* Operating Hours & Facilities */}
