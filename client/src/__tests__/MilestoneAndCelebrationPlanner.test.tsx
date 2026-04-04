@@ -7,7 +7,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 import MilestoneAndCelebrationPlanner from '../components/MilestoneAndCelebrationPlanner';
-import { LanguageProvider } from '../components/LanguageContext';
+import { LanguageProvider } from '../i18n/LanguageContext';
 
 // Mock the CSS import
 vi.mock('../styles/MilestoneAndCelebrationPlanner.css', () => ({}));

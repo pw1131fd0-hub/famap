@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { MapPin, Clock, DollarSign, TrendingUp, Share2, Download, X } from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
 import {
@@ -27,26 +27,32 @@ export function MultiVenueOptimizer({
   const [expandedStop, setExpandedStop] = useState<number | null>(null);
   const [showShared, setShowShared] = useState(false);
 
+  // Use ref to avoid infinite loop from childAges default [] creating new reference each render
+  const childAgesRef = useRef(childAges);
+  childAgesRef.current = childAges;
+  const childAgesKey = JSON.stringify(childAges);
+
   useEffect(() => {
     if (selectedLocations.length > 0) {
       const trip = optimizeMultiVenueTrip(
         selectedLocations,
         new Date(),
         familySize,
-        childAges
+        childAgesRef.current
       );
-      // Calculate trip based on prop changes
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setOptimizedTrip(trip);
     }
-  }, [selectedLocations, familySize, childAges]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedLocations, familySize, childAgesKey]);
 
   const handleShare = () => {
     if (!optimizedTrip) return;
     const encoded = encodeTrip(optimizedTrip);
     const url = `${window.location.origin}?trip=${encoded}`;
     setShowShared(true);
-    navigator.clipboard.writeText(url);
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(url).catch(() => {});
+    }
   };
 
   const handleExportCalendar = () => {

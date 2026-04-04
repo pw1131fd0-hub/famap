@@ -191,8 +191,8 @@ export const EmergencyVenueFinder: React.FC<EmergencyVenueFinderProps> = ({
 
       <div className="evf-form">
         <div className="evf-form-group">
-          <label>{t.needType}</label>
-          <select value={emergencyType} onChange={(e) => setEmergencyType(e.target.value as EmergencyType)}>
+          <label htmlFor="evf-need-type">{t.needType}</label>
+          <select id="evf-need-type" value={emergencyType} onChange={(e) => setEmergencyType(e.target.value as EmergencyType)}>
             <option value="bathroom">{t.bathroom}</option>
             <option value="nursing_room">{t.nursing}</option>
             <option value="medical">{t.medical}</option>
@@ -205,8 +205,8 @@ export const EmergencyVenueFinder: React.FC<EmergencyVenueFinderProps> = ({
         </div>
 
         <div className="evf-form-group">
-          <label>{t.urgency}</label>
-          <select value={urgency} onChange={(e) => setUrgency(e.target.value as any)}>
+          <label htmlFor="evf-urgency">{t.urgency}</label>
+          <select id="evf-urgency" value={urgency} onChange={(e) => setUrgency(e.target.value as any)}>
             <option value="critical">{t.critical}</option>
             <option value="high">{t.high}</option>
             <option value="medium">{t.medium}</option>
@@ -215,11 +215,13 @@ export const EmergencyVenueFinder: React.FC<EmergencyVenueFinderProps> = ({
         </div>
 
         <div className="evf-form-group">
-          <label>
+          <label htmlFor="evf-time-available">
             {t.timeAvailable}: <span className="evf-value">{timeAvailable}</span>
           </label>
           <input
+            id="evf-time-available"
             type="range"
+            aria-label={t.timeAvailable}
             min="5"
             max="240"
             step="5"
@@ -229,11 +231,13 @@ export const EmergencyVenueFinder: React.FC<EmergencyVenueFinderProps> = ({
         </div>
 
         <div className="evf-form-group">
-          <label>
+          <label htmlFor="evf-family-size">
             {t.familySize}: <span className="evf-value">{familySize}</span>
           </label>
           <input
+            id="evf-family-size"
             type="range"
+            aria-label={t.familySize}
             min="1"
             max="10"
             value={familySize}

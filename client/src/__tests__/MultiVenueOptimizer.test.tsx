@@ -1,8 +1,22 @@
-// @vitest-environment happy-dom
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+// @vitest-environment jsdom
+import { describe, it, expect, beforeEach, vi, beforeAll } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MultiVenueOptimizer } from '../components/MultiVenueOptimizer';
 import type { Location } from '../types';
+
+// Mock browser APIs that may not be available in jsdom
+beforeAll(() => {
+  Object.defineProperty(navigator, 'clipboard', {
+    value: {
+      writeText: vi.fn().mockResolvedValue(undefined),
+      readText: vi.fn().mockResolvedValue(''),
+    },
+    writable: true,
+    configurable: true,
+  });
+  global.URL.createObjectURL = vi.fn(() => 'mock-url');
+  global.URL.revokeObjectURL = vi.fn();
+});
 
 // Mock the useTranslation hook
 vi.mock('../i18n/useTranslation', () => ({
@@ -210,6 +224,10 @@ describe('MultiVenueOptimizer Component', () => {
     });
 
     it('should handle share button click', async () => {
+      // Mock clipboard before this test
+      const writeTextMock = vi.fn().mockResolvedValue(undefined);
+      vi.stubGlobal('navigator', { ...navigator, clipboard: { writeText: writeTextMock } });
+
       render(
         <MultiVenueOptimizer
           selectedLocations={mockLocations}

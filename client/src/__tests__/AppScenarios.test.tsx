@@ -100,8 +100,11 @@ describe('App Complex Scenarios', () => {
         coords: { latitude: 25.1, longitude: 121.7 }
       }))
     };
-    // @ts-expect-error mock geolocation
-    global.navigator.geolocation = mockGeolocation;
+    Object.defineProperty(global.navigator, 'geolocation', {
+      value: mockGeolocation,
+      writable: true,
+      configurable: true,
+    });
 
     render(
       <LanguageProvider>

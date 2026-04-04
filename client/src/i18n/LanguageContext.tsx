@@ -3,8 +3,8 @@ import type { Language } from '../types';
 import { translations } from './index';
 import { LanguageContext } from './context';
 
-export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('zh');
+export const LanguageProvider: React.FC<{ children: ReactNode; initialLanguage?: Language }> = ({ children, initialLanguage = 'zh' }) => {
+  const [language, setLanguage] = useState<Language>(initialLanguage);
 
   const t = translations[language];
 

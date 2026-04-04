@@ -179,11 +179,15 @@ describe('AlertCenter Component', () => {
       const mockClose = vi.fn();
       render(<AlertCenter isOpen={true} onClose={mockClose} />);
 
+      // Set up confirm mock before click
+      Object.defineProperty(window, 'confirm', {
+        value: vi.fn().mockReturnValue(true),
+        writable: true,
+        configurable: true,
+      });
+
       const clearBtn = screen.getByText(/Clear all/);
       fireEvent.click(clearBtn);
-
-      // Confirm dialog
-      vi.spyOn(window, 'confirm').mockReturnValueOnce(true);
 
       await waitFor(() => {
         const alerts = alertSystem.loadAlerts();
