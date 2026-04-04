@@ -23,6 +23,7 @@ import type { CityKey } from './config/mapConfig';
 import performanceMonitor from './utils/performanceMonitoring';
 import { initializeSentry, addBreadcrumb, captureException } from './utils/sentryConfig';
 import './styles/SmartTipsPanel.css';
+import './styles/PhotoGallery.css';
 
 // Initialize error tracking and monitoring
 initializeSentry();
@@ -74,6 +75,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     'basic': true, // Always show basic info
+    'photos': true, // Show photo gallery by default
     'facilities': true,
     'operating': true,
     'transit': false,

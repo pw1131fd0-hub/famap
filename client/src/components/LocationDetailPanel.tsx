@@ -12,6 +12,8 @@ import { LocationInsightsPanel } from './LocationInsightsPanel';
 import BestTimeVisitRecommender from './BestTimeVisitRecommender';
 import { SmartPackingChecklist } from './SmartPackingChecklist';
 import { FamilyExplorationPassport } from './FamilyExplorationPassport';
+import { PhotoGallery } from './PhotoGallery';
+import { generateDemoPhotos } from '../utils/photoGallery';
 import { isLocationOpen } from '../utils/locationUtils';
 import { DAY_NAMES_ZH } from '../config/mapConfig';
 
@@ -133,6 +135,20 @@ export function LocationDetailPanel({
               </p>
             </div>
           )}
+        </CollapsibleSection>
+
+        {/* Photo Gallery */}
+        <CollapsibleSection
+          title={language === 'zh' ? '地點照片' : 'Photos'}
+          emoji="📷"
+          isExpanded={expandedSections['photos']}
+          onToggle={() => onToggleSection('photos')}
+        >
+          <PhotoGallery
+            photos={generateDemoPhotos(location.id)}
+            locationName={location.name[language]}
+            compact
+          />
         </CollapsibleSection>
 
         {/* Location Insights & Analytics */}
