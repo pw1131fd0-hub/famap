@@ -206,6 +206,402 @@ mock_locations: List[Dict[str, Any]] = [
             "nearbyPublicTransit": "信義線信義安和站 150m"
         }
     },
+    # === Kaohsiung Locations ===
+    {
+        "id": "kh1",
+        "name": {"zh": "駁二藝術特區", "en": "Pier-2 Art Center"},
+        "description": {
+            "zh": "高雄港邊的文創藝術園區，有露天廣場、互動裝置及兒童友善空間，週末常有表演活動。",
+            "en": "A creative arts district by Kaohsiung Harbor with open plazas, interactive installations, and family-friendly spaces. Weekend performances are common.",
+        },
+        "category": "attraction",
+        "coordinates": {"lat": 22.6269, "lng": 120.2850},
+        "address": {
+            "zh": "高雄市鹽埕區大勇路1號",
+            "en": "No. 1, Dayong Rd., Yancheng Dist., Kaohsiung",
+        },
+        "facilities": ["stroller_accessible", "public_toilet"],
+        "averageRating": 4.7,
+        "phoneNumber": "07-521-4899",
+        "publicTransit": {
+            "nearestMRT": {"line": "橘線", "station": "鹽埕埔站", "distance": 400},
+            "busLines": ["60", "99"]
+        },
+        "parking": {"available": True, "cost": "每小時30元", "hasValidation": False},
+        "toilet": {"available": True, "childrenFriendly": True, "hasChangingTable": True},
+        "hasWiFi": True,
+        "allergens": {"commonAllergens": []},
+        "crowding": {
+            "quietHours": "平日上午10-12點",
+            "peakHours": "週末下午2-5點",
+            "averageCrowding": "moderate"
+        },
+        "nursingAmenities": {
+            "hasDedicatedArea": True,
+            "hasChangingTable": True,
+            "hasPowerOutlet": True,
+            "hasRefrigerator": False,
+            "hasWarmWater": False
+        },
+        "weatherCoverage": {
+            "isIndoor": False,
+            "hasRoof": False,
+            "hasShade": True,
+            "weatherProtection": "大部分戶外，有倉庫改建室內展區"
+        },
+        "nearbyAmenities": {
+            "convenientStores": 3,
+            "nearbyRestrooms": True,
+            "nearbyRestaurants": True,
+            "nearbyPublicTransit": "橘線鹽埕埔站 400m"
+        }
+    },
+    {
+        "id": "kh2",
+        "name": {"zh": "高雄兒童美術館", "en": "Kaohsiung Museum of Fine Arts - Children's Area"},
+        "description": {
+            "zh": "設有大面積雕塑公園和兒童藝術教育設施，戶外腹地廣大，孩子可自由奔跑玩耍。",
+            "en": "Features a large sculpture park and children's art education facilities. Outdoor space is spacious for kids to run around.",
+        },
+        "category": "attraction",
+        "coordinates": {"lat": 22.6534, "lng": 120.2925},
+        "address": {
+            "zh": "高雄市鼓山區美術館路80號",
+            "en": "No. 80, Museum Rd., Gushan Dist., Kaohsiung",
+        },
+        "facilities": ["stroller_accessible", "nursing_room", "public_toilet"],
+        "averageRating": 4.6,
+        "phoneNumber": "07-555-0331",
+        "publicTransit": {
+            "nearestMRT": {"line": "紅線", "station": "美術館站", "distance": 800},
+            "busLines": ["205", "301"]
+        },
+        "parking": {"available": True, "cost": "免費", "hasValidation": False},
+        "toilet": {"available": True, "childrenFriendly": True, "hasChangingTable": True},
+        "hasWiFi": True,
+        "allergens": {"commonAllergens": []},
+        "crowding": {
+            "quietHours": "平日開館時間",
+            "peakHours": "週末上午10-12點",
+            "averageCrowding": "light"
+        },
+        "nursingAmenities": {
+            "hasDedicatedArea": True,
+            "hasChangingTable": True,
+            "hasPowerOutlet": True,
+            "hasRefrigerator": True,
+            "hasWarmWater": True
+        },
+        "weatherCoverage": {
+            "isIndoor": False,
+            "hasRoof": False,
+            "hasShade": True,
+            "weatherProtection": "公園有大樹遮蔭，室內展館可避雨"
+        },
+        "nearbyAmenities": {
+            "convenientStores": 2,
+            "nearbyRestrooms": True,
+            "nearbyRestaurants": True,
+            "nearbyPublicTransit": "紅線美術館站 800m"
+        }
+    },
+    {
+        "id": "kh3",
+        "name": {"zh": "高雄夢時代購物中心親子館", "en": "Dream Mall - Family Zone"},
+        "description": {
+            "zh": "高雄最大購物中心內的親子遊樂區，包含室內遊樂場、哺乳室和兒童餐廳。全天候室內，下雨天首選。",
+            "en": "Family zone inside Kaohsiung's largest shopping mall, featuring indoor playground, nursing rooms, and kids' dining. Fully indoors – great for rainy days.",
+        },
+        "category": "attraction",
+        "coordinates": {"lat": 22.6097, "lng": 120.3015},
+        "address": {
+            "zh": "高雄市前鎮區中華五路789號",
+            "en": "No. 789, Zhonghua 5th Rd., Qianzhen Dist., Kaohsiung",
+        },
+        "facilities": ["stroller_accessible", "nursing_room", "high_chair", "public_toilet"],
+        "averageRating": 4.5,
+        "phoneNumber": "07-973-3000",
+        "publicTransit": {
+            "nearestMRT": {"line": "紅線", "station": "凱旋站", "distance": 600},
+            "busLines": ["E02", "紅52"]
+        },
+        "parking": {"available": True, "cost": "前兩小時免費", "hasValidation": True},
+        "toilet": {"available": True, "childrenFriendly": True, "hasChangingTable": True},
+        "hasWiFi": True,
+        "allergens": {"commonAllergens": ["peanuts", "dairy"]},
+        "crowding": {
+            "quietHours": "平日上午開店時間",
+            "peakHours": "週末全天及國定假日",
+            "averageCrowding": "heavy"
+        },
+        "nursingAmenities": {
+            "hasDedicatedArea": True,
+            "hasChangingTable": True,
+            "hasPowerOutlet": True,
+            "hasRefrigerator": True,
+            "hasWarmWater": True
+        },
+        "weatherCoverage": {
+            "isIndoor": True,
+            "hasRoof": True,
+            "hasShade": True,
+            "weatherProtection": "全室內空調，下雨天最佳選擇"
+        },
+        "nearbyAmenities": {
+            "convenientStores": 20,
+            "nearbyRestrooms": True,
+            "nearbyRestaurants": True,
+            "nearbyPublicTransit": "紅線凱旋站 600m"
+        }
+    },
+    # === Taichung Locations ===
+    {
+        "id": "tc1",
+        "name": {"zh": "台中兒童藝術節遊戲廣場", "en": "Taichung Children's Art Festival Playground"},
+        "description": {
+            "zh": "台中市中央公園內的大型兒童遊戲場，設有特色攀爬架、滑梯和噴水廣場，是全台最具特色的兒童公共遊樂設施之一。",
+            "en": "A large children's playground inside Taichung Central Park featuring unique climbing structures, slides, and a splash pad. One of Taiwan's most distinctive public playgrounds.",
+        },
+        "category": "park",
+        "coordinates": {"lat": 24.1631, "lng": 120.6469},
+        "address": {
+            "zh": "台中市西屯區市政北七路100號",
+            "en": "No. 100, Shizheng N. 7th Rd., Xitun Dist., Taichung",
+        },
+        "facilities": ["stroller_accessible", "public_toilet", "nursing_room"],
+        "averageRating": 4.8,
+        "phoneNumber": "04-2228-9111",
+        "publicTransit": {
+            "nearestMRT": {"line": "台中捷運綠線", "station": "市政府站", "distance": 500},
+            "busLines": ["300", "302", "88"]
+        },
+        "parking": {"available": True, "cost": "每小時20元", "hasValidation": False},
+        "toilet": {"available": True, "childrenFriendly": True, "hasChangingTable": True},
+        "hasWiFi": True,
+        "allergens": {"commonAllergens": []},
+        "crowding": {
+            "quietHours": "平日上午9-11點",
+            "peakHours": "週末下午1-5點及暑假",
+            "averageCrowding": "moderate"
+        },
+        "nursingAmenities": {
+            "hasDedicatedArea": True,
+            "hasChangingTable": True,
+            "hasPowerOutlet": True,
+            "hasRefrigerator": False,
+            "hasWarmWater": True
+        },
+        "weatherCoverage": {
+            "isIndoor": False,
+            "hasRoof": False,
+            "hasShade": True,
+            "weatherProtection": "部分遊樂設施有遮陽棚"
+        },
+        "nearbyAmenities": {
+            "convenientStores": 5,
+            "nearbyRestrooms": True,
+            "nearbyRestaurants": True,
+            "nearbyPublicTransit": "捷運市政府站 500m"
+        }
+    },
+    {
+        "id": "tc2",
+        "name": {"zh": "台中國立自然科學博物館", "en": "National Museum of Natural Science"},
+        "description": {
+            "zh": "台灣最大科學博物館，擁有IMAX劇場、植物園和恐龍展廳，寓教於樂，適合各年齡層兒童。",
+            "en": "Taiwan's largest science museum with IMAX theater, botanical garden, and dinosaur exhibits. Educational and fun for all ages.",
+        },
+        "category": "attraction",
+        "coordinates": {"lat": 24.1521, "lng": 120.6644},
+        "address": {
+            "zh": "台中市北區館前路1號",
+            "en": "No. 1, Guanqian Rd., North Dist., Taichung",
+        },
+        "facilities": ["stroller_accessible", "nursing_room", "high_chair", "public_toilet"],
+        "averageRating": 4.7,
+        "phoneNumber": "04-2322-6940",
+        "publicTransit": {
+            "nearestMRT": None,
+            "busLines": ["51", "300", "干城-崇德幹線"]
+        },
+        "parking": {"available": True, "cost": "每小時30元", "hasValidation": False},
+        "toilet": {"available": True, "childrenFriendly": True, "hasChangingTable": True},
+        "hasWiFi": True,
+        "allergens": {"commonAllergens": []},
+        "crowding": {
+            "quietHours": "平日下午2-4點",
+            "peakHours": "週末、國定假日及寒暑假",
+            "averageCrowding": "moderate"
+        },
+        "nursingAmenities": {
+            "hasDedicatedArea": True,
+            "hasChangingTable": True,
+            "hasPowerOutlet": True,
+            "hasRefrigerator": True,
+            "hasWarmWater": True
+        },
+        "weatherCoverage": {
+            "isIndoor": True,
+            "hasRoof": True,
+            "hasShade": True,
+            "weatherProtection": "大部分展區室內空調，植物園有部分戶外區域"
+        },
+        "nearbyAmenities": {
+            "convenientStores": 4,
+            "nearbyRestrooms": True,
+            "nearbyRestaurants": True,
+            "nearbyPublicTransit": "多路公車可達"
+        }
+    },
+    # === Tainan Locations ===
+    {
+        "id": "tn1",
+        "name": {"zh": "台南市立圖書館新總館兒童閱覽區", "en": "Tainan Public Library - Children's Reading Area"},
+        "description": {
+            "zh": "台南最美圖書館，融合自然採光設計，兒童閱覽區寬敞明亮，提供大量繪本及親子共讀服務。",
+            "en": "Tainan's most beautiful library with natural lighting design. The children's reading area is spacious and bright, offering picture books and family reading services.",
+        },
+        "category": "attraction",
+        "coordinates": {"lat": 22.9768, "lng": 120.2115},
+        "address": {
+            "zh": "台南市南區文南路1號",
+            "en": "No. 1, Wennan Rd., South Dist., Tainan",
+        },
+        "facilities": ["stroller_accessible", "nursing_room", "public_toilet"],
+        "averageRating": 4.9,
+        "phoneNumber": "06-213-0500",
+        "publicTransit": {
+            "nearestMRT": None,
+            "busLines": ["公車6路", "紅幹線"]
+        },
+        "parking": {"available": True, "cost": "免費", "hasValidation": False},
+        "toilet": {"available": True, "childrenFriendly": True, "hasChangingTable": True},
+        "hasWiFi": True,
+        "allergens": {"commonAllergens": []},
+        "crowding": {
+            "quietHours": "平日早上10-12點",
+            "peakHours": "週末下午及寒暑假",
+            "averageCrowding": "moderate"
+        },
+        "nursingAmenities": {
+            "hasDedicatedArea": True,
+            "hasChangingTable": True,
+            "hasPowerOutlet": True,
+            "hasRefrigerator": True,
+            "hasWarmWater": True
+        },
+        "weatherCoverage": {
+            "isIndoor": True,
+            "hasRoof": True,
+            "hasShade": True,
+            "weatherProtection": "全室內空調"
+        },
+        "nearbyAmenities": {
+            "convenientStores": 3,
+            "nearbyRestrooms": True,
+            "nearbyRestaurants": True,
+            "nearbyPublicTransit": "公車可達"
+        }
+    },
+    {
+        "id": "tn2",
+        "name": {"zh": "台南孔廟文化廣場", "en": "Tainan Confucius Temple Cultural Plaza"},
+        "description": {
+            "zh": "台灣最古老的孔廟周邊廣場，環境典雅，有寬闊草地供兒童活動，是親子文化散策的好去處。",
+            "en": "Plaza surrounding Taiwan's oldest Confucius Temple. Elegant setting with spacious lawns for children. A great family cultural walk.",
+        },
+        "category": "park",
+        "coordinates": {"lat": 22.9971, "lng": 120.1993},
+        "address": {
+            "zh": "台南市中西區南門路2號",
+            "en": "No. 2, Nanmen Rd., West Central Dist., Tainan",
+        },
+        "facilities": ["stroller_accessible", "public_toilet"],
+        "averageRating": 4.6,
+        "phoneNumber": "06-221-4647",
+        "publicTransit": {
+            "nearestMRT": None,
+            "busLines": ["3路", "5路", "14路"]
+        },
+        "parking": {"available": True, "cost": "路邊停車計費", "hasValidation": False},
+        "toilet": {"available": True, "childrenFriendly": True, "hasChangingTable": False},
+        "hasWiFi": False,
+        "allergens": {"commonAllergens": []},
+        "crowding": {
+            "quietHours": "平日上午",
+            "peakHours": "週末及國定假日",
+            "averageCrowding": "light"
+        },
+        "nursingAmenities": {
+            "hasDedicatedArea": False,
+            "hasChangingTable": False,
+            "hasPowerOutlet": False,
+            "hasRefrigerator": False,
+            "hasWarmWater": False
+        },
+        "weatherCoverage": {
+            "isIndoor": False,
+            "hasRoof": False,
+            "hasShade": True,
+            "weatherProtection": "廟宇走廊可短暫避雨"
+        },
+        "nearbyAmenities": {
+            "convenientStores": 4,
+            "nearbyRestrooms": True,
+            "nearbyRestaurants": True,
+            "nearbyPublicTransit": "多路公車可達"
+        }
+    },
+    # === Hsinchu Location ===
+    {
+        "id": "hc1",
+        "name": {"zh": "新竹市立動物園", "en": "Hsinchu City Zoo"},
+        "description": {
+            "zh": "台灣最老的動物園，門票便宜，園區適中，適合帶孩子悠閒半日遊。有多種台灣特有種動物。",
+            "en": "Taiwan's oldest zoo with affordable admission. Moderate size, perfect for a leisurely half-day family visit. Features several Taiwan endemic species.",
+        },
+        "category": "attraction",
+        "coordinates": {"lat": 24.8043, "lng": 120.9750},
+        "address": {
+            "zh": "新竹市東區動物園路101號",
+            "en": "No. 101, Zoo Rd., East Dist., Hsinchu",
+        },
+        "facilities": ["stroller_accessible", "nursing_room", "public_toilet"],
+        "averageRating": 4.5,
+        "phoneNumber": "03-522-2194",
+        "publicTransit": {
+            "nearestMRT": None,
+            "busLines": ["1路", "9路"]
+        },
+        "parking": {"available": True, "cost": "每次50元", "hasValidation": False},
+        "toilet": {"available": True, "childrenFriendly": True, "hasChangingTable": True},
+        "hasWiFi": False,
+        "allergens": {"commonAllergens": []},
+        "crowding": {
+            "quietHours": "平日上午",
+            "peakHours": "週末及寒暑假",
+            "averageCrowding": "moderate"
+        },
+        "nursingAmenities": {
+            "hasDedicatedArea": True,
+            "hasChangingTable": True,
+            "hasPowerOutlet": True,
+            "hasRefrigerator": False,
+            "hasWarmWater": False
+        },
+        "weatherCoverage": {
+            "isIndoor": False,
+            "hasRoof": False,
+            "hasShade": True,
+            "weatherProtection": "部分展區有遮雨棚"
+        },
+        "nearbyAmenities": {
+            "convenientStores": 2,
+            "nearbyRestrooms": True,
+            "nearbyRestaurants": True,
+            "nearbyPublicTransit": "公車可達"
+        }
+    },
 ]
 
 mock_reviews: List[Dict[str, Any]] = [

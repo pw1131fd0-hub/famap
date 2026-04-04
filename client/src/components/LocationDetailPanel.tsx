@@ -10,6 +10,7 @@ import { CrowdednessReportList } from './CrowdednessReportList';
 import { EventsList } from './EventsList';
 import { LocationInsightsPanel } from './LocationInsightsPanel';
 import BestTimeVisitRecommender from './BestTimeVisitRecommender';
+import { SmartPackingChecklist } from './SmartPackingChecklist';
 import { isLocationOpen } from '../utils/locationUtils';
 import { DAY_NAMES_ZH } from '../config/mapConfig';
 
@@ -144,6 +145,13 @@ export function LocationDetailPanel({
         <BestTimeVisitRecommender
           location={location}
           familyProfile={undefined}
+        />
+
+        {/* Smart Packing Checklist */}
+        <SmartPackingChecklist
+          locationId={location.id}
+          venueCategory={location.category}
+          language={language}
         />
 
         {/* Operating Hours & Facilities */}
