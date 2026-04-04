@@ -64,7 +64,7 @@ export const GoNowSuggestions: React.FC<GoNowSuggestionsProps> = ({
           throw new Error('Failed to fetch Go Now suggestions');
         }
         const data = await response.json();
-        setSuggestions(data);
+        setSuggestions(Array.isArray(data) ? data : []);
         setError(null);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
