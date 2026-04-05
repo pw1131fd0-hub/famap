@@ -99,7 +99,7 @@ export function calculateBudgetAlignment(
  */
 export function assessGroupVenueSuitability(
   families: FamilyProfile[],
-  venue: Location
+  _venue: Location
 ): {
   suitabilityScore: number;
   commonNeeds: string[];
@@ -249,11 +249,11 @@ export function optimizeGroupForOuting(
   const maxSize = constraints?.maxGroupSize || 4;
   const selectedFamilies = families.slice(0, maxSize);
 
-  const { optimalSize: recommendedSize, reasoning: sizeReasoning } =
+  const { optimalSize: recommendedSize } =
     recommendOptimalGroupSize(selectedFamilies);
   const optimalSize = Math.min(recommendedSize, maxSize);
 
-  const bestVenues = availableVenues
+  const _bestVenues = availableVenues
     .map((venue) => ({
       venue,
       score: assessGroupVenueSuitability(selectedFamilies, venue),
