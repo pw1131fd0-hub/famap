@@ -208,3 +208,50 @@ async def create_event(location_id: str, event: EventCreate):
             loc["events"].append(new_event)
             return new_event
     raise HTTPException(status_code=404, detail="Location not found")
+
+
+@router.get("/{location_id}/stats", tags=["locations"])
+async def get_location_stats(location_id: str):
+    """
+    Aggregate statistics for a location: review breakdown, event count,
+    facility list, and category info useful for venue cards and dashboards.
+    """
+    loc = next((l for l in mock_locations if l["id"] == location_id), None)
+    if loc is None:
+        raise HTTPException(status_code=404, detail="Location not found")
+
+    from data.seed_data import mock_reviews
+    reviews = [r for r in mock_reviews if r["locationId"] == location_id]
+
+    # Rating distribution
+    rating_dist: dict[int, int] = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
+    for r in reviews:
+        rating = int(r.get("rating", 0))
+        if rating in rating_dist:
+            rating_dist[rating] += 1
+
+    avg_rating = (
+        sum(r.get("rating", 0) for r in reviews) / len(reviews) if reviews else 0.0
+    )
+
+    events = loc.get("events", [])
+    now_iso = datetime.now(UTC).isoformat()
+    upcoming_events = [e for e in events if e.get("startDate", "") >= now_iso]
+
+    return {
+        "locationId": location_id,
+        "name": loc.get("name"),
+        "category": loc.get("category"),
+        "averageRating": round(avg_rating, 2),
+        "reviewCount": len(reviews),
+        "ratingDistribution": rating_dist,
+        "facilityCount": len(loc.get("facilities", [])),
+        "facilities": loc.get("facilities", []),
+        "upcomingEventCount": len(upcoming_events),
+        "totalEventCount": len(events),
+        "hasNursingRoom": "nursing_room" in loc.get("facilities", []),
+        "isStrollerAccessible": "stroller_accessible" in loc.get("facilities", []),
+        "hasHighChair": "high_chair" in loc.get("facilities", []),
+        "isIndoor": loc.get("weatherCoverage", {}).get("isIndoor", False),
+        "isFree": loc.get("pricing", {}).get("isFree", True) if loc.get("pricing") else True,
+    }
