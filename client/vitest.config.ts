@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-    environment: 'node', // Default: node for utilities. Use '// @vitest-env jsdom' in .test.tsx files that need DOM
+    environment: 'jsdom', // Use jsdom for React component testing
     setupFiles: ['./src/test/setup.ts'],
     env: {
       NODE_ENV: 'test'

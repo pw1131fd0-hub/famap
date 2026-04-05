@@ -147,7 +147,7 @@ describe('LocationList', () => {
       </LanguageProvider>
     );
 
-    expect(screen.getByText(/找不到景點/)).toBeInTheDocument();
+    expect(screen.getByText(/此地區沒有地點/)).toBeInTheDocument();
   });
 
   it('filters locations by search query', () => {
@@ -192,7 +192,7 @@ describe('LocationList', () => {
 
     // Only locations with all facilities will be shown
     if (filtered.length === 0) {
-      expect(screen.getByText(/找不到景點/)).toBeInTheDocument();
+      expect(screen.getByText(/此地區沒有地點/)).toBeInTheDocument();
     }
   });
 
@@ -292,7 +292,7 @@ describe('LocationList', () => {
       </LanguageProvider>
     );
 
-    expect(screen.getByText(/目前沒有收藏/)).toBeInTheDocument();
+    expect(screen.getByText(/還沒有收藏/)).toBeInTheDocument();
   });
 
   it('displays free pricing badge', () => {
@@ -425,7 +425,7 @@ describe('LocationList', () => {
       </LanguageProvider>
     );
 
-    expect(screen.getByText(/找不到景點/)).toBeInTheDocument();
+    expect(screen.getByText(/找不到.*非存在地點/)).toBeInTheDocument();
   });
 
   it('combines search and facilities filter', () => {
@@ -739,7 +739,7 @@ describe('LocationList', () => {
           />
         </LanguageProvider>
       );
-      expect(screen.getByText(/找不到景點/)).toBeInTheDocument();
+      expect(screen.getByText(/此地區沒有地點/)).toBeInTheDocument();
     });
 
     it('shows multiple visited badges for multiple checked-in venues', () => {
