@@ -4,6 +4,7 @@ import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, 
 import { locationApi, reviewApi, favoriteApi, crowdinessApi, eventsApi } from './services/api';
 import { useDebounce } from './hooks/useDebounce';
 import { useVoiceSearch } from './hooks/useVoiceSearch';
+import { useKeyboardShortcuts, createNavigationShortcuts } from './hooks/useKeyboardShortcuts';
 import { recordView, getRecentlyViewedIds } from './utils/recentlyViewed';
 import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO, CrowdednessReport, CrowdednessReportCreateDTO, Event } from './types';
 import { useTranslation } from './i18n/useTranslation';
@@ -331,6 +332,17 @@ function App() {
       setTimeout(() => setErrorMessage(null), 3000);
     }
   };
+
+  // Keyboard shortcuts for power users
+  useKeyboardShortcuts({
+    enabled: true,
+    shortcuts: createNavigationShortcuts({
+      onFindMe: handleFindMe,
+      onToggleSidebar: () => setSidebarOpen(prev => !prev),
+      onToggleDarkMode: toggleDarkMode,
+      onLanguageSwitch: () => setLanguage(prev => prev === 'zh' ? 'en' : 'zh'),
+    }),
+  });
 
   const handleCityChange = (cityKey: CityKey) => {
     const city = CITIES.find(c => c.key === cityKey);

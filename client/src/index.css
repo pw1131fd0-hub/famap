@@ -1704,6 +1704,18 @@ html.dark-mode .offline-banner {
   color: #fff;
 }
 
+/* Dark mode fallback values (ensure no undefined CSS variables) */
+:root {
+  --bg-dark: #1A1F2E;
+  --bg-dark-secondary: #2D3748;
+  --border-dark: #4B5563;
+  --text-light: #E5E7EB;
+  --accent-coral: #FF6F61;
+  --primary-blue: #A7C7E7;
+  --secondary-yellow: #FDFD96;
+  --bg-secondary: #F3F4F6;
+}
+
 /* ===== Loading Skeletons ===== */
 @keyframes skeleton-loading {
   0% {

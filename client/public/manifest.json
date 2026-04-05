@@ -17,5 +17,19 @@
     }
   ],
   "categories": ["travel", "navigation", "lifestyle"],
-  "screenshots": []
+  "screenshots": [
+    {
+      "src": "/screenshot-map.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Map view with family-friendly locations"
+    },
+    {
+      "src": "/screenshot-detail.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Location details with facilities info"
+    }
+  ],
+  "prefer_related_applications": false
 }
