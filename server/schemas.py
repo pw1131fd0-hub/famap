@@ -167,6 +167,7 @@ class LocationQualityScore(BaseModel):
     recencyScore: float  # Higher for recently updated locations
     verificationScore: float  # Based on data verification
     communityTrustScore: float  # Based on review count and consistency
+    credibilityScore: float  # Alias for communityTrustScore for API compatibility
     recommendationReason: str  # Why this location is recommended
     trustLevel: str  # "high", "medium", "low"
     reviewCount: int

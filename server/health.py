@@ -50,6 +50,6 @@ def get_health_status(location_count: int, errors: int = 0) -> HealthStatus:
     """
     if errors > 10:
         return HealthStatus.UNHEALTHY
-    if location_count == 0 or errors > 5:
+    if location_count == 0 or errors >= 5:
         return HealthStatus.DEGRADED
     return HealthStatus.HEALTHY

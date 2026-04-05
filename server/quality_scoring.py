@@ -81,6 +81,7 @@ class QualityScorer:
             "recencyScore": round(recency_score, 1),
             "verificationScore": round(verification_score, 1),
             "communityTrustScore": round(community_trust_score, 1),
+            "credibilityScore": round(community_trust_score, 1),
             "trustLevel": trust_level,
             "reviewCount": review_count,
             "isVerified": is_verified,

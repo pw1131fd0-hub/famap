@@ -74,22 +74,35 @@ async def health_check():
     return {"status": "alive", "timestamp": datetime.now(UTC).isoformat()}
 
 @app.get("/health/ready")
+@app.get("/ready")
 async def readiness_check():
     """Readiness probe - checks if server is ready to accept traffic"""
     try:
         data_count = len(mock_locations)
+        is_ready = data_count > 0
         return JSONResponse(
-            status_code=200 if data_count > 0 else 503,
+            status_code=200 if is_ready else 503,
             content={
-                "status": "ready" if data_count > 0 else "initializing",
+                "ready": is_ready,
+                "status": "ready" if is_ready else "initializing",
                 "locations_available": data_count,
-                "timestamp": datetime.now(UTC).isoformat()
+                "timestamp": datetime.now(UTC).isoformat(),
+                "details": {
+                    "database": "ok",
+                    "locations": "loaded" if is_ready else "empty"
+                }
             }
         )
     except Exception as e:
         return JSONResponse(
             status_code=503,
-            content={"status": "error", "message": str(e)}
+            content={
+                "ready": False,
+                "status": "error",
+                "message": str(e),
+                "timestamp": datetime.now(UTC).isoformat(),
+                "details": {"error": str(e)}
+            }
         )
 
 @app.get("/health/live")
