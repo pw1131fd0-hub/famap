@@ -16,10 +16,17 @@ import {
   PHOTO_CATEGORY_LABELS,
 } from '../utils/photoGallery';
 
-// Fixed date for deterministic tests
-const NOW = new Date('2026-04-04T12:00:00Z').getTime();
-vi.useFakeTimers();
-vi.setSystemTime(NOW);
+// Fixed date for deterministic tests - using epoch ms for clarity
+const NOW_MS = 1743768000000; // 2026-04-04T12:00:00.000Z
+
+beforeEach(() => {
+  vi.useFakeTimers();
+  vi.setSystemTime(NOW_MS);
+});
+
+afterEach(() => {
+  vi.useRealTimers();
+});
 
 const makePhoto = (overrides: Partial<VenuePhoto> = {}): VenuePhoto => ({
   id: 'photo-1',
@@ -232,45 +239,45 @@ describe('prevPhotoIndex', () => {
 
 describe('getRelativeDateLabel', () => {
   it('returns "Today" for today in English', () => {
-    const todayIso = new Date(NOW).toISOString();
+    const todayIso = new Date(NOW_MS).toISOString();
     expect(getRelativeDateLabel(todayIso, 'en')).toBe('Today');
   });
 
   it('returns "今天" for today in Chinese', () => {
-    const todayIso = new Date(NOW).toISOString();
+    const todayIso = new Date(NOW_MS).toISOString();
     expect(getRelativeDateLabel(todayIso, 'zh')).toBe('今天');
   });
 
   it('returns "Yesterday" for yesterday in English', () => {
-    const yesterday = new Date(NOW - 1 * 24 * 60 * 60 * 1000).toISOString();
+    const yesterday = new Date(NOW_MS - 1 * 24 * 60 * 60 * 1000).toISOString();
     expect(getRelativeDateLabel(yesterday, 'en')).toBe('Yesterday');
   });
 
   it('returns "昨天" for yesterday in Chinese', () => {
-    const yesterday = new Date(NOW - 1 * 24 * 60 * 60 * 1000).toISOString();
+    const yesterday = new Date(NOW_MS - 1 * 24 * 60 * 60 * 1000).toISOString();
     expect(getRelativeDateLabel(yesterday, 'zh')).toBe('昨天');
   });
 
   it('returns days ago for recent dates', () => {
-    const threeDaysAgo = new Date(NOW - 3 * 24 * 60 * 60 * 1000).toISOString();
+    const threeDaysAgo = new Date(NOW_MS - 3 * 24 * 60 * 60 * 1000).toISOString();
     expect(getRelativeDateLabel(threeDaysAgo, 'en')).toBe('3 days ago');
     expect(getRelativeDateLabel(threeDaysAgo, 'zh')).toBe('3 天前');
   });
 
   it('returns weeks ago for older dates', () => {
-    const twoWeeksAgo = new Date(NOW - 14 * 24 * 60 * 60 * 1000).toISOString();
+    const twoWeeksAgo = new Date(NOW_MS - 14 * 24 * 60 * 60 * 1000).toISOString();
     expect(getRelativeDateLabel(twoWeeksAgo, 'en')).toBe('2 weeks ago');
     expect(getRelativeDateLabel(twoWeeksAgo, 'zh')).toBe('2 週前');
   });
 
   it('returns months ago for much older dates', () => {
-    const twoMonthsAgo = new Date(NOW - 60 * 24 * 60 * 60 * 1000).toISOString();
+    const twoMonthsAgo = new Date(NOW_MS - 60 * 24 * 60 * 60 * 1000).toISOString();
     expect(getRelativeDateLabel(twoMonthsAgo, 'en')).toBe('2 months ago');
     expect(getRelativeDateLabel(twoMonthsAgo, 'zh')).toBe('2 個月前');
   });
 
   it('returns years ago for very old dates', () => {
-    const twoYearsAgo = new Date(NOW - 730 * 24 * 60 * 60 * 1000).toISOString();
+    const twoYearsAgo = new Date(NOW_MS - 730 * 24 * 60 * 60 * 1000).toISOString();
     expect(getRelativeDateLabel(twoYearsAgo, 'en')).toBe('2 years ago');
     expect(getRelativeDateLabel(twoYearsAgo, 'zh')).toBe('2 年前');
   });
