@@ -11,7 +11,6 @@ import {
   optimizeGroupForOuting,
   generateGroupRecommendations,
   type FamilyGroupMatch,
-  type GroupOptimizationResult,
 } from '../utils/familyGroupOptimizer';
 import '../styles/FamilyGroupOptimizer.css';
 

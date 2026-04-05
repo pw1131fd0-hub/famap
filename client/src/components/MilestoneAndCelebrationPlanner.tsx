@@ -11,14 +11,9 @@ import {
   type MilestoneType,
   type VenueStyle,
   analyzeMilestoneContext,
-  generateCelebrationTips,
-  createBudgetBreakdown,
-  generateCelebrationTimeline,
   createCelebrationPlan,
   getStyleRecommendations,
   checkMilestoneUrgency,
-  calculateCelebrationSuccessScore,
-  calculateCelebrationScore
 } from '../utils/milestonePlanner';
 import { useLanguage } from '../i18n/useLanguage';
 import '../styles/MilestoneAndCelebrationPlanner.css';
@@ -58,7 +53,7 @@ export const MilestoneAndCelebrationPlanner: React.FC<MilestoneAndCelebrationPla
   const { language } = useLanguage();
   const isZh = language === 'zh';
 
-  const [milestone, setMilestone] = useState<FamilyMilestone>({
+  const [milestone, setMilestone] = useState<FamilyMilestone>(() => ({
     type: 'birthday',
     date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
     title: '',
@@ -68,7 +63,7 @@ export const MilestoneAndCelebrationPlanner: React.FC<MilestoneAndCelebrationPla
     budget: 3000,
     preferredStyle: ['casual'],
     specialRequirements: []
-  });
+  }));
 
   const [showResults, setShowResults] = useState(false);
   const [selectedVenue, setSelectedVenue] = useState<CelebrationVenueSuggestion | null>(null);

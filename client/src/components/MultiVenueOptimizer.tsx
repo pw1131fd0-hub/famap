@@ -29,8 +29,11 @@ export function MultiVenueOptimizer({
 
   // Use ref to avoid infinite loop from childAges default [] creating new reference each render
   const childAgesRef = useRef(childAges);
-  childAgesRef.current = childAges;
-  const childAgesKey = JSON.stringify(childAges);
+
+  useEffect(() => {
+    // Update ref after render to avoid "Cannot update ref during render" error
+    childAgesRef.current = childAges;
+  }, [childAges]);
 
   useEffect(() => {
     if (selectedLocations.length > 0) {
@@ -42,8 +45,7 @@ export function MultiVenueOptimizer({
       );
       setOptimizedTrip(trip);
     }
-     
-  }, [selectedLocations, familySize, childAgesKey]);
+  }, [selectedLocations, familySize]);
 
   const handleShare = () => {
     if (!optimizedTrip) return;

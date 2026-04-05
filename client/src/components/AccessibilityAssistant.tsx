@@ -3,13 +3,10 @@ import {
   createSpecialNeedsProfile,
   assessVenueAccessibility,
   findBestAccessibleVenues,
-  createAccessibilityOutingPlan,
   compareAccessibleVenues,
   type SpecialNeedsProfile,
-  type VenueAccessibilityAssessment,
   type SpecialCondition,
   type AccessibilityRequirement,
-  type SensoryProfile,
 } from '../utils/accessibilityAssistant';
 import '../styles/AccessibilityAssistant.css';
 
