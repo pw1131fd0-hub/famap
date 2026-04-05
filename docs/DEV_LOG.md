@@ -1374,3 +1374,23 @@ Agent: Claude Code
 Permissions: a
 
 ---
+
+## [2026-04-05 12:40:20] [done] 100%
+
+Iteration 3 improvements (boss feedback: 想辦法更好): (1) Added 'Open Now' filter toggle — shows only currently open venues based on operating hours; (2) Re-enabled child age filter (was commented out 'for mobile stability') — parents can select child age 0-12 years, venues outside the age range are filtered; (3) Added debounced search (300ms) using new useDebounce hook — prevents API thrash on rapid typing; (4) Added 'Recently Viewed' pill-row in sidebar showing up to 5 last-viewed venues with persistent localStorage; (5) Connected handleSelectLocation across all location-click paths to consistently record recently viewed; (6) Added 13 new tests: 7 for useDebounce hook (timer reset, rapid updates, undefined values) and 6 for LocationList age/openNow filters. Total: 2549 client tests, 232 server tests — all pass.
+
+> 
+╔══════════════════════════════════════════════════════════════════╗
+║                    Ralph Wiggum Loop                            ║
+║         Iterative AI Development with Claude Code                 ║
+╚══════════════════════════════════════════════════════════════════╝
+
+Task: .gemini_instructions.tmp
+Preview: 專案名稱：親子地圖。 【現有 PRD（作為核心參考）】 # FamMap (親子地圖) - Product Requirement Document (PRD)...
+Completion promise: COMPLETE
+Min iterations: 1
+Max iterations: 3
+Agent: Claude Code
+Permissions: a
+
+---
