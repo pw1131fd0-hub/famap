@@ -31,7 +31,6 @@ import './styles/SmartTipsPanel.css';
 import './styles/PhotoGallery.css';
 import './styles/EmptyState.css';
 import { SkipLinks } from './components/SkipLinks';
-import { Sidebar } from './components/Sidebar';
 import { useKeyboardShortcuts, createNavigationShortcuts } from './hooks/useKeyboardShortcuts';
 
 // Initialize error tracking and monitoring

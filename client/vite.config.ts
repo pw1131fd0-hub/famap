@@ -3,7 +3,9 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [
-    react(),
+    react({
+      jsxRuntime: 'classic',
+    }),
     // PWA disabled - causing mobile crash issues
     // VitePWA({
     //   registerType: 'autoUpdate',

@@ -31,8 +31,8 @@ import './styles/SmartTipsPanel.css';
 import './styles/PhotoGallery.css';
 import './styles/EmptyState.css';
 import { SkipLinks } from './components/SkipLinks';
-import { Sidebar } from './components/Sidebar';
 import { useKeyboardShortcuts, createNavigationShortcuts } from './hooks/useKeyboardShortcuts';
+import { Sidebar } from './components/Sidebar';
 
 // Initialize error tracking and monitoring
 initializeSentry();
@@ -650,7 +650,7 @@ function App() {
                 <div style={{ padding: '12px', overflowY: 'auto', flex: 1 }}>
                   <FamilyExplorationPassport showHistory={true} />
                 </div>
-              ) : !showFavorites ? (
+              ) : !showFavorites && (
                 <>
                   <div style={{ padding: '12px', borderBottom: '1px solid var(--border)', display: 'flex', gap: '8px', alignItems: 'center' }}>
                     <input
@@ -895,7 +895,7 @@ function App() {
                     ))}
                   </nav>
                 </>
-              ) : null}
+              )}
 
               {loading && <div className="loading-overlay">{t.common.loading}</div>}
 
