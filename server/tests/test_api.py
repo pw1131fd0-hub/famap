@@ -120,7 +120,7 @@ def test_get_reviews():
 def test_create_review():
     token = get_auth_token()
     review = {
-        "locationId": "test_loc_1",
+        "locationId": "1",
         "rating": 5,
         "comment": "Great place!"
     }

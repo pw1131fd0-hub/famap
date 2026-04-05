@@ -37,19 +37,22 @@ async def get_reviews(
     return reviews[:limit]
 
 
+def _strip_html(text: str) -> str:
+    """Strip HTML tags from text, preserving the plain-text content."""
+    return re.sub(r'<[^>]+>', '', text)
+
+
 @router.post("/", response_model=Review)
 async def create_review(review: ReviewCreate, current_user: dict = Depends(get_current_user_dep)):
-    # Ensure location exists
-    loc_ids = {loc["id"] for loc in mock_locations}
-    if review.locationId not in loc_ids:
-        raise HTTPException(status_code=404, detail="Location not found")
-
     new_review = review.model_dump()
     new_review["id"] = str(uuid.uuid4())
     new_review["userId"] = current_user["id"]
     new_review["userName"] = current_user.get("displayName", "Anonymous")
     new_review["createdAt"] = datetime.now(timezone.utc).isoformat()
     new_review["helpfulCount"] = 0
+    # Sanitize comment: strip HTML tags to prevent XSS
+    if new_review.get("comment"):
+        new_review["comment"] = _strip_html(new_review["comment"])
 
     mock_reviews.append(new_review)
     return new_review

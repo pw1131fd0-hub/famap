@@ -233,7 +233,7 @@ class TestInputBoundaries:
         login = client.post("/api/auth/login", json={"email": "test@example.com", "password": "password123"})
         token = login.json().get("access_token", "")
         review = {
-            "locationId": "loc1",
+            "locationId": "1",
             "rating": 4,
             "comment": "<script>alert('xss')</script>Nice place"
         }
