@@ -254,3 +254,97 @@ def test_create_event_not_found():
     }
     response = client.post("/api/locations/invalid_loc_999/events", json=new_event)
     assert response.status_code == 404
+
+
+# --- Featured & Search endpoint tests ---
+
+def test_get_featured_locations():
+    """GET /api/locations/featured returns a list of top-rated venues"""
+    response = client.get("/api/locations/featured")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+    assert len(data) <= 10  # default limit
+    if len(data) > 1:
+        ratings = [float(loc.get("averageRating", 0) or 0) for loc in data]
+        assert ratings == sorted(ratings, reverse=True)
+
+
+def test_get_featured_locations_custom_limit():
+    """GET /api/locations/featured respects the limit param"""
+    response = client.get("/api/locations/featured?limit=3")
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) <= 3
+
+
+def test_search_locations_by_name():
+    """GET /api/locations/search finds locations by zh name"""
+    response = client.get("/api/locations/search?q=大安")
+    assert response.status_code == 200
+    data = response.json()
+    assert "items" in data
+    assert "total" in data
+    assert "page" in data
+    assert "has_next" in data
+    assert data["total"] >= 1
+    assert any("大安" in loc["name"]["zh"] for loc in data["items"])
+
+
+def test_search_locations_english_query():
+    """GET /api/locations/search finds locations by English name"""
+    response = client.get("/api/locations/search?q=Park")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data["items"], list)
+
+
+def test_search_locations_no_results():
+    """GET /api/locations/search returns empty results for unmatched query"""
+    response = client.get("/api/locations/search?q=xyzNonExistent999")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["total"] == 0
+    assert data["items"] == []
+
+
+def test_search_locations_pagination():
+    """GET /api/locations/search supports pagination metadata"""
+    r1 = client.get("/api/locations/search?q=公園&page=1&page_size=5")
+    assert r1.status_code == 200
+    d1 = r1.json()
+    assert d1["page"] == 1
+    assert d1["page_size"] == 5
+    assert not d1["has_prev"]
+
+
+def test_search_locations_with_category_filter():
+    """GET /api/locations/search supports category filter"""
+    response = client.get("/api/locations/search?q=公&category=park")
+    assert response.status_code == 200
+    data = response.json()
+    for item in data["items"]:
+        assert item["category"] == "park"
+
+
+def test_get_locations_with_text_filter():
+    """GET /api/locations/ supports optional q text filter"""
+    response = client.get("/api/locations/?lat=25.0330&lng=121.5654&radius=50000&q=大安")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+    for loc in data:
+        name_zh = loc.get("name", {}).get("zh", "")
+        name_en = loc.get("name", {}).get("en", "")
+        desc_zh = loc.get("description", {}).get("zh", "")
+        desc_en = loc.get("description", {}).get("en", "")
+        addr_zh = loc.get("address", {}).get("zh", "")
+        addr_en = loc.get("address", {}).get("en", "")
+        text = (name_zh + name_en + desc_zh + desc_en + addr_zh + addr_en).lower()
+        assert "大安" in text
+
+
+def test_search_empty_query_rejected():
+    """GET /api/locations/search rejects empty/whitespace-only query"""
+    response = client.get("/api/locations/search?q=")
+    assert response.status_code == 422

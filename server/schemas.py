@@ -181,6 +181,15 @@ class Event(EventBase):
 
     model_config = ConfigDict(from_attributes=True)
 
+class PaginatedLocationsResponse(BaseModel):
+    """Paginated response for location searches with metadata"""
+    items: List[Location]
+    total: int
+    page: int
+    page_size: int
+    has_next: bool
+    has_prev: bool
+
 class LocationQualityScore(BaseModel):
     """
     Comprehensive quality score for a location based on multiple factors.

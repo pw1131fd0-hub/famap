@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { Location, SearchParams, Review, ReviewCreateDTO, LocationCreateDTO, Favorite, CrowdednessReport, CrowdednessReportCreateDTO, Event, EventCreateDTO } from '../types';
+import type { Location, SearchParams, Review, ReviewCreateDTO, LocationCreateDTO, Favorite, CrowdednessReport, CrowdednessReportCreateDTO, Event, EventCreateDTO, PaginatedLocationsResponse } from '../types';
 import { saveLocations, loadLocations, clearOfflineDb } from './offlineDb';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
@@ -163,6 +163,23 @@ export const locationApi = {
     requestCache.clear();
     const response = await api.post<Location>('/locations/', location);
     return response.data;
+  },
+  getFeatured: async (limit = 10): Promise<Location[]> => {
+    const cacheKey = getCacheKey('GET', '/locations/featured', { limit });
+    return cachedGet(cacheKey, () =>
+      retryableGet<Location[]>('/locations/featured', { params: { limit } })
+    );
+  },
+  search: async (params: {
+    q: string;
+    category?: string;
+    page?: number;
+    page_size?: number;
+  }): Promise<PaginatedLocationsResponse> => {
+    const cacheKey = getCacheKey('GET', '/locations/search', params);
+    return cachedGet(cacheKey, () =>
+      retryableGet<PaginatedLocationsResponse>('/locations/search', { params })
+    );
   },
 };
 
