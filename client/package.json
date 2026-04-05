@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc --noEmit && vite build",
     "lint": "eslint .",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
@@ -41,7 +41,7 @@
     "jsdom": "^29.0.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.56.1",
-    "vite": "file:vite-8.0.3.tgz",
+    "vite": "^8.0.3",
     "vitest": "^4.1.2"
   },
   "overrides": {
