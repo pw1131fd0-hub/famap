@@ -19,6 +19,8 @@ interface LocationListProps {
   searchQuery?: string;
   openNowOnly?: boolean;
   childAge?: number;
+  visitedIds?: Set<string>;
+  hideVisited?: boolean;
 }
 
 // Memoized location card component to prevent unnecessary re-renders
@@ -26,6 +28,7 @@ const LocationCard = memo(({
   location,
   position,
   isFavorite,
+  isVisited,
   language,
   t,
   onLocationClick,
@@ -34,6 +37,7 @@ const LocationCard = memo(({
   location: Location;
   position: [number, number];
   isFavorite: boolean;
+  isVisited: boolean;
   language: string;
   t: TranslationKeys;
   onLocationClick: (location: Location) => void;
@@ -111,6 +115,11 @@ const LocationCard = memo(({
             ⚠️ {language === 'zh' ? '有必要設施' : 'Key Facilities'}
           </div>
         )}
+        {isVisited && (
+          <div style={{ fontSize: '0.75em', background: '#e8f5e9', color: '#2e7d32', padding: '2px 6px', borderRadius: '3px', fontWeight: '600' }}>
+            ✅ {language === 'zh' ? '已去過' : 'Visited'}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -131,6 +140,8 @@ function LocationListImpl({
   searchQuery = '',
   openNowOnly = false,
   childAge,
+  visitedIds = new Set(),
+  hideVisited = false,
 }: LocationListProps) {
   const { language, t } = useTranslation();
 
@@ -172,6 +183,11 @@ function LocationListImpl({
       });
     }
 
+    // Hide already-visited venues for discovery mode
+    if (hideVisited && visitedIds.size > 0) {
+      filtered = filtered.filter(loc => !visitedIds.has(loc.id));
+    }
+
     // Sort based on selected option
     const sorted = [...filtered].sort((a, b) => {
       switch (sortBy) {
@@ -190,7 +206,7 @@ function LocationListImpl({
     });
 
     return sorted;
-  }, [showFavorites, favorites, locations, searchQuery, facilitiesFilter, sortBy, position, language]);
+  }, [showFavorites, favorites, locations, searchQuery, facilitiesFilter, sortBy, position, language, openNowOnly, childAge, hideVisited, visitedIds]);
 
   if (loading && filteredLocations.length === 0) {
     return <LocationListSkeleton />;
@@ -212,6 +228,7 @@ function LocationListImpl({
           location={loc}
           position={position}
           isFavorite={favorites.some(f => f.id === loc.id)}
+          isVisited={visitedIds.has(loc.id)}
           language={language}
           t={t}
           onLocationClick={onLocationClick}
@@ -236,6 +253,8 @@ export const LocationList = memo(LocationListImpl, (prevProps, nextProps) => {
     prevProps.sortBy === nextProps.sortBy &&
     prevProps.searchQuery === nextProps.searchQuery &&
     prevProps.openNowOnly === nextProps.openNowOnly &&
-    prevProps.childAge === nextProps.childAge
+    prevProps.childAge === nextProps.childAge &&
+    prevProps.visitedIds === nextProps.visitedIds &&
+    prevProps.hideVisited === nextProps.hideVisited
   );
 });

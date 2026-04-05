@@ -633,4 +633,134 @@ describe('LocationList', () => {
       expect(screen.queryByText('幼兒公園')).not.toBeInTheDocument();
     });
   });
+
+  describe('visitedIds and hideVisited', () => {
+    it('shows "已去過" visited badge for checked-in venues', () => {
+      const visitedSet = new Set(['1']);
+      render(
+        <LanguageProvider>
+          <LocationList
+            locations={mockLocations}
+            position={mockPosition}
+            favorites={[]}
+            showFavorites={false}
+            loading={false}
+            onLocationClick={mockOnLocationClick}
+            onFavoriteToggle={mockOnFavoriteToggle}
+            visitedIds={visitedSet}
+          />
+        </LanguageProvider>
+      );
+      // Location 1 (台北公園) should show visited badge
+      expect(screen.getByText(/已去過/)).toBeInTheDocument();
+      // Other locations should not
+      expect(screen.getAllByText(/已去過/).length).toBe(1);
+    });
+
+    it('does not show visited badge when visitedIds is empty', () => {
+      render(
+        <LanguageProvider>
+          <LocationList
+            locations={mockLocations}
+            position={mockPosition}
+            favorites={[]}
+            showFavorites={false}
+            loading={false}
+            onLocationClick={mockOnLocationClick}
+            onFavoriteToggle={mockOnFavoriteToggle}
+            visitedIds={new Set()}
+          />
+        </LanguageProvider>
+      );
+      expect(screen.queryByText(/已去過/)).not.toBeInTheDocument();
+    });
+
+    it('hides visited venues when hideVisited is true', () => {
+      const visitedSet = new Set(['1', '2']); // Park and Hospital visited
+      render(
+        <LanguageProvider>
+          <LocationList
+            locations={mockLocations}
+            position={mockPosition}
+            favorites={[]}
+            showFavorites={false}
+            loading={false}
+            onLocationClick={mockOnLocationClick}
+            onFavoriteToggle={mockOnFavoriteToggle}
+            visitedIds={visitedSet}
+            hideVisited={true}
+          />
+        </LanguageProvider>
+      );
+      // Visited venues should be hidden
+      expect(screen.queryByText('台北公園')).not.toBeInTheDocument();
+      expect(screen.queryByText('兒童醫院')).not.toBeInTheDocument();
+      // Unvisited venue should still show
+      expect(screen.getByText('親子餐廳')).toBeInTheDocument();
+    });
+
+    it('shows all venues when hideVisited is false regardless of visitedIds', () => {
+      const visitedSet = new Set(['1', '2']);
+      render(
+        <LanguageProvider>
+          <LocationList
+            locations={mockLocations}
+            position={mockPosition}
+            favorites={[]}
+            showFavorites={false}
+            loading={false}
+            onLocationClick={mockOnLocationClick}
+            onFavoriteToggle={mockOnFavoriteToggle}
+            visitedIds={visitedSet}
+            hideVisited={false}
+          />
+        </LanguageProvider>
+      );
+      // All venues visible regardless of visitedIds when hideVisited is false
+      expect(screen.getByText('台北公園')).toBeInTheDocument();
+      expect(screen.getByText('兒童醫院')).toBeInTheDocument();
+      expect(screen.getByText('親子餐廳')).toBeInTheDocument();
+    });
+
+    it('shows empty state when all locations are visited and hideVisited is true', () => {
+      const allVisited = new Set(['1', '2', '3']);
+      render(
+        <LanguageProvider>
+          <LocationList
+            locations={mockLocations}
+            position={mockPosition}
+            favorites={[]}
+            showFavorites={false}
+            loading={false}
+            onLocationClick={mockOnLocationClick}
+            onFavoriteToggle={mockOnFavoriteToggle}
+            visitedIds={allVisited}
+            hideVisited={true}
+          />
+        </LanguageProvider>
+      );
+      expect(screen.getByText(/找不到景點/)).toBeInTheDocument();
+    });
+
+    it('shows multiple visited badges for multiple checked-in venues', () => {
+      const visitedSet = new Set(['1', '3']); // Park and Restaurant visited
+      render(
+        <LanguageProvider>
+          <LocationList
+            locations={mockLocations}
+            position={mockPosition}
+            favorites={[]}
+            showFavorites={false}
+            loading={false}
+            onLocationClick={mockOnLocationClick}
+            onFavoriteToggle={mockOnFavoriteToggle}
+            visitedIds={visitedSet}
+            hideVisited={false}
+          />
+        </LanguageProvider>
+      );
+      // Two visited badges should appear
+      expect(screen.getAllByText(/已去過/).length).toBe(2);
+    });
+  });
 });

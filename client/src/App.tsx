@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import 'leaflet/dist/leaflet.css';
-import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Menu, ChevronDown, Filter, Heart, List, Moon, Sun, Route, Bell, Users, Wallet, Clock, Mic, MicOff } from 'lucide-react';
+import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Menu, ChevronDown, Filter, Heart, List, Moon, Sun, Route, Bell, Users, Wallet, Clock, Mic, MicOff, BookOpen } from 'lucide-react';
 import { locationApi, reviewApi, favoriteApi, crowdinessApi, eventsApi } from './services/api';
 import { useDebounce } from './hooks/useDebounce';
 import { useVoiceSearch } from './hooks/useVoiceSearch';
@@ -21,6 +21,8 @@ import { SmartTipsPanel } from './components/SmartTipsPanel';
 import OutingPlanner from './components/OutingPlanner';
 import { FamilyTripPlanner } from './components/FamilyTripPlanner';
 import { TripCostCalculator } from './components/TripCostCalculator';
+import { FamilyExplorationPassport } from './components/FamilyExplorationPassport';
+import { loadCheckIns } from './utils/checkInSystem';
 import { CITIES, initializeLeafletIcons } from './config/mapConfig';
 import type { CityKey } from './config/mapConfig';
 import performanceMonitor from './utils/performanceMonitoring';
@@ -108,6 +110,17 @@ function App() {
     return !hasVisited && !dismissedTips;
   });
   const [showCostCalculator, setShowCostCalculator] = useState(false);
+  const [showPassport, setShowPassport] = useState(false);
+  const [hideVisited, setHideVisited] = useState(false);
+  const [visitedIds, setVisitedIds] = useState<Set<string>>(() => {
+    const checkIns = loadCheckIns();
+    return new Set(checkIns.map(c => c.locationId));
+  });
+
+  const refreshVisitedIds = useCallback(() => {
+    const checkIns = loadCheckIns();
+    setVisitedIds(new Set(checkIns.map(c => c.locationId)));
+  }, []);
 
   const toggleSection = (section: string) => {
     setExpandedSections(prev => ({
@@ -143,6 +156,17 @@ function App() {
       localStorage.setItem('fammap_visited', 'true');
     }
   }, []);
+
+  // Sync visitedIds when localStorage check-ins change (e.g., after check-in in detail panel)
+  useEffect(() => {
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'fammap_checkins') {
+        refreshVisitedIds();
+      }
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, [refreshVisitedIds]);
 
   // Track online/offline status
   useEffect(() => {
@@ -551,7 +575,7 @@ function App() {
               location={selectedLocation}
               isFavorite={favorites.some(f => f.id === selectedLocation.id)}
               onFavoriteToggle={(e) => toggleFavorite(e, selectedLocation.id)}
-              onClose={() => setSelectedLocation(null)}
+              onClose={() => { setSelectedLocation(null); refreshVisitedIds(); }}
               reviews={reviews}
               onReviewSubmit={handlePostReview}
               crowdednessReports={crowdednessReports}
@@ -566,18 +590,27 @@ function App() {
             <>
               <div className="sidebar-tabs">
                 <button
-                  className={`tab-button ${!showFavorites ? 'active' : ''}`}
-                  onClick={() => setShowFavorites(false)}
+                  className={`tab-button ${!showFavorites && !showPassport ? 'active' : ''}`}
+                  onClick={() => { setShowFavorites(false); setShowPassport(false); }}
                 >
                   <List size={18} />
                   <span>{t.common.all}</span>
                 </button>
                 <button
                   className={`tab-button ${showFavorites ? 'active' : ''}`}
-                  onClick={() => setShowFavorites(true)}
+                  onClick={() => { setShowFavorites(true); setShowPassport(false); }}
                 >
                   <Heart size={18} />
                   <span>{t.common.favorites}</span>
+                </button>
+                <button
+                  className={`tab-button ${showPassport ? 'active' : ''}`}
+                  onClick={() => { setShowPassport(true); setShowFavorites(false); refreshVisitedIds(); }}
+                  title={language === 'zh' ? '探索護照' : 'Exploration Passport'}
+                  aria-pressed={showPassport}
+                >
+                  <BookOpen size={18} />
+                  <span>{language === 'zh' ? '護照' : 'Passport'}</span>
                 </button>
                 <button
                   className="tab-button sidebar-close-btn"
@@ -588,7 +621,11 @@ function App() {
                 </button>
               </div>
 
-              {!showFavorites ? (
+              {showPassport ? (
+                <div style={{ padding: '12px', overflowY: 'auto', flex: 1 }}>
+                  <FamilyExplorationPassport showHistory={true} />
+                </div>
+              ) : !showFavorites ? (
                 <>
                   <div style={{ padding: '12px', borderBottom: '1px solid var(--border)', display: 'flex', gap: '8px', alignItems: 'center' }}>
                     <input
@@ -806,6 +843,16 @@ function App() {
                     >
                       🍽️ {t.facilities.kids_menu}
                     </button>
+                    {visitedIds.size > 0 && (
+                      <button
+                        className={`quick-facility-btn ${hideVisited ? 'active' : ''}`}
+                        onClick={() => setHideVisited(v => !v)}
+                        title={language === 'zh' ? '隱藏已去過的地方' : 'Hide visited venues'}
+                        aria-pressed={hideVisited}
+                      >
+                        🗺️ {language === 'zh' ? '探索新地方' : 'Discover New'}
+                      </button>
+                    )}
                   </div>
                   <nav className="category-list" aria-label="Location categories">
                     {categories.map((cat) => (
@@ -910,6 +957,8 @@ function App() {
                 searchQuery={debouncedSearchQuery}
                 openNowOnly={openNowOnly}
                 childAge={childAge}
+                visitedIds={visitedIds}
+                hideVisited={hideVisited}
                 onLocationClick={(loc) => {
                   setPosition([loc.coordinates.lat, loc.coordinates.lng]);
                   handleSelectLocation(loc);
