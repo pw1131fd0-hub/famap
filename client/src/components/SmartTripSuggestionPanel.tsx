@@ -4,7 +4,7 @@
  * Integrates with weather, history, and family preferences
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   generateSmartTripSuggestions,
   type TripSuggestion,
@@ -88,11 +88,7 @@ export function SmartTripSuggestionPanel({
 
   const t = translations[language as keyof typeof translations] || translations.en;
 
-  useEffect(() => {
-    generateSuggestions();
-  }, [familyProfile, activityHistory, availableVenues]);
-
-  const generateSuggestions = () => {
+  const generateSuggestions = useCallback(() => {
     try {
       setLoading(true);
       setError(null);
@@ -122,7 +118,11 @@ export function SmartTripSuggestionPanel({
     } finally {
       setLoading(false);
     }
-  };
+  }, [familyProfile, activityHistory, availableVenues, currentWeather]);
+
+  useEffect(() => {
+    generateSuggestions();
+  }, [generateSuggestions]);
 
   const handleTripSelect = (trip: TripSuggestion) => {
     setSelectedSuggestion(trip);

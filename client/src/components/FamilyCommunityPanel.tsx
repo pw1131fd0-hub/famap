@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import type { FamilyProfile, FamilyCompatibilityScore, FamilyDiscoveryRecommendation } from '../types';
+import { useState, useMemo } from 'react';
+import type { FamilyProfile } from '../types';
 import { findCompatibleFamilies, generateFamilyRecommendations } from '../utils/familyCommunity';
 import '../styles/components/FamilyCommunityPanel.css';
 
@@ -16,23 +16,19 @@ export function FamilyCommunityPanel({
   onFamilySelect,
   isDarkMode = false,
 }: FamilyCommunityPanelProps) {
-  const [compatibleFamilies, setCompatibleFamilies] = useState<FamilyCompatibilityScore[]>([]);
-  const [recommendations, setRecommendations] = useState<FamilyDiscoveryRecommendation[]>([]);
   const [activeTab, setActiveTab] = useState<'compatible' | 'recommendations'>('compatible');
   const [expandedFamilyId, setExpandedFamilyId] = useState<string | null>(null);
 
-  useEffect(() => {
-    // Calculate compatible families
-    const compatible = findCompatibleFamilies(currentFamily, allFamilies, 60);
-    setCompatibleFamilies(compatible);
+  // Use useMemo for derived state - no need for useState + useEffect
+  const compatibleFamilies = useMemo(
+    () => findCompatibleFamilies(currentFamily, allFamilies, 60),
+    [currentFamily, allFamilies]
+  );
 
-    // Generate recommendations
-    const recs = generateFamilyRecommendations(
-      currentFamily,
-      allFamilies
-    );
-    setRecommendations(recs);
-  }, [currentFamily, allFamilies]);
+  const recommendations = useMemo(
+    () => generateFamilyRecommendations(currentFamily, allFamilies),
+    [currentFamily, allFamilies]
+  );
 
   const getScoreColor = (score: number): string => {
     if (score >= 80) return 'score-excellent';

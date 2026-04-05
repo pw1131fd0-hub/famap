@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { CheckSquare, Square, Package, RotateCcw, ChevronDown } from 'lucide-react';
 import type { Category } from '../types';
 import {
@@ -7,7 +7,6 @@ import {
   loadChecklistState,
   clearChecklistState,
   type ChecklistItem,
-  type PackingList,
 } from '../utils/packingChecklist';
 
 interface SmartPackingChecklistProps {
@@ -87,16 +86,21 @@ export function SmartPackingChecklist({
   childAgeMonths,
   language,
 }: SmartPackingChecklistProps) {
-  const [list, setList] = useState<PackingList>({ essential: [], recommended: [], optional: [] });
   const [checkedIds, setCheckedIds] = useState<Set<string>>(new Set());
   const [isExpanded, setIsExpanded] = useState(false);
 
+  // Use useMemo for derived state - computed from props
+  const list = useMemo(
+    () => generatePackingList(venueCategory, childAgeMonths),
+    [venueCategory, childAgeMonths]
+  );
+
+  // Load saved state on locationId change
   useEffect(() => {
-    const generated = generatePackingList(venueCategory, childAgeMonths);
-    setList(generated);
     const saved = loadChecklistState(locationId);
     setCheckedIds(saved);
-  }, [locationId, venueCategory, childAgeMonths]);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+  }, [locationId]);
 
   const handleToggle = useCallback((id: string) => {
     setCheckedIds(prev => {

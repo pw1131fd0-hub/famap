@@ -69,9 +69,15 @@ export function FamilyExplorationPassport({
     }
   }, [location]);
 
+  // Load initial data and react to location changes
   useEffect(() => {
-    reload();
-  }, [reload]);
+    const loaded = loadCheckIns();
+    setCheckIns(loaded);
+    if (location) {
+      setCheckedInToday(hasCheckedInToday(location.id));
+    }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+  }, [location]);
 
   const handleCheckIn = useCallback(() => {
     if (!location) return;
