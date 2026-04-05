@@ -29,10 +29,6 @@ import performanceMonitor from './utils/performanceMonitoring';
 import { initializeSentry, addBreadcrumb, captureException } from './utils/sentryConfig';
 import './styles/SmartTipsPanel.css';
 import './styles/PhotoGallery.css';
-import './styles/EmptyState.css';
-import { SkipLinks } from './components/SkipLinks';
-import { Sidebar } from './components/Sidebar';
-import { useKeyboardShortcuts, createNavigationShortcuts } from './hooks/useKeyboardShortcuts';
 
 // Initialize error tracking and monitoring
 initializeSentry();
@@ -42,15 +38,6 @@ initializeLeafletIcons();
 
 // Add initial breadcrumb for app startup
 addBreadcrumb('FamMap application initialized', 'info', 'app-lifecycle');
-
-// Keyboard shortcut references
-const navigationShortcuts = createNavigationShortcuts({
-  onFindMe: undefined, // Will be called directly in the component
-  onSearch: undefined,
-  onToggleSidebar: undefined,
-  onToggleDarkMode: undefined,
-  onLanguageSwitch: undefined,
-});
 
 // Hardcoded user ID for demonstration (MVP)
 const MOCK_USER_ID = 'u1';
@@ -459,20 +446,8 @@ function App() {
     { key: 'other', icon: MapPin, label: t.categories.other },
   ], [t]);
 
-  // Register keyboard shortcuts
-  useKeyboardShortcuts({
-    shortcuts: [
-      { key: 'm', action: () => setSidebarOpen(prev => !prev), description: 'Toggle sidebar' },
-      { key: 'f', action: handleFindMe, description: 'Find my location' },
-      { key: '/', action: () => document.querySelector<HTMLInputElement>('.search-input')?.focus(), description: 'Focus search' },
-      { key: 'd', ctrl: true, action: toggleDarkMode, description: 'Toggle dark mode' },
-      { key: 'Escape', action: () => { setSelectedLocation(null); setSidebarOpen(false); }, description: 'Close panels' },
-    ],
-  });
-
   return (
     <div className="app-layout">
-      <SkipLinks />
       {!isOnline && (
         <div className="offline-banner" role="alert" aria-live="polite">
           <span className="offline-icon">📵</span>
@@ -569,9 +544,9 @@ function App() {
         </div>
       )}
 
-      <div className="main-content" id="main-content">
+      <div className="main-content">
         {sidebarOpen && <div className="sidebar-backdrop" onClick={() => setSidebarOpen(false)} />}
-        <aside className={`sidebar${sidebarOpen ? ' sidebar-open' : ''}`} id="sidebar">
+        <aside className={`sidebar${sidebarOpen ? ' sidebar-open' : ''}`}>
           {showRoutePlanner ? (
             <RoutePlanner
               locations={locations}
@@ -650,7 +625,7 @@ function App() {
                 <div style={{ padding: '12px', overflowY: 'auto', flex: 1 }}>
                   <FamilyExplorationPassport showHistory={true} />
                 </div>
-              ) : !showFavorites ? (
+              ) : showFavorites ? null : (
                 <>
                   <div style={{ padding: '12px', borderBottom: '1px solid var(--border)', display: 'flex', gap: '8px', alignItems: 'center' }}>
                     <input
@@ -660,7 +635,6 @@ function App() {
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="search-input"
                       aria-label="Search locations"
-                      id="search"
                       style={{ flex: 1 }}
                     />
                     {isSupported && (
@@ -895,7 +869,7 @@ function App() {
                     ))}
                   </nav>
                 </>
-              ) : null}
+              )}
 
               {loading && <div className="loading-overlay">{t.common.loading}</div>}
 
@@ -1000,8 +974,7 @@ function App() {
           )}
         </aside>
 
-        <div id="map" style={{ flex: 1, position: 'relative' }}>
-          <MapPanel
+        <MapPanel
           position={position}
           zoom={zoom}
           locations={locations}

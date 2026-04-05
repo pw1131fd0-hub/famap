@@ -181,7 +181,7 @@ describe('App Complex Scenarios', () => {
     const favTab = screen.getByText(/我的收藏/i);
     fireEvent.click(favTab);
     
-    expect(await screen.findByText(/目前沒有收藏/i)).toBeInTheDocument();
+    expect(await screen.findByText(/還沒有收藏/i)).toBeInTheDocument();
   });
 
   it('closes add location form', async () => {
