@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import 'leaflet/dist/leaflet.css';
-import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Menu, ChevronDown, Filter, Heart, List, Moon, Sun, Route, Bell, Users, Wallet } from 'lucide-react';
+import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Menu, ChevronDown, Filter, Heart, List, Moon, Sun, Route, Bell, Users, Wallet, Clock } from 'lucide-react';
 import { locationApi, reviewApi, favoriteApi, crowdinessApi, eventsApi } from './services/api';
+import { useDebounce } from './hooks/useDebounce';
+import { recordView, getRecentlyViewedIds } from './utils/recentlyViewed';
 import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO, CrowdednessReport, CrowdednessReportCreateDTO, Event } from './types';
 import { useTranslation } from './i18n/useTranslation';
 import { LocationForm } from './components/LocationForm';
@@ -70,7 +72,14 @@ function App() {
   //   return saved ? parseInt(saved, 10) : undefined;
   // });
   
-const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance');
+  const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance');
+  const [openNowOnly, setOpenNowOnly] = useState(false);
+  const [childAge, setChildAge] = useState<number | undefined>(() => {
+    const saved = localStorage.getItem('childAge');
+    return saved ? parseInt(saved, 10) : undefined;
+  });
+  const [recentlyViewedIds, setRecentlyViewedIds] = useState<string[]>(() => getRecentlyViewedIds(5));
+  const debouncedSearchQuery = useDebounce(searchQuery, 300);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
@@ -254,6 +263,12 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
     fetchEvents();
   }, [selectedLocation]);
 
+  const handleSelectLocation = useCallback((loc: Location) => {
+    setSelectedLocation(loc);
+    recordView(loc.id);
+    setRecentlyViewedIds(getRecentlyViewedIds(5));
+  }, []);
+
   const handleFindMe = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -379,23 +394,14 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
     );
   };
 
-  // Age filtering disabled for mobile stability
-  // const isAgeAppropriate = (location: Location): boolean => {
-  //   if (childAge === undefined || !location.ageRange) return true;
-  //   const { minAge, maxAge } = location.ageRange;
-  //   if (minAge !== undefined && childAge < minAge) return false;
-  //   if (maxAge !== undefined && childAge > maxAge) return false;
-  //   return true;
-  // };
-
-  // const handleChildAgeChange = (age: number | undefined) => {
-  //   setChildAge(age);
-  //   if (age !== undefined) {
-  //     localStorage.setItem('childAge', age.toString());
-  //   } else {
-  //     localStorage.removeItem('childAge');
-  //   }
-  // };
+  const handleChildAgeChange = (age: number | undefined) => {
+    setChildAge(age);
+    if (age !== undefined) {
+      localStorage.setItem('childAge', age.toString());
+    } else {
+      localStorage.removeItem('childAge');
+    }
+  };
 
   const categories = useMemo(() => [
     { key: undefined, icon: MapPin, label: t.common.all },
@@ -593,7 +599,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                       onSelectLocation={(locationId) => {
                         const loc = locations.find(l => l.id === locationId);
                         if (loc) {
-                          setSelectedLocation(loc);
+                          handleSelectLocation(loc);
                         }
                       }}
                       onNavigate={(lat, lng) => {
@@ -613,6 +619,32 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                       <Filter size={18} />
                       <span>{t.common.filterStroller}</span>
                     </button>
+                    <button
+                      className={`tool-button ${openNowOnly ? 'active' : ''}`}
+                      onClick={() => setOpenNowOnly(!openNowOnly)}
+                      title={t.common.filterOpenNow}
+                      aria-pressed={openNowOnly}
+                      aria-label={openNowOnly ? `Disable ${t.common.filterOpenNow}` : `Enable ${t.common.filterOpenNow}`}
+                    >
+                      <Clock size={18} />
+                      <span>{t.common.filterOpenNow}</span>
+                    </button>
+                    <div className="tool-button age-filter-wrapper" style={{ gap: '6px', padding: '6px 10px' }}>
+                      <Users size={16} />
+                      <select
+                        value={childAge ?? ''}
+                        onChange={(e) => handleChildAgeChange(e.target.value === '' ? undefined : parseInt(e.target.value, 10))}
+                        className="age-filter-select"
+                        aria-label={t.common.ageFilter}
+                        title={t.common.ageFilter}
+                        style={{ background: 'transparent', border: 'none', fontSize: '0.85em', cursor: 'pointer', color: 'inherit', outline: 'none' }}
+                      >
+                        <option value="">{t.common.ageFilterAll}</option>
+                        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(age => (
+                          <option key={age} value={age}>{age}{language === 'zh' ? '歲' : 'y'}</option>
+                        ))}
+                      </select>
+                    </div>
                     <button
                       className="tool-button"
                       onClick={() => setShowRoutePlanner(!showRoutePlanner)}
@@ -773,15 +805,41 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
 
               {loading && <div className="loading-overlay">{t.common.loading}</div>}
 
-              {!showFavorites && !searchQuery && (
+              {!showFavorites && !debouncedSearchQuery && (
                 <>
+                  {recentlyViewedIds.length > 0 && (
+                    <div style={{ padding: '8px 12px', borderBottom: '1px solid var(--border)' }}>
+                      <p style={{ fontSize: '0.75em', color: 'var(--text-secondary)', fontWeight: 600, marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                        🕐 {t.common.recentlyViewed}
+                      </p>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                        {recentlyViewedIds.map(id => {
+                          const loc = locations.find(l => l.id === id);
+                          if (!loc) return null;
+                          return (
+                            <button
+                              key={id}
+                              onClick={() => {
+                                setPosition([loc.coordinates.lat, loc.coordinates.lng]);
+                                handleSelectLocation(loc);
+                                setSidebarOpen(false);
+                              }}
+                              style={{ fontSize: '0.78em', background: 'var(--bg-secondary)', border: '1px solid var(--border)', borderRadius: '12px', padding: '3px 8px', cursor: 'pointer', color: 'var(--text)', whiteSpace: 'nowrap', maxWidth: '160px', overflow: 'hidden', textOverflow: 'ellipsis' }}
+                            >
+                              {loc.name[language as 'zh' | 'en']}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
                   <PersonalizedRecommendations
                     locations={locations}
                     onSelectLocation={(locationId) => {
                       const loc = locations.find(l => l.id === locationId);
                       if (loc) {
                         setPosition([loc.coordinates.lat, loc.coordinates.lng]);
-                        setSelectedLocation(loc);
+                        handleSelectLocation(loc);
                         setSidebarOpen(false);
                       }
                     }}
@@ -794,7 +852,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                       locations={locations}
                       onSelectLocation={(location) => {
                         setPosition([location.coordinates.lat, location.coordinates.lng]);
-                        setSelectedLocation(location);
+                        handleSelectLocation(location);
                         setSidebarOpen(false);
                       }}
                       userLocation={{ lat: position[0], lng: position[1] }}
@@ -828,10 +886,12 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
                 loading={loading}
                 facilitiesFilter={facilitiesFilter}
                 sortBy={sortBy}
-                searchQuery={searchQuery}
+                searchQuery={debouncedSearchQuery}
+                openNowOnly={openNowOnly}
+                childAge={childAge}
                 onLocationClick={(loc) => {
                   setPosition([loc.coordinates.lat, loc.coordinates.lng]);
-                  setSelectedLocation(loc);
+                  handleSelectLocation(loc);
                   setSidebarOpen(false);
                 }}
                 onFavoriteToggle={toggleFavorite}
@@ -849,7 +909,7 @@ const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'name'>('distance')
           zoom={zoom}
           locations={locations}
           loading={loading}
-          onLocationClick={setSelectedLocation}
+          onLocationClick={handleSelectLocation}
           onSearchAreaClick={fetchLocations}
           onPositionChange={setPosition}
         />

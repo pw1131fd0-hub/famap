@@ -475,4 +475,162 @@ describe('LocationList', () => {
     const items = screen.getAllByText(/親子友善|Family-Friendly/);
     expect(items.length).toBeGreaterThan(0);
   });
+
+  describe('openNowOnly filter', () => {
+    it('shows all locations when openNowOnly is false', () => {
+      render(
+        <LanguageProvider>
+          <LocationList
+            locations={mockLocations}
+            position={mockPosition}
+            favorites={[]}
+            showFavorites={false}
+            loading={false}
+            onLocationClick={mockOnLocationClick}
+            onFavoriteToggle={mockOnFavoriteToggle}
+            openNowOnly={false}
+          />
+        </LanguageProvider>
+      );
+      // Renders in Chinese by default - check zh names
+      expect(screen.getByText('台北公園')).toBeInTheDocument();
+      expect(screen.getByText('兒童醫院')).toBeInTheDocument();
+    });
+
+    it('accepts openNowOnly prop without crashing', () => {
+      expect(() =>
+        render(
+          <LanguageProvider>
+            <LocationList
+              locations={mockLocations}
+              position={mockPosition}
+              favorites={[]}
+              showFavorites={false}
+              loading={false}
+              onLocationClick={mockOnLocationClick}
+              onFavoriteToggle={mockOnFavoriteToggle}
+              openNowOnly={true}
+            />
+          </LanguageProvider>
+        )
+      ).not.toThrow();
+    });
+  });
+
+  describe('childAge filter', () => {
+    const locWithAgeRange: Location = {
+      ...mockLocations[0],
+      id: 'age-test',
+      name: { zh: '幼兒公園', en: 'Toddler Park' },
+      ageRange: { minAge: 0, maxAge: 5 },
+    };
+
+    const locWithHighAge: Location = {
+      ...mockLocations[0],
+      id: 'age-high',
+      name: { zh: '大童樂園', en: 'Big Kids Park' },
+      ageRange: { minAge: 8, maxAge: 14 },
+    };
+
+    it('shows all locations when childAge is undefined', () => {
+      render(
+        <LanguageProvider>
+          <LocationList
+            locations={[locWithAgeRange, locWithHighAge]}
+            position={mockPosition}
+            favorites={[]}
+            showFavorites={false}
+            loading={false}
+            onLocationClick={mockOnLocationClick}
+            onFavoriteToggle={mockOnFavoriteToggle}
+            childAge={undefined}
+          />
+        </LanguageProvider>
+      );
+      expect(screen.getByText('幼兒公園')).toBeInTheDocument();
+      expect(screen.getByText('大童樂園')).toBeInTheDocument();
+    });
+
+    it('filters out locations whose age range excludes the child age', () => {
+      render(
+        <LanguageProvider>
+          <LocationList
+            locations={[locWithAgeRange, locWithHighAge]}
+            position={mockPosition}
+            favorites={[]}
+            showFavorites={false}
+            loading={false}
+            onLocationClick={mockOnLocationClick}
+            onFavoriteToggle={mockOnFavoriteToggle}
+            childAge={3}
+          />
+        </LanguageProvider>
+      );
+      // Toddler park (0-5) should show for age 3
+      expect(screen.getByText('幼兒公園')).toBeInTheDocument();
+      // Big kids park (8-14) should be hidden for age 3
+      expect(screen.queryByText('大童樂園')).not.toBeInTheDocument();
+    });
+
+    it('shows locations without ageRange for any child age', () => {
+      const locNoAge: Location = {
+        ...mockLocations[0],
+        id: 'no-age',
+        name: { zh: '無限制地點', en: 'No Age Limit' },
+        ageRange: undefined,
+      };
+      render(
+        <LanguageProvider>
+          <LocationList
+            locations={[locNoAge, locWithHighAge]}
+            position={mockPosition}
+            favorites={[]}
+            showFavorites={false}
+            loading={false}
+            onLocationClick={mockOnLocationClick}
+            onFavoriteToggle={mockOnFavoriteToggle}
+            childAge={2}
+          />
+        </LanguageProvider>
+      );
+      expect(screen.getByText('無限制地點')).toBeInTheDocument();
+      expect(screen.queryByText('大童樂園')).not.toBeInTheDocument();
+    });
+
+    it('persists childAge filter across re-renders', () => {
+      const { rerender } = render(
+        <LanguageProvider>
+          <LocationList
+            locations={[locWithAgeRange, locWithHighAge]}
+            position={mockPosition}
+            favorites={[]}
+            showFavorites={false}
+            loading={false}
+            onLocationClick={mockOnLocationClick}
+            onFavoriteToggle={mockOnFavoriteToggle}
+            childAge={3}
+          />
+        </LanguageProvider>
+      );
+      expect(screen.queryByText('大童樂園')).not.toBeInTheDocument();
+
+      rerender(
+        <LanguageProvider>
+          <LocationList
+            locations={[locWithAgeRange, locWithHighAge]}
+            position={mockPosition}
+            favorites={[]}
+            showFavorites={false}
+            loading={false}
+            onLocationClick={mockOnLocationClick}
+            onFavoriteToggle={mockOnFavoriteToggle}
+            childAge={10}
+          />
+        </LanguageProvider>
+      );
+      // Now age 10 should see Big Kids Park (8-14) but not Toddler Park (0-5)
+      expect(screen.getByText('大童樂園')).toBeInTheDocument();
+      expect(screen.queryByText('幼兒公園')).not.toBeInTheDocument();
+    });
+  });
 });

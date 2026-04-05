@@ -3,7 +3,7 @@ import { Heart } from 'lucide-react';
 import type { Location } from '../types';
 import type { TranslationKeys } from '../i18n';
 import { useTranslation } from '../i18n/useTranslation';
-import { calculateDistance, formatDistance, getLocationFamilyScore } from '../utils/locationUtils';
+import { calculateDistance, formatDistance, getLocationFamilyScore, isLocationOpen } from '../utils/locationUtils';
 import { LocationListSkeleton } from './LocationSkeleton';
 
 interface LocationListProps {
@@ -17,6 +17,8 @@ interface LocationListProps {
   facilitiesFilter?: string[];
   sortBy?: 'distance' | 'rating' | 'name';
   searchQuery?: string;
+  openNowOnly?: boolean;
+  childAge?: number;
 }
 
 // Memoized location card component to prevent unnecessary re-renders
@@ -111,6 +113,8 @@ function LocationListImpl({
   facilitiesFilter = [],
   sortBy = 'distance',
   searchQuery = '',
+  openNowOnly = false,
+  childAge,
 }: LocationListProps) {
   const { language, t } = useTranslation();
 
@@ -134,6 +138,22 @@ function LocationListImpl({
       filtered = filtered.filter(loc =>
         facilitiesFilter.every(facility => loc.facilities.includes(facility))
       );
+    }
+
+    // Filter by open now
+    if (openNowOnly) {
+      filtered = filtered.filter(loc => isLocationOpen(loc.operatingHours).isOpen);
+    }
+
+    // Filter by child age compatibility
+    if (childAge !== undefined) {
+      filtered = filtered.filter(loc => {
+        if (!loc.ageRange) return true;
+        const { minAge, maxAge } = loc.ageRange;
+        if (minAge !== undefined && childAge < minAge) return false;
+        if (maxAge !== undefined && childAge > maxAge) return false;
+        return true;
+      });
     }
 
     // Sort based on selected option
@@ -198,6 +218,8 @@ export const LocationList = memo(LocationListImpl, (prevProps, nextProps) => {
     prevProps.loading === nextProps.loading &&
     prevProps.facilitiesFilter === nextProps.facilitiesFilter &&
     prevProps.sortBy === nextProps.sortBy &&
-    prevProps.searchQuery === nextProps.searchQuery
+    prevProps.searchQuery === nextProps.searchQuery &&
+    prevProps.openNowOnly === nextProps.openNowOnly &&
+    prevProps.childAge === nextProps.childAge
   );
 });
