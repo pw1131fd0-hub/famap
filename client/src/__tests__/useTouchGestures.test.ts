@@ -10,15 +10,11 @@ window.scrollTo = mockScrollTo;
 describe('useSwipe', () => {
   let onSwipeLeft: ReturnType<typeof vi.fn>;
   let onSwipeRight: ReturnType<typeof vi.fn>;
-  let onSwipeUp: ReturnType<typeof vi.fn>;
-  let onSwipeDown: ReturnType<typeof vi.fn>;
 
   beforeEach(() => {
     vi.clearAllMocks();
     onSwipeLeft = vi.fn();
     onSwipeRight = vi.fn();
-    onSwipeUp = vi.fn();
-    onSwipeDown = vi.fn();
   });
 
   it('returns touch handlers with onTouchStart and onTouchEnd', () => {

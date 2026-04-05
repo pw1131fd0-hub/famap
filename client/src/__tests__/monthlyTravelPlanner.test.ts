@@ -1,9 +1,8 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import {
   generateMonthlyTravelPlan,
   optimizeVisitSequence,
   exportMonthlyPlanAsText,
-  type MonthlyTravelPlan,
   type FamilyTravelProfile,
   type PlannedVisit,
 } from '../utils/monthlyTravelPlanner';

@@ -187,7 +187,7 @@ describe('MonthlyTravelPlanner Component', () => {
         // Look for any element that indicates summary is displayed
         try {
           expect(screen.getByText(/Summary/i)).toBeInTheDocument();
-        } catch (e) {
+        } catch {
           // Alternative check for summary content
           expect(screen.getByText(/Variety Score|Family-Friendliness/i)).toBeInTheDocument();
         }

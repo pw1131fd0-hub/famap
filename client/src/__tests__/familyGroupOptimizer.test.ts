@@ -306,10 +306,6 @@ describe('familyGroupOptimizer', () => {
 
     it('should calculate estimated group budget', () => {
       const result = optimizeGroupForOuting([familyA, familyB]);
-      const expectedBudget =
-        ((familyA.monthlyBudget || 5000) +
-          (familyB.monthlyBudget || 5000)) /
-        2;
       expect(result.estimatedGroupBudget).toBeGreaterThan(0);
     });
 

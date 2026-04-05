@@ -3,7 +3,6 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import SmartTripSuggestionPanel from '../components/SmartTripSuggestionPanel';
 import { LanguageContext } from '../i18n/context';
-import type { TripSuggestion } from '../utils/smartTripSuggester';
 
 // Mock LanguageContext
 const mockLanguageValue = {
@@ -474,9 +473,6 @@ describe('SmartTripSuggestionPanel Component', () => {
       await waitFor(() => {
         expect(screen.queryByText(/Generating suggestions/i)).not.toBeInTheDocument();
       });
-
-      const beforeText = screen.queryAllByRole('button', { name: /Plan This Trip/i });
-      const beforeCount = beforeText.length;
 
       rerender(
         <LanguageContext.Provider value={mockLanguageValue}>

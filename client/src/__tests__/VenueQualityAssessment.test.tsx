@@ -1,5 +1,5 @@
 // @vitest-environment happy-dom
-import { render, screen, fireEvent, within } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { VenueQualityAssessment } from '../components/VenueQualityAssessment';
 import type { Location } from '../types';
@@ -71,8 +71,6 @@ describe('VenueQualityAssessment Component', () => {
 
       // Check for sections by CSS classes
       const overallSection = container.querySelector('.vqa-overall');
-      const credibilitySection = container.querySelector('.vqa-credibility');
-      const suitabilitySection = container.querySelector('.vqa-suitability');
 
       expect(overallSection || container.querySelector('.vqa-content')).toBeInTheDocument();
     });

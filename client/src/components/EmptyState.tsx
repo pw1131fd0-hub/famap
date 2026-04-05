@@ -1,4 +1,4 @@
-import { MapPin, Search, Heart, Filter, Baby, Plus } from 'lucide-react';
+import { Search, Heart, Filter, MapPin } from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
 
 interface EmptyStateProps {
@@ -8,7 +8,7 @@ interface EmptyStateProps {
   onAction?: () => void;
 }
 
-export function EmptyState({ type, searchQuery, selectedCategory, onAction }: EmptyStateProps) {
+export function EmptyState({ type, searchQuery, onAction }: EmptyStateProps) {
   const { language, t } = useTranslation();
 
   const content = {

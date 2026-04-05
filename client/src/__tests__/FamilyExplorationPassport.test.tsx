@@ -4,7 +4,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { FamilyExplorationPassport } from '../components/FamilyExplorationPassport';
 import { LanguageProvider } from '../i18n/LanguageContext';
 import type { Location } from '../types';
-import { clearAllCheckIns, addCheckIn, saveCheckIns } from '../utils/checkInSystem';
+import { saveCheckIns } from '../utils/checkInSystem';
 import type { CheckIn } from '../utils/checkInSystem';
 
 const localStorageMock = (() => {

@@ -1,7 +1,6 @@
 // @vitest-environment happy-dom
 import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import { describe, it, expect, beforeEach, beforeAll, vi } from 'vitest';
-import { Suspense } from 'react';
 import App from '../App.tsx';
 import { LanguageProvider } from '../i18n/LanguageContext.tsx';
 

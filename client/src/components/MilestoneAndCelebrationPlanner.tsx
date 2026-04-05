@@ -118,8 +118,6 @@ export const MilestoneAndCelebrationPlanner: React.FC<MilestoneAndCelebrationPla
     }
   };
 
-  const milestoneName = MILESTONE_TYPES.find(m => m.value === milestone.type);
-  const urgencyColor = urgencyCheck.isUrgent ? '#FF6F61' : '#A7C7E7';
   const urgencyLabel = isZh ? '緊急程度' : 'Urgency';
   const daysLabel = isZh ? '天' : 'days';
 

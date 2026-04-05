@@ -1,10 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import type {
-  VenueCredibility,
-  VenueSuitability,
-  VenueComparison,
-  FamilyNeed,
-} from '../utils/venueQualityAssessment';
+import type { FamilyNeed } from '../utils/venueQualityAssessment';
 import {
   assessVenueCredibility,
   evaluateVenueSuitability,

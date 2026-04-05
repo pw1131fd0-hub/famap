@@ -20,6 +20,49 @@ interface MockVenue {
   hasBreakRoom: boolean;
 }
 
+// Mock venues for demonstration - defined outside component to avoid memoization issues
+const MOCK_VENUES: MockVenue[] = [
+  {
+    id: 'v1',
+    name: 'Peaceful Park',
+    accessibilityFeatures: [
+      { type: 'wheelchair_accessible', available: true, quality: 'good' },
+      { type: 'accessible_bathroom', available: true, quality: 'good' },
+      { type: 'quiet_space', available: true, quality: 'excellent' },
+    ],
+    noiseLevel: 'quiet',
+    crowdExpectation: 'light',
+    hasQuietZone: true,
+    hasBreakRoom: true,
+  },
+  {
+    id: 'v2',
+    name: 'Urban Entertainment Center',
+    accessibilityFeatures: [
+      { type: 'wheelchair_accessible', available: true, quality: 'fair' },
+      { type: 'elevator', available: true, quality: 'good' },
+    ],
+    noiseLevel: 'very_loud',
+    crowdExpectation: 'very_busy',
+    hasQuietZone: false,
+    hasBreakRoom: false,
+  },
+  {
+    id: 'v3',
+    name: 'Family-Friendly Museum',
+    accessibilityFeatures: [
+      { type: 'wheelchair_accessible', available: true, quality: 'excellent' },
+      { type: 'elevator', available: true, quality: 'excellent' },
+      { type: 'accessible_bathroom', available: true, quality: 'excellent' },
+      { type: 'quiet_space', available: true, quality: 'good' },
+    ],
+    noiseLevel: 'moderate',
+    crowdExpectation: 'moderate',
+    hasQuietZone: true,
+    hasBreakRoom: true,
+  },
+];
+
 export function AccessibilityAssistant() {
   const [profiles, setProfiles] = useState<SpecialNeedsProfile[]>([]);
   const [selectedProfile, setSelectedProfile] = useState<SpecialNeedsProfile | null>(null);
@@ -31,49 +74,6 @@ export function AccessibilityAssistant() {
     soundSensitivity: 'normal' as const,
     crowdTolerance: 'normal' as const,
   });
-
-  // Mock venues for demonstration
-  const mockVenues: MockVenue[] = [
-    {
-      id: 'v1',
-      name: 'Peaceful Park',
-      accessibilityFeatures: [
-        { type: 'wheelchair_accessible', available: true, quality: 'good' },
-        { type: 'accessible_bathroom', available: true, quality: 'good' },
-        { type: 'quiet_space', available: true, quality: 'excellent' },
-      ],
-      noiseLevel: 'quiet',
-      crowdExpectation: 'light',
-      hasQuietZone: true,
-      hasBreakRoom: true,
-    },
-    {
-      id: 'v2',
-      name: 'Urban Entertainment Center',
-      accessibilityFeatures: [
-        { type: 'wheelchair_accessible', available: true, quality: 'fair' },
-        { type: 'elevator', available: true, quality: 'good' },
-      ],
-      noiseLevel: 'very_loud',
-      crowdExpectation: 'very_busy',
-      hasQuietZone: false,
-      hasBreakRoom: false,
-    },
-    {
-      id: 'v3',
-      name: 'Family-Friendly Museum',
-      accessibilityFeatures: [
-        { type: 'wheelchair_accessible', available: true, quality: 'excellent' },
-        { type: 'elevator', available: true, quality: 'excellent' },
-        { type: 'accessible_bathroom', available: true, quality: 'excellent' },
-        { type: 'quiet_space', available: true, quality: 'good' },
-      ],
-      noiseLevel: 'moderate',
-      crowdExpectation: 'moderate',
-      hasQuietZone: true,
-      hasBreakRoom: true,
-    },
-  ];
 
   const handleCreateProfile = () => {
     const selectedConditions: SpecialCondition[] = formData.conditions.map((type) => ({
@@ -126,7 +126,7 @@ export function AccessibilityAssistant() {
   const assessedVenues = useMemo(() => {
     if (!selectedProfile) return [];
 
-    return mockVenues.map((venue) =>
+    return MOCK_VENUES.map((venue) =>
       assessVenueAccessibility(
         venue.id,
         venue.name,

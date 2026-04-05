@@ -490,11 +490,6 @@ describe('Smart Trip Suggester', () => {
     });
 
     it('should handle family profile with no preferences', () => {
-      const simpleProfile: FamilyProfile = {
-        id: 'family_simple',
-        name: 'Simple Family',
-      };
-
       const suggestions = generateSmartTripSuggestions(context, mockVenues, 1);
 
       expect(suggestions).toBeDefined();

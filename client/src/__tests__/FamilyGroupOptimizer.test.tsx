@@ -1,9 +1,9 @@
 // @vitest-environment happy-dom
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import FamilyGroupOptimizer from '../components/FamilyGroupOptimizer';
-import type { FamilyProfile, Location } from '../types';
+import type { FamilyProfile } from '../types';
 
 describe('FamilyGroupOptimizer Component', () => {
   const mockCurrentFamily: FamilyProfile = {
@@ -39,21 +39,6 @@ describe('FamilyGroupOptimizer Component', () => {
       interests: ['parks', 'outdoor'],
       monthlyBudget: 4500,
       specialNeeds: [],
-    },
-  ];
-
-  const mockAvailableVenues: Location[] = [
-    {
-      id: 'venue-1',
-      name: 'City Park',
-      coordinates: { lat: 25.0, lng: 121.5 },
-      category: 'park',
-    },
-    {
-      id: 'venue-2',
-      name: 'Museum',
-      coordinates: { lat: 25.05, lng: 121.55 },
-      category: 'cultural',
     },
   ];
 
