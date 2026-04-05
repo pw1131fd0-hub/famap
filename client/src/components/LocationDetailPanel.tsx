@@ -1,4 +1,4 @@
-import { X, Heart, MapPin, Copy } from 'lucide-react';
+import { X, Heart, MapPin, Copy, Share2 } from 'lucide-react';
 import type { Location, Review, ReviewCreateDTO, CrowdednessReport, CrowdednessReportCreateDTO, Event } from '../types';
 import { useTranslation } from '../i18n/useTranslation';
 import { useLocationMetaTags } from '../hooks/useMetaTags';
@@ -51,6 +51,30 @@ export function LocationDetailPanel({
   const { language, t } = useTranslation();
   useLocationMetaTags(location, language);
 
+  const handleShare = async () => {
+    const venueName = location.name[language];
+    const venueAddress = location.address[language];
+    const shareData = {
+      title: venueName,
+      text: `${venueName} - ${venueAddress}`,
+      url: `${window.location.origin}?venue=${location.id}`,
+    };
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch {
+        // User cancelled share - that's fine
+      }
+    } else {
+      // Fallback: copy to clipboard
+      try {
+        await navigator.clipboard.writeText(`${venueName}\n${venueAddress}\n${shareData.url}`);
+      } catch {
+        // Clipboard not available
+      }
+    }
+  };
+
   return (
     <div className="location-detail-overlay">
       <header className="detail-header">
@@ -74,6 +98,14 @@ export function LocationDetailPanel({
                 <Copy size={24} />
               </button>
             )}
+            <button
+              className="share-button"
+              onClick={handleShare}
+              aria-label={language === 'zh' ? '分享此地點' : 'Share this venue'}
+              title={language === 'zh' ? '分享' : 'Share'}
+            >
+              <Share2 size={24} />
+            </button>
           </div>
           <p className="category-label">{t.categories[location.category]}</p>
         </div>

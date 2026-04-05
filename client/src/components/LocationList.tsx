@@ -65,6 +65,22 @@ const LocationCard = memo(({
       <div className="card-meta">
         <p className="category-label">{t.categories[location.category]}</p>
         <p className="distance-text">📍 {formatDistance(distance)}</p>
+        {(() => {
+          if (!location.operatingHours) return null;
+          const { isOpen } = isLocationOpen(location.operatingHours);
+          return (
+            <span style={{
+              fontSize: '0.7em',
+              padding: '2px 6px',
+              borderRadius: '3px',
+              fontWeight: '600',
+              background: isOpen ? '#d4edda' : '#f8d7da',
+              color: isOpen ? '#155724' : '#721c24',
+            }}>
+              {isOpen ? (language === 'zh' ? '🟢 營業中' : '🟢 Open') : (language === 'zh' ? '🔴 已關閉' : '🔴 Closed')}
+            </span>
+          );
+        })()}
       </div>
       <p className="address-text">{location.address[language as keyof typeof location.address]}</p>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px', gap: '8px', flexWrap: 'wrap' }}>

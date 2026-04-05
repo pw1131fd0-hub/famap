@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import 'leaflet/dist/leaflet.css';
-import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Menu, ChevronDown, Filter, Heart, List, Moon, Sun, Route, Bell, Users, Wallet, Clock } from 'lucide-react';
+import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Menu, ChevronDown, Filter, Heart, List, Moon, Sun, Route, Bell, Users, Wallet, Clock, Mic, MicOff } from 'lucide-react';
 import { locationApi, reviewApi, favoriteApi, crowdinessApi, eventsApi } from './services/api';
 import { useDebounce } from './hooks/useDebounce';
+import { useVoiceSearch } from './hooks/useVoiceSearch';
 import { recordView, getRecentlyViewedIds } from './utils/recentlyViewed';
 import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO, CrowdednessReport, CrowdednessReportCreateDTO, Event } from './types';
 import { useTranslation } from './i18n/useTranslation';
@@ -80,6 +81,7 @@ function App() {
   });
   const [recentlyViewedIds, setRecentlyViewedIds] = useState<string[]>(() => getRecentlyViewedIds(5));
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
+  const { isListening, isSupported, transcript, startListening, stopListening } = useVoiceSearch(language);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
@@ -126,6 +128,13 @@ function App() {
       return newMode;
     });
   };
+
+  // Update search query when voice transcript changes
+  useEffect(() => {
+    if (transcript) {
+      setSearchQuery(transcript);
+    }
+  }, [transcript]);
 
   // Mark first visit for smart tips
   useEffect(() => {
@@ -581,7 +590,7 @@ function App() {
 
               {!showFavorites ? (
                 <>
-                  <div style={{ padding: '12px', borderBottom: '1px solid var(--border)' }}>
+                  <div style={{ padding: '12px', borderBottom: '1px solid var(--border)', display: 'flex', gap: '8px', alignItems: 'center' }}>
                     <input
                       type="text"
                       placeholder={t.common.searchPlaceholder}
@@ -589,7 +598,19 @@ function App() {
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="search-input"
                       aria-label="Search locations"
+                      style={{ flex: 1 }}
                     />
+                    {isSupported && (
+                      <button
+                        onClick={isListening ? stopListening : startListening}
+                        className={`icon-button ${isListening ? 'active' : ''}`}
+                        aria-label={isListening ? (language === 'zh' ? '停止語音搜尋' : 'Stop voice search') : (language === 'zh' ? '語音搜尋' : 'Voice search')}
+                        title={isListening ? (language === 'zh' ? '停止語音搜尋' : 'Stop voice search') : (language === 'zh' ? '語音搜尋' : 'Voice search')}
+                        style={{ flexShrink: 0, color: isListening ? '#ff6b6b' : undefined }}
+                      >
+                        {isListening ? <MicOff size={18} /> : <Mic size={18} />}
+                      </button>
+                    )}
                   </div>
 
                   <div style={{ padding: '12px', borderBottom: '1px solid var(--border)', backgroundColor: 'var(--bg-secondary)' }}>

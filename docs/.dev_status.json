@@ -1,6 +1,6 @@
 {
   "stage": "done",
-  "iteration": 3,
+  "iteration": 4,
   "quality_score": 100,
   "quality_details": {
     "api_implementation": 99,
@@ -11,7 +11,7 @@
     "ux_improvements": 100
   },
   "completeness": 100,
-  "summary": "Iteration 3 improvements (boss feedback: 想辦法更好): (1) Added 'Open Now' filter toggle — shows only currently open venues based on operating hours; (2) Re-enabled child age filter (was commented out 'for mobile stability') — parents can select child age 0-12 years, venues outside the age range are filtered; (3) Added debounced search (300ms) using new useDebounce hook — prevents API thrash on rapid typing; (4) Added 'Recently Viewed' pill-row in sidebar showing up to 5 last-viewed venues with persistent localStorage; (5) Connected handleSelectLocation across all location-click paths to consistently record recently viewed; (6) Added 13 new tests: 7 for useDebounce hook (timer reset, rapid updates, undefined values) and 6 for LocationList age/openNow filters. Total: 2549 client tests, 232 server tests — all pass.",
-  "next_action": "All quality gates passed. System now has smarter UX: Open Now filter, child age compatibility, debounced search, and recently viewed navigation.",
-  "updated_at": "2026-04-05T10:00:00Z"
+  "summary": "Iteration 4 improvements: (1) Voice search via Web Speech API — microphone button in search bar, supports zh-TW and en-US; (2) Native venue sharing via Web Share API — share button in venue detail panel, falls back to clipboard copy; (3) Open/Closed status badge on location cards for quick visual scanning. Added tests for voice search and share features.",
+  "next_action": "All quality gates passed.",
+  "updated_at": "2026-04-05T12:00:00Z"
 }
