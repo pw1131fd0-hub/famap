@@ -16,6 +16,13 @@ except ImportError:
 
 client = TestClient(app)
 
+
+def get_auth_token():
+    """Helper to get a valid Bearer token using the seed user"""
+    response = client.post("/api/auth/login", json={"email": "test@example.com", "password": "password123"})
+    return response.json().get("access_token", "")
+
+
 def test_health_check():
     response = client.get("/health")
     assert response.status_code == 200
@@ -45,6 +52,7 @@ def test_get_location_not_found():
     assert response.status_code == 404
 
 def test_create_location():
+    token = get_auth_token()
     new_loc = {
         "name": {"zh": "測試公園", "en": "Test Park"},
         "description": {"zh": "測試用", "en": "For testing"},
@@ -53,21 +61,35 @@ def test_create_location():
         "address": {"zh": "測試地址", "en": "Test Addr"},
         "facilities": ["playground"]
     }
-    response = client.post("/api/locations/", json=new_loc)
+    response = client.post("/api/locations/", json=new_loc, headers={"Authorization": f"Bearer {token}"})
     assert response.status_code == 200
     assert response.json()["name"]["en"] == "Test Park"
+
+def test_create_location_unauthenticated():
+    new_loc = {
+        "name": {"zh": "未授權公園", "en": "Unauth Park"},
+        "description": {"zh": "測試", "en": "Test"},
+        "category": "park",
+        "coordinates": {"lat": 25.0, "lng": 121.0},
+        "address": {"zh": "地址", "en": "Addr"},
+        "facilities": []
+    }
+    response = client.post("/api/locations/", json=new_loc)
+    assert response.status_code == 401
 
 def test_update_location():
     if not mock_locations:
         return
+    token = get_auth_token()
     loc_id = mock_locations[0]["id"]
     update_data = {"photoUrl": "http://test.com/photo.jpg"}
-    response = client.patch(f"/api/locations/{loc_id}", json=update_data)
+    response = client.patch(f"/api/locations/{loc_id}", json=update_data, headers={"Authorization": f"Bearer {token}"})
     assert response.status_code == 200
     assert response.json()["photoUrl"] == "http://test.com/photo.jpg"
 
 def test_update_location_not_found():
-    response = client.patch("/api/locations/invalid_id_999", json={"photoUrl": "test"})
+    token = get_auth_token()
+    response = client.patch("/api/locations/invalid_id_999", json={"photoUrl": "test"}, headers={"Authorization": f"Bearer {token}"})
     assert response.status_code == 404
 
 def test_get_favorites():
@@ -96,21 +118,41 @@ def test_get_reviews():
     assert isinstance(response.json(), list)
 
 def test_create_review():
+    token = get_auth_token()
     review = {
         "locationId": "test_loc_1",
         "rating": 5,
         "comment": "Great place!"
     }
-    response = client.post("/api/reviews/", json=review)
+    response = client.post("/api/reviews/", json=review, headers={"Authorization": f"Bearer {token}"})
     assert response.status_code == 200
     assert response.json()["comment"] == "Great place!"
 
+def test_create_review_unauthenticated():
+    review = {
+        "locationId": "test_loc_1",
+        "rating": 5,
+        "comment": "Should fail"
+    }
+    response = client.post("/api/reviews/", json=review)
+    assert response.status_code == 401
+
+def test_create_review_invalid_rating():
+    token = get_auth_token()
+    review = {
+        "locationId": "test_loc_1",
+        "rating": 10,
+        "comment": "Invalid rating"
+    }
+    response = client.post("/api/reviews/", json=review, headers={"Authorization": f"Bearer {token}"})
+    assert response.status_code == 422
+
 def test_register_and_login():
-    # Register
+    # Register with strong password (letter + digit)
     user_data = {
         "email": "newuser@test.com",
         "displayName": "New User",
-        "password": "secretpassword"
+        "password": "secretpass1"
     }
     response = client.post("/api/auth/register", json=user_data)
     assert response.status_code == 200
@@ -121,7 +163,7 @@ def test_register_and_login():
     assert response_dup.status_code == 400
 
     # Login
-    login_data = {"email": "newuser@test.com", "password": "secretpassword"}
+    login_data = {"email": "newuser@test.com", "password": "secretpass1"}
     response = client.post("/api/auth/login", json=login_data)
     assert response.status_code == 200
     assert "access_token" in response.json()
@@ -130,6 +172,26 @@ def test_register_and_login():
     login_invalid = {"email": "newuser@test.com", "password": "wrongpassword"}
     response = client.post("/api/auth/login", json=login_invalid)
     assert response.status_code == 401
+
+def test_register_weak_password():
+    """Weak passwords should be rejected"""
+    user_data = {
+        "email": "weakpass@test.com",
+        "displayName": "Weak Pass",
+        "password": "onlyletters"  # no digit
+    }
+    response = client.post("/api/auth/register", json=user_data)
+    assert response.status_code == 422
+
+def test_register_short_password():
+    """Short passwords should be rejected"""
+    user_data = {
+        "email": "shortpass@test.com",
+        "displayName": "Short",
+        "password": "Ab1"  # too short
+    }
+    response = client.post("/api/auth/register", json=user_data)
+    assert response.status_code == 422
 
 def test_get_me():
     # Login first to get a valid token

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, Depends
 from typing import List, Optional
 import math
 import sys
@@ -8,6 +8,7 @@ sys.path.append('..')
 from schemas import Location, SearchParams, Category, LocationCreate, Event, EventCreate
 from data.seed_data import mock_locations
 from data.auto_collect import fetch_osm_data, save_locations
+from routers.auth import get_current_user_dep
 
 router = APIRouter()
 
@@ -97,7 +98,7 @@ async def get_location(location_id: str):
     raise HTTPException(status_code=404, detail="Location not found")
 
 @router.post("/", response_model=Location)
-async def create_location(location: LocationCreate):
+async def create_location(location: LocationCreate, current_user: dict = Depends(get_current_user_dep)):
     new_loc = location.model_dump()
     new_loc["id"] = str(len(mock_locations) + 1)
     new_loc["averageRating"] = 0.0
@@ -105,7 +106,7 @@ async def create_location(location: LocationCreate):
     return new_loc
 
 @router.patch("/{location_id}", response_model=Location)
-async def update_location(location_id: str, location_update: dict):
+async def update_location(location_id: str, location_update: dict, current_user: dict = Depends(get_current_user_dep)):
     for loc in mock_locations:
         if loc["id"] == location_id:
             loc.update(location_update)

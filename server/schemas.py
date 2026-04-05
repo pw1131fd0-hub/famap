@@ -1,6 +1,7 @@
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, Field, ConfigDict, field_validator
 from typing import List, Optional
 from enum import Enum
+import re
 
 class Category(str, Enum):
     PARK = "park"
@@ -65,8 +66,15 @@ class SearchParams(BaseModel):
 
 class ReviewBase(BaseModel):
     locationId: str
-    rating: int
-    comment: str
+    rating: int = Field(..., ge=1, le=5, description="Rating must be between 1 and 5")
+    comment: str = Field(..., min_length=1, max_length=500, description="Comment max 500 characters")
+
+    @field_validator("comment")
+    @classmethod
+    def sanitize_comment(cls, v: str) -> str:
+        # Strip HTML tags to prevent XSS
+        clean = re.sub(r"<[^>]*>", "", v)
+        return clean.strip()
 
 class ReviewCreate(ReviewBase):
     pass
@@ -86,11 +94,28 @@ class Favorite(FavoriteBase):
     createdAt: str
 
 class UserBase(BaseModel):
-    email: str
-    displayName: str
+    email: str = Field(..., max_length=255)
+    displayName: str = Field(..., min_length=1, max_length=100)
+
+    @field_validator("email")
+    @classmethod
+    def validate_email_format(cls, v: str) -> str:
+        # Basic email format validation
+        if not re.match(r"^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$", v):
+            raise ValueError("Invalid email format")
+        return v.lower()
 
 class UserCreate(UserBase):
-    password: str
+    password: str = Field(..., min_length=8, max_length=128)
+
+    @field_validator("password")
+    @classmethod
+    def validate_password_strength(cls, v: str) -> str:
+        if not re.search(r"[A-Za-z]", v):
+            raise ValueError("Password must contain at least one letter")
+        if not re.search(r"[0-9]", v):
+            raise ValueError("Password must contain at least one digit")
+        return v
 
 class User(UserBase):
     id: str

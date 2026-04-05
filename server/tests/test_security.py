@@ -170,3 +170,114 @@ class TestErrorHandling:
         body = response.text
         assert "Traceback" not in body
         assert "File " not in body or "test" not in body.lower()
+
+
+class TestAccessControl:
+    """A01: Broken Access Control - Protected endpoints require authentication"""
+
+    def test_create_location_requires_auth(self):
+        """POST /api/locations should require authentication"""
+        new_loc = {
+            "name": {"zh": "未授權", "en": "Unauthorized"},
+            "description": {"zh": "測試", "en": "Test"},
+            "category": "park",
+            "coordinates": {"lat": 25.0, "lng": 121.0},
+            "address": {"zh": "地址", "en": "Addr"},
+            "facilities": []
+        }
+        response = client.post("/api/locations/", json=new_loc)
+        assert response.status_code == 401
+
+    def test_update_location_requires_auth(self):
+        """PATCH /api/locations/:id should require authentication"""
+        response = client.patch("/api/locations/1", json={"photoUrl": "evil.com"})
+        assert response.status_code == 401
+
+    def test_create_review_requires_auth(self):
+        """POST /api/reviews should require authentication"""
+        review = {"locationId": "loc_1", "rating": 5, "comment": "Unauthorized review"}
+        response = client.post("/api/reviews/", json=review)
+        assert response.status_code == 401
+
+    def test_invalid_token_rejected(self):
+        """Tampered JWT tokens should be rejected"""
+        response = client.get(
+            "/api/auth/me",
+            headers={"Authorization": "Bearer invalid.token.here"}
+        )
+        assert response.status_code == 401
+
+
+class TestInputBoundaries:
+    """A03: Injection - Boundary validation for user input"""
+
+    def test_review_rating_too_high(self):
+        """Rating > 5 should be rejected"""
+        # Login first
+        login = client.post("/api/auth/login", json={"email": "test@example.com", "password": "password123"})
+        token = login.json().get("access_token", "")
+        review = {"locationId": "loc1", "rating": 6, "comment": "Too high rating"}
+        response = client.post("/api/reviews/", json=review, headers={"Authorization": f"Bearer {token}"})
+        assert response.status_code == 422
+
+    def test_review_rating_too_low(self):
+        """Rating < 1 should be rejected"""
+        login = client.post("/api/auth/login", json={"email": "test@example.com", "password": "password123"})
+        token = login.json().get("access_token", "")
+        review = {"locationId": "loc1", "rating": 0, "comment": "Too low rating"}
+        response = client.post("/api/reviews/", json=review, headers={"Authorization": f"Bearer {token}"})
+        assert response.status_code == 422
+
+    def test_comment_xss_sanitized(self):
+        """HTML tags in comments should be stripped"""
+        login = client.post("/api/auth/login", json={"email": "test@example.com", "password": "password123"})
+        token = login.json().get("access_token", "")
+        review = {
+            "locationId": "loc1",
+            "rating": 4,
+            "comment": "<script>alert('xss')</script>Nice place"
+        }
+        response = client.post("/api/reviews/", json=review, headers={"Authorization": f"Bearer {token}"})
+        assert response.status_code == 200
+        data = response.json()
+        assert "<script>" not in data["comment"]
+        assert "alert" in data["comment"]  # text remains, tags stripped
+
+    def test_comment_too_long_rejected(self):
+        """Comments exceeding 500 chars should be rejected"""
+        login = client.post("/api/auth/login", json={"email": "test@example.com", "password": "password123"})
+        token = login.json().get("access_token", "")
+        review = {
+            "locationId": "loc1",
+            "rating": 3,
+            "comment": "A" * 501
+        }
+        response = client.post("/api/reviews/", json=review, headers={"Authorization": f"Bearer {token}"})
+        assert response.status_code == 422
+
+    def test_password_too_short_rejected(self):
+        """Passwords < 8 chars should be rejected at registration"""
+        response = client.post("/api/auth/register", json={
+            "email": "shortpwd@test.com",
+            "displayName": "Short Pwd",
+            "password": "Ab1"
+        })
+        assert response.status_code == 422
+
+    def test_password_no_digit_rejected(self):
+        """Passwords without a digit should be rejected"""
+        response = client.post("/api/auth/register", json={
+            "email": "nodigit@test.com",
+            "displayName": "No Digit",
+            "password": "onlyletters"
+        })
+        assert response.status_code == 422
+
+    def test_invalid_email_format_rejected(self):
+        """Invalid email formats should be rejected"""
+        response = client.post("/api/auth/register", json={
+            "email": "not-an-email",
+            "displayName": "Bad Email",
+            "password": "Secure1pass"
+        })
+        assert response.status_code == 422
