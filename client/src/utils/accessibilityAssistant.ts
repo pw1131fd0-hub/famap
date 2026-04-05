@@ -264,9 +264,9 @@ function assessSensoryEnvironment(
   sensorySensitivities: SensoryProfile,
   conditions: SpecialCondition[]
 ): SensoryEnvironmentAssessment {
-  const autismCondition = conditions.find((c) => c.type === 'autism');
-  const adhdCondition = conditions.find((c) => c.type === 'adhd');
-  const anxietyCondition = conditions.find((c) => c.type === 'anxiety');
+  const _autismCondition = conditions.find((c) => c.type === 'autism');
+  const _adhdCondition = conditions.find((c) => c.type === 'adhd');
+  const _anxietyCondition = conditions.find((c) => c.type === 'anxiety');
 
   // Calculate suitability for different conditions
   const suitableForAutism = calculateAutismSuitability(
@@ -508,8 +508,8 @@ function generateRecommendations(
   profile: SpecialNeedsProfile,
   accessibilityFeatures: AccessibilityFeature[],
   sensoryEnvironment: SensoryEnvironmentAssessment,
-  medicalFacilities: MedicalFacility[],
-  warnings: AccessibilityWarning[]
+  _medicalFacilities: MedicalFacility[],
+  _warnings: AccessibilityWarning[]
 ): AccessibilityRecommendation[] {
   const recommendations: AccessibilityRecommendation[] = [];
 
@@ -696,7 +696,7 @@ export function createAccessibilityOutingPlan(
 export function compareAccessibleVenues(
   venues: VenueAccessibilityAssessment[],
   profile: SpecialNeedsProfile,
-  compareBy: ('accessibility' | 'sensory' | 'medical' | 'overall')[] = [
+  _compareBy: ('accessibility' | 'sensory' | 'medical' | 'overall')[] = [
     'overall',
   ]
 ): VenueComparison[] {
@@ -777,7 +777,7 @@ function identifyVenueQuestions(
 
 function generateVenueRecommendation(
   venue: VenueAccessibilityAssessment,
-  profile: SpecialNeedsProfile
+  _profile: SpecialNeedsProfile
 ): string {
   if (venue.matchScore < 60) {
     return 'Not recommended - accessibility concerns for this profile';

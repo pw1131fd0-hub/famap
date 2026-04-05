@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { SkipLinks, useFocusManagement } from '../components/SkipLinks';
+import { SkipLinks } from '../components/SkipLinks';
+import { useFocusManagement } from '../hooks/useFocusManagement';
 
 // Mock the useTranslation hook
 vi.mock('../i18n/useTranslation', () => ({

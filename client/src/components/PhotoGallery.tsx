@@ -22,7 +22,7 @@ interface PhotoGalleryProps {
   onAddPhoto?: () => void;
 }
 
-export function PhotoGallery({ photos, locationName, compact = false, onAddPhoto }: PhotoGalleryProps) {
+export function PhotoGallery({ photos, locationName: _locationName, compact = false, onAddPhoto }: PhotoGalleryProps) {
   const { language } = useTranslation();
   const [activeCategory, setActiveCategory] = useState<PhotoCategory | 'all'>('all');
   const [lightboxOpen, setLightboxOpen] = useState(false);

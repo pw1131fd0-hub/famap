@@ -340,7 +340,6 @@ function checkAgeSuitability(location: Location, childAges: number[]): boolean {
 
   // Basic age-based filtering
   const minAge = Math.min(...childAges);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _maxAge = Math.max(...childAges);
 
   // Nursing rooms and rest areas suit all ages
@@ -430,7 +429,6 @@ export function generateLastMinuteOutingPlans(
   weatherCondition?: 'sunny' | 'rainy' | 'cloudy'
 ): LastMinutePlans {
   const travelTimePerStop = Math.ceil(timeAvailableMinutes * 0.2); // 20% for travel
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _activityTimePerStop = Math.ceil((timeAvailableMinutes - travelTimePerStop * 2) / 2);
 
   // Filter locations by travel time
@@ -506,8 +504,7 @@ function organizeByActivityType(
   });
 
   return Object.entries(activities)
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    .filter(([_category, venues]) => venues.length > 0)
+    .filter(([, venues]) => venues.length > 0)
     .map(([category, venues]) => ({
       category,
       duration: timeAvailable > 60 ? 30 : 15,

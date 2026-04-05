@@ -4,7 +4,6 @@ import type {
   FamilyCommunityExperience,
   GroupOutingProposal,
   FamilyDiscoveryRecommendation,
-  Location,
 } from '../types';
 
 export function calculateFamilyCompatibility(

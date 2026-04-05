@@ -274,7 +274,7 @@ export function calculateWeeklyStreak(checkIns: CheckIn[]): number {
   })();
 
   let streak = 0;
-  let week = currentWeek;
+  const week = currentWeek;
   const [yearStr, weekPart] = week.split('-W');
   let year = parseInt(yearStr, 10);
   let weekN = parseInt(weekPart, 10);

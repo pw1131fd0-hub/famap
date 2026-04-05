@@ -29,7 +29,7 @@ if (typeof (global as any).sessionStorage === 'undefined') {
 // This enables tests that need document and element APIs to run
 if (typeof (global as any).document === 'undefined') {
   const elementStore = new Map<string, any>();
-  const eventListeners: Record<string, Function[]> = {};
+  const eventListeners: Record<string, (() => void)[]> = {};
 
   class MockElement {
     private static idCounter = 0;
@@ -42,7 +42,7 @@ if (typeof (global as any).document === 'undefined') {
     private attributes: Map<string, string> = new Map();
     private children: MockElement[] = [];
     parentNode: MockElement | null = null;
-    private listeners: Map<string, Function[]> = new Map();
+    private listeners: Map<string, (() => void)[]> = new Map();
 
     constructor(tagName: string = 'DIV') {
       this.tagName = tagName.toUpperCase();
@@ -81,14 +81,14 @@ if (typeof (global as any).document === 'undefined') {
       if (this.id) elementStore.delete(this.id);
     }
 
-    addEventListener(event: string, listener: Function) {
+    addEventListener(event: string, listener: () => void) {
       if (!this.listeners.has(event)) {
         this.listeners.set(event, []);
       }
       this.listeners.get(event)!.push(listener);
     }
 
-    removeEventListener(event: string, listener: Function) {
+    removeEventListener(event: string, listener: () => void) {
       const listeners = this.listeners.get(event);
       if (listeners) {
         const index = listeners.indexOf(listener);
@@ -100,8 +100,8 @@ if (typeof (global as any).document === 'undefined') {
       return this === node || this.children.some(child => child.contains(node));
     }
 
-    querySelector(selector: string): null { return null; }
-    querySelectorAll(selector: string): MockElement[] { return []; }
+    querySelector(_selector: string): null { return null; }
+    querySelectorAll(_selector: string): MockElement[] { return []; }
 
     getBoundingClientRect() {
       return {
@@ -135,11 +135,11 @@ if (typeof (global as any).document === 'undefined') {
     },
     localStorage: (global as any).localStorage,
     sessionStorage: (global as any).sessionStorage,
-    addEventListener: (event: string, listener: Function) => {
+    addEventListener: (event: string, listener: () => void) => {
       if (!eventListeners[event]) eventListeners[event] = [];
       eventListeners[event].push(listener);
     },
-    removeEventListener: (event: string, listener: Function) => {
+    removeEventListener: (event: string, listener: () => void) => {
       if (eventListeners[event]) {
         const index = eventListeners[event].indexOf(listener);
         if (index > -1) eventListeners[event].splice(index, 1);
@@ -154,24 +154,24 @@ if (typeof (global as any).document === 'undefined') {
       removeEventListener: () => {},
     }),
     getComputedStyle: () => ({}),
-    requestAnimationFrame: (cb: Function) => setTimeout(cb, 0),
+    requestAnimationFrame: (cb: () => void) => setTimeout(cb, 0),
     cancelAnimationFrame: (id: number) => clearTimeout(id),
   };
 
   (global as any).document = {
-    createElement: (tag: string) => new MockElement(tag),
+    createElement: (_tag: string) => new MockElement(_tag),
     getElementById: (id: string) => elementStore.get(id) || null,
-    getElementsByTagName: (tag: string) => [],
-    getElementsByClassName: (name: string) => [],
-    querySelector: (selector: string) => null,
-    querySelectorAll: (selector: string) => [],
+    getElementsByTagName: (_tag: string) => [],
+    getElementsByClassName: (_name: string) => [],
+    querySelector: (_selector: string) => null,
+    querySelectorAll: (_selector: string) => [],
     body: mockBody,
     documentElement: mockBody,
-    addEventListener: (event: string, listener: Function) => {
+    addEventListener: (event: string, listener: () => void) => {
       if (!eventListeners[event]) eventListeners[event] = [];
       eventListeners[event].push(listener);
     },
-    removeEventListener: (event: string, listener: Function) => {
+    removeEventListener: (event: string, listener: () => void) => {
       if (eventListeners[event]) {
         const index = eventListeners[event].indexOf(listener);
         if (index > -1) eventListeners[event].splice(index, 1);
@@ -183,7 +183,7 @@ if (typeof (global as any).document === 'undefined') {
 
   // Add DOMParser
   (global as any).DOMParser = class DOMParser {
-    parseFromString(html: string, type: string) {
+    parseFromString(_html: string, _type: string) {
       return { documentElement: mockBody };
     }
   };
@@ -237,7 +237,7 @@ if (typeof (global as any).document === 'undefined') {
       search: string;
       hash: string;
 
-      constructor(url: string, base?: string) {
+      constructor(url: string, _base?: string) {
         this.href = url;
         this.origin = 'http://localhost';
         this.pathname = '/';
@@ -296,7 +296,7 @@ beforeEach(() => {
 });
 
 // Global cleanup after each test
-afterEach(() => {
+afterEach(async () => {
   vi.clearAllMocks();
   vi.clearAllTimers();
 
@@ -318,7 +318,7 @@ afterEach(() => {
 
   // Reset circuit breaker state for api tests
   try {
-    const api = require('../services/api');
+    const api = await import('../services/api');
     if (api.circuitBreakerUtils?.reset) {
       api.circuitBreakerUtils.reset();
     }

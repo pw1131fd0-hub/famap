@@ -118,7 +118,7 @@ function getWeeksInMonth(year: number, month: number): { start: Date; end: Date 
   const lastDay = new Date(year, month + 1, 0);
   const weeks: { start: Date; end: Date }[] = [];
 
-  let current = new Date(firstDay);
+  const current = new Date(firstDay);
   while (current <= lastDay) {
     const weekStart = new Date(current);
     const weekEnd = new Date(current);
@@ -257,7 +257,7 @@ export function generateMonthlyTravelPlan(
   const weeks = getWeeksInMonth(year, month);
 
   let totalEstimatedCost = 0;
-  let weeklyPlans: WeeklyPlan[] = weeks.map((week, index) => {
+  const weeklyPlans: WeeklyPlan[] = weeks.map((week, index) => {
     const theme = selectTheme(index, suitableLocations);
     const preferredDates = getPreferredDatesInRange(week.start, week.end, profile.preferredDays);
 

@@ -119,7 +119,7 @@ export const VenueManagerPortal: React.FC<VenueManagerPortalProps> = ({ venueId,
     loadManagerData();
   }, [loadManagerData]);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   const handleLogin = (email: string, _password: string) => {
     const newManager: VenueManager = {
       id: 'mgr_' + Math.random().toString(36).substr(2, 9),

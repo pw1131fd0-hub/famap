@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, lazy, Suspense } from 'react';
 import 'leaflet/dist/leaflet.css';
 import { MapPin, Navigation, Globe, Trees as Park, Baby, Utensils, Hospital, X, Plus, Menu, ChevronDown, Filter, Heart, List, Moon, Sun, Route, Bell, Users, Wallet, Clock, Mic, MicOff, BookOpen } from 'lucide-react';
 import { locationApi, reviewApi, favoriteApi, crowdinessApi, eventsApi } from './services/api';
@@ -7,21 +7,10 @@ import { useVoiceSearch } from './hooks/useVoiceSearch';
 import { recordView, getRecentlyViewedIds } from './utils/recentlyViewed';
 import type { Location, Category, Review, ReviewCreateDTO, LocationCreateDTO, CrowdednessReport, CrowdednessReportCreateDTO, Event } from './types';
 import { useTranslation } from './i18n/useTranslation';
-import { LocationForm } from './components/LocationForm';
-import { LocationDetailPanel } from './components/LocationDetailPanel';
 import { LocationList } from './components/LocationList';
 import { MapPanel } from './components/MapPanel';
-import { RoutePlanner } from './components/RoutePlanner';
 import { GoNowSuggestions } from './components/GoNowSuggestions';
-import { AlertCenter } from './components/AlertCenter';
-import { FamilyProfileManager } from './components/FamilyProfileManager';
 import { PersonalizedRecommendations } from './components/PersonalizedRecommendations';
-import { LocationComparison } from './components/LocationComparison';
-import { SmartTipsPanel } from './components/SmartTipsPanel';
-import OutingPlanner from './components/OutingPlanner';
-import { FamilyTripPlanner } from './components/FamilyTripPlanner';
-import { TripCostCalculator } from './components/TripCostCalculator';
-import { FamilyExplorationPassport } from './components/FamilyExplorationPassport';
 import { loadCheckIns } from './utils/checkInSystem';
 import { CITIES, initializeLeafletIcons } from './config/mapConfig';
 import type { CityKey } from './config/mapConfig';
@@ -29,6 +18,19 @@ import performanceMonitor from './utils/performanceMonitoring';
 import { initializeSentry, addBreadcrumb, captureException } from './utils/sentryConfig';
 import './styles/SmartTipsPanel.css';
 import './styles/PhotoGallery.css';
+
+// Lazy-loaded components for code splitting (reduces initial bundle size)
+const LocationForm = lazy(() => import('./components/LocationForm'));
+const LocationDetailPanel = lazy(() => import('./components/LocationDetailPanel'));
+const RoutePlanner = lazy(() => import('./components/RoutePlanner'));
+const AlertCenter = lazy(() => import('./components/AlertCenter'));
+const FamilyProfileManager = lazy(() => import('./components/FamilyProfileManager'));
+const LocationComparison = lazy(() => import('./components/LocationComparison'));
+const SmartTipsPanel = lazy(() => import('./components/SmartTipsPanel'));
+const OutingPlanner = lazy(() => import('./components/OutingPlanner'));
+const FamilyTripPlanner = lazy(() => import('./components/FamilyTripPlanner'));
+const TripCostCalculator = lazy(() => import('./components/TripCostCalculator'));
+const FamilyExplorationPassport = lazy(() => import('./components/FamilyExplorationPassport'));
 
 // Initialize error tracking and monitoring
 initializeSentry();
@@ -548,44 +550,50 @@ function App() {
         {sidebarOpen && <div className="sidebar-backdrop" onClick={() => setSidebarOpen(false)} />}
         <aside className={`sidebar${sidebarOpen ? ' sidebar-open' : ''}`}>
           {showRoutePlanner ? (
-            <RoutePlanner
-              locations={locations}
-              userLocation={position}
-              onClose={() => setShowRoutePlanner(false)}
-            />
+            <Suspense fallback={<div className="loading-overlay">{t.common.loading}</div>}>
+              <RoutePlanner
+                locations={locations}
+                userLocation={position}
+                onClose={() => setShowRoutePlanner(false)}
+              />
+            </Suspense>
           ) : showAddLocation ? (
             <div className="location-form-container">
               <header className="detail-header">
                 <h2>{t.common.addLocation}</h2>
-                <button 
-                  onClick={() => setShowAddLocation(false)} 
+                <button
+                  onClick={() => setShowAddLocation(false)}
                   className="close-detail-button"
                 >
                   <X size={20} />
                 </button>
               </header>
-              <LocationForm 
-                onSubmit={handleCreateLocation} 
-                onCancel={() => setShowAddLocation(false)} 
-                initialCoordinates={{ lat: position[0], lng: position[1] }}
-              />
+              <Suspense fallback={<div className="loading-overlay">{t.common.loading}</div>}>
+                <LocationForm
+                  onSubmit={handleCreateLocation}
+                  onCancel={() => setShowAddLocation(false)}
+                  initialCoordinates={{ lat: position[0], lng: position[1] }}
+                />
+              </Suspense>
             </div>
           ) : selectedLocation ? (
-            <LocationDetailPanel
-              location={selectedLocation}
-              isFavorite={favorites.some(f => f.id === selectedLocation.id)}
-              onFavoriteToggle={(e) => toggleFavorite(e, selectedLocation.id)}
-              onClose={() => { setSelectedLocation(null); refreshVisitedIds(); }}
-              reviews={reviews}
-              onReviewSubmit={handlePostReview}
-              crowdednessReports={crowdednessReports}
-              onCrowdednessReportSubmit={handlePostCrowdednessReport}
-              events={events}
-              expandedSections={expandedSections}
-              onToggleSection={toggleSection}
-              isInComparison={comparisonLocations.some(l => l.id === selectedLocation.id)}
-              onComparisonToggle={(e) => toggleComparison(e, selectedLocation.id)}
-            />
+            <Suspense fallback={<div className="loading-overlay">{t.common.loading}</div>}>
+              <LocationDetailPanel
+                location={selectedLocation}
+                isFavorite={favorites.some(f => f.id === selectedLocation.id)}
+                onFavoriteToggle={(e) => toggleFavorite(e, selectedLocation.id)}
+                onClose={() => { setSelectedLocation(null); refreshVisitedIds(); }}
+                reviews={reviews}
+                onReviewSubmit={handlePostReview}
+                crowdednessReports={crowdednessReports}
+                onCrowdednessReportSubmit={handlePostCrowdednessReport}
+                events={events}
+                expandedSections={expandedSections}
+                onToggleSection={toggleSection}
+                isInComparison={comparisonLocations.some(l => l.id === selectedLocation.id)}
+                onComparisonToggle={(e) => toggleComparison(e, selectedLocation.id)}
+              />
+            </Suspense>
           ) : (
             <>
               <div className="sidebar-tabs">
@@ -623,7 +631,9 @@ function App() {
 
               {showPassport ? (
                 <div style={{ padding: '12px', overflowY: 'auto', flex: 1 }}>
-                  <FamilyExplorationPassport showHistory={true} />
+                  <Suspense fallback={<div className="loading-overlay">{t.common.loading}</div>}>
+                    <FamilyExplorationPassport showHistory={true} />
+                  </Suspense>
                 </div>
               ) : showFavorites ? null : (
                 <>
@@ -916,32 +926,38 @@ function App() {
                   />
 
                   {showOutingPlanner && (
-                    <OutingPlanner
-                      locations={locations}
-                      onSelectLocation={(location) => {
-                        setPosition([location.coordinates.lat, location.coordinates.lng]);
-                        handleSelectLocation(location);
-                        setSidebarOpen(false);
-                      }}
-                      userLocation={{ lat: position[0], lng: position[1] }}
-                    />
+                    <Suspense fallback={<div className="loading-overlay">{t.common.loading}</div>}>
+                      <OutingPlanner
+                        locations={locations}
+                        onSelectLocation={(location) => {
+                          setPosition([location.coordinates.lat, location.coordinates.lng]);
+                          handleSelectLocation(location);
+                          setSidebarOpen(false);
+                        }}
+                        userLocation={{ lat: position[0], lng: position[1] }}
+                      />
+                    </Suspense>
                   )}
 
                   {showFamilyTripPlanner && (
-                    <FamilyTripPlanner
-                      darkMode={darkMode}
-                    />
+                    <Suspense fallback={<div className="loading-overlay">{t.common.loading}</div>}>
+                      <FamilyTripPlanner
+                        darkMode={darkMode}
+                      />
+                    </Suspense>
                   )}
 
                   {showCostCalculator && (
-                    <TripCostCalculator
-                      locations={selectedLocation ? [selectedLocation] : locations.slice(0, 5)}
-                      darkMode={darkMode}
-                      onBudgetPlanCreated={(report) => {
-                        // Could save or export the report
-                        console.log('Budget Report:', report);
-                      }}
-                    />
+                    <Suspense fallback={<div className="loading-overlay">{t.common.loading}</div>}>
+                      <TripCostCalculator
+                        locations={selectedLocation ? [selectedLocation] : locations.slice(0, 5)}
+                        darkMode={darkMode}
+                        onBudgetPlanCreated={(report) => {
+                          // Could save or export the report
+                          console.log('Budget Report:', report);
+                        }}
+                      />
+                    </Suspense>
                   )}
                 </>
               )}
@@ -985,18 +1001,26 @@ function App() {
         />
       </div>
 
-      <AlertCenter isOpen={showAlertCenter} onClose={() => setShowAlertCenter(false)} />
-      <FamilyProfileManager
-        isOpen={showFamilyProfile}
-        onClose={() => setShowFamilyProfile(false)}
-      />
-      {showComparison && comparisonLocations.length > 0 && (
-        <LocationComparison
-          locations={comparisonLocations}
-          onClose={() => setShowComparison(false)}
+      <Suspense fallback={null}>
+        <AlertCenter isOpen={showAlertCenter} onClose={() => setShowAlertCenter(false)} />
+      </Suspense>
+      <Suspense fallback={null}>
+        <FamilyProfileManager
+          isOpen={showFamilyProfile}
+          onClose={() => setShowFamilyProfile(false)}
         />
+      </Suspense>
+      {showComparison && comparisonLocations.length > 0 && (
+        <Suspense fallback={null}>
+          <LocationComparison
+            locations={comparisonLocations}
+            onClose={() => setShowComparison(false)}
+          />
+        </Suspense>
       )}
-      <SmartTipsPanel visible={showSmartTips} onClose={() => setShowSmartTips(false)} />
+      <Suspense fallback={null}>
+        <SmartTipsPanel visible={showSmartTips} onClose={() => setShowSmartTips(false)} />
+      </Suspense>
     </div>
   );
 }
