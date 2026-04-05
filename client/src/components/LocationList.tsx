@@ -5,6 +5,7 @@ import type { TranslationKeys } from '../i18n';
 import { useTranslation } from '../i18n/useTranslation';
 import { calculateDistance, formatDistance, getLocationFamilyScore, isLocationOpen } from '../utils/locationUtils';
 import { LocationListSkeleton } from './LocationSkeleton';
+import { EmptyState } from './EmptyState';
 
 interface LocationListProps {
   locations: Location[];
@@ -214,9 +215,11 @@ function LocationListImpl({
 
   if (filteredLocations.length === 0) {
     return (
-      <div className="location-list-empty">
-        <p>{showFavorites ? t.common.noFavorites : t.common.noLocations}</p>
-      </div>
+      <EmptyState
+        type={showFavorites ? 'no-favorites' : 'no-results'}
+        searchQuery={searchQuery}
+        selectedCategory={undefined}
+      />
     );
   }
 
