@@ -20,17 +20,18 @@ import './styles/SmartTipsPanel.css';
 import './styles/PhotoGallery.css';
 
 // Lazy-loaded components for code splitting (reduces initial bundle size)
-const LocationForm = lazy(() => import('./components/LocationForm'));
-const LocationDetailPanel = lazy(() => import('./components/LocationDetailPanel'));
-const RoutePlanner = lazy(() => import('./components/RoutePlanner'));
-const AlertCenter = lazy(() => import('./components/AlertCenter'));
-const FamilyProfileManager = lazy(() => import('./components/FamilyProfileManager'));
-const LocationComparison = lazy(() => import('./components/LocationComparison'));
-const SmartTipsPanel = lazy(() => import('./components/SmartTipsPanel'));
-const OutingPlanner = lazy(() => import('./components/OutingPlanner'));
-const FamilyTripPlanner = lazy(() => import('./components/FamilyTripPlanner'));
-const TripCostCalculator = lazy(() => import('./components/TripCostCalculator'));
-const FamilyExplorationPassport = lazy(() => import('./components/FamilyExplorationPassport'));
+// Using named export pattern since components use named exports
+const LocationForm = lazy(() => import('./components/LocationForm').then(m => ({ default: m.LocationForm })));
+const LocationDetailPanel = lazy(() => import('./components/LocationDetailPanel').then(m => ({ default: m.LocationDetailPanel })));
+const RoutePlanner = lazy(() => import('./components/RoutePlanner').then(m => ({ default: m.RoutePlanner })));
+const AlertCenter = lazy(() => import('./components/AlertCenter').then(m => ({ default: m.AlertCenter })));
+const FamilyProfileManager = lazy(() => import('./components/FamilyProfileManager').then(m => ({ default: m.FamilyProfileManager })));
+const LocationComparison = lazy(() => import('./components/LocationComparison').then(m => ({ default: m.LocationComparison })));
+const SmartTipsPanel = lazy(() => import('./components/SmartTipsPanel').then(m => ({ default: m.SmartTipsPanel })));
+const OutingPlanner = lazy(() => import('./components/OutingPlanner').then(m => ({ default: m.OutingPlanner })));
+const FamilyTripPlanner = lazy(() => import('./components/FamilyTripPlanner').then(m => ({ default: m.FamilyTripPlanner })));
+const TripCostCalculator = lazy(() => import('./components/TripCostCalculator').then(m => ({ default: m.TripCostCalculator })));
+const FamilyExplorationPassport = lazy(() => import('./components/FamilyExplorationPassport').then(m => ({ default: m.FamilyExplorationPassport })));
 
 // Initialize error tracking and monitoring
 initializeSentry();

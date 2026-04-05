@@ -10,6 +10,96 @@ beforeAll(() => {
     text: () => Promise.resolve(''),
   });
 });
+
+// Mock lazy-loaded components
+vi.mock('../components/LocationForm', () => ({
+  LocationForm: vi.fn(() => <div data-testid="location-form">LocationForm</div>),
+}));
+vi.mock('../components/LocationDetailPanel', () => ({
+  LocationDetailPanel: vi.fn(() => <div data-testid="location-detail-panel">LocationDetailPanel</div>),
+}));
+vi.mock('../components/RoutePlanner', () => ({
+  RoutePlanner: vi.fn(() => <div data-testid="route-planner">RoutePlanner</div>),
+}));
+vi.mock('../components/AlertCenter', () => ({
+  AlertCenter: vi.fn(() => <div data-testid="alert-center">AlertCenter</div>),
+}));
+vi.mock('../components/FamilyProfileManager', () => ({
+  FamilyProfileManager: vi.fn(() => <div data-testid="family-profile-manager">FamilyProfileManager</div>),
+}));
+vi.mock('../components/LocationComparison', () => ({
+  LocationComparison: vi.fn(() => <div data-testid="location-comparison">LocationComparison</div>),
+}));
+vi.mock('../components/SmartTipsPanel', () => ({
+  SmartTipsPanel: vi.fn(() => <div data-testid="smart-tips-panel">SmartTipsPanel</div>),
+}));
+vi.mock('../components/OutingPlanner', () => ({
+  OutingPlanner: vi.fn(() => <div data-testid="outing-planner">OutingPlanner</div>),
+}));
+vi.mock('../components/FamilyTripPlanner', () => ({
+  FamilyTripPlanner: vi.fn(() => <div data-testid="family-trip-planner">FamilyTripPlanner</div>),
+}));
+vi.mock('../components/TripCostCalculator', () => ({
+  TripCostCalculator: vi.fn(() => <div data-testid="trip-cost-calculator">TripCostCalculator</div>),
+}));
+vi.mock('../components/FamilyExplorationPassport', () => ({
+  FamilyExplorationPassport: vi.fn(() => <div data-testid="family-exploration-passport">FamilyExplorationPassport</div>),
+}));
+
+// Mock checkInSystem
+vi.mock('../utils/checkInSystem', () => ({
+  loadCheckIns: vi.fn(() => []),
+}));
+
+// Mock recentlyViewed
+vi.mock('../utils/recentlyViewed', () => ({
+  recordView: vi.fn(),
+  getRecentlyViewedIds: vi.fn(() => []),
+}));
+
+// Mock sentryConfig
+vi.mock('../utils/sentryConfig', () => ({
+  initializeSentry: vi.fn(),
+  addBreadcrumb: vi.fn(),
+  captureException: vi.fn(),
+}));
+
+// Mock performanceMonitoring
+vi.mock('../utils/performanceMonitoring', () => ({
+  default: {
+    measureAsync: vi.fn((_, fn) => fn()),
+  },
+}));
+
+// Mock mapConfig
+vi.mock('../config/mapConfig', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    CITIES: [{ key: 'taipei', name: 'Taipei', center: [25.0, 121.0], defaultZoom: 13 }],
+    DAY_NAMES_ZH: { monday: '一', tuesday: '二', wednesday: '三', thursday: '四', friday: '五', saturday: '六', sunday: '日' },
+    MARKER_CONFIG: {},
+    initializeLeafletIcons: vi.fn(),
+    createGlowingIcon: vi.fn(() => ({})),
+  };
+});
+
+// Mock useVoiceSearch hook
+vi.mock('../hooks/useVoiceSearch', () => ({
+  useVoiceSearch: vi.fn(() => ({
+    isListening: false,
+    isSupported: false,
+    transcript: '',
+    startListening: vi.fn(),
+    stopListening: vi.fn(),
+  })),
+}));
+
+// Mock useDebounce hook
+vi.mock('../hooks/useDebounce', () => ({
+  useDebounce: vi.fn((value) => value),
+}));
+
 import App from '../App.tsx';
 import { LanguageProvider } from '../i18n/LanguageContext.tsx';
 import { locationApi, favoriteApi, reviewApi } from '../services/api';
