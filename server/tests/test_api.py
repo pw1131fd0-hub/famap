@@ -348,3 +348,107 @@ def test_search_empty_query_rejected():
     """GET /api/locations/search rejects empty/whitespace-only query"""
     response = client.get("/api/locations/search?q=")
     assert response.status_code == 422
+
+
+# --- Fuzzy Search Tests ---
+
+def test_fuzzy_search_exact_match():
+    """Fuzzy search returns results for exact match."""
+    response = client.get("/api/locations/fuzzy-search?q=大安")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+    assert len(data) > 0
+
+
+def test_fuzzy_search_english():
+    """Fuzzy search works with English queries."""
+    response = client.get("/api/locations/fuzzy-search?q=Park")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+    assert len(data) > 0
+
+
+def test_fuzzy_search_with_category_filter():
+    """Fuzzy search supports category filtering."""
+    response = client.get("/api/locations/fuzzy-search?q=公園&category=park")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+    for loc in data:
+        assert loc["category"] == "park"
+
+
+def test_fuzzy_search_limit():
+    """Fuzzy search respects limit parameter."""
+    response = client.get("/api/locations/fuzzy-search?q=台&limit=3")
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) <= 3
+
+
+def test_fuzzy_search_invalid_limit():
+    """Fuzzy search rejects limit > 50."""
+    response = client.get("/api/locations/fuzzy-search?q=公園&limit=100")
+    assert response.status_code == 422
+
+
+def test_fuzzy_search_no_results_high_threshold():
+    """Fuzzy search returns empty list for very high min_score with no-match query."""
+    response = client.get("/api/locations/fuzzy-search?q=zzzzunmatchablexyz&min_score=0.99")
+    assert response.status_code == 200
+    assert response.json() == []
+
+
+# --- Trending Locations Tests ---
+
+def test_trending_locations():
+    """GET /api/locations/trending returns a list of locations."""
+    response = client.get("/api/locations/trending")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+    assert len(data) > 0
+
+
+def test_trending_locations_with_coordinates():
+    """Trending endpoint accepts lat/lng for proximity boost."""
+    response = client.get("/api/locations/trending?lat=25.0330&lng=121.5654")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+    assert len(data) > 0
+
+
+def test_trending_locations_limit():
+    """Trending endpoint respects limit parameter."""
+    response = client.get("/api/locations/trending?limit=5")
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) <= 5
+
+
+def test_trending_locations_invalid_limit():
+    """Trending endpoint rejects limit > 50."""
+    response = client.get("/api/locations/trending?limit=100")
+    assert response.status_code == 422
+
+
+# --- New Seed Data Tests ---
+
+def test_taipei_zoo_exists():
+    """Taipei Zoo (tp07) is in seed data."""
+    response = client.get("/api/locations/tp07")
+    assert response.status_code == 200
+    data = response.json()
+    assert "動物園" in data["name"]["zh"] or "Zoo" in data["name"]["en"]
+
+
+def test_taipei_101_nursing_room_exists():
+    """Taipei 101 nursing room (nr05) is in seed data."""
+    response = client.get("/api/locations/nr05")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["category"] == "nursing_room"
+    assert "stroller_accessible" in data["facilities"]

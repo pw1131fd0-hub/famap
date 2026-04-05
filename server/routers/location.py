@@ -4,6 +4,7 @@ import math
 import sys
 import uuid
 from datetime import datetime, UTC
+from difflib import SequenceMatcher
 sys.path.append('..')
 from schemas import Location, SearchParams, Category, LocationCreate, Event, EventCreate, PaginatedLocationsResponse
 from data.seed_data import mock_locations
@@ -60,6 +61,42 @@ async def get_featured_locations(
     return sorted_locs[:limit]
 
 
+def _fuzzy_score(text: str, query: str) -> float:
+    """Calculate fuzzy match ratio between text and query (0.0 - 1.0)."""
+    if not text or not query:
+        return 0.0
+    return SequenceMatcher(None, query.lower(), text.lower()).ratio()
+
+
+def _relevance_score(loc: dict, q: str) -> float:
+    """
+    Score a location's relevance to a query.
+    Exact matches score 1.0, fuzzy partial matches score lower.
+    """
+    q_lower = q.lower()
+    best = 0.0
+    fields = [
+        loc.get("name", {}).get("zh", ""),
+        loc.get("name", {}).get("en", ""),
+        loc.get("description", {}).get("zh", ""),
+        loc.get("description", {}).get("en", ""),
+        loc.get("address", {}).get("zh", ""),
+        loc.get("address", {}).get("en", ""),
+    ]
+    for field in fields:
+        if not field:
+            continue
+        field_lower = field.lower()
+        # Exact substring match gets perfect score
+        if q_lower in field_lower:
+            return 1.0
+        # Fuzzy match for typo tolerance
+        score = _fuzzy_score(field, q)
+        if score > best:
+            best = score
+    return best
+
+
 @router.get("/search", response_model=PaginatedLocationsResponse)
 async def search_locations(
     q: str = Query(..., min_length=1, max_length=100, description="Search query (bilingual)"),
@@ -90,6 +127,67 @@ async def search_locations(
         has_next=(offset + page_size) < total,
         has_prev=page > 1,
     )
+
+
+@router.get("/fuzzy-search", response_model=List[Location])
+async def fuzzy_search_locations(
+    q: str = Query(..., min_length=1, max_length=100, description="Fuzzy search query"),
+    category: Optional[Category] = Query(None),
+    limit: int = Query(default=10, ge=1, le=50),
+    min_score: float = Query(default=0.3, ge=0.0, le=1.0, description="Minimum relevance score"),
+):
+    """
+    Fuzzy search with typo tolerance. Useful for autocomplete and 'did you mean?' scenarios.
+    Returns results sorted by relevance score.
+    """
+    q = q.strip()
+    scored_results = []
+    for loc in mock_locations:
+        if category and loc.get("category") != category:
+            continue
+        score = _relevance_score(loc, q)
+        if score >= min_score:
+            scored_results.append((score, loc))
+
+    # Sort by relevance descending, then by rating
+    scored_results.sort(key=lambda x: (x[0], float(x[1].get("averageRating", 0) or 0)), reverse=True)
+    return [loc for _, loc in scored_results[:limit]]
+
+
+@router.get("/trending", response_model=List[Location])
+async def get_trending_locations(
+    lat: Optional[float] = Query(None, description="Latitude for proximity boost"),
+    lng: Optional[float] = Query(None, description="Longitude for proximity boost"),
+    limit: int = Query(default=10, ge=1, le=50),
+):
+    """
+    Return trending family venues based on quality score, recency, and crowd activity.
+    Optionally boosted by proximity to user location.
+    """
+    from data.seed_data import mock_reviews
+    from routers.crowdedness import mock_crowdedness_reports
+    from collections import Counter
+
+    # Count recent crowdedness activity as a proxy for trending
+    recent_activity: Counter = Counter()
+    for report in mock_crowdedness_reports:
+        recent_activity[report.get("locationId", "")] += 1
+
+    def trending_score(loc: dict) -> float:
+        loc_id = loc.get("id", "")
+        rating = float(loc.get("averageRating", 0) or 0)
+        activity = recent_activity.get(loc_id, 0)
+        verified_bonus = 5.0 if loc.get("isVerified") else 0.0
+        # Proximity boost (if coordinates provided)
+        prox_bonus = 0.0
+        if lat is not None and lng is not None:
+            dist = calculate_distance(lat, lng, loc["coordinates"]["lat"], loc["coordinates"]["lng"])
+            # 10-point bonus for venues within 2km
+            prox_bonus = max(0.0, 10.0 - (dist / 200.0))
+        return rating * 20 + activity * 5 + verified_bonus + prox_bonus
+
+    sorted_locs = sorted(mock_locations, key=trending_score, reverse=True)
+    return sorted_locs[:limit]
 
 
 @router.get("/", response_model=List[Location])

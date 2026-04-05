@@ -181,6 +181,23 @@ export const locationApi = {
       retryableGet<PaginatedLocationsResponse>('/locations/search', { params })
     );
   },
+  fuzzySearch: async (params: {
+    q: string;
+    category?: string;
+    limit?: number;
+    min_score?: number;
+  }): Promise<Location[]> => {
+    const cacheKey = getCacheKey('GET', '/locations/fuzzy-search', params);
+    return cachedGet(cacheKey, () =>
+      retryableGet<Location[]>('/locations/fuzzy-search', { params })
+    );
+  },
+  getTrending: async (params?: { lat?: number; lng?: number; limit?: number }): Promise<Location[]> => {
+    const cacheKey = getCacheKey('GET', '/locations/trending', params);
+    return cachedGet(cacheKey, () =>
+      retryableGet<Location[]>('/locations/trending', { params })
+    );
+  },
 };
 
 export const reviewApi = {
