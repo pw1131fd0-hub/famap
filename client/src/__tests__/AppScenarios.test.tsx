@@ -11,12 +11,40 @@ beforeAll(() => {
   });
 });
 
-// Mock lazy-loaded components
+// Mock lazy-loaded components with realistic structure for integration tests
 vi.mock('../components/LocationForm', () => ({
-  LocationForm: vi.fn(() => <div data-testid="location-form">LocationForm</div>),
+  LocationForm: vi.fn(({ onSubmit, onCancel }: any) => (
+    <div data-testid="location-form">
+      <h2>新增地點</h2>
+      <input aria-label="中文名稱" />
+      <input aria-label="英文名稱" />
+      <input aria-label="中文地址" />
+      <input aria-label="英文地址" />
+      <button onClick={onCancel}>X</button>
+      <button onClick={() => onSubmit({})}>提交</button>
+    </div>
+  )),
 }));
 vi.mock('../components/LocationDetailPanel', () => ({
-  LocationDetailPanel: vi.fn(() => <div data-testid="location-detail-panel">LocationDetailPanel</div>),
+  LocationDetailPanel: vi.fn(({ location, onClose, onFavoriteToggle, onReviewSubmit }: any) => (
+    <div data-testid="location-detail-panel" className="detail-panel">
+      <header className="detail-header">
+        <h2>{location?.name?.zh || location?.name?.en || 'Location'}</h2>
+        <button onClick={onClose}>X</button>
+      </header>
+      <section>
+        <h4>地址</h4>
+      </section>
+      <button aria-label="加入收藏" onClick={(e: any) => onFavoriteToggle(e)}>Heart</button>
+      <section>
+        <label>您的名稱</label>
+        <input aria-label="您的名稱" name="userName" />
+        <label>評論內容</label>
+        <textarea aria-label="評論內容" name="comment" />
+        <button onClick={() => onReviewSubmit({ userName: 'User', comment: 'Great!', rating: 5 })}>提交</button>
+      </section>
+    </div>
+  )),
 }));
 vi.mock('../components/RoutePlanner', () => ({
   RoutePlanner: vi.fn(() => <div data-testid="route-planner">RoutePlanner</div>),
