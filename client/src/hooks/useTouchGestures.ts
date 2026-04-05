@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect } from 'react';
+import { useRef, useCallback, useEffect, useState } from 'react';
 
 interface SwipeState {
   startX: number;
@@ -69,13 +69,15 @@ interface UsePullToRefreshOptions {
 }
 
 export function usePullToRefresh({ onRefresh, threshold = 80, disabled = false }: UsePullToRefreshOptions) {
-  const pullState = useRef({ startY: 0, pulling: false, progress: 0 });
+  const pullState = useRef({ startY: 0, pulling: false });
   const containerRef = useRef<HTMLElement | null>(null);
+  const [pullProgress, setPullProgress] = useState(0);
 
   const handleTouchStart = useCallback((e: TouchEvent) => {
     if (disabled) return;
     if (window.scrollY === 0) {
-      pullState.current = { startY: e.touches[0].clientY, pulling: true, progress: 0 };
+      pullState.current = { startY: e.touches[0].clientY, pulling: true };
+      setPullProgress(0);
     }
   }, [disabled]);
 
@@ -84,25 +86,27 @@ export function usePullToRefresh({ onRefresh, threshold = 80, disabled = false }
     const delta = e.touches[0].clientY - pullState.current.startY;
     if (delta > 0) {
       e.preventDefault();
-      pullState.current.progress = Math.min(delta / threshold, 1);
+      setPullProgress(Math.min(delta / threshold, 1));
     }
-  }, []);
+  }, [threshold]);
 
   const handleTouchEnd = useCallback(async () => {
     if (!pullState.current.pulling) return;
-    if (pullState.current.progress >= 1) {
+    const progress = pullProgress;
+    if (progress >= 1) {
       try {
         await onRefresh();
       } catch (error) {
         console.error('Pull to refresh failed:', error);
       }
     }
-    pullState.current = { startY: 0, pulling: false, progress: 0 };
-  }, [onRefresh]);
+    pullState.current = { startY: 0, pulling: false };
+    setPullProgress(0);
+  }, [onRefresh, pullProgress]);
 
   return {
     containerRef,
-    pullProgress: pullState.current.progress,
+    pullProgress,
     handlers: disabled ? {} : {
       onTouchStart: handleTouchStart,
       onTouchMove: handleTouchMove,

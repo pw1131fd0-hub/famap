@@ -89,7 +89,7 @@ class Analytics {
     };
 
     // Try to get current user location
-    if ('geolocation' in navigator) {
+    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           event.location = {
