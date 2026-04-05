@@ -1394,3 +1394,23 @@ Agent: Claude Code
 Permissions: a
 
 ---
+
+## [2026-04-05 13:40:22] [done] 100%
+
+Iteration 5 improvements (boss feedback: 想辦法更好): (1) Passport sidebar tab — new 3rd tab in sidebar shows full Family Exploration Passport with stats (total check-ins, unique locations, badges), weekly streak, badge grid, and recent check-in history; previously the passport was only accessible in compact mode inside venue detail; (2) 'Visited' badge on LocationCard — venues the family has already checked into display a '✅ 已去過' green badge, giving instant visual context in the list; (3) 'Discover New' filter button — appears when visitedIds > 0, toggles hideVisited to filter out visited venues from list so families can discover new places; (4) visitedIds auto-refreshes when: passport tab opens, detail panel closes (after possible check-in), or localStorage changes cross-tab; (5) Fixed useMemo deps in LocationList (openNowOnly and childAge were missing); (6) Added 6 new tests for visitedIds/hideVisited behavior. Total: 2574 client tests, 232 server tests — all pass.
+
+> 
+╔══════════════════════════════════════════════════════════════════╗
+║                    Ralph Wiggum Loop                            ║
+║         Iterative AI Development with Claude Code                 ║
+╚══════════════════════════════════════════════════════════════════╝
+
+Task: .gemini_instructions.tmp
+Preview: 專案名稱：親子地圖。 【現有 PRD（作為核心參考）】 # FamMap (親子地圖) - Product Requirement Document (PRD)...
+Completion promise: COMPLETE
+Min iterations: 1
+Max iterations: 3
+Agent: Claude Code
+Permissions: a
+
+---
