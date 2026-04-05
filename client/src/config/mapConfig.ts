@@ -74,11 +74,26 @@ export const MARKER_CONFIG: Record<string, { color: string; emoji: string; label
 };
 
 /**
- * Create a glowing marker icon for a given category
+ * Crowd level colors for map markers
+ * When a venue has typical crowd data, the marker color reflects it
  */
-export const createGlowingIcon = (category: string) => {
+export const CROWD_LEVEL_COLORS: Record<string, { color: string; label: string }> = {
+  light: { color: '#22c55e', label: 'Light crowds' },      // Green - usually quiet
+  moderate: { color: '#eab308', label: 'Moderate crowds' }, // Yellow - typical
+  heavy: { color: '#ef4444', label: 'Heavy crowds' },       // Red - very busy
+};
+
+/**
+ * Create a glowing marker icon for a given category
+ * Optionally shows crowd level via border color indicator
+ */
+export const createGlowingIcon = (category: string, crowdLevel?: 'light' | 'moderate' | 'heavy') => {
   const config = MARKER_CONFIG[category] || MARKER_CONFIG.other;
   const { color, emoji } = config;
+
+  // If crowd level is provided, use a colored ring indicator
+  const hasCrowdIndicator = crowdLevel && CROWD_LEVEL_COLORS[crowdLevel];
+  const crowdColor = hasCrowdIndicator ? CROWD_LEVEL_COLORS[crowdLevel].color : null;
 
   return L.divIcon({
     className: 'custom-marker',
@@ -88,13 +103,14 @@ export const createGlowingIcon = (category: string) => {
       height: 40px;
       border-radius: 50% 50% 50% 0;
       transform: rotate(-45deg);
-      border: 3px solid white;
+      border: 3px solid ${crowdColor || 'white'};
       box-shadow: 0 0 12px ${color}, 0 2px 8px rgba(0,0,0,0.3);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 18px;
       font-weight: bold;
+      ${crowdColor ? `box-shadow: 0 0 12px ${color}, 0 0 8px ${crowdColor}, 0 2px 8px rgba(0,0,0,0.3);` : ''}
     ">
       <div style="transform: rotate(45deg);">${emoji}</div>
     </div>`,

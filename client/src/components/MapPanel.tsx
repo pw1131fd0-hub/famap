@@ -71,7 +71,7 @@ export function MapPanel({
             <Marker
               key={loc.id}
               position={[loc.coordinates.lat, loc.coordinates.lng]}
-              icon={createGlowingIcon(loc.category)}
+              icon={createGlowingIcon(loc.category, loc.crowding?.averageCrowding)}
               eventHandlers={{
                 click: () => onLocationClick(loc),
               }}

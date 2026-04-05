@@ -1,6 +1,6 @@
 {
   "stage": "done",
-  "iteration": 5,
+  "iteration": 6,
   "quality_score": 100,
   "quality_details": {
     "test_coverage": 98,
@@ -14,6 +14,7 @@
     "main_bundle_after": "112KB",
     "lint_errors_fixed": 45,
     "improvements": [
+      "Added crowd-level visualization on map markers - venues now show colored borders indicating typical crowd levels (green=light, yellow=moderate, red=heavy)",
       "Fixed CSS bug: Added missing CSS variable definitions for dark mode offline-banner",
       "Improved PWA manifest.json: Added screenshot entries for app store compatibility",
       "Integrated keyboard shortcuts hook into App.tsx for accessibility",
@@ -23,7 +24,7 @@
     ]
   },
   "completeness": 100,
-  "summary": "Iteration 5 improvements: Fixed CSS dark mode variable bugs, improved PWA manifest with screenshots, and integrated keyboard shortcuts for accessibility. All tests pass.",
-  "next_action": "Done - production ready with improved accessibility and PWA support.",
-  "updated_at": "2026-04-05T13:12:00.000Z"
+  "summary": "Iteration 6 improvement: Added crowd-level visualization on map markers - venues now display colored borders indicating typical crowd levels (green=light, yellow=moderate, red=heavy), helping families quickly assess venue busyness before visiting. All tests pass.",
+  "next_action": "Done - production ready with improved crowd-level visibility on map.",
+  "updated_at": "2026-04-05T13:22:00.000Z"
 }
