@@ -30,5 +30,9 @@
     "tests_pass": true,
     "build_pass": true
   },
-  "updated_at": "2026-04-13T10:00:00.000Z"
+  "updated_at": "2026-04-14T06:45:00.000Z",
+  "boss_notification": {
+    "message": "Security 已達標（96 ≥ 95），假照片問題已修復。請老闆在 Notion 手動確認後將 stage 改為 Done。",
+    "required_action": "老闆在 Notion 確認 → 改 stage 為 Done"
+  }
 }
