@@ -2794,3 +2794,34 @@ Fixed boss feedback: removed fake demo photos (picsum.photos) from location deta
 
 
 ---
+
+## [2026-04-14 02:34:00] [security] 100%
+
+Fixed boss feedback: removed fake demo photos (picsum.photos) from location detail panel. Now shows '尚無照片' when no real photo exists.
+
+> **狀態確認完畢**
+
+| 項目 | 狀態 |
+|------|------|
+| **Stage** | security |
+| **Quality Score** | 96/100 (門檻 95) ✓ |
+| **Iteration** | 2 |
+| **Git Status** | Clean (所有變更已提交) |
+| **老闆回饋** | 已處理 (fake photos 已移除) |
+
+**Security 階段已達標**
+
+- npm audit: 0 漏洞 ✓
+- fake photos 已移除 ✓
+- API/Frontend 健康 (HTTP 200) ✓
+- 所有測試通過 ✓
+- 建置成功 ✓
+
+**根據開發流程規則：**
+
+> Security 已達標（96 ≥ 95），**需要老闆在 Notion 手動確認後才能標記 Done**。Worker 絕對不能自己寫 `stage: "done"`。
+
+**請老闆在 Notion 確認後將 stage 改為 Done。**
+
+
+---
