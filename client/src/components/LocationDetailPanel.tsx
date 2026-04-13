@@ -13,7 +13,7 @@ import BestTimeVisitRecommender from './BestTimeVisitRecommender';
 import { SmartPackingChecklist } from './SmartPackingChecklist';
 import { FamilyExplorationPassport } from './FamilyExplorationPassport';
 import { PhotoGallery } from './PhotoGallery';
-import { generateDemoPhotos } from '../utils/photoGallery';
+import { type VenuePhoto } from '../utils/photoGallery';
 import { isLocationOpen } from '../utils/locationUtils';
 import { DAY_NAMES_ZH } from '../config/mapConfig';
 
@@ -177,7 +177,13 @@ export function LocationDetailPanel({
           onToggle={() => onToggleSection('photos')}
         >
           <PhotoGallery
-            photos={generateDemoPhotos(location.id)}
+            photos={location.photoUrl ? [{
+              id: `${location.id}-cover`,
+              url: location.photoUrl,
+              caption: location.name[language],
+              category: 'general' as const,
+              isVerified: true,
+            }] : []}
             locationName={location.name[language]}
             compact
           />
