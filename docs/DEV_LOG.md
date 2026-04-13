@@ -2674,3 +2674,29 @@ photos={location.photoUrl ? [{
 }] : []}  // 使用真實圖片或顯示空
 
 ---
+
+## [2026-04-14 00:31:08] [security] 100%
+
+Fixed boss feedback: removed fake demo photos (picsum.photos) from location detail panel. Now shows '尚無照片' when no real photo exists.
+
+> 
+
+All security checks pass:
+
+| Check | Result |
+|-------|--------|
+| npm audit | 0 vulnerabilities |
+| Backend packages | Up-to-date (FastAPI 0.135.3, Flask 3.1.2, SQLAlchemy 2.0.48, etc.) |
+| XSS patterns in frontend | None found |
+| innerHTML/dangerouslySetInnerHTML | None found |
+| API health | HTTP 200 |
+| Frontend health | HTTP 200 |
+| Fake photos removal | Confirmed |
+
+**Current Status:**
+- Stage: `security` 
+- Quality Score: **96/100** (threshold: 95) ✓
+- Iteration: 2
+- All quality gates 
+
+---
