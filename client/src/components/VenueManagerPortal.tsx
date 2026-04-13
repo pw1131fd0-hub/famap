@@ -73,19 +73,7 @@ export const VenueManagerPortal: React.FC<VenueManagerPortalProps> = ({ venueId,
               hasResponse: false
             }
           ],
-          photos: [
-            {
-              id: 'p1',
-              venueId,
-              url: 'https://via.placeholder.com/300x200?text=Exterior',
-              caption: 'Main entrance',
-              uploadedBy: 'manager',
-              uploadedAt: Date.now() - 604800000,
-              isApproved: true,
-              category: 'exterior',
-              order: 1
-            }
-          ],
+          photos: [],
           offers: [
             {
               id: 'o1',
