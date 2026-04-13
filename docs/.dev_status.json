@@ -20,5 +20,5 @@
   "completeness": 100,
   "summary": "Fixed boss feedback: removed fake demo photos (picsum.photos) from location detail panel. Now shows '尚無照片' when no real photo exists.",
   "next_action": "Awaiting boss confirmation in Notion to mark Done",
-  "updated_at": "2026-04-13T16:18:00.000Z"
+  "updated_at": "2026-04-13T19:00:48.000Z"
 }
