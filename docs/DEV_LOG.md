@@ -2643,3 +2643,34 @@ FamMap production deployment ready. Port info re-confirmed for boss.
 
 
 ---
+
+## [2026-04-14 00:18:56] [security] 100%
+
+Fixed boss feedback: removed fake demo photos (picsum.photos) from location detail panel. Now shows '尚無照片' when no real photo exists.
+
+> ## 已完成修正
+
+**老闆回饋處理完畢：「地點照片是假的，不如不要放」**
+
+### 變更內容
+
+| 檔案 | 變更 |
+|------|------|
+| `client/src/components/LocationDetailPanel.tsx` | 移除 `generateDemoPhotos()` 假圖片，改用真實的 `location.photoUrl`，若無則顯示「尚無照片」 |
+
+### 修改前
+```tsx
+photos={generateDemoPhotos(location.id)}  // 使用 picsum.photos 假圖片
+```
+
+### 修改後
+```tsx
+photos={location.photoUrl ? [{
+  id: `${location.id}-cover`,
+  url: location.photoUrl,
+  caption: location.name[language],
+  category: 'general' as const,
+  isVerified: true,
+}] : []}  // 使用真實圖片或顯示空
+
+---
