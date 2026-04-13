@@ -1,6 +1,6 @@
 {
   "stage": "security",
-  "iteration": 1,
+  "iteration": 2,
   "quality_score": 96,
   "quality_details": {
     "api_health": "pass",
@@ -10,6 +10,7 @@
     "proxy_working": true,
     "tests_pass": true,
     "build_pass": true,
+    "fake_photos_removed": true,
     "port_mapping": {
       "frontend_dev": 3003,
       "backend_api": 3001,
@@ -17,7 +18,7 @@
     }
   },
   "completeness": 100,
-  "summary": "FamMap production deployment ready. Port info re-confirmed for boss.",
+  "summary": "Fixed boss feedback: removed fake demo photos (picsum.photos) from location detail panel. Now shows '尚無照片' when no real photo exists.",
   "next_action": "Awaiting boss confirmation in Notion to mark Done",
-  "updated_at": "2026-04-13T14:35:00.000Z"
+  "updated_at": "2026-04-13T16:18:00.000Z"
 }
