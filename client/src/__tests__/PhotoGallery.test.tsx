@@ -23,7 +23,7 @@ function renderWithLanguage(ui: React.ReactElement) {
 
 const makePhoto = (overrides: Partial<VenuePhoto> = {}): VenuePhoto => ({
   id: `photo-${Math.random().toString(36).slice(2)}`,
-  url: 'https://picsum.photos/400/300.jpg',
+  url: 'https://example.com/photo.jpg',
   category: 'general',
   ...overrides,
 });

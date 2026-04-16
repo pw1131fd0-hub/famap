@@ -10,7 +10,6 @@ import {
   prevPhotoIndex,
   getRelativeDateLabel,
   isValidImageUrl,
-  generateDemoPhotos,
   getCoverPhoto,
   groupPhotosByCategory,
   PHOTO_CATEGORY_LABELS,
@@ -315,33 +314,6 @@ describe('isValidImageUrl', () => {
   it('rejects HTTP (non-HTTPS) by allowing HTTP too since it checks http: or https:', () => {
     // HTTP is allowed by the implementation
     expect(isValidImageUrl('http://example.com/photo.jpg')).toBe(true);
-  });
-});
-
-describe('generateDemoPhotos', () => {
-  it('generates demo photos for a location', () => {
-    const photos = generateDemoPhotos('venue-123');
-    expect(photos.length).toBeGreaterThan(0);
-  });
-
-  it('all photos have required fields', () => {
-    const photos = generateDemoPhotos('venue-xyz');
-    photos.forEach((p) => {
-      expect(p.id).toBeTruthy();
-      expect(p.url).toBeTruthy();
-      expect(p.category).toBeTruthy();
-    });
-  });
-
-  it('generates photos with location-specific IDs', () => {
-    const photos = generateDemoPhotos('my-loc');
-    expect(photos.every((p) => p.id.startsWith('my-loc'))).toBe(true);
-  });
-
-  it('includes nursing_room category', () => {
-    const photos = generateDemoPhotos('test-loc');
-    const categories = photos.map((p) => p.category);
-    expect(categories).toContain('nursing_room');
   });
 });
 

@@ -219,40 +219,6 @@ export function isValidImageUrl(url: string): boolean {
   }
 }
 
-/**
- * Generate a placeholder photo set for demo/testing purposes.
- */
-export function generateDemoPhotos(locationId: string): VenuePhoto[] {
-  return [
-    {
-      id: `${locationId}-1`,
-      url: `https://picsum.photos/seed/${locationId}-entrance/800/600.jpg`,
-      caption: 'Main entrance',
-      category: 'entrance',
-      isVerified: true,
-      takenAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-      likes: 12,
-    },
-    {
-      id: `${locationId}-2`,
-      url: `https://picsum.photos/seed/${locationId}-play/800/600.jpg`,
-      caption: 'Play area for kids',
-      category: 'play_area',
-      isVerified: true,
-      takenAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
-      likes: 24,
-    },
-    {
-      id: `${locationId}-3`,
-      url: `https://picsum.photos/seed/${locationId}-nursing/800/600.jpg`,
-      caption: 'Nursing room',
-      category: 'nursing_room',
-      isVerified: false,
-      takenAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
-      likes: 8,
-    },
-  ];
-}
 
 /**
  * Get the cover photo for a venue (best photo to show as thumbnail).
