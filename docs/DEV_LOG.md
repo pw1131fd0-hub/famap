@@ -4757,3 +4757,30 @@ Verified fake photos removed: generateDemoPhotos() exists in codebase but is NOT
 
 
 ---
+
+## [2026-04-18 01:04:51] [security] 100%
+
+Verified fake photos removed: generateDemoPhotos() exists in codebase but is NOT called by any component. Code audit confirms no picsum.photos usage in production code. Build passes. npm audit shows 0 vulnerabilities.
+
+> 
+
+假照片問題已確認修復：
+
+| 檢查項目 | 結果 |
+|---------|------|
+| `picsum.photos` 使用 | 無 |
+| `lorem` 相關關鍵字 | 無 |
+| `faker` / `FakeData` | 無 |
+| `generateDemoPhotos()` | 已移除呼叫 |
+| 空照片顯示 | 正確顯示「尚無照片」 |
+
+**系統狀態正確，無需任何變更。**
+
+根據開發流程第 1 步規則，`awaiting_done_confirmation` 決策：
+- 停在 `security`，iteration 不變
+- **Worker 禁止自行寫 `stage: "done"`**
+
+老闆回饋「地點照片是假的 不如不要放」已修復。系統已就緒，請老闆在 Notion 手動確認後將 stage 改為 Done。
+
+
+---
